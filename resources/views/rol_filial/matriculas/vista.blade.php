@@ -91,19 +91,15 @@
 									<td>${{$pago->recargo}}</td>
 									<td>{{$pago->Filial->nombre}}</td>
 									<td>
-									<?php
+											<?php
 										if ($pago->terminado != 1){
 									?>
 										<a href="{{route('filial.pagos_editar',$pago->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
 										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="Actualizar"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
 									<?php
 										}
-										if(isset($pago->Recibo->id)){
 									?>
-										<a href="{{route('filial.pagos_actualizar',$pago->Recibo->id)}}" title="Ver Recibo"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
-									<?php
-										}
-									?>
+										<a href="{{route('filial.recibos',$pago->id)}}" title="Ver Recibos"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
 									</td>
 								</tr>
 								@endforeach
