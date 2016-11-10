@@ -6,5 +6,7 @@ Route::group(['prefix' => 'director'], function(){
 		'as' => 'director.inicio',
 		'uses' => 'DirectoresController@index'
 	 ]);
+		require_once('EstadisticasRoute.php');
+	
 
 });
