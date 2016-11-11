@@ -1,6 +1,6 @@
 <?php
 Route::get('estadisticas',[
-	'as' => 'estadisticas.inicio',
+	'as' => 'filial.estadisticas',
 	'uses' => 'EstadisticaController@index'
 ]);
 
