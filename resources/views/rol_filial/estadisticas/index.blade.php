@@ -12,6 +12,14 @@
       <div class="col-xs-4">
          {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
       </div>
+      <div class="col-xs-4">
+       <select class="form-control" id="selectvalue">
+          <option ="inscripcion">Inscripciones</option>
+          <option ="preinforme">Pre informes</option>
+          <option ="recaudacion">Recaudación</option>
+          <option ="morosidad">Morosidad</option>
+        </select>
+      </div> 
 
       <div class="col-xs-2">
        <button class="btn btn-block btn-default " id="btn_buscar">Buscar</button>
@@ -39,10 +47,10 @@
             </div><!-- /.col (LEFT) -->
 </div><!-- /.row -->
 
-<div class="row">
-  <div class="col-md-6">
-  <div class="box box-danger">
+
+ <div class="box box-primary">
                 <div class="box-header with-border">
+                  <i class="fa fa-bar-chart-o"></i>
                   <h3 class="box-title">Donut Chart</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -50,28 +58,9 @@
                   </div>
                 </div>
                 <div class="box-body">
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                </div><!-- /.box-body -->
+                  <div id="donut-chart" style="height: 300px;"></div>
+                </div><!-- /.box-body-->
               </div><!-- /.box -->
-  </div>            
-
-  <div class="col-md-6">
-     <div class="box box-success">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Bar Chart</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div>
-                <div class="box-body">
-                  <div class="chart">
-                    <canvas id="barChart" style="height:230px"></canvas>
-                  </div>
-                </div><!-- /.box-body -->
-              </div><!-- /.box --> 
-  </div>            
-  </div>
 
 @endsection
 
@@ -88,14 +77,16 @@
         
         $( "#btn_buscar" ).on( "click", function() {
             var fecha = $("#reservation").val();
-            console.log(fecha);
+            var value = $("#selectvalue").val();
+
+            console.log(value);
              $.ajax({
                         type:'POST',
                         url:'procesarAjax',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        data:'fecha='+fecha,
+                        data:'fecha='+fecha+'value='+value,
                         success:function(data){
                          
                            var areaChartData = {
@@ -166,8 +157,10 @@
         });
 
        
-
+  
        
       });
+
+
     </script>
 @endsection

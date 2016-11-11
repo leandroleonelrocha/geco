@@ -53,9 +53,10 @@ abstract class BaseRepo {
         return $this->model->lists($data, $id);
     }
 
-    public function listWhere($inicio, $fin)
+
+    public function qryWhereDate($inicio, $fin)
     {
-        return $this->model->where('created_at', '>=', $inicio)->where('created_at','>=', $fin)->get();
+        return $this->model->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->groupBy('como_encontro')->get();
     }
 
 

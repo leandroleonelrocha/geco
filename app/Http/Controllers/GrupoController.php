@@ -72,8 +72,20 @@ class GrupoController extends Controller
 
 	public function postAdd(Request $request)
 	{
-		//$data  = $request->only('curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id');
+		/*
+		$array = explode("-", $request->get('fecha'));
+		$fecha1 = date("Y-m-d", strtotime($array[0]));
+		$fecha2 = date("Y-m-d", strtotime($array[1]));
 
+		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+		    echo $i . "<br />";
+		 //aca puedes comparar $i a una fecha en la bd y guardar el resultado en un arreglo
+
+		}
+		*/
+		
+		//$data  = $request->only('curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id');
+		
 		$data = $request->all();
 		$array = explode("-", $request->get('fecha'));
 	
@@ -84,7 +96,7 @@ class GrupoController extends Controller
 
 		$this->grupoRepo->create($data);
 		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
-
+		
 	}
 
 	public function postEdit($id, Request $request)

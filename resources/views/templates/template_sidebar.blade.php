@@ -210,7 +210,7 @@
             ?>
                 <li>
                   <a href="{{route('filial.estadisticas')}}">
-                    <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
+                    <i class="fa fa-contao"></i> <span>@lang('menu.estadistica')</span>
                   </a>
                 </li>
 
