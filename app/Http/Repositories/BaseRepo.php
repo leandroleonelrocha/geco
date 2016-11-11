@@ -53,6 +53,10 @@ abstract class BaseRepo {
         return $this->model->lists($data, $id);
     }
 
+    public function listWhere($inicio, $fin)
+    {
+        return $this->model->where('created_at', '>=', $inicio)->where('created_at','>=', $fin)->get();
+    }
 
 
 }
