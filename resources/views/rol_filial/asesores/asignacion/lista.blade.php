@@ -31,10 +31,10 @@
 					    		<td>{{ $a->Asesor->apellidos}}</td>
 								<td>{{ $a->Asesor->nombres}}</td>
 				    		   	<td>
-					           		<a href="{{route('filial.asignacionAsesores_borrar',$a->asesor_id)}}" class="btn btn-danger text-white">BORRAR</a></td>
+					           		<a href="{{route('filial.asignacionAsesores_borrar',$a->asesor_id)}}" title="Eliminar" class="btn btn-danger glyphicon glyphicon-remove"</a></td>
 						    </tr>
 					    @endforeach
-						    	         
+						    	        
 					   	</tbody>
 				    </table>
         		</div><!-- Fin box-body -->

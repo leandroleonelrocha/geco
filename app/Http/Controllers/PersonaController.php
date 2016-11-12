@@ -84,7 +84,7 @@ class PersonaController extends Controller {
                     if($this->personaRepo->create($data)){
 
                         $persona=$this->personaRepo->all()->last();
-
+                        
                         $mail['persona_id']=$persona->id;
                         $mail['mail']=$request->mail;
                         $this->personaMailRepo->create($mail);

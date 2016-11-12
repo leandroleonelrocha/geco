@@ -32,7 +32,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label>Tel&eacute;fono</label>
-                                {!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+                                {!! Form::text('telefono[]',null,array('class'=>'form-control item')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
@@ -57,4 +57,5 @@
         </div> <!-- Fin col -->
     </div> <!-- Fin row -->
 @endsection
+
 

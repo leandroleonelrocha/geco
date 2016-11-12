@@ -98,13 +98,13 @@
 							<div class="col-md-6 form-group telefono">
 								<label>Tel&eacute;fono</label>
 								<div class="btn btn-default agregar" data-info="telefono">+</div>
-								{!! Form::text('telefono[]',null,array('class'=>'form-control item')) !!}
+								{!! Form::text('telefono',null,array('class'=>'form-control item')) !!}
 								<div class="btn btn-default quitar" data-info="telefono">-</div>
 							</div>
 							<div class="col-md-6 form-group mail">
 								<label>E-mail</label>
 								<div class="btn btn-default agregar" data-info="mail">+</div>
-								{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
+								{!! Form::email('mail',null,array('class'=>'form-control')) !!}
 								<div class="btn btn-default quitar" data-info="mail">-</div>
 							</div>
 

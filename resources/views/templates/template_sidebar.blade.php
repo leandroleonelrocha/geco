@@ -49,10 +49,11 @@
                   </ul>
                 </li>
 
+                <li>
+                  <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                </li>
+
                 <li class="treeview">
-                  <a>
-                    <i class="fa fa-user"></i> <span>Configuración</span><i class="fa fa-angle-left pull-right"></i>
-                  </a>
                   <ul class="treeview-menu">
                     <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> Cambiar contraseña</a></li>
                   </ul>
@@ -67,16 +68,11 @@
                 </li>
 
                 <li class="treeview">
-                    <a> 
-                      <i class="fa fa-user"></i> <span>Configuración</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
                     <ul class="treeview-menu">
                       <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> Cambiar contraseña</a></li>
                     </ul>
                 </li> 
             <?php
-                break;
-                case 3:
                 break;
                 case 4:
             ?>
@@ -195,31 +191,18 @@
                     </ul>
                   </li>
 
-                  <li class="treeview">
-                    <a>
-                      <i class="fa fa-user"></i> <span>Configuración</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i>Asignar asesores</a></li>
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> Cambiar contraseña</a></li>
-                    </ul>
-                  </li>  
+
             <?php
                 break;
               }
             ?>
-                <li>
-                  <a href="#">
-                    <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
-                  </a>
-                </li>
 
-    
-           
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+            <li>
+              <a href="{{route('filial.contacto')}}">
+                <i class="fa fa-contao"></i> <span>@lang('menu.contacto')</span>
+              </a>
+            </li>
+
           </ul>
         </section>
         <!-- /.sidebar -->

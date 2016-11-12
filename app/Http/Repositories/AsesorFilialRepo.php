@@ -22,6 +22,12 @@ class AsesorFilialRepo extends BaseRepo {
         $filial = session('usuario')['entidad_id'];
         return AsesorFilial::where('asesor_id', '=', $id)->where('filial_id', '=', $filial)->delete();
     }
+
+
+    public function findAsesorFilial($id,$f){
+  
+        return AsesorFilial::where('asesor_id', $id)->where('filial_id',$f)->get(); //consultar estado activo
+    }
 }
 
          

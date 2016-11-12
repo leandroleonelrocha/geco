@@ -91,12 +91,6 @@ class DirectoresController extends Controller
 	   		else
 	    		return redirect()->route('dueño.directores')->with('msg_error','No se ha podido agregar al director, intente nuevamente.');
 			}
-	
-	//	$this->directorRepo->create($request->all());
-	
-
-
-	//	return redirect()->route('director.index')->with('msg_ok', 'Director creado correctamente');
 
 			return redirect()->route('dueño.directores')->with('msg_ok', 'Director creado correctamente,');
 
@@ -127,5 +121,22 @@ class DirectoresController extends Controller
             return redirect()->route('dueño.directores')->with('msg_error','El director no ha podido ser modificado.');
     }
 
+  	public function editarPerfil($id){
+    	$director = $this->directorRepo->find($id);
+    	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+	  	$telefono=$this->directorTelefonoRepo->findTelefono($id);
+	  	$mail=$this->directorMailRepo->findMail($id);
+    	return view('perfiles.director',compact('director','tipos','telefono','mail'));
+    }
 
+    public function editarPerfil_post(EditarDirectorRequest $request){
+        $data = $request->all();
+        $model = $this->directorRepo->find($data['id']);
+        if($this->directorRepo->edit($model,$data)){
+	      //editar telefono
+	        $this->directorTelefonoRepo->editTelefono($data['id'],$data['telefono']);
+            return redirect()->back()->with('msg_ok','El perfil del director ha sido modificado con éxito.');}
+        else
+            return redirect()->route()->with('msg_error','El perfil del director no ha podido ser modificado.');
+    }
 }

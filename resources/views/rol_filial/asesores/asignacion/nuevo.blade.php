@@ -27,8 +27,8 @@
 							      	<td>{{ $a->nro_documento}}</td>
 							        <td>{{ $a->apellidos }}</td>
 							        <td>{{ $a->nombres }}</td>
-							        <td class="text-center"><a href="{{route('filial.asignacionAsesores_nuevo_post',$a->id)}}" class="btn btn-success text-white">ASIGNAR</a></td>
-							    </tr>
+							        <td class="text-center"><a href="{{route('filial.asignacionAsesores_nuevo_post',$a->id)}}" title="Asignar" class="btn btn-success glyphicon glyphicon-ok"></a></td>
+							    </tr> 
 						    @endforeach
 					   	</tbody>
 				    </table>

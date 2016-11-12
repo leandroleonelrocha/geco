@@ -36,16 +36,17 @@ Route::group(['prefix' => 'filial'], function(){
 	require_once('GrupoRoute.php');
 
 	// Rutas Operaciones ---------- Exámenes
-	 require_once('ExamenesRoute.php');
+	require_once('ExamenesRoute.php');
 
 	// Rutas Operaciones ---------- Asesores
 	// require_once('AsesoresRoute.php');
-
 	// Rutas Operaciones ---------- Docentes
 	require_once('DocentesRoute.php');
 	require_once('AsesoresRoute.php');
 	require_once('AsignacionAsesoresRoute.php');
+	require_once('PerfilRoute.php');
 	require_once('PersonasRoute.php');
+	require_once('ContactoRoute.php');
 	// Rutas Operaciones ---------- Estadísticas
 	// require_once('Route.php');
 });
