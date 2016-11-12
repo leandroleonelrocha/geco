@@ -11,6 +11,9 @@
  * -------------------------
  */
 html,
+.cuerpo{
+  background-image: url("fondo-login.png");
+}
 body {
   min-height: 100%;
 }
