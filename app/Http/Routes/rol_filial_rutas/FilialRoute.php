@@ -40,6 +40,11 @@ Route::group(['prefix' => 'filial'], function(){
 
 	// Rutas Operaciones ---------- Asesores
 	// require_once('AsesoresRoute.php');
+
+
+	require_once('EstadisticasRoute.php');
+
+
 	// Rutas Operaciones ---------- Docentes
 	require_once('DocentesRoute.php');
 	require_once('AsesoresRoute.php');
