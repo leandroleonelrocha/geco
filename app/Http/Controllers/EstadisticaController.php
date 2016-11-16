@@ -21,45 +21,73 @@ class EstadisticaController extends Controller
 
 	public function index(){
 	  
-	  $pagos = $this->pagoRepo->all();
-	  $months = array("Personas inscriptas", "Recaudacion", "Marzo", "Abril", "Mayo", "Junio");
+		$generos = Preinforme::all();
 
-
-	  
-	  return view('rol_filial.estadisticas.index', compact('pagos', 'months'));
+	  return view('rol_filial.estadisticas.index', compact('generos'));
 	}
-	//["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
-	//Estadisticas de pago
-	//
+	
 
-
-
-	public function procesarAjax(Request $request)
+	public function test()
 	{
+		$resultado = $this->preinformeRepo->estadisticas('2016-10-12 ', '2016-11-12 ')->get()->groupBy('como_encontro');
+		return view('rol_filial.estadisticas.test');
+	}
 
 
-		$array = explode("-", $request->get('fecha'));
+	public function estadistica_preinformes_ajax(Request $request)
+	{	
+		$array = explode("-", $request->get('fecha'));	
 		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
 		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
 
-		//$personas = $this->personaRepo->qryWhereDate($inicio, $fin)->count();
-		//return $this->model->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->groupBy('como_encontro')->get();
-		//$preinformes = $this->preinformeRepo->qryWhereDate($inicio, $fin);
-		$preinformes = Preinforme::all()->groupBy('como_encontro');
+		$data=[];
+		$total = $this->personaRepo->countTotal();
+		//Por genero
+		$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
+		$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
+
+	
+		return view('rol_filial.estadisticas.test', compact('data'));
+
+		/*
+		if($request->get('selectvalue') == 'preinforme');
+		{		
+			$resultado = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
+			return view('rol_filial.estadisticas.test', compact('resultado'));
+		}
+		*/
 		
-		foreach($preinformes as $preinforme => $a)
+		if($request->get('selectvalue') == 'inscripcion')
 		{
-				
-			dd($preinforme . $a->count());
-		}	
-	
-		return response()->json($personas, 200);
-	
-		 	
-
-
+			$generos = $this->personaRepo->getGenero($inicio, $fin);
+			$posee_computadora = $this->personaRepo->getPoseeComputadora($inicio, $fin);
+		
+			$estudio_computadora = $this->personaRepo->getEstudioComputadora($inicio, $fin);
+			return view('rol_filial.estadisticas.test', compact('posee_computadora'));
+		}
+		
 
 	}
+
+	/*
+		for ($i = 1; $i <= 10; $i++) {
+
+		    $data = [];
+		    $data['persona_id'] = 3;
+		    $data['asesor_id'] = 15;
+		    $data['descripcion'] = "descripcion ".$i;
+		    $data['medio'] = "volante";
+		    $data['como_encontro'] = "volante";
+		    $data['filial_id'] = 2;
+
+		    	
+			$preinformes = $this->preinformeRepo->create($data);
+		
+		}
+
+	*/
+
+	
 
 
 }

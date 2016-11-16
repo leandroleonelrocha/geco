@@ -54,9 +54,10 @@ abstract class BaseRepo {
     }
 
 
-    public function qryWhereDate($inicio, $fin)
+    public function estadisticaBase($inicio, $fin)
     {
-        return $this->model->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->groupBy('como_encontro')->get();
+        $filial = session('usuario')['entidad_id'];
+        return $this->model->where('filial_id', $filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin);
     }
 
 
