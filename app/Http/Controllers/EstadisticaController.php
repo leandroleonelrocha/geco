@@ -20,10 +20,8 @@ class EstadisticaController extends Controller
 	}
 
 	public function index(){
-	  
-		$generos = Preinforme::all();
 
-	  return view('rol_filial.estadisticas.index', compact('generos'));
+	  return view('rol_filial.estadisticas.index');
 	}
 	
 
@@ -33,6 +31,26 @@ class EstadisticaController extends Controller
 		return view('rol_filial.estadisticas.test');
 	}
 
+	public function detalles(Request $request)
+	{
+		$array = explode("-", $request->get('fecha'));	
+		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
+		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
+
+		$data=[];
+		$total = $this->personaRepo->countTotal();
+		
+		$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
+		$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
+		$data['estadistica3'] = $this->personaRepo->disponibilidadManana($inicio, $fin);
+		$data['estadistica4'] = $this->personaRepo->disponibilidadTarde($inicio, $fin);
+		$data['estadistica5'] = $this->personaRepo->disponibilidadNoche($inicio, $fin);
+		$data['estadistica6'] = $this->personaRepo->disponibilidadSabado($inicio, $fin);
+		
+		$genero = $this->personaRepo->getGenero($inicio, $fin);
+		
+		return view('rol_filial.estadisticas.detalles',compact('data', 'genero', 'total'));
+	}
 
 	public function estadistica_preinformes_ajax(Request $request)
 	{	
@@ -46,9 +64,8 @@ class EstadisticaController extends Controller
 		$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
 		$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
 
+		return redirect()->back();
 	
-		return view('rol_filial.estadisticas.test', compact('data'));
-
 		/*
 		if($request->get('selectvalue') == 'preinforme');
 		{		
@@ -57,16 +74,7 @@ class EstadisticaController extends Controller
 		}
 		*/
 		
-		if($request->get('selectvalue') == 'inscripcion')
-		{
-			$generos = $this->personaRepo->getGenero($inicio, $fin);
-			$posee_computadora = $this->personaRepo->getPoseeComputadora($inicio, $fin);
-		
-			$estudio_computadora = $this->personaRepo->getEstudioComputadora($inicio, $fin);
-			return view('rol_filial.estadisticas.test', compact('posee_computadora'));
-		}
-		
-
+	
 	}
 
 	/*
