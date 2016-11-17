@@ -8,7 +8,7 @@ use App\Http\Repositories\PreinformeRepo;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use Illuminate\Http\Request;
-
+use Session;
 class EstadisticaController extends Controller
 {
 	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo)
@@ -34,6 +34,7 @@ class EstadisticaController extends Controller
 	}
 
 
+
 	public function estadistica_preinformes_ajax(Request $request)
 	{	
 		$array = explode("-", $request->get('fecha'));	
@@ -46,8 +47,13 @@ class EstadisticaController extends Controller
 		$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
 		$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
 
-	
-		return view('rol_filial.estadisticas.test', compact('data'));
+		
+		$data=[];
+		$data['parameter1'] = 'aklsdklñadls';
+		$data['parameter2'] = 'papasa';
+		
+		
+		return redirect()->route('filial.test')->with($data);
 
 		/*
 		if($request->get('selectvalue') == 'preinforme');

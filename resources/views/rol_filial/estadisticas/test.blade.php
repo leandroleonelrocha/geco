@@ -9,6 +9,12 @@ ${demo.css}
 @endsection
 @section('content')    
 
+
+
+  @if(isset($data))
+<h1>{{dd('adasd')}}</h1>
+@endif
+
 <div class="box box-default">
   <div class="box-header with-border">
     <h3 class="box-title">Collapsable</h3>
@@ -17,7 +23,7 @@ ${demo.css}
     </div><!-- /.box-tools -->
   </div><!-- /.box-header -->
   <div class="box-body">
-    {!! Form::model(Request::all(), ['route'=> 'estadisticas.estadistica_preinformes_ajax', 'method'=>'get']) !!} 
+    {!! Form::model(Request::all(), ['route'=> 'estadisticas.estadistica_preinformes_ajax', 'method'=>'post']) !!} 
           <div class="col-xs-4">
              {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
           </div>
@@ -41,6 +47,8 @@ ${demo.css}
 <br><br>
 <div id="bar"></div>
 <br><br>
+
+
  <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
