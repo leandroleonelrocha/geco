@@ -1,0 +1,19 @@
+<?php
+namespace App\Entities;
+
+class GrupoHorario extends Entity {
+
+    protected  $table= 'grupo_horario';
+	protected $casts = [
+	    'dia' => 'int',
+	];
+
+    protected $fillable   = ['grupo_id', 'dia', 'horario_desde', 'horario_hasta'];
+
+    public function Grupo()
+    {
+    	return $this->belongsTo(Grupo::getClass());
+    }
+
+    
+}

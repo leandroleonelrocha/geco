@@ -76,26 +76,44 @@ class GrupoController extends Controller
 		$array = explode("-", $request->get('fecha'));
 		$fecha1 = date("Y-m-d", strtotime($array[0]));
 		$fecha2 = date("Y-m-d", strtotime($array[1]));
-
-		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-		    echo $i . "<br />";
-		 //aca puedes comparar $i a una fecha en la bd y guardar el resultado en un arreglo
-
-		}
 		*/
 		
 		//$data  = $request->only('curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id');
 		
-		$data = $request->all();
+		/*$data = $request->all();
 		$array = explode("-", $request->get('fecha'));
 	
 		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
 		$data['filial_id'] = session('usuario')['entidad_id'];
-	
+		*/
 
-		$this->grupoRepo->create($data);
-		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+		//$this->grupoRepo->create($data);
+		//return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+
+		$grupo = $this->grupoRepo->find(1);
+		$grupo_horario = $grupo->GrupoHorario;
+		$fecha1 = date("Y-m-d", strtotime($grupo->fecha_inicio));
+		$fecha2 = date("Y-m-d", strtotime($grupo->fecha_fin));
+
+		
+		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+			$dias = ['Lunes'=>'1', 'Martes'=>'2', 'Miercoles'=>'3', 'Jueves'=>'4', 'Viernes'=>'5', 'Sabado'=>'6', 'Domingo'=>'7'];
+			foreach ($grupo_horario as $value ) {
+				foreach ($dias as $d) {
+					if($value->dia == $d)
+					{
+						dd('es igual');
+					}	
+				}
+			
+			}
+
+		    echo $i . "<br />";
+		    $dias = array('','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
+			$fecha = $dias[date('N', strtotime($i))];
+			
+		}
 		
 	}
 

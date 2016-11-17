@@ -68,6 +68,7 @@ class EstadisticaController extends Controller
 
 		if($request->selectvalue == 'examen')
 		{
+			
 			dd($this->examenRepo->allExamenFilialMatricula());
 		}
 	}

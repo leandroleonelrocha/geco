@@ -24,6 +24,7 @@ class ExamenRepo extends BaseRepo {
 		foreach ($examen as  $value) {
 			if($value->Matricula->Filial->id == $filial)
 			{
+                dd($value->get()->groupBy('grupo_id'));
 				array_push($resultado, $value);
 			}	
 		}
