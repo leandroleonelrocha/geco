@@ -98,15 +98,14 @@ class GrupoController extends Controller
 
 		
 		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-			$dias = ['Lunes'=>'1', 'Martes'=>'2', 'Miercoles'=>'3', 'Jueves'=>'4', 'Viernes'=>'5', 'Sabado'=>'6', 'Domingo'=>'7'];
+		
 			foreach ($grupo_horario as $value ) {
-				foreach ($dias as $d) {
-					if($value->dia == $d)
+				
+					if($value->dia == 'Lunes')
 					{
 						dd('es igual');
 					}	
-				}
-			
+				
 			}
 
 		    echo $i . "<br />";
