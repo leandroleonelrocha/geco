@@ -167,7 +167,7 @@
                   </li>
 
                   <li>
-                  <a href="#">
+                  <a href="{{route('filial.estadisticas')}}">
                     <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span>
                   </a>
                   </li>

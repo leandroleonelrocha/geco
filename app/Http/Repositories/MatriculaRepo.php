@@ -13,8 +13,7 @@ class MatriculaRepo extends BaseRepo {
     }
     
     public function allEneable(){
-        $filial = session('usuario')['entidad_id'];
-        return $this->model->where('activo', 1)->where('filial_id', $filial)->get();
+        return $this->model->where('activo', 1)->where('filial_id', $this->filial)->get();
     }
 
     public function disable($matricula){

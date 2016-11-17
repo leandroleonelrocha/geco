@@ -13,6 +13,7 @@ class PersonaInteresRepo extends BaseRepo {
     }
 
     public function findPreinforme($preinforme_id){
-    	return PersonaInteres::where('preinforme_id',$preinforme_id)->get();
+
+    	return $this->model->where('preinforme_id',$preinforme_id)->get();
     }
 }

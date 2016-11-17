@@ -13,10 +13,10 @@ class PersonaTelefonoRepo extends BaseRepo {
     }
 
 	public function findTelefono($persona_id){
-    	return PersonaTelefono::where('persona_id',$persona_id)->get();
+    	return $this->model->where('persona_id',$persona_id)->get();
     }
 
     public function editTelefono($id,$tel){
-    	return PersonaTelefono::where('persona_id', $id)->update(array('telefono' => $tel));
+    	return $this->model->where('persona_id', $id)->update(array('telefono' => $tel));
     }
 }

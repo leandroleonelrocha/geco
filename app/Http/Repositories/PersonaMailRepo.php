@@ -13,10 +13,10 @@ class PersonaMailRepo extends BaseRepo {
     }
 
     public function findMail($persona_id){
-    	return PersonaMail::where('persona_id',$persona_id)->get();
+    	return $this->model->where('persona_id',$persona_id)->get();
     }
 
     public function editMail($id,$mail){
-    	return PersonaMail::where('persona_id', $id)->update(array('mail' => $mail));
+    	return $this->model->where('persona_id', $id)->update(array('mail' => $mail));
     }
 }

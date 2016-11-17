@@ -13,11 +13,11 @@ class PagoRepo extends BaseRepo {
     }
 
     public function allFilial(){
-        $filial = session('usuario')['entidad_id'];
-        return Pago::where('filial_id', $filial)->get();
+
+        return $this->model->where('filial_id', $this->filial)->get();
     }
 
     public function allMatricula($id){
-        return Pago::where('matricula_id', $id)->get();
+        return $this->model->where('matricula_id', $id)->get();
     }
 }

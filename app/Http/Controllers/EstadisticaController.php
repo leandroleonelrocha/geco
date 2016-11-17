@@ -5,75 +5,75 @@ use Controllers;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PreinformeRepo;
+use App\Http\Repositories\ExamenRepo;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use Illuminate\Http\Request;
 use Session;
 class EstadisticaController extends Controller
 {
-	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo)
+	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo)
 	{
 		$this->pagoRepo = $pagoRepo;
 		$this->personaRepo = $personaRepo;
 		$this->preinformeRepo = $preinformeRepo;
+		$this->examenRepo = $examenRepo;
 
 	}
 
 	public function index(){
-	  
-		$generos = Preinforme::all();
 
-	  return view('rol_filial.estadisticas.index', compact('generos'));
+	  return view('rol_filial.estadisticas.index');
 	}
 	
 
-	public function test()
+	
+
+	public function detalles(Request $request)
 	{
-		$resultado = $this->preinformeRepo->estadisticas('2016-10-12 ', '2016-11-12 ')->get()->groupBy('como_encontro');
-		return view('rol_filial.estadisticas.test');
-	}
-
-
-
-	public function estadistica_preinformes_ajax(Request $request)
-	{	
 		$array = explode("-", $request->get('fecha'));	
 		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
 		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
-
-		$data=[];
-		$total = $this->personaRepo->countTotal();
-		//Por genero
-		$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
-		$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
-
 		
-		$data=[];
-		$data['parameter1'] = 'aklsdklñadls';
-		$data['parameter2'] = 'papasa';
-		
-		
-		return redirect()->route('filial.test')->with($data);
 
-		/*
-		if($request->get('selectvalue') == 'preinforme');
+		if($request->selectvalue == 'inscripcion')
 		{		
-			$resultado = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
-			return view('rol_filial.estadisticas.test', compact('resultado'));
+			$data=[];
+			$total = $this->personaRepo->countTotal();
+			$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
+			$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
+			$data['estadistica3'] = $this->personaRepo->disponibilidadManana($inicio, $fin);
+			$data['estadistica4'] = $this->personaRepo->disponibilidadTarde($inicio, $fin);
+			$data['estadistica5'] = $this->personaRepo->disponibilidadNoche($inicio, $fin);
+			$data['estadistica6'] = $this->personaRepo->disponibilidadSabado($inicio, $fin);
+			$genero = $this->personaRepo->getGenero($inicio, $fin);
+			return view('rol_filial.estadisticas.detalles',compact('data', 'genero', 'total'));
 		}
-		*/
-		
-		if($request->get('selectvalue') == 'inscripcion')
-		{
-			$generos = $this->personaRepo->getGenero($inicio, $fin);
-			$posee_computadora = $this->personaRepo->getPoseeComputadora($inicio, $fin);
-		
-			$estudio_computadora = $this->personaRepo->getEstudioComputadora($inicio, $fin);
-			return view('rol_filial.estadisticas.test', compact('posee_computadora'));
-		}
-		
 
+		if($request->selectvalue == 'preinforme')
+		{		
+			$preinforme = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
+			return view('rol_filial.estadisticas.detalles', compact('preinforme'));
+		}
+
+		if($request->selectvalue == 'recaudacion')
+		{
+			return 'recaudacion';
+		}
+
+		if($request->selectvalue == 'morosidad')
+		{
+			return 'morosidad';
+		}
+
+		if($request->selectvalue == 'examen')
+		{
+			dd($this->examenRepo->allExamenFilialMatricula());
+		}
 	}
+
+
+
 
 	/*
 		for ($i = 1; $i <= 10; $i++) {

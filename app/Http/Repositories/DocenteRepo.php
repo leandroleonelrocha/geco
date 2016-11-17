@@ -10,12 +10,12 @@ class DocenteRepo extends BaseRepo {
     }
     
     public function allEneable(){
-        $filial = session('usuario')['entidad_id'];
-        return Docente::where('activo', 1)->where('filial_id', $filial)->get();
+
+        return $this->model->where('activo', 1)->where('filial_id', $this->filial)->get();
     }
 
     public function check($tipo,$nro){
-        return Docente::where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+        return $this->model->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
     }
 
     public function disable($docente){
