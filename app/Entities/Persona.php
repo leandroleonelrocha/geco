@@ -42,9 +42,17 @@ class Persona extends Entity
         return $this->hasMany(PersonaInteres::getClass());
     }
 
+    public function Matricula(){
+        return $this->hasMany(Matricula::getClass());
+    }
+
     public function getFullNameAttribute()
     {
         return $this->apellidos .',' . $this->nombres;
+    }
+
+    public function Mailing(){
+        return $this->belongsTo(Mailing::getClass());
     }
 
 }

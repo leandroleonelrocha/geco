@@ -9,7 +9,7 @@ Route::group(['prefix' => 'filial'], function(){
 	 ]);
 
 	// Rutas Operaciones -------- Personas
-	// require_once('PersonasRoute.php');
+	require_once('PersonasRoute.php');
 	
 	// Rutas Operaciones ---------- Preinformes
 	require_once('PreinformesRoute.php');
@@ -39,13 +39,17 @@ Route::group(['prefix' => 'filial'], function(){
 	 require_once('ExamenesRoute.php');
 
 	// Rutas Operaciones ---------- Asesores
-	// require_once('AsesoresRoute.php');
+	require_once('AsesoresRoute.php');
+
+	// Rutas Operaciones ---------- Asignación de Asesores
+	require_once('AsignacionAsesoresRoute.php');
 
 	// Rutas Operaciones ---------- Docentes
 	require_once('DocentesRoute.php');
-	require_once('AsesoresRoute.php');
-	require_once('AsignacionAsesoresRoute.php');
-	require_once('PersonasRoute.php');
+	
 	// Rutas Operaciones ---------- Estadísticas
 	// require_once('Route.php');
+
+	// Rutas Operaciones ---------- Mails
+	require_once('MailsRoute.php');
 });
