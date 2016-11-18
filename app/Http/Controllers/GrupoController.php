@@ -72,6 +72,17 @@ class GrupoController extends Controller
 
 	public function postAdd(Request $request)
 	{
+		for($i=0;$i<count($request->dia);$i++) {
+			$grupo = $this->grupoRepo->find(1);
+			$data['dia'] = $request->dia[$i];
+			$data['horario_desde'] = $request->horario_desde[$i];
+			$data['horario_hasta'] = $request->horario_hasta[$i];
+			$grupo->GrupoHorario()->create($data);
+		}
+
+		
+		dd('sasa');
+
 		/*
 		$array = explode("-", $request->get('fecha'));
 		$fecha1 = date("Y-m-d", strtotime($array[0]));
@@ -90,6 +101,7 @@ class GrupoController extends Controller
 
 		//$this->grupoRepo->create($data);
 		//return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+
 
 		$grupo = $this->grupoRepo->find(1);
 		$grupo_dias =[];
