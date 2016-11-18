@@ -43,7 +43,7 @@
                 </li>
 
                 <li>
-                  <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                  <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
 
                 <li class="treeview">
@@ -109,11 +109,10 @@
 
                   <li class="treeview">
                     <a href="{{route('filial.recibos')}}">
-                      <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.recibo')</span><i class="fa fa-angle-left pull-right"></i>
+                      <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.pago')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                      <li class="active"><a href="{{route('filial.recibos')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
-                      <li> <a href="{{route('filial.recibo_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                      <li class="active"><a href="{{route('filial.pagos_matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
                     </ul>
                   </li>
 
@@ -202,7 +201,6 @@
                       <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
                     </ul>
                   </li> 
-
             <?php
                 break;
               }

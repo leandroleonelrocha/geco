@@ -13,7 +13,14 @@ class PreinformeRepo extends BaseRepo {
     }
 
     public function allFilial(){
-        $filial = session('usuario')['entidad_id'];
-        return Preinforme::where('filial_id', $filial)->get();
+
+        return $this->model->where('filial_id', $this->filial)->get();
     }
+
+    public function estadisticas($inicio, $fin){
+        return $this->model->where('filial_id', $this->filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin);
+    }
+
+    
+
 }

@@ -14,7 +14,7 @@ class FilialRepo extends BaseRepo {
 
     public function allEneable(){
 
-        return Filial::where('activo', 1)->get();
+        return $this->model->where('activo', 1)->get();
     }
   
     public function disable($filial){

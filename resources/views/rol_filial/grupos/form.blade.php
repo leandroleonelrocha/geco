@@ -67,8 +67,7 @@
                                 </div>
                             </div>
 
-
-        <div class="form-group">
+            <div class="form-group">
                     <label>Date range:</label>
                     <div class="input-group">
                       <div class="input-group-addon">
@@ -78,13 +77,46 @@
                           {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
                         @else
                           {!! Form::text('fecha', $model->fulldate ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
-                     
                         @endif
                     
                     
                     </div><!-- /.input group -->
-        </div>                    
+        </div>      
 
+
+
+
+
+         <button class="add_field_button">Agregar otro dia</button><br>
+            
+            <div class="row input_fields_wrap">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                    <label> Dia </label>
+                    <select name="dia[]" class="form-control">
+                        <option value="1"> Lunes</option>
+                        <option value="2"> Martes</option>           
+                        <option value="3"> Miercoles</option>           
+                        <option value="4"> Jueves</option>           
+                        <option value="5"> Viernes</option>           
+                        <option value="6"> Sabados</option>           
+                     </select>
+                    </div>
+
+                  <div class="col-xs-3">
+                   <label> Hora comienzo </label>
+                    <input class="form-control" name="horario_desde[]" type="time" value="13:45:00" >
+                  </div>
+
+                  <div class="col-xs-3">
+                   <label> Hora fin </label>
+                    <input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >
+                  </div>
+
+
+                </div>
+            </div>
+     
         
     </div><!-- /.box-body -->
 
@@ -93,4 +125,60 @@
     </div>
     </div><!-- /.box -->
     {!! Form::close() !!}
+@endsection
+
+@section('js')
+<script type="text/javascript">
+   
+    $(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+    
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            console.log(x);
+            $(wrapper).append(add_input()); //add input box
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        
+        var row = $(this).data('id');
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+
+    })
+
+
+    function add_input()
+    {
+     var data = '<div class="form-group">'+
+                '<div class="col-xs-6">'+
+                '<select name="dia[]" class="form-control">'+
+                    '<option> Lunes</option>'+
+                    '<option> Martes</option>'+           
+                    '<option> Miercoles</option>'+           
+                    '<option> Jueves</option>'+           
+                    '<option> Viernes</option>'+           
+                    '<option> Sabados</option> ' +         
+                 '</select>'+
+                '</div>'+
+                    '<div class="col-xs-3">'+
+                    '<input class="form-control" name="horario_desde[]" type="time" value="13:45:00" >'+
+                  '</div>'+
+                  '<div class="col-xs-3">'+
+                    '<input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >'+
+                  '</div>'+
+                '</div>';
+      return data;      
+    }
+
+    console.log(add_input());
+});
+
+</script>
+
 @endsection

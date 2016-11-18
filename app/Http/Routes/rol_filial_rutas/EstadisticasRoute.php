@@ -4,7 +4,15 @@ Route::get('estadisticas',[
 	'uses' => 'EstadisticaController@index'
 ]);
 
-Route::post('procesarAjax',[
-	'as' => 'estadisticas.procesarAjax',
-	'uses' => 'EstadisticaController@procesarAjax'
+Route::get('test',[
+	'as' => 'filial.test',
+	'uses' => 'EstadisticaController@test'
+]);
+
+
+Route::get('detalles',[
+
+	'as' => 'estadisticas.detalles',
+	'uses' => 'EstadisticaController@detalles'
+
 ]);
