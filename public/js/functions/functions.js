@@ -21,7 +21,7 @@ $(document).ready(function(){
 		else 
 			$('#ninguna').removeAttr('disabled');
 	}
-
+	$('.sidebar-menu').perfectScrollbar(); /*PLUGIN PARA CAMBIAR LA BARRITA*/
 	// Se bloquea/habilita la opción ninguna
 	seleccionoCarreraCurso(); // Al cargar la página
 	// Al hacer click en alguna Carrera o Curso

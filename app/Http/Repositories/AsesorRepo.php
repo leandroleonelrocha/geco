@@ -14,11 +14,11 @@ class AsesorRepo extends BaseRepo {
 
     public function allEneable(){
 
-        return Asesor::where('activo', 1)->get();
+        return $this->model->where('activo', 1)->get();
     }
 
     public function check($tipo,$nro){
-        return Asesor::where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+        return $this->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
     }
 
     public function disable($asesor){

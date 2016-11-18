@@ -13,10 +13,10 @@ class FilialTelefonoRepo extends BaseRepo {
     }
 
     public function findTelefono($filial_id){
-    	return FilialTelefono::where('filial_id',$filial_id)->get();
+    	return $this->model->where('filial_id',$filial_id)->get();
     }
 
     public function editTelefono($id,$tel){
-        return FilialTelefono::where('filial_id', $id)->update(array('telefono' => $tel));
+        return $this->model->where('filial_id', $id)->update(array('telefono' => $tel));
     }
 }

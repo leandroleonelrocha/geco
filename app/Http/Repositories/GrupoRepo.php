@@ -12,8 +12,8 @@ class GrupoRepo extends BaseRepo {
     }
     
     public function allEnable(){
-        $filial = session('usuario')['entidad_id'];
-        return Grupo::where('filial_id', $filial)->where('activo', 1)->where('terminado', 0)->where('cancelado', 0)->get();
+
+        return $this->model->where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->where('cancelado', 0)->get();
     }
 
     public function allNuevo(){

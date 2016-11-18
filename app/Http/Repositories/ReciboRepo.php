@@ -13,7 +13,6 @@ class ReciboRepo extends BaseRepo {
     }
 
     public function allReciboPago($pago){
-        $filial = session('usuario')['entidad_id'];
-        return Recibo::where('pago_id', $pago)->where('filial_id', $filial)->get();
+        return $this->model->where('pago_id', $pago)->where('filial_id', $filial)->get();
     }
 }

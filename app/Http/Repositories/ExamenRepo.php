@@ -13,9 +13,23 @@ class ExamenRepo extends BaseRepo {
     }
 
     public function allExamenFilial(){
-        $filial = session('usuario')['entidad_id'];
-    
-        return $this->model->where('activo',1)->where('filial_id', $filial)->get();
+        return $this->model->where('activo',1)->where('filial_id', $this->filial)->get();
 
     }
+
+    public function allExamenFilialMatricula(){
+    	$filial = session('usuario')['entidad_id'];
+    	$examen = $this->model->all();
+		$resultado = [];
+		foreach ($examen as  $value) {
+			if($value->Matricula->Filial->id == $filial)
+			{
+                dd($value->get()->groupBy('grupo_id'));
+				array_push($resultado, $value);
+			}	
+		}
+
+		return $resultado;
+    }
+   
 }

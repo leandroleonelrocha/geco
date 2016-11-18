@@ -14,11 +14,11 @@ class DirectorRepo extends BaseRepo {
 
     public function allEneable(){
 
-        return Director::where('activo', 1)->get();
+        return $this->model->where('activo', 1)->get();
     }
 
     public function check($tipo,$nro){
-    	return Director::where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+    	return $this->model->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
     }
 
     public function disable($director){

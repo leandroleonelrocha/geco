@@ -24,7 +24,6 @@ class LoginController extends Controller {
         // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         // $data = json_decode(curl_exec($ch),true);
         // curl_close($ch);
-        
        
        $data =[ 
        'id'=>'1',
@@ -68,8 +67,7 @@ class LoginController extends Controller {
     }
 
     public function nueva()
-    {
-        
+    { 
         return view('cambio_contrasena',compact('data'));
     }
 

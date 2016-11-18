@@ -2,16 +2,10 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-          <div class="user-panel">
-            <div class="pull-left image">
-              <img src="dist/img/logo.png"  height="500" width="500" >
-            </div>
-            <div class="pull-left info">
-              <p></p>
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-            </div>
-          </div>
-          <!-- search form -->
+          
+        
+          <ul id="Defaultses" class="sidebar-menu"> 
+              <!-- search form -->
           <form action="#" method="get" class="sidebar-form">
             <div class="input-group">
               <input type="text" name="q" class="form-control" placeholder="Search...">
@@ -21,9 +15,6 @@
             </div>
           </form>
           <!-- /.search form -->
-          <!-- sidebar menu: : style can be found in sidebar.less -->
-          <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
             <?php
               switch (session('usuario')['rol_id']) {
                 case 2: 
@@ -38,7 +29,6 @@
                   </ul>
                 </li>
 
-
                 <li class="treeview">
                   <a href="{{route('dueño.filiales')}}">
                     <i class="fa fa-child"></i> <span>@lang('menu.filiales')</span><i class="fa fa-angle-left pull-right"></i>
@@ -49,48 +39,15 @@
                   </ul>
                 </li>
 
-                <li class="treeview">
-                  <a>
-                    <i class="fa fa-user"></i> <span>Configuración</span><i class="fa fa-angle-left pull-right"></i>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> Cambiar contraseña</a></li>
-                  </ul>
-                </li>
-                <?php
-                break;
-                case 3:
-
-              ?>
                 <li>
-                  <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                  <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
-
-                <li class="treeview">
-                    <a> 
-                      <i class="fa fa-user"></i> <span>Configuración</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> Cambiar contraseña</a></li>
-                    </ul>
-                </li> 
             <?php
                 break;
                 case 3:
                 break;
                 case 4:
             ?>
-
-                <li class="treeview">
-                  <a href="{{route('filial.asesores')}}">
-                    <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span><i class="fa fa-angle-left pull-right"></i>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
-                    <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
-                  </ul>
-                </li>
-
                 <li class="treeview">
                     <a href="{{route('filial.personas')}}">
                       <i class="fa fa-user"></i> <span>@lang('menu.persona')</span><i class="fa fa-angle-left pull-right"></i>
@@ -184,6 +141,20 @@
                     </ul>
                   </li>
 
+ 
+
+                  <li class="treeview">
+                    <a href="{{route('filial.asesores')}}">
+                      <i class="fa fa-user"></i> <span>@lang('menu.asesor')</span><i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                      <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> Lista</a></li>
+                      <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> Nuevo</a></li>
+                       <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i> Asignaci&oacute;n a filial</a></li>
+                    </ul>
+                  </li>
+
+
 
                   <li class="treeview">
                     <a href="{{route('filial.docentes')}}">
@@ -195,15 +166,11 @@
                     </ul>
                   </li>
 
-                  <li class="treeview">
-                    <a>
-                      <i class="fa fa-user"></i> <span>Configuración</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i>Asignar asesores</a></li>
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> Cambiar contraseña</a></li>
-                    </ul>
-                  </li>  
+                  <li>
+                  <a href="{{route('filial.estadisticas')}}">
+                    <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span>
+                  </a>
+                  </li>
             <?php
                 break;
               }
@@ -216,11 +183,7 @@
 
     
            
-            <li class="header">LABELS</li>
-            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-          </ul>
-        </section>
+            
         <!-- /.sidebar -->
       </aside>
+   
