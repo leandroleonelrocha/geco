@@ -7,7 +7,7 @@ ${demo.css}
   <!-- Morris charts -->
     <link rel="stylesheet" href="{{asset('plugins/morris/morris.css')}}">
 @endsection
-@section('content')    
+@section('content')
 
 <div class="box box-default">
   <div class="box-header with-border">
@@ -17,7 +17,7 @@ ${demo.css}
     </div><!-- /.box-tools -->
   </div><!-- /.box-header -->
   <div class="box-body">
-    {!! Form::model(Request::all(), ['route'=> 'estadisticas.estadistica_preinformes_ajax', 'method'=>'get']) !!} 
+    {!! Form::model(Request::all(), ['route'=> 'estadisticas.estadistica_preinformes_ajax', 'method'=>'post']) !!}
           <div class="col-xs-4">
              {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
           </div>
@@ -28,15 +28,14 @@ ${demo.css}
               <option value="recaudacion">Recaudación</option>
               <option value="morosidad">Morosidad</option>
             </select>
-          </div> 
+          </div>
 
           <div class="col-xs-2">
            <button class="btn btn-block btn-default " id="btn_buscar">Buscar</button>
-          </div> 
+          </div>
     {!! Form::close() !!}
   </div><!-- /.box-body -->
 </div><!-- /.box -->
-
 <div id="torta"></div>
 <br><br>
 <div id="bar"></div>
@@ -61,7 +60,7 @@ ${demo.css}
 @section('js')
 <script type="text/javascript">
 $(function () {
-    
+
     $('#torta').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -93,19 +92,22 @@ $(function () {
             data: [
 
                 <?php
-                if(isset($resultado))
+
+                if(session()->has('data'))
                 {
-                    foreach ($resultado as $key => $value) {
+                    foreach(Session::get('data') as $data => $value)
+                    {
+
                     ?>
-                        
-                     ['{{$key}}', {{$value->count()}} ],
-                
-                 
+
+                     ['{{$data}}', {{$value->count()}} ],
+
+
                     <?php
                     }
                 }
                 ?>
-            
+
 
 
             ]
@@ -118,20 +120,22 @@ $(function () {
           element: 'bar-chart',
           resize: true,
           data: [
+                  <?php
+
+                  if(session()->has('data'))
+                  {
+                  foreach(Session::get('data') as $data => $value)
+                  {
+                  ?>
+
+              ['{{$data}}', {{$value->count()}} ],
+
+
               <?php
-              if(isset($data))
-               { 
-              foreach($data as $dat ){
-              $array = explode(",", $dat);
+              }
+              }
               ?>
 
-               {y: '{{$array[0]}}', a: {{$array[1]}}, b: {{$array[2]}} },
-           
-              <?php
-               }
-                }
-              ?>
-           
           ],
           barColors: ['#00a65a', '#f56954'],
           xkey: 'y',
@@ -139,7 +143,7 @@ $(function () {
           labels: ['SI','NO'],
           hideHover: 'auto'
         });
-   
+
 
 
 });

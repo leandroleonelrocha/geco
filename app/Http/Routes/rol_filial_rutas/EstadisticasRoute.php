@@ -4,12 +4,12 @@ Route::get('estadisticas',[
 	'uses' => 'EstadisticaController@index'
 ]);
 
-Route::get('test/{resultado?}',[
+Route::get('test',[
 	'as' => 'filial.test',
 	'uses' => 'EstadisticaController@test'
 ]);
 
-Route::get('estadistica_preinformes_ajax',[
+Route::post('estadistica_preinformes_ajax',[
 	'as' => 'estadisticas.estadistica_preinformes_ajax',
 	'uses' => 'EstadisticaController@estadistica_preinformes_ajax'
 ]);

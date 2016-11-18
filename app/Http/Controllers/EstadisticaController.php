@@ -39,33 +39,19 @@ class EstadisticaController extends Controller
 		$array = explode("-", $request->get('fecha'));	
 		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
 		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
+        if($request->selectvalue == 'inscripcion')
+        {
+            $total = $this->personaRepo->countTotal();
+            //Por genero
+            $data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
+            $data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
 
-		$data=[];
-		$total = $this->personaRepo->countTotal();
-		//Por genero
-		$data['estadistica1'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
-		$data['estadistica2'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
+            return redirect()->route('filial.test')->with('data',$data);
 
-	
-		return view('rol_filial.estadisticas.test', compact('data'));
 
-		/*
-		if($request->get('selectvalue') == 'preinforme');
-		{		
-			$resultado = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
-			return view('rol_filial.estadisticas.test', compact('resultado'));
-		}
-		*/
-		
-		if($request->get('selectvalue') == 'inscripcion')
-		{
-			$generos = $this->personaRepo->getGenero($inicio, $fin);
-			$posee_computadora = $this->personaRepo->getPoseeComputadora($inicio, $fin);
-		
-			$estudio_computadora = $this->personaRepo->getEstudioComputadora($inicio, $fin);
-			return view('rol_filial.estadisticas.test', compact('posee_computadora'));
-		}
-		
+        }
+
+
 
 	}
 
