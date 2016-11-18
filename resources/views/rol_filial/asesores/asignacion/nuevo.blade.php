@@ -7,15 +7,15 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de todos los asesores a asignar para la filial</h3>
+					<h3 class="box-title">@lang('asesor.titulo')</h3>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>N&uacute;mero de Asesor</th>
-						<th>N&uacute;mero de Documento</th>
-						<th>Apellido</th>
-						<th>Nombres</th>
+						<th>@lang('asesor.numeroasesor')</th>
+						<th>@lang('asesor.numerodocumento')</th>
+						<th>@lang('asesor.apellido')</th>
+						<th>@lang('asesor.nombre')</th>
 
 			
 						<th class="no-print"></th>

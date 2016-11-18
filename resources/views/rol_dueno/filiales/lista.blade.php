@@ -4,19 +4,19 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de filiales</h3>
+					<h3 class="box-title">@lang('filial.listadofilial')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('dueño.filiales_nuevo')}}" class="btn btn-success text-white"> Agregar nueva</a>
+						<a href="{{route('dueño.filiales_nuevo')}}" class="btn btn-success text-white"> @lang('filial.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Nombre</th>
-						<th>Direcci&oacuten</th>
-						<th>Localidad</th>
+						<th>@lang('filial.nombre')</th>
+						<th>@lang('filial.direccion')</th>
+						<th>@lang('filial.localidad')</th>
 						<th>CP</th>
-						<th>Tel&eacutefono</th>
+						<th>@lang('filial.telefonos')</th>
 						<th>E-Mail</th>
 						<th>Director</th>
 						<th class="no-print"></th>
@@ -31,7 +31,7 @@
 					                <td>{{ $f->codigo_postal }}</td>
 					                <td>
 			                     	@foreach($f->FilialTelefono as $telefono)
-						            		{{$telefono->telefono}}
+						            		{{$telefono->telefono}}<br>
 					            	@endforeach</td>
 					            	<td>{{ $f->mail}}</td>
 						            <td>{{ $f->Director->fullname}}</td>

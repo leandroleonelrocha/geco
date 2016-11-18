@@ -11,18 +11,17 @@
                     <div class="row">
                         <div class="col-xs-12">
                             {!! Form::open(['route'=> 'filial.materias_nuevo_post', 'method'=>'post']) !!}
-                            <div class="col-md-6 form-group">
-                                <label>@lang('materia.numero')</label>
-                                {!! Form::text('id',null,array('class'=>'form-control')) !!}
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label>@lang('materia.carrera')</label>
-                                {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control')) !!}
-                            </div>
+
                             <div class="col-md-6 form-group">
                                 <label>@lang('materia.nombre')</label>
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>@lang('materia.carrera')</label>
+                                {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control')) !!}
+                            </div>
+                   
                             <div class="col-md-6 form-group">
                                 <label>@lang('materia.descripcion')</label>
                                 {!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x3')) !!}

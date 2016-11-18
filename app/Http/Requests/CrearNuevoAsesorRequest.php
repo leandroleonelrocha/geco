@@ -48,7 +48,7 @@ class CrearNuevoAsesorRequest extends Request
             'apellidos.required' => 'Escriba el apellido', 
             'direccion.required' => 'Escriba la dirección',
             'localidad.required' => 'Escriba la localidad',
-            'telefono.required' => 'Escriba el teléfono',
+            'telefono[0].required' => 'Escriba el teléfono',
             'mail.required' => 'Escriba el E-mail',
             'mail.unique'=> 'El mail ya está en uso', 
         ];

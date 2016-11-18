@@ -5,7 +5,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Nuevo Preinforme</h3>
+					<h3>@lang('preinforme.nuevopreinforme')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -13,30 +13,30 @@
 							{!! Form::open(['route'=> 'filial.preinformes_nuevo_post', 'method'=>'post']) !!}
 							<!-- ---------- Datos Personales ---------- -->
 				            <div class="col-xs-12">
-				            	<h4 class="box-title text-center">Datos Personales</h4>
+				            	<h4 class="box-title text-center">@lang('persona.titulo')</h4>
 				            </div>
 				            <div class="col-md-4 form-group">
 				            	{!! Form::hidden('persona',$persona->id,array('class'=>'form-control')) !!}
-				            	<label>Nombre</label>
+				            	<label>@lang('persona.nombre')</label>
 								<span class="form-control">{{$persona->apellidos}} {{$persona->nombres}}</span>
 							</div>
 							<div class="col-md-4 form-group">
-				            	<label>N&uacute;mero de Documento</label>
+				            	<label>@lang('persona.numerodocumento')</label>
 								<span class="form-control">{{$persona->nro_documento}}</span>
 							</div>
 							<div class="col-md-4 form-group">
-				            	<label>Fecha de Nacimiento</label>
+				            	<label>@lang('persona.fnacimiento')</label>
 								<span class="form-control">{{$persona->fecha_nacimiento}}</span>
 							</div>
 			              	<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Datos del Preinforme</h4>
+			                	<h4 class="box-title text-center">@lang('preinforme.datospreinforme')</h4>
 			              	</div>
 			              	<div class="col-md-12 form-group">
-								<label>Asesor</label>
+								<label>@lang('persona.asesor')</label>
 								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
-								<label>Descripci&oacute;n</label>
+								<label>@lang('preinforme.descripcion')</label>
 								{!! Form::textarea('descripcion_preinforme',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-md-6 form-group">
@@ -44,26 +44,26 @@
 								{!! Form::textarea('medio',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-md-12 form-group">
-								<label>¿C&oacute;mo nos encontr&oacute;?</label>
+								<label>@lang('preinforme.encontro')</label>
 								{!! Form::textarea('como_encontro',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Intereses</h4>
+			                	<h4 class="box-title text-center">@lang('preinforme.intereses')</h4>
 			              	</div>
 			              	<div class="col-md-5 form-group">
-								<label>Carreras</label>
+								<label>@lang('preinforme.carreras')</label>
 								{!! Form::select('carrera',$carreras->toArray(),null, array('id'=>'carreras', 'class' => 'form-control', 'multiple')) !!}
 							</div>
 							<div class="col-md-5 form-group">
-								<label>Cursos</label>
+								<label>@lang('preinforme.cursos')</label>
 								{!! Form::select('curso',$cursos->toArray(),null,array('id'=>'cursos', 'class' => 'form-control', 'multiple')) !!}
 							</div>
 							<div class="col-md-2 form-group">
-								<label>Ninguna</label>
+								<label>@lang('preinforme.ningunat')</label>
 								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna')) !!}</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<label>Otros</label>
+								<label>@lang('preinforme.otrost')</label>
 								{!! Form::textarea('descripcion_interes',null,array('id'=>'otros', 'class' => 'form-control','disabled','size'=>'30x4')) !!}
 							</div>
 							<div class="box-footer col-xs-12">

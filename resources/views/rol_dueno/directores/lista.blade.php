@@ -7,19 +7,19 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Directores</h3>
+					<h3 class="box-title">@lang('director.listadodirector')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('dueño.directores_nuevo')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('dueño.directores_nuevo')}}" class="btn btn-success text-white"> @lang('director.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Tipo Documento</th>
-						<th>N&uacute;mero de Documento</th>
-						<th>Apellido</th>
-						<th>Nombres</th>
-						<th>Tel&eacute;fono</th>
+						<th>@lang('director.tipodocumento')</th>
+						<th>@lang('director.numerodocumento')</th>
+						<th>@lang('director.apellido')</th>
+						<th>@lang('director.nombre')</th>
+						<th>@lang('director.telefonos')</th> 
 						<th>E-Mail</th>
 						<th class="no-print"></th>
 						</tr> </thead>
@@ -32,11 +32,11 @@
 							        <td>{{ $d->nombres }}</td>
 									<td>
 							     	@foreach($d->DirectorTelefono as $telefono)
-						            		{{$telefono->telefono}}
+						            		{{$telefono->telefono}}</br>
 					            	@endforeach</td>
 					            	<td>
 				            	   	@foreach($d->DirectorMail as $mail)
-						            		{{$mail->mail}}
+						            		{{$mail->mail}}</br>
 					            	@endforeach</td>
 						           	<td class="text-center">
 									<a href="{{route('dueño.directores_editar',$d->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>

@@ -35,7 +35,7 @@ class PreinformeController extends Controller {
         $this->personaRepo          = $personaRepo;
         $this->asesorRepo           = $asesorRepo;
         $this->tipoDocumentoRepo    = $tipoDocumentoRepo;
-        $this->personaEmailRepo     = $personaMailRepo;
+        $this->personaMailRepo     = $personaMailRepo;
         $this->personaTelefonoRepo  = $personaTelefonoRepo;
         $this->carreraRepo          = $carreraRepo;
         $this->cursoRepo            = $cursoRepo;
@@ -174,15 +174,23 @@ class PreinformeController extends Controller {
                 $persona['aclaraciones']            =   $request->aclaraciones;
                 $persona['filial_id']               =   session('usuario')['entidad_id'];
                 $persona['asesor_id']               =   $request->asesor;
+
                 if($this->personaRepo->create($persona)){
                     //Datos Telefónicos y Mails
-                    $persona                        =   $this->personaRepo->all()->last();
-                    $email['persona_id']            =   $persona['id'];
-                    $email['mail']                  =   $request->mail;
-                    $this->personaEmailRepo->create($email);
-                    $telefono['persona_id']         =   $persona['id'];
-                    $telefono['telefono']           =   $request->telefono;
-                    $this->personaTelefonoRepo->create($telefono);
+                    $persona=$this->personaRepo->all()->last();
+
+                    foreach ($data['telefono'] as $key) {
+                        
+                        $telefono['persona_id'] = $persona->id;
+                        $telefono['telefono'] = $key;
+                        $this->personaTelefonoRepo->create($telefono);
+                    }
+                    foreach ($data['mail'] as $key) {
+
+                        $mail['persona_id']=$persona->id;
+                        $mail['mail']=$key;
+                        $this->personaMailRepo->create($mail);
+                    }
                     // Datos Preinforme
                     $preinforme['persona_id']       =   $persona['id'];
                     $preinforme['asesor_id']        =   $request->asesor;

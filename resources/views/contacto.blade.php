@@ -6,8 +6,8 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h2>Contacto</h2>
-					<h1 class="box-title">Equipo de desarrollo Whiteout Team</h1>
+					<h2>@lang('contacto.contacto')</h2>
+					<h1 class="box-title">@lang('contacto.equipo')</h1>
 				</div>
 
 				<div class="box-body">
@@ -52,25 +52,25 @@
     						</div>
 						</div>
 						<div class="col-xs-12">
-							<h4>Deje su Mensaje</h4>
+							<h4>@lang('contacto.mensajedejar')</h4>
 					     </div>
 						{!! Form::open(['route'=> 'filial.contacto_nuevo_post', 'method'=>'post']) !!}
                             <div class="col-md-8 form-group">
-                                <label>Nombre</label>
+                                <label>@lang('contacto.nombre')</label>
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>
 
                          	<div class="col-md-8 form-group">
-                                <label>Tipo de consulta</label>
+                                <label>@lang('contacto.tipoconsulta')</label>
                                 <SELECT NAME="tipoConsulta"> 
-								   <OPTION VALUE="Técnica">Técnica</OPTION> 
-								   <OPTION VALUE="Funcional">Funcional</OPTION> 
-								   <OPTION VALUE="Otros">Otros</OPTION> 
+								   <OPTION VALUE="Técnica">@lang('contacto.tecnica')</OPTION> 
+								   <OPTION VALUE="Funcional">@lang('contacto.funcional')</OPTION> 
+								   <OPTION VALUE="Otros">@lang('contacto.otros')</OPTION> 
 								</SELECT> 
                             </div>
 
                             <div class="col-md-8 form-group">
-                                <label>Tel&eacute;fono</label>
+                                <label>@lang('contacto.telefono')</label>
                                 {!! Form::text('telefono',null,array('class'=>'form-control item')) !!}
                             </div>
 
@@ -80,12 +80,12 @@
                             </div>
 
                            <div class="col-md-8 form-group">
-                                <label>Mensaje</label>
+                                <label>@lang('contacto.mensaje')</label>
                                 {!! Form::textarea('mensaje',null,array('class'=>'form-control','size'=>'30x4')) !!}
                             </div>
 
-                            <div class="box-footer col-xs-12">
-                            {!! Form::submit('Enviar',array('class'=>'btn btn-success')) !!}
+                            <div class="box-footer col-xs-10">
+                            	{!! Form::submit('Enviar',array('class'=>'btn btn-success')) !!}
                             </div>
 
                         {!! Form::close() !!}

@@ -44,12 +44,18 @@ class FilialesController extends Controller
 	}
 
 	public function nuevo_post(CrearNuevaFilialRequest $request){
-		$this->filialesRepo->create($request->all());
-		$filial=$this->filialesRepo->all()->last();
+		
         $data = $request->all();
-        $telefono['filial_id']=$filial->id;
-        $telefono['telefono']=$request->telefono;
-        $this->filialTelefonoRepo->create($telefono);
+
+        $this->filialesRepo->create($request->all());
+        $filial=$this->filialesRepo->all()->last();
+        foreach ($data['telefono'] as $key) {
+                            
+            $telefono['filial_id'] = $filial->id;
+            $telefono['telefono'] = $key;
+            $this->filialTelefonoRepo->create($telefono);
+        }
+                    
 
 	  	$ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$filial->id}/4");  
@@ -68,9 +74,10 @@ class FilialesController extends Controller
         Mail::send('mailing.cuenta',$datosMail,function($msj) use($user){
         	$msj->subject('GeCo -- Nueva Cuenta');
         	$msj->to($user);
-        });
+       }); 
     
 		return redirect()->route('dueño.filiales')->with('msg_ok', 'Filial creada correctamente.');
+
 	}
 
     public function borrar($id){
@@ -92,13 +99,19 @@ class FilialesController extends Controller
         $data = $request->all();
         $model = $this->filialesRepo->find($data['id']);
         if($this->filialesRepo->edit($model,$data)){
-          //editar telefono
-            $this->filialTelefonoRepo->editTelefono($data['id'],$data['telefono']); 
+           //editar telefono
+           // $this->filialTelefonoRepo->editTelefono($data['id'],$data['telefono']); 
+            $model->FilialTelefono()->delete();
+
+            foreach ($data['telefono'] as $key) {
+                $telefono['filial_id'] = $model->id;
+                $telefono['telefono'] = $key;
+                $this->filialTelefonoRepo->create($telefono);
+            }
             return redirect()->route('dueño.filiales')->with('msg_ok','La filial ha sido modificada con éxito.');}
         else
             return redirect()->route('dueño.filiales')->with('msg_error','La filial no ha podido ser modificada.');
     }
-
 
     public function editarPerfil($id){
         $filial = $this->filialesRepo->find($id);
@@ -112,7 +125,12 @@ class FilialesController extends Controller
         $model = $this->filialesRepo->find($data['id']);
         if($this->filialesRepo->edit($model,$data)){
           //editar telefono
-            $this->filialTelefonoRepo->editTelefono($data['id'],$data['telefono']); 
+            $model->FilialTelefono()->delete();
+            foreach ($data['telefono'] as $key) {
+                $telefono['filial_id'] = $model->id;
+                $telefono['telefono'] = $key;
+                $this->filialTelefonoRepo->create($telefono);
+            }
             return redirect()->back()->with('msg_ok','El perfil de la filial ha sido modificada con éxito.');}
         else
             return redirect()->back()->with('msg_error','El perfil de la filial no ha podido ser modificado.');

@@ -12,14 +12,7 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'filial.materias_editar_post', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
-								<label>@lang('materia.numero')</label>
-								{!! Form::text(null, $materia->id, array('class'=>'form-control','disabled')) !!}
 								<input type="hidden" name="id" value="{{$materia->id}}">
-							</div>
-
-							<div class="col-md-6 form-group">
-								<label>@lang('materia.carrera')</label>
-  								{!! Form::select('carrera_id', $carreras->toArray() , $materia->Carrera->id, array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -27,9 +20,13 @@
 								{!! Form::text('nombre', $materia->nombre, array('class'=>'form-control')) !!}
 							</div>
 
+							<div class="col-md-6 form-group">
+								<label>@lang('materia.carrera')</label>
+							   	{!! Form::select('carrera_id', $carreras->toArray() , $materia->Carrera->id, array('class'=>'form-control')) !!}
+							</div>
 
 							<div class="col-md-6 form-group">
-								<label>@lang('Descripcion')</label>
+								<label>@lang('materia.descripcion')</label>
 					     		{!! Form::textarea('descripcion',$materia->descripcion,array('class'=>'form-control','size'=>'30x3')) !!}
 							</div>
 				

@@ -12,10 +12,6 @@
                         <div class="col-xs-12">
                             {!! Form::open(['route'=> 'filial.carreras_nuevo_post', 'method'=>'post']) !!}
                             <div class="col-md-6 form-group">
-                                <label>@lang('carrera.numero')</label>
-                                {!! Form::text('id',null,array('class'=>'form-control')) !!}
-                            </div>
-                            <div class="col-md-6 form-group">
                                 <label>@lang('carrera.nombre')</label>
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>

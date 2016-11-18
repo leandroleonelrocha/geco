@@ -11,9 +11,7 @@
 		</div>
 		<div class="box">
 			<p>Se le ha restaurado la cuenta para el sistema de gesti&oacute;n y cobranza Geco.</p>
-			<p>Para comenzar dir&iacute;jase a nuestro sitio web haciendo click aqu&iacute;.</p>
-			<p>En caso de cambiar la contrase&ntilde;a haga clic aqui</p><a href="http://localhost/proyecto/public/contrasena/nueva">Cambio de contrase&ntilde;a</a>
-
+			<p>Para comenzar dir&iacute;jase a nuestro sitio web haciendo click <a href="http://localhost/geco/public/login">aqu&iacute</a>.</p>
 		</div>
 		<div class="box">
 			<div class="title verde">Datos de la Cuenta renovada</div>

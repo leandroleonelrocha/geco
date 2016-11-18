@@ -14,7 +14,8 @@ class ContactoController extends Controller{
 
 	public function index(){
 		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
+			$rol=session('usuario')['rol_id'];
+			if ( $rol== 4 || $rol==3 || $rol==2){
 				return view('contacto');
 			}
 		    else
@@ -26,28 +27,38 @@ class ContactoController extends Controller{
 
 	public function nuevo_post(CrearNuevoContactoRequest $request){
 		
-	    // Datos del mail
-		$nombre= $request->nombre;
-		$tipoConsulta=$request->tipoConsulta;
-		$mail = $request->mail;
-		$telefono= $request->telefono;
-		$mensaje= $request->mensaje;
+		if (null !== session('usuario')){
+			$rol=session('usuario')['rol_id'];
+			if ( $rol== 4 || $rol==3 || $rol==2){
 
-		$datosMail = array(	'nombre' 	=> $nombre, 
-					'tipoConsulta' 		=> $tipoConsulta, 
-					'mail' 		=> $mail, 
-					'telefono' 	=> $telefono,
-					'mensaje' 	=> $mensaje,
+			    // Datos del mail
+				$nombre= $request->nombre;
+				$tipoConsulta=$request->tipoConsulta;
+				$mail = $request->mail;
+				$telefono= $request->telefono;
+				$mensaje= $request->mensaje;
 
-					);
-		$user="crisdabruno@hotmail.com";
+				$datosMail = array(	'nombre' 	=> $nombre, 
+							'tipoConsulta' 		=> $tipoConsulta, 
+							'mail' 		=> $mail, 
+							'telefono' 	=> $telefono,
+							'mensaje' 	=> $mensaje,
 
-	    // Envío del mail
-	    Mail::send('mailing.contacto',$datosMail,function($msj) use($user){
-	    	$msj->subject('GeCo -- Consulta');
-	    	$msj->to($user);
-	    });
+							);
+				$user="crisdabruno@hotmail.com";
 
-     	return redirect()->back()->with('msg_ok','Datos enviados correctamente.');
+	    		// Envío del mail
+			    Mail::send('mailing.contacto',$datosMail,function($msj) use($user){
+			    	$msj->subject('GeCo -- Consulta');
+			    	$msj->to($user);
+	    		});
+     			return redirect()->back()->with('msg_ok','Datos enviados correctamente.');
+			}
+		    else
+		        return redirect()->back();
+		    }
+		else
+		    return redirect('login');
+
 	}
 }

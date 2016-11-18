@@ -24,7 +24,6 @@ class EditarMateriaRequest extends Request
     {
         return [
 
-            'id' => 'required',
             'carrera_id'=>'required',
             'nombre' => 'required',
 
@@ -34,8 +33,7 @@ class EditarMateriaRequest extends Request
     public function messages()
     {
         return [
-            'id.required' => 'Escriba un número de materia',
-            'carrera_id' => 'Seleccione una materia',
+            'carrera_id' => 'Seleccione una carrera',
             'nombre.required' => 'Escriba un nombre',
         ];
     }

@@ -21,4 +21,5 @@ class FilialRepo extends BaseRepo {
         $filial->activo = 0;
         return $filial->save();
     }
+
 }

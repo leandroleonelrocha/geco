@@ -31,14 +31,11 @@ class EditarPerfilFilialRequest extends Request
     {
         return [
 
-
             'nombre' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'codigo_postal' => 'required',
             'telefono' => 'required',
-           	// 'mail' => 'required',
-
         ];
     }
 
@@ -50,8 +47,6 @@ class EditarPerfilFilialRequest extends Request
             'localidad.required' => 'Escriba una localidad',
             'codigo_postal.required' => 'Escriba el código postal',
             'telefono.required' => 'Escriba el teléfono',  
-            // 'mail.required' => 'Escriba un email',
-
         ];
     }
 

@@ -38,7 +38,6 @@ class EditarFilialRequest extends Request
             'codigo_postal' => 'required',
            	'director_id' => 'required',
             'telefono' => 'required',
-           	// 'mail' => 'required',
 
         ];
     }
@@ -52,8 +51,6 @@ class EditarFilialRequest extends Request
             'codigo_postal.required' => 'Escriba el código postal',
             'director_id.required' => 'Selecciona un director',
             'telefono.required' => 'Escriba el teléfono',  
-            // 'mail.required' => 'Escriba un email',
-
         ];
     }
 

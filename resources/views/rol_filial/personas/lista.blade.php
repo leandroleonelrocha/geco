@@ -6,24 +6,23 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Personas</h3>
+					<h3 class="box-title">@lang('persona.listadopersona')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white"> Agregar nueva Persona</a>
+						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white"> @lang('persona.agregarnuevo')</a>
 					</div>
 				</div>
 
 				<div class="box-body">
 					<table id="example1" class="table table-bordered table-striped">
 						<thead><tr>
-						<th>Documento</th>
-						<th>Nombre</th>
-						<th>Apellido</th>
-						<th>F Nacimiento</th>
-						<th>Localidad</th>
-						<th>Estado civil</th>
-						<th>Tel&eacute;fono</th>
-						<th>E-mail</th>
-						<th>Disponibilidad</th>
+						<th>@lang('persona.numerodocumento')</th>
+						<th>@lang('persona.nombre')</th>
+						<th>@lang('persona.apellido')</th>
+						<th>@lang('persona.fnacimiento')</th>
+						<th>@lang('persona.localidad')</th>
+						<th>@lang('persona.telefonos')</th>
+						<th>E-mails</th>
+						<th>@lang('persona.disponibilidad')</th>
 
 						<th class="no-print"></th>
 						</tr></thead>
@@ -35,14 +34,13 @@
 									<td>{{$p->apellidos}}</td>
 									<td>{{$p->fecha_nacimiento}}</td>
 									<td>{{$p->localidad}}</td>
-									<td>{{$p->estado_civil}}</td>
 									<td>
 							     	@foreach($p->PersonaTelefono as $telefono)
-						            		{{$telefono->telefono}}
+						            		{{$telefono->telefono}}   </br>
 					            	@endforeach</td>
 					            	<td>
 				            	   	@foreach($p->PersonaMail as $mail)
-						            		{{$mail->mail}}
+						            		{{$mail->mail}} </br>
 					            	@endforeach</td>
 							
 						         	<td><?php if($p->disponibilidad_manana == 1) echo'M ';?>

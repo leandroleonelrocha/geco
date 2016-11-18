@@ -29,8 +29,7 @@ class EditarDirectorRequest extends Request
             'apellidos' => 'required',
             'nombres' => 'required',
             'telefono' => 'required',
-
-
+            'mail' => 'required',
         ];
     }
 
@@ -42,6 +41,7 @@ class EditarDirectorRequest extends Request
             'nombres.required' => 'Escriba el nombre',
             'apellidos.required' => 'Escriba el apellido', 
             'telefono.required' => 'Escriba el teléfono',
+            'mail.required' => 'Escriba el E-mail',
         ];
     }
 
