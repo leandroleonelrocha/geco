@@ -92,28 +92,38 @@ class GrupoController extends Controller
 		//return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
 
 		$grupo = $this->grupoRepo->find(1);
-		$grupo_horario = $grupo->GrupoHorario;
+		$grupo_dias =[];
+		foreach ($grupo->GrupoHorario as $value ) {
+			array_push($grupo_dias, $value->dia);
+		}
+
 		$fecha1 = date("Y-m-d", strtotime($grupo->fecha_inicio));
 		$fecha2 = date("Y-m-d", strtotime($grupo->fecha_fin));
-
+		
 		
 		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-		
-			foreach ($grupo_horario as $value ) {
-				
-					if($value->dia == 'Lunes')
-					{
-						dd('es igual');
-					}	
-				
-			}
-
-		    echo $i . "<br />";
-		    $dias = array('','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado','Domingo');
+			
+			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
 			$fecha = $dias[date('N', strtotime($i))];
 			
+			if (in_array($fecha, $grupo_dias)) {
+			  
+			    //cargo fecha
+			    $data['grupo_id'] = $grupo->id;
+			    $data['fecha'] = $i;
+			    $data['docente_id'] = $grupo->docente_id;
+			    $data['color'] = '#40E0D0';
+			    $data['horario_desde'] = '01:00:00';
+			    $data['horario_hasta'] = '05:00:00';
+			   
+			    $this->claseRepo->create($data);
+			}
+			
+
 		}
+
 		
+
 	}
 
 	public function postEdit($id, Request $request)
