@@ -11,10 +11,12 @@ namespace App\Http\Repositories;
 abstract class BaseRepo {
 
     protected $model;
+    protected $filial;
 
     public function __construct()
     {
         $this->model = $this->getModel();
+        $this->filial = session('usuario')['entidad_id'];
     }
 
     public abstract function getModel();
@@ -53,12 +55,9 @@ abstract class BaseRepo {
         return $this->model->lists($data, $id);
     }
 
-
-    public function estadisticaBase($inicio, $fin)
-    {
-        $filial = session('usuario')['entidad_id'];
-        return $this->model->where('filial_id', $filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin);
+   
+    public function baseWhere($campo,$valor,$inicio,$fin){
+    
+        return $this->model->where('filial_id', $this->filial)->where($campo,$valor)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
-
-
 }

@@ -1,18 +1,8 @@
 @extends('template')
-@section('css')
-        <style type="text/css">
-${demo.css}
+@section('content')
 
-        </style>
-  <!-- Morris charts -->
-    <link rel="stylesheet" href="{{asset('plugins/morris/morris.css')}}">
-@endsection
-@section('content')    
-
-@if(isset($data))
-<h1>{{dd('adasd')}}</h1>
-@endif
-
+<div class="row">
+<div class="col-xs-12">
 <div class="box box-default">
   <div class="box-header with-border">
     <h3 class="box-title">Collapsable</h3>
@@ -42,7 +32,6 @@ ${demo.css}
     {!! Form::close() !!}
   </div><!-- /.box-body -->
 </div><!-- /.box -->
-
-
+</div>
+</div>
 @endsection
-

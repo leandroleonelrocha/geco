@@ -11,7 +11,7 @@ class Matricula extends Entity
      *
      * @var array
      */
-    protected $fillable = ['persona_id','curso_id','carrera_id','filial_id','asesor_id','activo','terminado','cancelado'];
+    protected $fillable = ['persona_id','curso_id','carrera_id','filial_id','asesor_id','activo','terminado','cancelado', 'ultimo_mail_enviado'];
 
     // Relaciones
     public function Persona(){

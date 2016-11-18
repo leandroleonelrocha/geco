@@ -18,6 +18,10 @@ class Docente extends Entity
         return $this->belongsTo(TipoDocumento::getClass());
     }
 
+    public function Grupo(){
+        return $this->hasMany(Grupo::getClass());
+    }
+
     public function getFullNameAttribute()
     {
         return $this->apellidos .','. $this->nombres;

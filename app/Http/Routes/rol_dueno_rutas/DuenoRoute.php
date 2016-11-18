@@ -10,6 +10,8 @@
 
 	// Rutas Operaciones ---------- Filiales
 	require_once('FilialesRoute.php');
+	require_once('EstadisticasRoute.php');
+
 
 	// Rutas Operaciones ---------- Directores
 	//require_once('DirectoresRoute.php');

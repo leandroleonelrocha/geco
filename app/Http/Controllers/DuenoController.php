@@ -16,4 +16,9 @@ class DuenoController extends Controller
 	public function index(){
 		return view('rol_dueno.index');
 	}
+
+	public function estadisticas()
+	{
+		return view('rol_dueno.estadisticas.index');	
+	}
 }

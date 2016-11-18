@@ -25,4 +25,8 @@ class Filial extends Entity {
         return $this->hasMany(Pago::getClass());
     }
 
+    public function Mailing(){
+        return $this->belongsTo(Mailing::getClass());
+    }
+
 }

@@ -14,6 +14,7 @@ use App\Http\Repositories\ClaseMatriculaRepo;
 use App\Entities\Clase;
 use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
+use App\Entities\GrupoHorario;
 
 
 class GrupoController extends Controller
@@ -72,32 +73,67 @@ class GrupoController extends Controller
 
 	public function postAdd(Request $request)
 	{
-		/*
-		$array = explode("-", $request->get('fecha'));
-		$fecha1 = date("Y-m-d", strtotime($array[0]));
-		$fecha2 = date("Y-m-d", strtotime($array[1]));
 
-		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-		    echo $i . "<br />";
-		 //aca puedes comparar $i a una fecha en la bd y guardar el resultado en un arreglo
+        $data = $request->all();
 
-		}
-		*/
-		
-		//$data  = $request->only('curso_id', 'carrera_id', 'materia_id', 'descripcion', 'docente_id');
-		
-		$data = $request->all();
 		$array = explode("-", $request->get('fecha'));
 	
 		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
 		$data['filial_id'] = session('usuario')['entidad_id'];
-	
 
 		$this->grupoRepo->create($data);
-		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+
+        $longitud = count($request->dia);
+        for($i=0;$i<$longitud;$i++) {
+
+            $data['dia'] = $request->dia[$i];
+            $data['horario_desde'] = $request->horario_desde[$i];
+            $data['horario_hasta'] = $request->horario_hasta[$i];
+
+            $grupo = $this->grupoRepo->all()->last();
+            $grupo->GrupoHorario()->create($data);
+
+
+        }
+
+
+		$grupo_dias =[];
+		foreach ($grupo->GrupoHorario as $value ) {
+			array_push($grupo_dias, $value->dia);
+		}
+
+		$fecha1 = date("Y-m-d", strtotime($grupo->fecha_inicio));
+		$fecha2 = date("Y-m-d", strtotime($grupo->fecha_fin));
 		
-	}
+		
+		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+			
+			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
+			$fecha = $dias[date('N', strtotime($i))];
+			
+			if (in_array($fecha, $grupo_dias)) {
+			  
+			    //cargo fecha
+			    $data['grupo_id'] = $grupo->id;
+			    $data['fecha'] = $i;
+			    $data['docente_id'] = $grupo->docente_id;
+			    $data['color'] = '#40E0D0';
+			    $data['horario_desde'] = '01:00:00';
+			    $data['horario_hasta'] = '05:00:00';
+			   
+			    $this->claseRepo->create($data);
+			}
+			
+
+		}
+
+        return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+
+
+
+
+    }
 
 	public function postEdit($id, Request $request)
 	{

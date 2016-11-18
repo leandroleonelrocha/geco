@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @extends('template')
 @section('css')
         <style type="text/css">
@@ -8,39 +7,14 @@ ${demo.css}
   <!-- Morris charts -->
     <link rel="stylesheet" href="{{asset('plugins/morris/morris.css')}}">
 @endsection
-@section('content')
+@section('content')    
 
-<div class="box box-default">
-  <div class="box-header with-border">
-    <h3 class="box-title">Collapsable</h3>
-    <div class="box-tools pull-right">
-      <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-    </div><!-- /.box-tools -->
-  </div><!-- /.box-header -->
-  <div class="box-body">
-    {!! Form::model(Request::all(), ['route'=> 'estadisticas.estadistica_preinformes_ajax', 'method'=>'post']) !!}
-          <div class="col-xs-4">
-             {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
-          </div>
-          <div class="col-xs-4">
-           <select class="form-control" id="selectvalue" name="selectvalue">
-              <option value="inscripcion">Inscripciones</option>
-              <option value="preinforme">Pre informes</option>
-              <option value="recaudacion">Recaudación</option>
-              <option value="morosidad">Morosidad</option>
-            </select>
-          </div>
 
-          <div class="col-xs-2">
-           <button class="btn btn-block btn-default " id="btn_buscar">Buscar</button>
-          </div>
-    {!! Form::close() !!}
-  </div><!-- /.box-body -->
-</div><!-- /.box -->
 <div id="torta"></div>
 <br><br>
 <div id="bar"></div>
 <br><br>
+
  <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
@@ -61,7 +35,7 @@ ${demo.css}
 @section('js')
 <script type="text/javascript">
 $(function () {
-
+    
     $('#torta').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -69,7 +43,10 @@ $(function () {
             plotShadow: false
         },
         title: {
-            text: '¿ Como nos encontró ?'
+            <?php if(isset($total)){?>
+            text: ' Cantidad de inscriptos: {{$total}} '
+            <?php }?>
+            
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -89,26 +66,39 @@ $(function () {
         },
         series: [{
             type: 'pie',
-            name: 'Deudores',
+            name: 'Genero',
             data: [
 
                 <?php
-
-                if(session()->has('data'))
+                if(isset($genero))
                 {
-                    foreach(Session::get('data') as $data => $value)
-                    {
 
+                    foreach ($genero as $key => $value) {
                     ?>
 
-                     ['{{$data}}', {{$value->count()}} ],
-
-
+                     ['{{$value['nombre']}}', {{$value['count'] }} ],
+                
+                 
                     <?php
                     }
                 }
                 ?>
 
+                 <?php
+                if(isset($preinforme))
+                {
+
+                    foreach ($preinforme as $key => $value) {
+                    ?>
+
+                     [ '{{$key}}', {{$value->count()}} ],
+                
+                 
+                    <?php
+                    }
+                }
+                ?>
+            
 
 
             ]
@@ -121,22 +111,21 @@ $(function () {
           element: 'bar-chart',
           resize: true,
           data: [
-                  <?php
-
-                  if(session()->has('data'))
-                  {
-                  foreach(Session::get('data') as $data => $value)
-                  {
-                  ?>
-
-              ['{{$data}}', {{$value->count()}} ],
-
-
               <?php
-              }
-              }
+              if(isset($data))
+               {
+
+              foreach($data as $dat ){
+              $array = explode(",", $dat);
               ?>
 
+               {y: '{{$array[0]}}', a: {{$array[1]}}, b: {{$array[2]}} },
+           
+              <?php
+               }
+                }
+              ?>
+           
           ],
           barColors: ['#00a65a', '#f56954'],
           xkey: 'y',
@@ -144,7 +133,7 @@ $(function () {
           labels: ['SI','NO'],
           hideHover: 'auto'
         });
-
+   
 
 
 });
@@ -158,6 +147,3 @@ $(function () {
 @endsection
 
 
-=======
-test.blade.php
->>>>>>> 476d734517b30d4481c239fe09fcb5e9c10c4a55

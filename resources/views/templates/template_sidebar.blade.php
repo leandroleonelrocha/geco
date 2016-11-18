@@ -40,7 +40,7 @@
                 </li>
 
                 <li>
-                  <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                  <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
             <?php
                 break;
@@ -167,7 +167,7 @@
                   </li>
 
                   <li>
-                  <a href="#">
+                  <a href="{{route('filial.estadisticas')}}">
                     <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span>
                   </a>
                   </li>

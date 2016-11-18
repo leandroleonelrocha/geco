@@ -13,10 +13,10 @@ class AsesorTelefonoRepo extends BaseRepo {
     }
 
     public function findTelefono($asesor_id){
-    	return AsesorTelefono::where('asesor_id',$asesor_id)->get();
+    	return $this->model->where('asesor_id',$asesor_id)->get();
     }
 
     public function editTelefono($id,$tel){
-    	return AsesorTelefono::where('asesor_id', $id)->update(array('telefono' => $tel));
+    	return $this->model->where('asesor_id', $id)->update(array('telefono' => $tel));
     }
 }
