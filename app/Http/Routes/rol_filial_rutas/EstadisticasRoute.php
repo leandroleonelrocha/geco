@@ -9,6 +9,10 @@ Route::get('test',[
 	'uses' => 'EstadisticaController@test'
 ]);
 
+Route::post('estadistica_preinformes_ajax',[
+	'as' => 'estadisticas.estadistica_preinformes_ajax',
+	'uses' => 'EstadisticaController@estadistica_preinformes_ajax'
+]);
 
 Route::get('detalles',[
 

@@ -95,11 +95,11 @@
                     <label> Dia </label>
                     <select name="dia[]" class="form-control">
                         <option value="1"> Lunes</option>
-                        <option value="2"> Martes</option>           
-                        <option value="3"> Miercoles</option>           
-                        <option value="4"> Jueves</option>           
-                        <option value="5"> Viernes</option>           
-                        <option value="6"> Sabados</option>           
+                        <option value="2"> Martes</option>
+                        <option value="3"> Miercoles</option>
+                        <option value="4"> Jueves</option>
+                        <option value="5"> Viernes</option>
+                        <option value="6"> Sabados</option>
                      </select>
                     </div>
 
@@ -158,12 +158,12 @@
      var data = '<div class="form-group">'+
                 '<div class="col-xs-6">'+
                 '<select name="dia[]" class="form-control">'+
-                    '<option> Lunes</option>'+
-                    '<option> Martes</option>'+           
-                    '<option> Miercoles</option>'+           
-                    '<option> Jueves</option>'+           
-                    '<option> Viernes</option>'+           
-                    '<option> Sabados</option> ' +         
+                    '<option value="1"> Lunes</option>'+
+                    '<option value="2"> Martes</option>'+
+                    '<option value="3"> Miercoles</option>'+
+                    '<option value="4"> Jueves</option>'+
+                    '<option value="5"> Viernes</option>'+
+                    '<option value="6"> Sabados</option> ' +
                  '</select>'+
                 '</div>'+
                     '<div class="col-xs-3">'+

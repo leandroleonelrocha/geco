@@ -34,6 +34,7 @@ class EstadisticaController extends Controller
 		$array = explode("-", $request->get('fecha'));	
 		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
 		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
+
 		
 
 		if($request->selectvalue == 'inscripcion')
@@ -65,6 +66,7 @@ class EstadisticaController extends Controller
 		{
 			return 'morosidad';
 		}
+
 
 		if($request->selectvalue == 'examen')
 		{
