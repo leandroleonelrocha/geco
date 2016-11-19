@@ -31,7 +31,7 @@ class LoginController extends Controller {
        'usuario'=>'test@test.com',
        'password'=>'1234',
        'rol_id'=>'4',
-       'entidad_id'=>'1',
+       'entidad_id'=>'3',
        'habilitado'=>'1'];
        
 

@@ -351,24 +351,28 @@ class MatriculaController extends Controller {
 
     // Vista Detallada
     public function vista($id){
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-                $matricula  = $this->matriculaRepo->find($id);
-                $pagos  = $this->pagoRepo->allMatricula($id);
-                // Se debe ejecutar solo 1 vez
-                foreach ($pagos as $pago) {
-                    $monto = $pago->monto_original + $pago->recargo - $pago->monto_pago;
-                    if ($pago->vencimiento < date('Y-m-d') && $monto != $pago->monto_actual){
-                        $pago->monto_actual += $pago->recargo;
-                        $pago->save();
-                    }
-                }
-                return view('rol_filial.matriculas.vista',compact('matricula','pagos'));
+        $matricula  = $this->matriculaRepo->find($id);
+        $pagos  = $this->pagoRepo->allMatricula($id);
+        // Se debe ejecutar solo 1 vez
+        foreach ($pagos as $pago) {
+
+            $date1  = date_create ( date('Y-m-d') );
+            $date2  = date_create ( $pago->vencimiento );
+            $diff   = date_diff   ( $date1, $date2 );
+            $diff   = $diff->format("%R%a days");
+            $monto  = $pago->monto_original + $pago->recargo - $pago->monto_pago;
+            // $montoD = $pago->monto_original + $pago->descuento - $pago->monto_pago;
+            
+            if ($diff > -10) {
+                var_dump($pago->monto_);die;
+                $pago->monto_actual += $pago->descuento;
             }
-            else
-                return redirect()->back();   
+
+            if ($pago->vencimiento < date('Y-m-d') && $monto != $pago->monto_actual){
+                $pago->monto_actual += $pago->recargo;
+                $pago->save();
+            }
         }
-        else
-            return redirect('login');
+        return view('rol_filial.matriculas.vista',compact('matricula','pagos'));
     }
 }
