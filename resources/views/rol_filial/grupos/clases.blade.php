@@ -89,7 +89,7 @@
 			},
 			events: [
 			<?php foreach($events as $event): 
-							
+
 				$start = explode(" ", $event['fecha']);
 
 				$end = explode(" ", $event['fecha']);
@@ -109,7 +109,7 @@
 					title: '<?php echo $event['descripcion']; ?>',
 					start: '<?php echo $start; ?>',
 					end: '<?php echo $end; ?>',
-					color: '<?php echo $event['color']; ?>',
+					color: '<?php echo $event->Grupo->color; ?>',
 				},
 
 			<?php endforeach; ?>
