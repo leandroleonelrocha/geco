@@ -11,6 +11,11 @@
     <div class="box-body">
 
         <div class="form-group">
+            <label for="exampleInputEmail1">Clave  </label>
+            {!! Form::text('id', null ,  array('class'=>'form-control')) !!}
+        </div>
+
+        <div class="form-group">
             <label for="exampleInputEmail1">Curso  </label>
             @if(empty($model))
             {!! Form::select('curso_id',(['' => 'Seleccionar curso'] + $cursos->toArray()), null, ['id' => 'curso_id', 'class' => 'form-control']) !!}
@@ -81,9 +86,12 @@
                     
                     
                     </div><!-- /.input group -->
-        </div>      
+        </div>
 
-
+        <div class="form-group">
+            <label for="example-color-input">Color</label>
+                <input class="form-control" name="color" type="color" value="#563d7c" id="example-color-input">
+        </div>
 
 
 

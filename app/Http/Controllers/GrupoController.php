@@ -76,13 +76,14 @@ class GrupoController extends Controller
 
         $data = $request->all();
 
-		$array = explode("-", $request->get('fecha'));
+        $array = explode("-", $request->get('fecha'));
 	
 		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->create($data);
+        $grupo = $this->grupoRepo->all()->last();
 
         $longitud = count($request->dia);
         for($i=0;$i<$longitud;$i++) {
@@ -90,37 +91,39 @@ class GrupoController extends Controller
             $data['dia'] = $request->dia[$i];
             $data['horario_desde'] = $request->horario_desde[$i];
             $data['horario_hasta'] = $request->horario_hasta[$i];
-
-            $grupo = $this->grupoRepo->all()->last();
             $grupo->GrupoHorario()->create($data);
 
 
         }
 
-
 		$grupo_dias =[];
-		foreach ($grupo->GrupoHorario as $value ) {
+        $ultimo = $this->grupoRepo->all()->last();
+
+        foreach ($ultimo->GrupoHorario as $value ) {
+
 			array_push($grupo_dias, $value->dia);
 		}
 
-		$fecha1 = date("Y-m-d", strtotime($grupo->fecha_inicio));
-		$fecha2 = date("Y-m-d", strtotime($grupo->fecha_fin));
+		$fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
+		$fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
+
 		
 		
 		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
 			
 			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
 			$fecha = $dias[date('N', strtotime($i))];
-			
+
 			if (in_array($fecha, $grupo_dias)) {
-			  
+
 			    //cargo fecha
-			    $data['grupo_id'] = $grupo->id;
+			    $data['grupo_id'] = $ultimo->id;
 			    $data['fecha'] = $i;
-			    $data['docente_id'] = $grupo->docente_id;
-			    $data['color'] = '#40E0D0';
+			    $data['docente_id'] = $ultimo->docente_id;
+			    $data['descripcion'] = '';
 			    $data['horario_desde'] = '01:00:00';
 			    $data['horario_hasta'] = '05:00:00';
+
 			   
 			    $this->claseRepo->create($data);
 			}
@@ -157,6 +160,7 @@ class GrupoController extends Controller
 		$grupos = $this->grupoRepo->lists('descripcion', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
+
 		return view('rol_filial.grupos.clases', compact('grupos', 'docentes', 'events'));
 	}
 
