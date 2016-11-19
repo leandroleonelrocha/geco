@@ -22,4 +22,8 @@ class FilialRepo extends BaseRepo {
         return $filial->save();
     }
 
+    public function filialCadena(){
+        return $this->model->where('activo', 1)->get();
+    }
+  
 }

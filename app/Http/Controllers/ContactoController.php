@@ -7,58 +7,31 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Http\Requests\CrearNuevoContactoRequest;
+use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\DirectorRepo;
+use App\Http\Repositories\DirectorTelefonoRepo;
+use App\Http\Repositories\FilialTelefonoRepo;
+use App\Entities\FilialTelefono;
 use Mail;
 
 class ContactoController extends Controller{
 
-	public function index(){
-		if (null !== session('usuario')){
-			$rol=session('usuario')['rol_id'];
-			if ( $rol== 4 || $rol==3 || $rol==2){
-				return view('contacto');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
-	}	
+	protected $filialesRepo;
+	protected $directorRepo;
 
-	public function nuevo_post(CrearNuevoContactoRequest $request){
-		
-		if (null !== session('usuario')){
-			$rol=session('usuario')['rol_id'];
-			if ( $rol== 4 || $rol==3 || $rol==2){
+	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo,DirectorTelefonoRepo $directorTelefonoRepo ){
 
-			    // Datos del mail
-				$nombre= $request->nombre;
-				$tipoConsulta=$request->tipoConsulta;
-				$mail = $request->mail;
-				$telefono= $request->telefono;
-				$mensaje= $request->mensaje;
-
-				$datosMail = array(	'nombre' 	=> $nombre, 
-							'tipoConsulta' 		=> $tipoConsulta, 
-							'mail' 		=> $mail, 
-							'telefono' 	=> $telefono,
-							'mensaje' 	=> $mensaje,
-
-							);
-				$user="crisdabruno@hotmail.com";
-
-	    		// Envío del mail
-			    Mail::send('mailing.contacto',$datosMail,function($msj) use($user){
-			    	$msj->subject('GeCo -- Consulta');
-			    	$msj->to($user);
-	    		});
-     			return redirect()->back()->with('msg_ok','Datos enviados correctamente.');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		$this->directorRepo = $directorRepo;
+		$this->filialesRepo = $filialesRepo;
+        $this->filialTelefonoRepo = $filialTelefonoRepo;
+      	$this->directorTelefonoRepo = $directorTelefonoRepo;
 
 	}
+
+	public function index(){
+
+		$filiales=$this->filialesRepo->allEneable();
+		return view('contacto',compact('filiales'));
+	}	
+
 }
