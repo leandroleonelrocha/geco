@@ -17,6 +17,8 @@ class ExamenRepo extends BaseRepo {
 
     }
 
+
+
     public function allExamenFilialMatricula(){
     	$filial = session('usuario')['entidad_id'];
     	$examen = $this->model->all();

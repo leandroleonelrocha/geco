@@ -22,6 +22,7 @@
 						<th class="text-center">Vencimiento</th>
 						<th class="text-center">Pago</th>
 						<th class="text-center">Original</th>
+						<th class="text-center">Descuento</th>
 						<th class="text-center">Recargo</th>
 						<th class="text-center">Filial</th>
 						<th class="no-print"></th>
@@ -45,7 +46,8 @@
 							else echo '-';
 							?></td>
 							<td>${{$pago->monto_original}}</td>
-							<td>${{$pago->recargo}}</td>
+							<td>${{$pago->descuento}}</td>
+							<td>{{$pago->recargo}}%</td>
 							<td>{{$pago->Filial->nombre}}</td>
 							<td>
 							<?php

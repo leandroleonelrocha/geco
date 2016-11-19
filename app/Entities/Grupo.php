@@ -55,6 +55,11 @@ class Grupo extends Entity {
         return $inicio .' - '. $fin;
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->id .' ('.$this->descripcion.')';
+    }
+
     public function GrupoHorario(){
         return $this->hasMany(GrupoHorario::getClass());
     }  

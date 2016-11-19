@@ -38,9 +38,10 @@ class ExamenController extends Controller
 	public function index(){
 	
 		$examenes = $this->examenRepo->all();
+        $grupos = $this->grupoRepo->all()->lists('id', 'id');
 
 		
-		return view('rol_filial.examenes.lista', compact('examenes'));
+		return view('rol_filial.examenes.lista', compact('examenes', 'grupos'));
 	}
 
 	public function nuevo()
@@ -60,6 +61,7 @@ class ExamenController extends Controller
 
 	public function nuevo_post(Request $request)
 	{
+        dd($request->all());
 		$this->examenRepo->create($request->all());
 
 		$data['nro_acta'] = $request->get('nro_acta');
@@ -102,7 +104,15 @@ class ExamenController extends Controller
 		*/
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen editado correctamente.');		
 
-	}	
+	}
+
+	public function grupos_examenes(Request $request)
+    {
+        $grupo_id = $request->get('grupo_id');
+        $grupo = $this->grupoRepo->find($grupo_id);
+        $data = $grupo->Matricula;
+        return response()->json($data, 200);
+    }
 
 
 

@@ -31,4 +31,9 @@ Route::group(['prefix' => 'examenes'], function(){
 		'uses'	=>	'ExamenController@editar_post'
 	]);
 
+    Route::post('grupos_examenes',[
+       'as' => 'filial.examenes_grupos_examenes',
+       'uses' => 'ExamenController@grupos_examenes'
+    ]);
+
 });

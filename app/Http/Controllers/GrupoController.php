@@ -200,6 +200,10 @@ class GrupoController extends Controller
 		
 	}
 
+	public function buscar_clase(Request $request)
+    {
+        dd($request->all());
+    }
 
 	public function borrar_clase($id = null)
 	{

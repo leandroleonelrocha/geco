@@ -136,15 +136,6 @@ class PersonaRepo extends BaseRepo {
 }
 
 /*
-Todos los morosos
-
-select persona.id, persona_mail.mail, curso.nombre as curso
-from persona
-inner join persona_mail on persona.id = persona_mail.persona_id
-inner join persona_interes on persona.id = persona_interes.persona_id
-inner join curso on curso.id = persona_interes.curso_id
-inner join grupo on grupo.curso_id = curso.id
-where grupo.nuevo = 1
 
 ----------------------------------------------------------------------
 

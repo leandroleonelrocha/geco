@@ -53,7 +53,10 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@cargar_clase'
 	]);
 
-	
+	Route::post('buscar_clase',[
+	   'as' =>'grupos.buscar_clase',
+        'uses' =>'GrupoController@buscar_clase'
+    ]);
 
 	Route::post('nueva_clase', [
 		'as' => 'grupos.nueva_clase',

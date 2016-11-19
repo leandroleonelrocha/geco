@@ -11,7 +11,7 @@ class Pago extends Entity
      *
      * @var array
      */
-    protected $fillable = ['matricula_id','nro_pago','pago_individual','descripcion','terminado','vencimiento','monto_original','monto_actual', 'monto_pago', 'recargo', 'filial_id'];
+    protected $fillable = ['matricula_id','nro_pago','pago_individual','descripcion','terminado','vencimiento','monto_original','monto_actual', 'monto_pago','descuento', 'recargo', 'filial_id'];
 
     // Relaciones
     public function Matricula(){

@@ -31,6 +31,16 @@
                             </div>
 
                             <div class="col-md-6 form-group">
+                                <label>Cadena</label>
+                                {!! Form::select('cadena_id', $cadenas->toArray() , null, array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Director</label>
+                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
                                 <label>@lang('filial.telefonos')</label>
                                 <button class="add_input_telefono btn btn-success">+</button>   
                                 <div class="input_fields_telefono">  
@@ -43,10 +53,6 @@
                                 {!! Form::email('mail',null,array('class'=>'form-control')) !!}
                             </div>
 
-                             <div class="col-md-6 form-group">
-                                <label>Director</label>
-                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
-                            </div>
 
                             <div class="box-footer col-xs-12">
                             {!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}

@@ -49,6 +49,7 @@ class PagoController extends Controller
         $pago['vencimiento']    	=   $request->vencimiento;
         $pago['monto_original'] 	=   $request->monto_original;
         $pago['monto_actual'] 		=   $pago['monto_original'];
+        $pago['descuento']        	=   $request->descuento;
         $pago['recargo']        	=   $request->recargo;
         $pago['filial_id']      	=   session('usuario')['entidad_id'];
 
