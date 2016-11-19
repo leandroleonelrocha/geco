@@ -15,6 +15,7 @@ use App\Http\Requests\EditarPerfilFilialRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialTelefonoRepo;
+use App\Http\Repositories\CadenaRepo;
 use Mail;
 
 class FilialesController extends Controller
@@ -22,11 +23,12 @@ class FilialesController extends Controller
 	protected $filialesRepo;
 	protected $directorRepo;
 
-	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo ){
+	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo){
 
-		$this->directorRepo = $directorRepo;
-		$this->filialesRepo = $filialesRepo;
+		$this->directorRepo       = $directorRepo;
+		$this->filialesRepo       = $filialesRepo;
         $this->filialTelefonoRepo = $filialTelefonoRepo;
+        $this->cadenaRepo         = $cadenaRepo;
 	}
 
     public function index(){
@@ -34,13 +36,14 @@ class FilialesController extends Controller
     }
 
 	public function lista(){
-		$filiales=$this->filialesRepo->allEneable();
+		$filiales = $this->filialesRepo->allEneable();
 		return view('rol_dueno.filiales.lista',compact('filiales'));
 	}
 
 	public function  nuevo(){
 		$directores = $this->directorRepo->all()->lists('fullname','id');
-		return view('rol_dueno.filiales.nuevo', compact('directores'));
+        $cadenas    = $this->cadenaRepo->all()->lists('nombre','id');
+		return view('rol_dueno.filiales.nuevo', compact('directores', 'cadenas'));
 	}
 
 	public function nuevo_post(CrearNuevaFilialRequest $request){
@@ -48,7 +51,7 @@ class FilialesController extends Controller
         $data = $request->all();
 
         $this->filialesRepo->create($request->all());
-        $filial=$this->filialesRepo->all()->last();
+        $filial = $this->filialesRepo->all()->last();
         foreach ($data['telefono'] as $key) {
                             
             $telefono['filial_id'] = $filial->id;
