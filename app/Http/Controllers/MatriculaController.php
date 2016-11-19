@@ -187,13 +187,21 @@ class MatriculaController extends Controller {
                 $persona['asesor_id']               =   $request->asesor;
                 if($this->personaRepo->create($persona)){
                     //Datos Telefónicos y Mails
-                    $persona                        =   $this->personaRepo->all()->last();
-                    $email['persona_id']            =   $persona['id'];
-                    $email['mail']                  =   $request->mail;
-                    $this->personaEmailRepo->create($email);
-                    $telefono['persona_id']         =   $persona['id'];
-                    $telefono['telefono']           =   $request->telefono;
-                    $this->personaTelefonoRepo->create($telefono);
+                    $persona=$this->personaRepo->all()->last();
+
+                    foreach ($data['telefono'] as $key) {
+                        
+                        $telefono['persona_id'] = $persona->id;
+                        $telefono['telefono'] = $key;
+                        $this->personaTelefonoRepo->create($telefono);
+                    }
+
+                    foreach ($data['mail'] as $key) {
+
+                        $mail['persona_id']=$persona->id;
+                        $mail['mail']=$key;
+                        $this->personaMailRepo->create($mail);
+                    }
                     // Datos Matrícula
                     $matricula['persona_id']       =   $persona['id'];
                     //Determinar si se seleccionó un Curso o Carrera

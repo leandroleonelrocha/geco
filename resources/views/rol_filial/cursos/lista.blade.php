@@ -16,7 +16,6 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>@lang('curso.numero')</th>
 						<th>@lang('curso.nombre')</th>
 						<th>@lang('curso.duracion')</th>
 						<th>@lang('curso.descripcion')</th>
@@ -27,9 +26,8 @@
 						    @foreach($curso as $c)
 							    <tr role="row" class="odd">
 
-							        <td class="sorting_1">{{ $c->id }}</td>
+							        <td class="sorting_1">{{ $c->nombre }}</td>
 						        	<input type="hidden" value="{{$c->id_curso}}">
-							        <td>{{ $c->nombre }}</td>
 							        <td>{{ $c->duracion }}</td>
 						            <td>{{ $c->descripcion }}</td>
 						            <td><?php if($c->taller == 0) echo 'No Asiste'; else echo 'Si Asiste';?></td> 

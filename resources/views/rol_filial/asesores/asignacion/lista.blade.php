@@ -7,18 +7,18 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de mis asesores</h3>
+					<h3 class="box-title">@lang('asesor.misasesores')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.asignacionAsesores_nuevo')}}" class="btn btn-success text-white"> Selecci&oacute;n</a>
+						<a href="{{route('filial.asignacionAsesores_nuevo')}}" class="btn btn-success text-white"> @lang('asesor.seleccion')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>N&uacute;mero de Asesor</th>
-						<th>N&uacute;mero de Documento</th>
-						<th>Apellido</th>
-						<th>Nombre</th>
+						<th>@lang('asesor.numeroasesor')</th>
+						<th>@lang('asesor.numerodocumento')</th>
+						<th>@lang('asesor.apellido')</th>
+						<th>@lang('asesor.nombre')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
@@ -31,10 +31,10 @@
 					    		<td>{{ $a->Asesor->apellidos}}</td>
 								<td>{{ $a->Asesor->nombres}}</td>
 				    		   	<td>
-					           		<a href="{{route('filial.asignacionAsesores_borrar',$a->asesor_id)}}" class="btn btn-danger text-white">BORRAR</a></td>
+					           		<a href="{{route('filial.asignacionAsesores_borrar',$a->asesor_id)}}" title="Eliminar" class="btn btn-danger glyphicon glyphicon-remove"</a></td>
 						    </tr>
 					    @endforeach
-						    	         
+						    	        
 					   	</tbody>
 				    </table>
         		</div><!-- Fin box-body -->

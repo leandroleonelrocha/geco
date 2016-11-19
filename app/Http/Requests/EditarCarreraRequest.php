@@ -26,7 +26,7 @@ class EditarCarreraRequest extends Request
             'id' => 'required',
             'nombre' => 'required',
             'duracion' => 'required',
-            'descripcion' => 'required',
+
 
 
         ];
@@ -38,7 +38,6 @@ class EditarCarreraRequest extends Request
             'id.required' => 'Escriba un número de carrera',
             'nombre.required' => 'Escriba un nombre',
             'duracion.required' => 'Escriba la duración',
-            'descripcion.required' => 'Escriba la descripción', 
 
         ];
     }

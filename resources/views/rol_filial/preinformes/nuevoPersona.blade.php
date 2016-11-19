@@ -5,7 +5,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Nuevo Preinforme</h3>
+					<h3>@lang('preinforme.nuevopreinforme')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -13,97 +13,105 @@
 							{!! Form::open(['route'=> 'filial.preinformes_nuevaPersona_post', 'method'=>'post']) !!}
 							<!-- ---------- Datos Personales ---------- -->
 				            <div class="col-xs-12">
-				            	<h4 class="box-title text-center">Datos Personales</h4>
+				            	<h4 class="box-title text-center">@lang('persona.titulo')</h4>
 				            </div>
 							<div class="col-md-6 form-group">
-								<label>Apellido</label>
+								<label>@lang('persona.apellido')</label>
 								{!! Form::text('apellidos',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Nombre</label>
+								<label>@lang('persona.nombre')</label>
 								{!! Form::text('nombres',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Tipo de Documento</label>
+								<label>@lang('persona.tipodocumento')</label>
 								{!! Form::select('tipo_documento',$tipos->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>N&uacute;mero de Documento</label>
+								<label>@lang('persona.numerodocumento')</label>
 								{!! Form::text('nro_documento',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<div class="col-xs-12"><label>G&eacute;nero</label></div>
+								<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'M') !!} Masculino
+									{!! Form::radio('genero', 'M') !!} @lang('persona.masculino')
 								</div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'F') !!} Femenino
+									{!! Form::radio('genero', 'F') !!} @lang('persona.femenino')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Fecha de Nacimiento</label>
+								<label>@lang('persona.fnacimiento')</label>
 								{!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Domicilio</label>
+								<label>@lang('persona.domicilio')</label>
 								{!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Localidad</label>
+								<label>@lang('persona.localidad')</label>
 								{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 							</div>
+
 							<div class="col-md-6 form-group">
-								<label>Tel&eacute;fono</label>
-								{!! Form::text('telefono',null,array('class'=>'form-control')) !!}
+								<label>@lang('persona.telefonos')</label>
+								<button class="add_input_telefono btn btn-success">+</button>	
+								<div class="input_fields_telefono">
+									{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
+								</div>
+							</div>
+
+							<div class="col-md-6 form-group">
+								<label>E-Mails</label>
+								<button class="add_input_mail btn btn-success"">+</button>	
+								<div class="input_fields_wrap">
+							   		{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
+								</div>	
 							</div>
 							<div class="col-md-6 form-group">
-								<label>E-mail</label>
-								{!! Form::email('mail',null,array('class'=>'form-control')) !!}
-							</div>
-							<div class="col-md-6 form-group">
-								<label>Estado Civil</label>
+								<label>@lang('persona.estadocivil')</label>
 								{!! Form::text('estado_civil',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Nivel de Estudios</label>
+								<label>@lang('persona.nivelestudios')</label>
 								{!! Form::text('nivel_estudios',null,array('class'=>'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Estudios de Computaci&oacute;n</label>
+								<label>@lang('persona.computacion')</label>
 								<div>{!! Form::checkbox('estudio_computacion', '1') !!} Si</div>
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Posee Computadoras</label>
+								<label>@lang('persona.computadora')</label>
 								<div>{!! Form::checkbox('posee_computadora', '1') !!} Si</div>
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Disponibilidad</label>
+								<label>@lang('persona.disponibilidad')</label>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_manana', '1') !!} Ma&ntilde;ana
+									{!! Form::checkbox('disponibilidad_manana', '1') !!} @lang('persona.mañana')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_tarde', '1') !!} Tarde
+									{!! Form::checkbox('disponibilidad_tarde', '1') !!} @lang('persona.tarde')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_noche', '1') !!} Noche
+									{!! Form::checkbox('disponibilidad_noche', '1') !!} @lang('persona.noche')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_sabados', '1') !!} S&aacute;bados
+									{!! Form::checkbox('disponibilidad_sabados', '1') !!} @lang('persona.sabados')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
-								<label>Aclaraciones</label>
+								<label>@lang('persona.aclaraciones')</label>
 								{!! Form::textarea('aclaraciones',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 			              	<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Datos del Preinforme</h4>
+			                	<h4 class="box-title text-center">@lang('preinforme.datospreinforme')</h4>
 			              	</div>
 			              	<div class="col-md-12 form-group">
-								<label>Asesor</label>
+								<label>@lang('persona.asesor')</label>
 								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
-								<label>Descripci&oacute;n</label>
+								<label>@lang('preinforme.descripcion')</label>
 								{!! Form::textarea('descripcion_preinforme',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-md-6 form-group">
@@ -111,26 +119,26 @@
 								{!! Form::textarea('medio',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-md-12 form-group">
-								<label>¿C&oacute;mo nos encontr&oacute;?</label>
+								<label>@lang('preinforme.encontro')</label>
 								{!! Form::textarea('como_encontro',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
 							<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Intereses</h4>
+			                	<h4 class="box-title text-center">@lang('preinforme.intereses')</h4>
 			              	</div>
 			              	<div class="col-md-5 form-group">
-								<label>Carreras</label>
+								<label>@lang('preinforme.carreras')</label>
 								{!! Form::select('carrera[]',$carreras->toArray(),null,array('id'=>'carreras', 'class' => 'form-control', 'multiple')) !!}
 							</div>
 							<div class="col-md-5 form-group">
-								<label>Cursos</label>
+								<label>@lang('preinforme.cursos')</label>
 								{!! Form::select('curso[]',$cursos->toArray(),null,array('id'=>'cursos', 'class' => 'form-control', 'multiple')) !!}
 							</div>
 							<div class="col-md-2 form-group">
-								<label>Ninguna</label>
+								<label>@lang('preinforme.ningunat')</label>
 								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna')) !!}</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<label>Otros</label>
+								<label>@lang('preinforme.otrost')</label>
 								{!! Form::textarea('descripcion_interes',null,array('id'=>'otros', 'class' => 'form-control','disabled','size'=>'30x4')) !!}
 							</div>
 							<div class="box-footer col-xs-12">
@@ -147,3 +155,51 @@
     <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
 	<script src="{{asset('js/functions/functions.js')}}"></script>
 @endsection
+
+@section('js')
+	<script type="text/javascript">
+		$(document).ready(function() {
+	    var max_fields      = 5; //maximum input boxes allowed
+	    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+	    var wrapper2 = $(".input_fields_telefono");
+	    var add_button_mail      = $(".add_input_mail"); //Add button ID
+	    var add_button_telefono = $(".add_input_telefono");
+
+	    var x = 1; //initlal text box count
+	    $(add_button_mail).click(function(e){ //on add input button click
+	        e.preventDefault();
+	        if(x < max_fields){ //max input box allowed
+	            x++; //text box increment
+	            $(wrapper).append('<div><input type="text" name="mail[]" class="form-control"/><a href="#" class="remove_fieldMail" >&times;</a></div>'); //add input box
+	        }
+	    });
+
+	    $(add_button_telefono).click(function(e){
+	    	e.preventDefault();
+	       if(x < max_fields){ //max input box allowed
+	            x++; //text box increment
+	    		$(wrapper2).append('<div><input type="text" name="telefono[]" class="form-control"/><a href="#" class="remove_fieldTel" >&times;</a></div>'); //add input box
+	    	}
+	    });
+
+	    $(wrapper).on("click",".remove_fieldMail", function(e){ //click en eliminar campo
+	       
+	    	if( x > 1 ) {
+	            $(this).parent('div').remove(); //eliminar el campo
+	            x--;
+	    	}
+	        return false;
+	    });
+
+	    $(wrapper2).on("click",".remove_fieldTel", function(e){ //click en eliminar campo
+	       
+	    	if( x > 1 ) {
+	            $(this).parent('div').remove(); //eliminar el campo
+	            x--;
+	    	}
+	    	return false;
+	    });
+	});
+	</script>
+@endsection
+

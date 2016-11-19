@@ -15,7 +15,6 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>@lang('carrera.numero')</th>
 						<th>@lang('carrera.nombre')</th>
 						<th>@lang('carrera.duracion')</th>
 						<th>@lang('carrera.descripcion')</th>
@@ -25,9 +24,8 @@
 					    	@foreach($carrera as $ca)
 						    	<tr role="row" class="odd">
 
-						        	<td class="sorting_1">{{ $ca->id }}</td>
+						        	<td class="sorting_1">{{ $ca->nombre }}</td>
 						        	<input type="hidden" value="{{$ca->id_carrera}}">
-							        <td>{{ $ca->nombre }}</td>
 							        <td>{{ $ca->duracion }}</td>
 						            <td>{{ $ca->descripcion }}</td>
 						           	<td class="text-center">

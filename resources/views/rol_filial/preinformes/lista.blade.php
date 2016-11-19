@@ -1,37 +1,22 @@
 @extends('template')
 
 @section('content')
-									<!-- Mensaje -->
-	<div class="row">
-	@if (session()->has('msg_ok'))
-	    <div class="col-xs-10 col-md-offset-1 alert alert-success">
-	        <strong>Éxito!</strong><br />
-	        {{ session('msg_ok') }}
-	    </div>
-	@endif
-	@if (session()->has('msg_error'))
-	    <div class="col-xs-10 col-md-offset-1 alert alert-danger">
-	        <strong>Error!</strong><br />
-	        {{ session('msg_error') }}
-	    </div>
-	@endif
-	</div>
 									<!-- Lista de Preinformes -->
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Preinformes</h3>
+					<h3 class="box-title">@lang('preinforme.listadopreinforme')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.preinformes_seleccion')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('filial.preinformes_seleccion')}}" class="btn btn-success text-white"> @lang('preinforme.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>N&uacute;mero de Preinforme</th>
-						<th>Asesor</th>
-						<th>Persona</th>
+						<th>@lang('preinforme.numero')</th>
+						<th>@lang('persona.asesor')</th>
+						<th>@lang('preinforme.persona')</th>
 						<th>Medio</th>
 						<th class="no-print"></th>
 						</tr> </thead>

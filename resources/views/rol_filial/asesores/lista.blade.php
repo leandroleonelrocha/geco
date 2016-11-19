@@ -7,21 +7,21 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Asesores</h3>
+					<h3 class="box-title">@lang('asesor.listadoasesor')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.asesores_nuevo')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('filial.asesores_nuevo')}}" class="btn btn-success text-white"> @lang('asesor.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>N&uacute;mero de Documento</th>
-						<th>Apellido</th>
-						<th>Nombres</th>
-						<th>Direcci&oacuten</th>
-						<th>Localidad</th>
-						<th>Tel&eacute;fono</th>
-						<th>E-Mail</th>
+						<th>@lang('asesor.numerodocumento')</th>
+						<th>@lang('asesor.apellido')</th>
+						<th>@lang('asesor.nombre')</th>
+						<th>@lang('asesor.direccion')</th>
+						<th>@lang('asesor.localidad')</th>
+						<th>@lang('asesor.telefonos')</th>
+						<th>@lang('asesor.mail')</th>
 			
 						<th class="no-print"></th>
 						</tr> </thead>

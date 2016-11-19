@@ -8,19 +8,19 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Docentes</h3>
+					<h3 class="box-title">@lang('docente.listadodocente')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.docentes_nuevo')}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('filial.docentes_nuevo')}}" class="btn btn-success text-white"> @lang('docente.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Tipo de Documento</th>
-						<th>Documento</th>
-						<th>Apellido</th>
-						<th>Nombre</th>					
-						<th>Disponibilidad</th>
+						<th>@lang('docente.tipodocumento')</th>
+						<th>@lang('docente.numerodocumento')</th>
+						<th>@lang('docente.apellido')</th>
+						<th>@lang('docente.nombre')</th>					
+						<th>@lang('docente.disponibilidad')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>

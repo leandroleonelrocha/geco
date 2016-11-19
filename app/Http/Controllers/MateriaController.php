@@ -29,7 +29,7 @@ class MateriaController extends Controller
 	public function lista(){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
-				$materia=$this->materiaRepo->all();
+				$materia=$this->materiaRepo->allMateria();
 				return view('rol_filial.materias.lista',compact('materia'));
 			}
 		    else
@@ -55,8 +55,7 @@ class MateriaController extends Controller
 	public function nuevo_post(CrearNuevaMateriaRequest $request){
 		if (null !== session('usuario')){
 			if (session('usuario')['rol_id'] == 4){
-				//dd($request->all());
-				$this->materiaRepo->create($request->all());
+		       $this->materiaRepo->create($request->all());
 		     	return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
 			}
 		    else
@@ -85,10 +84,12 @@ class MateriaController extends Controller
 			if (session('usuario')['rol_id'] == 4){
 		        $data = $request->all();
 		        $model = $this->materiaRepo->find($data['id']);
-		        if($this->materiaRepo->edit($model,$data))
-		            return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
+
+		        if($this->materiaRepo->edit($model,$data))	
+
+        			return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
 		        else
-		            return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');
+		           	return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');
 			}
 		    else
 		        return redirect()->back();

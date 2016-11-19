@@ -31,7 +31,7 @@ class CrearNuevoDirectorRequest extends Request
             'nombres' => 'required',
             'mail' => 'required',
             'telefono' => 'required',
-            'mail' => 'required|unique:director_mail,mail',
+            'mail' => 'required|unique:director_mail',
 
 
         ];

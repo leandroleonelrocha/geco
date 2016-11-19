@@ -57,18 +57,25 @@ class DirectoresController extends Controller
 		else{
     // Si no existe lo crea
 	   		if($this->directorRepo->create($data)){
+
 				$director=$this->directorRepo->all()->last();
-				$mail['director_id']=$director->id;
-				$mail['mail']=$request->mail;
-				$this->directorMailRepo->create($mail);
 
-				$telefono['director_id']=$director->id;
-				$telefono['telefono']=$request->telefono;
-				$this->directorTelefonoRepo->create($telefono);
-
+                foreach ($data['mail'] as $key) {
+                    
+                    $mail['director_id'] = $director->id;
+                    $mail['mail'] = $key;
+                    $this->directorMailRepo->create($mail);
+                    
+                }
+                foreach ($data['telefono'] as $key) {
+                    
+                    $telefono['director_id'] = $director->id;
+                    $telefono['telefono'] = $key;
+                    $this->directorTelefonoRepo->create($telefono);
+                }
 			  	$ch = curl_init();  
 
-		        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$director->id}/3");  
+		        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail[0]}/{$director->id}/3");  
 		        curl_setopt($ch, CURLOPT_HEADER, false);  
 		        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
 		        $data = json_decode(curl_exec($ch),true);
@@ -91,14 +98,8 @@ class DirectoresController extends Controller
 	   		else
 	    		return redirect()->route('dueño.directores')->with('msg_error','No se ha podido agregar al director, intente nuevamente.');
 			}
-	
-	//	$this->directorRepo->create($request->all());
-	
 
-
-	//	return redirect()->route('director.index')->with('msg_ok', 'Director creado correctamente');
-
-			return redirect()->route('dueño.directores')->with('msg_ok', 'Director creado correctamente,');
+			return redirect()->route('dueño.directores')->with('msg_ok', 'Director creado correctamente.');
 
 	}
 
@@ -113,19 +114,68 @@ class DirectoresController extends Controller
     	$director = $this->directorRepo->find($id);
     	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
 	  	$telefono=$this->directorTelefonoRepo->findTelefono($id);
-    	return view('rol_dueno.directores.editar',compact('director','tipos','telefono'));
+  	  	$mail=$this->directorMailRepo->findMail($id);
+    	return view('rol_dueno.directores.editar',compact('director','tipos','telefono','mail'));
     }
 
     public function editar_post(EditarDirectorRequest $request){
+
         $data = $request->all();
         $model = $this->directorRepo->find($data['id']);
         if($this->directorRepo->edit($model,$data)){
-	      //editar telefono
-	        $this->directorTelefonoRepo->editTelefono($data['id'],$data['telefono']);
+	      
+			$model->DirectorMail()->delete();
+			$model->DirectorTelefono()->delete();
+
+			foreach ($data['mail'] as $key) {
+				$mail['director_id'] = $model->id;
+				$mail['mail'] = $key;
+				$this->directorMailRepo->create($mail);
+			}
+			foreach ($data['telefono'] as $key) {
+
+				$telefono['director_id'] = $model->id;
+				$telefono['telefono'] = $key;
+				$this->directorTelefonoRepo->create($telefono);
+			}
             return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido modificado con éxito.');}
         else
             return redirect()->route('dueño.directores')->with('msg_error','El director no ha podido ser modificado.');
     }
 
+  	public function editarPerfil($id){
+    	$director = $this->directorRepo->find($id);
+    	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+	  	$telefono=$this->directorTelefonoRepo->findTelefono($id);
+	  	$mail=$this->directorMailRepo->findMail($id);
+    	return view('perfiles.director',compact('director','tipos','telefono','mail'));
+    }
 
+    public function editarPerfil_post(EditarDirectorRequest $request){
+        $data = $request->all();
+        $model = $this->directorRepo->find($data['id']);
+        if($this->directorRepo->edit($model,$data)){
+	      //editar telefono
+
+        	$model->DirectorMail()->delete();
+			$model->DirectorTelefono()->delete();
+
+			foreach ($data['mail'] as $key) {
+				$mail['director_id'] = $model->id;
+				$mail['mail'] = $key;
+				$this->directorMailRepo->create($mail);
+			}
+			foreach ($data['telefono'] as $key) {
+
+				$telefono['director_id'] = $model->id;
+				$telefono['telefono'] = $key;
+				$this->directorTelefonoRepo->create($telefono);
+			}
+
+
+	        //$this->directorTelefonoRepo->editTelefono($data['id'],$data['telefono']);
+            return redirect()->back()->with('msg_ok','El perfil del director ha sido modificado con éxito.');}
+        else
+            return redirect()->route()->with('msg_error','El perfil del director no ha podido ser modificado.');
+    }
 }

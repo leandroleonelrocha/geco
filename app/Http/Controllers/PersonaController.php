@@ -85,17 +85,23 @@ class PersonaController extends Controller {
 
                         $persona=$this->personaRepo->all()->last();
 
-                        $mail['persona_id']=$persona->id;
-                        $mail['mail']=$request->mail;
-                        $this->personaMailRepo->create($mail);
+                        foreach ($data['telefono'] as $key) {
+                            
+                            $telefono['persona_id'] = $persona->id;
+                            $telefono['telefono'] = $key;
+                            $this->personaTelefonoRepo->create($telefono);
+                        }
 
-                        $telefono['persona_id']=$persona->id;
-                        $telefono['telefono']=$request->telefono;
-                        $this->personaTelefonoRepo->create($telefono);
+                        foreach ($data['mail'] as $key) {
+
+                            $mail['persona_id']=$persona->id;
+                            $mail['mail']=$key;
+                            $this->personaMailRepo->create($mail);
+                        }
              
-            	       return redirect()->route('filial.personas')->with('msg_ok','La persona ha sida agregada con éxito');}
-                   else
-                    return redirect()->route('filial.personas')->with('msg_error','No se ha podido agregar a la persona, intente nuevamente.');
+    	               return redirect()->route('filial.personas')->with('msg_ok','La persona ha sida agregada con éxito');}
+                    else
+                        return redirect()->route('filial.personas')->with('msg_error','No se ha podido agregar a la persona, intente nuevamente.');
                 }
             }
             else
@@ -147,13 +153,25 @@ class PersonaController extends Controller {
                 $data = $request->all();
 
                 $model = $this->personaRepo->find($data['persona']); // Busco a la persona
-                
+                  
                 if($this->personaRepo->edit($model,$data)) // Modificación de los datos
                 {
-                    //editar mail
-                    $this->personaMailRepo->editMail($data['persona'],$data['mail']); 
-                     //editar telefono
-                    $this->personaTelefonoRepo->editTelefono($data['persona'],$data['telefono']); 
+                    $model->PersonaMail()->delete();
+                    $model->PersonaTelefono()->delete();
+
+                    foreach ($data['telefono'] as $key) {
+                            
+                            $telefono['persona_id'] = $model->id;
+                            $telefono['telefono'] = $key;
+                            $this->personaTelefonoRepo->create($telefono);
+                    }
+
+                    foreach ($data['mail'] as $key) {
+
+                            $mail['persona_id']=$model->id;
+                            $mail['mail']=$key;
+                            $this->personaMailRepo->create($mail);
+                    }
                    
                     return redirect()->route('filial.personas')->with('msg_ok','La persona ha sido modificada con éxito.');}
                 else

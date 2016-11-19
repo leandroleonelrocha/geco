@@ -31,7 +31,7 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
       <img class="logo-login" src="../public/img/logo/Geco-Blanco.png" height="80" width="80">
-        <p class="login-box-msg">Ingrese los datos para iniciar sesión</p>
+        <p class="login-box-msg">Ingrese sus datos para iniciar sesión</p>
         
             {!! Form::open(['route'=>'auth.postLogin','method' => 'post']) !!}
               <div class="form-group has-feedback">
@@ -44,11 +44,7 @@
               </div>
               <div class="row">
                 <div class="col-xs-8">
-                  <div class="checkbox icheck"> 
-                    <label> 
-                      <input type="checkbox"> &nbsp; Recordarme
-                    </label>
-                  </div>
+                  <a href="{{ route('restaurarCuenta.nueva')}}" class="text-center">Olvidó la contraseña</a>
                 </div><!-- /.col -->
                 <div class="col-xs-4">
                   <button id="Send" type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
@@ -57,7 +53,7 @@
             {!! Form::close() !!}
 
 
-        <a href="{{ route('restaurarCuenta.nueva')}}" class="text-center">Olvidó la contraseña</a>
+       
         <div class ="row">
             <div class="col-xs-12">
                 <!-- Mensaje -->

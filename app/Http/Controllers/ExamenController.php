@@ -66,7 +66,7 @@ class ExamenController extends Controller
 		$data['matricula_id'] = $request->get('matricula_id');
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
-		$this->examenPermisosRepo->create($data);
+		//$this->examenPermisosRepo->create($data);
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen creado correctamente.');
 	}
 

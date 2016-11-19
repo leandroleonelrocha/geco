@@ -76,7 +76,9 @@
              
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="{{route('auth.getLogout')}}">Salir</a>
+                <a href="{{route('auth.getLogout')}}" class="menu-icon fa fa-sign-out" > @lang('menu.salir')</a>
+                    
+        
                 <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{asset('dist/img/log.jpg')}}" class="user-image" alt="User Image">
                   <span class="hidden-xs">Alexander Pierce</span>

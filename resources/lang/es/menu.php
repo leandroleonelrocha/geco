@@ -17,5 +17,13 @@ return [
     'docente'       => 'Docentes',
     'estadistica'   => 'Estadísticas',
     'contacto'      => 'Contactos',
- 
+    'configuracion'      => 'Configuración',
+    'nueva' =>'Nueva',
+    'nuevo' =>'Nuevo',
+    'lista' =>'Lista',
+    'asignar' =>'Asignar asesores',
+    'perfil' =>'Perfil',
+    'cambiarcontraseña' =>'Cambiar contraseña',
+    'cerrarsesion' =>'Cerrar sesión',
+    'salir' =>'Salir',
 ];

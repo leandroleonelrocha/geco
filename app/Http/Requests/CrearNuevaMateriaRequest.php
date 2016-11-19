@@ -24,8 +24,6 @@ class CrearNuevaMateriaRequest extends Request
     {
         return [
 
-            'id' => 'required',
-            'id' => 'required|unique:materia,id',
             'carrera_id'=>'required',
             'nombre' => 'required',
             'nombre' => 'required|unique:materia,nombre'
@@ -36,8 +34,7 @@ class CrearNuevaMateriaRequest extends Request
     public function messages()
     {
         return [
-            'id.required' => 'Escriba un número de materia',
-            'id.unique'=> 'El número de materia ya está en uso',
+         //   'id.unique'=> 'El número de materia ya está en uso',
             'carrera_id' => 'Seleccione una materia',
             'nombre.required' => 'Escriba un nombre',
             'nombre.unique'=> 'El nombre de la materia ya está en uso', 

@@ -28,10 +28,10 @@
   <body class="hold-transition register-page">
     <div class="register-box">
       <div class="register-logo">
-        <a href="../../index2.html"><b>GECO</b></a>
       </div>
 
       <div class="register-box-body">
+        <img class="logo-login" src="../img/logo/Geco-Blanco.png" height="80" width="80">
         <p class="login-box-msg">Para la restauración de cuenta le enviaremos la nueva contraseña a su casilla de E-mail.</p>
         {!! Form::open(['route'=>'restaurarCuenta.postNueva', 'method' => 'post']) !!}
 

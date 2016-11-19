@@ -12,8 +12,6 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'filial.carreras_editar_post', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
-								<label>@lang('carrera.numero')</label>
-								{!! Form::text(null, $carrera->id, array('class'=>'form-control','disabled')) !!}
 								<input type="hidden" name="id" value="{{$carrera->id}}">
 							</div>
 
