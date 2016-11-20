@@ -3,20 +3,26 @@
 return [
  
 
-    'nombre' => 'Name',
+    'nombre' => 'Subsidiary',
     'tipoconsulta' => 'Type of consultation',
     'telefono'=>'Phone',
+
+    'telefonosd'=>'Phones Director',
+    'mailsd'=>'E-Mails Director',
+
+    'telefonosf'=>'Phones Subsidiary',
+    'mailsf'=>'E-Mails Subsidiary',
 
     'mensaje'=>'Message',
    	'mensajedejar'=>'Leave your message',
 
-   	'equipo'=>'Whiteout Development Team',
+   	'soporte'=>'Technical Support',
 
    	'contacto'=>'Contact us',
 
- 	'tecnica'=>'technique',
-	'funcional'=>'functional',
-	'otros'=>'others',
+ 	  'tecnica'=>'technique',
+  	'funcional'=>'functional',
+  	'otros'=>'others',
 
 
 

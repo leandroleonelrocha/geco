@@ -32,6 +32,9 @@
 
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
+                            
+                        <!-- ******************** GECO JS ******************** -->
+<script src="{{asset('js/functions/functions.js')}}"></script>
 
 <!-- Page script -->
 <script>

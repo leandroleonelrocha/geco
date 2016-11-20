@@ -4,7 +4,7 @@ namespace App\Http\Repositories;
 use App\Entities\Filial;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
-
+use DB;
 class FilialRepo extends BaseRepo {
 
     public function getModel()
@@ -23,7 +23,10 @@ class FilialRepo extends BaseRepo {
     }
 
     public function filialCadena(){
-        return $this->model->where('activo', 1)->get();
+        return DB::table('filial')->select('cadena_id')->where('id', $this->filial)->first();
     }
-  
+
+    public function allFilialCadena($cadena){
+        return $this->model->where('cadena_id',$cadena)->get();
+    }
 }

@@ -29,9 +29,8 @@ class ContactoController extends Controller{
 	}
 
 	public function index(){
-
-		$filiales=$this->filialesRepo->allEneable();
+		$cadena=$this->filialesRepo->filialCadena();
+		$filiales=$this->filialesRepo->allFilialCadena($cadena->cadena_id);
 		return view('contacto',compact('filiales'));
 	}	
-
 }

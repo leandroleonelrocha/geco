@@ -148,7 +148,14 @@ class DirectoresController extends Controller
     	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
 	  	$telefono=$this->directorTelefonoRepo->findTelefono($id);
 	  	$mail=$this->directorMailRepo->findMail($id);
-    	return view('perfiles.director',compact('director','tipos','telefono','mail'));
+	  	$mailp=$mail[0]->mail;
+
+	  		for ($i=1; $i <2 ; $i++) { 
+				$me =$mail[$i];
+					}
+
+		//var_dump($me);die;
+    	return view('perfiles.director',compact('director','tipos','telefono','mailp','me','mail'));
     }
 
     public function editarPerfil_post(EditarDirectorRequest $request){

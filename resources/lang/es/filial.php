@@ -10,7 +10,7 @@ return [
     'codigopostal'=>'Código postal',
     'telefonos' => 'Teléfonos',
 
-    'cuenta' => 'Cuenta',
+    'cuenta' => 'Cuenta principal',
 
     'bienvenido' => 'Bienvenido',
 

@@ -12,16 +12,12 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'director.perfil_editarPerfil_post', 'method'=>'post']) !!}
 							<div class="col-md-6 form-group">
-								<label>@lang('director.numero')</label>
-								{!! Form::text(null, $director->id, array('class'=>'form-control','disabled')) !!}
 								<input type="hidden" name="id" value="{{$director->id}}">
 							</div>
 
-							<div class="col-md-6 form-group">
+							<div class="col-md-12 form-group">
 								<label>@lang('director.cuenta')</label>
-								@foreach ($mail as $m)
-									{!! Form::text(null, $m->mail, array('class'=>'form-control','disabled')) !!}		
-								@endforeach
+									{!! Form::text(null, $mailp, array('class'=>'form-control','disabled')) !!}	
 							
 							</div>
 
@@ -53,14 +49,15 @@
 										@endforeach
                                 </div>
 							</div>
-
+	
 		                 	<div class="col-md-6 form-group">
                                 <label>E-Mails</label>
                                 <button class="add_input_mail btn btn-success"">+</button>  
                                 <div class="input_fields_wrap">
-									@foreach ($mail as $m)
+								 	@foreach ($mail as $m) 
+								
 									{!! Form::email('mail[]', $m->mail, array('class'=>'form-control')) !!}		
-									@endforeach
+							@endforeach 
                                 </div>
                             </div>
 							<div class="box-footer col-xs-12">
@@ -73,50 +70,4 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
-@endsection
-
-@section('js')
-<script type="text/javascript">
-    $(document).ready(function() {
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var wrapper2 = $(".input_fields_telefono");
-    var add_button_mail      = $(".add_input_mail"); //Add button ID
-    var add_button_telefono = $(".add_input_telefono");
-
-    var x = 1; //initlal text box count
-    $(add_button_mail).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper).append('<div><input type="text" name="mail[]" class="form-control"/><a href="#" class="remove_fieldMail" >&times;</a></div>'); //add input box
-        }
-    });
-    $(add_button_telefono).click(function(e){
-        e.preventDefault();
-       if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper2).append('<div><input type="text" name="telefono[]" class="form-control"/><a href="#" class="remove_fieldTel" >&times;</a></div>'); //add input box
-        }
-    });
-
-    $(wrapper).on("click",".remove_fieldMail", function(e){ //click en eliminar campo
-       
-        if( x > 1 ) {
-            $(this).parent('div').remove(); //eliminar el campo
-            x--;
-        }
-        return false;
-    });
-
-    $(wrapper2).on("click",".remove_fieldTel", function(e){ //click en eliminar campo
-       
-        if( x > 1 ) {
-            $(this).parent('div').remove(); //eliminar el campo
-            x--;
-        }
-        return false;
-    });
-});
-</script>
 @endsection

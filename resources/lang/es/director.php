@@ -10,7 +10,7 @@ return [
     'nombre' => 'Nombre',
 
     'telefonos' => 'Teléfonos',
-    'cuenta' => 'Cuenta',
+    'cuenta' => 'Cuenta principal',
 
     'bienvenido' => 'Bienvenido',
 

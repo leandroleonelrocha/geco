@@ -11,7 +11,7 @@ return [
 
     'telefonos' => 'Phones',
 
-    'cuenta' => 'Account',
+    'cuenta' => 'Main Account',
 
     'bienvenido' => 'Welcome',
 

@@ -60,7 +60,7 @@
                 case 3:
                 ?>
                 <li>
-                  <a href="#"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                  <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
 
                 <li class="treeview">
@@ -99,7 +99,7 @@
 
                   <li class="treeview">
                     <a href="{{route('filial.matriculas')}}">
-                      <i class="fa fa-cubes"></i> <span>@lang('menu.matricula')</span><i class="fa fa-angle-left pull-right"></i>
+                      <i class="fa fa-th"></i> <span>@lang('menu.matricula')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
@@ -108,8 +108,8 @@
                   </li>
 
                   <li class="treeview">
-                    <a href="{{route('filial.recibos')}}">
-                      <i class="fa fa-pencil-square-o"></i> <span>@lang('menu.pago')</span><i class="fa fa-angle-left pull-right"></i>
+                    <a href="{{route('filial.pagos_matriculas')}}">
+                      <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.pagos_matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
@@ -189,6 +189,10 @@
                       <li class="active"><a href="{{route('filial.docentes')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
                       <li> <a href="{{route('filial.docentes_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
                     </ul>
+                  </li>
+
+                  <li>
+                    <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                   </li>
   
                   <li class="treeview">

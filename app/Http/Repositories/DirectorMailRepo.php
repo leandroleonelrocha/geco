@@ -14,5 +14,5 @@ class DirectorMailRepo extends BaseRepo {
 
 	public function findMail($director_id){
     	return DirectorMail::where('director_id',$director_id)->get();
-    }
+    } 
 }

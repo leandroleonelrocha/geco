@@ -10,7 +10,7 @@ return [
     'codigopostal'=>'Postal Code',
     'telefonos' => 'Phones',
 
-    'cuenta' => 'Account',
+    'cuenta' => 'Main Account',
     'bienvenido' => 'Welcome',
 
     'agregarnuevo' => 'Add new',

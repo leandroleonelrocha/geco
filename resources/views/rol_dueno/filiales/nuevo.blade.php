@@ -66,32 +66,3 @@
         </div> <!-- Fin col -->
     </div> <!-- Fin row -->
 @endsection
-
-@section('js')
-<script type="text/javascript">
-    $(document).ready(function() {
-    var max_fields      = 5; //maximum input boxes allowed
-    var wrapper2 = $(".input_fields_telefono");
-    var add_button_telefono = $(".add_input_telefono");
-
-    var x = 1; //initlal text box count
-
-    $(add_button_telefono).click(function(e){
-        e.preventDefault();
-       if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            $(wrapper2).append('<div><input type="text" name="telefono[]" class="form-control"/><a href="#" class="remove_fieldTel" >&times;</a></div>'); //add input box
-        }
-    });
-
-    $(wrapper2).on("click",".remove_fieldTel", function(e){ //click en eliminar campo
-       
-        if( x > 1 ) {
-            $(this).parent('div').remove(); //eliminar el campo
-            x--;
-        }
-        return false;
-    });
-});
-</script>
-@endsection

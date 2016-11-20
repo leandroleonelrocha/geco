@@ -18,7 +18,7 @@ class AsesorRepo extends BaseRepo {
     }
 
     public function check($tipo,$nro){
-        return $this->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+        return $this->model->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
     }
 
     public function disable($asesor){
