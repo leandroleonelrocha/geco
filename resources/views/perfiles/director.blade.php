@@ -57,7 +57,7 @@
 								 	@foreach ($mail as $m) 
 								
 									{!! Form::email('mail[]', $m->mail, array('class'=>'form-control')) !!}		
-							@endforeach 
+									@endforeach 
                                 </div>
                             </div>
 							<div class="box-footer col-xs-12">

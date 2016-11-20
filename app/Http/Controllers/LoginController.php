@@ -19,6 +19,7 @@ class LoginController extends Controller {
     {
  
 
+
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
         curl_setopt($ch, CURLOPT_HEADER, false);  
@@ -34,6 +35,7 @@ class LoginController extends Controller {
        // 'rol_id'=>'3',
        // 'entidad_id'=>'1',
        // 'habilitado'=>'1'];
+
        
 
       if ($data){

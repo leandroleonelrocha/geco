@@ -150,11 +150,11 @@ class DirectoresController extends Controller
 	  	$mail=$this->directorMailRepo->findMail($id);
 	  	$mailp=$mail[0]->mail;
 
-	  		for ($i=1; $i <2 ; $i++) { 
-				$me =$mail[$i];
-					}
+	 //  		for ($i=1; $i <2 ; $i++) { 
+		// 		$me =$mail[$i];
+		// 			}
 
-		//var_dump($me);die;
+		// //var_dump($me);die;
     	return view('perfiles.director',compact('director','tipos','telefono','mailp','me','mail'));
     }
 

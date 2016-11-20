@@ -63,6 +63,19 @@
 					var urlborrar = "clases/borrar_clase/"+id;
 					//document.getElementById("mylink").href = url;
 
+					$.ajax({
+						url: 'buscar_clase',
+						type: "POST",
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						},
+						data: 'clase_id='+id,
+						success: function(rep) {
+							console.log(rep);
+
+						}
+					});
+
 					$('#ModalEdit #id').val(event.id);
 					$('#ModalEdit #descripcion').val(event.title);
 					$('#ModalEdit #color').val(event.color);
@@ -70,8 +83,6 @@
 					$('#ModalEdit #clase_matricula').attr('href', url );
 					$('#ModalEdit #clase_borrar').attr('href', urlborrar );
 
-
-					//window.location=("clases/matricula/" + data);
 					$('#ModalEdit').modal('show');
 				});
 			},
@@ -106,7 +117,7 @@
 			?>
 				{
 					id: '<?php echo $event['id']; ?>',
-					title: '<?php echo $event['descripcion']; ?>',
+					title: '<?php echo $event->Grupo->fullname; ?>',
 					start: '<?php echo $start; ?>',
 					end: '<?php echo $end; ?>',
 					color: '<?php echo $event->Grupo->color; ?>',
