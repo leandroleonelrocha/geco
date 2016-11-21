@@ -349,7 +349,7 @@ turno_manana	boolean,
 turno_tarde		boolean,
 turno_noche		boolean,
 sabados			boolean,
-grupo_color_id	int,
+color           varchar(45),	
 fecha_inicio	date not null,
 fecha_fin		date not null,
 filial_id		int not null,
@@ -363,8 +363,7 @@ foreign key 	(curso_id)						references curso		(id),
 foreign key 	(carrera_id)					references carrera		(id),
 foreign key 	(materia_id)					references materia		(id),
 foreign key 	(docente_id)					references docente		(id),
-foreign key 	(filial_id)						references filial		(id),
-foreign key		(grupo_color_id)				references grupo_color 	(id)
+foreign key 	(filial_id)						references filial		(id)
 );
 
 create table if not exists grupo_horario(

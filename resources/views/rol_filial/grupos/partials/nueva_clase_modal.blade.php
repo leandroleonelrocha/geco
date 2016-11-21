@@ -37,24 +37,19 @@
                 </div>
 
 
-                <div class="form-group row">
-			      <label for="inputEmail3" class="col-sm-2 col-form-label">Horario desde</label>
+                  <div class="form-group row">
+			      <label for="inputEmail3" class="col-sm-2 col-form-label">Hora comienzo</label>
 			      <div class="col-sm-10">
-			       
-				{!! Form::text('horario_desde',null,array('class' => 'form-control', 'id'=>'horario_desde')) !!}
-							
-                </div>
+			      	{!! Form::hidden('fecha',null,array('class'=>'form-control', 'id' => 'start')) !!}
+			    	<input class="form-control" name="horario_desde" type="time" value="12:00" >
+				</div>			
                 </div>
 
-
-                <div class="form-group row">
-			      <label for="inputEmail3" class="col-sm-2 col-form-label">Horario hasta</label>
+                 <div class="form-group row">
+			      <label for="inputEmail3" class="col-sm-2 col-form-label">Hora fin</label>
 			      <div class="col-sm-10">
-			    {!! Form::hidden('fecha',null,array('class' => 'form-control', 'id'=>'start')) !!}
-				   
-				{!! Form::text('horario_hasta',null,array('class' => 'form-control', 'id'=>'horario_hasta')) !!}
-							
-                </div>
+			    	<input class="form-control" name="horario_hasta" type="time" value="12:00" >
+				</div>			
                 </div>
 
 

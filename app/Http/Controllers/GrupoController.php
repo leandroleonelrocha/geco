@@ -50,8 +50,8 @@ class GrupoController extends Controller
 
 	public function nuevo()
 	{
-		$cursos = $this->cursoRepo->lists('nombre', 'id');
-		$carreras = $this->carreraRepo->lists('nombre','id');
+		$carreras = $this->carreraRepo->all();
+        $cursos  = $this->cursoRepo->all();
 		$materias =  $this->materiaRepo->lists('nombre','id');
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
 	
@@ -62,8 +62,8 @@ class GrupoController extends Controller
 	{
 		$model = $this->grupoRepo->find($id);
 
-		$cursos = $this->cursoRepo->lists('nombre', 'id');
-		$carreras = $this->carreraRepo->lists('nombre','id');
+		$carreras = $this->carreraRepo->all();
+        $cursos  = $this->cursoRepo->all();
 		$materias =  $this->materiaRepo->lists('nombre','id');
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
 		return view('rol_filial.grupos.form', compact('model', 'cursos', 'carreras', 'materias', 'docentes'));
@@ -76,15 +76,22 @@ class GrupoController extends Controller
 
         $data = $request->all();
 
+
         $array = explode("-", $request->get('fecha'));
-	
+		$carrearas_cursos = explode(';',$request->carreras_cursos);
+            if ($carrearas_cursos[0] == 'carrera')
+                $data['carrera_id']    =   $carrearas_cursos[1];
+            elseif ($carrearas_cursos[0] == 'curso')
+                $data['curso_id']      =   $carrearas_cursos[1];	
+
 		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
 		$data['filial_id'] = session('usuario')['entidad_id'];
+		//creacion del grupo
 
 		$this->grupoRepo->create($data);
+        
         $grupo = $this->grupoRepo->all()->last();
-
         $longitud = count($request->dia);
         for($i=0;$i<$longitud;$i++) {
 
@@ -157,7 +164,7 @@ class GrupoController extends Controller
 
 	public function clases()
 	{
-		$grupos = $this->grupoRepo->lists('descripcion', 'id');
+		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
 
@@ -169,9 +176,7 @@ class GrupoController extends Controller
 	public function nueva_clase(Request $request)
 	{
 		$data = $request->all();
-		//$fecha = explode(" ", $request->get('hora_desde'));
-		//$data['hora_desde'] = $fecha[0];
-
+		
 		$this->claseRepo->create($data);
 		return redirect()->back()->with('msg_ok', 'Clase creada correctamente');
 		
@@ -179,11 +184,15 @@ class GrupoController extends Controller
 
 	public function editar_clase(Request $request)
 	{
-		dd($request->all());
+		$clase_id = $request->clase_id;
+		$data = $request->all();
+		$clase = $this->claseRepo->find($clase_id);
+		$this->claseRepo->edit($clase,$data);
+		return redirect()->back()->with('msg_ok', 'Clase editada correctamente');
 	}
 
 	public function editar_clase_arrastrando(Request $request)
-	{
+	{	
 		$clase= $request->get('Event');
 
 		$id = $clase[0];
@@ -193,16 +202,19 @@ class GrupoController extends Controller
 		$model->fecha = $fecha;
 		$model->save();
 		if($model)
-				echo json_encode('success');
+				echo json_encode('La clase se ha editado correctamente.');
 			else
-				echo json_encode('failed');
+				echo json_encode('Ha ocurrido un error al editar la clase.');
 		
 		
 	}
 
 	public function buscar_clase(Request $request)
     {
-        dd($request->all());
+        $clase_id = $request->get('clase_id');
+        $clase = $this->claseRepo->find($clase_id);
+        return response()->json($clase, 200);
+ 
     }
 
 	public function borrar_clase($id = null)
@@ -248,6 +260,14 @@ class GrupoController extends Controller
 		
 		return redirect()->back()->with('msg_ok', 'Asistencia creado correctamente');
 		
+	}
+
+	public function post_materias_carreras(Request $request)
+	{	
+		$carrera_id = $request->get('carrera_id');
+		$carrera = $this->carreraRepo->find($carrera_id);
+		$materia = $carrera->Materia;
+		return response()->json($materia, 200);
 	}
 
 

@@ -38,7 +38,7 @@ class ExamenController extends Controller
 	public function index(){
 	
 		$examenes = $this->examenRepo->all();
-        $grupos = $this->grupoRepo->all()->lists('id', 'id');
+		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
 
 		
 		return view('rol_filial.examenes.lista', compact('examenes', 'grupos'));
