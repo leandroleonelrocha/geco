@@ -65,7 +65,7 @@
     </div><!-- /.box-tools -->
   </div><!-- /.box-header -->
   <div class="box-body">
-    {!! Form::model(Request::all(), ['route'=> 'estadisticas.detalles', 'method'=>'get']) !!} 
+    {!! Form::model(Request::all(), ['route'=> 'dueno.estadisticas_detalles', 'method'=>'get']) !!} 
 
           <div class="col-xs-4">
              {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}

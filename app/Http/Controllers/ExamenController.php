@@ -62,9 +62,17 @@ class ExamenController extends Controller
 
 	public function nuevo_post(Request $request)
 	{
+ 		
  		$longitud = count($request->matricula);
  		$data = $request->all();
- 		$ultimo = $this->examenRepo->all()->last()->nro_acta + 1;
+ 		
+ 		if(count($this->examenRepo->all()) > 0)
+ 		{
+ 			$ultimo = $this->examenRepo->all()->last()->nro_acta + 1;
+
+ 		}else{
+ 			$ultimo = 1000;
+ 		}	
  		
         for($i=0;$i<$longitud;$i++) {
         	$data['nro_acta'] = $ultimo;

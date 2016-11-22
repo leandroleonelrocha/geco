@@ -22,17 +22,18 @@
 				<div class="box-header">
 					<h3 class="box-title">Listado de Examenes</h3>
 				</div>
-
+				
 				<div class="lalocura" style="display: none">
 
 					<div class="form-group materia" >
 			            <label for="exampleInputEmail1">Materia  </label>
 			            <select name="materia_id" class="form-control materia_id">
+			            <option>Seleccione materia</option>
 			           	</select>
 			        </div>
 			        <div class="form-group materia" >
 			           <label for="exampleInputEmail1">Docente  </label>
-			           {!! Form::select('docente_id',(['' => 'Seleccionar curso'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
+			           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
 
 			        </div>
 
