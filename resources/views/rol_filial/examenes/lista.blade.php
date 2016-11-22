@@ -11,7 +11,6 @@
 			<div class="input-group input-group-sm">
 				{!! Form::select('grupo_id',(['' => 'Seleccionar curso'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
 
-
 				<span class="input-group-btn">
                       <button class="btn btn-info btn-flat buscar" type="button">Buscar!</button>
                     </span>
@@ -23,7 +22,24 @@
 				<div class="box-header">
 					<h3 class="box-title">Listado de Examenes</h3>
 				</div>
+
+				<div class="lalocura" style="display: none">
+
+					<div class="form-group materia" >
+			            <label for="exampleInputEmail1">Materia  </label>
+			            <select name="materia_id" class="form-control materia_id">
+			           	</select>
+			        </div>
+			        <div class="form-group materia" >
+			           <label for="exampleInputEmail1">Docente  </label>
+			           {!! Form::select('docente_id',(['' => 'Seleccionar curso'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
+
+			        </div>
+
+				</div>
+
 				<div class="box-body">
+					
         		</div><!-- Fin box-body -->
 			</div> <!-- Fin box -->
 
@@ -54,9 +70,16 @@
 			success: function(result){
 				$('.box-body').empty();
 				$('.box-body').append(table());
+				$('.lalocura').show();
 				var body = $('#example1').children('tbody');
-				$.each(result, function(clave, valor) {
+				$('.docente_id').val(result.grupo.docente_id);
+				var select_materia = $('.materia_id');				
 
+				$.each(result.materias, function(clave, valor) {
+					select_materia.append('<option value='+valor.id+'>'+valor.nombre+'</option>');
+				});
+
+				$.each(result.matriculas, function(clave, valor) {
 					var matricula = valor.id;
 					var nombre = 'Beto';
 					body.append(tr(matricula, nombre));
@@ -76,7 +99,6 @@
 					'<th>Matricula</th>'+
 					'<th>Persona</th>'+
 					'<th>Nota</th>'+
-					'<th class="no-print"></th>'+
 					'</tr></thead>'+
 					'<tbody>'+
 					'</tbody>'+
@@ -89,10 +111,11 @@
 		var tr = '<tr>'+
 				 '<td>'+ matricula + '</td>'+
 				 '<td>'+ persona + '</td>'+
-				 '<td><input type="text" name="nota"></td>'+
+				 '<td><input type="hidden" name="matricula[]" value="'+matricula+'"><input type="text" name="nota[]" class="form-control"></td>'+
 				 '</tr>';
 		return tr;
 	}
+
 
 
 </script>

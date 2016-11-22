@@ -84,7 +84,11 @@
 
         <div class="form-group">
             <label for="example-color-input">Color</label>
+            @if(empty($model))
             <input class="form-control" name="color" type="color" value="#563d7c" id="example-color-input">
+            @else
+            {!! Form::color('color', null ,  array('class'=>'form-control', 'id'=>'example-color-input')) !!}
+            @endif
         </div>
 
 
