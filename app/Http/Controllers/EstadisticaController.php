@@ -70,8 +70,12 @@ class EstadisticaController extends Controller
 
 		if($request->selectvalue == 'examen')
 		{
-			
-			dd($this->examenRepo->allExamenFilialMatricula());
+			$examenes = $this->examenRepo->allExamenFilialMatricula()->groupBy('nro_acta');
+			foreach ($examenes as $key => $value) {
+				# code...
+				dd($key);
+			}
+
 		}
 	}
 

@@ -60,7 +60,7 @@
                 case 3:
                 ?>
                 <li>
-                  <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                  <a href="{{route('director.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
 
                 <li class="treeview">
@@ -192,7 +192,7 @@
                   </li>
 
                   <li>
-                    <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                    <a href="{{route('filial.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                   </li>
   
                   <li class="treeview">

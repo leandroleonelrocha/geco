@@ -29,8 +29,13 @@ class LoginController extends Controller {
         */
 
        $data =[ 
+
+        //rol 3 director
+        //rol 4 filial
+
+        $data =[ 
         'id'=>'1',
-        'usuario'=>'test@test.com',
+        'usuario'=>'rochaleandroleonel@gmail.com',
         'password'=>'1234',
         'rol_id'=>'4',
         'entidad_id'=>'1',

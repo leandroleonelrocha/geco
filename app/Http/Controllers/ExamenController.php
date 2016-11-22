@@ -39,9 +39,10 @@ class ExamenController extends Controller
 	
 		$examenes = $this->examenRepo->all();
 		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
+		$docentes = $this->docenteRepo->all()->lists('full_name','id');
 
 		
-		return view('rol_filial.examenes.lista', compact('examenes', 'grupos'));
+		return view('rol_filial.examenes.lista', compact('examenes', 'grupos', 'docentes'));
 	}
 
 	public function nuevo()
@@ -61,12 +62,17 @@ class ExamenController extends Controller
 
 	public function nuevo_post(Request $request)
 	{
-        dd($request->all());
-		$this->examenRepo->create($request->all());
+ 		$longitud = count($request->matricula);
+ 		$data = $request->all();
+ 		$ultimo = $this->examenRepo->all()->last()->nro_acta + 1;
+ 		
+        for($i=0;$i<$longitud;$i++) {
+        	$data['nro_acta'] = $ultimo;
+        	$data['matricula_id'] = $request->matricula[$i];
+            $data['nota'] = $request->nota[$i];
+           	$this->examenRepo->create($data);
 
-		$data['nro_acta'] = $request->get('nro_acta');
-		$data['matricula_id'] = $request->get('matricula_id');
-		$data['filial_id'] = session('usuario')['entidad_id'];
+        }
 
 		//$this->examenPermisosRepo->create($data);
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen creado correctamente.');
@@ -110,8 +116,11 @@ class ExamenController extends Controller
     {
         $grupo_id = $request->get('grupo_id');
         $grupo = $this->grupoRepo->find($grupo_id);
-        $data = $grupo->Matricula;
-        return response()->json($data, 200);
+       	$carrera = $grupo->Carrera;
+       	$materias = $grupo->Carrera->Materia;
+        $matriculas = $grupo->Matricula;
+
+        return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materias'=>$materias,'matriculas'=>$matriculas));
     }
 
 

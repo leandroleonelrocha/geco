@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @extends('template')
 @section('css')
         <style type="text/css">
@@ -158,6 +157,3 @@ $(function () {
 @endsection
 
 
-=======
-test.blade.php
->>>>>>> 476d734517b30d4481c239fe09fcb5e9c10c4a55
