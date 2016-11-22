@@ -28,6 +28,9 @@ class LoginController extends Controller {
         curl_close($ch);
         */
 
+        //rol 3 director
+        //rol 4 filial
+
         $data =[ 
         'id'=>'1',
         'usuario'=>'test@test.com',
