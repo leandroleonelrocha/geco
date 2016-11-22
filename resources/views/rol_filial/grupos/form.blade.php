@@ -34,6 +34,9 @@
 
         <div class="form-group materia" style="display: none">
             <label for="exampleInputEmail1">Materia  </label>
+            <select name="materia_id" class="form-control select_materia">
+           
+            </select>
         </div>
 
         
@@ -140,6 +143,7 @@
         
         if(tipo[0] == "carrera")
         {   
+
             $(".materia").show();
             $.ajax(
                 {
@@ -150,12 +154,19 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(result){
-                   $(".materia").show(); 
-                   $.each(result, function(clave, valor) {
-                        $(".materia").append(add_select(valor.id, valor.nombre)); 
-
-                   });
-
+                       if(result.length == 0)
+                       {
+                            $(".materia").show();
+                            $(".materia").empty(); 
+                       }
+                       if(result.length > 0)
+                       { 
+                           $(".materia").show(); 
+                           $.each(result, function(clave, valor) {
+                                $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
+                           });
+                       }
+                    
                 }}
 
             );
@@ -214,16 +225,7 @@
       return data;      
     }
 
-    function add_select(id, nombre)
-    {
-        var data = '<select name="materia_id" class="form-control">'+
-                   '<option value="'+ id +'">'+ nombre + '</option>'+
-                   '</select>';
-                   
-        return data;           
 
-           
-    }
 
 
 });
