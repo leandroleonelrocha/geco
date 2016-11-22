@@ -6,24 +6,30 @@ use App\Http\Repositories\PagoRepo;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PreinformeRepo;
 use App\Http\Repositories\ExamenRepo;
+use App\Http\Repositories\AsesorFilialRepo;;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use Illuminate\Http\Request;
 use Session;
 class EstadisticaController extends Controller
 {
-	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo)
+	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo, AsesorFilialRepo $asesorFilialRepo)
 	{
 		$this->pagoRepo = $pagoRepo;
 		$this->personaRepo = $personaRepo;
 		$this->preinformeRepo = $preinformeRepo;
 		$this->examenRepo = $examenRepo;
+		$this->asesorFilialRepo = $asesorFilialRepo;
 
 	}
 
 	public function index(){
 
-	  return view('rol_filial.estadisticas.index');
+	 $persona = $this->personaRepo->getPersonasFilial()->count();
+	 $asesores = $this->asesorFilialRepo->allAsesorFilial()->count();
+	
+		
+	  return view('rol_filial.estadisticas.index', compact('persona','asesores'));
 	}
 	
 
@@ -70,11 +76,8 @@ class EstadisticaController extends Controller
 
 		if($request->selectvalue == 'examen')
 		{
-			$examenes = $this->examenRepo->allExamenFilialMatricula()->groupBy('nro_acta');
-			foreach ($examenes as $key => $value) {
-				# code...
-				dd($key);
-			}
+			$examenes = $this->examenRepo->allExamenFilialMatricula();
+			
 
 		}
 	}
