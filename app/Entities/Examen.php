@@ -22,6 +22,10 @@ class Examen extends Entity
         return $this->belongsTo(Matricula::getClass());
     }
 
+    public function ExamenPermisos(){
+        return $this->hasMany(ExamenPermisos::getClass());   
+    }
+
     public function Grupo(){
         return $this->belongsTo(Grupo::getClass());
     }

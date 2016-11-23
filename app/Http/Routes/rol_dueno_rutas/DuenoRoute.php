@@ -3,9 +3,10 @@
 // Route::group(['prefix' => 'dueño'], function(){
 
 	//Inicio Rol Dueño
-	Route::get('inicio',[
+	Route::get('inicio', [
 		'as' => 'dueño.inicio',
-		'uses' => 'DuenoController@index'
+		'uses' => 'DuenoController@index',
+		'middleware' => 'dueno'
 	 ]);
 
 	// Rutas Operaciones ---------- Filiales

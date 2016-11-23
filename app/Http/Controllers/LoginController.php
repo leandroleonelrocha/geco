@@ -15,14 +15,18 @@ class LoginController extends Controller {
         return view('login');
     }
 
-    public function postLogin(Request $request){
-        // $ch = curl_init();  
-        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
-        // curl_setopt($ch, CURLOPT_HEADER, false);  
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        // $data = json_decode(curl_exec($ch),true);
-        // curl_close($ch);
+    public function postLogin(Request $request)
+    {
  
+        /*
+        $ch = curl_init();  
+        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
+        curl_setopt($ch, CURLOPT_HEADER, false);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = json_decode(curl_exec($ch),true);
+        curl_close($ch);
+        */  
+
        $data =[ 
        'id'=>'1',
        'usuario'=>'test@test.com',
@@ -47,17 +51,6 @@ class LoginController extends Controller {
       }
       else
         return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');
-
-       // if(!Auth::check())
-       //  {
-       //      if (Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password]))
-       //      {
-       //         return redirect('template');
-       //      }
-       //      return redirect()->back()->with('msg_ok', 'El usuario no existe o los datos son incorrectos');
-       //      return  redirect()->intended('login')->with('msg', 'no se puede ');
-       //  }
-
     }
     
     // login local

@@ -16,38 +16,37 @@
         </div>
 
         <div class="form-group">
-            <label for="exampleInputEmail1">Curso  </label>
-            @if(empty($model))
-            {!! Form::select('curso_id',(['' => 'Seleccionar curso'] + $cursos->toArray()), null, ['id' => 'curso_id', 'class' => 'form-control']) !!}
-            @else
-            {!! Form::select('curso_id',['' => 'Seleccionar curso'] + $cursos->toArray() ,$model->Curso->id, ['id' => 'curso_id', 'class' => 'form-control']) !!}
-            @endif
+            <label>Carreras y Cursos</label>
+            <select name="carreras_cursos" id="carreras_cursos" class="form-control">
+            <option>Seleccione una materia o curso</option>
+            <optgroup label="Carreras">
+            @foreach($carreras as $carrera)
+            <option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
+            @endforeach
+            </optgroup>
+            <optgroup label="Cursos">
+            @foreach($cursos as $curso)
+            <option value="curso;{{$curso->id}}">{{$curso->nombre}}</option>
+            @endforeach
+            </optgroup>
+            </select>
         </div>
 
-        <div class="form-group">
-            <label for="exampleInputEmail1">Carreras  </label>
-            @if(empty($model))
-            {!! Form::select('carrera_id',(['' => 'Seleccionar carrera'] + $carreras->toArray()), null, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
-            @else
-            {!! Form::select('carrera_id',['' => 'Seleccionar carrera'] + $carreras->toArray() ,$model->Carrera->id, ['id' => 'carrera_id', 'class' => 'form-control']) !!}
-            @endif
+        <div class="form-group materia" style="display: none">
+            <label for="exampleInputEmail1">Materia  </label>
+            <select name="materia_id" class="form-control select_materia">
+           
+            </select>
         </div>
 
-         <div class="form-group">
-            <label for="exampleInputEmail1">Materias  </label>
-            @if(empty($model))
-            {!! Form::select('materia_id',(['' => 'Seleccionar materia'] + $materias->toArray()), null, ['id' => 'materia_id', 'class' => 'form-control']) !!}
-            @else
-            {!! Form::select('materia_id',['' => 'Seleccionar materia'] + $materias->toArray() ,$model->Materia->id, ['id' => 'materia_id', 'class' => 'form-control']) !!}
-            @endif
-        </div>
+        
 
         <div class="form-group">
             {!! Form::label('descripcion', 'Descripcion') !!}
             {!! Form::text('descripcion', null ,  array('class'=>'form-control')) !!}
         </div>
 
-           <div class="form-group">
+        <div class="form-group">
             <label for="exampleInputEmail1">Docente  </label>
             @if(empty($model))
             {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control']) !!}
@@ -57,40 +56,42 @@
         </div>
 
         <div class="form-group">
-                                <label>Disponibilidad</label>
-                                <div class="col-xs-12">
-                                    {!! Form::checkbox('turno_manana', '1') !!} Ma&ntilde;ana
-                                </div>
-                                <div class="col-xs-12">
-                                    {!! Form::checkbox('turno_tarde', '1') !!} Tarde
-                                </div>
-                                <div class="col-xs-12">
-                                    {!! Form::checkbox('turno_noche', '1') !!} Noche
-                                </div>
-                                <div class="col-xs-12">
-                                    {!! Form::checkbox('sabados', '1') !!} S&aacute;bados
-                                </div>
-                            </div>
+            <label>Disponibilidad</label>
+            <div class="col-xs-12">
+            {!! Form::checkbox('turno_manana', '1') !!} Ma&ntilde;ana
+            </div>
+            <div class="col-xs-12">
+            {!! Form::checkbox('turno_tarde', '1') !!} Tarde
+            </div>
+            <div class="col-xs-12">
+            {!! Form::checkbox('turno_noche', '1') !!} Noche
+            </div>
+            <div class="col-xs-12">
+            {!! Form::checkbox('sabados', '1') !!} S&aacute;bados
+            </div>
+        </div>
 
-            <div class="form-group">
-                    <label>Date range:</label>
-                    <div class="input-group">
-                      <div class="input-group-addon">
-                        <i class="fa fa-calendar"></i>
-                      </div>
-                       @if(empty($model))
-                          {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
-                        @else
-                          {!! Form::text('fecha', $model->fulldate ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
-                        @endif
-                    
-                    
-                    </div><!-- /.input group -->
+        <div class="form-group">
+            <label>Date range:</label>
+            <div class="input-group">
+            <div class="input-group-addon">
+            <i class="fa fa-calendar"></i>
+            </div>
+            @if(empty($model))
+            {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
+            @else
+            {!! Form::text('fecha', $model->fulldate ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
+            @endif
+            </div><!-- /.input group -->
         </div>
 
         <div class="form-group">
             <label for="example-color-input">Color</label>
-                <input class="form-control" name="color" type="color" value="#563d7c" id="example-color-input">
+            @if(empty($model))
+            <input class="form-control" name="color" type="color" value="#563d7c" id="example-color-input">
+            @else
+            {!! Form::color('color', null ,  array('class'=>'form-control', 'id'=>'example-color-input')) !!}
+            @endif
         </div>
 
 
@@ -124,7 +125,6 @@
 
                 </div>
             </div>
-     
         
     </div><!-- /.box-body -->
 
@@ -138,7 +138,52 @@
 @section('js')
 <script type="text/javascript">
    
-    $(document).ready(function() {
+   $(document).ready(function() {
+
+   
+   $("#carreras_cursos").change(function(){
+        var carreras_cursos=$('select[id=carreras_cursos]').val(); 
+        var tipo = carreras_cursos.split(';');
+        
+        if(tipo[0] == "carrera")
+        {   
+
+            $(".materia").show();
+            $.ajax(
+                {
+                url: "post_materias_carreras",
+                type: "POST",
+                data: 'carrera_id='+tipo[1],
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(result){
+                       if(result.length == 0)
+                       {
+                            $(".materia").show();
+                            $(".materia").empty(); 
+                       }
+                       if(result.length > 0)
+                       { 
+                           $(".materia").show(); 
+                           $.each(result, function(clave, valor) {
+                                $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
+                           });
+                       }
+                    
+                }}
+
+            );
+        }
+
+        if(tipo[0] == "curso")
+        {
+            $(".materia").show();
+            $(".materia").empty(); 
+        }
+            
+    });
+
     var max_fields      = 10; //maximum input boxes allowed
     var wrapper         = $(".input_fields_wrap"); //Fields wrapper
     var add_button      = $(".add_field_button"); //Add button ID
@@ -184,7 +229,9 @@
       return data;      
     }
 
-    console.log(add_input());
+
+
+
 });
 
 </script>

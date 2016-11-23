@@ -23,40 +23,25 @@ class AsignacionAsesorAFilialController extends Controller {
 
     public function lista(){
 
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
+      
                 $asesor = $this->asesorFilialRepo->allAsesorFilial(); // Obtención de todos los Acesores activos de la filial 
              
                 return view('rol_filial.asesores.asignacion.lista',compact('asesor'));
-            }
-            else
-                return redirect()->back();
-        }
-        else
-            return redirect('login');
+        
     }
 
     public function nuevo(){
 
-    if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
+   
                 $asesor = $this->asesorRepo->allEneable(); // Obtención de todos los Acesores activos no importa de la filial qeu sean
 
                 return view('rol_filial.asesores.asignacion.nuevo',compact('asesor'));
-            }
-            else
-                return redirect()->back();
-        }
-        else
-            return redirect('login');
+        
     }
 
     public function nuevo_post($id){
 
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-              
-              
+       
                 $f = session('usuario')['entidad_id'];
                 $asesorFilial['asesor_id']=$id;
                 $asesorFilial['filial_id']=$f;
@@ -67,29 +52,17 @@ class AsignacionAsesorAFilialController extends Controller {
                 else
                     return redirect()->route('filial.asignacionAsesores')->with('msg_error','No se ha podido asignar e asesor a la flial.');
                 
-            }
-            else
-                return redirect()->back();          
-        }
-        else
-            return redirect('login');
+        
 
     }
 
     public function borrar($id){
 
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-
-                if ( $this->asesorFilialRepo->deleteAsesor($id))
+                if ($this->asesorFilialRepo->deleteAsesor($id))
                     return redirect()->route('filial.asignacionAsesores')->with('msg_ok','Asesor eliminado correctamente de la filial.');
                 else
                     return redirect()->route('filial.asignacionAsesores')->with('msg_error',' El Asesor no ha podido ser eliminado de la filial.');}
-            else
-                return redirect()->back();          
-        }
-        else
-            return redirect('login');
+          
     }
 
  }

@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'filial'], function(){
+Route::group(['prefix' => 'filial', 'middleware' => 'filial'], function(){
 
 	// Inicio Rol Filial
 	Route::get('inicio',[

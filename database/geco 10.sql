@@ -349,7 +349,7 @@ turno_manana	boolean,
 turno_tarde		boolean,
 turno_noche		boolean,
 sabados			boolean,
-grupo_color_id	int,
+color           varchar(45),	
 fecha_inicio	date not null,
 fecha_fin		date not null,
 filial_id		int not null,
@@ -363,8 +363,7 @@ foreign key 	(curso_id)						references curso		(id),
 foreign key 	(carrera_id)					references carrera		(id),
 foreign key 	(materia_id)					references materia		(id),
 foreign key 	(docente_id)					references docente		(id),
-foreign key 	(filial_id)						references filial		(id),
-foreign key		(grupo_color_id)				references grupo_color 	(id)
+foreign key 	(filial_id)						references filial		(id)
 );
 
 create table if not exists grupo_horario(
@@ -419,18 +418,19 @@ foreign key 	(matricula_id)						references matricula	(id)
 );
 
 create table if not exists examen(
-nro_acta				int not null auto_increment,
+id  					int not null auto_increment,	
+nro_acta				int not null,
 recuperatorio_nro_acta	int,
 matricula_id			int not null,
 grupo_id				varchar(50),
 nota					int(2) not null,
-carrera_id				varchar(50) not null,
-materia_id				varchar(50) not null,
+carrera_id				varchar(50),
+materia_id				varchar(50),
 docente_id				int not null,
 created_at  			timestamp not null default '0000-00-00 00:00:00',
 updated_at  			timestamp not null default '0000-00-00 00:00:00',
-primary key 			(nro_acta, matricula_id),
-foreign key 			(recuperatorio_nro_acta, matricula_id)	references examen	  (nro_acta, matricula_id),
+primary key 			(id),
+foreign key 			(recuperatorio_nro_acta)	references examen	  (id),
 foreign key				(grupo_id)								              references grupo	  (id),
 foreign key 			(carrera_id, materia_id)				        references materia	(carrera_id, id),
 foreign key 			(docente_id)							              references docente	(id)

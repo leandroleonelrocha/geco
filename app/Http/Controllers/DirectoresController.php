@@ -185,4 +185,15 @@ class DirectoresController extends Controller
         else
             return redirect()->route()->with('msg_error','El perfil del director no ha podido ser modificado.');
     }
+
+    public function estadisticas()
+    {
+    	return view('rol_director.estadisticas.index');
+    }
+
+    public function estadisticas_detalles(Request $request){
+
+    	return view('rol_director.estadisticas.detalles');
+    }
+
 }

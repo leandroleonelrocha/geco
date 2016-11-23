@@ -3,7 +3,7 @@ create database geco;
 use geco;
 
 create table if not exists curso(
-id			varchar(50) not null,
+id			int not null auto_increment,
 nombre		varchar(50) not null,
 duracion 	varchar(50),
 descripcion	varchar(300) default 'Sin Descripción.',
@@ -14,7 +14,7 @@ primary key	(id)
 );
 
 create table if not exists carrera(
-id			varchar(50) not null,
+id			int not null auto_increment,
 nombre		varchar(50) not null,
 duracion 	varchar(50),
 descripcion	varchar(300) default 'Sin Descripción.',
@@ -24,14 +24,24 @@ primary key	(id)
 );
 
 create table if not exists materia(
-id			varchar(50) not null,
-carrera_id	varchar(50) not null,
+id			int not null,
+carrera_id	int not null,
 nombre		varchar(50) not null,
 descripcion	varchar(300) default 'Sin Descripción.',
 created_at	timestamp not null default '0000-00-00 00:00:00',
 updated_at	timestamp not null default '0000-00-00 00:00:00',
 primary key (id, carrera_id),
 foreign key (carrera_id)				references carrera	(id)
+);
+
+create table if not exists cadena(
+id					int not null auto_increment,
+nombre				varchar(50) not null,
+mail				varchar(50) not null,
+telefono			varchar(50) not null,
+created_at  		timestamp not null default '0000-00-00 00:00:00',
+updated_at  		timestamp not null default '0000-00-00 00:00:00',
+primary key 		(id)
 );
 
 create table if not exists tipo_documento(
@@ -75,6 +85,7 @@ foreign key	(director_id) 			references director	(id)
 
 create table if not exists filial(
 id				int not null auto_increment,
+cadena_id		int not null,
 nombre			varchar(50) not null,
 direccion		varchar(50),
 localidad		varchar(50),
@@ -85,7 +96,8 @@ activo			boolean not null default true,
 created_at		timestamp not null default '0000-00-00 00:00:00',
 updated_at		timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),
-foreign key		(director_id) references director (id)
+foreign key		(cadena_id) 	references cadena (id),
+foreign key		(director_id) 	references director (id)
 );
 
 create table if not exists filial_telefono(
@@ -207,33 +219,34 @@ foreign key 	(filial_id)					references filial	(id)
 );
 
 create table if not exists persona_interes(
-id 						int not null auto_increment,
-preinforme_id			int,	
-persona_id				int not null,
-carrera_id				varchar(50),
-curso_id				varchar(50),
-descripcion				varchar (300),
-created_at				timestamp not null default '0000-00-00 00:00:00',
-updated_at				timestamp not null default '0000-00-00 00:00:00',
-primary key 			(id),
-foreign key 			(persona_id)			references persona		(id),
-foreign key 			(preinforme_id)			references preinforme 	(id),
-foreign key 			(carrera_id)			references carrera		(id),
-foreign key 			(curso_id)				references curso		(id)
+id 				int not null auto_increment,
+preinforme_id	int,	
+persona_id		int not null,
+carrera_id		int,
+curso_id		int(50),
+descripcion		varchar (300),
+created_at		timestamp not null default '0000-00-00 00:00:00',
+updated_at		timestamp not null default '0000-00-00 00:00:00',
+primary key 	(id),
+foreign key 	(persona_id)			references persona		(id),
+foreign key 	(preinforme_id)			references preinforme 	(id),
+foreign key 	(carrera_id)			references carrera		(id),
+foreign key 	(curso_id)				references curso		(id)
 );
 
 create table if not exists matricula(
-id				int not null auto_increment,
-persona_id		int not null,
-curso_id		varchar(50),
-carrera_id		varchar(50),
-filial_id		int,
-asesor_id		int,
-activo			boolean not null default true,
-terminado		boolean not null default false,
-cancelado		boolean not null default false,
-created_at  	timestamp not null default '0000-00-00 00:00:00',
-updated_at  	timestamp not null default '0000-00-00 00:00:00',
+id						int not null auto_increment,
+persona_id				int not null,
+curso_id				int,
+carrera_id				int,
+filial_id				int,
+asesor_id				int,
+activo					boolean not null default true,
+terminado				boolean not null default false,
+cancelado				boolean not null default false,
+ultimo_mail_enviado		date default '0000-00-00',
+created_at  			timestamp not null default '0000-00-00 00:00:00',
+updated_at  			timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),	
 foreign key 	(persona_id)		references persona	(id),
 foreign key 	(curso_id)			references curso	(id),
@@ -243,11 +256,13 @@ foreign key 	(asesor_id)			references asesor	(id)
 )AUTO_INCREMENT=1000;
 
 create table if not exists matricula_permisos(
+id				int not null auto_increment,
 matricula_id	int not null,
 filial_id		int not null,
+confirmar		boolean not null default false,
 created_at		timestamp not null default '0000-00-00 00:00:00',
 updated_at		timestamp not null default '0000-00-00 00:00:00',
-primary key 	(matricula_id, filial_id),
+primary key 	(id),
 foreign key 	(matricula_id)				references matricula	(id),
 foreign key 	(filial_id)					references filial		(id)
 );
@@ -263,6 +278,7 @@ vencimiento		date,
 monto_original	float not null,
 monto_actual	float,
 monto_pago		float,
+descuento		float not null,
 recargo			float not null,
 filial_id		int not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
@@ -283,6 +299,7 @@ primary key 	(id)
 create table if not exists recibo_concepto_pago(
 id						int not null auto_increment,
 concepto_pago			varchar(50),
+abreviacion				char(3),
 created_at				timestamp not null default '0000-00-00 00:00:00',
 updated_at				timestamp not null default '0000-00-00 00:00:00',
 primary key 			(id)
@@ -307,40 +324,49 @@ foreign key 			(filial_id)					references filial				(id)
 );
 
 create table if not exists docente(
-id						int not null auto_increment,
-tipo_documento_id 		int,
-nro_documento			varchar(50),
-apellidos				varchar(50) not null,
-nombres					varchar(50) not null,
-descripcion				varchar(300),
-disponibilidad_manana	boolean,
-disponibilidad_tarde	boolean,
-disponibilidad_noche	boolean,
-disponibilidad_sabados	boolean,
-filial_id				int not null,
-activo					boolean not null default true,
-created_at  			timestamp not null default '0000-00-00 00:00:00',
-updated_at  			timestamp not null default '0000-00-00 00:00:00',
-primary key 			(id),
-unique key				(tipo_documento_id, nro_documento),
-foreign key 			(tipo_documento_id)					references tipo_documento	(id),
-foreign key 			(filial_id)							references filial			(id)
+id							int not null auto_increment,
+tipo_documento_id 			int,
+nro_documento				varchar(50),
+apellidos					varchar(50) not null,
+nombres						varchar(50) not null,
+descripcion					varchar(300),
+disponibilidad_manana		boolean,
+disponibilidad_tarde		boolean,
+disponibilidad_noche		boolean,
+disponibilidad_sabados		boolean,
+filial_id					int not null,
+activo						boolean not null default true,
+created_at  				timestamp not null default '0000-00-00 00:00:00',
+updated_at  				timestamp not null default '0000-00-00 00:00:00',
+primary key 				(id),
+unique key					(tipo_documento_id, nro_documento),
+foreign key 				(tipo_documento_id)						references tipo_documento	(id),
+foreign key 				(filial_id)							    references filial			(id)
+);
+
+create table if not exists grupo_color(
+id 			int not null auto_increment,
+color 		varchar(50) not null,
+created_at 	timestamp not null default '0000-00-00 00:00:00',
+updated_at 	timestamp not null default '0000-00-00 00:00:00',
+primary key	(id)
 );
 
 create table if not exists grupo(
-id				varchar(50) not null,
-curso_id		varchar(50),
-carrera_id		varchar(50),
-materia_id 		varchar(50),
+id				int not null auto_increment,
+curso_id		int,
+carrera_id		int,
+materia_id 		int,
 descripcion		varchar(300),
 docente_id		int not null,
+nuevo			boolean not null default true,
 turno_manana	boolean,
 turno_tarde		boolean,
 turno_noche		boolean,
 sabados			boolean,
-color 			varchar(45),
-fecha_inicio	datetime not null,
-fecha_fin		datetime,
+color           varchar(45),
+fecha_inicio	date not null,
+fecha_fin		date not null,
 filial_id		int not null,
 activo			boolean not null default true,
 terminado		boolean not null default false,
@@ -348,15 +374,16 @@ cancelado		boolean not null default false,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),
-foreign key 	(curso_id)					references curso	(id),
-foreign key 	(carrera_id, materia_id)	references materia	(carrera_id, id),
-foreign key 	(docente_id)				references docente	(id),
-foreign key 	(filial_id)					references filial	(id)
+foreign key 	(curso_id)						references curso		(id),
+foreign key 	(carrera_id)					references carrera		(id),
+foreign key 	(materia_id)					references materia		(id),
+foreign key 	(docente_id)					references docente		(id),
+foreign key 	(filial_id)						references filial		(id)
 );
 
 create table if not exists grupo_horario(
-grupo_id		varchar(50) not null,
-dia				int(1) not null,
+grupo_id		int not null,
+dia				ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'),
 horario_desde	time not null,
 horario_hasta	time not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
@@ -366,18 +393,18 @@ foreign key		(grupo_id)										references grupo	(id)
 );
 
 create table if not exists grupo_matricula(
-grupo_id		varchar(50) not null,
+grupo_id		int not null,
 matricula_id	int not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key 	(grupo_id, matricula_id),
-foreign key 	(grupo_id)					references grupo		(id),
+foreign key 	(grupo_id)					  references grupo		(id),
 foreign key 	(matricula_id)				references matricula	(id)
 );
 
 create table if not exists clase(
 id 				int(11) not null auto_increment,
-grupo_id		varchar(50) not null,
+grupo_id		int not null,
 fecha			datetime not null,
 docente_id		int not null,
 dia				int(1) not null,
@@ -387,9 +414,9 @@ estado 			boolean not null default true,
 descripcion		varchar(300),
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
-primary key	(id),
-foreign key	(grupo_id)			references grupo	(id),
-foreign key	(docente_id)		references docente	(id)
+primary key		(id),
+foreign key		(grupo_id)			references grupo	(id),
+foreign key		(docente_id)		references docente	(id)
 );
 
 create table if not exists clase_matricula(
@@ -401,24 +428,145 @@ asistio			boolean not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),	
-foreign key 	(clase_id)							references clase		(id),
+foreign key 	(clase_id)							  references clase		(id),
 foreign key 	(matricula_id)						references matricula	(id)
 );
 
 create table if not exists examen(
+id  					int not null auto_increment,
 nro_acta				int not null auto_increment,
 recuperatorio_nro_acta	int,
 matricula_id			int not null,
-grupo_id				varchar(50),
+grupo_id				int,
 nota					int(2) not null,
-carrera_id				varchar(50) not null,
-materia_id				varchar(50) not null,
+carrera_id				int not null,
+materia_id				int not null,
 docente_id				int not null,
 created_at  			timestamp not null default '0000-00-00 00:00:00',
 updated_at  			timestamp not null default '0000-00-00 00:00:00',
-primary key 			(nro_acta, matricula_id),
-foreign key 			(recuperatorio_nro_acta, matricula_id)	references examen	(nro_acta, matricula_id),
-foreign key				(grupo_id)								references grupo	(id),
+primary key 			(id),
+foreign key 			(recuperatorio_nro_acta, matricula_id)	references examen	  (id),
+foreign key				(grupo_id)								references grupo	  (id),
 foreign key 			(carrera_id, materia_id)				references materia	(carrera_id, id),
 foreign key 			(docente_id)							references docente	(id)
 );
+
+create table if not exists mailing(
+id 					int(11) not null auto_increment,
+persona_id			int(11) not null,
+filial_id			int(11) not null,
+pago_id 			int(11),
+moroso 				boolean default 0,
+enviado 			boolean not null,
+vencimiento_pago	date not null,
+fecha_envio 		datetime not null,
+created_at			timestamp not null default '0000-00-00 00:00:00',
+updated_at			timestamp not null default '0000-00-00 00:00:00',
+primary key			(id),
+foreign key			(persona_id) 	references persona 	(id),
+foreign key			(filial_id) 	references filial	  (id),
+foreign key			(pago_id)     	references pago     (id)
+);
+
+-- --------------------------------------------------------
+-- ---------- Inserción de Datos
+
+--
+-- Cadenas
+--
+
+insert into cadena (`nombre`, `mail`, `telefono`, `created_at`, `updated_at`)
+values  ('IGI', 'test@igi.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('IAC', 'test@iac.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Tipos de Documento
+--
+
+insert into tipo_documento (`tipo_documento`, `created_at`, `updated_at`)
+values  ('DNI', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Directores
+--
+
+insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `activo`, `created_at`, `updated_at`)
+values  (1, 12345678, 'Apellido 1', 'Nombres 1', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 23456789, 'Apellido 2', 'Nombres 2', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Filiales
+--
+
+insert into filial (`cadena_id`, `nombre`, `direccion`, `localidad`, `codigo_postal`, `director_id`, `mail`, `activo`, `created_at`, `updated_at`)
+values  (1, 'Filial 1', 'Direccion 1', 'Localidad', 1234, 1, 'filial@test.com', 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Filial 2', 'Direccion 2', 'Localidad', 1234, 1, 'filial1@test.com', 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Filial 3', 'Direccion 3', 'Localidad', 1234, 1, 'test@test.com', 		1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Asesores
+--
+
+insert into asesor (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `direccion`, `localidad`, `activo`, `created_at`, `updated_at`)
+values  (1, 12345678, 'Apellido 1', 'Nombres 1', 'Guateico 4323', 'Catan', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 23456789, 'Apellido 2', 'Nombres 2', 'Guateico 4323', 'Catan', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Personas
+--
+
+insert into persona (`nro_documento`, `tipo_documento_id`, `apellidos`, `nombres`, `genero`, `fecha_nacimiento`, `domicilio`, `localidad`, `estado_civil`, `nivel_estudios`, `estudio_computacion`, `posee_computadora`, `disponibilidad_manana`, `disponibilidad_tarde`, `disponibilidad_noche`, `disponibilidad_sabados`, `aclaraciones`, `filial_id`, `asesor_id`, `activo`, `created_at`, `updated_at`)
+values  (12345678, 1, 'Apellido 1', 'Nombres 1', 'M', '1990-01-01', 'Direccion 1', 'Localidad', 'Soltero', 	'Secundario Completo', 	1, 1, 1, 0, 0, 0, null, 3, 1, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (12345679, 1, 'Apellido 2', 'Nombres 2', 'M', '1990-01-01', 'Direccion 2', 'Localidad', 'Casado', 	'Terciario', 			1, 1, 1, 0, 0, 0, null, 3, 1, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (12345670, 1, 'Apellido 3', 'Nombres 3', 'F', '1990-01-01', 'Direccion 3', 'Localidad', 'Soltera', 	'Universitario', 		1, 1, 1, 0, 0, 0, null, 3, 1, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Personas Mails
+--
+
+insert into persona_mail (`persona_id`, `mail`, `created_at`, `updated_at`)
+values  (1, 'magneto.alfonsin@gmail.com', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 'gabrield75@hotmail.com', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3, 'gabydonatognr@gmail.com', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Cursos
+--
+
+insert into curso (`id`, `nombre`, `duracion`, `descripcion`, `taller`, `created_at`, `updated_at`)
+values  (1, 'Curso 1', '50 Días', 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 'Curso 2', '50 Días', 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3, 'Curso 3', '50 Días', 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Carreras
+--
+
+insert into carrera (`id`, `nombre`, `duracion`, `descripcion`, `created_at`, `updated_at`)
+values  (1, 'Carrera 1', '50 Días', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 'Carrera 2', '50 Días', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3, 'Carrera 3', '50 Días', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Matrículas
+--
+
+insert into matricula (`persona_id`, `curso_id`, `carrera_id`, `filial_id`, `asesor_id`, `activo`, `terminado`, `cancelado`, `created_at`, `updated_at`)
+values  (1, null, 1, 3, 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 1, null, 3, 2, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3, null, 1, 3, 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Pagos
+--
+
+insert into pago (`matricula_id`, `nro_pago`, `pago_individual`, `descripcion`, `terminado`, `vencimiento`, `monto_original`, `monto_actual`, `monto_pago`, `descuento`, `recargo`, `filial_id`, `created_at`, `updated_at`)
+values  (1000, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1000, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1000, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1001, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1001, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1001, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1002, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1002, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1002, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00');

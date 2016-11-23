@@ -36,39 +36,24 @@ class PersonaController extends Controller {
     // Página principal de Acesor
     public function lista(){
         
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-                $persona = $this->personaRepo->allEneable(); // Obtención de todos las personas activos
-                return view('rol_filial.personas.lista',compact('persona'));
-            }
-            else
-                return redirect()->back();
-        }
-        else
-            return redirect('login');
+        $persona = $this->personaRepo->allEneable(); // Obtención de todos las personas activos
+        return view('rol_filial.personas.lista',compact('persona'));
+     
     }
 
     // Página de Nuevo
     public function nuevo(){
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-            	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+       
+        $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
  
-            	return view('rol_filial.personas.nuevo',compact('tipos','asesores'));
-            }
-            else
-                return redirect()->back();
-        }
-        else
-            return redirect('login');
+        return view('rol_filial.personas.nuevo',compact('tipos','asesores'));
+           
     }
 
     // Alta persona
     public function nuevo_post(CrearNuevaPersonaRequest $request){
        
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
             	$data = $request->all(); // Obtengo todos los datos del formulario
                 
                 // Corroboro que la persona exista, si exite lo activa
@@ -103,53 +88,34 @@ class PersonaController extends Controller {
                     else
                         return redirect()->route('filial.personas')->with('msg_error','No se ha podido agregar a la persona, intente nuevamente.');
                 }
-            }
-            else
-                return redirect()->back();  
-        }
-        else
-            return redirect('login');
+          
     }
 
     // Borrado lógico de la persona
     public function borrar($id){
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
+       
                 if($this->personaRepo->disable($this->personaRepo->find($id)))
                     return redirect()->route('filial.personas')->with('msg_ok','La persona fue eliminada correctamente');
                 else
                     return redirect()->route('filial.personas')->with('msg_error',' La persona no ha podido ser eliminada.');
-            }
-            else
-                return redirect()->back();   
-        }
-        else
-            return redirect('login');
+           
     }
 
     // Página de Editar
     public function editar($id){
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
+       
             	$persona = $this->personaRepo->find($id); // Obtengo a la persona
             	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
                 $asesores = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
                 $mail=$this->personaMailRepo->findMail($id);// Obtengo al mail
                 $telefono=$this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
             	return view('rol_filial.personas.editar',compact('persona','tipos','asesores','mail','telefono'));
-            }
-            else
-                return redirect()->back();
-        }
-        else
-            return redirect('login');
+          
     }
 
     //Modificación de la persona
     public function editar_post(EditarPersonaRequest $request){
 
-        if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
                 $data = $request->all();
 
                 $model = $this->personaRepo->find($data['persona']); // Busco a la persona
@@ -176,11 +142,6 @@ class PersonaController extends Controller {
                     return redirect()->route('filial.personas')->with('msg_ok','La persona ha sido modificada con éxito.');}
                 else
                     return redirect()->route('filial.personas')->with('msg_error','La persona no ha podido ser modificada.');
-            }
-            else
-                return redirect()->back();
-        }
-        else
-            return redirect('login');
+           
     }
 }
