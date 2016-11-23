@@ -27,92 +27,56 @@ class MateriaController extends Controller
 	}
 
 	public function lista(){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$materia=$this->materiaRepo->allMateria();
-				return view('rol_filial.materias.lista',compact('materia'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
+		$materia=$this->materiaRepo->allMateria();
+		return view('rol_filial.materias.lista',compact('materia'));
+		
 	}
 
 	public function nuevo(){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$carreras = $this->carreraRepo->lists('nombre','id');
-				return view('rol_filial.materias.nuevo', compact('carreras'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
+		$carreras = $this->carreraRepo->lists('nombre','id');
+		return view('rol_filial.materias.nuevo', compact('carreras'));
+			
 	}
 
 	public function nuevo_post(CrearNuevaMateriaRequest $request){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		       $this->materiaRepo->create($request->all());
-		     	return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
+		$this->materiaRepo->create($request->all());
+		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
+			
 	}
 
  	public function editar($id){
- 		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$carreras = $this->carreraRepo->lists('nombre','id');
-		    	$materia = $this->materiaRepo->find($id);
-		    	return view('rol_filial.materias.editar',compact('materia','carreras'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+ 		
+		$carreras = $this->carreraRepo->lists('nombre','id');
+		$materia = $this->materiaRepo->find($id);
+		return view('rol_filial.materias.editar',compact('materia','carreras'));
+			
     }
 
     public function editar_post(EditarMateriaRequest $request){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		        $data = $request->all();
-		        $model = $this->materiaRepo->find($data['id']);
+    	
+		$data = $request->all();
+		$model = $this->materiaRepo->find($data['id']);
 
-		        if($this->materiaRepo->edit($model,$data))	
+		if($this->materiaRepo->edit($model,$data))	
 
-        			return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
-		        else
-		           	return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');
-			}
-		    else
-		        return redirect()->back();
-		    }
+        	return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
 		else
-		    return redirect('login');
+		    return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');
+			
     }
 
     public function borrar($id){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-			    if( $data=$this->materiaRepo->find($id))
-			    {
-		    	    $data->Delete();
-		         	return redirect()->back()->with('msg_ok', 'Materia eliminada correctamente');
-		         	}
-		        else
-		            return redirect()->back()->with('msg_error','La materia no ha podido ser eliminada.');
-			}
+    	
+		if($data=$this->materiaRepo->find($id))
+			{
+		    	$data->Delete();
+		        return redirect()->back()->with('msg_ok', 'Materia eliminada correctamente');
+		        }
 		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		       return redirect()->back()->with('msg_error','La materia no ha podido ser eliminada.');
+		
     }
 }
