@@ -18,19 +18,18 @@ class LoginController extends Controller {
     public function postLogin(Request $request)
     {
  
-        /*
+
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
         curl_setopt($ch, CURLOPT_HEADER, false);  
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
-        */
 
         //rol 3 director
         //rol 4 filial
         
-
+        /*
         $data =[ 
         'id'=>'1',
         'usuario'=>'rochaleandroleonel@gmail.com',
@@ -38,7 +37,7 @@ class LoginController extends Controller {
         'rol_id'=>'4',
         'entidad_id'=>'1',
         'habilitado'=>'1'];
-       
+        */
 
       if ($data){
         session(['usuario' => $data]);
