@@ -76,7 +76,6 @@ class GrupoController extends Controller
 
         $data = $request->all();
 
-
         $array = explode("-", $request->get('fecha'));
 		$carrearas_cursos = explode(';',$request->carreras_cursos);
             if ($carrearas_cursos[0] == 'carrera')
@@ -103,21 +102,30 @@ class GrupoController extends Controller
 
         }
 
+
 		$grupo_dias =[];
+		$dias_horas = [];
         $ultimo = $this->grupoRepo->all()->last();
 
         foreach ($ultimo->GrupoHorario as $value ) {
 
+
 			array_push($grupo_dias, $value->dia);
+		}
+
+		  foreach ($ultimo->GrupoHorario as $value ) {
+
+		  	$d['horario_desde'] = $value->horario_desde;
+		  	$d['horario_hasta'] = $value->horario_hasta;
+			array_push($dias_horas, $d);
 		}
 
 		$fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
 		$fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
-
 		
 		
 		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-			
+			$contador = 0;
 			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
 			$fecha = $dias[date('N', strtotime($i))];
 
@@ -127,14 +135,16 @@ class GrupoController extends Controller
 			    $data['grupo_id'] = $ultimo->id;
 			    $data['fecha'] = $i;
 			    $data['docente_id'] = $ultimo->docente_id;
-			    $data['descripcion'] = '';
-			    $data['horario_desde'] = '01:00:00';
-			    $data['horario_hasta'] = '05:00:00';
+			    $data['descripcion'] = '(La clase no tiene descripción)';
+			    $data['horario_desde'] = $dias_horas[$contador]['horario_desde'];
+			    $data['horario_hasta'] = $dias_horas[$contador]['horario_hasta'];
 
-			   
+			   	
 			    $this->claseRepo->create($data);
 			}
 			
+			$contador ++;
+
 
 		}
 
