@@ -2,7 +2,7 @@
 namespace App\Http\Middleware;
 use Closure;
 use Session;
-class FilialMiddleware
+class DirectorMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,13 +18,13 @@ class FilialMiddleware
         session('usuario');
         $rol=session('usuario')['rol_id'];
        
-        //ROL FILIAL
-        if($rol == 4)
+       	// ROL DIRECTOR
+        if($rol == 3)
             return $next($request);
         else
             session()->flush(); // Elimina todos los datos de la session
             return redirect('login');
-        
+         
    
     }
 

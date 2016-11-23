@@ -31,6 +31,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'web' => \App\Http\Middleware\LangMiddleware::class,
-        'filial' => \App\Http\Middleware\FilialMiddleware::class
+        'filial' => \App\Http\Middleware\FilialMiddleware::class,
+        'dueno' => \App\Http\Middleware\DuenoMiddleware::class,
+        'director' => \App\Http\Middleware\DirectorMiddleware::class,
+          
     ];
 }
