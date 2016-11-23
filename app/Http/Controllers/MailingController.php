@@ -76,7 +76,30 @@ class MailingController extends Controller
 				else $flag[] = false;
 			}
 		}
-		// if ( count($interes) > 0 ) {}
+
+		if ( count($interesCu) > 0 ) {
+			foreach ($interesCu as $iCu) {
+				$datosMail = array(	'tipoInteres' 	=> 'Curso',
+		        					'interes' 		=> $iCu->carrera,
+		        					'duracion' 		=> $iCu->duracion);
+				// Envío del mail
+				if ($this->mailingRepo->sendMail('mailing.interes', $datosMail, $iCu->mail))
+					$flag[] = true;
+				else $flag[] = false;
+			}
+		}
+
+		if ( count($interesCa) > 0 ) {
+			foreach ($interesCa as $iCa) {
+				$datosMail = array(	'tipoInteres' 	=> 'Carrera',
+		        					'interes' 		=> $iCa->carrera,
+		        					'duracion' 		=> $iCa->duracion);
+				// Envío del mail
+				if ($this->mailingRepo->sendMail('mailing.interes', $datosMail, $iCa->mail))
+					$flag[] = true;
+				else $flag[] = false;
+			}
+		}
 
 		if ( count($grupos) > 0 ) {
 			foreach ($personasMails as $personaMail){

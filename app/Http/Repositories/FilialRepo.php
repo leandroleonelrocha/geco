@@ -29,4 +29,8 @@ class FilialRepo extends BaseRepo {
     public function allFilialCadena($cadena){
         return $this->model->where('cadena_id',$cadena)->get();
     }
+
+    public function allFilial($cadena){
+        return $this->model->where('cadena_id',$cadena)->where('id', '!=', $this->filial)->get();
+    }
 }

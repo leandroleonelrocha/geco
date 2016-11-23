@@ -27,18 +27,20 @@ use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
+use App\Http\Repositories\FilialRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Response;
 
 class MatriculaController extends Controller {
 
-	protected $matriculaRepo;
+    protected $matriculaRepo;
 
-	public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo)
-	{
-		$this->matriculaRepo            = $matriculaRepo;
-		$this->personaRepo              = $personaRepo;
+    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo)
+    {
+        $this->matriculaRepo            = $matriculaRepo;
+        $this->personaRepo              = $personaRepo;
         $this->asesorRepo               = $asesorRepo;
         $this->asesorFilialRepo         = $asesorFilialRepo;
         $this->tipoDocumentoRepo        = $tipoDocumentoRepo;
@@ -49,51 +51,77 @@ class MatriculaController extends Controller {
         $this->pagoRepo                 = $pagoRepo;
         $this->grupoRepo                = $grupoRepo;
         $this->matriculaPermisosRepo    = $matriculaPermisosRepo;
-	}
+        $this->filialRepo               = $filialRepo;
+    }
 
     // Página principal de Matrículas
     public function lista(){
-        
-        $matriculas = $this->matriculaRepo->allEneable();
-        return view('rol_filial.matriculas.lista',compact('matriculas'));
-          
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                $matriculas = $this->matriculaRepo->allEneable();
+                return view('rol_filial.matriculas.lista',compact('matriculas'));
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     // Selección de Persona nueva o Existente
     public function seleccion(){
-       
-        $personas = $this->personaRepo->getPersonasFilial();
-        return view('rol_filial.matriculas.seleccion',compact('personas'));
-        
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                $personas = $this->personaRepo->getPersonasFilial();
+                return view('rol_filial.matriculas.seleccion',compact('personas'));
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     // Página de Nuevo -- Persona Existente
     public function nuevo($id){
-        
-        $persona    = $this->personaRepo->find($id);
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos','grupos'));
-         
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                $persona    = $this->personaRepo->find($id);
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+                $carreras   = $this->carreraRepo->all();
+                $cursos     = $this->cursoRepo->all();
+                $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+                return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos','grupos'));
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
-        
-        $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos'));
-           
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+                $carreras   = $this->carreraRepo->all();
+                $cursos     = $this->cursoRepo->all();
+                $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+                return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos'));
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     // Alta de Matrícula y Persona Existente
     public function nuevo_post(Request $request){
-        
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
                 // Datos Matrícula
                 $matricula['persona_id']        =   $request->persona;
                 //Determinar si se seleccionó un Curso o Carrera
@@ -120,6 +148,7 @@ class MatriculaController extends Controller {
                         $pago['vencimiento']    =   $request->vencimiento[$i];
                         $pago['monto_original'] =   $request->monto_original[$i];
                         $pago['monto_actual'] =     $pago['monto_original'];
+                        $pago['descuento']      =   $request->descuento[$i];
                         $pago['recargo']        =   $request->recargo[$i];
                         $pago['filial_id']      =   session('usuario')['entidad_id'];
                         $this->pagoRepo->create($pago);
@@ -128,12 +157,18 @@ class MatriculaController extends Controller {
                 }
                 else
                     return redirect()->route('filial.matriculas')->with('msg_error','La matrícula no ha podido ser agregado');
-           
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     // Alta de Matrícula y Persona Nueva
     public function nuevaPersona_post(Request $request){
-        
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
                 // Datos Persona
                 $persona['tipo_documento_id']       =   $request->tipo_documento;
                 $persona['nro_documento']           =   $request->nro_documento;
@@ -197,6 +232,7 @@ class MatriculaController extends Controller {
                             $pago['vencimiento']    =   $request->vencimiento[$i];
                             $pago['monto_original'] =   $request->monto_original[$i];
                             $pago['monto_actual']   =     $pago['monto_original'];
+                            $pago['descuento']      =   $request->descuento[$i];
                             $pago['recargo']        =   $request->recargo[$i];
                             $pago['filial_id']      =   session('usuario')['entidad_id'];
                             $this->pagoRepo->create($pago);
@@ -206,23 +242,35 @@ class MatriculaController extends Controller {
                     else
                         return redirect()->route('filial.matriculas')->with('msg_error','La matrícula no ha podido ser agregado');
                 }
-        
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     public function editar($id){
-        
-        $matricula  = $this->matriculaRepo->find($id);
-        $pagos      = $this->pagoRepo->allMatricula($id);
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.editar',compact('matricula','pagos','asesores','carreras','cursos','grupos'));
-           
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                $matricula  = $this->matriculaRepo->find($id);
+                $pagos      = $this->pagoRepo->allMatricula($id);
+                $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+                $carreras   = $this->carreraRepo->all();
+                $cursos     = $this->cursoRepo->all();
+                $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+                return view('rol_filial.matriculas.editar',compact('matricula','pagos','asesores','carreras','cursos','grupos'));
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     public function editar_post(Request $request){
-        
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
                 $data                           = $request->all();
                 $data['filial_id']              = session('usuario')['entidad_id'];
 
@@ -244,43 +292,66 @@ class MatriculaController extends Controller {
                 $this->matriculaRepo->edit($modelM,$matricula);
 
                 return redirect()->route('filial.matriculas');
-           
+            }
+            else
+                return redirect()->back();
+            }
+        else
+            return redirect('login');
     }
 
     // Borrado lógico de la Matrícula
     public function borrar($id){
-       
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
                 if($this->matriculaRepo->disable($this->matriculaRepo->find($id)))
                     return redirect()->route('filial.matriculas')->with('msg_ok','Matrícula eliminado correctamente');
                 else
                     return redirect()->route('filial.matriculas')->with('msg_error',' La Matrícula no ha podido ser eliminado.');
-           
+            }
+            else
+                return redirect()->back();   
+        }
+        else
+            return redirect('login');
     }
 
     // Realización de los pagos de la Matrícula
     public function actualizar($id){
-       
-        $matricula  = $this->matriculaRepo->find($id);
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
-           
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                    $matricula  = $this->matriculaRepo->find($id);
+                    $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+                    return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
+                }
+            else
+                return redirect()->back();   
+        }
+        else
+            return redirect('login');
     }
 
     public function actualizar_post(Request $request){
-       
-        $data = $request->all();
+        if (null !== session('usuario')){
+            if (session('usuario')['rol_id'] == 4){
+                $data = $request->all();
                 // Matrícula
-        if (!isset($data['cancelado']))
-            $matricula['cancelado'] = 0;
-        else
-            $matricula['cancelado'] = $data['cancelado'];
-            $modelM = $this->matriculaRepo->find($data['matricula']);
+                if (!isset($data['cancelado']))
+                    $matricula['cancelado'] = 0;
+                else
+                    $matricula['cancelado'] = $data['cancelado'];
+                $modelM = $this->matriculaRepo->find($data['matricula']);
 
-        if ($this->matriculaRepo->edit($modelM,$matricula) && $modelM->Grupo()->sync($data['grupo']))
-            return redirect()->route('filial.matriculas')->with('msg_ok',' La Matrícula ha sido actualizada con éxito.');
+                if ($this->matriculaRepo->edit($modelM,$matricula) && $modelM->Grupo()->sync($data['grupo']))
+                    return redirect()->route('filial.matriculas')->with('msg_ok',' La Matrícula ha sido actualizada con éxito.');
+                else
+                    return redirect()->route('filial.matriculas')->with('msg_error',' La Matrícula no ha podido ser actualizada.');
+            }
+            else
+                return redirect()->back();   
+        }
         else
-            return redirect()->route('filial.matriculas')->with('msg_error',' La Matrícula no ha podido ser actualizada.');
-           
+            return redirect('login');
     }
 
     // Vista Detallada
@@ -289,24 +360,77 @@ class MatriculaController extends Controller {
         $pagos  = $this->pagoRepo->allMatricula($id);
         // Se debe ejecutar solo 1 vez
         foreach ($pagos as $pago) {
+            // Obtener fecha del primer día del mes
+            $month   = date('m');
+            $year    = date('Y');
+            $first   = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+            $date1   = date_create ( $first );
+            $date2   = date_create ( date('Y-m-d') );
+            // Obtengo el día nro diez de cada mes
+            $date1->modify('+9 day');
 
-            $date1  = date_create ( date('Y-m-d') );
-            $date2  = date_create ( $pago->vencimiento );
-            $diff   = date_diff   ( $date1, $date2 );
-            $diff   = $diff->format("%R%a days");
-            $monto  = $pago->monto_original + $pago->recargo - $pago->monto_pago;
-            // $montoD = $pago->monto_original + $pago->descuento - $pago->monto_pago;
+            $recargo = $pago->monto_original * ( $pago->recargo * 0.01);
+            $montoR  = $pago->monto_original + $recargo - $pago->monto_pago;
+            $montoD  = $pago->monto_original - $pago->descuento - $pago->monto_pago;
             
-            if ($diff > -10) {
-                var_dump($pago->monto_);die;
-                $pago->monto_actual += $pago->descuento;
+            if ($pago->vencimiento < date('Y-m-d') && $montoR != $pago->monto_actual){
+                $pago->monto_actual += $recargo;
+                $pago->save();
             }
-
-            if ($pago->vencimiento < date('Y-m-d') && $monto != $pago->monto_actual){
-                $pago->monto_actual += $pago->recargo;
+            if ($date2 <= $date1 && $montoD != $pago->monto_actual && $pago->vencimiento > date('Y-m-d')) {
+                $pago->monto_actual -= $pago->descuento;
+                $pago->save();
+            }
+            if ($date2 >= $date1 && $montoD == $pago->monto_actual && $pago->vencimiento > date('Y-m-d')) {
+                $pago->monto_actual += $pago->descuento;
                 $pago->save();
             }
         }
         return view('rol_filial.matriculas.vista',compact('matricula','pagos'));
+    }
+
+    //Pase
+    public function pase($id){
+        $cadena     = $this->filialRepo->filialCadena();
+        $filiales   = $this->filialRepo->allFilial($cadena->cadena_id);
+        $matricula  = $id;
+        return view('rol_filial.matriculas.pase',compact('filiales','matricula'));
+    }
+
+    public function pase_nuevo($filial, $matricula){
+        $permiso['matricula_id']  = $matricula;
+        $permiso['filial_id']     = $filial;
+        $permiso['confirmar']     = false;
+        if ($this->matriculaPermisosRepo->create($permiso))
+            return redirect()->route('filial.matriculas_pases')->with('msg_ok', 'Ha comenzado la operación de pase.');
+        else{
+            $matriculas = $this->matriculaRepo->allEneable();
+            return redirect()->route('filial.matriculas')->with('msg_error', 'Ha ocurrido un error, ´vuelva a intentarlo más tarde.');
+        }
+    }
+
+    //Pases
+    public function pases(){
+        $pasesEmitidos  = $this->matriculaRepo->allPasesSend();
+        $pasesRecibidos = $this->matriculaPermisosRepo->allFilial();
+        return view('rol_filial.matriculas.pases',compact('pasesEmitidos','pasesRecibidos'));
+    }
+
+    //Confirmar
+    public function confirmar($id){
+        $permiso = $this->matriculaPermisosRepo->find($id);
+        $permiso->confirmar = 1;
+        $resultado = '<i class="btn btn-success glyphicon glyphicon-ok" title="Confirmado"></i>';
+
+        if ($permiso->save())
+            return Response::json($resultado,200);
+    }
+
+    public function rechazar($id){
+        $permiso = $this->matriculaPermisosRepo->find($id);
+        if($permiso->Delete())
+            return Response::json(true,200);
+        else
+            return Response::json(false,200);
     }
 }

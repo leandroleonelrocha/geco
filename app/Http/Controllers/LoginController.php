@@ -41,28 +41,23 @@ class LoginController extends Controller {
         'habilitado'=>'1'];
        
 
+
       if ($data){
         session(['usuario' => $data]);
-        if($data['rol_id'] == 2) // Rol de Dueño
-          return redirect()->route('dueño.inicio');
-        elseif ($data['rol_id'] == 3) // Rol de Director
-          return redirect()->route('director.inicio'); //Pagina de estadisticas
-        elseif ($data['rol_id'] == 4) // Rol de Filial
-          return redirect()->route('filial.inicio');
+        switch ($data['rol_id']) {
+          case 2: // Rol de Dueño
+            return redirect()->route('dueño.inicio');
+          break;
+          case 3: // Rol de Director
+            return redirect()->route('director.inicio');
+          break;
+          case 4: // Rol de Filial
+            return redirect()->route('filial.inicio');
+          break;
+        }
       }
       else
         return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');
-
-       // if(!Auth::check())
-       //  {
-       //      if (Auth::attempt(['usuario' => $request->usuario, 'password' => $request->password]))
-       //      {
-       //         return redirect('template');
-       //      }
-       //      return redirect()->back()->with('msg_ok', 'El usuario no existe o los datos son incorrectos');
-       //      return  redirect()->intended('login')->with('msg', 'no se puede ');
-       //  }
-
     }
     
     // login local

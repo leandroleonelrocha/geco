@@ -37,6 +37,7 @@
 								<a href="{{route('filial.matriculas_vista',$matricula->id)}}" title="Vista Detallada"><i class="btn btn-info glyphicon glyphicon-search"></i></a>
 								<a href="{{route('filial.matriculas_editar',$matricula->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
 								<a href="{{route('filial.matriculas_actualizar',$matricula->id)}}" title="Actualizar"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
+								<a href="{{route('filial.matriculas_pase',$matricula->id)}}" title="Pases"><i class="btn btn-warning glyphicon glyphicon-share-alt"></i></a>
 								<a href="{{route('filial.matriculas_borrar',$matricula->id)}}" title="Borrar"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a>
 								</td>
 							</tr>
