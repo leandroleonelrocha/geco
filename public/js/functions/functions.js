@@ -93,4 +93,33 @@ $(document).ready(function(){
     	}
     	return false;
     });
+
+   /* ------------------------- Aceptar/Rechazar Pases ------------------------- */
+    $('.CR').on('click', function(event) {
+        event.preventDefault();
+        var thiss = $(this);
+        thiss.html('<i class="btn btn-blue" title="Cargando"><i class="fa fa-refresh fa-spin"></i></i>').attr('disabled', '');
+        $.ajax({
+            url: thiss.data('url'),
+            type: 'GET',
+            dataType: 'json',
+            data: {id: thiss.data('id')},
+        })
+        .done(function(resultado) {
+            if (thiss.data('actividad') == 'confirmar') {
+                thiss.html(resultado);
+                thiss.parent('td').parent('tr').find('.accion').html('<span class="text-success"> CONFIRMADO </span>');
+                thiss.parent('td').find('.rechazar').remove();
+            }
+            
+            if (thiss.data('actividad') == 'rechazar') {
+                if(resultado == true)
+                    thiss.parent('td').parent('tr').remove();
+            }
+        })
+        .fail(function() {
+            console.log("error");
+        });
+    });
+
 });

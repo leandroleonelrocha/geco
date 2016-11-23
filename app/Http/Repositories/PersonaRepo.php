@@ -127,7 +127,7 @@ class PersonaRepo extends BaseRepo {
                    ->join('persona_interes', 'persona.id',   '=', 'persona_interes.persona_id')
                    ->join('carrera',         'carrera.id',   '=', 'persona_interes.carrera_id')
                    ->join('grupo',           'carrera.id',   '=', 'grupo.carrera_id')
-                   ->select('persona.id', 'persona_mail.mail', 'carrera.nombre as carrera')
+                   ->select('persona.id', 'persona_mail.mail', 'carrera.nombre as carrera', 'carrera.duracion')
                    ->where('grupo.nuevo', 1)
                    ->where('persona.filial_id', $filial)
                    ->where('grupo.filial_id', $filial)

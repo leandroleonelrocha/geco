@@ -11,10 +11,14 @@ class MatriculaPermisos extends Entity
      *
      * @var array
      */
-    protected $fillable = ['matricula_id','filial_id'];
+    protected $fillable = ['matricula_id','filial_id', 'confirmar'];
 
     // Relaciones
     public function Matricula(){
-        return $this->hasMany(Matricula::getClass());
+        return $this->belongsTo(Matricula::getClass());
+    }
+
+    public function Filial(){
+        return $this->belongsTo(Filial::getClass());
     }
 }

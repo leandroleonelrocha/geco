@@ -15,37 +15,35 @@ class LoginController extends Controller {
         return view('login');
     }
 
-    public function postLogin(Request $request)
-    {
+    public function postLogin(Request $request){
+        // $ch = curl_init();  
+        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
+        // curl_setopt($ch, CURLOPT_HEADER, false);  
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        // $data = json_decode(curl_exec($ch),true);
+        // curl_close($ch);
  
-
-
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
- 
-
-       // $data =[ 
-       // 'id'=>'1',
-       // 'usuario'=>'test@test.com',
-       // 'password'=>'1234',
-       // 'rol_id'=>'3',
-       // 'entidad_id'=>'1',
-       // 'habilitado'=>'1'];
-
-       
+       $data =[ 
+       'id'=>'1',
+       'usuario'=>'test@test.com',
+       'password'=>'1234',
+       'rol_id'=>'4',
+       'entidad_id'=>'3',
+       'habilitado'=>'1'];
 
       if ($data){
         session(['usuario' => $data]);
-        if($data['rol_id'] == 2) // Rol de Dueño
-          return redirect()->route('dueño.inicio');
-        elseif ($data['rol_id'] == 3) // Rol de Director
-          return redirect()->route('director.inicio'); //Pagina de estadisticas
-        elseif ($data['rol_id'] == 4) // Rol de Filial
-          return redirect()->route('filial.inicio');
+        switch ($data['rol_id']) {
+          case 2: // Rol de Dueño
+            return redirect()->route('dueño.inicio');
+          break;
+          case 3: // Rol de Director
+            return redirect()->route('director.inicio');
+          break;
+          case 4: // Rol de Filial
+            return redirect()->route('filial.inicio');
+          break;
+        }
       }
       else
         return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');

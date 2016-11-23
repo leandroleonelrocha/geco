@@ -33,4 +33,8 @@ class Filial extends Entity {
         return $this->belongsTo(Mailing::getClass());
     }
 
+    public function MatriculaPermisos(){
+        return $this->hasMany(MatriculaPermisos::getClass());
+    }
+
 }

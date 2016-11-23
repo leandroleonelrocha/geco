@@ -79,6 +79,13 @@
 									</div>
 								</div>
 								<div class="col-md-6 form-group">
+									<label>Descuento</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">$</span>
+										{!! Form::text('descuento',null,array('class'=>'pago-item form-control')) !!}
+		  							</div>
+								</div>
+								<div class="col-md-6 form-group">
 									<label>Recargo</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">$</span>
