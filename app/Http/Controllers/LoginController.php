@@ -15,9 +15,7 @@ class LoginController extends Controller {
         return view('login');
     }
 
-    public function postLogin(Request $request)
-    {
- 
+    public function postLogin(Request $request){
         /*
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
@@ -26,14 +24,6 @@ class LoginController extends Controller {
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
         */  
-
-       $data = [ 
-       'id'=>'1',
-       'usuario'=>'test@test.com',
-       'password'=>'1234',
-       'rol_id'=>'4',
-       'entidad_id'=>'3',
-       'habilitado'=>'1'];
 
        $cuentas = array(
                     array(
@@ -115,11 +105,9 @@ class LoginController extends Controller {
         return redirect('login');  
     }
 
-    public function post_Nueva(Request $request)
-    {
-
+    public function post_Nueva(Request $request){
       if (null !== session('usuario')){
-        $rol=session('usuario')['rol_id'];
+        $rol = session('usuario')['rol_id'];
         if ( $rol== 4 || $rol==3 || $rol==2){
 
           $user=$request->all();

@@ -7,14 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use DB;
 class FilialRepo extends BaseRepo {
 
-    public function getModel()
-    {
+    public function getModel(){
         return new Filial();
     }
 
     public function allEneable(){
-
         return $this->model->where('activo', 1)->get();
+    }
+
+    public function allFilialDirector(){
+        $d = session('usuario')['entidad_id'];
+        return $this->model->where('director_id', $d)->get();
     }
   
     public function disable($filial){
@@ -30,6 +33,14 @@ class FilialRepo extends BaseRepo {
         return $this->model->where('cadena_id',$cadena)->get();
     }
 
+    public function check($mail){
+        return $this->model->where('mail', $mail)->update(['activo'=>1]);
+    }
+
+    public function existeMail($mail){
+        return $this->model->where('mail', $mail)->first();
+    }
+    
     public function allFilial($cadena){
         return $this->model->where('cadena_id',$cadena)->where('id', '!=', $this->filial)->get();
     }

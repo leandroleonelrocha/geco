@@ -12,9 +12,9 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'dueño.directores_editar_post', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
-								<label>@lang('director.numero')</label>
-								{!! Form::text(null, $director->id, array('class'=>'form-control','disabled')) !!}
+								<label>@lang('director.cuenta')</label>
 								<input type="hidden" name="id" value="{{$director->id}}">
+								{!! Form::email('mail', $director->mail, array('class'=>'form-control','disabled')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -41,20 +41,10 @@
                                 <button class="add_input_telefono btn btn-success">+</button>   
                                 <div class="input_fields_telefono">
                         			@foreach ($telefono as $t)
-										{!! Form::text('telefono[]', $t->telefono, array('class'=>'form-control')) !!}	
+										{!! Form::text('telefono[]', $t->telefono, array('class'=>'form-control')) !!}
 									@endforeach
                                 </div>
 							</div>
-
-			              	<div class="col-md-6 form-group">
-                                <label>E-Mails</label>
-                                <button class="add_input_mail btn btn-success"">+</button>  
-                                <div class="input_fields_wrap">
-									@foreach ($mail as $m)
-										{!! Form::email('mail[]', $m->mail, array('class'=>'form-control')) !!}	
-									@endforeach
-                                </div>
-                            </div>
 
 							<div class="box-footer col-xs-12">
 							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}

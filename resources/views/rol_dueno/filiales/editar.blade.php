@@ -12,9 +12,9 @@
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'dueño.filiales_editar_post', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
-								<label>@lang('filial.numero')</label>
-								{!! Form::text(null, $filial->id, array('class'=>'form-control','disabled')) !!}
+								<label>@lang('filial.cuenta')</label>
 								<input type="hidden" name="id" value="{{$filial->id}}">
+							    {!! Form::email('mail',$filial->mail,array('class'=>'form-control','disabled')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -38,6 +38,16 @@
                                		{!! Form::text('codigo_postal', $filial->codigo_postal, array('class'=>'form-control')) !!}
 							</div>
 
+                           	<div class="col-md-6 form-group">
+                                <label>@lang('filial.cadena')</label>
+                                {!! Form::select('cadena_id', $cadenas->toArray() , $filial->Cadena->id, array('class'=>'form-control')) !!}
+                            </div>
+
+							<div class="col-md-6 form-group">
+								<label>Director</label>
+     				            {!! Form::select('director_id', $directores->toArray() , $filial->Director->id, array('class'=>'form-control')) !!}
+							</div>
+
                             <div class="col-md-6 form-group">
                                 <label>@lang('filial.telefonos')</label>
                                 <button class="add_input_telefono btn btn-success">+</button> 
@@ -47,11 +57,6 @@
 									@endforeach
                                 </div>
                             </div>
-
-							<div class="col-md-6 form-group">
-								<label>Director</label>
-     				            {!! Form::select('director_id', $directores->toArray() , $filial->Director->id, array('class'=>'form-control')) !!}
-							</div>
 				
 							<div class="box-footer col-xs-12">
 							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}

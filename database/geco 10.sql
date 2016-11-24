@@ -338,7 +338,7 @@ primary key	(id)
 );
 
 create table if not exists grupo(
-id				varchar(50) not null,
+id				int(11) not null auto_increment,
 curso_id		varchar(50),
 carrera_id		varchar(50),
 materia_id 		varchar(50),

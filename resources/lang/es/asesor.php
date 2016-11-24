@@ -7,12 +7,15 @@ return [
     'numeroasesor'=>'Número de asesor',
     'tipodocumento' =>'Tipo de documento',
     'numerodocumento' => 'Número de documento',
-    'apellido' => 'Apellido',
-    'nombre' => 'Nombre',
+    'apellido' => 'Apellidos',
+    'nombre' => 'Nombres',
     'direccion' => 'Dirección',
     'localidad' => 'Localidad',
     'telefonos' => 'Teléfonos',
     'mail' => 'E-Mails',
+
+    'misasesores' => 'Mis Asesores',
+
 
     'agregarnuevo' => 'Agregar nuevo',
     'nuevoasesor' => 'Nuevo Asesor',

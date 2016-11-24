@@ -15,16 +15,18 @@
         <div class="box">
 
                 <div class="box-header">
-                 
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <div class="col-sm-4 invoice-col">
-                 
-                  <br>
-                  <b>Grupo:</b>{{ $clase->Grupo->descripcion }}<br>
-                  <b>Docente:{{ $clase->Docente->fullname}}</b><br>
-                 
+                  <div class="box-header with-border">
+                  <i class="fa fa-share-alt"></i>
+                  <h3 class="box-title">{{ $clase->Grupo->descripcion }}</h3>
+                  
                 </div>
+
+                </div><!-- /.box-header -->
+                <div class="box-body">
+
+               
+
+                <p class="lead"><i class="glyphicon glyphicon-user"></i> Docente: {{ $clase->Docente->fullname}}</p>
 
 
                   <table class="table table-striped">

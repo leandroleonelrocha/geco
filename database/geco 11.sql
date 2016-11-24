@@ -24,7 +24,7 @@ primary key	(id)
 );
 
 create table if not exists materia(
-id			int not null,
+id			int not null auto_increment,
 carrera_id	int not null,
 nombre		varchar(50) not null,
 descripcion	varchar(300) default 'Sin Descripción.',
@@ -58,6 +58,7 @@ tipo_documento_id 	int,
 nro_documento		varchar(50),
 apellidos			varchar(50) not null,
 nombres				varchar(50) not null,
+mail				varchar(50) not null,
 activo				boolean not null default true,
 created_at  		timestamp not null default '0000-00-00 00:00:00',
 updated_at  		timestamp not null default '0000-00-00 00:00:00',
@@ -420,9 +421,8 @@ foreign key		(docente_id)		references docente	(id)
 );
 
 create table if not exists clase_matricula(
-id 				int(11) not null,
+id 				int(11) not null auto_increment,
 clase_id		int(11) not null,
-fecha			datetime not null,
 matricula_id	int not null,
 asistio			boolean not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
@@ -433,23 +433,24 @@ foreign key 	(matricula_id)						references matricula	(id)
 );
 
 create table if not exists examen(
-id  					int not null auto_increment,
-nro_acta				int not null auto_increment,
+id  					int not null auto_increment,	
+nro_acta				int not null,
 recuperatorio_nro_acta	int,
 matricula_id			int not null,
 grupo_id				int,
 nota					int(2) not null,
-carrera_id				int not null,
-materia_id				int not null,
+carrera_id				int,
+materia_id				int,
 docente_id				int not null,
 created_at  			timestamp not null default '0000-00-00 00:00:00',
 updated_at  			timestamp not null default '0000-00-00 00:00:00',
 primary key 			(id),
-foreign key 			(recuperatorio_nro_acta, matricula_id)	references examen	  (id),
-foreign key				(grupo_id)								references grupo	  (id),
-foreign key 			(carrera_id, materia_id)				references materia	(carrera_id, id),
-foreign key 			(docente_id)							references docente	(id)
+foreign key 			(recuperatorio_nro_acta)	references examen	  (id),
+foreign key				(grupo_id)								              references grupo	  (id),
+foreign key 			(carrera_id, materia_id)				        references materia	(carrera_id, id),
+foreign key 			(docente_id)							              references docente	(id)
 );
+
 
 create table if not exists mailing(
 id 					int(11) not null auto_increment,
@@ -490,9 +491,9 @@ values  ('DNI', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 -- Directores
 --
 
-insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `activo`, `created_at`, `updated_at`)
-values  (1, 12345678, 'Apellido 1', 'Nombres 1', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 23456789, 'Apellido 2', 'Nombres 2', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`,`mail`, `activo`, `created_at`, `updated_at`)
+values  (1, 12345678, 'Apellido 1', 'Nombres 1','crisdabruno@hotmail.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 23456789, 'Apellido 2', 'Nombres 2','sdsd', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Filiales

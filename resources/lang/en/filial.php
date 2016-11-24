@@ -9,8 +9,9 @@ return [
     'localidad' => 'Location',
     'codigopostal'=>'Postal Code',
     'telefonos' => 'Phones',
+    'cadena'=>'Chain',
 
-    'cuenta' => 'Main Account',
+    'cuenta' => 'E-Mail (Access account)',
     'bienvenido' => 'Welcome',
 
     'agregarnuevo' => 'Add new',

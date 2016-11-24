@@ -52,25 +52,6 @@
 				</div>			
                 </div>
 
-
-				<div class="form-group row">
-			      <label for="inputEmail3" class="col-sm-2 col-form-label">Color</label>
-			      <div class="col-sm-10">
-			       
-					  <select name="color" class="form-control" id="color">
-						  <option value="">Choose</option>
-						  <option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
-						  <option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
-						  <option style="color:#008000;" value="#008000">&#9724; Green</option>				  
-						  <option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
-						  <option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
-						  <option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
-						  <option style="color:#000;" value="#000">&#9724; Black</option>
-						  
-						</select>
-				  </div>
-				  </div>
-	  
 				
 			  </div>
 			  <div class="modal-footer">

@@ -11,11 +11,6 @@
     <div class="box-body">
 
         <div class="form-group">
-            <label for="exampleInputEmail1">Clave  </label>
-            {!! Form::text('id', null ,  array('class'=>'form-control')) !!}
-        </div>
-
-        <div class="form-group">
             <label>Carreras y Cursos</label>
             <select name="carreras_cursos" id="carreras_cursos" class="form-control">
             <option>Seleccione una materia o curso</option>

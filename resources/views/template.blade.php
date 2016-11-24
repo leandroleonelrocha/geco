@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <link rel="shortcut icon" href="../img/logo/Geco-Blanco.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+
+    <title>GECO | Gestión y Cobranza</title>
+
     <!-- Tell the browser to be responsive to screen width -->
      <meta name="csrf-token" content="{{{ Session::token() }}}">
      <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -42,9 +44,9 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Version</b> 2.3.0
+          <b>Versión</b> 1.0
         </div>
-        <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2016 <a href=https://www.facebook.com/WhiteoutTeam/?fref=ts>@The Whiteout Team</a>.</strong> Reservado todos los derechos.
       </footer>
 
      @include('templates.template_aside')
