@@ -18,8 +18,9 @@
 						<tr>
 						<th>Matricula</th>
 						<th>Nombre </th>
-							<th>Nota </th>
-							
+						<th>Nota </th>
+						<th>Recuperatorio </th>
+								
 					
 						
 						</tr> 
@@ -32,6 +33,7 @@
 							        <td class="sorting_1">{{ $examen->matricula_id }}</td>
 						        	<td>{{$examen->Matricula->Persona->fullname }}</td>
 						        	<td>{{$examen->nota }}</td>
+						        	<td>Recuperatorio nota</td>
 							    </tr>
 						    @endforeach
 						
