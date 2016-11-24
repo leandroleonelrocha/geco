@@ -27,7 +27,6 @@
 								{!! Form::text('direccion', $filial->direccion, array('class'=>'form-control')) !!}
 							</div>
 
-
 							<div class="col-md-6 form-group">
 								<label>@lang('filial.localidad')</label>
 			     				{!! Form::text('localidad', $filial->localidad, array('class'=>'form-control')) !!}

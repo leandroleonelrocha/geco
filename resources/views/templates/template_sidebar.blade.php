@@ -2,7 +2,6 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
           <!-- Sidebar user panel -->
-          
         
           <ul id="Defaultses" class="sidebar-menu"> 
               <!-- search form -->
@@ -16,8 +15,8 @@
           </form>
           <!-- /.search form -->
             <?php
-              $ds=session('usuario');
-              $u=$ds['entidad_id'];
+              $u = session('usuario')['entidad_id'];
+              $h = session('usuario')['habilitado'];
               switch (session('usuario')['rol_id']) {
           
                 case 2: 
@@ -60,7 +59,7 @@
                 case 3:
                 ?>
                 <li>
-                  <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                  <a href="{{route('director.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                 </li>
 
                 <li class="treeview">
@@ -83,7 +82,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.personas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.personas_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nueva')</a></li>
+                      <?php } ?>
                     </ul>
                 </li>
 
@@ -192,7 +193,7 @@
                   </li>
 
                   <li>
-                    <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                    <a href="{{route('filial.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                   </li>
   
                   <li class="treeview">

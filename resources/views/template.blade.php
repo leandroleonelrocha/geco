@@ -3,7 +3,9 @@
   <head>
     <link rel="shortcut icon" href="../img/logo/Geco-Blanco.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>GECO | Gestión y cobranza</title>
+
+    <title>GECO | Gestión y Cobranza</title>
+
     <!-- Tell the browser to be responsive to screen width -->
      <meta name="csrf-token" content="{{{ Session::token() }}}">
      <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">

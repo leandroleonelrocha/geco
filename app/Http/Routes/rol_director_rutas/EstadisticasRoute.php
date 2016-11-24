@@ -1,10 +1,10 @@
 <?php
 Route::get('estadisticas',[
-	'as' => 'estadisticas.inicio',
-	'uses' => 'EstadisticaController@index'
+	'as' => 'director.estadisticas',
+	'uses' => 'DirectoresController@estadisticas'
 ]);
 
-Route::post('procesarAjax',[
-	'as' => 'estadisticas.procesarAjax',
-	'uses' => 'EstadisticaController@procesarAjax'
+Route::get('estadisticas_detalles',[
+	'as' => 'director.estadisticas_detalles',
+	'uses' => 'DirectoresController@estadisticas_detalles'
 ]);

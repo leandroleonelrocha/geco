@@ -26,7 +26,6 @@ class FilialRepo extends BaseRepo {
     }
 
     public function filialCadena(){
-        
         return DB::table('filial')->select('cadena_id')->where('id', $this->filial)->first();
     }
 
@@ -40,5 +39,9 @@ class FilialRepo extends BaseRepo {
 
     public function existeMail($mail){
         return $this->model->where('mail', $mail)->first();
+    }
+    
+    public function allFilial($cadena){
+        return $this->model->where('cadena_id',$cadena)->where('id', '!=', $this->filial)->get();
     }
 }

@@ -17,21 +17,21 @@ class ExamenRepo extends BaseRepo {
 
     }
 
-
-
     public function allExamenFilialMatricula(){
     	$filial = session('usuario')['entidad_id'];
-    	$examen = $this->model->all();
+    	$examenes = $this->model->all();
+      
 		$resultado = [];
-		foreach ($examen as  $value) {
-			if($value->Matricula->Filial->id == $filial)
-			{
-                dd($value->get()->groupBy('grupo_id'));
-				array_push($resultado, $value);
-			}	
+		foreach ($examenes as  $examen) {
+            if($examen->Matricula->filial_id == $filial)
+            {
+                array_push($resultado, $examen);
+            }
+			
 		}
 
 		return $resultado;
     }
    
+
 }

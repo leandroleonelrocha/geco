@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
 
 class AsignacionAsesorAFilialController extends Controller {
 
-	protected $asesorRepo;
-	
+    protected $asesorRepo;
+    
     public function __construct(AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo,AsesorFilialRepo $asesorFilialRepo)
-	{
-		$this->asesorRepo        = $asesorRepo;
-		$this->tipoDocumentoRepo  = $tipoDocumentoRepo;
+    {
+        $this->asesorRepo        = $asesorRepo;
+        $this->tipoDocumentoRepo  = $tipoDocumentoRepo;
         $this->asesorFilialRepo  = $asesorFilialRepo;
-	}
+    }
 
     public function lista(){
 

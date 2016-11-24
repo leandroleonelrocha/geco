@@ -5,6 +5,7 @@ use Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
+use App\Entities\Examen;
 use App\Http\Repositories\ExamenRepo;
 use App\Http\Repositories\ExamenPermisosRepo;
 use App\Http\Repositories\MatriculaRepo;
@@ -37,11 +38,9 @@ class ExamenController extends Controller
 	
 	public function index(){
 	
-		$examenes = $this->examenRepo->all();
-        $grupos = $this->grupoRepo->all()->lists('id', 'id');
-
+		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->get();
 		
-		return view('rol_filial.examenes.lista', compact('examenes', 'grupos'));
+		return view('rol_filial.examenes.lista', compact('examenes'));
 	}
 
 	public function nuevo()
@@ -49,24 +48,36 @@ class ExamenController extends Controller
 		//matriculaspermisos
 		//Docentes
 		
-		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'id');
+		$examenes = $this->examenRepo->all();
+		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
+		$docentes = $this->docenteRepo->all()->lists('full_name','id');
+
 		
-		$grupos = $this->grupoRepo->all()->lists('descripcion', 'id');
-		$carreras = $this->carreraRepo->all()->lists('nombre', 'id');
-		$materias = $this->materiaRepo->all()->lists('nombre', 'id');
-		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
-		
-		return view('rol_filial.examenes.form',compact('matriculas', 'grupos', 'carreras', 'materias', 'docentes'));
+		return view('rol_filial.examenes.form', compact('examenes', 'grupos', 'docentes'));
+	
 	}
 
 	public function nuevo_post(Request $request)
 	{
-        dd($request->all());
-		$this->examenRepo->create($request->all());
+ 		
+ 		$longitud = count($request->matricula);
+ 		$data = $request->all();
+ 		
+ 		if(count($this->examenRepo->all()) > 0)
+ 		{
+ 			$ultimo = $this->examenRepo->all()->last()->nro_acta + 1;
 
-		$data['nro_acta'] = $request->get('nro_acta');
-		$data['matricula_id'] = $request->get('matricula_id');
-		$data['filial_id'] = session('usuario')['entidad_id'];
+ 		}else{
+ 			$ultimo = 1000;
+ 		}	
+ 		
+        for($i=0;$i<$longitud;$i++) {
+        	$data['nro_acta'] = $ultimo;
+        	$data['matricula_id'] = $request->matricula[$i];
+            $data['nota'] = $request->nota[$i];
+           	$this->examenRepo->create($data);
+
+        }
 
 		//$this->examenPermisosRepo->create($data);
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen creado correctamente.');
@@ -110,10 +121,25 @@ class ExamenController extends Controller
     {
         $grupo_id = $request->get('grupo_id');
         $grupo = $this->grupoRepo->find($grupo_id);
-        $data = $grupo->Matricula;
-        return response()->json($data, 200);
+
+       	if($grupo->curso_id != null)
+       	{
+       		$matriculas = $grupo->Matricula;
+       		 return response()->json(array('grupo'=>$grupo,'matriculas'=>$matriculas));
+       	}else{
+       	$carrera = $grupo->Carrera;
+       	$materias = $grupo->Carrera->Materia;
+        $matriculas = $grupo->Matricula;
+
+        return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materias'=>$materias,'matriculas'=>$matriculas));
+    	}
     }
 
+    public function detalles(Request $request, $nro_acta)
+    {
+    	$examenes = Examen::where('nro_acta', $nro_acta)->get();
+    	return view ('rol_filial.examenes.detalles', compact('examenes'));
+    }
 
 
 }

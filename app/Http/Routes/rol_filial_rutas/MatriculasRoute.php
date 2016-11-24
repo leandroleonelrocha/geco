@@ -59,3 +59,28 @@
 		'as'	=> 'filial.matriculas_vista',
 		'uses'	=>	'MatriculaController@vista'
 	]);
+
+	Route::get('matriculas_pase/{id}',[
+		'as'	=> 'filial.matriculas_pase',
+		'uses'	=>	'MatriculaController@pase'
+	]);
+
+	Route::get('matriculas_pase_nuevo/{filial}/{matricula}',[
+		'as'	=> 'filial.matriculas_pase_nuevo',
+		'uses'	=>	'MatriculaController@pase_nuevo'
+	]);
+
+	Route::get('matriculas_pases',[
+		'as'	=> 'filial.matriculas_pases',
+		'uses'	=>	'MatriculaController@pases'
+	]);
+
+	Route::get('matriculas_pases_confirmar/{id}',[
+		'as'	=> 'filial.matriculas_pases_confirmar',
+		'uses'	=>	'MatriculaController@confirmar'
+	]);
+
+	Route::get('matriculas_pases_rechazar/{id}',[
+		'as'	=> 'filial.matriculas_pases_rechazar',
+		'uses'	=>	'MatriculaController@rechazar'
+	]);

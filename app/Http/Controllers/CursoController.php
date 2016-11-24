@@ -24,88 +24,52 @@ class CursoController extends Controller
 	}
 	
 	public function lista(){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$curso=$this->cursoRepo->all();
-				return view('rol_filial.cursos.lista',compact('curso'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
+		$curso=$this->cursoRepo->all();
+		return view('rol_filial.cursos.lista',compact('curso'));
+		
 	}
 
 	public function nuevo(){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				return view('rol_filial.cursos.nuevo');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
+		return view('rol_filial.cursos.nuevo');
+		
 	}
 
 	public function nuevo_post(CrearNuevoCursoRequest $request){
-		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-				$this->cursoRepo->create($request->all());
-				return redirect()->route('filial.cursos')->with('msg_ok', 'Curso creado correctamente');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
+		$this->cursoRepo->create($request->all());
+		return redirect()->route('filial.cursos')->with('msg_ok', 'Curso creado correctamente');
+		
 	}
 
   	public function editar($id){
-  		if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		    	$curso = $this->cursoRepo->find($id);
-		    	return view('rol_filial.cursos.editar',compact('curso'));
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+  		
+		$curso = $this->cursoRepo->find($id);
+		return view('rol_filial.cursos.editar',compact('curso'));
+			
     }
 
     public function editar_post(EditarCursoRequest $request){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-		        $data = $request->all();
-		        $model = $this->cursoRepo->find($data['id']);
-		        if($this->cursoRepo->edit($model,$data))
-		            return redirect()->route('filial.cursos')->with('msg_ok','El curso ha sido modificado con éxito');
-		        else
-		            return redirect()->route('filial.cursos')->with('msg_error','El curso no ha podido ser modificado.');
-			}
+    	
+		$data = $request->all();
+		$model = $this->cursoRepo->find($data['id']);
+		   if($this->cursoRepo->edit($model,$data))
+		        return redirect()->route('filial.cursos')->with('msg_ok','El curso ha sido modificado con éxito');
 		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		        return redirect()->route('filial.cursos')->with('msg_error','El curso no ha podido ser modificado.');
+		
     }
 
     public function borrar($id){
-    	if (null !== session('usuario')){
-			if (session('usuario')['rol_id'] == 4){
-			    if( $data=$this->cursoRepo->find($id))
-			    {
-		    	    $data->Delete();
-		         	return redirect()->back()->with('msg_ok', 'Curso eliminado correctamente');
-		         	}
+    	
+		if($data=$this->cursoRepo->find($id))
+			{
+		    	$data->Delete();
+		        return redirect()->back()->with('msg_ok', 'Curso eliminado correctamente');
+		    }
 		        else
 		            return redirect()->back()->with('msg_error','El curso no ha podido ser eliminada.');
-			}
-		    else
-		        return redirect()->back();
-		    }
-		else
-		    return redirect('login');
+		
     }
 }

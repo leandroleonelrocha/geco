@@ -11,4 +11,8 @@ class MatriculaPermisosRepo extends BaseRepo {
     {
         return new MatriculaPermisos();
     }
+
+    public function allFilial(){
+    	return $this->model->where('filial_id', $this->filial)->get();
+    }
 }
