@@ -22,8 +22,9 @@ class FilialMiddleware
         if($rol == 4)
             return $next($request);
         else
-            session()->flush(); // Elimina todos los datos de la session
-            return redirect('login');
+            // session()->flush(); // Elimina todos los datos de la session
+            // return redirect('login');
+            return redirect()->back();
         
    
     }
