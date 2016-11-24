@@ -10,11 +10,6 @@
 
     <div class="box-body">
 
-     <div class="form-group">
-            {!! Form::label('clave', 'Clave') !!}
-            {!! Form::text('id', null ,  array('class'=>'form-control')) !!}
-        </div>
-    
         <div class="form-group">
             <label>Carreras y Cursos</label>
             <select name="carreras_cursos" id="carreras_cursos" class="form-control">

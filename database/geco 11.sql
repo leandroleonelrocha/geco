@@ -420,9 +420,8 @@ foreign key		(docente_id)		references docente	(id)
 );
 
 create table if not exists clase_matricula(
-id 				int(11) not null,
+id 				int(11) not null auto_increment,
 clase_id		int(11) not null,
-fecha			datetime not null,
 matricula_id	int not null,
 asistio			boolean not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',

@@ -36,4 +36,10 @@ Route::group(['prefix' => 'examenes'], function(){
        'uses' => 'ExamenController@grupos_examenes'
     ]);
 
+    Route::get('detalles/{nro_acta}',[
+    	'as' => 'filial.examenes_detalles',
+       'uses' => 'ExamenController@detalles'
+    
+    ]);
+
 });
