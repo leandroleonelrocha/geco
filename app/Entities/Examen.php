@@ -38,5 +38,9 @@ class Examen extends Entity
      public function Materia(){
         return $this->belongsTo(Materia::getClass());
     }
+
+    public function Recuperatorio(){
+        return $this->hasOne(Examen::getClass(), 'recuperatorio_nro_acta', 'id');
+    }
 }
 
