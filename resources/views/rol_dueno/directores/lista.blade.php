@@ -34,10 +34,8 @@
 							     	@foreach($d->DirectorTelefono as $telefono)
 						            		{{$telefono->telefono}}</br>
 					            	@endforeach</td>
-					            	<td>
-				            	   	@foreach($d->DirectorMail as $mail)
-						            		{{$mail->mail}}</br>
-					            	@endforeach</td>
+					            	<td>{{$d->mail}}</td>
+				      
 						           	<td class="text-center">
 									<a href="{{route('dueño.directores_editar',$d->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
 						           	<a href="{{route('dueño.directores_borrar',$d->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el director?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>

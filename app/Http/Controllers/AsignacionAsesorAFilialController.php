@@ -10,6 +10,7 @@ use App\Http\Repositories\TipoDocumentoRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+
 class AsignacionAsesorAFilialController extends Controller {
 
 	protected $asesorRepo;
@@ -39,9 +40,8 @@ class AsignacionAsesorAFilialController extends Controller {
     public function nuevo(){
 
     if (null !== session('usuario')){
-            if (session('usuario')['rol_id'] == 4){
-                $asesor = $this->asesorRepo->allEneable(); // Obtención de todos los Acesores activos no importa de la filial qeu sean
-
+            if (session('usuario')['rol_id'] == 4){    
+             $asesor = $this->asesorRepo->allEneable(); // Obtención de todos los Acesores activos no importa de la filial qeu sean
                 return view('rol_filial.asesores.asignacion.nuevo',compact('asesor'));
             }
             else
@@ -55,18 +55,23 @@ class AsignacionAsesorAFilialController extends Controller {
 
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
-              
-              
-                $f = session('usuario')['entidad_id'];
-                $asesorFilial['asesor_id']=$id;
-                $asesorFilial['filial_id']=$f;
 
-                if($this->asesorFilialRepo->create($asesorFilial))
 
-                    return redirect()->route('filial.asignacionAsesores')->with('msg_ok','Se ha asignado el asesor a la filial.');
+               // var_dump($this->asesorFilialRepo->findAsesorFilial($id));die;
+                $asesor=$this->asesorFilialRepo->findAsesorFilial($id);
+                if ( count($asesor)==0 ){
+                  
+                    $f = session('usuario')['entidad_id'];
+                    $asesorFilial['asesor_id']=$id;
+                    $asesorFilial['filial_id']=$f;
+
+                    if($this->asesorFilialRepo->create($asesorFilial))
+
+                        return redirect()->route('filial.asignacionAsesores')->with('msg_ok','Se ha asignado el asesor a la filial.');
+                    else
+                        return redirect()->route('filial.asignacionAsesores')->with('msg_error','No se ha podido asignar e asesor a la filial.');}
                 else
-                    return redirect()->route('filial.asignacionAsesores')->with('msg_error','No se ha podido asignar e asesor a la flial.');
-                
+                    return redirect()->route('filial.asignacionAsesores_nuevo')->with('msg_error','El asesor ya se encuentra asignado, seleccione otro !!!.');
             }
             else
                 return redirect()->back();          
@@ -91,5 +96,4 @@ class AsignacionAsesorAFilialController extends Controller {
         else
             return redirect('login');
     }
-
  }

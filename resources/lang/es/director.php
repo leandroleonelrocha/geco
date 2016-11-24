@@ -6,11 +6,11 @@ return [
     'numero'=>'Número',
     'tipodocumento' => 'Tipo de documento',
     'numerodocumento' => 'Número de documento',
-    'apellido' => 'Apellido',
-    'nombre' => 'Nombre',
+    'apellido' => 'Apellidos',
+    'nombre' => 'Nombres',
 
     'telefonos' => 'Teléfonos',
-    'cuenta' => 'Cuenta principal',
+    'cuenta' => 'E-Mail (Cuenta de acceso)',
 
     'bienvenido' => 'Bienvenido',
 

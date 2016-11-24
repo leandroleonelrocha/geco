@@ -13,6 +13,7 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
 						<th>@lang('filial.nombre')</th>
+						<th>@lang('filial.cadena')</th>
 						<th>@lang('filial.direccion')</th>
 						<th>@lang('filial.localidad')</th>
 						<th>CP</th>
@@ -26,6 +27,7 @@
 						
 							    <tr role="row" class="odd">
 							        <td class="sorting_1">{{ $f->nombre }}</td>
+							        <td>{{ $f->Cadena->nombre }}</td>
 							        <td>{{ $f->direccion }}</td>
 							        <td>{{ $f->localidad }}</td>
 					                <td>{{ $f->codigo_postal }}</td>

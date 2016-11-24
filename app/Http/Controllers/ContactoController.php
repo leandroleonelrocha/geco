@@ -12,7 +12,6 @@ use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\FilialTelefonoRepo;
 use App\Entities\FilialTelefono;
-use Mail;
 
 class ContactoController extends Controller{
 
@@ -28,9 +27,23 @@ class ContactoController extends Controller{
 
 	}
 
-	public function index(){
-		$cadena=$this->filialesRepo->filialCadena();
-		$filiales=$this->filialesRepo->allFilialCadena($cadena->cadena_id);
-		return view('contacto',compact('filiales'));
+	public function index()
+	{
+  		if (null !== session('usuario')){
+        	if (session('usuario')['rol_id'] == 4){
+				$cadena=$this->filialesRepo->filialCadena();
+				$filiales=$this->filialesRepo->allFilialCadena($cadena->cadena_id);
+				return view('contacto',compact('filiales'));
+			}
+
+	     	if (session('usuario')['rol_id'] == 3){
+				$filiales=$this->filialesRepo->allFilialDirector();
+				return view('contacto',compact('filiales'));
+			}
+
+
+			if (session('usuario')['rol_id'] == 2)
+		 		return view('contacto');
+		} 
 	}	
 }

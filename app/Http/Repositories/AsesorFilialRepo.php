@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 use App\Entities\AsesorFilial;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class AsesorFilialRepo extends BaseRepo {
 
@@ -24,10 +25,11 @@ class AsesorFilialRepo extends BaseRepo {
     }
 
 
-    public function findAsesorFilial($id,$f){
-  
-        return AsesorFilial::where('asesor_id', $id)->where('filial_id',$f)->get(); //consultar estado activo
+    public function findAsesorFilial($id){
+        $filial = session('usuario')['entidad_id'];
+        return AsesorFilial::where('asesor_id', $id)->where('filial_id',$filial)->get(); //consultar estado activo
     }
+
 }
 
          

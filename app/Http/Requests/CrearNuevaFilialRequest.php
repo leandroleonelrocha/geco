@@ -40,7 +40,7 @@ class CrearNuevaFilialRequest extends Request
            	'director_id' => 'required',
             'telefono' => 'required',
            	'mail' => 'required',
-            'mail' => 'required|unique:filial,mail'
+            // 'mail' => 'required|unique:filial,mail'
 
         ];
     }
@@ -56,7 +56,7 @@ class CrearNuevaFilialRequest extends Request
             'director_id.required' => 'Selecciona un director',
             'telefono.required' => 'Escriba el teléfono',  
             'mail.required' => 'Escriba un email',
-            'mail.unique'=> 'El mail ya está en uso'
+            // 'mail.unique'=> 'El mail ya está en uso'
         ];
     }
 

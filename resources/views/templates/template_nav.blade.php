@@ -1,7 +1,7 @@
 <header class="main-header">
         <!-- Logo -->
         <div href="#" class="logo">
-          <span class="logo-mini"><img src="{{asset('img/logo/Geco-Negro.png')}}"  height="35" width="35" > </span>
+          <span class="logo-mini"><img src="../img/logo/Geco-Negro.png"  height="35" width="35" > </span>
           <!-- <span class="logo-lg"><b>Admin</b>LTE</span> -->
          
             <div class="pull-left info magia">
@@ -76,7 +76,7 @@
              
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
-                <a href="{{route('auth.getLogout')}}" class="menu-icon fa fa-sign-out" > @lang('menu.salir')</a>
+                <a href="{{route('auth.getLogout')}}" class="fa fa-sign-out" > @lang('menu.salir')</a>
                     
         
                 <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">

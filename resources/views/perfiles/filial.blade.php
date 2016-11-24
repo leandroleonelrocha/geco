@@ -11,15 +11,10 @@
 					<div class="row">
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'filial.perfil_editarPerfil_post', 'method'=>'post']) !!}
-							<div class="col-md-6 form-group">
-								<label>@lang('filial.numero')</label>
-								{!! Form::text(null, $filial->id, array('class'=>'form-control','disabled')) !!}
-								<input type="hidden" name="id" value="{{$filial->id}}">
-							</div>
-
-							<div class="col-md-6 form-group">
+							<div class="col-md-12 form-group">
 								<label>@lang('filial.cuenta')</label>
 								{!! Form::text(null, $filial->mail, array('class'=>'form-control','disabled')) !!}
+								<input type="hidden" name="id" value="{{$filial->id}}">
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -42,6 +37,11 @@
                                 <label>@lang('filial.codigopostal')</label>
                                		{!! Form::text('codigo_postal', $filial->codigo_postal, array('class'=>'form-control')) !!}
 							</div>
+
+			          		<div class="col-md-6 form-group">
+                                <label>@lang('filial.cadena')</label>
+                                {!! Form::select('cadena_id', $cadenas->toArray() , $filial->Cadena->id, array('class'=>'form-control')) !!}
+                            </div>
 
          					<div class="col-md-6 form-group">
                                 <label>@lang('filial.telefonos')</label>

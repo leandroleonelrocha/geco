@@ -17,8 +17,7 @@
 
 							<div class="col-md-12 form-group">
 								<label>@lang('director.cuenta')</label>
-									{!! Form::text(null, $mailp, array('class'=>'form-control','disabled')) !!}	
-							
+								{!! Form::text('null', $director->mail, array('class'=>'form-control','disabled')) !!}	
 							</div>
 
 							<div class="col-md-6 form-group">
@@ -50,18 +49,8 @@
                                 </div>
 							</div>
 	
-		                 	<div class="col-md-6 form-group">
-                                <label>E-Mails</label>
-                                <button class="add_input_mail btn btn-success"">+</button>  
-                                <div class="input_fields_wrap">
-								 	@foreach ($mail as $m) 
-								
-									{!! Form::email('mail[]', $m->mail, array('class'=>'form-control')) !!}		
-									@endforeach 
-                                </div>
-                            </div>
 							<div class="box-footer col-xs-12">
-							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
+								{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
 				          	</div>
 							{!! Form::close() !!}
 						</div>

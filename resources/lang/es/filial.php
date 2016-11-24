@@ -9,8 +9,9 @@ return [
     'localidad' => 'Localidad',
     'codigopostal'=>'Código postal',
     'telefonos' => 'Teléfonos',
+    'cadena'=>'Cadena',
 
-    'cuenta' => 'Cuenta principal',
+    'cuenta' => 'Email(Cuenta de acceso)',
 
     'bienvenido' => 'Bienvenido',
 

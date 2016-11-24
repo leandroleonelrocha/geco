@@ -7,11 +7,11 @@ return [
     'tipodocumento' => 'Document type ',
     'numerodocumento' => 'Document number ',
     'apellido' => 'Last name',
-    'nombre' => 'Name',
+    'nombre' => 'Names',
 
     'telefonos' => 'Phones',
 
-    'cuenta' => 'Main Account',
+    'cuenta' => 'E-Mail (Access account'),
 
     'bienvenido' => 'Welcome',
 
