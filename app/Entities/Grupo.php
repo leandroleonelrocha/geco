@@ -58,7 +58,7 @@ class Grupo extends Entity {
     public function getFullNameAttribute()
     {
 
-        return $this->Carrera->nombre .' ('.$this->Materia->nombre.')';
+        return $this->id .' ('.$this->descripcion.')';
     }
 
     public function GrupoHorario(){
