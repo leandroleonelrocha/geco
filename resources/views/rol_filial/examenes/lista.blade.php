@@ -6,13 +6,14 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listaso de grupos</h3>
+					<h3 class="box-title">Listado de actas</h3>
 					<div class="box-tools pull-right no-print">
 						<a href="{{route('filial.examenes_nuevo')}}" class="btn btn-success text-white"> Nuevo acta</a>
 						
 						
 					</div>
 				</div>
+				@if(count($examenes) > 0)
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> 
@@ -31,7 +32,7 @@
 							    <tr role="row" class="odd">
 
 							        <td class="sorting_1">{{ $examen->nro_acta }}</td>
-						        	<td>{{ $examen->Grupo->fullname}}</td>
+						        	<td>@if(isset($examen->Grupo->fullname)) @endif </td>
 						        	<td>{{ $examen->Docente->fullname }}</td>
 						       
 						           
@@ -45,6 +46,7 @@
 				   		</tbody>
 				    </table>
         		</div><!-- Fin box-body -->
+        		@endif
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->

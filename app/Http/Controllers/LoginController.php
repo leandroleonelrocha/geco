@@ -6,6 +6,7 @@ use App\Entities\User;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use PDF;
 
 
 class LoginController extends Controller {
@@ -15,31 +16,78 @@ class LoginController extends Controller {
         return view('login');
     }
 
-    public function postLogin(Request $request)
-    {
- 
-        
+    public function postLogin(Request $request){
+        /*
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
         curl_setopt($ch, CURLOPT_HEADER, false);  
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
         $data = json_decode(curl_exec($ch),true);
         curl_close($ch);
-          
+        */  
 
         //rol 2 dueno
         //rol 3 director
         //rol 4 filial
-        
-
-        // $data =[ 
-        // 'id'=>'1',
-        // 'usuario'=>'rochaleandroleonel@gmail.com',
-        // 'password'=>'1234',
-        // 'rol_id'=>'4',
-        // 'entidad_id'=>'1',
-        // 'habilitado'=>'1'];
        
+        /*
+        $data =[ 
+        'id'=>'1',
+        'usuario'=>'rochaleandroleonel@gmail.com',
+        'password'=>'1234',
+        'rol_id'=>'4',
+        'entidad_id'=>'1',
+        'habilitado'=>'1'];
+       */
+       $cuentas = array(
+                    array(
+                    'id'          => 1,
+                    'usuario'     => 'ferrari@dueño.com',
+                    'password'    => 1234,
+                    'rol_id'      => 2,
+                    'entidad_id'  => 1,
+                    'habilitado'  => 1 
+                    ),
+                    array(
+                    'id'          => 1,
+                    'usuario'     => 'director@director.com',
+                    'password'    => 1234,
+                    'rol_id'      => 3,
+                    'entidad_id'  => 1,
+                    'habilitado'  => 1 
+                    ),
+                    array(
+                    'id'          => 3,
+                    'usuario'     => 'filial@filial.com',
+                    'password'    => 1234,
+                    'rol_id'      => 4,
+                    'entidad_id'  => 1,
+                    'habilitado'  => 1 
+                    ),
+                    array(
+                    'id'          => 4,
+                    'usuario'     => 'filial2@filial.com',
+                    'password'    => 1234,
+                    'rol_id'      => 4,
+                    'entidad_id'  => 3,
+                    'habilitado'  => 1 
+                    )
+
+                  );
+
+       foreach ($cuentas as $cuenta) {
+         if ($request->usuario == $cuenta['usuario'] && $request->password == $cuenta['password']) {
+           $data['id']          = $cuenta['id'];
+           $data['usuario']     = $cuenta['usuario'];
+           $data['password']    = $cuenta['password'];
+           $data['rol_id']      = $cuenta['rol_id'];
+           $data['entidad_id']  = $cuenta['entidad_id'];
+           $data['habilitado']  = $cuenta['habilitado'];
+           break;
+         }
+         else
+          $data = null;
+       }
 
 
       if ($data){
@@ -88,7 +136,7 @@ class LoginController extends Controller {
     {
 
       if (null !== session('usuario')){
-        $rol=session('usuario')['rol_id'];
+        $rol = session('usuario')['rol_id'];
         if ( $rol== 4 || $rol==3 || $rol==2){
 
           $user=$request->all();

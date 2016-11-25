@@ -8,7 +8,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listaso de grupos</h3>
+					<h3 class="box-title">Listado de grupos</h3>
 					<div class="box-tools pull-right no-print">
 						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> Nuevo grupo</a>
 						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> Ver clases</a>
@@ -19,10 +19,10 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> 
 						<tr>
-						<th>Curso</th>
-						<th>Carrera</th>
-						<th>Materia</th>
-						<th>Descripcion</th>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Descripción</th>
+						
 						<th>Docente</th>
 						<th></th>
 						
@@ -31,9 +31,14 @@
 						<tbody>
 						@foreach($grupos as $grupo)
 						<tr>
-						<td> <?php if(isset($grupo->Curso->nombre)) echo $grupo->Curso->nombre; ?></td>
-						<td><?php if(isset($grupo->Carrera->nombre)) echo $grupo->Carrera->nombre ?></td>
-						<td><?php if(isset($grupo->Materia->nombre)) echo $grupo->Materia->nombre ?></td>
+						<td>
+							<small class="label" style="background-color: {{$grupo->color}} "><i class="fa fa-users"></i></small>
+						</td>
+						<td> 
+							<?php if(isset($grupo->Curso->nombre)) echo $grupo->Curso->nombre ; ?>
+							<?php if(isset($grupo->Carrera->nombre)) echo $grupo->Carrera->nombre . ', ';  ?>
+							<?php if(isset($grupo->Materia->nombre)) echo $grupo->Materia->nombre ?>
+						</td>
 						<td>{{ $grupo->descripcion }}</td>
 						<td>{{ $grupo->Docente->fullname }}</td>	
 						   	<td class="text-center">

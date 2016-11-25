@@ -6,40 +6,44 @@ Route::group(['prefix' => 'examenes'], function(){
 		'uses'	=>	'ExamenController@index'
 	]);
 
-	Route::get('nuevo',[
-		'as'	=>	'filial.examenes_nuevo',
-		'uses'	=>	'ExamenController@nuevo'
-	]);
+	Route::group(['middleware' => 'habilitado'], function(){
 
-	Route::post('examenes_nuevo_post',[
-		'as'	=>	'filial.examenes_nuevo_post',
-		'uses'	=>	'ExamenController@nuevo_post'
-	]);
+		Route::get('nuevo',[
+			'as'	=>	'filial.examenes_nuevo',
+			'uses'	=>	'ExamenController@nuevo'
+		]);
 
-	Route::get('examenes_borrar/{id}',[
-		'as'	=> 'filial.examenes_borrar',
-		'uses'	=>	'ExamenController@borrar'
-	]);
+		Route::post('examenes_nuevo_post',[
+			'as'	=>	'filial.examenes_nuevo_post',
+			'uses'	=>	'ExamenController@nuevo_post'
+		]);
 
-	Route::get('editar/{id}',[
-		'as'	=> 'filial.examenes_editar',
-		'uses'	=>	'ExamenController@editar'
-	]);
+		Route::get('examenes_borrar/{id}',[
+			'as'	=> 'filial.examenes_borrar',
+			'uses'	=>	'ExamenController@borrar'
+		]);
 
-	Route::post('examenes_editar_post/{id}',[
-		'as'	=> 'filial.examenes_editar_post',
-		'uses'	=>	'ExamenController@editar_post'
-	]);
+		Route::get('editar/{id}',[
+			'as'	=> 'filial.examenes_editar',
+			'uses'	=>	'ExamenController@editar'
+		]);
 
-    Route::post('grupos_examenes',[
-       'as' => 'filial.examenes_grupos_examenes',
-       'uses' => 'ExamenController@grupos_examenes'
-    ]);
+		Route::post('examenes_editar_post/{id}',[
+			'as'	=> 'filial.examenes_editar_post',
+			'uses'	=>	'ExamenController@editar_post'
+		]);
 
-    Route::get('detalles/{nro_acta}',[
-    	'as' => 'filial.examenes_detalles',
-       'uses' => 'ExamenController@detalles'
-    
-    ]);
+	    Route::post('grupos_examenes',[
+	       'as' => 'filial.examenes_grupos_examenes',
+	       'uses' => 'ExamenController@grupos_examenes'
+	    ]);
+
+	    Route::get('detalles/{nro_acta}',[
+	    	'as' => 'filial.examenes_detalles',
+	       'uses' => 'ExamenController@detalles'
+	    
+	    ]);
+	    
+	});
 
 });

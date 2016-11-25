@@ -49,7 +49,9 @@ class ExamenController extends Controller
 		//Docentes
 		
 		$examenes = $this->examenRepo->all();
-		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
+		$grupos = $this->grupoRepo->allEnable()->where('curso_id', null)->lists('full_name','id');
+		//$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
+		
 		$docentes = $this->docenteRepo->all()->lists('full_name','id');
 
 		

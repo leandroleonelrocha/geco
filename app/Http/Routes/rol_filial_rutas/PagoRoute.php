@@ -4,6 +4,7 @@
 		'as'	=> 'filial.pagos_matriculas',
 		'uses'	=>	'PagoController@vista'
 	]);
+	
 
 	Route::get('pagos/{id}',[
 		'as'	=> 'filial.pagos',

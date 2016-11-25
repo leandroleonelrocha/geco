@@ -39,8 +39,12 @@ class PersonaRepo extends BaseRepo {
         $query = $this->model->where('filial_id', $this->filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->groupBy('genero');
         $resultado=[];
         foreach ($query as $qry => $q)
-        {
-                $data['nombre'] = $qry;
+        {     
+                if($qry == 'M')
+                  $data['nombre'] = 'Masculino';
+               if($qry == 'F')
+                  $data['nombre'] = 'Femenino';
+
                 $data['count'] = $q->count();
                 array_push($resultado, $data);
         }
@@ -62,7 +66,7 @@ class PersonaRepo extends BaseRepo {
     }
 
     public function disponibilidadManana($inicio, $fin){
-        $label = 'Disponibilidad manana';
+        $label = 'Manana';
         $filial = session('usuario')['entidad_id'];
         $si = $this->baseWhere('disponibilidad_manana',1,$inicio,$fin);
         $no = $this->baseWhere('disponibilidad_manana',0,$inicio,$fin);
@@ -71,21 +75,21 @@ class PersonaRepo extends BaseRepo {
 
     
     public function disponibilidadTarde($inicio, $fin){
-        $label = 'Disponibilidad tarde';
+        $label = 'Tarde ';
         $si = $this->baseWhere('disponibilidad_tarde',1,$inicio,$fin);
         $no = $this->baseWhere('disponibilidad_tarde',0,$inicio,$fin);
         return $label.','.$si.','.$no;     
     }
 
     public function disponibilidadNoche($inicio, $fin){
-        $label = 'Disponibilidad noche';
+        $label = 'Noche';
         $si = $this->baseWhere('disponibilidad_noche',1,$inicio,$fin);
         $no = $this->baseWhere('disponibilidad_noche',0,$inicio,$fin);
         return $label.','.$si.','.$no;         
     }
 
     public function disponibilidadSabado($inicio, $fin){
-        $label = 'Disponibilidad sabados';
+        $label = 'Sabados';
         $si = $this->baseWhere('disponibilidad_sabados',1,$inicio,$fin);
         $no = $this->baseWhere('disponibilidad_sabados',0,$inicio,$fin);
         return $label.','.$si.','.$no;       

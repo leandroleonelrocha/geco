@@ -41,9 +41,9 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-// PDF
-// $app->register(\Barryvdh\DomPDF\ServiceProvider::class);
-// $app->configure('dompdf');
+PDF
+$app->register(\Barryvdh\DomPDF\ServiceProvider::class);
+$app->configure('dompdf');
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +56,4 @@ $app->singleton(
 |
 */
 
-return $app;
+ return $app;
