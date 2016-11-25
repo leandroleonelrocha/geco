@@ -76,14 +76,17 @@ class LoginController extends Controller {
                   );
 
        foreach ($cuentas as $cuenta) {
-         if ($request->usuario == $cuenta['usuario']) {
+         if ($request->usuario == $cuenta['usuario'] && $request->password == $cuenta['password']) {
            $data['id']          = $cuenta['id'];
            $data['usuario']     = $cuenta['usuario'];
            $data['password']    = $cuenta['password'];
            $data['rol_id']      = $cuenta['rol_id'];
            $data['entidad_id']  = $cuenta['entidad_id'];
            $data['habilitado']  = $cuenta['habilitado'];
+           break;
          }
+         else
+          $data = null;
        }
 
 
