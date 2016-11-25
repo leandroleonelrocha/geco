@@ -174,11 +174,15 @@ class GrupoController extends Controller
 
 	public function clases()
 	{
+		$filial = session('usuario')['entidad_id'];
+		
 		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
 
-		return view('rol_filial.grupos.clases', compact('grupos', 'docentes', 'events'));
+
+
+		return view('rol_filial.grupos.clases', compact('grupos', 'docentes', 'events', 'filial'));
 	}
 
 

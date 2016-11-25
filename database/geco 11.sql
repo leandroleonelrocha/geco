@@ -24,7 +24,7 @@ primary key	(id)
 );
 
 create table if not exists materia(
-id			int not null,
+id			int not null auto_increment,
 carrera_id	int not null,
 nombre		varchar(50) not null,
 descripcion	varchar(300) default 'Sin Descripción.',
@@ -58,6 +58,7 @@ tipo_documento_id 	int,
 nro_documento		varchar(50),
 apellidos			varchar(50) not null,
 nombres				varchar(50) not null,
+mail				varchar(50) not null,
 activo				boolean not null default true,
 created_at  		timestamp not null default '0000-00-00 00:00:00',
 updated_at  		timestamp not null default '0000-00-00 00:00:00',
@@ -490,9 +491,9 @@ values  ('DNI', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 -- Directores
 --
 
-insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `activo`, `created_at`, `updated_at`)
-values  (1, 12345678, 'Apellido 1', 'Nombres 1', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 23456789, 'Apellido 2', 'Nombres 2', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`,`mail`, `activo`, `created_at`, `updated_at`)
+values  (1, 12345678, 'Apellido 1', 'Nombres 1','crisdabruno@hotmail.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 23456789, 'Apellido 2', 'Nombres 2','sdsd', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Filiales

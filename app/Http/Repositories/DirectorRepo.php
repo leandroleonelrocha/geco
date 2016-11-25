@@ -7,18 +7,16 @@ use Illuminate\Support\Facades\Auth;
 
 class DirectorRepo extends BaseRepo {
 
-    public function getModel()
-    {
+    public function getModel(){
         return new Director();
     }
 
     public function allEneable(){
-
         return $this->model->where('activo', 1)->get();
     }
 
-    public function check($tipo,$nro){
-    	return $this->model->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);
+    public function check($mail){
+    	return $this->model->where('mail', $mail)->update(['activo'=>1]);
     }
 
     public function disable($director){
@@ -26,4 +24,7 @@ class DirectorRepo extends BaseRepo {
     	return $director->save();
     }
 
+    public function existeMail($mail){
+        return $this->model->where('mail', $mail)->first();
+    }
 }

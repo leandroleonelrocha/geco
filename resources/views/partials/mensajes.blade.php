@@ -27,6 +27,14 @@
             </div>
         @endif
 
+        @if(session()->has('estado_cuenta'))
+             <div class="alert alert-danger">
+                <h4><i class="icon fa fa-ban"></i> Alerta!</h4>
+                <strong>Alerta! {{session('estado_cuenta')}} </strong><br />
+               
+            </div>
+        @endif
+
 
 
     </div>

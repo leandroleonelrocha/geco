@@ -94,7 +94,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.preinformes')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.preinformes_seleccion') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                      <?php } ?>
                     </ul>
                 </li>
 
@@ -104,7 +106,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.matriculas_seleccion') }}"><i class="fa fa-circle-o"></i> @lang('menu.nueva')</a></li>
+                      <?php } ?>
                     </ul>
                   </li>
 
@@ -123,7 +127,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.cursos')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.cursos_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                      <?php } ?>
                     </ul>
                   </li>
 
@@ -134,7 +140,9 @@
 
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.carreras')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.carreras_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nueva')</a></li>
+                      <?php } ?>
                     </ul>
                   </li>
 
@@ -144,7 +152,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.materias')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.materias_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nueva')</a></li>
+                      <?php } ?>
                     </ul>
                   </li>
 
@@ -154,7 +164,9 @@
                     </a>
                     <ul class="treeview-menu">
                         <li class="active"><a href="{{route('grupos.index')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                        <?php if($h == 1){ ?>
                         <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                        <?php } ?>
                     </ul>
                   </li>
 
@@ -164,7 +176,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.examenes')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                        <?php if($h == 1){ ?>
                         <li class="active"><a href="{{route('filial.examenes_nuevo')}}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                        <?php } ?>
                     </ul>
                   </li>
 
@@ -176,7 +190,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.asesores')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.asesores_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                      <?php } ?>
                     </ul>
                   </li>
 
@@ -188,7 +204,9 @@
                     </a>
                     <ul class="treeview-menu">
                       <li class="active"><a href="{{route('filial.docentes')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
+                      <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.docentes_nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
+                      <?php } ?>
                     </ul>
                   </li>
 

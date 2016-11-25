@@ -31,7 +31,7 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>Cadena</label>
+                                <label>@lang('filial.cadena')</label>
                                 {!! Form::select('cadena_id', $cadenas->toArray() , null, array('class'=>'form-control')) !!}
                             </div>
 
@@ -52,7 +52,6 @@
                                 <label>E-Mail</label>
                                 {!! Form::email('mail',null,array('class'=>'form-control')) !!}
                             </div>
-
 
                             <div class="box-footer col-xs-12">
                             {!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}

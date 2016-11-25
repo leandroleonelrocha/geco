@@ -103,29 +103,37 @@
 			events: [
 			<?php foreach($events as $event): 
 
-				$start = explode(" ", $event['fecha']);
 
-				$end = explode(" ", $event['fecha']);
-				if($start[1] == '00:00:00'){
-					$start = $start[0];
-				}else{
-					$start = $event['fecha'];
-				}
-				if($end[1] == '00:00:00'){
-					$end = $end[0];
-				}else{
-					$end = $event['fecha'];
-				}
+				if($event->Grupo->filial_id == $filial)
+				{
+					$start = explode(" ", $event['fecha']);
+
+					$end = explode(" ", $event['fecha']);
+					if($start[1] == '00:00:00'){
+						$start = $start[0];
+					}else{
+						$start = $event['fecha'];
+					}
+					if($end[1] == '00:00:00'){
+						$end = $end[0];
+					}else{
+						$end = $event['fecha'];
+					}
+				
+
 			?>
 				{
-					id: '<?php echo $event['id']; ?>',
-					title: '<?php echo $event->Grupo->fullname; ?>',
-					start: '<?php echo $start; ?>',
-					end: '<?php echo $end; ?>',
-					color: '<?php echo $event->Grupo->color; ?>',
+
+						id: '<?php if(isset($event)) echo $event['id']; ?>',
+						title: '<?php if(isset($event)) echo $event->Grupo->fullname; ?>',
+						start: '<?php if(isset($event)) echo $start; ?>',
+						end: '<?php if(isset($event)) echo $end; ?>',
+						color: '<?php if(isset($event)) echo $event->Grupo->color; ?>',
+					
 				},
 
-			<?php endforeach; ?>
+
+			<?php } endforeach; ?>
 			]
 		});
 		

@@ -7,80 +7,84 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses' => 'GrupoController@index'
 	 ]);
 
-	Route::get('nuevo', [
+	Route::group(['middleware' => 'habilitado'], function(){
 
-		'as' => 'grupos.nuevo',
-		'uses' => 'GrupoController@nuevo'
-	]);
+		Route::get('nuevo', [
 
-	Route::post('postAdd', [
+			'as' => 'grupos.nuevo',
+			'uses' => 'GrupoController@nuevo'
+		]);
 
-		'as' => 'grupos.postAdd',
-		'uses' => 'GrupoController@postAdd'
-	]);
+		Route::post('postAdd', [
 
-	Route::get('getDelete/{id}',[
-	'as'	=> 'grupos.getDelete',
-	'uses'	=>	'GrupoController@getDelete'
-	]);
+			'as' => 'grupos.postAdd',
+			'uses' => 'GrupoController@postAdd'
+		]);
 
-	
-	Route::post('postEditar/{id}',[
-	'as'	=> 'grupos.postEdit',
-	'uses'	=>	'GrupoController@postEdit'
-	]);
+		Route::get('getDelete/{id}',[
+		'as'	=> 'grupos.getDelete',
+		'uses'	=>	'GrupoController@getDelete'
+		]);
 
-	Route::get('editar/{id}',[
-	'as'	=> 'grupos.edit',
-	'uses'	=>	'GrupoController@edit'
-	]);
+		
+		Route::post('postEditar/{id}',[
+		'as'	=> 'grupos.postEdit',
+		'uses'	=>	'GrupoController@postEdit'
+		]);
+
+		Route::get('editar/{id}',[
+		'as'	=> 'grupos.edit',
+		'uses'	=>	'GrupoController@edit'
+		]);
 
 
-	Route::get('clases',[
+		Route::get('clases',[
 
-		'as' => 'grupos.clases',
-		'uses' => 'GrupoController@clases'
-	]);
+			'as' => 'grupos.clases',
+			'uses' => 'GrupoController@clases'
+		]);
 
-	Route::get('clases/matricula/{id}',[
+		Route::get('clases/matricula/{id}',[
 
-		'as' => 'grupos.clase_matricula',
-		'uses' => 'GrupoController@clase_matricula'
-	]);
+			'as' => 'grupos.clase_matricula',
+			'uses' => 'GrupoController@clase_matricula'
+		]);
 
-	Route::post('cargar_clase',[
-		'as' => 'grupos.cargar_clase',
-		'uses' => 'GrupoController@cargar_clase'
-	]);
+		Route::post('cargar_clase',[
+			'as' => 'grupos.cargar_clase',
+			'uses' => 'GrupoController@cargar_clase'
+		]);
 
-	Route::post('buscar_clase',[
-	   'as' =>'grupos.buscar_clase',
-        'uses' =>'GrupoController@buscar_clase'
-    ]);
+		Route::post('buscar_clase',[
+		   'as' =>'grupos.buscar_clase',
+	        'uses' =>'GrupoController@buscar_clase'
+	    ]);
 
-	Route::post('nueva_clase', [
-		'as' => 'grupos.nueva_clase',
-		'uses' => 'GrupoController@nueva_clase'
-	]);
+		Route::post('nueva_clase', [
+			'as' => 'grupos.nueva_clase',
+			'uses' => 'GrupoController@nueva_clase'
+		]);
 
-	Route::post('editar_clase', [
-		'as' => 'grupos.editar_clase',
-		'uses' => 'GrupoController@editar_clase'
-	]);
+		Route::post('editar_clase', [
+			'as' => 'grupos.editar_clase',
+			'uses' => 'GrupoController@editar_clase'
+		]);
 
-	Route::get('clases/borrar_clase/{id}', [
-		'as' => 'grupos.borrar_clase',
-		'uses' => 'GrupoController@borrar_clase'
-	]);
+		Route::get('clases/borrar_clase/{id}', [
+			'as' => 'grupos.borrar_clase',
+			'uses' => 'GrupoController@borrar_clase'
+		]);
 
-	Route::post('editar_clase_arrastrando',[
-		'as' => 'grupos.editar_clase_arrastrando',
-		'uses' => 'GrupoController@editar_clase_arrastrando'
-	]);	
+		Route::post('editar_clase_arrastrando',[
+			'as' => 'grupos.editar_clase_arrastrando',
+			'uses' => 'GrupoController@editar_clase_arrastrando'
+		]);	
 
-	Route::post('post_materias_carreras',[
-		'as' => 'grupos.post_materias_carreras',
-		'uses' => 'GrupoController@post_materias_carreras'
-	]);
+		Route::post('post_materias_carreras',[
+			'as' => 'grupos.post_materias_carreras',
+			'uses' => 'GrupoController@post_materias_carreras'
+		]);
+
+	});
 	
 });

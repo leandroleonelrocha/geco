@@ -2,7 +2,7 @@
 namespace App\Http\Middleware;
 use Closure;
 use Session;
-class FilialMiddleware
+class EstadoCuentaMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,16 +15,16 @@ class FilialMiddleware
     //$filial = session('usuario')['entidad_id'];
     public function handle($request, Closure $next)
     {
-        session('usuario');
-        $rol=session('usuario')['rol_id'];
-       
+        $estado=session('usuario')['habilitado'];
+       	$habilitado = 1;
         //ROL FILIAL
-        if($rol == 4)
+        if($estado == $habilitado)
             return $next($request);
         else
             // session()->flush(); // Elimina todos los datos de la session
             // return redirect('login');
-            return redirect()->back();
+            return redirect()->back()->with('estado_cuenta', 'Su cuenta no esta habilitada para utilizar nuestros servicio');
+
         
    
     }

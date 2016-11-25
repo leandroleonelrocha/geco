@@ -11,6 +11,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             {!! Form::open(['route'=> 'dueño.directores_nuevo_post', 'method'=>'post']) !!}
+
                             <div class="col-md-6 form-group">
                                 <label>@lang('director.tipodocumento')</label>
                                 {!! Form::select('tipo_documento_id',$tipos->toArray(),null,array('class' => 'form-control')) !!}
@@ -37,11 +38,8 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>E-Mails</label>
-                                <button class="add_input_mail btn btn-success"">+</button>  
-                                <div class="input_fields_wrap">
-                                {!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
-                                </div>
+                                <label>E-Mail</label>
+                                {!! Form::email('mail',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="box-footer col-xs-12">

@@ -34,6 +34,8 @@ class Kernel extends HttpKernel
         'filial' => \App\Http\Middleware\FilialMiddleware::class,
         'dueno' => \App\Http\Middleware\DuenoMiddleware::class,
         'director' => \App\Http\Middleware\DirectorMiddleware::class,
+        'habilitado' => \App\Http\Middleware\EstadoCuentaMiddleware::class,
+        
           
     ];
 }
