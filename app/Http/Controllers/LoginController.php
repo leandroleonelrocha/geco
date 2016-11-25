@@ -6,6 +6,7 @@ use App\Entities\User;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use PDF;
 
 
 class LoginController extends Controller {
@@ -25,6 +26,19 @@ class LoginController extends Controller {
         curl_close($ch);
         */  
 
+        //rol 2 dueno
+        //rol 3 director
+        //rol 4 filial
+       
+        /*
+        $data =[ 
+        'id'=>'1',
+        'usuario'=>'rochaleandroleonel@gmail.com',
+        'password'=>'1234',
+        'rol_id'=>'4',
+        'entidad_id'=>'1',
+        'habilitado'=>'1'];
+       */
        $cuentas = array(
                     array(
                     'id'          => 1,
@@ -47,9 +61,18 @@ class LoginController extends Controller {
                     'usuario'     => 'filial@filial.com',
                     'password'    => 1234,
                     'rol_id'      => 4,
+                    'entidad_id'  => 1,
+                    'habilitado'  => 1 
+                    ),
+                    array(
+                    'id'          => 4,
+                    'usuario'     => 'filial2@filial.com',
+                    'password'    => 1234,
+                    'rol_id'      => 4,
                     'entidad_id'  => 3,
-                    'habilitado'  => 0 
+                    'habilitado'  => 1 
                     )
+
                   );
 
        foreach ($cuentas as $cuenta) {
@@ -62,6 +85,7 @@ class LoginController extends Controller {
            $data['habilitado']  = $cuenta['habilitado'];
          }
        }
+
 
       if ($data){
         session(['usuario' => $data]);

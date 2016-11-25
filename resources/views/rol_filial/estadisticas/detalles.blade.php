@@ -74,11 +74,9 @@ $(function () {
                 {
 
                     foreach ($genero as $key => $value) {
+                                     
                     ?>
-
                      ['{{$value['nombre']}}', {{$value['count'] }} ],
-                
-                 
                     <?php
                     }
                 }
@@ -115,8 +113,10 @@ $(function () {
               if(isset($data))
                {
 
-              foreach($data as $dat ){
-              $array = explode(",", $dat);
+             for($i=0; $i<count($data); $i++){
+              
+              $array = explode(",", $data[$i]);
+              
               ?>
 
                {y: '{{$array[0]}}', a: {{$array[1]}}, b: {{$array[2]}} },

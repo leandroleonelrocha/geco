@@ -57,6 +57,7 @@ class Grupo extends Entity {
 
     public function getFullNameAttribute()
     {
+
         return $this->id .' ('.$this->descripcion.')';
     }
 

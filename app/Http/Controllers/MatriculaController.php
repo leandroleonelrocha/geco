@@ -44,6 +44,7 @@ class MatriculaController extends Controller {
 
     // Página principal de Matrículas
     public function lista(){
+        
         $matriculas = $this->matriculaRepo->allEneable();
         return view('rol_filial.matriculas.lista',compact('matriculas'));
     }

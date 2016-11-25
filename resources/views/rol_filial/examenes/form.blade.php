@@ -16,7 +16,7 @@
                     </span>
 			</div><!-- /input-group -->
 
-			<p class="margin">Small <code>.input-group.input-group-sm</code></p>
+			<br>
 			{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
 			<div class="box">
 				<div class="box-header">
