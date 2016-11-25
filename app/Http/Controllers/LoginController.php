@@ -6,6 +6,7 @@ use App\Entities\User;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use PDF;
 
 
 class LoginController extends Controller {
@@ -30,7 +31,7 @@ class LoginController extends Controller {
         //rol 2 dueno
         //rol 3 director
         //rol 4 filial
-        
+       
 
         $data =[ 
         'id'=>'1',

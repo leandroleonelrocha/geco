@@ -154,7 +154,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         /*Dompdf*/    
-      //  Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
@@ -208,8 +208,10 @@ return [
         // ...
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+
+        //PDF
         'PDF' => 'Barryvdh\DomPDF\Facade',
-        // ...
+        
     ],
 
 ];
