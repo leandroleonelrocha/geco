@@ -49,13 +49,15 @@ Route::group(['prefix' => 'filial', 'middleware' => 'filial'], function(){
 
 	require_once('EstadisticasRoute.php');
 
-
 	// Rutas Operaciones ---------- Docentes
 	require_once('DocentesRoute.php');
 
+	// Rutas Operaciones ---------- Perfiles
 	require_once('PerfilRoute.php');
+
+	// Rutas Operaciones ---------- Contacto
 	require_once('ContactoRoute.php');
-	// Rutas Operaciones ---------- Estadísticas
+
 	// require_once('Route.php');
 
 	

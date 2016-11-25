@@ -2,11 +2,14 @@
 namespace App\Http\Controllers;
 use App\Entities\Docente;
 use App\Entities\TipoDocumento;
+use App\Entities\Clase;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevoDocenteRequest;
 use App\Http\Requests\EditarDocenteRequest;
+
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -14,10 +17,11 @@ class DocenteController extends Controller {
 
 	protected $docenteRepo;
 	
-    public function __construct(DocenteRepo $docenteRepo, TipoDocumento $tipoDocumentoRepo)
+    public function __construct(DocenteRepo $docenteRepo, TipoDocumento $tipoDocumentoRepo, ClaseRepo $claseRepo)
 	{
 		$this->docenteRepo        = $docenteRepo;
 		$this->tipoDocumentoRepo  = $tipoDocumentoRepo;
+        $this->claseRepo         = $claseRepo;
 	}
 
     // Página principal de Docentes
@@ -86,5 +90,44 @@ class DocenteController extends Controller {
             else
                 return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser modificado.');
        
+    }
+
+    public function calcularHoras($id){
+
+        $fecha1='1-11-26 00:00:00.000000';
+        $fecha2=date(("Y/m/d"));
+        $clases = $this->claseRepo->clasesDocente($id,$fecha1,$fecha2);
+        $docente = $this->docenteRepo->find($id);
+        $horasTotal=0;
+        $cantClases=0;
+        foreach ($clases as $hora) {
+
+            $horas=($hora->horario_hasta)-($hora->horario_desde);
+            $horasTotal += $horas; 
+            $cantClases++;    
+        }
+
+        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases'));
+          
+    }
+
+    public function calcularHorasBusqueda(Request $request){
+
+        $data=$request->all();
+
+        $fecha1=$data['fecha1'];
+        $fecha2=$data['fecha2'];
+        $id=$data['docente'];
+        $clases = $this->claseRepo->clasesDocente($id,$fecha1,$fecha2);
+        $docente = $this->docenteRepo->find($id);
+        $horasTotal=0;
+        $cantClases=0;
+        foreach ($clases as $hora) {
+
+            $horas=($hora->horario_hasta)-($hora->horario_desde);
+            $horasTotal += $horas; 
+            $cantClases++;    
+        }
+        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases'));    
     }
 }
