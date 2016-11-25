@@ -41,3 +41,4 @@
 			'uses'	=>	'DocenteController@calcularHorasBusqueda'
 		]);
 
+});
