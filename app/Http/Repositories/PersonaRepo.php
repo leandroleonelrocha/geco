@@ -36,6 +36,7 @@ class PersonaRepo extends BaseRepo {
     }
 
     public function getGenero($inicio, $fin){
+      
         $query = $this->model->where('filial_id', $this->filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->groupBy('genero');
         $resultado=[];
         foreach ($query as $qry => $q)

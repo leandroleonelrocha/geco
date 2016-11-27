@@ -48,6 +48,7 @@ class EstadisticaController extends Controller
 			$data=[];
 			$total = $this->personaRepo->countTotal();
 
+
 			$data['0'] = $this->personaRepo->getEstudioComputadora($inicio, $fin);
 			$data['1'] = $this->personaRepo->getPoseeComputadora($inicio, $fin);
 			$data['2'] = $this->personaRepo->disponibilidadManana($inicio, $fin);
@@ -55,6 +56,7 @@ class EstadisticaController extends Controller
 			$data['4'] = $this->personaRepo->disponibilidadNoche($inicio, $fin);
 			$data['5'] = $this->personaRepo->disponibilidadSabado($inicio, $fin);
 			$genero = $this->personaRepo->getGenero($inicio, $fin);
+
 			return view('rol_filial.estadisticas.detalles',compact('data', 'genero', 'total'));
 		}
 
