@@ -31,8 +31,8 @@ class PersonaRepo extends BaseRepo {
       return Persona::where('filial_id', $filial)->get();
     }
 
-    public function countTotal(){
-        return $this->model->where('filial_id', $this->filial)->get()->count();
+    public function countTotal($inicio, $fin){
+        return $this->model->where('filial_id', $this->filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
 
     public function getGenero($inicio, $fin){
@@ -52,50 +52,16 @@ class PersonaRepo extends BaseRepo {
         return $resultado;
     }
 
-    public function getPoseeComputadora($inicio, $fin){
-        $label = 'Posee computadora';
-        $si = $this->baseWhere('posee_computadora',1,$inicio,$fin);
-        $no = $this->baseWhere('posee_computadora',0,$inicio,$fin);
-        return $label.','.$si.','.$no;
+    public function estadisticasNivelEstudios($inicio, $fin){
+
+      return $this->model->where('filial_id', $this->filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->groupBy('nivel_estudios');
     }
 
-    public function getEstudioComputadora($inicio, $fin){
-        $label = 'Estudio computacion';
-        $si = $this->baseWhere('estudio_computacion',1,$inicio,$fin);
-        $no = $this->baseWhere('estudio_computacion',0,$inicio,$fin);
-        return $label.','.$si.','.$no;
+    public function estadisticasPersonas($campo, $valor, $inicio, $fin){
+      return $this->model->where($campo,$valor)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
 
-    public function disponibilidadManana($inicio, $fin){
-        $label = 'Manana';
-        $filial = session('usuario')['entidad_id'];
-        $si = $this->baseWhere('disponibilidad_manana',1,$inicio,$fin);
-        $no = $this->baseWhere('disponibilidad_manana',0,$inicio,$fin);
-        return $label.','.$si.','.$no;
-    }
-
-    
-    public function disponibilidadTarde($inicio, $fin){
-        $label = 'Tarde ';
-        $si = $this->baseWhere('disponibilidad_tarde',1,$inicio,$fin);
-        $no = $this->baseWhere('disponibilidad_tarde',0,$inicio,$fin);
-        return $label.','.$si.','.$no;     
-    }
-
-    public function disponibilidadNoche($inicio, $fin){
-        $label = 'Noche';
-        $si = $this->baseWhere('disponibilidad_noche',1,$inicio,$fin);
-        $no = $this->baseWhere('disponibilidad_noche',0,$inicio,$fin);
-        return $label.','.$si.','.$no;         
-    }
-
-    public function disponibilidadSabado($inicio, $fin){
-        $label = 'Sabados';
-        $si = $this->baseWhere('disponibilidad_sabados',1,$inicio,$fin);
-        $no = $this->baseWhere('disponibilidad_sabados',0,$inicio,$fin);
-        return $label.','.$si.','.$no;       
-    }
-
+  
     public function allMorosos(){
         $filial = session('usuario')['entidad_id'];
         return DB::table('persona')
