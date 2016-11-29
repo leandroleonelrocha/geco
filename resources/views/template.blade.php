@@ -13,7 +13,8 @@
     @include('templates.template_css')
     @yield('css')
   </head>
-  <body class="hold-transition skin-blue sidebar-mini">
+  <?php $h = session('usuario')['habilitado']; ?>
+  <body class="hold-transition skin-<?php if($h==1) echo 'blue'; else echo 'red'; ?> sidebar-mini">
     <div class="wrapper">
       
       @include('templates.template_nav')

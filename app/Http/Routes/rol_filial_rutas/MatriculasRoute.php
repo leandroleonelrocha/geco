@@ -71,6 +71,7 @@
 			'as'	=> 'filial.matriculas_pase_nuevo',
 			'uses'	=>	'MatriculaController@pase_nuevo'
 		]);
+	});
 
 		Route::get('matriculas_pases',[
 			'as'	=> 'filial.matriculas_pases',
@@ -86,5 +87,3 @@
 			'as'	=> 'filial.matriculas_pases_rechazar',
 			'uses'	=>	'MatriculaController@rechazar'
 		]);
-
-	});	

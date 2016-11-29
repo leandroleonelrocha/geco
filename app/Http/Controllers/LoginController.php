@@ -61,15 +61,15 @@ class LoginController extends Controller {
                     'usuario'     => 'filial@filial.com',
                     'password'    => 1234,
                     'rol_id'      => 4,
-                    'entidad_id'  => 1,
+                    'entidad_id'  => 3,
                     'habilitado'  => 1 
                     ),
                     array(
-                    'id'          => 4,
+                    'id'          => 1,
                     'usuario'     => 'filial2@filial.com',
                     'password'    => 1234,
                     'rol_id'      => 4,
-                    'entidad_id'  => 3,
+                    'entidad_id'  => 1,
                     'habilitado'  => 1 
                     )
 
