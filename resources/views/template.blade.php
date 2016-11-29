@@ -25,14 +25,6 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-          <h1>
-            Dashboard
-            <small>Control panel</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
-          </ol>
         </section>
 
         <!-- Main content -->
@@ -45,9 +37,9 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Versión</b> 1.0
+          <b>Versión</b> 0.5
         </div>
-        <strong>Copyright &copy; 2016 <a href=https://www.facebook.com/WhiteoutTeam/?fref=ts>@The Whiteout Team</a>.</strong> Reservado todos los derechos.
+        <strong><a href=https://www.facebook.com/WhiteoutTeam/?fref=ts>The Whiteout Team</a></strong>
       </footer>
 
      @include('templates.template_aside')

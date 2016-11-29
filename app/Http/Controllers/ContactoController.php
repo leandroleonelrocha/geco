@@ -41,9 +41,8 @@ class ContactoController extends Controller{
 				return view('contacto',compact('filiales'));
 			}
 
-
 			if (session('usuario')['rol_id'] == 2)
 		 		return view('contacto');
-		} 
+		 } 
 	}	
 }

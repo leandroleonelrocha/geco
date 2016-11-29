@@ -31,4 +31,14 @@
 			'uses'	=>	'DocenteController@editar_post'
 		]);
 
-	});
+		Route::get('docentes_calcularHoras/{id}',[
+			'as'	=> 'filial.docentes_calcularHoras',
+			'uses'	=>	'DocenteController@calcularHoras'
+		]);
+
+			Route::post('docentes_calcularHorasBusqueda',[
+			'as'	=> 'filial.docentes_calcularHorasBusqueda',
+			'uses'	=>	'DocenteController@calcularHorasBusqueda'
+		]);
+
+});

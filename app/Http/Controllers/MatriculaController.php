@@ -24,6 +24,7 @@ use Response;
 class MatriculaController extends Controller {
 
     protected $matriculaRepo;
+    protected $tipoDocumentoRepo;
 
     public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo)
     {

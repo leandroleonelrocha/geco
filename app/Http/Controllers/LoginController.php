@@ -62,7 +62,7 @@ class LoginController extends Controller {
                     'password'    => 1234,
                     'rol_id'      => 4,
                     'entidad_id'  => 3,
-                    'habilitado'  => 1 
+                    'habilitado'  => 0,
                     ),
                     array(
                     'id'          => 1,
@@ -116,7 +116,7 @@ class LoginController extends Controller {
         return redirect('login');
     }
 
-    public function nueva()
+    public function nueva()//contraseña
     {
       if (null !== session('usuario')){
         $rol=session('usuario')['rol_id'];
@@ -132,7 +132,9 @@ class LoginController extends Controller {
         return redirect('login');  
     }
 
-    public function post_Nueva(Request $request){
+    public function post_Nueva(Request $request)//cambio de contraseña
+    {
+
       if (null !== session('usuario')){
         $rol = session('usuario')['rol_id'];
         if ( $rol== 4 || $rol==3 || $rol==2){

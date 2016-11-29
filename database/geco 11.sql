@@ -492,9 +492,17 @@ values  ('DNI', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 --
 
 insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`,`mail`, `activo`, `created_at`, `updated_at`)
-values  (1, 12345678, 'Apellido 1', 'Nombres 1','crisdabruno@hotmail.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 23456789, 'Apellido 2', 'Nombres 2','sdsd', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+values  (1, 23456789, 'Apellido 2', 'Nombres 2','director1@prueba.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+    	(1, 23456789, 'Apellido 2', 'Nombres 2','director2@prueba.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+        (1, 12345678, 'Apellido 1', 'Nombres 1','crisdabruno@hotmail.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+       
+insert into director_telefono(`director_id`, `telefono`, `created_at`, `updated_at`) 
 
+--directores tel
+values  (1, '2222','2016-11-11 00:00:00', '2016-11-11 00:00:00');
+    	(1,  '5555', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+        (1, '222', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+       
 --
 -- Filiales
 --

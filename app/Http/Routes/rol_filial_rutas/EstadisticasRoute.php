@@ -14,7 +14,7 @@ Route::post('estadistica_preinformes_ajax',[
 	'uses' => 'EstadisticaController@estadistica_preinformes_ajax'
 ]);
 
-Route::get('detalles',[
+Route::post('detalles',[
 
 	'as' => 'estadisticas.detalles',
 	'uses' => 'EstadisticaController@detalles'
