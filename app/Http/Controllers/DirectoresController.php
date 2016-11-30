@@ -36,6 +36,7 @@ class DirectoresController extends Controller
 
 	public function lista(){
 		$directores=$this->directorRepo->allEneable();
+        dd($directores);
 		return view('rol_dueno.directores.lista', compact('directores'));	
 	}
 
