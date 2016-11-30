@@ -20,9 +20,9 @@
 					
 				      			<img src="{{asset('img/whiteoutteam.png')}}" height="200" width="200" class="img-circle">
 								<?php
-	    				    	switch (session('usuario')['rol_id']) {
+	    				    	$s= (session('usuario')['rol_id']);
 
-   								case 4 
+   								if ($s===4 || $s==2) {
        							?>
 								<table id="example1" class="table table-bordered table-striped">
 								<h4><strong>Filiales de la misma cadena</strong></h4>
@@ -59,8 +59,8 @@
 				    				</tbody>
 							    </table>
 						        <?php
-						         break;
-						         case 3 
+						         }
+						         else{
 				              	?>
 
 								<table id="example1" class="table table-bordered table-striped">
@@ -88,7 +88,7 @@
 				    				</tbody>
 							    </table>
 						        <?php
-				               	 break;
+				               	
 				              	}
 					            ?>
         

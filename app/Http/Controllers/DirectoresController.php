@@ -141,18 +141,46 @@ class DirectoresController extends Controller
     public function editar_post(EditarDirectorRequest $request){
 
         $data = $request->all();
-        $model = $this->directorRepo->find($data['id']);
-        if($this->directorRepo->edit($model,$data)){
-	      
-			$model->DirectorTelefono()->delete();
-			foreach ($data['telefono'] as $key) {
-				$telefono['director_id'] = $model->id;
-				$telefono['telefono'] = $key;
-				$this->directorTelefonoRepo->create($telefono);
-			}
-            return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido modificado con éxito.');}
+        $pass=NULL;
+        $mail=$data['maila'];
+        $mailn=$data['mail'];
+        $entidad=$data['id'];
+        if  ($mail!==$mailn) {
+            $ch = curl_init();  
+            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/3");  
+            curl_setopt($ch, CURLOPT_HEADER, false);  
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+            $pass = json_decode(curl_exec($ch),true);
+            curl_close($ch);
+            if ($pass !==null){
+                // Datos del mail
+                $user =$mailn;
+                $datosMail = array( 'filial'    => $request->nombre, 
+                                    'user'      => $user, 
+                                    'password'  => $pass);
+                // Envío del mail nuevo
+                Mail::send('mailing.actualizacion_cuenta',$datosMail,function($msj) use($user){
+                    $msj->subject('GeCo -- Actualización de Cuenta');
+                    $msj->to($user);
+                });
+            } 
+        }
+        if ($pass !==null || $mail==$mailn){
+            $model = $this->directorRepo->find($data['id']);
+            if($this->directorRepo->edit($model,$data)){
+    	      
+    			$model->DirectorTelefono()->delete();
+    			foreach ($data['telefono'] as $key) {
+    				$telefono['director_id'] = $model->id;
+    				$telefono['telefono'] = $key;
+    				$this->directorTelefonoRepo->create($telefono);
+    			}
+                return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido modificado con éxito.');}
+            else
+                return redirect()->route('dueño.directores')->with('msg_error','El director no ha podido ser modificado.');
+            }
         else
-            return redirect()->route('dueño.directores')->with('msg_error','El director no ha podido ser modificado.');
+            return redirect()->route('dueño.directores')->with('msg_error','El director no ha podido ser modificado o existe el E-mail actual.');
     }
 
   	public function editarPerfil($id){
@@ -164,22 +192,48 @@ class DirectoresController extends Controller
     }
 
     public function editarPerfil_post(Request $request){
+
         $data = $request->all();
-        $model = $this->directorRepo->find($data['id']);
-        if($this->directorRepo->edit($model,$data)){
+        $pass=NULL;
+        $mail=$data['maila'];
+        $mailn=$data['mail'];
+        $entidad=$data['id'];
+        if  ($mail!==$mailn) {
+            $ch = curl_init();  
+            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/3");  
+            curl_setopt($ch, CURLOPT_HEADER, false);  
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+            $pass = json_decode(curl_exec($ch),true);
+            curl_close($ch);
+            if ($pass !==null){
+                // Datos del mail
+                $user =$mailn;
+                $datosMail = array( 'filial'    => $request->nombre, 
+                                    'user'      => $user, 
+                                    'password'  => $pass);
+                // Envío del mail nuevo
+                Mail::send('mailing.actualizacion_cuenta',$datosMail,function($msj) use($user){
+                    $msj->subject('GeCo -- Actualización de Cuenta');
+                    $msj->to($user);
+                });
+            } 
+        }
+        if ($pass !==null || $mail==$mailn){
+            $model = $this->directorRepo->find($data['id']);
+            if($this->directorRepo->edit($model,$data)){
+    			$model->DirectorTelefono()->delete();
+    			foreach ($data['telefono'] as $key) {
 
-			$model->DirectorTelefono()->delete();
-			foreach ($data['telefono'] as $key) {
+    				$telefono['director_id'] = $model->id;
+    				$telefono['telefono'] = $key;
+    				$this->directorTelefonoRepo->create($telefono);
+    			}
 
-				$telefono['director_id'] = $model->id;
-				$telefono['telefono'] = $key;
-				$this->directorTelefonoRepo->create($telefono);
-			}
-
-	        //$this->directorTelefonoRepo->editTelefono($data['id'],$data['telefono']);
-            return redirect()->back()->with('msg_ok','El perfil del director ha sido modificado con éxito.');}
-        else
-            return redirect()->route()->with('msg_error','El perfil del director no ha podido ser modificado.');
+                return redirect()->back()->with('msg_ok','El perfil del director ha sido modificado con éxito.');}
+            else
+                return redirect()->back()->with('msg_error','El perfil del director no ha podido ser modificado.');
+        }
+        return redirect()->back()->with('msg_error','El perfil del director no ha podido ser modificado o existe el E-mail actual.');
     }
 
     public function estadisticas()

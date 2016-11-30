@@ -17,14 +17,14 @@ class LoginController extends Controller {
     }
 
     public function postLogin(Request $request){
-        /*
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
-        */  
+        
+        // $ch = curl_init();  
+        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
+        // curl_setopt($ch, CURLOPT_HEADER, false);  
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        // $data = json_decode(curl_exec($ch),true);
+        // curl_close($ch);
+          
 
         //rol 2 dueno
         //rol 3 director
@@ -146,7 +146,7 @@ class LoginController extends Controller {
             $mail=session('usuario')['usuario'];
 
             $ch = curl_init();  
-            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$request->password}/{$request->passwordActual}");  
+            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarpassword/{$mail}/{$request->password}/{$request->passwordActual}");  
             curl_setopt($ch, CURLOPT_HEADER, false);  
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
             $data = json_decode(curl_exec($ch),true);

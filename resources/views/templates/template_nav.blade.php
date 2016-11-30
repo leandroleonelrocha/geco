@@ -32,21 +32,19 @@
                   <i class="fa fa-language"></i>
                 </a>
                 <!--EMPIEZA EL BOTON QUE DESPLIEGA IDIOMA-->
+
+
                 <ul class="dropdown-menu">
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
+
                         <a href="{{ url('lang', ['es']) }}">
                           @lang('header.espanol')
                           <div class="pull-left">
                             <img src=" {{asset('dist/img/español_128.png')}}" class="img-circle" alt="User Image">
                           </div>
-                          <h4>
-                            AdminLTE Design Team
-                            <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
                         </a>
                       </li>
                       <li>
@@ -55,14 +53,9 @@
                           <div class="pull-left">
                             <img src="{{asset('dist/img/english_128.png')}}" class="img-circle" alt="User Image">
                           </div>
-                          <h4>
-                            Developers
-                            <small><i class="fa fa-clock-o"></i> Today</small>
-                          </h4>
-                          <p>Why not buy a new awesome theme?</p>
                         </a>
                       </li>
-                    
+     
                     </ul>
                   </li>
                  
@@ -73,11 +66,11 @@
                <!--ACA DEBERIA DE ESTAR EL BUSCADOR-->
               </li>
               <!-- Notifications: style can be found in dropdown.less -->
-             
+         
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="{{route('auth.getLogout')}}" class="fa fa-sign-out" > @lang('menu.salir')</a>
-                    
+ 
         
                 <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="{{asset('dist/img/log.jpg')}}" class="user-image" alt="User Image">
@@ -117,7 +110,7 @@
               </li>
               <!-- Control Sidebar Toggle Button -->
               <li>
-                
+   
               </li>
             </ul>
           </div>

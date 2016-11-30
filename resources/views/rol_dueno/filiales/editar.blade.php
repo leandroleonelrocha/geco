@@ -14,7 +14,8 @@
 							<div class="col-md-12 form-group">
 								<label>@lang('filial.cuenta')</label>
 								<input type="hidden" name="id" value="{{$filial->id}}">
-							    {!! Form::email('mail',$filial->mail,array('class'=>'form-control','disabled')) !!}
+								<input type="hidden" name="maila" value="{{$filial->mail}}">
+							    {!! Form::email('mail',$filial->mail,array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">

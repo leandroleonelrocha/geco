@@ -13,8 +13,9 @@
 							{!! Form::open(['route'=> 'filial.perfil_editarPerfil_post', 'method'=>'post']) !!}
 							<div class="col-md-12 form-group">
 								<label>@lang('filial.cuenta')</label>
-								{!! Form::text(null, $filial->mail, array('class'=>'form-control','disabled')) !!}
 								<input type="hidden" name="id" value="{{$filial->id}}">
+								<input type="hidden" name="maila" value="{{$filial->mail}}">
+							    {!! Form::email('mail',$filial->mail,array('class'=>'form-control')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
