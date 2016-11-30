@@ -12,7 +12,7 @@ return [
     'tarde'=>'Tarde',
     'noche'=>'Noche',
     'sabados'=>'Sábados',
-    'disponibilidad' => 'disponibilidad',
+    'disponibilidad' => 'Disponibilidad',
 
 
 

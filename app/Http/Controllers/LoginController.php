@@ -17,14 +17,14 @@ class LoginController extends Controller {
     }
 
     public function postLogin(Request $request){
-        /*
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
-        */  
+        
+        // $ch = curl_init();  
+        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
+        // curl_setopt($ch, CURLOPT_HEADER, false);  
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        // $data = json_decode(curl_exec($ch),true);
+        // curl_close($ch);
+          
 
         //rol 2 dueno
         //rol 3 director
@@ -61,29 +61,32 @@ class LoginController extends Controller {
                     'usuario'     => 'filial@filial.com',
                     'password'    => 1234,
                     'rol_id'      => 4,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
+                    'entidad_id'  => 3,
+                    'habilitado'  => 0,
                     ),
                     array(
-                    'id'          => 4,
+                    'id'          => 1,
                     'usuario'     => 'filial2@filial.com',
                     'password'    => 1234,
                     'rol_id'      => 4,
-                    'entidad_id'  => 3,
+                    'entidad_id'  => 1,
                     'habilitado'  => 1 
                     )
 
                   );
 
        foreach ($cuentas as $cuenta) {
-         if ($request->usuario == $cuenta['usuario']) {
+         if ($request->usuario == $cuenta['usuario'] && $request->password == $cuenta['password']) {
            $data['id']          = $cuenta['id'];
            $data['usuario']     = $cuenta['usuario'];
            $data['password']    = $cuenta['password'];
            $data['rol_id']      = $cuenta['rol_id'];
            $data['entidad_id']  = $cuenta['entidad_id'];
            $data['habilitado']  = $cuenta['habilitado'];
+           break;
          }
+         else
+          $data = null;
        }
 
 
@@ -113,7 +116,7 @@ class LoginController extends Controller {
         return redirect('login');
     }
 
-    public function nueva()
+    public function nueva()//contraseña
     {
       if (null !== session('usuario')){
         $rol=session('usuario')['rol_id'];
@@ -129,7 +132,9 @@ class LoginController extends Controller {
         return redirect('login');  
     }
 
-    public function post_Nueva(Request $request){
+    public function post_Nueva(Request $request)//cambio de contraseña
+    {
+
       if (null !== session('usuario')){
         $rol = session('usuario')['rol_id'];
         if ( $rol== 4 || $rol==3 || $rol==2){
@@ -141,7 +146,7 @@ class LoginController extends Controller {
             $mail=session('usuario')['usuario'];
 
             $ch = curl_init();  
-            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$request->password}/{$request->passwordActual}");  
+            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarpassword/{$mail}/{$request->password}/{$request->passwordActual}");  
             curl_setopt($ch, CURLOPT_HEADER, false);  
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
             $data = json_decode(curl_exec($ch),true);

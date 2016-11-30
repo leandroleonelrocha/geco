@@ -17,7 +17,8 @@
 
 							<div class="col-md-12 form-group">
 								<label>@lang('director.cuenta')</label>
-								{!! Form::text('null', $director->mail, array('class'=>'form-control','disabled')) !!}	
+								<input type="hidden" name="maila" value="{{$director->mail}}">
+							    {!! Form::email('mail',$director->mail,array('class'=>'form-control')) !!}	
 							</div>
 
 							<div class="col-md-6 form-group">

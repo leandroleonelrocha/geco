@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="../public/img/logo/Geco-Blanco.png">
 
     <title>GECO | Ingreso al sistema</title>
 
@@ -50,7 +51,8 @@
                 </div><!-- /.col -->
                 <div class="col-xs-4">
                   <button id="Send" type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
-                </div><!-- /.col -->
+                </div>
+                <br></br><!-- /.col -->
               </div>
             {!! Form::close() !!}
 

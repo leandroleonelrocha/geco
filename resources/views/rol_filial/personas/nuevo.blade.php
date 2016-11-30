@@ -65,7 +65,7 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.nivelestudios')</label>
-								{!! Form::text('nivel_estudios',null,array('class'=>'form-control')) !!}
+								{!! Form::select('nivel_estudios',['Secundario Completo' => 'Secundario Completo','Terciario' => 'Terciario','Universitario' => 'Universitario'],null,array('class' => 'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>

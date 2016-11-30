@@ -36,14 +36,16 @@ class ContactoController extends Controller{
 				return view('contacto',compact('filiales'));
 			}
 
-	     	if (session('usuario')['rol_id'] == 3){
+	     	if (session('usuario')['rol_id'] == 3 ){
 				$filiales=$this->filialesRepo->allFilialDirector();
 				return view('contacto',compact('filiales'));
 			}
 
-
-			if (session('usuario')['rol_id'] == 2)
-		 		return view('contacto');
-		} 
+			if (session('usuario')['rol_id'] == 2){
+          
+				$filiales=$this->filialesRepo->allEneable();
+		 		return view('contacto',compact('filiales'));
+		 	}
+		 } 
 	}	
 }

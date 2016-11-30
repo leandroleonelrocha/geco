@@ -27,36 +27,27 @@ class MateriaController extends Controller
 	}
 
 	public function lista(){
-		
 		$materia=$this->materiaRepo->allMateria();
 		return view('rol_filial.materias.lista',compact('materia'));
-		
 	}
 
 	public function nuevo(){
-		
 		$carreras = $this->carreraRepo->lists('nombre','id');
-		return view('rol_filial.materias.nuevo', compact('carreras'));
-			
+		return view('rol_filial.materias.nuevo', compact('carreras'));	
 	}
 
 	public function nuevo_post(CrearNuevaMateriaRequest $request){
-		
 		$this->materiaRepo->create($request->all());
-		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
-			
+		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');	
 	}
 
  	public function editar($id){
- 		
 		$carreras = $this->carreraRepo->lists('nombre','id');
 		$materia = $this->materiaRepo->find($id);
-		return view('rol_filial.materias.editar',compact('materia','carreras'));
-			
+		return view('rol_filial.materias.editar',compact('materia','carreras'));	
     }
 
     public function editar_post(EditarMateriaRequest $request){
-    	
 		$data = $request->all();
 		$model = $this->materiaRepo->find($data['id']);
 
@@ -64,19 +55,16 @@ class MateriaController extends Controller
 
         	return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
 		else
-		    return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');
-			
+		    return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');	
     }
 
     public function borrar($id){
-    	
 		if($data=$this->materiaRepo->find($id))
 			{
 		    	$data->Delete();
 		        return redirect()->back()->with('msg_ok', 'Materia eliminada correctamente');
 		        }
 		    else
-		       return redirect()->back()->with('msg_error','La materia no ha podido ser eliminada.');
-		
+		       return redirect()->back()->with('msg_error','La materia no ha podido ser eliminada.');	
     }
 }

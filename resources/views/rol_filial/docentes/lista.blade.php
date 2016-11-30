@@ -43,7 +43,8 @@
 						         	</td> 
 									<td class="text-center">
 									<a href="{{route('filial.docentes_editar',$docente->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-									<a href="{{route('filial.docentes_borrar',$docente->id)}}" title="Borrar"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('filial.docentes_borrar',$docente->id)}}" title="Borrar"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a>
+									<a href="{{route('filial.docentes_calcularHoras',$docente->id)}}" title="Horas de clase"><i class="btn btn-info glyphicon glyphicon-time"></i></a></td>
 							</tr>
 						@endforeach
 						</tbody>

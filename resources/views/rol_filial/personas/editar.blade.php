@@ -64,9 +64,10 @@
 								<label>@lang('persona.estadocivil')</label>
 								{!! Form::text('estado_civil',$persona->estado_civil,array('class'=>'form-control')) !!}
 							</div>
-							<div class="col-md-6 form-group">
+							
+								<div class="col-md-6 form-group">
 								<label>@lang('persona.nivelestudios')</label>
-								{!! Form::text('nivel_estudios',$persona->nivel_estudios,array('class'=>'form-control')) !!}
+								{!! Form::select('nivel_estudios',['Secundario Completo' => 'Secundario Completo','Terciario' => 'Terciario','Universitario' => 'Universitario'],$persona->nivel_estudios,array('class' => 'form-control')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>

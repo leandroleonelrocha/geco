@@ -142,18 +142,47 @@ class FilialesController extends Controller
     public function editar_post(EditarFilialRequest $request){
 
         $data = $request->all();
-        $model = $this->filialesRepo->find($data['id']);
-        if($this->filialesRepo->edit($model,$data)){
-           //editar telefono
-            $model->FilialTelefono()->delete();
-            foreach ($data['telefono'] as $key) {
-                $telefono['filial_id'] = $model->id;
-                $telefono['telefono'] = $key;
-                $this->filialTelefonoRepo->create($telefono);
-            }
-            return redirect()->route('dueño.filiales')->with('msg_ok','La filial ha sido modificada con éxito.');}
+        $pass=NULL;
+        $mail=$data['maila'];
+        $mailn=$data['mail'];
+        $entidad=$data['id'];
+        if  ($mail!==$mailn) {
+            $ch = curl_init();  
+            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/4");  
+            curl_setopt($ch, CURLOPT_HEADER, false);  
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+            $pass = json_decode(curl_exec($ch),true);
+            curl_close($ch);
+            if ($pass !==null){
+                // Datos del mail
+                $user =$mailn;
+                $datosMail = array( 'filial'    => $request->nombre, 
+                                    'user'      => $user, 
+                                    'password'  => $pass);
+                // Envío del mail nuevo
+                Mail::send('mailing.actualizacion_cuenta',$datosMail,function($msj) use($user){
+                    $msj->subject('GeCo -- Actualización de Cuenta');
+                    $msj->to($user);
+                });
+            } 
+        }
+        if ($pass !==null || $mail==$mailn){
+
+            $model = $this->filialesRepo->find($data['id']);
+            if($this->filialesRepo->edit($model,$data)){
+               //editar telefono
+                $model->FilialTelefono()->delete();
+                foreach ($data['telefono'] as $key) {
+                    $telefono['filial_id'] = $model->id;
+                    $telefono['telefono'] = $key;
+                    $this->filialTelefonoRepo->create($telefono);
+                }
+                return redirect()->route('dueño.filiales')->with('msg_ok','La filial ha sido modificada con éxito.');}
+            else
+                return redirect()->route('dueño.filiales')->with('msg_error','La filial no ha podido ser modificada.');
+        }
         else
-            return redirect()->route('dueño.filiales')->with('msg_error','La filial no ha podido ser modificada.');
+            return redirect()->route('dueño.filiales')->with('msg_error','La filial no ha podido ser modificada o existe el E-mail actual.');
     }
 
     public function editarPerfil($id){
@@ -166,17 +195,47 @@ class FilialesController extends Controller
     public function editarPerfil_post(EditarPerfilFilialRequest $request){
 
         $data = $request->all();
-        $model = $this->filialesRepo->find($data['id']);
-        if($this->filialesRepo->edit($model,$data)){
-          //editar telefono
-            $model->FilialTelefono()->delete();
-            foreach ($data['telefono'] as $key) {
-                $telefono['filial_id'] = $model->id;
-                $telefono['telefono'] = $key;
-                $this->filialTelefonoRepo->create($telefono);
-            }
-            return redirect()->back()->with('msg_ok','El perfil de la filial ha sido modificada con éxito.');}
+        $pass=NULL;
+        $mail=$data['maila'];
+        $mailn=$data['mail'];
+        $entidad=$data['id'];
+        if  ($mail!==$mailn) {
+            $ch = curl_init();  
+            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/4");  
+            curl_setopt($ch, CURLOPT_HEADER, false);  
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+            $pass = json_decode(curl_exec($ch),true);
+            curl_close($ch);
+            if ($pass !==null){
+                // Datos del mail
+                $user =$mailn;
+                $datosMail = array( 'filial'    => $request->nombre, 
+                                    'user'      => $user, 
+                                    'password'  => $pass);
+                // Envío del mail nuevo
+                Mail::send('mailing.actualizacion_cuenta',$datosMail,function($msj) use($user){
+                    $msj->subject('GeCo -- Actualización de Cuenta');
+                    $msj->to($user);
+                });
+            } 
+
+        }
+        if ($pass !==null || $mail==$mailn){
+
+            $model = $this->filialesRepo->find($data['id']);
+            if($this->filialesRepo->edit($model,$data)){
+               //editar telefono
+                $model->FilialTelefono()->delete();
+                foreach ($data['telefono'] as $key) {
+                    $telefono['filial_id'] = $model->id;
+                    $telefono['telefono'] = $key;
+                    $this->filialTelefonoRepo->create($telefono);
+                }
+                return redirect()->back()->with('msg_ok','El perfil de la filial ha sido modificada con éxito.');}
+            else
+                return redirect()->back()->with('msg_error','El perfil la filial no ha podido ser modificada.');
+        }
         else
-            return redirect()->back()->with('msg_error','El perfil de la filial no ha podido ser modificado.');
+            return redirect()->back()->with('msg_error','El perfil de la filial no ha podido ser modificada o existe el E-mail actual.');
     }
 }
