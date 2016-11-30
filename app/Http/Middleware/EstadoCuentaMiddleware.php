@@ -13,8 +13,7 @@ class EstadoCuentaMiddleware
      */
    
     //$filial = session('usuario')['entidad_id'];
-    public function handle($request, Closure $next)
-    {
+    public function handle($request, Closure $next){
         $estado=session('usuario')['habilitado'];
        	$habilitado = 1;
         //ROL FILIAL
@@ -23,11 +22,6 @@ class EstadoCuentaMiddleware
         else
             // session()->flush(); // Elimina todos los datos de la session
             // return redirect('login');
-            return redirect()->back()->with('estado_cuenta', 'Su cuenta no esta habilitada para utilizar nuestros servicio');
-
-        
-   
+            return redirect()->back()->with('estado_cuenta', 'Su cuenta no esta habilitada, esta funcionalidad ha sido bloqueda.');
     }
-
-
 }

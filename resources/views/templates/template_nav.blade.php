@@ -6,7 +6,7 @@
          
             <div class="pull-left info magia">
               
-              <a href="#"><i class="fa fa-circle text-success "></i></a>
+              <a href="#"><i class="fa fa-circle text-<?php if($h==1) echo 'success'; else echo 'danger'; ?> "></i></a>
             </div>
            
           <div class="pull-left image" style="margin-top: -0.4%"> <!--PASAR A CSS!!!!!!!!!!!ESTO ES INACEPTABLE-->

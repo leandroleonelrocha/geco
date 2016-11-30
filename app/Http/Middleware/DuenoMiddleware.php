@@ -22,8 +22,7 @@ class DuenoMiddleware
         if($rol == 2)
             return $next($request);
         else
-            session()->flush(); // Elimina todos los datos de la session
-            return redirect('login');
+            return redirect()->back();
         
     
     }
