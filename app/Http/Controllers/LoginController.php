@@ -62,7 +62,7 @@ class LoginController extends Controller {
                     'password'    => 1234,
                     'rol_id'      => 4,
                     'entidad_id'  => 3,
-                    'habilitado'  => 0,
+                    'habilitado'  => 1,
                     ),
                     array(
                     'id'          => 1,

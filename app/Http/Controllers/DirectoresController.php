@@ -16,6 +16,7 @@ use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
+use App\Http\Funciones\ManejoDeFechas;
 use Mail;
 
 class DirectoresController extends Controller
@@ -237,14 +238,19 @@ class DirectoresController extends Controller
         return redirect()->back()->with('msg_error','El perfil del director no ha podido ser modificado o existe el E-mail actual.');
     }
 
+
+
     public function estadisticas()
     {
+        $m = ManejoDeFechas::ManejoDeFechas('1');
+        dd($m);
     	return view('rol_director.estadisticas.index');
     }
 
     public function estadisticas_detalles(Request $request){
 
-    	return view('rol_director.estadisticas.detalles');
+
+    	return view('rol_director.estadisticas.index');
     }
 
 }

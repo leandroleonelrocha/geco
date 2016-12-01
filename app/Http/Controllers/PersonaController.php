@@ -35,7 +35,9 @@ class PersonaController extends Controller {
 
     // Página principal de Acesor
     public function lista(){
-        
+
+
+
         $persona = $this->personaRepo->allEneable(); // Obtención de todos las personas activos
         return view('rol_filial.personas.lista',compact('persona'));
      
@@ -44,6 +46,8 @@ class PersonaController extends Controller {
     // Página de Nuevo
     public function nuevo(){
        
+
+
         $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
  

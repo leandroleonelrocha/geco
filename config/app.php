@@ -210,7 +210,10 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
 
         //PDF
-        // 'PDF' => 'Barryvdh\DomPDF\Facade',
+        //'PDF' => 'Barryvdh\DomPDF\Facade',
+
+        //Funciones globales para funciones
+        //'rocho'     => App\Http\Funciones\ManejoDeFechas::class,  
         
     ],
 
