@@ -32,7 +32,7 @@
 							    <tr role="row" class="odd">
 
 							        <td class="sorting_1">{{ $examen->nro_acta }}</td>
-						        	<td>@if(isset($examen->Grupo->fullname)) @endif </td>
+						        	<td>@if(isset($examen->Grupo)) {{$examen->Grupo->fullname}} @endif  </td>
 						        	<td>{{ $examen->Docente->fullname }}</td>
 						       
 						           
