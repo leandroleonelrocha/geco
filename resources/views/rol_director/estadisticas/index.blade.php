@@ -133,6 +133,7 @@ $(function () {
                 if(isset($preinforme))
                 {
                     foreach ($preinforme as $key => $value) {
+                      
                     ?>
                       [ '{{$key}}', {{$value->count()}} ],
                     <?php

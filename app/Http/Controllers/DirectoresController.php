@@ -305,9 +305,9 @@ class DirectoresController extends Controller
 
         $this->data['secion'] = 'preinforme';
         $this->data['preinforme'] = $this->directorRepo->estadisticasPreInformes($inicio, $fin)->get()->groupBy('como_encontro');
-        dd($this->data);
+        
 
-        return view('rol_filial.estadisticas.index')->with($this->data);
+        return view('rol_director.estadisticas.index')->with($this->data);
     }
 
 
