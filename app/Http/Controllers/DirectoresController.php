@@ -241,9 +241,10 @@ class DirectoresController extends Controller
 
 
     public function estadisticas()
-    {
-        $m = ManejoDeFechas::ManejoDeFechas('1');
-        dd($m);
+    {   
+       $m = new ManejoDeFechas;
+       dd($m->inicio_fecha('1'));
+     
     	return view('rol_director.estadisticas.index');
     }
 
