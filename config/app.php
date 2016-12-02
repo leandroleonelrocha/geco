@@ -212,8 +212,6 @@ return [
         //PDF
         //'PDF' => 'Barryvdh\DomPDF\Facade',
 
-        //Funciones globales para funciones
-        //'rocho'     => App\Http\Funciones\ManejoDeFechas::class,  
         
     ],
 
