@@ -8,7 +8,7 @@
   <div class="col-lg-6 col-xs-6">
   <div class="small-box bg-yellow">
   <div class="inner">
-  <h1> {{$persona}} </h1>
+  <h1>  </h1>
   <p>Personas Inscriptas</p>
   </div>
   <div class="icon">
@@ -20,7 +20,7 @@
   <div class="col-lg-6 col-xs-6">
   <div class="small-box bg-yellow">
   <div class="inner">
-  <h1> {{$asesores}} </h1>
+  <h1>  </h1>
   <p>Asesores Registrados</p>
   </div>
   <div class="icon">
@@ -36,40 +36,22 @@
     <h3 class="box-title">Ingrese una fecha y opción</h3>
    </div>
   <div class="box-body">
-
-    {!! Form::model(Request::all(), ['route'=> 'estadisticas.detalles', 'method'=>'post', 'class'=>'form-horizontal'] ) !!} 
+   {!! Form::model(Request::all(), ['route'=> 'estadisticas.detalles', 'method'=>'post', 'class'=>'form-horizontal'] ) !!}
       @include('partials.estadisticas.view_form')
     {!! Form::close() !!}
-    
   </div>
 </div>
 
+@if(isset($secion))
 
-  @if(isset($genero))
-  <div class="row">
-      <div class="col-lg-12 col-xs-12"> 
-      @include('partials.estadisticas.view_genero', ['titulo' => 'Inscriptos por géneros'])
-      @include('partials.estadisticas.view_nivelestudio', ['titulo' => 'Nivel de estudios'])
-  </div>
-      </div>
-  @endif
-
-  @if(isset($preinforme))
-    <div class="row">
-        <div class="col-lg-12 col-xs-12"> 
-      @include('partials.estadisticas.view_genero', ['titulo' => 'Pre informes'])  
-    </div>
-        </div>
-  @endif
+    @if($secion == 'inscripcion')
+        @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
+    @endif
 
 
-  @if(isset($inscripcion))
-     <div class="row">
-        <div class="col-lg-12 col-xs-12"> 
-     @include('partials.estadisticas.view_porpersona', ['titulo' => 'Estadísticas por personas'])
-        </div>
-     </div>
-  @endif
+
+@endif
+
 
 @endsection
 
@@ -77,7 +59,7 @@
 @section('js')
 <script type="text/javascript">
 $(function () {
-    
+    //Grafico torata para generos
     $('#torta').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -89,7 +71,7 @@ $(function () {
         },
         title: {
             <?php if(isset($total)){?>
-            text: ' Cantidad de inscriptos: {{$total}} '
+            text: ' Cantidad de inscriptos: {{$totalPersonasFilial}} '
             <?php }?>
             
         },
@@ -113,61 +95,48 @@ $(function () {
             type: 'pie',
             name: 'Genero',
             data: [
-
+                //si existe genero
                 <?php
                 if(isset($genero))
                 {
-
                     foreach ($genero as $key => $value) {
-                                                     
                     ?>
                      ['{{$value['nombre']}}', {{$value['count'] }} ],
                     <?php
                     }
                 }
                 ?>
-
+                //si existe preinforme
                  <?php
                 if(isset($preinforme))
                 {
-
                     foreach ($preinforme as $key => $value) {
                     ?>
-
-                     [ '{{$key}}', {{$value->count()}} ],
-                
-                 
+                      [ '{{$key}}', {{$value->count()}} ],
                     <?php
                     }
                 }
                 ?>
-            
-
 
             ]
         }]
     });//Fin de la torta
 
-
-        //BAR CHART
+        //grafico disponibilidad por persona
         var bar = new Morris.Bar({
           element: 'bar-chart',
           resize: true,
           data: [
               <?php
-              if(isset($inscripcion))
+              if(isset($disponibilidad))
                {
-             for($i=0; $i<count($inscripcion); $i++){
-             
+             for($i=0; $i<count($disponibilidad); $i++){
               ?>
-
-               {y: '{{$inscripcion[$i]['label']}}', a: {{$inscripcion[$i]['si']}}, b: {{$inscripcion[$i]['no']}} },
-           
+               {y: '{{$disponibilidad[$i]['label']}}', a: {{$disponibilidad[$i]['si']}}, b: {{$disponibilidad[$i]['no']}} },
               <?php
                }
                 }
               ?>
-           
           ],
           barColors: ['#00a65a', '#f56954'],
           xkey: 'y',
@@ -176,7 +145,7 @@ $(function () {
           hideHover: 'auto'
         });
    
-        //DONUT CHART
+       //Grafico por nivel de estudios
         var donut = new Morris.Donut({
           element: 'sales-chart',
           resize: true,
@@ -184,9 +153,9 @@ $(function () {
           data: [
 
             <?php
-            if(isset($nivel))
+            if(isset($nivelEstudios))
             { 
-              foreach($nivel as $val => $key){
+              foreach($nivelEstudios as $val => $key){
             ?>
 
             {label: "{{$val}}", value: {{$key->count()}}},
@@ -202,7 +171,6 @@ $(function () {
 });
 </script>
 
-    <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
 <script src="{{asset('js/Highcharts-4.1.5/js/highcharts.js')}}"></script>

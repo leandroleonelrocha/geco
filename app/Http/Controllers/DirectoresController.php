@@ -16,7 +16,7 @@ use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
-use App\Http\Funciones\ManejoDeFechas;
+
 use Mail;
 
 class DirectoresController extends Controller
@@ -242,15 +242,61 @@ class DirectoresController extends Controller
 
     public function estadisticas()
     {
-        $m = ManejoDeFechas::ManejoDeFechas('1');
-        dd($m);
+
+
     	return view('rol_director.estadisticas.index');
     }
 
     public function estadisticas_detalles(Request $request){
 
 
+
+        $array = explode("-", $request->get('fecha'));
+        $inicio = helpersfuncionFecha($array[0]);
+        $fin =  helpersfuncionFecha($array[1]);
+        $tipo = $request->selectvalue;
+
+
+        switch ($tipo) {
+
+            case 'inscripcion':
+                return 'inscripcion'; break;
+
+            case 'preinforme':
+                return $this->estadisticasDirectorInscripcion($inicio, $fin); break;
+
+            case 'recaudacion':
+                return $this->estadisticasDirectorRecaudacion($inicio, $fin); break;
+
+            case 'morosidad':
+                return $this->estadisticasDirectorMorisidad($inicio, $fin); break;
+
+            case 'examen':
+                return $this->estadisticasDirectorExamen($inicio, $fin); break;
+        }
+
     	return view('rol_director.estadisticas.index');
     }
+
+
+    public function estadisticasDirectorInscripcion($inicio, $fin){
+
+
+    }
+
+    public function estadisticasDirectorRecaudacion($inicio, $fin){
+
+    }
+
+    public function estadisticasDirectorMorisidad($inicio, $fin){
+
+    }
+
+    public function estadisticasDirectorExamen($inicio, $fin){
+
+    }
+
+
+
 
 }

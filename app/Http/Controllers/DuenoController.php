@@ -35,18 +35,16 @@ class DuenoController extends Controller
 		$data['total_persona'] = $this->personaRepo->all()->count();
 		$data['total_filial']  = $this->filialRepo->all()->count();
 		$data['total_asesor']  = $this->asesorRepo->all()->count();
-		
-		
+
 		return view('rol_dueno.estadisticas.index')->with($data);	
 	}
 
 	public function detalles(Request $request){
 
 
-
-		$array = explode("-", $request->get('fecha'));	
-		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
-		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
+		$array = explode("-", $request->get('fecha'));
+        $inicio = helpersfuncionFecha($array[0]);
+        $fin =  helpersfuncionFecha($array[1]);
 		$tipo = $request->selectvalue;
 		
 
@@ -74,27 +72,29 @@ class DuenoController extends Controller
 
 	public function estadisticasDuenoInscripcion($inicio, $fin)
 	{
-			$labels=['estudio_computacion', 'posee_computadora', 'disponibilidad_manana', 'disponibilidad_tarde', 'disponibilidad_noche', 'disponibilidad_sabados'];
-			$inscripcion =[];
+			$labels  = helperslabelsEstadisticas();
+            $nombres = helpersnombresEstadisticas();
+            $inscripcion =[];
 			$total = $this->personaRepo->all()->count();
 
 			for($i =0; $i<count($labels); $i++ ){
-				$data['label'] = $labels[$i];
+                $data['label'] = $nombres[$i];
 				$data['si'] = $this->duenoRepo->poseeComputadora($labels[$i], 1, $inicio, $fin);
 				$data['no'] = $this->duenoRepo->poseeComputadora($labels[$i], 0, $inicio, $fin);
 				array_push($inscripcion, $data);
 			}
 
 			$genero = $this->duenoRepo->getGenero($inicio,$fin);
+            $nivel  = $this->duenoRepo->estadisticasNivelEstudios($inicio, $fin);
 				
-			return view('rol_dueno.estadisticas.index',compact('total', 'inscripcion', 'genero'));
+			return view('rol_dueno.estadisticas.index',compact('total', 'inscripcion', 'genero', 'nivel'));
 	}
 
 
 	public function estadisticasDuenoPreinforme($inicio, $fin){
 
 		$preinforme = $this->duenoRepo->preInformes($inicio, $fin)->get()->groupBy('como_encontro');
-	
+
 		return view('rol_dueno.estadisticas.index', compact('preinforme'));	
 	}
 
