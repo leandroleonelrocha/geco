@@ -240,14 +240,12 @@ class DirectoresController extends Controller
 
 
 
-    public function estadisticas()
+    public function estadisticas(){
 
     	return view('rol_director.estadisticas.index');
     }
 
     public function estadisticas_detalles(Request $request){
-
-
 
         $array = explode("-", $request->get('fecha'));
         $inicio = helpersfuncionFecha($array[0]);
@@ -258,10 +256,10 @@ class DirectoresController extends Controller
         switch ($tipo) {
 
             case 'inscripcion':
-                return 'inscripcion'; break;
+                return $this->estadisticasDirectorInscripcion($inicio, $fin); break;
 
             case 'preinforme':
-                return $this->estadisticasDirectorInscripcion($inicio, $fin); break;
+                return $this->estadisticasDirectorPreInforme($inicio, $fin); break;
 
             case 'recaudacion':
                 return $this->estadisticasDirectorRecaudacion($inicio, $fin); break;
@@ -279,8 +277,39 @@ class DirectoresController extends Controller
 
     public function estadisticasDirectorInscripcion($inicio, $fin){
 
+            //todas las filiales que le correspondan al director
+
+
+
+            $secion = 'inscripcion';
+            $labels  = helperslabelsEstadisticas();
+            $nombres = helpersnombresEstadisticas();
+            $disponibilidad =[];
+            //$total = $this->personaRepo->all()->count();
+            
+            for($i =0; $i<count($labels); $i++ ){
+                $data['label'] = $nombres[$i];
+                $data['si'] = $this->directorRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
+                $data['no'] = $this->directorRepo->estadisticasPersonas($labels[$i], 0, $inicio, $fin);
+                array_push($disponibilidad, $data);
+            }
+
+            $genero = $this->directorRepo->getGenero($inicio,$fin);
+            $nivel  = $this->directorRepo->estadisticasNivelEstudios($inicio, $fin);
+            
+            return view('rol_director.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivel', 'secion'));
 
     }
+
+    public function estadisticasDirectorPreInforme($inicio, $fin){
+
+        $this->data['secion'] = 'preinforme';
+        $this->data['preinforme'] = $this->directorRepo->estadisticasPreInformes($inicio, $fin)->get()->groupBy('como_encontro');
+        dd($this->data);
+
+        return view('rol_filial.estadisticas.index')->with($this->data);
+    }
+
 
     public function estadisticasDirectorRecaudacion($inicio, $fin){
 

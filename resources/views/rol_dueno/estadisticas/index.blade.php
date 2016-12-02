@@ -21,27 +21,18 @@
 </div>
 </div>
 
-@if(isset($genero))
-    <div class="row">
-        <div class="col-lg-12 col-xs-12">
-            @include('partials.estadisticas.view_genero', ['titulo' => 'Total de inscripciones por géneros'])
-            @include('partials.estadisticas.view_nivelestudio', ['titulo' => 'Nivel de estudios'])
-        </div>
-    </div>
+@if(isset($secion))
+
+    @if($secion == 'inscripcion')
+        @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
+    @endif
+
+    @if($secion == 'preinforme')
+        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
+    @endif
+
+
 @endif
-
-@if(isset($preinforme))
-    <div id="torta"></div>
-    <br><br>
-@endif
-
-
-
-@if(isset($inscripcion))
-    @include('partials.estadisticas.view_porpersona', ['titulo' => 'Estadisticas total de personas'])
-@endif
-
-
 
 
 @endsection

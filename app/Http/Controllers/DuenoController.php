@@ -71,7 +71,8 @@ class DuenoController extends Controller
 
 
 	public function estadisticasDuenoInscripcion($inicio, $fin)
-	{
+	{		
+			$secion = 'inscripcion';
 			$labels  = helperslabelsEstadisticas();
             $nombres = helpersnombresEstadisticas();
             $inscripcion =[];
@@ -85,17 +86,18 @@ class DuenoController extends Controller
 			}
 
 			$genero = $this->duenoRepo->getGenero($inicio,$fin);
-            $nivel  = $this->duenoRepo->estadisticasNivelEstudios($inicio, $fin);
+            $nivelEstudios  = $this->duenoRepo->estadisticasNivelEstudios($inicio, $fin);
 				
-			return view('rol_dueno.estadisticas.index',compact('total', 'inscripcion', 'genero', 'nivel'));
+			return view('rol_dueno.estadisticas.index',compact('total', 'inscripcion', 'genero', 'nivel', 'secion'));
 	}
 
 
 	public function estadisticasDuenoPreinforme($inicio, $fin){
 
+		$secion = 'preinforme';
 		$preinforme = $this->duenoRepo->preInformes($inicio, $fin)->get()->groupBy('como_encontro');
 
-		return view('rol_dueno.estadisticas.index', compact('preinforme'));	
+		return view('rol_dueno.estadisticas.index', compact('preinforme','secion'));	
 	}
 
 	public function estadisticasDuenoRecaudacion($inicio, $fin){

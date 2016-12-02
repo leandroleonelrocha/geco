@@ -60,4 +60,141 @@
 </div>
 </div>
 </div>
+
+
+@if(isset($secion))
+
+    @if($secion == 'inscripcion')
+        @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
+    @endif  
+
+    @if($secion == 'preinforme')
+        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
+    @endif
+
+
+@endif
+
 @endsection
+
+
+@section('js')
+<script type="text/javascript">
+$(function () {
+    //Grafico torata para generos
+    $('#torta').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        exporting: {
+         enabled: false
+        },
+        title: {
+            <?php if(isset($total)){?>
+            text: ' Cantidad de inscriptos: {{$totalPersonasFilial}} '
+            <?php }?>
+            
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: 'Genero',
+            data: [
+                //si existe genero
+                <?php
+                if(isset($genero))
+                {
+                    foreach ($genero as $key => $value) {
+                    ?>
+                     ['{{$value['nombre']}}', {{$value['count'] }} ],
+                    <?php
+                    }
+                }
+                ?>
+                //si existe preinforme
+                 <?php
+                if(isset($preinforme))
+                {
+                    foreach ($preinforme as $key => $value) {
+                    ?>
+                      [ '{{$key}}', {{$value->count()}} ],
+                    <?php
+                    }
+                }
+                ?>
+            ]
+        }]
+    });//Fin de la torta
+
+        //grafico disponibilidad por persona
+        var bar = new Morris.Bar({
+          element: 'bar-chart',
+          resize: true,
+          data: [
+              <?php
+              if(isset($disponibilidad))
+               {
+             for($i=0; $i<count($disponibilidad); $i++){
+              ?>
+               {y: '{{$disponibilidad[$i]['label']}}', a: {{$disponibilidad[$i]['si']}}, b: {{$disponibilidad[$i]['no']}} },
+              <?php
+               }
+                }
+              ?>
+          ],
+          barColors: ['#00a65a', '#f56954'],
+          xkey: 'y',
+          ykeys: ['a','b'],
+          labels: ['SI','NO'],
+          hideHover: 'auto'
+        });
+   
+       //Grafico por nivel de estudios
+        var donut = new Morris.Donut({
+          element: 'sales-chart',
+          resize: true,
+          colors: ["#3c8dbc", "#f56954", "#00a65a"],
+          data: [
+
+            <?php
+            if(isset($nivelEstudios))
+            { 
+              foreach($nivelEstudios as $val => $key){
+            ?>
+
+            {label: "{{$val}}", value: {{$key->count()}}},
+           
+            <?php
+              }
+            }
+            ?>
+          ],
+          hideHover: 'auto'
+        });
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="{{asset('plugins/morris/morris.min.js')}}"></script>
+<script src="{{asset('js/Highcharts-4.1.5/js/highcharts.js')}}"></script>
+<script src="{{asset('js/Highcharts-4.1.5/js/modules/exporting.js')}}"></script>
+@endsection
+
+

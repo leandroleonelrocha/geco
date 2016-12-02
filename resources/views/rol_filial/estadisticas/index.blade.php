@@ -48,7 +48,7 @@
         @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
     @endif
 
-
+  
 
 @endif
 
