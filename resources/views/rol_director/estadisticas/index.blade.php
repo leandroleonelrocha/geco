@@ -5,7 +5,7 @@
              
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>2</h3>
+                  <h3>@if(isset($totalFiliales)) {{$totalFiliales}}@endif</h3>
                   <p>Filiales</p>
                 </div>
                 <div class="icon">
@@ -18,7 +18,7 @@
             
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>53</h3>
+                  <h3>@if(isset($totalPersonas)) {{$totalPersonas}}@endif</h3>
                   <p>Personas</p>
                 </div>
                 <div class="icon">
@@ -31,7 +31,7 @@
               
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>3</h3>
+                  <h3>@if(isset($totalAsesores)) {{$totalAsesores}}@endif</h3>
                   <p>Asesores</p>
                 </div>
                 <div class="icon">
@@ -53,7 +53,7 @@
     </div>
   </div>
   <div class="box-body">
-    {!! Form::model(Request::all(), ['route'=> 'director.estadisticas_detalles', 'method'=>'post', 'class'=>'form-horizontal']) !!} 
+    {!! Form::model(Request::all(), ['route'=> 'director.detalles', 'method'=>'post', 'class'=>'form-horizontal']) !!}
       @include('partials.estadisticas.view_form')
     {!! Form::close() !!}
   </div>

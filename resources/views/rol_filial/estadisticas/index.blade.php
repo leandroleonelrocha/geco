@@ -48,6 +48,10 @@
         @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
     @endif
 
+    @if($secion == 'preinforme')
+        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
+    @endif
+
   
 
 @endif

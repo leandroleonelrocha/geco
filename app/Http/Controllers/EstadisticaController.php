@@ -120,7 +120,6 @@ class EstadisticaController extends Controller
         $this->data['secion'] = 'preinforme';
 		$this->data['preinforme'] = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
 
-
 		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
 
@@ -143,6 +142,9 @@ class EstadisticaController extends Controller
 
 	public function estadisticasFilialExamen($inicio, $fin)
 	{
+       $examenes= $this->examenRepo->allExamenFilialMatricula();
+
+
 		return 'examen';
 	}
 

@@ -22,6 +22,7 @@ use Mail;
 class DirectoresController extends Controller
 {
 	protected $directorRepo;
+    protected $data;
 
 	public function __construct( DirectorRepo $directorRepo,TipoDocumento $tipoDocumentoRepo, DirectorTelefonoRepo $directorTelefonoRepo,FilialRepo $filialRepo){
 		
@@ -29,6 +30,9 @@ class DirectoresController extends Controller
 		$this->tipoDocumentoRepo = $tipoDocumentoRepo;
 		$this->directorTelefonoRepo = $directorTelefonoRepo;
         $this->filialRepo = $filialRepo;
+        $this->data['totalFiliales'] = count($this->directorRepo->filialDirectores());
+        $this->data['totalPersonas'] = $this->directorRepo->countTotalPersonas();
+        $this->data['totalAsesores'] = $this->directorRepo->countTotalAsesores();
 	}
 
 	public function index(){
@@ -242,10 +246,11 @@ class DirectoresController extends Controller
 
     public function estadisticas(){
 
-    	return view('rol_director.estadisticas.index');
+
+    	return view('rol_director.estadisticas.index')->with($this->data);
     }
 
-    public function estadisticas_detalles(Request $request){
+    public function detalles(Request $request){
 
         $array = explode("-", $request->get('fecha'));
         $inicio = helpersfuncionFecha($array[0]);
@@ -295,9 +300,9 @@ class DirectoresController extends Controller
             }
 
             $genero = $this->directorRepo->getGenero($inicio,$fin);
-            $nivel  = $this->directorRepo->estadisticasNivelEstudios($inicio, $fin);
+            $nivelEstudios  = $this->directorRepo->estadisticasNivelEstudios($inicio, $fin);
             
-            return view('rol_director.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivel', 'secion'));
+            return view('rol_director.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivelEstudios', 'secion'));
 
     }
 

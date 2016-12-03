@@ -3,6 +3,8 @@
 namespace App\Http\Repositories;
 use App\Entities\Director;
 use App\Entities\Filial;
+use App\Entities\AsesorFilial;
+
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use App\Http\Repositories\BaseRepo;
@@ -34,6 +36,7 @@ class DirectorRepo extends BaseRepo {
 
     public function filialDirectores(){
         $email    = session('usuario')['usuario'];
+
         $director = $this->model->where('activo', 1)->where('mail', $email)->first();
         $data_id  = [];
         foreach ($director->Filial as $value) {
@@ -44,8 +47,21 @@ class DirectorRepo extends BaseRepo {
     }
 
     public function countTotal($inicio, $fin){
-        return Persona::where('filial_id', $this->filial)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
+        $filial_id = $this->filialDirectores();
+        return Persona::whereIn('filial_id', $filial_id)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
+
+    public function countTotalPersonas(){
+        $filial_id = $this->filialDirectores();
+        return Persona::whereIn('filial_id', $filial_id)->get()->count();
+    }
+
+    public function countTotalAsesores(){
+        $filial_id = $this->filialDirectores();
+        return AsesorFilial::whereIn('filial_id', $filial_id)->get()->count();
+    }
+
+
 
     public function getGenero($inicio, $fin){
 

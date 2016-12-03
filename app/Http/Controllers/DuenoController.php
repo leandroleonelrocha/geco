@@ -75,20 +75,20 @@ class DuenoController extends Controller
 			$secion = 'inscripcion';
 			$labels  = helperslabelsEstadisticas();
             $nombres = helpersnombresEstadisticas();
-            $inscripcion =[];
+            $disponibilidad =[];
 			$total = $this->personaRepo->all()->count();
 
 			for($i =0; $i<count($labels); $i++ ){
                 $data['label'] = $nombres[$i];
 				$data['si'] = $this->duenoRepo->poseeComputadora($labels[$i], 1, $inicio, $fin);
 				$data['no'] = $this->duenoRepo->poseeComputadora($labels[$i], 0, $inicio, $fin);
-				array_push($inscripcion, $data);
+				array_push($disponibilidad, $data);
 			}
 
 			$genero = $this->duenoRepo->getGenero($inicio,$fin);
             $nivelEstudios  = $this->duenoRepo->estadisticasNivelEstudios($inicio, $fin);
 				
-			return view('rol_dueno.estadisticas.index',compact('total', 'inscripcion', 'genero', 'nivel', 'secion'));
+			return view('rol_dueno.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivelEstudios', 'secion'));
 	}
 
 

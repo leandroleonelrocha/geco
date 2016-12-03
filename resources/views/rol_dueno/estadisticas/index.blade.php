@@ -111,9 +111,9 @@ $(function () {
           resize: true,
           data: [
               <?php
-              if(isset($inscripcion))
+              if(isset($disponibilidad))
                {
-              foreach($inscripcion as $insc ){
+              foreach($disponibilidad as $insc ){
               ?>
                {y: '{{$insc["label"]}}', a: {{$insc["si"]}}, b: {{$insc["no"]}} },
               <?php
@@ -135,9 +135,9 @@ $(function () {
         colors: ["#3c8dbc", "#f56954", "#00a65a"],
         data: [
            <?php
-           if(isset($nivel))
+           if(isset($nivelEstudios))
            {
-            foreach ($nivel as $key => $value) {
+            foreach ($nivelEstudios as $key => $value) {
             ?>
             //{label: "Download Sales", value: 12},
             { label:'{{$key}}', value: {{$value->count()}} },
