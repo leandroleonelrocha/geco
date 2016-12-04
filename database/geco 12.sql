@@ -403,21 +403,31 @@ foreign key 	(grupo_id)					  references grupo		(id),
 foreign key 	(matricula_id)				references matricula	(id)
 );
 
+create table if not exists clase_estado(
+id 				int(11) not null auto_increment,
+estado			varchar(20) not null,
+created_at  	timestamp not null default '0000-00-00 00:00:00',
+updated_at  	timestamp not null default '0000-00-00 00:00:00',
+primary key 	(id)
+);
+
 create table if not exists clase(
 id 				int(11) not null auto_increment,
+clase_estado_id	int not null,
 grupo_id		int not null,
 fecha			datetime not null,
 docente_id		int not null,
 dia				int(1) not null,
 horario_desde	time not null,
 horario_hasta	time not null,
-estado 			boolean not null default true,
+enviado 		boolean not null default false,
 descripcion		varchar(300),
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key		(id),
-foreign key		(grupo_id)			references grupo	(id),
-foreign key		(docente_id)		references docente	(id)
+foreign key		(clase_estado_id)	references clase_estado	(id),
+foreign key		(grupo_id)			references grupo		(id),
+foreign key		(docente_id)		references docente		(id)
 );
 
 create table if not exists clase_matricula(
@@ -450,7 +460,6 @@ foreign key				(grupo_id)								              references grupo	  (id),
 foreign key 			(carrera_id, materia_id)				        references materia	(carrera_id, id),
 foreign key 			(docente_id)							              references docente	(id)
 );
-
 
 create table if not exists mailing(
 id 					int(11) not null auto_increment,
@@ -492,16 +501,18 @@ values  ('DNI', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 --
 
 insert into director (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`,`mail`, `activo`, `created_at`, `updated_at`)
-values  (1, 23456789, 'Apellido 2', 'Nombres 2','director1@prueba.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
-    	(1, 23456789, 'Apellido 2', 'Nombres 2','director2@prueba.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
-        (1, 12345678, 'Apellido 1', 'Nombres 1','crisdabruno@hotmail.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-       
-insert into director_telefono(`director_id`, `telefono`, `created_at`, `updated_at`) 
+values  (1, 23456789, 'Apellido 2', 'Nombres 2','director1@prueba.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+    	(1, 23456785, 'Apellido 2', 'Nombres 2','director2@prueba.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 12345678, 'Apellido 1', 'Nombres 1','crisdabruno@hotmail.com', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
---directores tel
-values  (1, '2222','2016-11-11 00:00:00', '2016-11-11 00:00:00');
-    	  (1,  '5555', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
-        (1, '222', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+--
+-- Directores Tel
+--
+
+insert into director_telefono(`director_id`, `telefono`, `created_at`, `updated_at`) 
+values  (1, '2222','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+    	(1,  '5555', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, '222', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
        
 --
 -- Filiales
@@ -519,6 +530,13 @@ values  (1, 'Filial 1', 'Direccion 1', 'Localidad', 1234, 1, 'filial@test.com', 
 insert into asesor (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `direccion`, `localidad`, `activo`, `created_at`, `updated_at`)
 values  (1, 12345678, 'Apellido 1', 'Nombres 1', 'Guateico 4323', 'Catan', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
   		(1, 23456789, 'Apellido 2', 'Nombres 2', 'Guateico 4323', 'Catan', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Docentes
+--
+
+insert into docente (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `descripcion`, `disponibilidad_manana`, `disponibilidad_tarde`, `disponibilidad_noche`, `disponibilidad_sabados`, `filial_id`, `activo`, `created_at`, `updated_at`)
+values  (1, 1234567, 'Apellido 1', 'Nombres 1', 'Sin Descripción.', 1, 1, 1, 1, 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Personas
@@ -557,6 +575,19 @@ values  (1, 'Carrera 1', '50 Días', 'Sin Descripción.', '2016-11-11 00:00:00',
         (3, 'Carrera 3', '50 Días', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
+-- Materias
+--
+
+insert into materia (`carrera_id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
+values  (1, 'Materia 1', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Materia 2', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Materia 3', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 'Materia 4', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 'Materia 5', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3, 'Materia 6', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3, 'Materia 7', 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
 -- Matrículas
 --
 
@@ -579,3 +610,18 @@ values  (1000, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 1
         (1002, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1002, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1002, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Grupos
+--
+
+insert into grupo (`curso_id`, `carrera_id`, `materia_id`, `descripcion`, `docente_id`, `nuevo`, `turno_manana`, `turno_tarde`, `turno_noche`, `sabados`, `fecha_inicio`, `fecha_fin`, `filial_id`, `activo`, `terminado`, `cancelado`, `created_at`, `updated_at`)
+values  (1, null, null, 'Grupo 1', 1, 0, 1, 1, 1, 1, '2016-12-01', '2017-06-22', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+--
+-- Clase Estado
+--
+
+insert into clase_estado (`estado`, `created_at`, `updated_at`)
+values  ('Pendiente', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+        ('Cancelado', '0000-00-00 00:00:00', '0000-00-00 00:00:00');

@@ -6,12 +6,18 @@ class Clase extends Entity {
     protected  $table= 'clase';
    // protected $primaryKey= 'id_curso';
 
-    protected $fillable   = ['id', 'grupo_id','fecha', 'descripcion','docente_id', 'horario_desde', 'horario_hasta'];
+    protected $fillable   = ['id', 'clase_estado_id', 'grupo_id', 'fecha', 'descripcion', 'docente_id', 'horario_desde', 'horario_hasta', 'enviado'];
 
+    public function getFechaAttribute($value)
+    {
+        return date("d/m/Y", strtotime($value));
+        
+    }
+
+    // Relaciones
     public function Matricula()
     {
     	return $this->belongsToMany(Matricula::getClass())->withPivot('asistio');
-
     }
 
     public function Grupo()

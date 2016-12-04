@@ -72,7 +72,15 @@ class LoginController extends Controller {
                     'entidad_id'  => 1,
                     'habilitado'  => 1 
                     )
-
+                    ,
+                    array(
+                    'id'          => 2,
+                    'usuario'     => 'filial3@filial.com',
+                    'password'    => 1234,
+                    'rol_id'      => 4,
+                    'entidad_id'  => 2,
+                    'habilitado'  => 0 
+                    )
                   );
 
        foreach ($cuentas as $cuenta) {
