@@ -8,11 +8,13 @@ use DB;
 
 class ClaseRepo extends BaseRepo {
 
-    public function getModel()
-    {
+    public function getModel(){
         return new Clase();
     }
 
+    public function allCancelado(){
+        return $this->model->where('clase_estado_id', 2)->where('enviado', 0)->get();
+    }
     
     public function clasesDocente($id,$fecha1,$fecha2){
     	$date=date(("Y/m/d"));

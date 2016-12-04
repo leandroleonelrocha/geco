@@ -111,6 +111,10 @@
                     </ul>
                   </li>
 
+                  <li>
+                  <a href="{{route('filial.matriculas_pases')}}"> <i class="fa fa-share"></i> <span>Pases</span> </a>
+                </li>
+
                   <li class="treeview">
                     <a href="{{route('filial.pagos_matriculas')}}">
                       <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span><i class="fa fa-angle-left pull-right"></i>
