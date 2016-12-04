@@ -210,7 +210,8 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
 
         //PDF
-        // 'PDF' => 'Barryvdh\DomPDF\Facade',
+        //'PDF' => 'Barryvdh\DomPDF\Facade',
+
         
     ],
 

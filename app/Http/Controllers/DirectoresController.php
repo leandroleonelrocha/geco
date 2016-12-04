@@ -16,11 +16,13 @@ use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
+
 use Mail;
 
 class DirectoresController extends Controller
 {
 	protected $directorRepo;
+    protected $data;
 
 	public function __construct( DirectorRepo $directorRepo,TipoDocumento $tipoDocumentoRepo, DirectorTelefonoRepo $directorTelefonoRepo,FilialRepo $filialRepo){
 		
@@ -28,6 +30,9 @@ class DirectoresController extends Controller
 		$this->tipoDocumentoRepo = $tipoDocumentoRepo;
 		$this->directorTelefonoRepo = $directorTelefonoRepo;
         $this->filialRepo = $filialRepo;
+        $this->data['totalFiliales'] = count($this->directorRepo->filialDirectores());
+        $this->data['totalPersonas'] = $this->directorRepo->countTotalPersonas();
+        $this->data['totalAsesores'] = $this->directorRepo->countTotalAsesores();
 	}
 
 	public function index(){
@@ -36,6 +41,7 @@ class DirectoresController extends Controller
 
 	public function lista(){
 		$directores=$this->directorRepo->allEneable();
+        dd($directores);
 		return view('rol_dueno.directores.lista', compact('directores'));	
 	}
 
@@ -236,14 +242,93 @@ class DirectoresController extends Controller
         return redirect()->back()->with('msg_error','El perfil del director no ha podido ser modificado o existe el E-mail actual.');
     }
 
-    public function estadisticas()
-    {
+
+
+    public function estadisticas(){
+
+
+    	return view('rol_director.estadisticas.index')->with($this->data);
+    }
+
+    public function detalles(Request $request){
+
+        $array = explode("-", $request->get('fecha'));
+        $inicio = helpersfuncionFecha($array[0]);
+        $fin =  helpersfuncionFecha($array[1]);
+        $tipo = $request->selectvalue;
+
+
+        switch ($tipo) {
+
+            case 'inscripcion':
+                return $this->estadisticasDirectorInscripcion($inicio, $fin); break;
+
+            case 'preinforme':
+                return $this->estadisticasDirectorPreInforme($inicio, $fin); break;
+
+            case 'recaudacion':
+                return $this->estadisticasDirectorRecaudacion($inicio, $fin); break;
+
+            case 'morosidad':
+                return $this->estadisticasDirectorMorisidad($inicio, $fin); break;
+
+            case 'examen':
+                return $this->estadisticasDirectorExamen($inicio, $fin); break;
+        }
+
     	return view('rol_director.estadisticas.index');
     }
 
-    public function estadisticas_detalles(Request $request){
 
-    	return view('rol_director.estadisticas.detalles');
+    public function estadisticasDirectorInscripcion($inicio, $fin){
+
+            //todas las filiales que le correspondan al director
+
+
+
+            $secion = 'inscripcion';
+            $labels  = helperslabelsEstadisticas();
+            $nombres = helpersnombresEstadisticas();
+            $disponibilidad =[];
+            //$total = $this->personaRepo->all()->count();
+            
+            for($i =0; $i<count($labels); $i++ ){
+                $data['label'] = $nombres[$i];
+                $data['si'] = $this->directorRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
+                $data['no'] = $this->directorRepo->estadisticasPersonas($labels[$i], 0, $inicio, $fin);
+                array_push($disponibilidad, $data);
+            }
+
+            $genero = $this->directorRepo->getGenero($inicio,$fin);
+            $nivelEstudios  = $this->directorRepo->estadisticasNivelEstudios($inicio, $fin);
+            
+            return view('rol_director.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivelEstudios', 'secion'));
+
     }
+
+    public function estadisticasDirectorPreInforme($inicio, $fin){
+
+        $this->data['secion'] = 'preinforme';
+        $this->data['preinforme'] = $this->directorRepo->estadisticasPreInformes($inicio, $fin)->get()->groupBy('como_encontro');
+        
+
+        return view('rol_director.estadisticas.index')->with($this->data);
+    }
+
+
+    public function estadisticasDirectorRecaudacion($inicio, $fin){
+
+    }
+
+    public function estadisticasDirectorMorisidad($inicio, $fin){
+
+    }
+
+    public function estadisticasDirectorExamen($inicio, $fin){
+
+    }
+
+
+
 
 }

@@ -10,8 +10,8 @@
 					<div class="row">
 						
 					</div>
-        		</div><!-- Fin box-body -->
-			</div> <!-- Fin box -->
-		</div> <!-- Fin col -->
-	</div> <!-- Fin row -->
+        		</div>
+			</div> 
+		</div> 
+	</div> 
 @endsection

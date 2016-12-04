@@ -4,7 +4,7 @@ Route::get('estadisticas',[
 	'uses' => 'DirectoresController@estadisticas'
 ]);
 
-Route::get('estadisticas_detalles',[
-	'as' => 'director.estadisticas_detalles',
-	'uses' => 'DirectoresController@estadisticas_detalles'
+Route::post('detalles',[
+	'as' => 'director.detalles',
+	'uses' => 'DirectoresController@detalles'
 ]);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Repositories;
 use App\Entities\Examen;
+use App\Entities\Grupo;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,16 +20,26 @@ class ExamenRepo extends BaseRepo {
 
     public function allExamenFilialMatricula(){
     	$filial = session('usuario')['entidad_id'];
-    	$examenes = $this->model->all();
-      
+        //traerme todos los id del grupo de la misma filial
+        $grupo_id=[];
+        $grupo = Grupo::where('filial_id', 3)->get();
+        foreach ($grupo as $g)
+        {
+            array_push($grupo_id, $g->id);
+        }
+
+    	$examenes = Examen::whereIn('grupo_id', $grupo_id)->get();
 		$resultado = [];
-		foreach ($examenes as  $examen) {
-            if($examen->Matricula->filial_id == $filial)
-            {
-                array_push($resultado, $examen);
-            }
-			
+
+		foreach ($examenes as  $key => $value) {
+
+            $suma = 0 + $value->nota;
+            $data['cantidadexamenes'] = $examenes->count();
+            $data['sumatota']=$suma;
+            $data['resultado']=4;
+
 		}
+        dd($data);
 
 		return $resultado;
     }

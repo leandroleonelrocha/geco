@@ -132,7 +132,7 @@ class ExamenController extends Controller
        	$carrera = $grupo->Carrera;
        	$materias = $grupo->Carrera->Materia;
         $matriculas = $grupo->Matricula;
-
+        
         return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materias'=>$materias,'matriculas'=>$matriculas));
     	}
     }

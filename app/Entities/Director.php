@@ -8,8 +8,12 @@ class Director extends Entity {
 
     protected $fillable   = ['tipo_documento_id', 'nro_documento', 'apellidos', 'nombres','mail',];
 
-     public function TipoDocumento(){
+    public function TipoDocumento(){
         return $this->belongsTo(TipoDocumento::getClass());
+    }
+
+    public function Filial(){
+        return $this->hasMany(Filial::getClass());
     }
 
     //Funcion obtiene le nombre completo
