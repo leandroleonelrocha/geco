@@ -28,3 +28,7 @@
 <!-- Full calendar -->
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}" media="print">
+
+<link rel="stylesheet" href="{{asset('plugins/intro/introjs.css')}}">
+
+<link rel="stylesheet" href="{{asset('plugins/pace/themes/pace-theme-flat-top.css')}}">

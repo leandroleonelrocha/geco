@@ -32,7 +32,7 @@
 						            <td>{{ $c->descripcion }}</td>
 						            <td><?php if($c->taller == 0) echo 'No Asiste'; else echo 'Si Asiste';?></td> 
 						  			<td class="text-center">
-					           		<a href="{{route('filial.cursos_editar',$c->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>		
+					           		<a href="{{route('filial.cursos_editar',$c->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>		
 									</td>
 							    </tr>
 						    @endforeach

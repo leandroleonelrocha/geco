@@ -8,7 +8,7 @@
 				<div class="box-header">
 					<h3 class="box-title">@lang('preinforme.listadopreinforme')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.preinformes_seleccion')}}" class="btn btn-success text-white"> @lang('preinforme.agregarnuevo')</a>
+						<a href="{{route('filial.preinformes_seleccion')}}" id="step1" class="btn btn-success text-white"> @lang('preinforme.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -27,7 +27,7 @@
 								<td>{{$preinforme->Asesor->nombres}} {{$preinforme->Asesor->apellidos}}</td>
 								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
 								<td>{{$preinforme->medio}}</td>
-								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a></td>
+								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a></td>
 							</tr>
 						@endforeach
 						</tbody>
@@ -36,4 +36,48 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+
+@section('js')
+<script type="text/javascript">
+		
+
+ function startIntro(){
+        var intro = introJs();
+
+          intro.setOptions({
+
+            'showProgress': true,
+            steps: [
+              { 
+                intro: "Hello world!"
+              },
+              {
+                element: document.querySelector('#step1'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#example1_filter'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#example1_length'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#step_editar'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#step_borrar'),
+                intro: "This is a tooltip."
+              }
+            ]
+          });
+
+          intro.start();
+      }
+
+</script>
 @endsection

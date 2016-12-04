@@ -42,7 +42,7 @@
 						<td>{{ $grupo->descripcion }}</td>
 						<td>{{ $grupo->Docente->fullname }}</td>	
 						   	<td class="text-center">
-					           		<a href="{{route('grupos.edit',$grupo->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
+					           		<a href="{{route('grupos.edit',$grupo->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>	
 									</td>
 							   
 						</tr>					

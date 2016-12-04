@@ -29,7 +29,7 @@
 							        <td>{{ $ca->duracion }}</td>
 						            <td>{{ $ca->descripcion }}</td>
 						           	<td class="text-center">
-					      			<a href="{{route('filial.carreras_editar',$ca->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
+					      			<a href="{{route('filial.carreras_editar',$ca->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>	
 									</td>
 							    </tr>
 						    @endforeach

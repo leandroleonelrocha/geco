@@ -27,7 +27,7 @@
       	            		        <td>{{ $m->Carrera->fullname}}</td>
 						            <td>{{ $m->descripcion }}</td>
 						           	<td class="text-center">
-					           		<a href="{{route('filial.materias_editar',$m->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
+					           		<a href="{{route('filial.materias_editar',$m->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>	
 									</td>
 							    </tr>
 						    @endforeach
