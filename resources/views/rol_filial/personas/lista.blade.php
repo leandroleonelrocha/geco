@@ -9,7 +9,7 @@
 				<div class="box-header">
 					<h3 class="box-title">@lang('persona.listadopersona')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white" id="step1"> @lang('persona.agregarnuevo')</a>
+						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white" id="explicacion_1"> @lang('persona.agregarnuevo')</a>
 					</div>
 					
 				</div>
@@ -54,8 +54,8 @@
 				
 
 						          	<td>
-									<a href="{{route('filial.personas_editar',$p->id)}}" id="step_editar" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>
-						           	<a href="{{route('filial.personas_borrar',$p->id)}}" id="step_borrar"title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('filial.personas_editar',$p->id)}}"  title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil explicacion_editar"></i></a>
+						           	<a href="{{route('filial.personas_borrar',$p->id)}}" id="step_borrar"title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash explicacion_borrar"></i></a></td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -66,46 +66,27 @@
 	</div> <!-- Fin row -->
 @endsection
 
-
 @section('js')
+
 <script type="text/javascript">
-		
 
- function startIntro(){
-        var intro = introJs();
+$(".star_intro" ).click(function() {
 
-          intro.setOptions({
+	var texto ='¡Bienvenido al Tutorial de Personas!';	
+	<?php
+		$array = [
+		    "#explicacion_1"	 	=>	"Este boton sirve para agregar una nueva persona",
+		    "#example1_length"   	=>	"Escriba aquí para filtrar un dato a buscar",
+		    ".explicacion_editar" 	=>  "Este boton sirve para editar la persona",
+		    ".explicacion_borrar"	=>  "Este boton sirve para borrar la persona", 
+		];
+	
+	?>
 
-            'showProgress': true,
-            steps: [
-              { 
-                intro: "Hello world!"
-              },
-              {
-                element: document.querySelector('#step1'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#example1_filter'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#example1_length'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#step_editar'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#step_borrar'),
-                intro: "This is a tooltip."
-              }
-            ]
-          });
+	startIntro(texto);
 
-          intro.start();
-      }
-
+});		
 </script>
+@include('partials.inicio_tutorial')
 @endsection
+

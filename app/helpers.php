@@ -11,3 +11,9 @@ function helperslabelsEstadisticas(){
 function helpersnombresEstadisticas(){
     return ['Posee PC', 'Estudio PC',  'Manana', 'Tarde', 'Noche', 'Sabados'];
 }
+
+function helpersgetFecha($value)
+{
+    return date("d/m/Y", strtotime($value));        
+}
+

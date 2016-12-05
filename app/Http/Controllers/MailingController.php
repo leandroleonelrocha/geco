@@ -89,7 +89,7 @@ class MailingController extends Controller
 						$materia = null;	
 					}
 					foreach ($m->Persona->PersonaMail as $pm){
-						$fecha 	   = $c->getFechaAttribute($c->fecha);
+						$fecha 	   = helpersgetFecha($c->fecha);
 						$datosMail = array(	'nombre' 		=> $m->Persona->nombres,
 				        					'apellido' 		=> $m->Persona->apellidos,
 				        					'fecha' 		=> $fecha,
