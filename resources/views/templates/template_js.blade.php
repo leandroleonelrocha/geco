@@ -35,6 +35,10 @@
                             
                         <!-- ******************** GECO JS ******************** -->
 <script src="{{asset('js/functions/functions.js')}}"></script>
+                        <!-- ******************** TUTORIALES JS ******************** -->
+<script src="{{asset('plugins/intro/intro.js')}}"></script>
+                        <!-- ******************** PACE JS ******************** -->
+<script src="{{asset('plugins/pace/pace.js')}}"></script>
 
 <!-- Page script -->
 <script>
@@ -109,5 +113,13 @@
         $(".timepicker").timepicker({
             showInputs: false
         });
+
+        $(".star_intro" ).click(function() {
+            //boton tutoriales
+            //metodo para llamar al star intro de cada pagina
+            startIntro();
+        
+        });
+        
     });
 </script>

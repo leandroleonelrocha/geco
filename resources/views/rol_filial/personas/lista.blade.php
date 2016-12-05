@@ -1,19 +1,21 @@
 @extends('template')
 
 @section('content')
-									<!-- Lista de Personas -->
+							
+							<!-- Lista de Personas -->
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">@lang('persona.listadopersona')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white"> @lang('persona.agregarnuevo')</a>
+						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white" id="step1"> @lang('persona.agregarnuevo')</a>
 					</div>
+					
 				</div>
 
 				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
+					<table id="example1" class="table table-bordered table-striped" >
 						<thead><tr>
 						<th>@lang('persona.numerodocumento')</th>
 						<th>@lang('persona.nombre')</th>
@@ -52,8 +54,8 @@
 				
 
 						          	<td>
-									<a href="{{route('filial.personas_editar',$p->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('filial.personas_editar',$p->id)}}" id="step_editar" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>
+						           	<a href="{{route('filial.personas_borrar',$p->id)}}" id="step_borrar"title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -62,4 +64,48 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+
+@section('js')
+<script type="text/javascript">
+		
+
+ function startIntro(){
+        var intro = introJs();
+
+          intro.setOptions({
+
+            'showProgress': true,
+            steps: [
+              { 
+                intro: "Hello world!"
+              },
+              {
+                element: document.querySelector('#step1'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#example1_filter'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#example1_length'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#step_editar'),
+                intro: "This is a tooltip."
+              },
+              {
+                element: document.querySelector('#step_borrar'),
+                intro: "This is a tooltip."
+              }
+            ]
+          });
+
+          intro.start();
+      }
+
+</script>
 @endsection

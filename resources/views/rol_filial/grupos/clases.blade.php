@@ -43,7 +43,8 @@
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,basicWeek,basicDay'
+				right: 'month,agendaWeek,agendaDay,listWeek'
+
 			},
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
@@ -107,8 +108,8 @@
 				if($event->Grupo->filial_id == $filial)
 				{
 					$start = explode(" ", $event['fecha']);
-
 					$end = explode(" ", $event['fecha']);
+
 					if($start[1] == '00:00:00'){
 						$start = $start[0];
 					}else{
@@ -119,15 +120,14 @@
 					}else{
 						$end = $event['fecha'];
 					}
-				
 
 			?>
 				{
 
 						id: '<?php if(isset($event)) echo $event['id']; ?>',
 						title: '<?php if(isset($event)) echo $event->Grupo->fullname; ?>',
-						start: '<?php if(isset($event)) echo $start; ?>',
-						end: '<?php if(isset($event)) echo $end; ?>',
+						start: '<?php if(isset($event)) echo $start.'T'.$event->horario_desde; ?>',
+						end: '<?php if(isset($event)) echo $end.'T'.$event->horario_hasta; ?>',
 						color: '<?php if(isset($event)) echo $event->Grupo->color; ?>',
 					
 				},

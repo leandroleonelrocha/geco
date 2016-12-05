@@ -4,22 +4,24 @@
 
 	<div class="row">
 		<div class="col-xs-12">
-			<div class="box">
-				<div class="box-header">
-					<h2>@lang('contacto.contacto')</h2>
-				</div>
+			<h2>@lang('contacto.contacto')</h2>
 
-				<div class="box-body">
-					<div class="row">
-			  			<div class= "col-md-12">
-				    		<div class="thumbnail">
-				    						
-								<h2>@lang('contacto.soporte')</h2>
-								<h3>The Whiteout Team</h3>
-								<p>Tel:11321456786</p>
-					
-				      			<img src="{{asset('img/whiteoutteam.png')}}" height="200" width="200" class="img-circle">
-								<?php
+			<div class="box">
+			
+                <div class="box-body box-profile">
+
+                  <img class="profile-user-img img-responsive img-circle" height="400" width="400"  src="{{asset('img/whiteoutteam.png')}}" alt="User profile picture">
+                  <h3 class="profile-username text-center">The Whiteout Team</h3>
+                  <p class="text-muted text-center">@lang('contacto.soporte')</p>
+
+                  <p class="text-muted text-center">
+                  <strong><i class="fa fa-book margin-r-5"></i>  Teléfono</strong>
+                  
+                  	112345679
+                  </p>
+
+                  <hr>
+                  <?php
 	    				    	$s= (session('usuario')['rol_id']);
 
    								if ($s===4 || $s==2) {
@@ -91,11 +93,10 @@
 				               	
 				              	}
 					            ?>
-        
-    						</div>
-						</div>
-					</div>
-        		</div><!-- Fin box-body -->
+
+                </div><!-- /.box-body -->
+           
+
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
