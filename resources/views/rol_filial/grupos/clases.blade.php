@@ -5,19 +5,15 @@
 @endsection
 
 @section('content')
-	
-	<div class="row">
-	
-             <div class="col-md-12">
-              <div class="box box-primary">
-                <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-
-	</div>
+<div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-body no-padding">
+          <div id="calendar"></div>
+        </div>
+      </div>
+    </div>
+</div>
 
 @endsection
 
@@ -30,9 +26,7 @@
 <script src="{{asset('js/calendario/moment.min.js') }}"></script>
 <script src="{{asset('js/calendario/fullcalendar.min.js') }}"></script>
 <script src="{{asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
-
 <script>
-
 	$(document).ready(function() {
 		
 		$('#calendar').fullCalendar({
@@ -85,7 +79,6 @@
 							$('#ModalEdit').modal('show');
 						}
 					});
-
 				
 				});
 			},
@@ -95,7 +88,6 @@
 
 
 			},
-			
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
 
 				edit(event);

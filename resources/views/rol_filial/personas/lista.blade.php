@@ -69,7 +69,6 @@
 @section('js')
 
 <script type="text/javascript">
-
 $(".star_intro" ).click(function() {
 
 	var texto ='¡Bienvenido al Tutorial de Personas!';	

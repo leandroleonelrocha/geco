@@ -27,7 +27,12 @@ class DuenoController extends Controller
 	}
 	
 	public function index(){
-		return view('rol_dueno.index');
+		$data['total_persona'] = $this->personaRepo->all()->count();
+		$data['total_filial']  = $this->filialRepo->all()->count();
+		$data['total_asesor']  = $this->asesorRepo->all()->count();
+
+		return view('rol_dueno.estadisticas.index')->with($data);	
+	
 	}
 
 	public function estadisticas()
