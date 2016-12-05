@@ -114,12 +114,5 @@
             showInputs: false
         });
 
-        $(".star_intro" ).click(function() {
-            //boton tutoriales
-            //metodo para llamar al star intro de cada pagina
-            startIntro();
-        
-        });
-        
     });
 </script>

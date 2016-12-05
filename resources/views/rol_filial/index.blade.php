@@ -18,7 +18,6 @@
             </div><!-- /.col -->
 
   </div>
-
 @endsection
 
 @include('rol_filial.grupos.partials.nueva_clase_modal')
@@ -57,6 +56,7 @@
         $('#ModalAdd #end').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
         $('#ModalAdd').modal('show');
       },
+
       eventRender: function(event, element) {
         element.bind('dblclick', function() {
           var id = event.id;
@@ -90,6 +90,7 @@
         
         });
       },
+
       eventDrop: function(event, delta, revertFunc) { // si changement de position
 
         edit(event);
@@ -111,7 +112,9 @@
           $start = explode(" ", $event['fecha']);
           $end = explode(" ", $event['fecha']);
 
+
           if($start[1] == '00:00:00'){
+            
             $start = $start[0];
           }else{
             $start = $event['fecha'];
@@ -137,7 +140,7 @@
       <?php } endforeach; ?>
       ]
     });
-    
+
     function edit(event){
       start = event.start.format('YYYY-MM-DD HH:mm:ss');
       if(event.end){

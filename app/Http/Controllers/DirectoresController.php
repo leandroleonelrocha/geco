@@ -36,7 +36,8 @@ class DirectoresController extends Controller
 	}
 
 	public function index(){
-		return view('rol_director.index');	
+        
+        return view('rol_director.estadisticas.index')->with($this->data);
 	}
 
 	public function lista(){
@@ -246,7 +247,7 @@ class DirectoresController extends Controller
 
     public function estadisticas(){
 
-
+        
     	return view('rol_director.estadisticas.index')->with($this->data);
     }
 
