@@ -37,9 +37,7 @@ class ExamenController extends Controller
 	}
 	
 	public function index(){
-	
 		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->get();
-		
 		return view('rol_filial.examenes.lista', compact('examenes'));
 	}
 
