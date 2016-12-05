@@ -29,7 +29,7 @@
 												@endforeach
 											</td>
 											<td>{{$filial->mail}}</td>
-											<td class="text-center"><a href="{{route('filial.matriculas_pase_nuevo',[$filial->id, $matricula])}}" class="btn btn-success text-white">Seleccionar</a></td>
+											<td class="text-center"><a href="{{route('filial.matriculas_pase_nuevo',[$filial->id, $matricula])}}" class="btn-xs btn-success text-white">Seleccionar</a></td>
 										</tr>
 								@endforeach
 							</tbody>
