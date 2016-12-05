@@ -43,7 +43,8 @@
 						<td>{{ $grupo->Docente->fullname }}</td>	
 						   	<td class="text-center">
 					           		<a href="{{route('grupos.edit',$grupo->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>	
-									</td>
+					           		<a href="{{route('grupos.grupos_borrar',$grupo->id)}}" title="Borrar"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a>
+							</td>
 							   
 						</tr>					
 						@endforeach

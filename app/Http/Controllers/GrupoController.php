@@ -109,7 +109,7 @@ class GrupoController extends Controller
 
 			if (in_array($fecha, $grupo_dias)) {
 			    // Cargo fecha
-			    if ($data['fecha'] >= date('Y-m-d'))
+			    if ($i >= date('Y-m-d'))
 			    	$data['clase_estado_id'] = 1;
 			    else
 			    	$data['clase_estado_id'] = 2;
@@ -129,20 +129,49 @@ class GrupoController extends Controller
         return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
     }
 
-	public function postEdit($id, Request $request)
-	{
-		$model = $this->grupoRepo->find($id);
-		
-		$data = $request->all();
-		$array = explode("-", $request->get('fecha'));
-	
-		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
-		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
+	public function postEdit($id, Request $request){
+		$model 					= $this->grupoRepo->find($id);
+		$data 					= $request->all();
+		$array 					= explode("-", $request->get('fecha'));
+		$data['fecha_inicio'] 	= date("Y-m-d", strtotime($array[0]));
+		$data['fecha_fin'] 		= date("Y-m-d", strtotime($array[1]));
+		$grupo_dias 			= [];
+		$dias_horas 			= [];
+		// $inicio 				= date("Y-m-d", strtotime($model->fecha_inicio));
+		$fin 					= date("Y-m-d", strtotime($model->fecha_fin));
+        
+        foreach ($model->GrupoHorario as $value ) {
+			array_push($grupo_dias, $value->dia);
+		}
+
+		foreach ($model->GrupoHorario as $value) {
+		  	$d['horario_desde'] = $value->horario_desde;
+		  	$d['horario_hasta'] = $value->horario_hasta;
+			array_push($dias_horas, $d);
+		}
+
+		// Si la fecha es anterior se eliminan las clases de más
+		if( $data['fecha_fin'] < $model->fecha_fin ){
+			for( $i = $data['fecha_fin']; $i <= $fin; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+				$clase = $this->claseRepo->findClase($model->id);
+			}
+			die;
+		}
+		elseif( $data['fecha_fin'] > $model->fecha_fin ){}
 
 		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->edit($model,$data);
 		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo editado correctamente');
+	}
+
+	public function borrar($id){
+		$grupo 			= $this->grupoRepo->find($id);
+		$grupo->activo 	= 0;
+		if ($grupo->save())
+			return redirect()->back()->with('msg_ok', 'Grupo eliminado correctamente');
+		else
+			return redirect()->back()->with('msg_error', 'El Grupo no ha podido ser eliminado');
 	}
 
 
@@ -158,8 +187,6 @@ class GrupoController extends Controller
 
 		return view('rol_filial.grupos.clases', compact('grupos', 'docentes', 'events', 'filial'));
 	}
-
-
 
 	public function nueva_clase(Request $request)
 	{
@@ -210,9 +237,6 @@ class GrupoController extends Controller
 		dd($id);
 	}
 
-	
-	
-
 	public function clase_matricula($data)
 	{
 		$clase = $this->claseRepo->find($data);
@@ -245,20 +269,13 @@ class GrupoController extends Controller
 			$clase_matricula->save();
 				    
 		}
-		
 		return redirect()->back()->with('msg_ok', 'Asistencia creado correctamente');
-		
 	}
 
-	public function post_materias_carreras(Request $request)
-	{	
+	public function post_materias_carreras(Request $request){	
 		$carrera_id = $request->get('carrera_id');
 		$carrera = $this->carreraRepo->find($carrera_id);
 		$materia = $carrera->Materia;
 		return response()->json($materia, 200);
 	}
-
-
-
-
 }

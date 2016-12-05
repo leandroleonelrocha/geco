@@ -1,6 +1,4 @@
 @extends('template')
-
-
 @section('content')
     @if(isset($model))
         {!! Form::model($model,['route'=>['grupos.postEdit',$model->id]]) !!}
@@ -9,19 +7,26 @@
     @endif
 
     <div class="box-body">
-
         <div class="form-group">
             <label>Carreras y Cursos</label>
             <select name="carreras_cursos" id="carreras_cursos" class="form-control">
             <option>Seleccione una materia o curso</option>
             <optgroup label="Carreras">
             @foreach($carreras as $carrera)
-            <option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
+            <option value="carrera;{{$carrera->id}}" <?php if(!empty($model)){
+            if(isset($model->Carrera->id)){if($model->Carrera->id == $carrera->id) echo 'selected';}
+            }?>>
+                {{$carrera->nombre}}
+            </option>
             @endforeach
             </optgroup>
             <optgroup label="Cursos">
             @foreach($cursos as $curso)
-            <option value="curso;{{$curso->id}}">{{$curso->nombre}}</option>
+            <option value="curso;{{$curso->id}}" <?php if(!empty($model)){
+            if(isset($model->Curso->id)){if($model->Curso->id == $curso->id) echo 'selected';}
+            }?>>
+                {{$curso->nombre}}
+            </option>
             @endforeach
             </optgroup>
             </select>
@@ -30,7 +35,6 @@
         <div class="form-group materia" style="display: none">
             <label for="exampleInputEmail1">Materia  </label>
             <select name="materia_id" class="form-control select_materia">
-           
             </select>
         </div>
 
@@ -134,99 +138,87 @@
 <script type="text/javascript">
    
    $(document).ready(function() {
+       $("#carreras_cursos").change(function(){
+            var carreras_cursos=$('select[id=carreras_cursos]').val(); 
+            var tipo = carreras_cursos.split(';');
+            if(tipo[0] == "carrera"){   
+                $(".materia").show();
+                $.ajax(
+                    {
+                    url: "post_materias_carreras",
+                    type: "POST",
+                    data: 'carrera_id='+tipo[1],
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(result){
+                           if(result.length == 0){
+                                $(".materia").show();
+                                $(".materia").empty();
+                           }
+                           if(result.length > 0){
+                               $(".materia").show();
+                               $(".select_materia").empty();
+                               $.each(result, function(clave, valor) {
+                                    $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
+                               });
+                           }
+                        
+                    }}
 
-   
-   $("#carreras_cursos").change(function(){
-        var carreras_cursos=$('select[id=carreras_cursos]').val(); 
-        var tipo = carreras_cursos.split(';');
+                );
+            }
+
+            if(tipo[0] == "curso"){
+                $(".select_materia").empty(); 
+                $(".materia").hide();
+            }
+                
+        });
+
+        var max_fields      = 10; //maximum input boxes allowed
+        var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+        var add_button      = $(".add_field_button"); //Add button ID
         
-        if(tipo[0] == "carrera")
-        {   
-
-            $(".materia").show();
-            $.ajax(
-                {
-                url: "post_materias_carreras",
-                type: "POST",
-                data: 'carrera_id='+tipo[1],
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function(result){
-                       if(result.length == 0)
-                       {
-                            $(".materia").show();
-                            $(".materia").empty(); 
-                       }
-                       if(result.length > 0)
-                       { 
-                           $(".materia").show(); 
-                           $.each(result, function(clave, valor) {
-                                $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
-                           });
-                       }
-                    
-                }}
-
-            );
-        }
-
-        if(tipo[0] == "curso")
-        {
-            $(".materia").show();
-            $(".materia").empty(); 
-        }
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            if(x < max_fields){ //max input box allowed
+                x++; //text box increment
+                console.log(x);
+                $(wrapper).append(add_input()); //add input box
+            }
+        });
+        
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
             
-    });
+            var row = $(this).data('id');
+            e.preventDefault(); $(this).parent('div').remove(); x--;
 
-    var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
-    
-    var x = 1; //initlal text box count
-    $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
-            console.log(x);
-            $(wrapper).append(add_input()); //add input box
+        })
+
+
+        function add_input(){
+         var data = '<div class="form-group">'+
+                    '<div class="col-xs-6">'+
+                    '<select name="dia[]" class="form-control">'+
+                        '<option value="1"> Lunes</option>'+
+                        '<option value="2"> Martes</option>'+
+                        '<option value="3"> Miercoles</option>'+
+                        '<option value="4"> Jueves</option>'+
+                        '<option value="5"> Viernes</option>'+
+                        '<option value="6"> Sabados</option> ' +
+                     '</select>'+
+                    '</div>'+
+                        '<div class="col-xs-3">'+
+                        '<input class="form-control" name="horario_desde[]" type="time" value="13:45:00" >'+
+                      '</div>'+
+                      '<div class="col-xs-3">'+
+                        '<input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >'+
+                      '</div>'+
+                    '</div>';
+          return data;      
         }
-    });
-    
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        
-        var row = $(this).data('id');
-        e.preventDefault(); $(this).parent('div').remove(); x--;
-
-    })
-
-
-    function add_input()
-    {
-     var data = '<div class="form-group">'+
-                '<div class="col-xs-6">'+
-                '<select name="dia[]" class="form-control">'+
-                    '<option value="1"> Lunes</option>'+
-                    '<option value="2"> Martes</option>'+
-                    '<option value="3"> Miercoles</option>'+
-                    '<option value="4"> Jueves</option>'+
-                    '<option value="5"> Viernes</option>'+
-                    '<option value="6"> Sabados</option> ' +
-                 '</select>'+
-                '</div>'+
-                    '<div class="col-xs-3">'+
-                    '<input class="form-control" name="horario_desde[]" type="time" value="13:45:00" >'+
-                  '</div>'+
-                  '<div class="col-xs-3">'+
-                    '<input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >'+
-                  '</div>'+
-                '</div>';
-      return data;      
-    }
-
-
-
-
 });
 
 </script>
