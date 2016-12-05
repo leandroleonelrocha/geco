@@ -153,11 +153,15 @@ class GrupoController extends Controller
 		// Si la fecha es anterior se eliminan las clases de más
 		if( $data['fecha_fin'] < $model->fecha_fin ){
 			for( $i = $data['fecha_fin']; $i <= $fin; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-				$clase = $this->claseRepo->findClase($model->id);
+				$clases = $this->claseRepo->findAllClaseGrupo($model->id);
+				foreach ($clases as $clase) {
+					$claseFecha = explode(" ", $clase->fecha);
+					if ( $claseFecha[0] > $data['fecha_fin'])
+						$clase->delete();
+				}
 			}
-			die;
 		}
-		elseif( $data['fecha_fin'] > $model->fecha_fin ){}
+		// elseif( $data['fecha_fin'] > $model->fecha_fin ){}
 
 		$data['filial_id'] = session('usuario')['entidad_id'];
 

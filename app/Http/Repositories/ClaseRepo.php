@@ -12,6 +12,10 @@ class ClaseRepo extends BaseRepo {
         return new Clase();
     }
 
+    public function findAllClaseGrupo($grupo){
+        return $this->model->where('grupo_id', $grupo)->get();
+    }
+
     public function allCancelado(){
         return $this->model->where('clase_estado_id', 2)->where('enviado', 0)->get();
     }
