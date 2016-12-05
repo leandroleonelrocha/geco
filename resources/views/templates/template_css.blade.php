@@ -29,6 +29,8 @@
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}" media="print">
 
+<!-- Js de tutorial -->
 <link rel="stylesheet" href="{{asset('plugins/intro/introjs.css')}}">
 
+<!-- Recargo de paginn -->
 <link rel="stylesheet" href="{{asset('plugins/pace/themes/pace-theme-flat-top.css')}}">
