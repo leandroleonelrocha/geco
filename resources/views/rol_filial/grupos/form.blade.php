@@ -56,16 +56,16 @@
         <div class="form-group">
             <label>Disponibilidad</label>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_manana', '1') !!} Ma&ntilde;ana
+            {!! Form::checkbox('turno_manana', '1', null, array('class'=>'minimal')) !!} Ma&ntilde;ana
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_tarde', '1') !!} Tarde
+            {!! Form::checkbox('turno_tarde', '1', null, array('class'=>'minimal')) !!} Tarde
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_noche', '1') !!} Noche
+            {!! Form::checkbox('turno_noche', '1', null, array('class'=>'minimal')) !!} Noche
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('sabados', '1') !!} S&aacute;bados
+            {!! Form::checkbox('sabados', '1', null, array('class'=>'minimal')) !!} S&aacute;bados
             </div>
         </div>
 
