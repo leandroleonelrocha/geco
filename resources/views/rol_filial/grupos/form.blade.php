@@ -38,7 +38,6 @@
             </select>
         </div>
 
-        
 
         <div class="form-group">
             {!! Form::label('descripcion', 'Descripcion') !!}
@@ -221,6 +220,29 @@
         }
 });
 
+
+$(".star_intro" ).click(function() {
+
+
+    var texto ='¡Bienvenido al Tutorial de Grupos!';  
+    <?php
+        $array = [
+            "#carreras_cursos"        =>  "Seleccione un nuevo curso o carrera del nuevo grupo",
+            "#docente_id"             =>  "Seleccione un nuevo curso o carrera del nuevo grupo",
+            "#example-color-input"    =>  "El color que se seleccione es el que se verá en el calendario del nuevo grupo",
+            ".add_field_button"       =>  "Boton para agregar nuevos dias al grupo",
+            
+
+            
+        ];
+    
+    ?>
+
+    startIntro(texto);
+
+});     
+
 </script>
+@include('partials.inicio_tutorial')
 
 @endsection

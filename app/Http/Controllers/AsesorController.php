@@ -45,9 +45,12 @@ class AsesorController extends Controller {
          
     }
 
+  
     // Alta Asesor
     public function nuevo_post(CrearNuevoAsesorRequest $request){
-        
+       
+
+
         $data = $request->all(); // Obtengo todos los datos del formulario
                             
                 // Corroboro que el asesor exista, si exite lo activa

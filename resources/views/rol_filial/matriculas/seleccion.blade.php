@@ -32,7 +32,7 @@
 											<td>{{$persona->nombres}}</td>
 											<td>{{$persona->apellidos}}</td>
 											<td>{{$persona->nro_documento}}</td>
-											<td class="text-center"><a href="{{route('filial.matriculas_nuevo',$persona->id)}}" class="btn btn-success text-white">Seleccionar</a></td>
+											<td class="text-center"><a href="{{route('filial.matriculas_nuevo',$persona->id)}}" class="btn-xs btn-success text-white">Seleccionar</a></td>
 										</tr>
 								@endforeach
 							</tbody>
