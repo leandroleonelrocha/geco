@@ -37,11 +37,20 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses'	=>	'GrupoController@edit'
 		]);
 
-
 		Route::get('clases',[
 			'as' => 'grupos.clases',
 			'uses' => 'GrupoController@clases'
 		]);
+
+		// Route::get('clase_asistencias/{id}',[
+		// 	'as' => 'grupos.clase_asistencias',
+		// 	'uses' => 'GrupoController@clase_asistencias'
+		// ]);
+
+		// Route::get('clase_asistir/{clase}/{matricula}/{asistio}',[
+		// 	'as' => 'grupos.clase_asistir',
+		// 	'uses' => 'GrupoController@asistir'
+		// ]);
 
 		Route::get('clases/matricula/{id}',[
 			'as' => 'grupos.clase_matricula',

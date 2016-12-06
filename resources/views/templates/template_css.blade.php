@@ -34,3 +34,4 @@
 
 <!-- Recargo de paginn -->
 <link rel="stylesheet" href="{{asset('plugins/pace/themes/pace-theme-flat-top.css')}}">
+

@@ -116,3 +116,8 @@
 
     });
 </script>
+
+<!-- Bootstrap-checkbox -->
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>
+<script src="{{asset('js/functions/checkbox.js')}}"></script>
