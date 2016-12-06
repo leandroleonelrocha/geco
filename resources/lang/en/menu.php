@@ -12,6 +12,7 @@ return [
     'carrera'       => 'Careers',
     'materia'       => 'Matter',
     'grupo'         => 'Groups',
+    'clases'        => 'Classes',
     'examen'        => 'Tests',
     'asesor'        => 'Advisors',
     'docente'       => 'Teachers',

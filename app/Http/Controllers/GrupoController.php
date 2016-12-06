@@ -139,7 +139,15 @@ class GrupoController extends Controller
 		$dias_horas 			= [];
 		// $inicio 				= date("Y-m-d", strtotime($model->fecha_inicio));
 		$fin 					= date("Y-m-d", strtotime($model->fecha_fin));
+		$clases 				= $this->claseRepo->findAllClaseGrupo($model->id);
         
+		// Validar que Fecha FIN no sea anterior a una clase finalizada (ESTADO = 3)
+		foreach ($clases as $clase) {
+			if ($data['fecha_fin'] < $clase->fecha && $clase->clase_estado_id == 3) {
+				return redirect()->back()->with('msg_error', 'Hay clases finalizadas posterior a la fecha de FIN ingresada, ingresa una fecha de fin posterior.');
+			}
+		}
+
         foreach ($model->GrupoHorario as $value ) {
 			array_push($grupo_dias, $value->dia);
 		}
@@ -150,10 +158,10 @@ class GrupoController extends Controller
 			array_push($dias_horas, $d);
 		}
 
+		// Cambio Fecha FIN
 		// Si la fecha es anterior se eliminan las clases de más
 		if( $data['fecha_fin'] < $model->fecha_fin ){
 			for( $i = $data['fecha_fin']; $i <= $fin; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-				$clases = $this->claseRepo->findAllClaseGrupo($model->id);
 				foreach ($clases as $clase) {
 					$claseFecha = explode(" ", $clase->fecha);
 					if ( $claseFecha[0] > $data['fecha_fin'])
@@ -161,7 +169,30 @@ class GrupoController extends Controller
 				}
 			}
 		}
-		// elseif( $data['fecha_fin'] > $model->fecha_fin ){}
+		elseif( $data['fecha_fin'] > $model->fecha_fin ){
+			for( $i = $fin; $i <= $data['fecha_fin']; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+				$contador = 0;
+				$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
+				$fecha = $dias[date('N', strtotime($i))];
+				if (in_array($fecha, $grupo_dias)) {
+				    // Cargo fecha
+				    if ($i >= date('Y-m-d'))
+				    	$data['clase_estado_id'] = 1;
+				    else
+				    	$data['clase_estado_id'] = 2;
+
+				    $data['grupo_id'] 		 = $model->id;
+				    $data['fecha'] 			 = $i;
+				    $data['docente_id'] 	 = $model->docente_id;
+				    $data['descripcion'] 	 = '(La clase no tiene descripción)';
+				    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
+				    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
+				    $data['enviado'] 	 	 = 0;
+				    $this->claseRepo->create($data);
+				}
+				$contador ++;
+			}
+		}
 
 		$data['filial_id'] = session('usuario')['entidad_id'];
 

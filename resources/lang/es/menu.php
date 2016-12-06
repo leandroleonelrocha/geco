@@ -12,6 +12,7 @@ return [
     'carrera'       => 'Carreras',
     'materia'       => 'Materias',
     'grupo'         => 'Grupos',
+    'clases'        => 'Clases',
     'examen'        => 'Exámenes',
     'asesor'        => 'Asesores',
     'docente'       => 'Docentes',

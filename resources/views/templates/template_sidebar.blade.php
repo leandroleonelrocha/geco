@@ -18,7 +18,6 @@
               $u = session('usuario')['entidad_id'];
               $h = session('usuario')['habilitado'];
               switch (session('usuario')['rol_id']) {
-          
                 case 2: 
             ?>
                 <li class="treeview">
@@ -171,6 +170,7 @@
                         <?php if($h == 1){ ?>
                         <li> <a href="{{route('grupos.nuevo') }}"><i class="fa fa-circle-o"></i> @lang('menu.nuevo')</a></li>
                         <?php } ?>
+                        <li> <a href="{{route('grupos.clases') }}"><i class="fa fa-circle-o"></i> @lang('menu.clases')</a></li>
                     </ul>
                   </li>
 
