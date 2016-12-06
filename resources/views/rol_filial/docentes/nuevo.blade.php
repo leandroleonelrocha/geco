@@ -34,16 +34,16 @@
 							<div class="col-md-6 form-group">
 								<label>@lang('docente.disponibilidad')</label>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_manana', '1') !!} @lang('docente.mañana')
+									{!! Form::checkbox('disponibilidad_manana', '1',null, array('class'=>'minimal')) !!} @lang('docente.mañana')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_tarde', '1') !!} @lang('docente.tarde')
+									{!! Form::checkbox('disponibilidad_tarde', '1',null, array('class'=>'minimal')) !!} @lang('docente.tarde')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_noche', '1') !!} @lang('docente.noche')
+									{!! Form::checkbox('disponibilidad_noche', '1',null, array('class'=>'minimal')) !!} @lang('docente.noche')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_sabados', '1') !!} @lang('docente.sabados')
+									{!! Form::checkbox('disponibilidad_sabados', '1',null, array('class'=>'minimal')) !!} @lang('docente.sabados')
 								</div>
 							</div>
 							<div class="box-footer col-xs-12">

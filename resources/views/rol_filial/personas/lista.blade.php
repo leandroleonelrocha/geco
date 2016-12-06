@@ -1,8 +1,28 @@
 @extends('template')
+@section('css')
+<style type="text/css">
+@-webkit-keyframes girando {
+  from { -webkit-transform: rotateY(0deg);    }
+  to   { -webkit-transform: rotateY(-360deg); }
+}
 
+	.girando {
+   -webkit-animation-name: girando;
+   -webkit-animation-timing-function: linear;
+   -webkit-animation-iteration-count: infinite;
+   -webkit-animation-duration: 3s;
+   -webkit-transform-style: preserve-3d;
+}
+</style>
+@endsection
 @section('content')
 							
-							<!-- Lista de Personas -->
+	<div class="alert alert-info alert-dismissable">
+   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+   <h4><i class="icon fa fa-info"></i> Alert!</h4>
+   Info alert preview. This alert is dismissable.
+   </div>
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -69,7 +89,11 @@
 @section('js')
 
 <script type="text/javascript">
+$(".alert-dismissable").show();
+$(".alert-dismissable").delay(3000).hide(600);
+
 $(".star_intro" ).click(function() {
+
 
 	var texto ='¡Bienvenido al Tutorial de Personas!';	
 	<?php

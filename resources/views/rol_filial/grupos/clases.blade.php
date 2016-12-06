@@ -97,18 +97,19 @@
 			<?php foreach($events as $event): 
 				if($event->Grupo->filial_id == $filial)
 				{
-					// $start = explode(" ", $event['fecha']);
-					// $end = explode(" ", $event['fecha']);
-					// if($start[1] == '00:00:00'){
-					// 	$start = $start[0];
-					// }else{
+					 $start = explode(" ", $event['fecha']);
+					 $end = explode(" ", $event['fecha']);
+					 if($start[1] == '00:00:00'){
+					 	$start = $start[0];
+					 }else{
 						$start = $event['fecha'];
-					// }
-					// if($end[1] == '00:00:00'){
-					// 	$end = $end[0];
-					// }else{
+
+					 }
+					 if($end[1] == '00:00:00'){
+						$end = $end[0];
+					 }else{
 						$end = $event['fecha'];
-					// }
+					 }
 
 			?>
 				{

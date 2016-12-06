@@ -41,10 +41,10 @@
 							<div class="col-md-6 form-group">
 								<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'M') !!} @lang('persona.masculino')
+									{!! Form::radio('genero', 'M',null, array('class'=>'minimal')) !!} @lang('persona.masculino')
 								</div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'F') !!} @lang('persona.femenino')
+									{!! Form::radio('genero', 'F',null, array('class'=>'minimal')) !!} @lang('persona.femenino')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
@@ -72,30 +72,30 @@
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>
 								{!!Form::hidden('estudio_computacion', '0') !!}
-								<div>{!! Form::checkbox('estudio_computacion', '1',$persona->estudio_computacion) !!} Si</div>
+								<div>{!! Form::checkbox('estudio_computacion', '1',$persona->estudio_computacion, array('class'=>'minimal') ) !!} Si</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computadora')</label>
 								{!!Form::hidden('posee_computadora', '0') !!}
-								<div>{!! Form::checkbox('posee_computadora', '1',$persona->posee_computadora) !!} Si</div>
+								<div>{!! Form::checkbox('posee_computadora', '1',$persona->posee_computadora, array('class'=>'minimal')) !!} Si</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.disponibilidad')</label>
 								<div class="col-xs-12">
 								 	{!!Form::hidden('disponibilidad_manana', '0') !!}
-									{!! Form::checkbox('disponibilidad_manana','1',$persona->disponibilidad_manana)!!} @lang('persona.mañana')
+									{!! Form::checkbox('disponibilidad_manana','1',$persona->disponibilidad_manana, array('class'=>'minimal'))!!} @lang('persona.mañana')
 								</div>
 								<div class="col-xs-12">
 								 	{!!Form::hidden('disponibilidad_tarde', '0') !!}
-									{!! Form::checkbox('disponibilidad_tarde', 'value',$persona->disponibilidad_tarde) !!} @lang('persona.tarde')
+									{!! Form::checkbox('disponibilidad_tarde', 'value',$persona->disponibilidad_tarde,array('class'=>'minimal')) !!} @lang('persona.tarde')
 								</div>
 								<div class="col-xs-12">
 								 	{!!Form::hidden('disponibilidad_noche', '0') !!}
-									{!! Form::checkbox('disponibilidad_noche', '1',$persona->disponibilidad_noche) !!} @lang('persona.noche')
+									{!! Form::checkbox('disponibilidad_noche', '1',$persona->disponibilidad_noche,array('class'=>'minimal')) !!} @lang('persona.noche')
 								</div>
 								<div class="col-xs-12">
 								 	{!!Form::hidden('disponibilidad_sabados', '0') !!}
-									{!! Form::checkbox('disponibilidad_sabados','1', $persona->disponibilidad_sabados) !!} @lang('persona.sabados')
+									{!! Form::checkbox('disponibilidad_sabados','1', $persona->disponibilidad_sabados,array('class'=>'minimal')) !!} @lang('persona.sabados')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
