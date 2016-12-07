@@ -9,7 +9,7 @@
 		<div class="col-xs-12">
 
 			<div class="input-group input-group-sm">
-				{!! Form::select('grupo_id',(['' => 'Seleccionar curso'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
+				{!! Form::select('grupo_id',(['' => 'Seleccionar grupo'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
 				<span class="input-group-btn">
                       <button class="btn btn-info btn-flat buscar" type="button">Buscar!</button>
                     </span>
@@ -24,15 +24,14 @@
 				
 				<div class="lalocura col-xs-12" style="display: none">
 					<div class="form-group materia" >
-			            <label for="exampleInputEmail1">Materia  </label>
+			            <label for="exampleInputEmail1">Materia</label>
 			            <select name="materia_id" class="form-control materia_id">
-			            <option>Seleccione materia</option>
+			            <!-- <option>Seleccione materia</option> -->
 			           	</select>
 			        </div>
 			        <div class="form-group materia" >
 			           <label for="exampleInputEmail1">Docente  </label>
 			           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
-
 			        </div>
 
 			        <!--grupo_id -->
@@ -57,7 +56,7 @@
 	$( ".buscar" ).click(function() {
 		var grupo = $('.grupo_id').val();
 
-		alert( "Handler for .click() called." );
+		// alert( "Handler for .click() called." );
 		$.ajax(
 			{
 			url: "grupos_examenes",
@@ -74,17 +73,22 @@
 				$('.docente_id').val(result.grupo.docente_id);
 				$('.grupo_id').val(result.grupo.id);
 				var select_materia = $('.materia_id');				
+					// $.each(result.materia, function(clave, valor) {
+					// 	select_materia.append('<option value='+valor.id+'>'+valor.nombre+'</option>');
+					// });
 
-					$.each(result.materias, function(clave, valor) {
-						select_materia.append('<option value='+valor.id+'>'+valor.nombre+'</option>');
-					});
+					select_materia.append('<option value='+result.materia.id+'>'+result.materia.nombre+'</option>');
 				
 					$.each(result.matriculas, function(clave, valor) {
-						var matricula = valor.id;
-						var nombre = 'Beto';
+						var matricula 	= valor.id;
+						var persona 	= valor.persona_id;
+						var nombre;
+						$.each(result.personas, function(claveP, valorP){
+							if (valorP.id == persona)
+								nombre = valorP.nombres +' '+ valorP.apellidos;
+						});
+						// var nombre = 'Beto';
 						body.append(tr(matricula, nombre));
-						
-						
 					});
 
 			}}

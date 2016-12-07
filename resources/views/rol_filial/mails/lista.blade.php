@@ -39,6 +39,13 @@
 											<td>{{$cantClase}}</td>
 										</tr>
 										<?php endif ?>
+										<?php if ($cantGruposCancelado > 0): ?>
+										<tr>
+											<td></td>
+											<td>Grupos Cancelados</td>
+											<td>{{$cantGruposCancelado}}</td>
+										</tr>
+										<?php endif ?>
 										<?php if ($cantInteres > 0): ?>
 										<tr>
 											<td></td>

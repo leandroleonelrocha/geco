@@ -37,24 +37,18 @@ class ExamenController extends Controller
 	}
 	
 	public function index(){
-		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->get();
+		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->where('nro_acta', '!=', 99999)->get();
 		return view('rol_filial.examenes.lista', compact('examenes'));
 	}
 
-	public function nuevo()
-	{
+	public function nuevo(){
 		//matriculaspermisos
 		//Docentes
-		
 		$examenes = $this->examenRepo->all();
 		$grupos = $this->grupoRepo->allEnable()->where('curso_id', null)->lists('full_name','id');
 		//$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
-		
 		$docentes = $this->docenteRepo->all()->lists('full_name','id');
-
-		
 		return view('rol_filial.examenes.form', compact('examenes', 'grupos', 'docentes'));
-	
 	}
 
 	public function nuevo_post(Request $request)
@@ -117,8 +111,7 @@ class ExamenController extends Controller
 
 	}
 
-	public function grupos_examenes(Request $request)
-    {
+	public function grupos_examenes(Request $request){
         $grupo_id = $request->get('grupo_id');
         $grupo = $this->grupoRepo->find($grupo_id);
 
@@ -128,10 +121,15 @@ class ExamenController extends Controller
        		 return response()->json(array('grupo'=>$grupo,'matriculas'=>$matriculas));
        	}else{
        	$carrera = $grupo->Carrera;
-       	$materias = $grupo->Carrera->Materia;
+       	// $materias = $grupo->Carrera->Materia;
+       	$materia 	= $grupo->Materia;
         $matriculas = $grupo->Matricula;
+
+        foreach ($matriculas as $matricula) {
+        	$personas[] = $matricula->Persona;
+        }
         
-        return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materias'=>$materias,'matriculas'=>$matriculas));
+        return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materia'=>$materia,'matriculas'=>$matriculas,'personas'=>$personas));
     	}
     }
 

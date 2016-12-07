@@ -41,9 +41,9 @@
 <script src="{{asset('plugins/pace/pace.js')}}"></script>
 
 <!-- Bootstrap-checkbox -->
+<!-- <script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>
+<script src="{{asset('js/functions/checkbox.js')}}"></script> -->
 
-<script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>
-<script src="{{asset('js/functions/checkbox.js')}}"></script>
 <!-- Page script -->
 <script>
     $(function () {

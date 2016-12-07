@@ -313,35 +313,4 @@ class GrupoController extends Controller
 		$materia = $carrera->Materia;
 		return response()->json($materia, 200);
 	}
-
-	// public function clase_asistencias($id){
-	// 	$clase 		= $this->claseRepo->find($id);
-	// 	$matriculas = $clase->Grupo->Matricula;
-	// 	return view('rol_filial.grupos.clase_asistencias', compact('matriculas','id'));
-	// }
-
-	// $clase, $matricula, $asistio
-	// Request $request
-	// public function asistir($clase, $matricula, $asistio){
-	// 	// $data  = $request->all();
-	// 	// $clase = $this->claseRepo->find($clase);
-	// 	$clase_matricula = ClaseMatricula::where('clase_id', $clase)
-	// 									   ->where('matricula_id', $matricula)
-	// 									   ->first();
-	// 	// $clase = $this->claseRepo->find($data['clase_id']);
-	// 	// $clase_matricula = ClaseMatricula::where('clase_id', $clase->id)
-	// 	// 								   ->where('matricula_id', $data['matricula_id'])
-	// 	// 								   ->first();
-	// 	if( count($clase_matricula) > 0 ){
-	// 		// $clase_matricula->asistio = $data['asistio'];
-	// 		$clase_matricula->asistio = $asistio;
-	// 		$clase_matricula->save();
-	// 	}
-	// 	else{
-	// 		$data = array('clase_id' 		=> $clase,
-	// 					  'matricula_id' 	=> $matricula,
-	// 					  'asistio' 		=> $asistio);
-	// 		$clase->Matricula()->create($data);
-	// 	}
-	// }
 }

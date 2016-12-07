@@ -53,28 +53,76 @@ class MailingController extends Controller
 	}
 	
 	public function lista(){
-		$cantAviso 		= count($this->personaRepo->allPreMorosos());
-		$cantMorosos 	= count($this->personaRepo->allMorosos());
-		$cantClase 		= count($this->mailClaseCancelada());
-		$cantInteres 	= count($this->personaRepo->allInteresCursoGrupo()) + count($this->personaRepo->allInteresCarreraGrupo());
-		if ( count($this->grupoRepo->allNuevo()) >0 )
+		$cantAviso 				= count($this->personaRepo->allPreMorosos());
+		$cantMorosos 			= count($this->personaRepo->allMorosos());
+		$cantClase 				= count($this->mailClaseCancelada());
+		$gruposCancelado 		= $this->grupoRepo->allCancelado();
+		$cantGruposCancelado 	= 0;
+		$cantInteres 			= count($this->personaRepo->allInteresCursoGrupo()) + count($this->personaRepo->allInteresCarreraGrupo());
+
+		if ( count($this->grupoRepo->allNuevo()) > 0 )
 			$cantGrupos 	= count($this->personaMailRepo->allMailPersonaFilial());
 		else
 			$cantGrupos 	= 0;
+		foreach ($gruposCancelado as $grupo) {
+			foreach ($grupo->Matricula as $matricula){
+				$cantGruposCancelado += count($matricula->Persona->PersonaMail);
+			}
+		}
 
-		return view('rol_filial.mails.lista',compact('cantMorosos','cantGrupos','cantInteres','cantAviso','cantClase'));
+		return view('rol_filial.mails.lista',compact('cantMorosos','cantGrupos','cantInteres','cantAviso','cantClase', 'cantGruposCancelado'));
 	}
 
 	public function enviar_post(){
-		$mailing 		= $this->mailingRepo->all();
-		$pre_morosos 	= $this->personaRepo->allPreMorosos();
-		$morosos 		= $this->personaRepo->allMorosos();
-		$clases			= $this->claseRepo->allCancelado();;
-		$interesCu 		= $this->personaRepo->allInteresCursoGrupo();
-		$interesCa 		= $this->personaRepo->allInteresCarreraGrupo();
-		$grupos 		= $this->grupoRepo->allNuevo();
-		$personasMails 	= $this->personaMailRepo->allMailPersonaFilial();
+		$mailing 			= $this->mailingRepo->all();
+		$pre_morosos 		= $this->personaRepo->allPreMorosos();
+		$morosos 			= $this->personaRepo->allMorosos();
+		$clases				= $this->claseRepo->allCancelado();;
+		$interesCu 			= $this->personaRepo->allInteresCursoGrupo();
+		$interesCa 			= $this->personaRepo->allInteresCarreraGrupo();
+		$grupos 			= $this->grupoRepo->allNuevo();
+		$personasMails 		= $this->personaMailRepo->allMailPersonaFilial();
+		$gruposCancelados 	= $this->grupoRepo->allCancelado();
 		$filial = session('usuario')['entidad_id'];
+
+		if ( count($gruposCancelados) > 0 ){
+			foreach ($gruposCancelados as $grupoC) {
+				if (isset($grupoC->Carrera->nombre)){
+						$carrera = $grupoC->Carrera->nombre;
+						$materia = $grupoC->Materia->nombre;
+						$curso 	 = null;
+					}
+					else{
+						$curso 	 = $grupoC->Curso->nombre;
+						$carrera = null;
+						$materia = null;	
+					}
+				foreach ($grupoC->Matricula as $matricula){
+					foreach ($matricula->Persona->PersonaMail as $personaMail) {
+						$datosMail = array(	'nombre' 		=> $matricula->Persona->nombres,
+				        					'apellido' 		=> $matricula->Persona->apellidos,
+				        					'curso' 		=> $curso,
+				        					'carrera' 		=> $carrera,
+				        					'materia' 		=> $materia);
+						// Envío del mail
+						if ($this->mailingRepo->sendMail('mailing.grupoCancelado', $datosMail, $personaMail->mail)){
+							$dataMailing['persona_id'] 	 	 = $matricula->Persona->id;
+							$dataMailing['filial_id'] 	 	 = $filial;
+							$dataMailing['moroso'] 		 	 = 0;
+							$dataMailing['enviado'] 	 	 = 1;
+							$dataMailing['fecha_envio']  	 = date('Y-m-d');
+							$this->mailingRepo->create($dataMailing);
+							$flag[] = true;
+						}
+						else $flag[] = false;
+					}
+				}
+				$grupoModel = $this->grupoRepo->find($grupoC->id);
+				$dataGrupo['cancelado'] = 1;
+				$this->grupoRepo->edit($grupoModel, $dataGrupo);
+			}
+		}
+
 		if ( count($clases) > 0 ){
 			foreach ($clases as $c) {
 				foreach ($c->Grupo->Matricula as $m) {
