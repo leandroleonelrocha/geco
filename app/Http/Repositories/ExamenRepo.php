@@ -43,6 +43,8 @@ class ExamenRepo extends BaseRepo {
 
 		return $resultado;
     }
-   
 
+    public function allRecuperatorio($id){
+         return $this->model->where('recuperatorio_nro_acta',$id)->get();
+     }
 }

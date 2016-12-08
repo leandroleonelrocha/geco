@@ -444,7 +444,7 @@ foreign key 	(matricula_id)						references matricula	(id)
 
 create table if not exists examen(
 id  					int not null auto_increment,	
-nro_acta				int not null,
+nro_acta				int,
 recuperatorio_nro_acta	int,
 matricula_id			int not null,
 grupo_id				int,
@@ -455,10 +455,10 @@ docente_id				int not null,
 created_at  			timestamp not null default '0000-00-00 00:00:00',
 updated_at  			timestamp not null default '0000-00-00 00:00:00',
 primary key 			(id),
-foreign key 			(recuperatorio_nro_acta)	references examen	  (id),
-foreign key				(grupo_id)								              references grupo	  (id),
-foreign key 			(carrera_id, materia_id)				        references materia	(carrera_id, id),
-foreign key 			(docente_id)							              references docente	(id)
+foreign key 			(recuperatorio_nro_acta)	references examen	  	(id),
+foreign key				(grupo_id)					references grupo	  	(id),
+foreign key 			(carrera_id, materia_id)	references materia		(carrera_id, id),
+foreign key 			(docente_id)				references docente		(id)
 );
 
 create table if not exists mailing(

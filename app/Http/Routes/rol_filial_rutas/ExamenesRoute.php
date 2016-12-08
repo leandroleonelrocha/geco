@@ -34,15 +34,24 @@ Route::group(['prefix' => 'examenes'], function(){
 		]);
 
 	    Route::post('grupos_examenes',[
-	       'as' => 'filial.examenes_grupos_examenes',
-	       'uses' => 'ExamenController@grupos_examenes'
+			'as' 	=> 'filial.examenes_grupos_examenes',
+			'uses' 	=> 'ExamenController@grupos_examenes'
 	    ]);
 
 	    Route::get('detalles/{nro_acta}',[
-	    	'as' => 'filial.examenes_detalles',
-	       'uses' => 'ExamenController@detalles'
-	    
+	    	'as' 	=> 'filial.examenes_detalles',
+	        'uses' 	=> 'ExamenController@detalles'
 	    ]);
+
+	    Route::get('examenes_recuperatorio/{id}',[
+			'as'	=> 'filial.examenes_recuperatorio',
+			'uses'	=> 'ExamenController@recuperartorio'
+		]);
+
+		Route::post('examenes_recuperatorio_post',[
+			'as'	=> 'filial.examenes_recuperatorio_post',
+			'uses'	=> 'ExamenController@recuperartorio_post'
+		]);
 	    
 	});
 
