@@ -6,36 +6,33 @@
 
 @section('content')
   
-  <div class="row">
-  
-             <div class="col-md-12">
-              <div class="box">
-                <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-
+<div class="row">
+  <div class="col-md-12">
+      <div class="box">
+        <div class="box-body no-padding">
+        <!-- THE CALENDAR -->
+        <div id="calendar"></div>
+      </div>
+    </div>
   </div>
+</div>
 @endsection
 
-@include('rol_filial.grupos.partials.nueva_clase_modal')
-@include('rol_filial.grupos.partials.editar_clase_modal')
-
+@section('modal')
+  @include('rol_filial.grupos.partials.nueva_clase_modal')
+  @include('rol_filial.grupos.partials.editar_clase_modal')
+@endsection
 
 @section('js')
 
 <script src="{{asset('js/calendario/moment.min.js') }}"></script>
 <script src="{{asset('js/calendario/fullcalendar.min.js') }}"></script>
 <script src="{{asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
-
 <script>
-
   $(document).ready(function() {
     
     $('#calendar').fullCalendar({
-       defaultView: 'agendaWeek',
+      defaultView: 'agendaWeek',
       monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
           monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
           dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
@@ -45,6 +42,13 @@
         center: 'title',
         right: 'month,agendaWeek,agendaDay,listWeek'
 
+      },
+       buttonText: {
+          today:    'hoy', 
+          month:    'mes',
+          week:     'semana',
+          day:      'dia',
+          list:     'lista'
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events
@@ -92,20 +96,15 @@
       },
 
       eventDrop: function(event, delta, revertFunc) { // si changement de position
-
         edit(event);
-
 
       },
       
       eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
-
         edit(event);
-
       },
       events: [
       <?php foreach($events as $event): 
-
 
         if($event->Grupo->filial_id == $filial)
         {

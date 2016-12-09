@@ -213,7 +213,6 @@ class GrupoController extends Controller
 	public function clases()
 	{
 		$filial = session('usuario')['entidad_id'];
-		
 		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
@@ -246,10 +245,10 @@ class GrupoController extends Controller
 		$clase= $request->get('Event');
 
 		$id = $clase[0];
-		$fecha = $clase[1]; 
-		$model = $this->claseRepo->find($id);		
+		$fecha = explode(' ',$clase[1]);
+ 		$model = $this->claseRepo->find($id);
 		
-		$model->fecha = $fecha;
+		$model->fecha = $fecha[0];
 		$model->save();
 		if($model)
 				echo json_encode('La clase se ha editado correctamente.');

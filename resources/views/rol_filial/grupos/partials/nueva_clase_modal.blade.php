@@ -1,5 +1,4 @@
-<!-- Modal -->
-		<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
 			  {!! Form::open(['route'=>'grupos.nueva_clase'] ) !!}
@@ -55,8 +54,8 @@
 				
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="submit" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Salir</button>
+				<button type="submit" class="btn btn-primary">Guardar cambios</button>
 			  </div>
 			{!! Form::close() !!}
 			</div>
