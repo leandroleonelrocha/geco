@@ -53,12 +53,14 @@
 							<?php
 								if ($pago->terminado != 1){
 							?>
-								<a href="{{route('filial.pagos_editar',$pago->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-								<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="@lang('lista.actualizar')"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
+
+								<a href="{{route('filial.pagos_editar',$pago->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
+								<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="@lang('lista.actualizar')"><i class="btn btn-success glyphicon glyphicon-repeat"></i></a>
+
 							<?php
 								}
 							?>
-								<a href="{{route('filial.recibos',$pago->id)}}" title="Ver Recibos"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
+								<a href="{{route('filial.recibos',$pago->id)}}" title="Ver Recibos"><i class="btn-xs btn-primary glyphicon glyphicon-list-alt"></i></a>
 							</td>
 						</tr>
 						@endforeach

@@ -6,7 +6,7 @@
          
             <div class="pull-left info magia">
               
-              <a href="#"><i class="fa fa-circle text-<?php if($h==1) echo 'success'; else echo 'danger'; ?> "></i></a>
+            <a href="#"><i class="fa fa-circle text-<?php if($h==1) echo 'success'; else echo 'danger'; ?> "></i></a>
             </div>
            
           <div class="pull-left image" style="margin-top: -0.4%"> <!--PASAR A CSS!!!!!!!!!!!ESTO ES INACEPTABLE-->
@@ -15,31 +15,23 @@
           </div>
 
         <nav class="navbar navbar-static-top" role="navigation">
-
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
           </a>
-          <!--FALTA EXPANDIR LA BARRA DESDE EL ESTILO PROPIO DEL BUSCADOR O ASIGANRLE UNA NUEVA DIMENSION DE COL -->
-          <div class="navbar-custom-menu col-lg-2" style="margin-right: -5%;"> <!--CONTRAIGO LA BARRA DE NAVEGACION PARA QUE ENTRE EL BUSCADOR--> <!--PASAR A CSS!!!!!!!!!!!ESTO ES INACEPTABLE-->
+          <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-               <li class="buscame col-lg-2" style="margin-left: -318%;"> <!--PASAR A CSS!!!!!!!!!!!ESTO ES INACEPTABLE-->
               
-                   <!-- sidebar menu: : style can be found in sidebar.less -->
               <li class="dropdown messages-menu ">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-language"></i>
                 </a>
                 <!--EMPIEZA EL BOTON QUE DESPLIEGA IDIOMA-->
-
-
                 <ul class="dropdown-menu">
                   <li>
                     <!-- inner menu: contains the actual data -->
                     <ul class="menu">
                       <li>
-
                         <a href="{{ url('lang', ['es']) }}">
                           @lang('header.espanol')
                           <div class="pull-left">
@@ -67,59 +59,16 @@
      
                     </ul>
                   </li>
-                 
                 </ul>
-                
               </li>
-             
-               <!--ACA DEBERIA DE ESTAR EL BUSCADOR-->
+
+              <li>
+
+                <a href="#" class="star_intro" ><i class="fa fa-info-circle"></i></a>
               </li>
-              <!-- Notifications: style can be found in dropdown.less -->
-         
-              <!-- User Account: style can be found in dropdown.less -->
+
               <li class="dropdown user user-menu">
                 <a href="{{route('auth.getLogout')}}" class="fa fa-sign-out" > @lang('menu.salir')</a>
- 
-        
-                <!-- <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{asset('dist/img/log.jpg')}}" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Alexander Pierce</span>
-                </a>
-                <ul class="dropdown-menu"> -->
-                  <!-- User image -->
-                  <!-- <li class="user-header">
-                    <img src="{{asset('dist/img/log.jpg')}}" class="img-circle" alt="User Image">
-                    <p>
-                      Alexander Pierce - Web Developer
-                      <small>Member since Nov. 2012</small>
-                    </p>
-                  </li> -->
-                  <!-- Menu Body -->
-                  <!-- <li class="user-body">
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Followers</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Sales</a>
-                    </div>
-                    <div class="col-xs-4 text-center">
-                      <a href="#">Friends</a>
-                    </div>
-                  </li> -->
-                  <!-- Menu Footer-->
-                  <!-- <li class="user-footer">
-                    <div class="pull-left">
-                      <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    </div>
-                    <div class="pull-right">
-                      <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                    </div>
-                  </li>
-                </ul> -->
-              </li>
-              <!-- Control Sidebar Toggle Button -->
-              <li>
-   
               </li>
             </ul>
           </div>

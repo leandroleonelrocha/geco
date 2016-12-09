@@ -29,6 +29,7 @@
 												@endforeach
 											</td>
 											<td>{{$filial->mail}}</td>
+
 											<td class="text-center"><a href="{{route('filial.matriculas_pase_nuevo',[$filial->id, $matricula])}}" class="btn btn-success text-white">@lang('filial.seleccionar')</a></td>
 										</tr>
 								@endforeach

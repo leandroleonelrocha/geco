@@ -38,8 +38,13 @@
 					            	<td>{{ $f->mail}}</td>
 						            <td>{{ $f->Director->fullname}}</td>
 						           	<td>
+<<<<<<< HEAD
 					           		<a href="{{route('dueño.filiales_editar',$f->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>	
 				           	   		<a href="{{route('dueño.filiales_borrar',$f->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar la filial?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+=======
+					           		<a href="{{route('dueño.filiales_editar',$f->id)}}" title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil"></i></a>	
+				           	   		<a href="{{route('dueño.filiales_borrar',$f->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar la filial?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>
+>>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 							    </tr>
 						    @endforeach
 					   	</tbody>

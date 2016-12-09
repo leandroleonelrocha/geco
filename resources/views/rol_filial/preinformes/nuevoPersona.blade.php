@@ -34,10 +34,10 @@
 							<div class="col-md-6 form-group">
 								<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'M') !!} @lang('persona.masculino')
+									{!! Form::radio('genero', 'M', null, array('class'=>'minimal')) !!} @lang('persona.masculino')
 								</div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'F') !!} @lang('persona.femenino')
+									{!! Form::radio('genero', 'F',  null, array('class'=>'minimal')) !!} @lang('persona.femenino')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
@@ -55,7 +55,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.telefonos')</label>
-								<button class="add_input_telefono btn btn-success">+</button>	
+								<button class="add_input_telefono btn-xs btn-success">+</button>	
 								<div class="input_fields_telefono">
 									{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
 								</div>
@@ -63,7 +63,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>E-Mails</label>
-								<button class="add_input_mail btn btn-success"">+</button>	
+								<button class="add_input_mail btn-xs btn-success"">+</button>	
 								<div class="input_fields_wrap">
 							   		{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
 								</div>	
@@ -78,25 +78,33 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>
+<<<<<<< HEAD
 								<div>{!! Form::checkbox('estudio_computacion', '1') !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computadora')</label>
 								<div>{!! Form::checkbox('posee_computadora', '1') !!} @lang('persona.si')</div>
+=======
+								<div>{!! Form::checkbox('estudio_computacion', '1', null, array('class'=>'minimal')) !!} Si</div>
+							</div>
+							<div class="col-md-6 form-group">
+								<label>@lang('persona.computadora')</label>
+								<div>{!! Form::checkbox('posee_computadora', '1', null, array('class'=>'minimal')) !!} Si</div>
+>>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.disponibilidad')</label>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_manana', '1') !!} @lang('persona.mañana')
+									{!! Form::checkbox('disponibilidad_manana', '1', null, array('class'=>'minimal')) !!} @lang('persona.mañana')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_tarde', '1') !!} @lang('persona.tarde')
+									{!! Form::checkbox('disponibilidad_tarde', '1', null, array('class'=>'minimal')) !!} @lang('persona.tarde')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_noche', '1') !!} @lang('persona.noche')
+									{!! Form::checkbox('disponibilidad_noche', '1', null, array('class'=>'minimal')) !!} @lang('persona.noche')
 								</div>
 								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_sabados', '1') !!} @lang('persona.sabados')
+									{!! Form::checkbox('disponibilidad_sabados', '1',  null, array('class'=>'minimal')) !!} @lang('persona.sabados')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
@@ -135,7 +143,7 @@
 							</div>
 							<div class="col-md-2 form-group">
 								<label>@lang('preinforme.ningunat')</label>
-								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna')) !!}</div>
+								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna','class'=>'minimal')) !!}</div>
 							</div>
 							<div class="col-md-12 form-group">
 								<label>@lang('preinforme.otrost')</label>

@@ -16,7 +16,5 @@ class MateriaRepo extends BaseRepo {
         return Materia::where('id', '=', $id)->delete();
     }
 
-    public function allMateria(){
-        return Materia::select()->get();
-    }
+   
 }

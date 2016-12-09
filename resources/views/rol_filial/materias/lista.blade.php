@@ -27,6 +27,7 @@
       	            		        <td>{{ $m->Carrera->fullname}}</td>
 						            <td>{{ $m->descripcion }}</td>
 						           	<td class="text-center">
+
 					           		<a href="{{route('filial.materias_editar',$m->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>	
 									</td>
 							    </tr>
@@ -37,4 +38,11 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+		<div class="row">
+        <div class="col-sm-12">
+	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+	        	{!! $materia->render() !!}
+	        </div>
+        </div>
+    </div>
 @endsection

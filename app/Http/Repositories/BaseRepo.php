@@ -21,6 +21,13 @@ abstract class BaseRepo {
 
     public abstract function getModel();
 
+    public function allEneable(){
+
+        return $this->model->where('activo', 1)->paginate(2);
+    }
+
+
+
     public function listPaginate()
     {
         return $this->model->orderBy('id', 'DESC')->Paginate(10);

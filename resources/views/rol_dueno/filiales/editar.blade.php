@@ -51,7 +51,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label>@lang('filial.telefonos')</label>
-                                <button class="add_input_telefono btn btn-success">+</button> 
+                                <button class="add_input_telefono btn-xs btn-success">+</button> 
                                	<div class="input_fields_telefono">    
       								@foreach ($telefono as $t)
 										{!! Form::text('telefono[]', $t->telefono, array('class'=>'form-control')) !!}

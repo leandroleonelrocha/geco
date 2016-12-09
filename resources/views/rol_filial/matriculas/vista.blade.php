@@ -94,8 +94,9 @@
 											<?php
 										if ($pago->terminado != 1){
 									?>
-										<a href="{{route('filial.pagos_editar',$pago->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="@lang('lista.actualizar')"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
+
+										<a href="{{route('filial.pagos_editar',$pago->id)}}" title="Editar"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
+										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="@lang('lista.actualizar')"><i class="btn btn-success glyphicon glyphicon-repeat"></i></a>
 									<?php
 										}
 									?>

@@ -35,6 +35,14 @@
                             
                         <!-- ******************** GECO JS ******************** -->
 <script src="{{asset('js/functions/functions.js')}}"></script>
+                        <!-- ******************** TUTORIALES JS ******************** -->
+<script src="{{asset('plugins/intro/intro.js')}}"></script>
+                        <!-- ******************** PACE JS ******************** -->
+<script src="{{asset('plugins/pace/pace.js')}}"></script>
+
+<!-- Bootstrap-checkbox -->
+<!-- <script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>
+<script src="{{asset('js/functions/checkbox.js')}}"></script> -->
 
 <!-- Page script -->
 <script>
@@ -42,17 +50,13 @@
         //Initialize Select2 Elements
         $(".select2").select2();
 
-        $("#example1").DataTable();
-        $('#example2').DataTable({
-          "paging": true,
-          "lengthChange": false,
-          "searching": false,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
+        $('#example1').DataTable({
+            paging: false,
+            "bInfo" : false
         });
-      
 
+        $('#example2').DataTable();
+    
 
         //Datemask dd/mm/yyyy
         $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
@@ -109,5 +113,7 @@
         $(".timepicker").timepicker({
             showInputs: false
         });
+
     });
 </script>
+

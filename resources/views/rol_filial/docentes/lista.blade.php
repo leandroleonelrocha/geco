@@ -42,6 +42,7 @@
 										<?php if($docente->disponibilidad_sabados == 0 and $docente->disponibilidad_manana == 0 and $docente->disponibilidad_tarde == 0 and $docente->disponibilidad_noche == 0) echo'Ninguna';?>
 						         	</td> 
 									<td class="text-center">
+
 									<a href="{{route('filial.docentes_editar',$docente->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
 									<a href="{{route('filial.docentes_borrar',$docente->id)}}" title="@lang('lista.eliminar')"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a>
 									<a href="{{route('filial.docentes_calcularHoras',$docente->id)}}" title="@lang('lista.horas')"><i class="btn btn-info glyphicon glyphicon-time"></i></a></td>
@@ -53,4 +54,11 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+		<div class="row">
+        <div class="col-sm-12">
+	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+	        	{!! $docentes->render() !!}
+	        </div>
+        </div>
+    </div>
 @endsection

@@ -16,23 +16,37 @@ use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialTelefonoRepo;
 use App\Http\Repositories\CadenaRepo;
+use App\Http\Repositories\GrupoRepo;
+use App\Http\Repositories\ClaseRepo;
+use App\Http\Repositories\DocenteRepo;
 use Mail;
 
 class FilialesController extends Controller
 {
 	protected $filialesRepo;
 	protected $directorRepo;
+    protected $grupoRepo;
+    protected $claseRepo;
+    protected $docenteRepo;
 
-	public function __construct(FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo){
+	public function __construct(GrupoRepo $grupoRepo,ClaseRepo $claseRepo,DocenteRepo $docenteRepo, FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo){
 
 		$this->directorRepo       = $directorRepo;
 		$this->filialesRepo       = $filialesRepo;
         $this->filialTelefonoRepo = $filialTelefonoRepo;
         $this->cadenaRepo         = $cadenaRepo;
+        $this->grupoRepo          = $grupoRepo;
+        $this->claseRepo          = $claseRepo;
+        $this->docenteRepo        = $docenteRepo;  
 	}
 
     public function index(){
-        return view('rol_filial.index');  
+        $filial     = session('usuario')['entidad_id'];
+        $grupos     = $this->grupoRepo->all()->lists('full_name', 'id');
+        $docentes   = $this->docenteRepo->all()->lists('full_name', 'id');
+        $events     = $this->claseRepo->all();
+        return view('rol_filial.index', compact('grupos', 'docentes', 'events', 'filial'));
+    
     }
 
 	public function lista(){

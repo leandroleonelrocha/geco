@@ -11,7 +11,7 @@ class DocenteRepo extends BaseRepo {
     
     public function allEneable(){
 
-        return $this->model->where('activo', 1)->where('filial_id', $this->filial)->get();
+        return $this->model->where('activo', 1)->where('filial_id', $this->filial)->paginate(10);
     }
 
     public function check($tipo,$nro){

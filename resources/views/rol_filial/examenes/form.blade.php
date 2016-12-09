@@ -9,12 +9,11 @@
 		<div class="col-xs-12">
 
 			<div class="input-group input-group-sm">
-				{!! Form::select('grupo_id',(['' => 'Seleccionar curso'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
-
+				{!! Form::select('grupo_id',(['' => 'Seleccionar grupo'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
 				<span class="input-group-btn">
                       <button class="btn btn-info btn-flat buscar" type="button">@lang('examen.buscar')</button>
                     </span>
-			</div><!-- /input-group -->
+			</div>
 
 			<br>
 			{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
@@ -23,34 +22,38 @@
 					<h3 class="box-title">@lang('examen.listadoexamen')</h3>
 				</div>
 				
-				<div class="lalocura" style="display: none">
-
+				<div class="lalocura col-xs-12" style="display: none">
 					<div class="form-group materia" >
+<<<<<<< HEAD
 			            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
 			            <select name="materia_id" class="form-control materia_id">
 			            <option>@lang('examen.seleccionemateria')</option>
+=======
+			            <label for="exampleInputEmail1">Materia</label>
+			            <select name="materia_id" class="form-control materia_id">
+			            <!-- <option>Seleccione materia</option> -->
+>>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 			           	</select>
 			        </div>
 			        <div class="form-group materia" >
 			           <label for="exampleInputEmail1">@lang('grupo.docente')  </label>
 			           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
-
 			        </div>
 
+			        <!--grupo_id -->
+			        {!! Form::hidden('grupo_id',null, ['class'=>'form-control grupo_id'])!!}
 				</div>
 
 				<div class="box-body">
-					
-        		</div><!-- Fin box-body -->
-			</div> <!-- Fin box -->
-
+				</div>
+			</div>
 			<div class="box-footer">
 				<button type="submit" class="btn btn-success">@lang('examen.guardar')</button>
 			</div>
 			{!! Form::close() !!}
 
-		</div> <!-- Fin col -->
-	</div> <!-- Fin row -->
+		</div>
+	</div>
 @endsection
 
 @section('js')
@@ -58,8 +61,8 @@
 
 	$( ".buscar" ).click(function() {
 		var grupo = $('.grupo_id').val();
-		console.log(grupo);
-		alert( "Handler for .click() called." );
+
+		// alert( "Handler for .click() called." );
 		$.ajax(
 			{
 			url: "grupos_examenes",
@@ -74,19 +77,25 @@
 				$('.lalocura').show();
 				var body = $('#example1').children('tbody');
 				$('.docente_id').val(result.grupo.docente_id);
+				$('.grupo_id').val(result.grupo.id);
 				var select_materia = $('.materia_id');				
+					// $.each(result.materia, function(clave, valor) {
+					// 	select_materia.append('<option value='+valor.id+'>'+valor.nombre+'</option>');
+					// });
 
+					select_materia.append('<option value='+result.materia.id+'>'+result.materia.nombre+'</option>');
 				
-					$.each(result.materias, function(clave, valor) {
-						select_materia.append('<option value='+valor.id+'>'+valor.nombre+'</option>');
+					$.each(result.matriculas, function(clave, valor) {
+						var matricula 	= valor.id;
+						var persona 	= valor.persona_id;
+						var nombre;
+						$.each(result.personas, function(claveP, valorP){
+							if (valorP.id == persona)
+								nombre = valorP.nombres +' '+ valorP.apellidos;
+						});
+						// var nombre = 'Beto';
+						body.append(tr(matricula, nombre));
 					});
-				
-				$.each(result.matriculas, function(clave, valor) {
-					var matricula = valor.id;
-					var nombre = 'Beto';
-					body.append(tr(matricula, nombre));
-
-				});
 
 			}}
 

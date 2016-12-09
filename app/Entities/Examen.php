@@ -5,7 +5,6 @@ namespace App\Entities;
 class Examen extends Entity
 {
     protected $table = 'examen';
-    protected $primaryKey = 'nro_acta';
 
 
     /**

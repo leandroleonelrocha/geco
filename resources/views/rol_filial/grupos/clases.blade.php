@@ -5,19 +5,15 @@
 @endsection
 
 @section('content')
-	
-	<div class="row">
-	
-             <div class="col-md-12">
-              <div class="box box-primary">
-                <div class="box-body no-padding">
-                  <!-- THE CALENDAR -->
-                  <div id="calendar"></div>
-                </div><!-- /.box-body -->
-              </div><!-- /. box -->
-            </div><!-- /.col -->
-
-	</div>
+<div class="row">
+    <div class="col-md-12">
+      <div class="box">
+        <div class="box-body no-padding">
+          <div id="calendar"></div>
+        </div>
+      </div>
+    </div>
+</div>
 
 @endsection
 
@@ -30,9 +26,7 @@
 <script src="{{asset('js/calendario/moment.min.js') }}"></script>
 <script src="{{asset('js/calendario/fullcalendar.min.js') }}"></script>
 <script src="{{asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
-
 <script>
-
 	$(document).ready(function() {
 		
 		$('#calendar').fullCalendar({
@@ -43,7 +37,8 @@
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,basicWeek,basicDay'
+				right: 'month,agendaWeek,agendaDay,listWeek'
+
 			},
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
@@ -84,7 +79,6 @@
 							$('#ModalEdit').modal('show');
 						}
 					});
-
 				
 				});
 			},
@@ -94,7 +88,6 @@
 
 
 			},
-			
 			eventResize: function(event,dayDelta,minuteDelta,revertFunc) { // si changement de longueur
 
 				edit(event);
@@ -102,32 +95,29 @@
 			},
 			events: [
 			<?php foreach($events as $event): 
-
-
 				if($event->Grupo->filial_id == $filial)
 				{
-					$start = explode(" ", $event['fecha']);
-
-					$end = explode(" ", $event['fecha']);
-					if($start[1] == '00:00:00'){
-						$start = $start[0];
-					}else{
+					 $start = explode(" ", $event['fecha']);
+					 $end = explode(" ", $event['fecha']);
+					 if($start[1] == '00:00:00'){
+					 	$start = $start[0];
+					 }else{
 						$start = $event['fecha'];
-					}
-					if($end[1] == '00:00:00'){
+
+					 }
+					 if($end[1] == '00:00:00'){
 						$end = $end[0];
-					}else{
+					 }else{
 						$end = $event['fecha'];
-					}
-				
+					 }
 
 			?>
 				{
 
 						id: '<?php if(isset($event)) echo $event['id']; ?>',
 						title: '<?php if(isset($event)) echo $event->Grupo->fullname; ?>',
-						start: '<?php if(isset($event)) echo $start; ?>',
-						end: '<?php if(isset($event)) echo $end; ?>',
+						start: '<?php if(isset($event)) echo $start.'T'.$event->horario_desde; ?>',
+						end: '<?php if(isset($event)) echo $end.'T'.$event->horario_hasta; ?>',
 						color: '<?php if(isset($event)) echo $event->Grupo->color; ?>',
 					
 				},

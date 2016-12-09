@@ -36,19 +36,19 @@
 								<label>@lang('docente.disponibilidad')</label>
 								<div class="col-xs-12">
 									{!!Form::hidden('disponibilidad_manana', '0') !!}
-									{!! Form::checkbox('disponibilidad_manana','1', $docente->disponibilidad_manana) !!} @lang('docente.mañana')
+									{!! Form::checkbox('disponibilidad_manana','1', $docente->disponibilidad_manana, array('class'=>'minimal')) !!} @lang('docente.mañana')
 								</div>
 								<div class="col-xs-12">
 									{!!Form::hidden('disponibilidad_tarde', '0') !!}
-									{!! Form::checkbox('disponibilidad_tarde','1', $docente->disponibilidad_tarde) !!} @lang('docente.tarde')
+									{!! Form::checkbox('disponibilidad_tarde','1', $docente->disponibilidad_tarde,array('class'=>'minimal')) !!} @lang('docente.tarde')
 								</div>
 								<div class="col-xs-12">
 									{!!Form::hidden('disponibilidad_noche', '0') !!}
-									{!! Form::checkbox('disponibilidad_noche','1', $docente->disponibilidad_noche) !!} @lang('docente.noche')
+									{!! Form::checkbox('disponibilidad_noche','1', $docente->disponibilidad_noche, array('class'=>'minimal')) !!} @lang('docente.noche')
 								</div>
 								<div class="col-xs-12">
 									{!!Form::hidden('disponibilidad_sabados', '0') !!}
-									{!! Form::checkbox('disponibilidad_sabados', '1', $docente->disponibilidad_sabados) !!} @lang('docente.sabados')
+									{!! Form::checkbox('disponibilidad_sabados', '1', $docente->disponibilidad_sabados,array('class'=>'minimal')) !!} @lang('docente.sabados')
 								</div>
 							</div>
 							<div class="box-footer col-xs-12">

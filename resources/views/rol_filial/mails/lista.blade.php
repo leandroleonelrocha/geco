@@ -18,11 +18,32 @@
 										<th>@lang('mail.destinatarios')</th>
 									</tr></thead>
 									<tbody>
+										<?php if ($cantAviso > 0): ?>
+										<tr>
+											<td></td>
+											<td>Pre-Moroso</td>
+											<td>{{$cantAviso}}</td>
+										</tr>
+										<?php endif ?>
 										<?php if ($cantMorosos > 0): ?>
 										<tr>
 											<td></td>
 											<td>Moroso</td>
 											<td>{{$cantMorosos}}</td>
+										</tr>
+										<?php endif ?>
+										<?php if ($cantClase > 0): ?>
+										<tr>
+											<td></td>
+											<td>Clases Canceladas</td>
+											<td>{{$cantClase}}</td>
+										</tr>
+										<?php endif ?>
+										<?php if ($cantGruposCancelado > 0): ?>
+										<tr>
+											<td></td>
+											<td>Grupos Cancelados</td>
+											<td>{{$cantGruposCancelado}}</td>
 										</tr>
 										<?php endif ?>
 										<?php if ($cantInteres > 0): ?>

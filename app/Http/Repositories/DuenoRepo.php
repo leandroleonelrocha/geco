@@ -41,4 +41,9 @@ class DuenoRepo {
   
     }
 
+    public function estadisticasNivelEstudios($inicio, $fin){
+
+        return $this->persona->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->groupBy('nivel_estudios');
+    }
+
 }

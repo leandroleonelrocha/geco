@@ -26,7 +26,7 @@ class CarreraController extends Controller
 
 	public function lista(){
 		
-		$carrera=$this->carreraRepo->all();
+		$carrera=$this->carreraRepo->listPaginate();
 		return view('rol_filial.carreras.lista',compact('carrera'));
 		
 	}

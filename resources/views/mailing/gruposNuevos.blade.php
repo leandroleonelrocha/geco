@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>GeCo -- Moroso</title>
+	<title>GeCo -- Nuevos Grupos</title>
 </head>
 <body>
 	<div class="mailContainer">

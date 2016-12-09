@@ -21,9 +21,9 @@ Route::group(['prefix' => 'grupos'], function(){
 			'uses' => 'GrupoController@postAdd'
 		]);
 
-		Route::get('getDelete/{id}',[
-		'as'	=> 'grupos.getDelete',
-		'uses'	=>	'GrupoController@getDelete'
+		Route::get('borrar/{id}',[
+		'as'	=> 'grupos.grupos_borrar',
+		'uses'	=>	'GrupoController@borrar'
 		]);
 
 		
@@ -37,15 +37,22 @@ Route::group(['prefix' => 'grupos'], function(){
 		'uses'	=>	'GrupoController@edit'
 		]);
 
-
 		Route::get('clases',[
-
 			'as' => 'grupos.clases',
 			'uses' => 'GrupoController@clases'
 		]);
 
-		Route::get('clases/matricula/{id}',[
+		// Route::get('clase_asistencias/{id}',[
+		// 	'as' => 'grupos.clase_asistencias',
+		// 	'uses' => 'GrupoController@clase_asistencias'
+		// ]);
 
+		// Route::get('clase_asistir/{clase}/{matricula}/{asistio}',[
+		// 	'as' => 'grupos.clase_asistir',
+		// 	'uses' => 'GrupoController@asistir'
+		// ]);
+
+		Route::get('clases/matricula/{id}',[
 			'as' => 'grupos.clase_matricula',
 			'uses' => 'GrupoController@clase_matricula'
 		]);

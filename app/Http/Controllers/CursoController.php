@@ -23,9 +23,15 @@ class CursoController extends Controller
 		$this->cursoRepo = $cursoRepo;
 	}
 	
+<<<<<<< HEAD
 	public function lista()
 	{
 		$curso=$this->cursoRepo->all();
+=======
+	public function lista(){
+		
+		$curso = $this->cursoRepo->listPaginate();
+>>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 		return view('rol_filial.cursos.lista',compact('curso'));
 	}
 

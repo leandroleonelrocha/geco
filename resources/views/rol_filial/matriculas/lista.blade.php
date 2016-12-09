@@ -34,11 +34,13 @@
 									<?php if($matricula->cancelado == 0) echo 'No'; else echo 'Si';?>
 								</td>
 								<td class="text-center">
+
 								<a href="{{route('filial.matriculas_vista',$matricula->id)}}" title="@lang('lista.vistadetallada')"><i class="btn btn-info glyphicon glyphicon-search"></i></a>
 								<a href="{{route('filial.matriculas_editar',$matricula->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
 								<a href="{{route('filial.matriculas_actualizar',$matricula->id)}}" title="@lang('lista.actualizar')"><i class="btn btn-success glyphicon glyphicon-repeat"></i></a>
 								<a href="{{route('filial.matriculas_pase',$matricula->id)}}" title="@lang('lista.pases')"><i class="btn btn-warning glyphicon glyphicon-share-alt"></i></a>
 								<a href="{{route('filial.matriculas_borrar',$matricula->id)}}" title="@lang('lista.eliminar')"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a>
+
 								</td>
 							</tr>
 						@endforeach
@@ -48,4 +50,11 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+	<div class="row">
+        <div class="col-sm-12">
+	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+	        	{!! $matriculas->render() !!}
+	        </div>
+        </div>
+    </div>
 @endsection

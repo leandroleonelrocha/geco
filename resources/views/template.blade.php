@@ -37,7 +37,7 @@
       </div><!-- /.content-wrapper -->
       <footer class="main-footer">
         <div class="pull-right hidden-xs">
-          <b>Versión</b> 0.5
+          <b>Versión</b> 0.6
         </div>
         <strong><a href=https://www.facebook.com/WhiteoutTeam/?fref=ts>The Whiteout Team</a></strong>
       </footer>

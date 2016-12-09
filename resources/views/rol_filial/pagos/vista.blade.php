@@ -32,7 +32,9 @@
 									<?php if($matricula->cancelado == 0) echo 'No'; else echo 'Si';?>
 								</td>
 								<td class="text-center">
-								<a href="{{route('filial.pagos',$matricula->id)}}" class="btn btn-success" title="Ver Pagos">@lang('matricula.verpagos')</a>
+
+								<a href="{{route('filial.pagos',$matricula->id)}}" class="btn btn-success" title="@lang('matricula.verpagos')"></a>
+
 								</td>
 							</tr>
 						@endforeach
