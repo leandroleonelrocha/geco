@@ -1,9 +1,6 @@
 @extends('template')
 
-
 @section('content')
-	
-								
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -12,7 +9,6 @@
 					<div class="box-tools pull-right no-print">
 						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> Nuevo grupo</a>
 						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> Ver clases</a>
-						
 					</div>
 				</div>
 				<div class="box-body">
@@ -22,10 +18,8 @@
 						<th>#</th>
 						<th>Nombre</th>
 						<th>Descripción</th>
-						
 						<th>Docente</th>
 						<th></th>
-						
 						</tr> 
 						</thead>
 						<tbody>
@@ -63,5 +57,7 @@
         </div>
     </div>
 @endsection
+
+
 
  

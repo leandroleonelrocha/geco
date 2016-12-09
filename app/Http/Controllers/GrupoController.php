@@ -225,7 +225,6 @@ class GrupoController extends Controller
 	public function nueva_clase(Request $request)
 	{
 		$data = $request->all();
-		
 		$this->claseRepo->create($data);
 		return redirect()->back()->with('msg_ok', 'Clase creada correctamente');
 		
@@ -247,7 +246,6 @@ class GrupoController extends Controller
 		$id = $clase[0];
 		$fecha = explode(' ',$clase[1]);
  		$model = $this->claseRepo->find($id);
-		
 		$model->fecha = $fecha[0];
 		$model->save();
 		if($model)
@@ -275,7 +273,7 @@ class GrupoController extends Controller
 	{
 		$clase = $this->claseRepo->find($data);
 		$grupo_matricula = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
-		//$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();
+		
 		$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();		
      	$search = $this->claseMatriculaRepo;
      

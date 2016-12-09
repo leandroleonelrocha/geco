@@ -91,9 +91,6 @@
             {!! Form::color('color', null ,  array('class'=>'form-control', 'id'=>'example-color-input')) !!}
             @endif
         </div>
-
-
-
          <button class="add_field_button">Agregar otro dia</button><br>
             
             <div class="row input_fields_wrap">
@@ -119,7 +116,6 @@
                    <label> Hora fin </label>
                     <input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >
                   </div>
-
 
                 </div>
             </div>
