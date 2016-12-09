@@ -19,7 +19,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label>@lang('materia.carrera')</label>
-                                {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control')) !!}
+                                {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control select2')) !!}
                             </div>
                    
                             <div class="col-md-6 form-group">
