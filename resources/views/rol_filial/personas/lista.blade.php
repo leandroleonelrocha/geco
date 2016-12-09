@@ -17,11 +17,11 @@
 @endsection
 @section('content')
 							
-	<div class="alert alert-info alert-dismissable">
+	<!-- <div class="alert alert-info alert-dismissable">
    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
    <h4><i class="icon fa fa-info"></i> Alert!</h4>
    Info alert preview. This alert is dismissable.
-   </div>
+   </div> -->
 
 	<div class="row">
 		<div class="col-xs-12">
@@ -89,25 +89,21 @@
 @section('js')
 
 <script type="text/javascript">
-$(".alert-dismissable").show();
-$(".alert-dismissable").delay(3000).hide(600);
+// $(".alert-dismissable").show();
+// $(".alert-dismissable").delay(3000).hide(600);
 
 $(".star_intro" ).click(function() {
-
-
 	var texto ='¡Bienvenido al Tutorial de Personas!';	
 	<?php
 		$array = [
-		    "#explicacion_1"	 	=>	"Este boton sirve para agregar una nueva persona",
-		    "#example1_length"   	=>	"Escriba aquí para filtrar un dato a buscar",
-		    ".explicacion_editar" 	=>  "Este boton sirve para editar la persona",
-		    ".explicacion_borrar"	=>  "Este boton sirve para borrar la persona", 
+		    "#explicacion_1"	 	=>	"Este boton sirve para agregar una nueva persona.",
+		    "#example1_length"   	=>	"Seleccione la cantidad de registros que desee ver.",
+		    "#example1_filter"   	=>	"Escriba aquí para filtrar un dato a buscar.",
+		    ".explicacion_editar" 	=>  "Este boton sirve para editar la persona.",
+		    ".explicacion_borrar"	=>  "Este boton sirve para borrar la persona.", 
 		];
-	
 	?>
-
 	startIntro(texto);
-
 });		
 </script>
 @include('partials.inicio_tutorial')

@@ -22,36 +22,51 @@ class CrearNuevoAsesorRequest extends Request
      */
     public function rules()
     {
-        return [
+        $rules = [
+                    'tipo_documento_id' => 'required',
+                    'nro_documento' => 'required', 
+                    'nro_documento' => 'required|unique:asesor,nro_documento',
+                    'apellidos' => 'required',
+                    'nombres' => 'required',
+                    'direccion' => 'required',
+                    'localidad' => 'required',
+                 ];
 
-            'tipo_documento_id' => 'required',
-            'nro_documento' => 'required', 
-            'nro_documento' => 'required|unique:asesor,nro_documento',
-            'apellidos' => 'required',
-            'nombres' => 'required',
-            'direccion' => 'required',
-            'localidad' => 'required',
-            'telefono' => 'required',
-            'mail' => 'required',
-            'mail' => 'required|unique:asesor_mail,mail',
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $rules['telefono.' . $index] = 'required';
+        }
 
-        ];
+        $nbr = count($this->input('mail')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $rules['mail.' . $index] = 'required';
+        }
+
+        return $rules;
     }
 
-    public function messages()
-    {
-        return [
-            'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'Escriba un número de documento',
-            'nro_documento.unique'=> 'El número de documento ya está en uso', 
-            'nombres.required' => 'Escriba el nombre',
-            'apellidos.required' => 'Escriba el apellido', 
-            'direccion.required' => 'Escriba la dirección',
-            'localidad.required' => 'Escriba la localidad',
-            'telefono[0].required' => 'Escriba el teléfono',
-            'mail.required' => 'Escriba el E-mail',
-            'mail.unique'=> 'El mail ya está en uso', 
+    public function messages(){
+        $messages = [
+            'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
+            'nro_documento.required' => 'Escriba un número de documento.',
+            'nro_documento.unique'=> 'El número de documento ya está en uso.', 
+            'nombres.required' => 'Escriba el nombre.',
+            'apellidos.required' => 'Escriba el apellido.', 
+            'direccion.required' => 'Escriba la dirección.',
+            'localidad.required' => 'Escriba la localidad.',
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $messages['telefono.' . $index.'.required'] = 'Escriba almenos un teléfono.';
+        }
+
+        $nbr = count($this->input('mail')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $messages['mail.' . $index.'.required'] = 'Escriba almenos un e-mail.';
+        }
+
+        return $messages;
     }
 
 }

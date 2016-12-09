@@ -8,10 +8,10 @@
 				<div class="box-header">
 					<h3 class="box-title">@lang('persona.listadopersona')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.preinformes_nuevaPersona')}}" class="btn btn-success text-white"> @lang('preinforme.agregarnuevapersona')</a>
+						<a href="{{route('filial.preinformes_nuevaPersona')}}" class="btn btn-success text-white explicacion_seleccion3"> @lang('preinforme.agregarnuevapersona')</a>
 					</div>
 				</div>
-				<div class="box-body">
+				<div class="box-body explicacion_seleccion">
 					<div class="col-xs-12">
 						<div class="col-xs-9">
 			            	<h4 class="box-title">
@@ -32,7 +32,7 @@
 											<td>{{$persona->nombres}}</td>
 											<td>{{$persona->apellidos}}</td>
 											<td>{{$persona->nro_documento}}</td>
-											<td class="text-center"><a href="{{route('filial.preinformes_nuevo',$persona->id)}}" class="btn-xs btn-success text-white">@lang('preinforme.seleccionar')</a></td>
+											<td class="text-center explicacion_seleccion2"><a href="{{route('filial.preinformes_nuevo',$persona->id)}}" class="btn-xs btn-success text-white">@lang('preinforme.seleccionar')</a></td>
 										</tr>
 								@endforeach
 							</tbody>
@@ -42,4 +42,23 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+@section('js')
+<script type="text/javascript">
+// $(".alert-dismissable").show();
+// $(".alert-dismissable").delay(3000).hide(600);
+
+$(".star_intro" ).click(function() {
+	var texto ='¡Bienvenido al Tutorial de Selección de Preinformes!';	
+	<?php
+		$array = [
+		    ".explicacion_seleccion" 	=>  "Listados de personas existentes en el sistema.",
+		    ".explicacion_seleccion2"	=>  "Seleccione una persona para crearle un preinforme.",
+		    ".explicacion_seleccion3"	=>  "Si la persona no ha sido cargada, haga click aquí para crear tanto a la persona como el preinforme.", 
+		];
+	?>
+	startIntro(texto);
+});		
+</script>
+@include('partials.inicio_tutorial')
 @endsection

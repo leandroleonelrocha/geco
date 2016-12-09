@@ -41,7 +41,7 @@
 								<label>@lang('asesor.telefonos')</label>
 								<button class="add_input_telefono btn btn-success">+</button>	
 								<div class="input_fields_telefono">
-									{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
+									<input name="telefono[]" type="text" class="form-control">
 								</div>
 							</div>
 
@@ -49,7 +49,7 @@
 								<label>@lang('asesor.mail')</label>
 								<button class="add_input_mail btn btn-success"">+</button>	
 								<div class="input_fields_wrap">
-							   	{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
+							   		<input name="mail[]" type="text" class="form-control">
 								</div>	
 							</div>
 		

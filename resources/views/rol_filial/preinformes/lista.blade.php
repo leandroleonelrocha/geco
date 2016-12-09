@@ -41,43 +41,22 @@
 
 @section('js')
 <script type="text/javascript">
-		
+// $(".alert-dismissable").show();
+// $(".alert-dismissable").delay(3000).hide(600);
 
- function startIntro(){
-        var intro = introJs();
-
-          intro.setOptions({
-
-            'showProgress': true,
-            steps: [
-              { 
-                intro: "Hello world!"
-              },
-              {
-                element: document.querySelector('#step1'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#example1_filter'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#example1_length'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#step_editar'),
-                intro: "This is a tooltip."
-              },
-              {
-                element: document.querySelector('#step_borrar'),
-                intro: "This is a tooltip."
-              }
-            ]
-          });
-
-          intro.start();
-      }
-
+$(".star_intro" ).click(function() {
+	var texto ='¡Bienvenido al Tutorial de Preinformes!';	
+	<?php
+		$array = [
+		    // "#explicacion_1"	 	=>	"Este boton sirve para agregar una nueva persona.",
+		    "#example1_length"   	=>	"Seleccione la cantidad de registros que desee ver.",
+		    "#example1_filter"   	=>	"Escriba aquí para filtrar un dato a buscar.",
+		    // ".explicacion_editar" 	=>  "Este boton sirve para editar la persona.",
+		    // ".explicacion_borrar"	=>  "Este boton sirve para borrar la persona.", 
+		];
+	?>
+	startIntro(texto);
+});		
 </script>
+@include('partials.inicio_tutorial')
 @endsection
