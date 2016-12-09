@@ -9,9 +9,12 @@ return [
     'taller' => 'Taller',  
 
     'listadodecursos' => 'Listado de Cursos',
-    'agregarnuevo' => 'Agregar nuevo',
-    'nuevocurso' => 'Nuevo curso',
-    'curso' => 'Crear'
+    'agregarnuevo' => 'Agregar Nuevo',
+    'editarcurso' => 'Editar Curso',
+    'nuevocurso' => 'Nuevo Curso',
+   	'crear' => 'Crear',
+    'guardar' => 'Guardar',
+   
 
     
  

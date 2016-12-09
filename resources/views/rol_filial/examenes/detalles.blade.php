@@ -6,7 +6,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de examenes</h3>
+					<h3 class="box-title">@lang('examen.listadoexamen')</h3>
 					<div class="box-tools pull-right no-print">
 					
 						
@@ -16,10 +16,10 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> 
 						<tr>
-						<th>Matricula</th>
-						<th>Nombre </th>
-						<th>Nota </th>
-						<th>Recuperatorio </th>
+						<th>@lang('examen.matricula') </th>
+						<th>@lang('examen.nombre') </th>
+						<th>@lang('examen.nota') </th>
+						<th>@lang('examen.recupertorio') </th>
 								
 					
 						

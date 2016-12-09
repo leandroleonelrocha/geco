@@ -31,7 +31,7 @@
 							</div>
 				
 							<div class="box-footer col-xs-12">
-							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
+                            <button type="submit" class="btn btn-success">@lang('carrera.guardar')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>

@@ -18,12 +18,12 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request){
         
-        // $ch = curl_init();  
-        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
-        // curl_setopt($ch, CURLOPT_HEADER, false);  
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        // $data = json_decode(curl_exec($ch),true);
-        // curl_close($ch);
+        $ch = curl_init();  
+        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
+        curl_setopt($ch, CURLOPT_HEADER, false);  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        $data = json_decode(curl_exec($ch),true);
+        curl_close($ch);
           
 
         //rol 2 dueno
@@ -39,55 +39,55 @@ class LoginController extends Controller {
         'entidad_id'=>'1',
         'habilitado'=>'1'];
        */
-       $cuentas = array(
-                    array(
-                    'id'          => 1,
-                    'usuario'     => 'ferrari@dueño.com',
-                    'password'    => 1234,
-                    'rol_id'      => 2,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
-                    ),
-                    array(
-                    'id'          => 1,
-                    'usuario'     => 'director@director.com',
-                    'password'    => 1234,
-                    'rol_id'      => 3,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
-                    ),
-                    array(
-                    'id'          => 3,
-                    'usuario'     => 'filial@filial.com',
-                    'password'    => 1234,
-                    'rol_id'      => 4,
-                    'entidad_id'  => 3,
-                    'habilitado'  => 0,
-                    ),
-                    array(
-                    'id'          => 1,
-                    'usuario'     => 'filial2@filial.com',
-                    'password'    => 1234,
-                    'rol_id'      => 4,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
-                    )
+       // $cuentas = array(
+       //              array(
+       //              'id'          => 1,
+       //              'usuario'     => 'ferrari@dueño.com',
+       //              'password'    => 1234,
+       //              'rol_id'      => 2,
+       //              'entidad_id'  => 1,
+       //              'habilitado'  => 1 
+       //              ),
+       //              array(
+       //              'id'          => 1,
+       //              'usuario'     => 'director@director.com',
+       //              'password'    => 1234,
+       //              'rol_id'      => 3,
+       //              'entidad_id'  => 1,
+       //              'habilitado'  => 1 
+       //              ),
+       //              array(
+       //              'id'          => 3,
+       //              'usuario'     => 'filial@filial.com',
+       //              'password'    => 1234,
+       //              'rol_id'      => 4,
+       //              'entidad_id'  => 3,
+       //              'habilitado'  => 0,
+       //              ),
+       //              array(
+       //              'id'          => 1,
+       //              'usuario'     => 'filial2@filial.com',
+       //              'password'    => 1234,
+       //              'rol_id'      => 4,
+       //              'entidad_id'  => 1,
+       //              'habilitado'  => 1 
+       //              )
 
-                  );
+       //            );
 
-       foreach ($cuentas as $cuenta) {
-         if ($request->usuario == $cuenta['usuario'] && $request->password == $cuenta['password']) {
-           $data['id']          = $cuenta['id'];
-           $data['usuario']     = $cuenta['usuario'];
-           $data['password']    = $cuenta['password'];
-           $data['rol_id']      = $cuenta['rol_id'];
-           $data['entidad_id']  = $cuenta['entidad_id'];
-           $data['habilitado']  = $cuenta['habilitado'];
-           break;
-         }
-         else
-          $data = null;
-       }
+       // foreach ($cuentas as $cuenta) {
+       //   if ($request->usuario == $cuenta['usuario'] && $request->password == $cuenta['password']) {
+       //     $data['id']          = $cuenta['id'];
+       //     $data['usuario']     = $cuenta['usuario'];
+       //     $data['password']    = $cuenta['password'];
+       //     $data['rol_id']      = $cuenta['rol_id'];
+       //     $data['entidad_id']  = $cuenta['entidad_id'];
+       //     $data['habilitado']  = $cuenta['habilitado'];
+       //     break;
+       //   }
+       //   else
+       //    $data = null;
+       // }
 
 
       if ($data){

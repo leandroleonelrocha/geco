@@ -2,8 +2,8 @@
 
 return [
  
-    'listadoasesor' => 'Listado de asesores',
-    'misasesores'=>'Lista de mis asesores',
+    'listadoasesor' => 'Listado de Asesores',
+    'misasesores'=>'Lista de mis Asesores',
     'numeroasesor'=>'Número de asesor',
     'tipodocumento' =>'Tipo de documento',
     'numerodocumento' => 'Número de documento',
@@ -17,7 +17,7 @@ return [
     'misasesores' => 'Mis Asesores',
 
 
-    'agregarnuevo' => 'Agregar nuevo',
+    'agregarnuevo' => 'Agregar Nuevo',
     'nuevoasesor' => 'Nuevo Asesor',
     'editarasesor' => 'Editar Asesor',
 
@@ -27,5 +27,4 @@ return [
     'seleccion' => 'Selección',
     
     'titulo'=>'Listado de todos los asesores a asignar para la filial'
- 
 ];

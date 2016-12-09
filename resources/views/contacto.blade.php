@@ -16,16 +16,16 @@
 				    						
 								<h2>@lang('contacto.soporte')</h2>
 								<h3>The Whiteout Team</h3>
-								<p>Tel:11321456786</p>
+								<p>Tel:1132145678</p>
 					
 				      			<img src="{{asset('img/whiteoutteam.png')}}" height="200" width="200" class="img-circle">
 								<?php
 	    				    	$s= (session('usuario')['rol_id']);
 
-   								if ($s===4 || $s==2) {
+   								if ($s==4 || $s==2) {
        							?>
 								<table id="example1" class="table table-bordered table-striped">
-								<h4><strong>Filiales de la misma cadena</strong></h4>
+								<h4><strong>@lang('contacto.titulof')</strong></h4>
 									<thead> <tr>
 									<th>@lang('contacto.nombre')</th>
 									<th>@lang('contacto.telefonosf')</th>
@@ -64,7 +64,7 @@
 				              	?>
 
 								<table id="example1" class="table table-bordered table-striped">
-								<h4><strong>Filiales del director</strong></h4>
+								<h4><strong>@lang('contacto.titulod')</strong></h4>
 									<thead> <tr>
 									<th>@lang('contacto.nombre')</th>
 									<th>@lang('contacto.telefonosf')</th>

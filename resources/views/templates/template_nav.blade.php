@@ -1,7 +1,7 @@
 <header class="main-header">
         <!-- Logo -->
         <div href="#" class="logo">
-          <span class="logo-mini"><img src="../img/logo/Geco-Negro.png"  height="35" width="35" > </span>
+          <span class="logo-mini"><img src="{{asset('/img/logo/Geco-Negro.png')}}"   height="35" width="35" > </span>
           <!-- <span class="logo-lg"><b>Admin</b>LTE</span> -->
          
             <div class="pull-left info magia">
@@ -52,6 +52,15 @@
                         @lang('header.ingles')
                           <div class="pull-left">
                             <img src="{{asset('dist/img/english_128.png')}}" class="img-circle" alt="User Image">
+                          </div>
+                        </a>
+                      </li>
+
+                      <li>
+                        <a href="{{ url('lang', ['pt']) }}">
+                        @lang('header.portugues')
+                          <div class="pull-left">
+                            <img src="{{asset('dist/img/brazil.png')}}" class="img-circle" alt="User Image">
                           </div>
                         </a>
                       </li>

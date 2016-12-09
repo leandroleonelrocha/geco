@@ -2,28 +2,23 @@
 
 return [
  
-    'listadodirector' => 'List of directors',
+    'listadodirector' => 'List of Directors',
     'numero'=>'Number',
     'tipodocumento' => 'Document type ',
     'numerodocumento' => 'Document number ',
-    'apellido' => 'Last name',
+    'apellido' => 'Last names',
     'nombre' => 'Names',
 
-    'telefonos' => 'Phones',
+    'telefonos' => 'Telephones',
 
-    'cuenta' => 'E-Mail (Access account'),
+    'cuenta' => 'E-Mail (Access account)',
 
     'bienvenido' => 'Welcome',
 
-
-
-    'agregarnuevo' => 'Add new',
-    'nuevodirector' => 'New director',
-    'editardirector' => 'Edit director',
+    'agregarnuevo' => 'Add New',
+    'nuevodirector' => 'New Director',
+    'editardirector' => 'Edit Director',
 
     'crear' => 'Create',
     'guardar' => 'Save',
-   
-    
- 
 ];

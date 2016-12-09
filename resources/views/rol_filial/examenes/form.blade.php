@@ -12,7 +12,7 @@
 				{!! Form::select('grupo_id',(['' => 'Seleccionar curso'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
 
 				<span class="input-group-btn">
-                      <button class="btn btn-info btn-flat buscar" type="button">Buscar!</button>
+                      <button class="btn btn-info btn-flat buscar" type="button">@lang('examen.buscar')</button>
                     </span>
 			</div><!-- /input-group -->
 
@@ -20,19 +20,19 @@
 			{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Examenes</h3>
+					<h3 class="box-title">@lang('examen.listadoexamen')</h3>
 				</div>
 				
 				<div class="lalocura" style="display: none">
 
 					<div class="form-group materia" >
-			            <label for="exampleInputEmail1">Materia  </label>
+			            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
 			            <select name="materia_id" class="form-control materia_id">
-			            <option>Seleccione materia</option>
+			            <option>@lang('examen.seleccionemateria')</option>
 			           	</select>
 			        </div>
 			        <div class="form-group materia" >
-			           <label for="exampleInputEmail1">Docente  </label>
+			           <label for="exampleInputEmail1">@lang('grupo.docente')  </label>
 			           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
 
 			        </div>
@@ -45,7 +45,7 @@
 			</div> <!-- Fin box -->
 
 			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Guardar</button>
+				<button type="submit" class="btn btn-success">@lang('examen.guardar')</button>
 			</div>
 			{!! Form::close() !!}
 

@@ -47,7 +47,7 @@
 								</div>
 							</div>
 							<div class="box-footer col-xs-12">
-							{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+					     		<button type="submit" class="btn btn-success">@lang('docente.crear')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>

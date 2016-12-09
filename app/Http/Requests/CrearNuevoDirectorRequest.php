@@ -23,17 +23,14 @@ class CrearNuevoDirectorRequest extends Request
     public function rules()
     {
         return [
-
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
-         //   'nro_documento' => 'required|unique:director,nro_documento',
+            'nro_documento' => 'required|unique:director,nro_documento',
+            'nro_documento' => 'required|numeric',
             'apellidos' => 'required',
             'nombres' => 'required',
             'mail' => 'required',
             'telefono' => 'required',
-            'mail' => 'required|unique:director_mail',
-
-
         ];
     }
 
@@ -41,14 +38,13 @@ class CrearNuevoDirectorRequest extends Request
     {
         return [
             'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'Escriba un número documento',
-         //   'nro_documento.unique'=> 'El número de documento ya está en uso', 
-            'nombres.required' => 'Escriba el nombre',
-            'apellidos.required' => 'Escriba el apellido', 
-            'mail.required' => 'Escriba el mail', 
-            'telefono.required' => 'Escriba el teléfono', 
-            'mail.unique'=> 'El mail ya está en uso', 
+            'nro_documento.required' => 'El número de documento es requerido',
+            'nro_documento.unique'=> 'El número de documento ya está en uso', 
+            'nro_documento.numeric'=> 'El número de documento es numérico',
+            'nombres.required' => 'El nombre es requerido',
+            'apellidos.required' => 'El apellido es requerido', 
+            'mail.required' => 'El mail es requerido', 
+            'telefono.required' => 'El teléfono es requerido', 
         ];
     }
-
 }

@@ -5,7 +5,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Editar Curso</h3>
+					<h3 class="box-title">@lang('curso.editarcurso')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -36,7 +36,7 @@
 		                            {!! Form::checkbox('taller','1')!!}
 							</div>
 							<div class="box-footer col-xs-12">
-							{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
+							<button type="submit" class="btn btn-success">@lang('curso.guardar') </button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>

@@ -2,7 +2,7 @@
 
 return [
  
-    'listadodocente' => 'List of teachers',
+    'listadodocente' => 'List of Teachers',
     'tipodocumento' =>'Document type',
     'numerodocumento' => 'Document number',
     'apellido' => 'Last names',
@@ -14,18 +14,25 @@ return [
     'noche'=>'Night',
     'sabados'=>'Saturday',
 
+    'agregarnuevo' => 'Add New',
+    'nuevodocente' => 'New Teacher',
+    'editardocente' => 'Edit Teacher',
 
-    'agregarnuevo' => 'Add new',
-    'nuevodocente' => 'New teacher',
-    'editardocente' => 'Edit teacher',
+    'editardocente' => 'Edit Teacher',
+
+    'docente' => 'Teacher',
+    'titulo' => 'Search for classes to report the hours worked by the teacher',
+
+    'fechadesde' => 'Date from',
+    'fechahasta' => 'Date until',
+    'buscar' => 'Search lessons',
+
+    'numeroclase' => 'Lesson Number',
+    'fecha' => 'Date',
+    'horariodesde' => 'Schedule from',
+    'horariohasta' => 'Schedule until',
+    'decripcion' => 'Description',
 
     'crear' => 'Create',
-    'guardar' => 'Save',
-
-
-
-
-   
-    
- 
+    'guardar' => 'Save',  
 ];

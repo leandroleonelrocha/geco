@@ -26,13 +26,13 @@ class EditarAsesorRequest extends Request
 
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required', 
+            'nro_documento' => 'required|numeric',
             'apellidos' => 'required',
             'nombres' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
-            'telefono' => 'required',
-            'mail' => 'required',
-
+            // 'telefono' => 'required',
+            // 'mail' => 'required',
         ];
     }
 
@@ -40,14 +40,14 @@ class EditarAsesorRequest extends Request
     {
         return [
             'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'Escriba un número de documento',
-            'nombres.required' => 'Escriba el nombre',
-            'apellidos.required' => 'Escriba el apellido', 
-            'direccion.required' => 'Escriba la dirección',
-            'localidad.required' => 'Escriba la localidad',
-            'telefono.required' => 'Escriba el teléfono',
-            'mail.required' => 'Escriba el E-mail',
+            'nro_documento.required' => 'El número de documento es requerido',
+            'nro_documento.numeric'=> 'El número de documento es numérico', 
+            'nombres.required' => 'El nombre es requerido',
+            'apellidos.required' => 'El apellido es requerido ', 
+            'direccion.required' => 'La dirección es requerida',
+            'localidad.required' => 'La localidad es requerida',
+            // 'telefono.required' => 'El teléfono es requerido',
+            // 'mail.required' => 'El mail es requerido',
         ];
     }
-
 }

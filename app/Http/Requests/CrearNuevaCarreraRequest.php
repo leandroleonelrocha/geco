@@ -23,22 +23,18 @@ class CrearNuevaCarreraRequest extends Request
     public function rules()
     {
         return [
-
             'nombre' => 'required',
             'duracion' => 'required',
             'nombre' => 'required|unique:carrera,nombre'
-
-
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'Escriba un nombre',
-            'duracion.required' => 'Escriba la duración',
-            'nombre.unique'=> 'El nombre de carrera ya está en uso' 
+            'nombre.required' => 'El nombre es requerido',
+            'duracion.required' => 'La duración es requerida',
+            'nombre.unique'=> 'El nombre de la carrera ya está en uso' 
         ];
     }
-
 }

@@ -65,8 +65,7 @@ class PreinformeController extends Controller {
         $asesores   = $this->asesorRepo->all()->lists('full_name','id');
         $carreras   = $this->carreraRepo->all()->lists('nombre','id');
         $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-        return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));
-          
+        return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));     
     }
 
     // Página de Nuevo -- Persona Nueva
@@ -83,124 +82,122 @@ class PreinformeController extends Controller {
     // Alta de Preinforme y Persona Existente
     public function nuevo_post(Request $request){
       
-                // Datos Preinforme
-                $data                           = $request->all();
-                $preinforme['persona_id']       =   $request->persona;
-                $preinforme['asesor_id']        =   $request->asesor;
-                $preinforme['descripcion']      =   $request->descripcion_preinforme;
-                $preinforme['medio']            =   $request->medio;
-                $preinforme['como_encontro']    =   $request->como_encontro;
-                $preinforme['filial_id']        =   session('usuario')['entidad_id'];
-                if($this->preinformeRepo->create($preinforme)){
-                    // Intereces
-                    $preinforme                 =   $this->preinformeRepo->all()->last();
-                    $interes['preinforme_id']   =   $preinforme['id'];
-                    $interes['persona_id']      =   $request->persona;
-                    $interes['descripcion']     =   $request->descripcion_interes;
+        // Datos Preinforme
+        $data                           = $request->all();
+        $preinforme['persona_id']       =   $request->persona;
+        $preinforme['asesor_id']        =   $request->asesor;
+        $preinforme['descripcion']      =   $request->descripcion_preinforme;
+        $preinforme['medio']            =   $request->medio;
+        $preinforme['como_encontro']    =   $request->como_encontro;
+        $preinforme['filial_id']        =   session('usuario')['entidad_id'];
+        if($this->preinformeRepo->create($preinforme)){
+            // Intereces
+            $preinforme                 =   $this->preinformeRepo->all()->last();
+            $interes['preinforme_id']   =   $preinforme['id'];
+            $interes['persona_id']      =   $request->persona;
+            $interes['descripcion']     =   $request->descripcion_interes;
 
-                    if ( isset($data['ninguna']) ){
-                        $interes['descripcion']     =   $data['descripcion_interes'];
+            if ( isset($data['ninguna']) ){
+                $interes['descripcion']     =   $data['descripcion_interes'];
+                $this->personaInteresRepo->create($interes);
+            }
+            else{
+                if (isset($data['curso'])) {
+                    for ($i=0; $i < count($data['curso']); $i++) {
+                        $interes['curso_id'] = $data['curso'][0];
                         $this->personaInteresRepo->create($interes);
                     }
-                    else{
-                        if (isset($data['curso'])) {
-                            for ($i=0; $i < count($data['curso']); $i++) {
-                                $interes['curso_id'] = $data['curso'][0];
-                                $this->personaInteresRepo->create($interes);
-                            }
-                            $interes['curso_id']     =   null;
-                        }
-                        if (isset($data['carrera'])) {
-                            for ($i=0; $i < count($data['carrera']); $i++) {
-                                $interes['carrera_id'] = $data['carrera'][0];
-                                $this->personaInteresRepo->create($interes);
-                            }
-                            $interes['carrera_id']     =   null;
-                        }
-                    }
-                    return redirect()->route('filial.preinformes');
+                    $interes['curso_id']     =   null;
                 }
-          
+                if (isset($data['carrera'])) {
+                    for ($i=0; $i < count($data['carrera']); $i++) {
+                        $interes['carrera_id'] = $data['carrera'][0];
+                        $this->personaInteresRepo->create($interes);
+                    }
+                    $interes['carrera_id']     =   null;
+                }
+            }
+            return redirect()->route('filial.preinformes');
+        }   
     }
 
     // Alta de Preinforme y Persona Nueva
     public function nuevaPersona_post(Request $request){
        
-                $data                               = $request->all();
-                // Datos Persona
-                $persona['tipo_documento_id']       =   $request->tipo_documento;
-                $persona['nro_documento']           =   $request->nro_documento;
-                $persona['nombres']                 =   $request->nombres;
-                $persona['apellidos']               =   $request->apellidos;
-                $persona['genero']                  =   $request->genero;
-                $persona['fecha_nacimiento']        =   $request->fecha_nacimiento;
-                $persona['domicilio']               =   $request->domicilio;
-                $persona['localidad']               =   $request->localidad;
-                $persona['estado_civil']            =   $request->estado_civil;
-                $persona['nivel_estudios']          =   $request->nivel_estudios;
-                $persona['estudio_computacion']     =   $request->estudio_computacion;
-                $persona['posee_computadora']       =   $request->posee_computadora;
-                $persona['disponibilidad_manana']   =   $request->disponibilidad_manana;
-                $persona['disponibilidad_tarde']    =   $request->disponibilidad_tarde;
-                $persona['disponibilidad_noche']    =   $request->disponibilidad_noche;
-                $persona['disponibilidad_sabados']  =   $request->disponibilidad_sabados;
-                $persona['aclaraciones']            =   $request->aclaraciones;
-                $persona['filial_id']               =   session('usuario')['entidad_id'];
-                $persona['asesor_id']               =   $request->asesor;
+        $data                               = $request->all();
+        // Datos Persona
+        $persona['tipo_documento_id']       =   $request->tipo_documento;
+        $persona['nro_documento']           =   $request->nro_documento;
+        $persona['nombres']                 =   $request->nombres;
+        $persona['apellidos']               =   $request->apellidos;
+        $persona['genero']                  =   $request->genero;
+        $persona['fecha_nacimiento']        =   $request->fecha_nacimiento;
+        $persona['domicilio']               =   $request->domicilio;
+        $persona['localidad']               =   $request->localidad;
+        $persona['estado_civil']            =   $request->estado_civil;
+        $persona['nivel_estudios']          =   $request->nivel_estudios;
+        $persona['estudio_computacion']     =   $request->estudio_computacion;
+        $persona['posee_computadora']       =   $request->posee_computadora;
+        $persona['disponibilidad_manana']   =   $request->disponibilidad_manana;
+        $persona['disponibilidad_tarde']    =   $request->disponibilidad_tarde;
+        $persona['disponibilidad_noche']    =   $request->disponibilidad_noche;
+        $persona['disponibilidad_sabados']  =   $request->disponibilidad_sabados;
+        $persona['aclaraciones']            =   $request->aclaraciones;
+        $persona['filial_id']               =   session('usuario')['entidad_id'];
+        $persona['asesor_id']               =   $request->asesor;
 
-                if($this->personaRepo->create($persona)){
-                    //Datos Telefónicos y Mails
-                    $persona=$this->personaRepo->all()->last();
+        if($this->personaRepo->create($persona)){
+            //Datos Telefónicos y Mails
+            $persona=$this->personaRepo->all()->last();
 
-                    foreach ($data['telefono'] as $key) {
-                        
-                        $telefono['persona_id'] = $persona->id;
-                        $telefono['telefono'] = $key;
-                        $this->personaTelefonoRepo->create($telefono);
-                    }
-                    foreach ($data['mail'] as $key) {
+            foreach ($data['telefono'] as $key) {
+                
+                $telefono['persona_id'] = $persona->id;
+                $telefono['telefono'] = $key;
+                $this->personaTelefonoRepo->create($telefono);
+            }
+            foreach ($data['mail'] as $key) {
 
-                        $mail['persona_id']=$persona->id;
-                        $mail['mail']=$key;
-                        $this->personaMailRepo->create($mail);
-                    }
-                    // Datos Preinforme
-                    $preinforme['persona_id']       =   $persona['id'];
-                    $preinforme['asesor_id']        =   $request->asesor;
-                    $preinforme['descripcion']      =   $request->descripcion_preinforme;
-                    $preinforme['medio']            =   $request->medio;
-                    $preinforme['como_encontro']    =   $request->como_encontro;
-                    $preinforme['filial_id']        =   session('usuario')['entidad_id'];
-                    if($this->preinformeRepo->create($preinforme)){
-                        // Intereces
-                        $preinforme                 =   $this->preinformeRepo->all()->last();
-                        $interes['preinforme_id']   =   $preinforme['id'];
-                        $interes['persona_id']      =   $persona['id'];
-                        $interes['descripcion']     =   $request->descripcion_interes; 
-                        if ( isset($data['ninguna']) ){
-                            $interes['descripcion']     =   $data['descripcion_interes'];
+                $mail['persona_id']=$persona->id;
+                $mail['mail']=$key;
+                $this->personaMailRepo->create($mail);
+            }
+            // Datos Preinforme
+            $preinforme['persona_id']       =   $persona['id'];
+            $preinforme['asesor_id']        =   $request->asesor;
+            $preinforme['descripcion']      =   $request->descripcion_preinforme;
+            $preinforme['medio']            =   $request->medio;
+            $preinforme['como_encontro']    =   $request->como_encontro;
+            $preinforme['filial_id']        =   session('usuario')['entidad_id'];
+            if($this->preinformeRepo->create($preinforme)){
+                // Intereces
+                $preinforme                 =   $this->preinformeRepo->all()->last();
+                $interes['preinforme_id']   =   $preinforme['id'];
+                $interes['persona_id']      =   $persona['id'];
+                $interes['descripcion']     =   $request->descripcion_interes; 
+                if ( isset($data['ninguna']) ){
+                    $interes['descripcion']     =   $data['descripcion_interes'];
+                    $this->personaInteresRepo->create($interes);
+                }
+                else{
+                    if (isset($data['curso'])) {
+                        for ($i=0; $i < count($data['curso']); $i++) {
+                            $interes['curso_id'] = $data['curso'][$i];
                             $this->personaInteresRepo->create($interes);
                         }
-                        else{
-                            if (isset($data['curso'])) {
-                                for ($i=0; $i < count($data['curso']); $i++) {
-                                    $interes['curso_id'] = $data['curso'][$i];
-                                    $this->personaInteresRepo->create($interes);
-                                }
-                                $interes['curso_id']     =   null;
-                            }
-                            if (isset($data['carrera'])) {
-                                for ($i=0; $i < count($data['carrera']); $i++) {
-                                    $interes['carrera_id'] = $data['carrera'][$i];
-                                    $this->personaInteresRepo->create($interes);
-                                }
-                                $interes['carrera_id']     =   null;
-                            }
+                        $interes['curso_id']     =   null;
+                    }
+                    if (isset($data['carrera'])) {
+                        for ($i=0; $i < count($data['carrera']); $i++) {
+                            $interes['carrera_id'] = $data['carrera'][$i];
+                            $this->personaInteresRepo->create($interes);
                         }
-                        return redirect()->route('filial.preinformes');
+                        $interes['carrera_id']     =   null;
                     }
                 }
-          
+                return redirect()->route('filial.preinformes');
+            }
+        }    
     }
 
     public function editar($id){
@@ -216,43 +213,42 @@ class PreinformeController extends Controller {
 
     public function editar_post(Request $request){
         
-                $data                           = $request->all();
-                $data['filial_id']              = session('usuario')['entidad_id'];
-                // Datos del Preinforme
-                $preinforme['asesor_id']        = $data['asesor'];
-                $preinforme['descripcion']      = $data['descripcion_preinforme'];
-                $preinforme['medio']            = $data['medio'];
-                $preinforme['como_encontro']    = $data['como_encontro'];
+        $data                           = $request->all();
+        $data['filial_id']              = session('usuario')['entidad_id'];
+        // Datos del Preinforme
+        $preinforme['asesor_id']        = $data['asesor'];
+        $preinforme['descripcion']      = $data['descripcion_preinforme'];
+        $preinforme['medio']            = $data['medio'];
+        $preinforme['como_encontro']    = $data['como_encontro'];
 
-                $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
-                // Modificación de los datos del preinforme
-                $this->preinformeRepo->edit($modelP,$preinforme); 
-                // Intereces
-                $modelI = $this->personaInteresRepo->findPreinforme($data['preinforme']);
-                foreach ($modelI as $mI) { $mI->delete(); }
-                $interes['preinforme_id']   =   $data['preinforme'];
-                $interes['persona_id']      =   $modelP->persona_id;
-                if ( isset($data['ninguna']) ){
-                    $interes['descripcion']     =   $data['descripcion_interes'];
+        $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
+        // Modificación de los datos del preinforme
+        $this->preinformeRepo->edit($modelP,$preinforme); 
+        // Intereces
+        $modelI = $this->personaInteresRepo->findPreinforme($data['preinforme']);
+        foreach ($modelI as $mI) { $mI->delete(); }
+        $interes['preinforme_id']   =   $data['preinforme'];
+        $interes['persona_id']      =   $modelP->persona_id;
+        if ( isset($data['ninguna']) ){
+            $interes['descripcion']     =   $data['descripcion_interes'];
+            $this->personaInteresRepo->create($interes);
+        }
+        else{
+            if ( isset($data['curso']) ){
+                for ($i=0; $i < count($data['curso']); $i++) {
+                    $interes['curso_id'] = $data['curso'][$i];
                     $this->personaInteresRepo->create($interes);
                 }
-                else{
-                    if ( isset($data['curso']) ){
-                        for ($i=0; $i < count($data['curso']); $i++) {
-                            $interes['curso_id'] = $data['curso'][$i];
-                            $this->personaInteresRepo->create($interes);
-                        }
-                        $interes['curso_id']     =   null;
-                    }
-                    if ( isset($data['carrera']) ){
-                        for ($i=0; $i < count($data['carrera']); $i++) {
-                            $interes['carrera_id'] = $data['carrera'][$i];
-                            $this->personaInteresRepo->create($interes);
-                        }
-                        $interes['carrera_id']     =   null;
-                    }
+                $interes['curso_id']     =   null;
+            }
+            if ( isset($data['carrera']) ){
+                for ($i=0; $i < count($data['carrera']); $i++) {
+                    $interes['carrera_id'] = $data['carrera'][$i];
+                    $this->personaInteresRepo->create($interes);
                 }
-                return redirect()->route('filial.preinformes');
-           
+                $interes['carrera_id']     =   null;
+            }
+        }
+        return redirect()->route('filial.preinformes');   
     }
 }

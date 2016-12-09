@@ -6,9 +6,9 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de actas</h3>
+					<h3 class="box-title">@lang('examen.listadoacta')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.examenes_nuevo')}}" class="btn btn-success text-white"> Nuevo acta</a>
+						<a href="{{route('filial.examenes_nuevo')}}" class="btn btn-success text-white"> @lang('examen.nuevaacta')</a>
 						
 						
 					</div>
@@ -18,9 +18,9 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> 
 						<tr>
-						<th>Nro acta</th>
-						<th>Grupo</th>
-						<th>Docente</th>
+						<th>@lang('examen.numeroacta')</th>
+						<th>@lang('grupo.grupo')</th>
+						<th>@lang('grupo.docente')</th>
 					
 						<th></th>
 						
@@ -37,7 +37,7 @@
 						       
 						           
 						  			<td class="text-center">
-					           		<a href="{{route('filial.examenes_detalles',$examen->nro_acta)}}" title="Editar"><i class="glyphicon glyphicon-info-sign"></i></a>		
+					           		<a href="{{route('filial.examenes_detalles',$examen->nro_acta)}}" title="@lang('lista.editar')"><i class="glyphicon glyphicon-primary-sign"></i></a>		
 								
 					           		</td>
 							    </tr>

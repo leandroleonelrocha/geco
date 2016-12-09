@@ -21,9 +21,11 @@ return [
     'nueva' =>'Nueva',
     'nuevo' =>'Nuevo',
     'lista' =>'Lista',
+    'pases' =>'Pases',
     'asignar' =>'Asignar asesores',
     'perfil' =>'Perfil',
-    'cambiarcontraseña' =>'Cambiar contraseña',
+      'cambiarcontraseña' =>'Cambiar contraseña',
+
     'cerrarsesion' =>'Cerrar sesión',
     'salir' =>'Salir',
 ];

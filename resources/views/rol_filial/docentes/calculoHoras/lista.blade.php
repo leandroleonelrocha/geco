@@ -8,34 +8,34 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Docente <strong>{{$docente->nombres}} {{$docente->apellidos}}</strong> </br>Busqueda de clases para saber las horas trabajadas</h3>	
+					<h3 class="box-title">@lang('docente.docente') <strong>{{$docente->nombres}} {{$docente->apellidos}}</strong> </br>@lang('docente.titulo')</h3>	
 				</div>
 	
 				{!! Form::open(['route'=> 'filial.docentes_calcularHorasBusqueda', 'method'=>'post']) !!}
 				{!! Form::hidden('docente', $docente->id, array('class'=>'form-control')) !!}
 				<div class="col-md-4 form-group">
-					<label>Fecha Desde</label>
+					<label>@lang('docente.fechadesde')</label>
 					{!! Form::date('fecha1',null,array('class'=>'form-control')) !!}
 				</div>
 
 				<div class="col-md-4 form-group">
-					<label>Fecha Hasta</label>
+					<label>@lang('docente.fechahasta')</label>
 					{!! Form::date('fecha2',null,array('class'=>'form-control')) !!}
 				</div>
 
 				<div class="col-md-9 form-group">
-					{!! Form::submit('Buscar clase',array('class'=>'btn btn-success')) !!}
+					<button type="submit" class="btn btn-success">@lang('docente.buscar')</button>
 					<h3>Tiene {{$horasTotal}} horas de clases y {{$cantClases}} clases en total realizadas</h3>
 				</div>
 				{!! Form::close() !!}
 				<div class="box-body">
 					<table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Número de clase</th>
-						<th>Fecha</th>
-						<th>Horario desde</th>
-						<th>Horario hasta</th>
-						<th>Descripcion</th>
+						<th>@lang('docente.numeroclase')</th>
+						<th>@lang('docente.fecha')</th>
+						<th>@lang('docente.horariodesde')</th>
+						<th>@lang('docente.horariohasta')</th>
+						<th>@lang('docente.descripcion')</th>
 
 						</tr> </thead>
 						<tbody>

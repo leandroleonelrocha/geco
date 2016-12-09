@@ -64,12 +64,11 @@ class CarreraController extends Controller
     public function borrar($id){
     	
 		if($data=$this->carreraRepo->find($id))
-			{
-		     $data->Delete();
-		         	return redirect()->back()->with('msg_ok', 'Carrera eliminada correctamente');
-		         	}
-		    else
-		        return redirect()->back()->with('msg_error','La carrera no ha podido ser eliminada.');
-		
+		{
+	     	$data->Delete();
+         	return redirect()->back()->with('msg_ok', 'Carrera eliminada correctamente');
+	        }
+	    else
+	        return redirect()->back()->with('msg_error','La carrera no ha podido ser eliminada.');
     }
 }

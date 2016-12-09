@@ -47,8 +47,8 @@
 					
 
 						           	<td>
-									<a href="{{route('filial.asesores_editar',$a->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-						           	<a href="{{route('filial.asesores_borrar',$a->id)}}" title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar el director?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('filial.asesores_editar',$a->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
+						           	<a href="{{route('filial.asesores_borrar',$a->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar el asesor?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
 							    </tr>
 						    @endforeach
 					   	</tbody>

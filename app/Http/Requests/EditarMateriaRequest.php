@@ -26,7 +26,6 @@ class EditarMateriaRequest extends Request
 
             'carrera_id'=>'required',
             'nombre' => 'required',
-
         ];
     }
 
@@ -34,7 +33,7 @@ class EditarMateriaRequest extends Request
     {
         return [
             'carrera_id' => 'Seleccione una carrera',
-            'nombre.required' => 'Escriba un nombre',
+            'nombre.required' => 'El nombre es requerido',
         ];
     }
 

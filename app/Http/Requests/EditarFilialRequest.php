@@ -30,28 +30,26 @@ class EditarFilialRequest extends Request
     public function rules()
     {
         return [
-
-
             'nombre' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'codigo_postal' => 'required',
            	'director_id' => 'required',
             'telefono' => 'required',
-
+            'mail' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'Escriba un Nombre',
-            'direccion.required' => 'Escriba una dirección',
-            'localidad.required' => 'Escriba una localidad',
-            'codigo_postal.required' => 'Escriba el código postal',
+            'nombre.required' => 'El nombre es requerido',
+            'direccion.required' => 'La dirección es requerida',
+            'localidad.required' => 'La localidad es requerida',
+            'codigo_postal.required' => 'El CP es requerido',
             'director_id.required' => 'Selecciona un director',
-            'telefono.required' => 'Escriba el teléfono',  
+            'telefono.required' => 'El teléfono es requerido',  
+            'mail.required' => 'El mail es requerido',
         ];
     }
-
 }

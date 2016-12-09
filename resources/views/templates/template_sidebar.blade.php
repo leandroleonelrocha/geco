@@ -107,6 +107,7 @@
                       <li class="active"><a href="{{route('filial.matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
                       <?php if($h == 1){ ?>
                       <li> <a href="{{route('filial.matriculas_seleccion') }}"><i class="fa fa-circle-o"></i> @lang('menu.nueva')</a></li>
+                      <li> <a href="{{route('filial.matriculas_pases') }}"><i class="fa fa-circle-o"></i> @lang('menu.pases')</a></li>
                       <?php } ?>
                     </ul>
                   </li>

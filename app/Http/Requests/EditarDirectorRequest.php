@@ -23,13 +23,13 @@ class EditarDirectorRequest extends Request
     public function rules()
     {
         return [
-
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
+            'nro_documento' => 'required|numeric',
             'apellidos' => 'required',
             'nombres' => 'required',
             'telefono' => 'required',
-            //'mail' => 'required',
+            'mail' => 'required',
         ];
     }
 
@@ -37,12 +37,12 @@ class EditarDirectorRequest extends Request
     {
         return [
             'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'Escriba un número documento',
-            'nombres.required' => 'Escriba el nombre',
-            'apellidos.required' => 'Escriba el apellido', 
-            'telefono.required' => 'Escriba el teléfono',
-            //'mail.required' => 'Escriba el E-mail',
+            'nro_documento.required' => 'El número de documento es requerido',
+            'nro_documento.numeric'=> 'El número de documento es numérico',
+            'nombres.required' => 'El nombre es requerido',
+            'apellidos.required' => 'El apellido es requerido', 
+            'telefono.required' => 'El teléfono es requerido', 
+            'mail.required' => 'El mail es requerido', 
         ];
     }
-
 }

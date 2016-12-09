@@ -3,7 +3,7 @@
 return [
  
  	'asesor' => 'Asesor',
-    'listadopersona' => 'Listado de personas',
+    'listadopersona' => 'Listado de Personas',
     'tipodocumento' =>'Tipo de documento',
     'numerodocumento' => 'Documento',
     'apellido' => 'Apellidos',
@@ -29,12 +29,19 @@ return [
     'aclaraciones'=>'Aclaraciones',
     'titulo'=>'Datos personales',
 
-    'agregarnuevo' => 'Agregar nueva',
-    'nuevopersona' => 'Nueva persona',
-    'editarpersona' => 'Editar persona',
+    'no'=>'No',
+    'si'=>'Si',
 
-    'crear' => 'Create',
-    'guardar' => 'Save',
+    'secundario'=>'Secundario completo',
+    'terciario'=>'Terciario',
+    'universitario'=>'Universitario',
+
+    'agregarnuevo' => 'Agregar Nueva',
+    'nuevopersona' => 'Nueva Persona',
+    'editarpersona' => 'Editar Persona',
+
+    'crear' => 'Crear',
+    'guardar' => 'Guardar',
 
 
  

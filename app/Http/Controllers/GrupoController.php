@@ -39,7 +39,6 @@ class GrupoController extends Controller
 		
 	}	
 
-
 	public function index()
 	{
 
@@ -144,15 +143,9 @@ class GrupoController extends Controller
 			}
 			
 			$contador ++;
-
-
 		}
 
         return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
-
-
-
-
     }
 
 	public function postEdit($id, Request $request)
@@ -179,8 +172,6 @@ class GrupoController extends Controller
 		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
-
-
 
 		return view('rol_filial.grupos.clases', compact('grupos', 'docentes', 'events', 'filial'));
 	}
@@ -236,9 +227,6 @@ class GrupoController extends Controller
 		dd($id);
 	}
 
-	
-	
-
 	public function clase_matricula($data)
 	{
 		$clase = $this->claseRepo->find($data);
@@ -283,8 +271,4 @@ class GrupoController extends Controller
 		$materia = $carrera->Materia;
 		return response()->json($materia, 200);
 	}
-
-
-
-
 }

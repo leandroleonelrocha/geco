@@ -6,16 +6,16 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Filiales</h3>
+					<h3 class="box-title">@lang('filial.listadofilial')</h3>
 				</div>
 				<div class="box-body">
 					<div class="col-xs-12">
 						<table id="example1" class="table table-bordered table-striped">
 							<thead><tr>
-							<th>Nombre</th>
+							<th>@lang('filial.nombre')</th>
 							<th>Director</th>
-							<th>Tel&eacute;fono</th>
-							<th>Mail</th>
+							<th>@lang('filial.telefonos')</th>
+							<th>E-Mail</th>
 							<th class="no-print"></th>
 							</tr></thead>
 							<tbody>
@@ -29,7 +29,7 @@
 												@endforeach
 											</td>
 											<td>{{$filial->mail}}</td>
-											<td class="text-center"><a href="{{route('filial.matriculas_pase_nuevo',[$filial->id, $matricula])}}" class="btn btn-success text-white">Seleccionar</a></td>
+											<td class="text-center"><a href="{{route('filial.matriculas_pase_nuevo',[$filial->id, $matricula])}}" class="btn btn-success text-white">@lang('filial.seleccionar')</a></td>
 										</tr>
 								@endforeach
 							</tbody>

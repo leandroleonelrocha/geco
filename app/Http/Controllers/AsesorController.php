@@ -16,6 +16,7 @@ use App\Http\Requests\EditarAsesorRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+
 class AsesorController extends Controller {
 
 	protected $asesorRepo;
@@ -28,13 +29,11 @@ class AsesorController extends Controller {
         $this->asesorTelefonoRepo  = $asesorTelefonoRepo;
         $this->asesorFilialRepo  = $asesorFilialRepo;
 	}
-
     // Página principal de Acesor
     public function lista(){
 
         $asesor = $this->asesorRepo->allEneable(); // Obtención de todos los Acesores activos
-        return view('rol_filial.asesores.lista',compact('asesor'));
-           
+        return view('rol_filial.asesores.lista',compact('asesor'));     
     }
 
     // Página de Nuevo
@@ -42,61 +41,56 @@ class AsesorController extends Controller {
        
        $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
        return view('rol_filial.asesores.nuevo',compact('tipos'));
-         
     }
 
     // Alta Asesor
     public function nuevo_post(CrearNuevoAsesorRequest $request){
         
-        $data = $request->all(); // Obtengo todos los datos del formulario
-                            
-                // Corroboro que el asesor exista, si exite lo activa
-                if ( $asesor = $this->asesorRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
-                        return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');
-                }
-                else{
+        $data = $request->all(); // Obtengo todos los datos del formulario             
+        // Corroboro que el asesor exista, si exite lo activa
+        if ( $asesor = $this->asesorRepo->check($data['tipo_documento_id'],$data['nro_documento']) )
+                return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');
+        else{
+            // Si no existe lo crea
+            if($this->asesorRepo->create($data)){
 
-                    // Si no existe lo crea
-                    if($this->asesorRepo->create($data)){
-
-                        $asesor=$this->asesorRepo->all()->last();
-                        
-                        foreach ($data['mail'] as $key) {
-                            
-                            $mail['asesor_id'] = $asesor->id;
-                            $mail['mail'] = $key;
-                            $this->asesorMailRepo->create($mail);
-                            
-                        }
-                        foreach ($data['telefono'] as $key) {
-                            
-                            $telefono['asesor_id'] = $asesor->id;
-                            $telefono['telefono'] = $key;
-                            $this->asesorTelefonoRepo->create($telefono);
-                        }
+                $asesor=$this->asesorRepo->all()->last();
+                
+                foreach ($data['mail'] as $key) {
                     
-                        return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');}
-
-                   else
-                        return redirect()->route('filial.asesores')->with('msg_error','No se ha podido agregar al asesor, intente nuevamente.');
+                    $mail['asesor_id'] = $asesor->id;
+                    $mail['mail'] = $key;
+                    $this->asesorMailRepo->create($mail);
+                    
                 }
-        
+                foreach ($data['telefono'] as $key) {
+                    
+                    $telefono['asesor_id'] = $asesor->id;
+                    $telefono['telefono'] = $key;
+                    $this->asesorTelefonoRepo->create($telefono);
+                }
+                $f = session('usuario')['entidad_id'];
+                $asesorFilial['asesor_id']=$asesor->id;
+                $asesorFilial['filial_id']=$f;
+
+                $this->asesorFilialRepo->create($asesorFilial);
+            
+                return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');}
+           else
+                return redirect()->route('filial.asesores')->with('msg_error','No se ha podido agregar al asesor, intente nuevamente.');
+        }
     }
-
-
     // Página de Editar
     public function editar($id){
         
-                $asesor = $this->asesorRepo->find($id); // Obtengo al Asesor
-                $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-                $mail=$this->asesorMailRepo->findMail($id);
-                $telefono=$this->asesorTelefonoRepo->findTelefono($id); 
-                return view('rol_filial.asesores.editar',compact('asesor','tipos','mail','telefono'));
-          
+        $asesor = $this->asesorRepo->find($id); // Obtengo al Asesor
+        $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $mail=$this->asesorMailRepo->findMail($id);
+        $telefono=$this->asesorTelefonoRepo->findTelefono($id); 
+        return view('rol_filial.asesores.editar',compact('asesor','tipos','mail','telefono'));      
     }
-
-    //Modificación del Acesor
-    public function editar_post(Request $request){
+    //Modificación del Asesor
+    public function editar_post(EditarAsesorRequest $request){
        
         $data = $request->all();
                
@@ -122,11 +116,8 @@ class AsesorController extends Controller {
              return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido modificado con éxito.');
              }
             else
-        return redirect()->route('filial.asesores')->with('msg_error',' El asesor no ha podido ser modificado.');
-          
-            
+        return redirect()->route('filial.asesores')->with('msg_error',' El asesor no ha podido ser modificado.');       
     }
-
 
     // Borrado lógico del Asesor
     public function borrar($id){
@@ -134,7 +125,6 @@ class AsesorController extends Controller {
        if($this->asesorRepo->disable($this->asesorRepo->find($id)))
             return redirect()->route('filial.asesores')->with('msg_ok','Asesor eliminado correctamente');
         else
-            return redirect()->route('filial.asesores')->with('msg_error',' El asesor no ha podido ser eliminado.');
-         
+            return redirect()->route('filial.asesores')->with('msg_error',' El asesor no ha podido ser eliminado.');  
     }
 }

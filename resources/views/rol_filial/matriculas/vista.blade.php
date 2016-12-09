@@ -6,28 +6,28 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Datos de la Matr&iacute;cula</h3>
+					<h3 class="box-title">@lang('matricula.datosmatricula')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
 						<div class="col-md-6">
-							<label>N&uacute;mero de Matr&iacute;cula</label>
+							<label>@lang('matricula.numero')</label>
 							<div><span>{{$matricula->id}}</span></div>
 						</div>
 						<div class="col-md-6">
-							<label>Fecha de alta</label>
+							<label>@lang('matricula.fechaalta')</label>
 							<div><span>{{$matricula->created_at}}</span></div>
 						</div>
 						<div class="col-md-6">
-							<label>Asesor de alta</label>
+							<label>@lang('matricula.asesoralta')</label>
 							<div><span>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</span></div>
 						</div>
 						<div class="col-md-6">
-							<label>Filial de alta</label>
+							<label>@lang('matricula.filialalta')</label>
 							<div><span>{{$matricula->Filial->nombre}}</span></div>
 						</div>
 						<div class="col-md-6">
-							<label>Estado</label>
+							<label>@lang('matricula.estado')</label>
 							<div><span>
 								<?php 
 									if ($matricula->terminado == 1) echo 'Terminado';
@@ -48,9 +48,9 @@
 					</div>
 				</div><!-- Fin box-body -->
 				<div class="box-header">
-					<h3 class="box-title">Listado de Pagos</h3>
+					<h3 class="box-title">@lang('matricula.listadopago')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.pagos_nuevo',$matricula->id)}}" class="btn btn-success text-white"> Agregar nuevo</a>
+						<a href="{{route('filial.pagos_nuevo',$matricula->id)}}" class="btn btn-success text-white"> @lang('matricula.agregarnuevopago')</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -58,15 +58,15 @@
 						<div class="col-md-12">
 							 <table id="example1" class="table table-bordered table-striped">
 								<thead> <tr>
-								<th class="text-center">Nro Pago</th>
-								<th class="text-center">Descripci&oacute;n</th>
-								<th class="text-center">Estado</th>
-								<th class="text-center">Actual</th>
-								<th class="text-center">Vencimiento</th>
-								<th class="text-center">Pago</th>
+								<th class="text-center">@lang('matricula.nro')</th>
+								<th class="text-center">@lang('matricula.descripcion')</th>
+								<th class="text-center">@lang('matricula.estado')</th>
+								<th class="text-center">@lang('matricula.actual')</th>
+								<th class="text-center">@lang('matricula.vencimiento')</th>
+								<th class="text-center">@lang('matricula.pago')</th>
 								<th class="text-center">Original</th>
-								<th class="text-center">Recargo</th>
-								<th class="text-center">Filial</th>
+								<th class="text-center">@lang('matricula.recargo')</th>
+								<th class="text-center">@lang('matricula.filial')</th>
 								<th class="no-print"></th>
 								</tr> </thead>
 								<tbody>
@@ -95,11 +95,11 @@
 										if ($pago->terminado != 1){
 									?>
 										<a href="{{route('filial.pagos_editar',$pago->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>
-										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="Actualizar"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
+										<a href="{{route('filial.pagos_actualizar',$pago->id)}}" title="@lang('lista.actualizar')"><i class="btn btn-primary glyphicon glyphicon-repeat"></i></a>
 									<?php
 										}
 									?>
-										<a href="{{route('filial.recibos',$pago->id)}}" title="Ver Recibos"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
+										<a href="{{route('filial.recibos',$pago->id)}}" title="@lang('lista.verrecibos')"><i class="btn btn-primary glyphicon glyphicon-list-alt"></i></a>
 									</td>
 								</tr>
 								@endforeach

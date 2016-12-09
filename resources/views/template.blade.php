@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="shortcut icon" href="../img/logo/Geco-Blanco.png">
+    <link rel="shortcut icon" href="{{asset('/img/logo/Geco-Blanco.png')}}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>GECO | Gestión y Cobranza</title>

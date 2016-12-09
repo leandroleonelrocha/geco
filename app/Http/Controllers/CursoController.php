@@ -23,53 +23,47 @@ class CursoController extends Controller
 		$this->cursoRepo = $cursoRepo;
 	}
 	
-	public function lista(){
-		
+	public function lista()
+	{
 		$curso=$this->cursoRepo->all();
 		return view('rol_filial.cursos.lista',compact('curso'));
-		
 	}
 
-	public function nuevo(){
-		
-		return view('rol_filial.cursos.nuevo');
-		
+	public function nuevo()
+	{
+		return view('rol_filial.cursos.nuevo');	
 	}
 
 	public function nuevo_post(CrearNuevoCursoRequest $request){
 		
 		$this->cursoRepo->create($request->all());
 		return redirect()->route('filial.cursos')->with('msg_ok', 'Curso creado correctamente');
-		
 	}
 
   	public function editar($id){
   		
 		$curso = $this->cursoRepo->find($id);
-		return view('rol_filial.cursos.editar',compact('curso'));
-			
+		return view('rol_filial.cursos.editar',compact('curso'));	
     }
 
     public function editar_post(EditarCursoRequest $request){
     	
 		$data = $request->all();
 		$model = $this->cursoRepo->find($data['id']);
-		   if($this->cursoRepo->edit($model,$data))
-		        return redirect()->route('filial.cursos')->with('msg_ok','El curso ha sido modificado con éxito');
-		    else
-		        return redirect()->route('filial.cursos')->with('msg_error','El curso no ha podido ser modificado.');
-		
+		if($this->cursoRepo->edit($model,$data))
+			return redirect()->route('filial.cursos')->with('msg_ok','El curso ha sido modificado con éxito');
+		else
+			return redirect()->route('filial.cursos')->with('msg_error','El curso no ha podido ser modificado.');
     }
 
     public function borrar($id){
     	
 		if($data=$this->cursoRepo->find($id))
-			{
-		    	$data->Delete();
-		        return redirect()->back()->with('msg_ok', 'Curso eliminado correctamente');
-		    }
-		        else
-		            return redirect()->back()->with('msg_error','El curso no ha podido ser eliminada.');
-		
+		{
+	    	$data->Delete();
+	        return redirect()->back()->with('msg_ok', 'Curso eliminado correctamente');
+	    	}
+        else
+        	return redirect()->back()->with('msg_error','El curso no ha podido ser eliminada.');
     }
 }

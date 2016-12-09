@@ -41,10 +41,10 @@
 							<div class="col-md-6 form-group">
 								<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'M') !!} @lang('persona.masculino')
+									{!! Form::radio('genero', 'M',$persona->genero) !!} @lang('persona.masculino')
 								</div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'F') !!} @lang('persona.femenino')
+									{!! Form::radio('genero', 'F',$persona->genero) !!} @lang('persona.femenino')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">
@@ -72,12 +72,12 @@
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>
 								{!!Form::hidden('estudio_computacion', '0') !!}
-								<div>{!! Form::checkbox('estudio_computacion', '1',$persona->estudio_computacion) !!} Si</div>
+								<div>{!! Form::checkbox('estudio_computacion', '1',$persona->estudio_computacion) !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computadora')</label>
 								{!!Form::hidden('posee_computadora', '0') !!}
-								<div>{!! Form::checkbox('posee_computadora', '1',$persona->posee_computadora) !!} Si</div>
+								<div>{!! Form::checkbox('posee_computadora', '1',$persona->posee_computadora) !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.disponibilidad')</label>
@@ -124,7 +124,7 @@
 							</div>
 
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
+					     		<button type="submit" class="btn btn-success">@lang('persona.guardar')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>
@@ -133,5 +133,4 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
-	<!-- jQuery 2.1.4 -->
 @endsection

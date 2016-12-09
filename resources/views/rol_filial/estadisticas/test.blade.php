@@ -23,15 +23,15 @@ ${demo.css}
           </div>
           <div class="col-xs-4">
            <select class="form-control" id="selectvalue" name="selectvalue">
-              <option value="inscripcion">Inscripciones</option>
-              <option value="preinforme">Pre informes</option>
-              <option value="recaudacion">Recaudación</option>
-              <option value="morosidad">Morosidad</option>
+              <option value="inscripcion">@lang('estadistica.inscripcion')</option>
+              <option value="preinforme">@lang('estadistica.preinforme')</option>
+              <option value="recaudacion">@lang('estadistica.recaudacion')</option>
+              <option value="morosidad">@lang('estadistica.morosidad')</option>
             </select>
           </div>
 
           <div class="col-xs-2">
-           <button class="btn btn-block btn-default " id="btn_buscar">Buscar</button>
+           <button class="btn btn-block btn-success " id="btn_buscar">@lang('estadistica.buscar')</button>
           </div>
     {!! Form::close() !!}
   </div><!-- /.box-body -->

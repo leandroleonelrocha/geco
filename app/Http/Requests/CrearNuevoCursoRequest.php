@@ -23,23 +23,18 @@ class CrearNuevoCursoRequest extends Request
     public function rules()
     {
         return [
-
             'nombre' => 'required',
-            'duracion' => 'required',
             'nombre' => 'required|unique:curso,nombre'
-
-
-
+            'duracion' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'Escriba un nombre',
-            'duracion.required' => 'Escriba la duración',
+            'nombre.required' => 'El nombre es requerido',
             'nombre.unique'=> 'El nombre del curso ya está en uso' 
+            'duracion.required' => 'La duración es requerida',
         ];
     }
-
 }

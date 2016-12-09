@@ -2,7 +2,7 @@
 
 return [
  
-    'listadodirector' => 'Listado de directores',
+    'listadodirector' => 'Listado de Directores',
     'numero'=>'Número',
     'tipodocumento' => 'Tipo de documento',
     'numerodocumento' => 'Número de documento',
@@ -14,9 +14,9 @@ return [
 
     'bienvenido' => 'Bienvenido',
 
-    'agregarnuevo' => 'Agregar nuevo',
-    'nuevodirector' => 'Nuevo director',
-    'editardirector' => 'Editar director',
+    'agregarnuevo' => 'Agregar Nuevo',
+    'nuevodirector' => 'Nuevo Director',
+    'editardirector' => 'Editar Director',
 
     'crear' => 'Crear',
     'guardar' => 'Guardar',

@@ -23,42 +23,41 @@ class EditarPersonaRequest extends Request
     public function rules()
     {
         return [
-
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
+            'nro_documento' => 'required|numeric',
             'apellidos' => 'required',
             'nombres' => 'required',
             'genero'=> 'required',
             'fecha_nacimiento'=> 'required',
             'domicilio' => 'required',
             'localidad' => 'required',
-            // 'telefono' => 'required',
-            // 'mail' => 'required',
             'estado_civil' => 'required',
             'nivel_estudios' => 'required',
             'aclaraciones' => 'required',
-
+            // 'telefono' => 'required',
+            // 'mail' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
+            //  'asesor_id.required' => 'Seleccione un asesor',
             'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'Escriba un número documento', 
-            'apellidos.required' => 'Escriba el apellido',
-            'nombres.required' => 'Escriba el nombre',
-            'genero.required' => 'Seleccione un género',
-            'fecha_nacimiento.required' => 'Escriba la fecha de nacimiento',
-            'domicilio.required' => 'Escriba el domicilio',
-            'localidad.required' => 'Escriba la localidad',
+            'nro_documento.required' => 'El número de documento es requerido',
+            // 'nro_documento.unique'=> 'El número de documento ya está en uso', 
+            'nro_documento.numeric'=> 'El número de documento es numérico', 
+            'apellidos.required' => 'El apellido es requerido',
+            'nombres.required' => 'El nombre es requerido',
+            // 'genero.required' => 'Seleccione un género',
+            'fecha_nacimiento.required' => 'La fecha de nacimiento es requerida',
+            'domicilio.required' => 'El domicilio es requerido',
+            'localidad.required' => 'La localidad es requerida',
+            'estado_civil.required' => 'El estado civil es requerido',
+            'nivel_estudios.required' => 'El nivel de estudios es requerido',
             // 'telefono.required' => 'Escriba el teléfono',
-            // 'mail.required' => 'Escriba el mail',
-            'localidad.required' => 'Escriba la localidad',
-            'estado_civil.required' => 'Escriba el estado civil',
-            'nivel_estudios.required' => 'Escriba el nivel de estudios',
-            'aclaraciones.required' => 'Escriba una aclaración', 
+            // 'mail.required' => 'El Mail es requerido',
         ];
     }
-
 }

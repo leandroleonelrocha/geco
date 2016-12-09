@@ -7,12 +7,12 @@ return [
     'carrera' => 'Career',
     'nombre' => 'Name',
     'descripcion' => 'Description',
-    'listadodemateria' => 'List of materials',
-    'editarmateria' => 'Edit matter',
-    'agregarnuevo' => 'Add new',
-    'nuevamateria' => 'New matter',
+    'listadodemateria' => 'List of Matters',
+    'editarmateria' => 'Edit Matter',
+    'agregarnuevo' => 'Add New',
+    'nuevamateria' => 'New Matter',
     
-   
-    
+   	'crear' => 'Create',
+    'guardar' => 'Save',
  
 ];

@@ -9,7 +9,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Http\Requests\CrearNuevoCursoRequest;
+use App\Http\Requests\CrearNuevoPagoRequest;
+use App\Http\Requests\EditarPagoRequest;
 use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PagoRepo;
 
@@ -67,7 +68,7 @@ class PagoController extends Controller
 		return view('rol_filial.matriculas.pagos.nuevo',compact('matricula'));
 	}
 
-	public function nuevo_post(Request $request){
+	public function nuevo_post(CrearNuevoPagoRequest $request){
 		$url 						= 	session('urlBack'); session()->forget('urlBack');
         $pago['matricula_id']   	=   $request->matricula;
         $pago['nro_pago']       	=   $request->nro_pago;
@@ -92,7 +93,7 @@ class PagoController extends Controller
 		return view('rol_filial.matriculas.pagos.editar',compact('pago'));
     }
 
-    public function editar_post(Request $request){
+    public function editar_post(EditarPagoRequest $request){
     	$url 	= 	session('urlBack'); session()->forget('urlBack');
 		$modelP = 	$this->pagoRepo->find($request->pago);
 		// Venció y cambió el vencimiento

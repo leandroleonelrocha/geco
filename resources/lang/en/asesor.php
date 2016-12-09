@@ -2,7 +2,7 @@
 
 return [
  
-    'listadoasesor' => 'List of advisers',
+    'listadoasesor' => 'List of Advisers',
     'misasesores'=>'List of my advisors',
     'numeroasesor'=>'Number of advisor',
     'tipodocumento' =>'Document type',
@@ -11,14 +11,14 @@ return [
     'nombre' => 'Names',
     'direccion' => 'Address',
     'localidad' => 'Location',
-    'telefonos' => 'Phones',
+    'telefonos' => 'Telephones',
     'mail' => 'E-Mails',
 
     'misasesores' => 'My Advisers',
 
-    'agregarnuevo' => 'Add new',
-    'nuevoasesor' => 'New adviser',
-    'editarasesor' => 'Edit adviser',
+    'agregarnuevo' => 'Add New',
+    'nuevoasesor' => 'New Adviser',
+    'editarasesor' => 'Edit Adviser',
 
     'crear' => 'Create',
     'guardar' => 'Save',
@@ -26,10 +26,4 @@ return [
     'seleccion' => 'Selection',
 
     'titulo'=>'Listing of all the advisors to be assigned for the subsidiary',
-
-
-
-   
-    
- 
 ];

@@ -15,12 +15,12 @@ ${demo.css}
               <div class="small-box bg-yellow">
                 <div class="inner">
                    <h1> {{$persona}} </h1>
-                  <p>Personas Inscriptas</p>
+                  <p>@lang('estadistica.personasi')</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-ios-people-outline"></i>
                 </div>
-                <a href="#" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">@lang('estadistica.masinformacion')<i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
 
@@ -29,12 +29,12 @@ ${demo.css}
               <div class="small-box bg-yellow">
                 <div class="inner">
                    <h1> {{$asesores}} </h1>
-                  <p>Asesores Registrados</p>
+                  <p>@lang('estadistica.asesoresr')</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
          
@@ -42,7 +42,7 @@ ${demo.css}
 
 <div class="box box-default">
   <div class="box-header with-border">
-    <h3 class="box-title">Ingrese una fecha y opción</h3>
+    <h3 class="box-title">@lang('estadistica.ingresefecha')</h3>
     <div class="box-tools pull-right">
       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div><!-- /.box-tools -->
@@ -55,16 +55,16 @@ ${demo.css}
           </div>
           <div class="col-xs-4">
            <select class="form-control" id="selectvalue" name="selectvalue">
-              <option value="inscripcion">Inscripciones</option>
-              <option value="preinforme">Pre informes</option>
-              <option value="recaudacion">Recaudación</option>
-              <option value="morosidad">Morosidad</option>
-              <option value="examen">Examen</option>
+              <option value="inscripcion">@lang('estadistica.inscripciones')</option>
+              <option value="preinforme">@lang('estadistica.preinformes')</option>
+              <option value="recaudacion">@lang('estadistica.recaudacion')</option>
+              <option value="morosidad">@lang('estadistica.morosidad')</option>
+              <option value="examen">@lang('estadistica.examen')</option>
             </select>
           </div> 
 
           <div class="col-xs-2">
-           <button class="btn btn-block btn-default " id="btn_buscar">Buscar</button>
+           <button class="btn btn-block btn-success " id="btn_buscar">@lang('estadistica.buscar')</button>
           </div> 
     {!! Form::close() !!}
 
@@ -76,7 +76,7 @@ ${demo.css}
             <div class="col-md-6">
              <div class="box box-success">
   <div class="box-header with-border">
-                  <h3 class="box-title">Porcentaje por género</h3>
+                  <h3 class="box-title">@lang('estadistica.porcentaje')</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -93,7 +93,7 @@ ${demo.css}
 
               <div class="box box-success">
   <div class="box-header with-border">
-                  <h3 class="box-title">Nivel estudios</h3>
+                  <h3 class="box-title">@lang('estadistica.nivelestudios')</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -114,7 +114,7 @@ ${demo.css}
 @if(isset($inscripcion))
 <div class="box box-success">
   <div class="box-header with-border">
-  <h3 class="box-title">Estadisticas de personas inscriptas</h3>
+  <h3 class="box-title">@lang('estadistica.estadisticapersonas')</h3>
   <div class="box-tools pull-right">
     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>

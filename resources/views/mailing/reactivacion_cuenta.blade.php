@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>GeCo -- Reactivaci&oacute;n de Cuenta</title>
+	<title>GeCo -- Reactivaci&oacute;n de la Cuenta</title>
 </head>
 <body>
 	<div class="mailContainer">

@@ -13,24 +13,14 @@ return [
     'telefonosf'=>'Teléfonos de Filial',
     'mailsf'=>'E-Mails de Filial',
 
-    'mensaje'=>'Mensaje',
-   	'mensajedejar'=>'Deje su mensaje',
-
    	'soporte'=>'Soporte Técnico',
 
    	'contacto'=>'Contáctenos',
 
-   	'tecnica'=>'Técnica',
-  	'funcional'=>'Funcional',
-  	'otros'=>'Otros',
+    'titulof'=>'Filiales de la misma cadena',
+    'titulod'=>'Filiales del director',
 
     'crear' => 'Crear',
-    'guardar' => 'Guardar',
-
-
-
-
-   
-    
+    'guardar' => 'Guardar',  
  
 ];

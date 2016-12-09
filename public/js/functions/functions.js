@@ -122,4 +122,14 @@ $(document).ready(function(){
         });
     });
 
+
+   function validar(){
+
+        valor = document.getElementById("nombres").value;
+        if( valor == null || valor.length == 0 || /^\s+$/.test(valor) ) {
+            alert('[ERROR] El campo debe tener un valor de...');
+            return false;
+        }
+
+    }
 });

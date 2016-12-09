@@ -7,13 +7,12 @@ return [
     'carrera' => 'Carrera',
     'nombre' => 'Nombre',
     'descripcion' => 'Descripción',
-    'listadodemateria' => 'Listado de materias',
-    'editarmateria' => 'Editar materia',
-    'agregarnuevo' => 'Agregar nueva',
-    'nuevamateria' => 'Nueva materia',
+    'listadodemateria' => 'Listado de Materias',
+    'editarmateria' => 'Editar Materia',
+    'agregarnuevo' => 'Agregar Nueva',
+    'nuevamateria' => 'Nueva Materia',
 
-    
-   
-    
+    'crear' => 'Crear',
+    'guardar' => 'Guardar',
  
 ];

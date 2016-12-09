@@ -14,8 +14,8 @@
 	                            <table id="example1" class="table table-bordered table-striped">
 									<thead><tr>
 										<th></th>
-										<th>Raz&oacute;n</th>
-										<th>Destinatarios</th>
+										<th>@lang('mail.razon')</th>
+										<th>@lang('mail.destinatarios')</th>
 									</tr></thead>
 									<tbody>
 										<?php if ($cantMorosos > 0): ?>
@@ -42,7 +42,7 @@
 									</tbody>
 								</table>
 	                            <div class="box-footer col-xs-12">
-	                            <a href="{{route('filial.mails_enviar')}}" class="btn btn-success">Enviar a todos</a>
+	                            <a href="{{route('filial.mails_enviar')}}" class="btn btn-success">@lang('mail.enviar')</a>
 	                            </div>
 
 	                            {!! Form::close() !!}

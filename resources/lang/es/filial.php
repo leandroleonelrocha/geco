@@ -2,7 +2,7 @@
 
 return [
  
-    'listadofilial' => 'Listado de filiales',
+    'listadofilial' => 'Listado de Filiales',
     'numero' => 'Número',
     'nombre' => 'Nombre',
     'direccion' => 'Dirección',
@@ -15,13 +15,12 @@ return [
 
     'bienvenido' => 'Bienvenido',
 
-    'agregarnuevo' => 'Agregar nuevo',
-    'nuevofilial' => 'Nueva filial',
-    'editarfilial' => 'Editar filial',
+    'seleccionar' => 'Seleccionar',
+
+    'agregarnuevo' => 'Agregar Nueva',
+    'nuevofilial' => 'Nueva Filial',
+    'editarfilial' => 'Editar Filial',
 
     'crear' => 'Crear',
     'guardar' => 'Guardar',
-   
-    
- 
 ];

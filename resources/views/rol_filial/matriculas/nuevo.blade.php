@@ -5,7 +5,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Nueva Matr&iacute;cula</h3>
+					<h3>@lang('matricula.nuevamatricula')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -13,38 +13,38 @@
 							{!! Form::open(['route'=> 'filial.matriculas_nuevo_post', 'method'=>'post']) !!}
 							<!-- ---------- Datos Personales ---------- -->
 				            <div class="col-xs-12">
-				            	<h4 class="box-title text-center">Datos Personales</h4>
+				            	<h4 class="box-title text-center">@lang('matricula.datospersonales')</h4>
 				            </div>
 							<div class="col-md-4 form-group">
 				            	{!! Form::hidden('persona',$persona->id,array('class'=>'form-control')) !!}
-				            	<label>Nombre</label>
+				            	<label>@lang('persona.nombre')</label>
 								<span class="form-control">{{$persona->apellidos}} {{$persona->nombres}}</span>
 							</div>
 							<div class="col-md-4 form-group">
-				            	<label>N&uacute;mero de Documento</label>
+				            	<label>@lang('persona.numerodocumento')</label>
 								<span class="form-control">{{$persona->nro_documento}}</span>
 							</div>
 							<div class="col-md-4 form-group">
-				            	<label>Fecha de Nacimiento</label>
+				            	<label>@lang('persona.fnacimiento')</label>
 								<span class="form-control">{{$persona->fecha_nacimiento}}</span>
 							</div>
 										<!-- ---------- Datos de la Matrícula ---------- -->
 			              	<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Datos de la Matr&iacute;cula</h4>
+			                	<h4 class="box-title text-center">@lang('matricula.datosmatricula')</h4>
 			              	</div>
 			              	<div class="col-md-6 form-group">
-								<label>Asesor</label>
+								<label>@lang('matricula.asesor')</label>
 								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
-								<label>Carreras y Cursos</label>
+								<label>@lang('matricula.carrerasycursos')</label>
 								<select name="carreras_cursos" id="carreras_cursos" class="form-control">
-									<optgroup label="Carreras">
+									<optgroup label=@lang('matricula.carreras')>
 										@foreach($carreras as $carrera)
 											<option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
 										@endforeach
 									</optgroup>
-									<optgroup label="Cursos">
+									<optgroup label=@lang('matricula.cursos')>
 										@foreach($cursos as $curso)
 											<option value="curso;{{$curso->id}}">{{$curso->nombre}}</option>
 										@endforeach
@@ -52,56 +52,56 @@
 								</select>
 							</div>
 							<div class="col-md-12 form-group">
-								<label>Grupos</label>
-								<small>Ctrl + click para seleccionar m&aacute; de un grupo.</small>
+								<label>@lang('matricula.grupos')</label>
+								<small>Ctrl + click @lang('matricula.grupost').</small>
 								{!! Form::select('grupo[]',$grupos->toArray(),null,array('id'=>'grupos', 'class' => 'form-control', 'multiple')) !!}
 							</div>
 										<!-- ---------- Plan de Pagos ---------- -->
 							<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Plan de Pagos</h4>
-			                	<div>Acontinuaci&oacute;n cargue cada uno de los pagos que conformar&aacute;n el plan.</div>
+			                	<h4 class="box-title text-center">@lang('matricula.plandepagos')</h4>
+			                	<div>@lang('matricula.plandepagost')</div>
 			              	</div>
 							<div id="planDePagos">
 							<div class="pagos">
 				              	<div class="col-md-6 form-group">
-									<label>N&uacute;mero de Pago</label>
+									<label>@lang('matricula.numerodepago')</label>
 									{!! Form::text('nro_pago[]',null,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
-									<label>Fecha de Vencimiento</label>
+									<label>@lang('matricula.fechavencimiento')</label>
 									{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
-									<label>Monto Original</label>
+									<label>@lang('matricula.montooriginal')</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">$</span>
 										{!! Form::text('monto_original[]',null,array('class'=>'pago-item form-control')) !!}
 									</div>
 								</div>
 								<div class="col-md-6 form-group">
-									<label>Descuento</label>
+									<label>@lang('matricula.descuento')</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">$</span>
 										{!! Form::text('descuento',null,array('class'=>'pago-item form-control')) !!}
 		  							</div>
 								</div>
 								<div class="col-md-6 form-group">
-									<label>Recargo</label>
+									<label>@lang('matricula.recargo')</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">$</span>
 										{!! Form::text('recargo[]',null,array('class'=>'pago-item form-control')) !!}
 		  							</div>
 								</div>
 								<div class="col-md-12 form-group">
-									<label>Descripci&oacute;n</label>
+									<label>@lang('matricula.descripcion')</label>
 									{!! Form::textarea('descripcion[]',null,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
 									<div class="line"></div>
 								</div>
 							</div><!-- Fin pagos -->
 							</div><!-- Fin planDePagos -->
-							<div id="mas" class="col-md-12 btn btn-danger">Agregar Nuevo Pago</div>
+							<div id="mas" class="col-md-12 btn btn-danger">@lang('matricula.agregarnuevopago')</div>
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+					     		<button type="submit" class="btn btn-success">@lang('matricula.crear')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>

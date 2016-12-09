@@ -23,22 +23,17 @@ class EditarCarreraRequest extends Request
     {
         return [
 
-            'id' => 'required',
             'nombre' => 'required',
             'duracion' => 'required',
-
-
-
         ];
     }
 
     public function messages()
     {
         return [
-            'id.required' => 'Escriba un número de carrera',
-            'nombre.required' => 'Escriba un nombre',
-            'duracion.required' => 'Escriba la duración',
 
+            'nombre.required' => 'El nombre es requerido',
+            'duracion.required' => 'La duración es requerida',
         ];
     }
 

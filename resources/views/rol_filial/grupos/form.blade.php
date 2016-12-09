@@ -11,15 +11,15 @@
     <div class="box-body">
 
         <div class="form-group">
-            <label>Carreras y Cursos</label>
+            <label>@lang('grupo.carrerasycursos')</label>
             <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-            <option>Seleccione una materia o curso</option>
-            <optgroup label="Carreras">
+            <option>@lang('grupo.seleccioncyc')</option>
+            <optgroup label=@lang('grupo.carreras')>
             @foreach($carreras as $carrera)
             <option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
             @endforeach
             </optgroup>
-            <optgroup label="Cursos">
+            <optgroup label=@lang('grupo.cursos')>
             @foreach($cursos as $curso)
             <option value="curso;{{$curso->id}}">{{$curso->nombre}}</option>
             @endforeach
@@ -37,12 +37,12 @@
         
 
         <div class="form-group">
-            {!! Form::label('descripcion', 'Descripcion') !!}
+            <label>@lang('grupo.descripcion')</label>
             {!! Form::text('descripcion', null ,  array('class'=>'form-control')) !!}
         </div>
 
         <div class="form-group">
-            <label for="exampleInputEmail1">Docente  </label>
+            <label for="exampleInputEmail1">@lang('grupo.docente')</label>
             @if(empty($model))
             {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control']) !!}
             @else
@@ -51,23 +51,23 @@
         </div>
 
         <div class="form-group">
-            <label>Disponibilidad</label>
+            <label>@lang('grupo.disponibilidad')</label>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_manana', '1') !!} Ma&ntilde;ana
+            {!! Form::checkbox('turno_manana', '1') !!} @lang('grupo.mañana')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_tarde', '1') !!} Tarde
+            {!! Form::checkbox('turno_tarde', '1') !!} @lang('grupo.tarde')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_noche', '1') !!} Noche
+            {!! Form::checkbox('turno_noche', '1') !!} @lang('grupo.noche')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('sabados', '1') !!} S&aacute;bados
+            {!! Form::checkbox('sabados', '1') !!} @lang('grupo.sabados')
             </div>
         </div>
 
         <div class="form-group">
-            <label>Date range:</label>
+            <label>@lang('grupo.rangofecha')</label>
             <div class="input-group">
             <div class="input-group-addon">
             <i class="fa fa-calendar"></i>
@@ -91,29 +91,29 @@
 
 
 
-         <button class="add_field_button">Agregar otro dia</button><br>
+         <button class="add_field_button btn btn-primary">@lang('grupo.agregarotrodia')</button><br>
             
             <div class="row input_fields_wrap">
                 <div class="form-group">
                     <div class="col-xs-6">
                     <label> Dia </label>
                     <select name="dia[]" class="form-control">
-                        <option value="1"> Lunes</option>
-                        <option value="2"> Martes</option>
-                        <option value="3"> Miercoles</option>
-                        <option value="4"> Jueves</option>
-                        <option value="5"> Viernes</option>
-                        <option value="6"> Sabados</option>
+                        <option value="1"> @lang('grupo.lunes')</option>
+                        <option value="2"> @lang('grupo.martes')</option>
+                        <option value="3"> @lang('grupo.miercoles')</option>
+                        <option value="4"> @lang('grupo.jueves')</option>
+                        <option value="5"> @lang('grupo.viernes')</option>
+                        <option value="6"> @lang('grupo.sabados')</option>
                      </select>
                     </div>
 
                   <div class="col-xs-3">
-                   <label> Hora comienzo </label>
+                   <label> @lang('grupo.horacomienzo') </label>
                     <input class="form-control" name="horario_desde[]" type="time" value="13:45:00" >
                   </div>
 
                   <div class="col-xs-3">
-                   <label> Hora fin </label>
+                   <label> @lang('grupo.horafin') </label>
                     <input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >
                   </div>
 
@@ -124,7 +124,7 @@
     </div><!-- /.box-body -->
 
     <div class="box-footer">
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-success">@lang('grupo.guardar') </button>
     </div>
     </div><!-- /.box -->
     {!! Form::close() !!}

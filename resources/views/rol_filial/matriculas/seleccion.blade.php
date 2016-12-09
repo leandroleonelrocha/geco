@@ -6,24 +6,24 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Personas</h3>
+					<h3 class="box-title">@lang('persona.listadopersona')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.matriculas_nuevaPersona')}}" class="btn btn-success text-white"> Agregar nueva Persona</a>
+						<a href="{{route('filial.matriculas_nuevaPersona')}}" class="btn btn-success text-white"> @lang('preinforme.agregarnuevapersona')</a>
 					</div>
 				</div>
 				<div class="box-body">
 					<div class="col-xs-12">
 						<div class="col-xs-9">
 			            	<h4 class="box-title">
-			            		Personas Existentes
-			            		<div><small>Seleccione una persona o cree un preinforme con una persona nueva</small></div>
+			            		@lang('preinforme.personasexistentes')
+			            		<div><small>@lang('preinforme.seleccion')</small></div>
 			            	</h4>
 			            </div>
 						<table id="example1" class="table table-bordered table-striped">
 							<thead><tr>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>N&uacute;mero de Documento</th>
+							<th>@lang('persona.nombre')</th>
+							<th>@lang('persona.apellido')</th>
+							<th>@lang('persona.numerodocumento')</th>
 							<th class="no-print"></th>
 							</tr></thead>
 							<tbody>
@@ -32,7 +32,7 @@
 											<td>{{$persona->nombres}}</td>
 											<td>{{$persona->apellidos}}</td>
 											<td>{{$persona->nro_documento}}</td>
-											<td class="text-center"><a href="{{route('filial.matriculas_nuevo',$persona->id)}}" class="btn btn-success text-white">Seleccionar</a></td>
+											<td class="text-center"><a href="{{route('filial.matriculas_nuevo',$persona->id)}}" class="btn btn-success text-white">@lang('preinforme.seleccionar')</a></td>
 										</tr>
 								@endforeach
 							</tbody>

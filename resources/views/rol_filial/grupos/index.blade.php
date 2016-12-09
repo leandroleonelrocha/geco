@@ -8,10 +8,10 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de grupos</h3>
+					<h3 class="box-title">@lang('grupo.listadogrupo')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> Nuevo grupo</a>
-						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> Ver clases</a>
+						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> @lang('grupo.nuevogrupo')</a>
+						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> @lang('grupo.verclases')</a>
 						
 					</div>
 				</div>
@@ -20,10 +20,10 @@
 						<thead> 
 						<tr>
 						<th>#</th>
-						<th>Nombre</th>
-						<th>Descripción</th>
+						<th>@lang('grupo.nombre')</th>
+						<th>@lang('grupo.descripcion')</th>
 						
-						<th>Docente</th>
+						<th>@lang('grupo.docente')</th>
 						<th></th>
 						
 						</tr> 
@@ -42,7 +42,7 @@
 						<td>{{ $grupo->descripcion }}</td>
 						<td>{{ $grupo->Docente->fullname }}</td>	
 						   	<td class="text-center">
-					           		<a href="{{route('grupos.edit',$grupo->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
+					           		<a href="{{route('grupos.edit',$grupo->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>	
 									</td>
 							   
 						</tr>					

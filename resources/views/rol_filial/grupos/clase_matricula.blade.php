@@ -26,15 +26,15 @@
 
                
 
-                <p class="lead"><i class="glyphicon glyphicon-user"></i> Docente: {{ $clase->Docente->fullname}}</p>
+                <p class="lead"><i class="glyphicon glyphicon-user"></i> @lang('grupo.docente'): {{ $clase->Docente->fullname}}</p>
 
 
                   <table class="table table-striped">
                     <tbody>
                     <tr>
                       <th>#</th>
-                      <th>Asistencia</th>
-                      <th>Apellido y nombre</th>
+                      <th>@lang('grupo.asistencia')</th>
+                      <th>@lang('grupo.apellidoynombre')</th>
                      
                     </tr>
                     
@@ -43,14 +43,14 @@
 
                              <td ><input type="hidden" name="clase_id" value="{{$clase->id}}"></td>
                              @if( !empty($search->buscarClasePorMatricula($gm->matricula_id, $clase->id)))
-                              <td>Si
-                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'true' ? 'checked' : ''  }}    >NO
+                              <td>@lang('grupo.si')
+                                <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="1"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'true' ? 'checked' : ''  }}    >@lang('grupo.no')
                                 <input type='radio' class='flat-red' name='asistio[][{{$gm->matricula_id}}]' value="0"  {{ $search->buscarClasePorMatricula($gm->matricula_id, $clase->id) == 'false' ? 'checked' : ''  }}  >
                               </td>
                              @else
                               <td> 
-                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="1">SI
-                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="0">NO
+                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="1">@lang('grupo.si')
+                                <input  class='flat-red'  type="radio"  name='asistio[][{{$gm->matricula_id}}]' value="0">@lang('grupo.no')
                               </td>
                              @endif
                                <td>{{$gm->Matricula->Persona->fullname}}</td>    
@@ -63,7 +63,7 @@
                 </div><!-- /.box-body -->
 
         </div>
-        <button type="submit" class="btn btn-primary pull-right">Guardar</button>
+        <button type="submit" class="btn btn-success pull-right">@lang('grupo.guardar')</button>
         {!! Form::close() !!}
 
 </div><!-- /.mail-box-messages -->

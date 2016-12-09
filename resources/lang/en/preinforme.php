@@ -2,9 +2,10 @@
 
 return [
 
-    'listadopreinforme' => 'List of reports',
+    'listadopreinforme' => 'List of Reports',
     'numero' =>'Report number',
     'persona'=>'Person',
+    'datospersonales'=>'Person data',
     'datospreinforme'=>'Report data',
   	'descripcion'=>'Description',
 
@@ -22,16 +23,12 @@ return [
 	'personasexistentes'=>'Existing persons',
 
 
-
-
-	'agregarnuevapersona' => 'Add new person',
-    'agregarnuevo' => 'Add new',
-    'nuevopreinforme' => 'New report',
-    'editarpreinforme' => 'Edit report',
+	'agregarnuevapersona' => 'Add New Person',
+    'agregarnuevo' => 'Add New',
+    'nuevopreinforme' => 'New Report',
+    'editarpreinforme' => 'Edit Report',
 
     'crear' => 'Create',
     'guardar' => 'Save',
 
-
- 
 ];

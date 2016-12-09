@@ -69,11 +69,11 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>
-								<div>{!! Form::checkbox('estudio_computacion', '1') !!} Si</div>
+								<div>{!! Form::checkbox('estudio_computacion', '1') !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computadora')</label>
-								<div>{!! Form::checkbox('posee_computadora', '1') !!} Si</div>
+								<div>{!! Form::checkbox('posee_computadora', '1') !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.disponibilidad')</label>
@@ -112,7 +112,7 @@
 							</div>
 
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+						     	<button type="submit" class="btn btn-success">@lang('persona.crear')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>

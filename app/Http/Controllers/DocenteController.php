@@ -9,10 +9,10 @@ use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevoDocenteRequest;
 use App\Http\Requests\EditarDocenteRequest;
-
-use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Auth;
+
 class DocenteController extends Controller {
 
 	protected $docenteRepo;
@@ -29,45 +29,41 @@ class DocenteController extends Controller {
     
        $docentes = $this->docenteRepo->allEneable(); // Obtención de todos los docentes acrivos
        return view('rol_filial.docentes.lista',compact('docentes'));
-     
 }
 
     // Página de Nuevo
     public function nuevo(){
         
        $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-       return view('rol_filial.docentes.nuevo',compact('tipos'));
-          
+       return view('rol_filial.docentes.nuevo',compact('tipos'));    
     }
 
     // Alta Docente
     public function nuevo_post(CrearNuevoDocenteRequest $request){
         
-            	$data = $request->all(); // Obtengo todos los datos del formulario
-                $data['filial_id'] = session('usuario')['entidad_id'];
-                
-                // Corroboro que el cliente exista, si exite lo activa
-                if ( $docente = $this->docenteRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
-                        return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido agregado con éxito');
-                }
-                else{
-                    // Si no existe lo crea
-                   if($this->docenteRepo->create($data))
-            	       return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido agregado con éxito');
-                   else
-                    return redirect()->route('filial.docentes')->with('msg_error','No se ha podido agregar al docente, intente nuevamente.');
-                }
-           
+    	$data = $request->all(); // Obtengo todos los datos del formulario
+        $data['filial_id'] = session('usuario')['entidad_id'];
+        
+        // Corroboro que el cliente exista, si exite lo activa
+        if ( $docente = $this->docenteRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
+                return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido agregado con éxito');
+        }
+        else{
+            // Si no existe lo crea
+            if($this->docenteRepo->create($data))
+    	       return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido agregado con éxito');
+            else
+            return redirect()->route('filial.docentes')->with('msg_error','No se ha podido agregar al docente, intente nuevamente.');
+        }  
     }
 
     // Borrado lógico del Docente
     public function borrar($id){
       
-           if($this->docenteRepo->disable($this->docenteRepo->find($id)))
-                return redirect()->route('filial.docentes')->with('msg_ok','Docente eliminado correctamente');
-            else
-               return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser eliminado.');
-         
+       if($this->docenteRepo->disable($this->docenteRepo->find($id)))
+            return redirect()->route('filial.docentes')->with('msg_ok','Docente eliminado correctamente');
+        else
+           return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser eliminado.'); 
     }
 
     // Página de Editar
@@ -75,8 +71,7 @@ class DocenteController extends Controller {
        
         $docente = $this->docenteRepo->find($id); // Obtengo al docente
         $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        return view('rol_filial.docentes.editar',compact('docente','tipos'));
-          
+        return view('rol_filial.docentes.editar',compact('docente','tipos'));  
     }
 
     //Modificación del Docente
@@ -85,13 +80,13 @@ class DocenteController extends Controller {
         $data = $request->all();
         $data['filial_id'] = session('usuario')['entidad_id'];
         $model = $this->docenteRepo->find($data['docente']); // Busco al docente
-            if($this->docenteRepo->edit($model,$data)) // Modificación de los datos
-                return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido modificado con éxito');
-            else
-                return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser modificado.');
-       
+        if($this->docenteRepo->edit($model,$data)) // Modificación de los datos
+            return redirect()->route('filial.docentes')->with('msg_ok','El docente ha sido modificado con éxito');
+        else
+            return redirect()->route('filial.docentes')->with('msg_error',' El docente no ha podido ser modificado.');
     }
 
+    //Calculo de horas  Docente
     public function calcularHoras($id){
 
         $fecha1='1-11-26 00:00:00.000000';
@@ -107,8 +102,7 @@ class DocenteController extends Controller {
             $cantClases++;    
         }
 
-        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases'));
-          
+        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases'));  
     }
 
     public function calcularHorasBusqueda(Request $request){

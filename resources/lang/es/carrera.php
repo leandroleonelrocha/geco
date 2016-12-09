@@ -2,15 +2,18 @@
 
 return [
  
-    'listadocarrera' => 'Listado de carreras',
+    'listadocarrera' => 'Listado de Carreras',
     'numero' => 'Nro Carrera',
     'nombre' => 'Nombre',
     'duracion' => 'Duración',
     'descripcion' => 'Descripción',
-    'listadodecursos' => 'Listado de cursos',
-    'agregarnuevo' => 'Agregar nuevo',
-    'editarcarrera' => 'Editar carrera',
-     'nuevacarrera' => 'Nueva carrera',
+    'listadodecursos' => 'Listado de Cursos',
+    'agregarnuevo' => 'Agregar Nueva',
+    'editarcarrera' => 'Editar Carrera',
+    'nuevacarrera' => 'Nueva Carrera',
+
+	'crear' => 'Crear',
+    'guardar' => 'Guardar',
     
  
 ];

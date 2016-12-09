@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="{{asset('bootstrap/css/bootstrap.min.css')}}">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"> -->
 <!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
 <!-- daterange picker -->
 <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker-bs3.css')}}">
 <!-- iCheck for checkboxes and radio inputs -->
@@ -21,10 +21,12 @@
 
 <link rel="stylesheet" href="{{asset('css/fontello.css') }}">
 <link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap.css')}}">
-
 <!-- Our Style -->
 <link rel="stylesheet" href="{{asset('css/geco-styles.css')}}">
-
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{{asset('/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+<!-- Ionicons -->
+<link rel="stylesheet" href="{{asset('/ionicons-2.0.1/css/ionicons.min.css')}}">
 <!-- Full calendar -->
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.min.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/fullcalendar.print.css')}}" media="print">

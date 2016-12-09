@@ -1,16 +1,14 @@
 <?php
 
 return [
- 
 
     'nombre' => 'Subsidiary',
-    'tipoconsulta' => 'Type of consultation',
-    'telefono'=>'Phone',
+    'telefono'=>'Telephone',
 
-    'telefonosd'=>'Phones Director',
+    'telefonosd'=>'Telephones Director',
     'mailsd'=>'E-Mails Director',
 
-    'telefonosf'=>'Phones Subsidiary',
+    'telefonosf'=>'Telephones Subsidiary',
     'mailsf'=>'E-Mails Subsidiary',
 
     'mensaje'=>'Message',
@@ -20,13 +18,6 @@ return [
 
    	'contacto'=>'Contact us',
 
- 	  'tecnica'=>'technique',
-  	'funcional'=>'functional',
-  	'otros'=>'others',
-
-
-
-    'crear' => 'Create',
-    'guardar' => 'Save',
- 
+    'titulof'=>'Subsidiaries of the chain itself',
+    'titulod'=>'The directors affiliates',
 ];

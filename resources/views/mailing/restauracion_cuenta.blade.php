@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>GeCo -- Restauraci&oacuten; de cuenta con Exito !!!</title>
+	<title>GeCo -- Restauraci&oacuten; de la Cuenta</title>
 </head>
 <body>
 	<div class="mailContainer">

@@ -8,11 +8,10 @@ return [
     'descripcion' => 'Description',
     'taller' => 'Workshop',  
 
-    'listadodecursos' => 'Course List',
-    'agregarnuevo' => 'add new',
-    'nuevocurso' => 'New course',
-    'crear' => 'Create'
-   
-    
- 
+    'listadodecursos' => 'List of Courses',
+    'agregarnuevo' => 'Add New',
+    'editarcurso' => 'Edit Course',
+    'nuevocurso' => 'New Course',
+   	'crear' => 'Create',
+    'guardar' => 'Save',
 ];

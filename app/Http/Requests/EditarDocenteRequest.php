@@ -23,25 +23,22 @@ class EditarDocenteRequest extends Request
     public function rules()
     {
         return [
-
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
+            'nro_documento' => 'required|numeric',
             'apellidos' => 'required',
             'nombres' => 'required',
-            'descripcion' => 'required',
-
         ];
     }
 
     public function messages()
     {
         return [
-            'tipo_documento_id.required' => 'Escriba un tipo de documento',
-            'nro_documento.required' => 'Escriba el número de documento',  
-            'apellidos.required' => 'Escriba el nombre',
-            'nombres.required' => 'Escriba el apellido',
-            'descripcion.required' => 'Escriba la descripción',     
+            'tipo_documento_id.required' => 'Seleccione un tipo de documento',
+            'nro_documento.required' => 'El número de documento es requerido',   
+            'nro_documento.numeric'=> 'El número de documento es numérico', 
+            'apellidos.required' => 'El nombre es requerido',
+            'nombres.required' => 'El apellido es requerido',    
         ];
     }
-
 }

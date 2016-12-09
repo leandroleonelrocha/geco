@@ -10,6 +10,7 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
+						
 							{!! Form::open(['route'=> 'filial.asesores_nuevo_post', 'method'=>'post']) !!}
 							<div class="col-md-6 form-group">
 								<label>@lang('asesor.tipodocumento')</label>
@@ -41,7 +42,8 @@
 								<label>@lang('asesor.telefonos')</label>
 								<button class="add_input_telefono btn btn-success">+</button>	
 								<div class="input_fields_telefono">
-									{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
+							<!-- 		{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!} -->
+									<input type="text" name="telefono[]" class="form-control">
 								</div>
 							</div>
 
@@ -49,13 +51,13 @@
 								<label>@lang('asesor.mail')</label>
 								<button class="add_input_mail btn btn-success"">+</button>	
 								<div class="input_fields_wrap">
-							   	{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
+				<!-- 			   	{!! Form::email('mail[]',null,array('class'=>'form-control')) !!} -->
+									<input type="text" name="mail[]" class="form-control">
 								</div>	
 							</div>
 		
 							<div class="box-footer col-xs-12">
-							{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
-				          	</div>
+						     <button type="submit" class="btn btn-success">@lang('asesor.crear')</button>
 							{!! Form::close() !!}
 						</div>
 					</div>
@@ -63,8 +65,6 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
-
-<!-- <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
-
-<script src="{{asset('js/functions/functions.js')}}"></script> -->
 @endsection
+
+

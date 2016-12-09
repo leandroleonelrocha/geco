@@ -23,24 +23,16 @@ class EditarCursoRequest extends Request
     public function rules()
     {
         return [
-
-            'id' => 'required',
             'nombre' => 'required',
             'duracion' => 'required',
-            'taller' => 'required',
-
-
-
         ];
     }
 
     public function messages()
     {
         return [
-            'id.required' => 'Escriba un número de curso',
-            'nombre.required' => 'Escriba un nombre',
-            'duracion.required' => 'Escriba la duración',
-            'taller.required' => 'Seleccione si asiste a un taller',
+            'nombre.required' => 'El nombre es requerido',
+            'duracion.required' => 'La duración es requerida',
         ];
     }
 

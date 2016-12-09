@@ -6,7 +6,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Pases</h3>
+					<h3 class="box-title">@lang('pase.listadopases')</h3>
 				</div>
 				<div class="box-body">
 					<!-- <div class="col-xs-12"><h4>Pases Realizados</h4></div>
@@ -14,10 +14,10 @@
 					<div class="col-xs-12">
 						<table id="example1" class="table table-bordered table-striped">
 							<thead><tr>
-							<th>Matricula</th>
-							<th>Filial</th>
-							<th>Persona</th>
-							<th>Estado</th>
+							<th>@lang('pase.matricula')</th>
+							<th>@lang('pase.filial')</th>
+							<th>@lang('pase.persona')</th>
+							<th>@lang('pase.estado')</th>
 							<th class="no-print"></th>
 							</tr></thead>
 							<tbody>
@@ -36,13 +36,13 @@
 									<td class="text-center">
 										<?php if($paseR->confirmar == 0){ ?>
 										<a data-url="{{route('filial.matriculas_pases_confirmar',$paseR->id)}}" class="CR" data-actividad="confirmar" data-id="{{$paseR->id}}">
-											<i class="btn btn-success fa fa-thumbs-o-up" title="Confirmar"></i>
+											<i class="btn btn-success fa fa-thumbs-o-up" title=@lang('pase.confirmar')></i>
 										</a>
 										<a data-url="{{route('filial.matriculas_pases_rechazar',$paseR->id)}}" class="CR rechazar" data-actividad="rechazar" data-id="{{$paseR->id}}">
 											<i class="btn btn-danger fa fa-thumbs-o-down" title="Rechazar"></i>
 										</a> 
 										<?php }else{ ?>
-											<i class="btn btn-success glyphicon glyphicon-ok" title="Confirmado"></i>
+											<i class="btn btn-success glyphicon glyphicon-ok" title=@lang('pase.rechazar')></i>
 										<?php } ?>
 									</td>
 								</tr>

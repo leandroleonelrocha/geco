@@ -36,10 +36,10 @@
 	$(document).ready(function() {
 		
 		$('#calendar').fullCalendar({
-			monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+			monthNames: ['@lang('grupo.enero')','@lang('grupo.febrero')','@lang('grupo.marzo')','@lang('grupo.abril')','@lang('grupo.mayo')','@lang('grupo.junio')','@lang('grupo.julio')','@lang('grupo.agosto')','@lang('grupo.septiembre')','@lang('grupo.octubre')','@lang('grupo.noviembre')','@lang('grupo.diciembre')'],
         	monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-     	    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-    		dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+     	    dayNames: ['@lang('grupo.domingo')','@lang('grupo.lunes')','@lang('grupo.martes')','@lang('grupo.miercoles')','@lang('grupo.jueves')','@lang('grupo.viernes')','@lang('grupo.sabado')'],
+    		dayNamesShort: ['@lang('grupo.dom')','@lang('grupo.lun')','@lang('grupo.mar')','@lang('grupo.mie')','@lang('grupo.jue')','@lang('grupo.vie')','@lang('grupo.sab')'],
 			header: {
 				left: 'prev,next today',
 				center: 'title',

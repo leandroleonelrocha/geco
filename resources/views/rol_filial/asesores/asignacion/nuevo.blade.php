@@ -28,7 +28,7 @@
 							      	<td>{{ $a->nro_documento}}</td>
 							        <td>{{ $a->apellidos }}</td>
 							        <td>{{ $a->nombres }}</td>
-							        <td class="text-center"><a href="{{route('filial.asignacionAsesores_nuevo_post',$a->id)}}" title="Asignar" class="btn btn-success glyphicon glyphicon-ok"></a></td>
+							        <td class="text-center"><a href="{{route('filial.asignacionAsesores_nuevo_post',$a->id)}}" title="@lang('lista.asignar')" class="btn btn-success glyphicon glyphicon-ok"></a></td>
 							    </tr> 
 						    @endforeach
 					   	</tbody>

@@ -8,11 +8,12 @@ return [
     'direccion' => 'Address',
     'localidad' => 'Location',
     'codigopostal'=>'Postal Code',
-    'telefonos' => 'Phones',
+    'telefonos' => 'Telephones',
     'cadena'=>'Chain',
 
     'cuenta' => 'E-Mail (Access account)',
     'bienvenido' => 'Welcome',
+    'seleccionar' => 'Select',
 
     'agregarnuevo' => 'Add new',
     'nuevofilial' => 'New subsidiary',

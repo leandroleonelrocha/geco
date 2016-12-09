@@ -2,10 +2,10 @@
 
 return [
 
-    'listadopreinforme' => 'Listado de preinformes',
+    'listadopreinforme' => 'Listado de Preinformes',
     'numero' =>'Número de preinforme',
     'persona'=>'Persona',
-    'datospreinforme'=>'Datos del preinforme',
+    'datospreinforme'=>'Datos del Preinforme',
   	'descripcion'=>'Description',
 
 	'encontro'=>'¿Cómo nos encontró?',
@@ -21,16 +21,13 @@ return [
 
 	'personasexistentes'=>'Personas existentes',
 
+	'agregarnuevapersona' => 'Agregar Nueva Persona',
+    'agregarnuevo' => 'Agregar Nuevo',
+    'nuevopreinforme' => 'Nuevo  Preinforme',
+    'editarpreinforme' => 'Editar Preinforme',
 
-
-
-	'agregarnuevapersona' => 'Agregar nueva persona',
-    'agregarnuevo' => 'Agregar nuevo',
-    'nuevopreinforme' => 'Nuevo  preinforme',
-    'editarpreinforme' => 'Editar preinforme',
-
-    'crear' => 'Create',
-    'guardar' => 'Save',
+    'crear' => 'Crear',
+    'guardar' => 'Guardar',
 
 
  

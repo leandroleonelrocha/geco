@@ -12,7 +12,7 @@ return [
     'carrera'       => 'Careers',
     'materia'       => 'Matter',
     'grupo'         => 'Groups',
-    'examen'        => 'Tests',
+    'examen'        => 'Exams',
     'asesor'        => 'Advisors',
     'docente'       => 'Teachers',
     'estadistica'   => 'Statistics',
@@ -21,11 +21,12 @@ return [
     'nueva' =>'New',
     'nuevo' =>'New',
     'lista' =>'List',
+    'pases' =>'Pases',
     'asignar' =>'Assign advisors',
     'perfil' =>'Profile',
     'cambiarcontraseña' =>'Change password',
+
     'cerrarsesion' =>'Sign off',
 
     'salir' =>'Get out',
-
 ];

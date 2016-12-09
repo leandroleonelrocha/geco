@@ -7,16 +7,16 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de Matr&iacute;culas</h3>
+					<h3 class="box-title">@lang('matricula.listadomatricula')</h3>
 				</div>
 				<div class="box-body">
 					<table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>N&uacute;mero de Matr&iacute;cula</th>
-						<th>Asesor</th>
-						<th>Persona</th>
-						<th>Terminado</th>
-						<th>Cancelado</th>
+						<th>@lang('matricula.numero')</th>
+						<th>@lang('matricula.asesor')</th>
+						<th>@lang('matricula.persona')</th>
+						<th>@lang('matricula.terminado')</th>
+						<th>@lang('matricula.cancelado')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
@@ -32,7 +32,7 @@
 									<?php if($matricula->cancelado == 0) echo 'No'; else echo 'Si';?>
 								</td>
 								<td class="text-center">
-								<a href="{{route('filial.pagos',$matricula->id)}}" class="btn btn-success" title="Ver Pagos">Ver Pagos</a>
+								<a href="{{route('filial.pagos',$matricula->id)}}" class="btn btn-success" title="Ver Pagos">@lang('matricula.verpagos')</a>
 								</td>
 							</tr>
 						@endforeach

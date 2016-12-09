@@ -14,7 +14,7 @@
 			<p>Para comenzar dir&iacute;jase a nuestro sitio web haciendo click <a href="http://localhost/geco/public/login">aqu&iacute;</a>.</p>
 		</div>
 		<div class="box">
-			<div class="title verde">Datos de la Cuenta actuaizada</div>
+			<div class="title verde">Datos de la Cuenta actualizada</div>
 			<p><strong>Nuevo Usuario: </strong>{!!$user!!}</p>
 			<p><strong>Nueva Contrase&ntilde;a: </strong>{!!$password!!}</p>
 		</div>

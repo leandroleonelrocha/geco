@@ -38,7 +38,7 @@ class MateriaController extends Controller
 
 	public function nuevo_post(CrearNuevaMateriaRequest $request){
 		$this->materiaRepo->create($request->all());
-		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');	
+		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
 	}
 
  	public function editar($id){
@@ -60,11 +60,11 @@ class MateriaController extends Controller
 
     public function borrar($id){
 		if($data=$this->materiaRepo->find($id))
-			{
-		    	$data->Delete();
-		        return redirect()->back()->with('msg_ok', 'Materia eliminada correctamente');
-		        }
-		    else
-		       return redirect()->back()->with('msg_error','La materia no ha podido ser eliminada.');	
+		{
+	    	$data->Delete();
+	        return redirect()->back()->with('msg_ok', 'Materia eliminada correctamente');
+	        }
+	    else
+	       return redirect()->back()->with('msg_error','La materia no ha podido ser eliminada.');	
     }
 }

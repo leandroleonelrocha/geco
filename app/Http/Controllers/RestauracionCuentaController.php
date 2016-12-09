@@ -47,7 +47,6 @@ class RestauracionCuentaController extends Controller {
 	    else{
 
     		return redirect()->route('restaurarCuenta.nueva')->with('msg_error', 'El E-mail no existe, escriba otro !!!');
-
 	    }
     }
 }

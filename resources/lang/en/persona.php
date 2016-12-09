@@ -2,7 +2,7 @@
 
 return [
 	'asesor' => 'Adviser',
-    'listadopersona' => 'List of persons',
+    'listadopersona' => 'List of Persons',
     'tipodocumento' =>'Document type',
     'numerodocumento' => 'Document',
     'apellido' => 'Last names',
@@ -25,13 +25,20 @@ return [
     'nivelestudios'=>'Level of study',
     'computadora'=>'Has computer',
     'computacion'=>'Study Computer',
-    'aclaraciones'=>'Clarifications',
+    'aclaraciones'=>'Clasifications',
     'titulo'=>'Personal information',
 
+    'no'=>'No',
+    'si'=>'Yes',
 
-    'agregarnuevo' => 'Add new',
-    'nuevopersona' => 'New person',
-    'editarpersona' => 'Edit person',
+    'secundario'=>'Full secondary',
+    'terciario'=>'Tertiary',
+    'universitario'=>'Academic',
+
+
+    'agregarnuevo' => 'Add New',
+    'nuevopersona' => 'New Person',
+    'editarpersona' => 'Edit Person',
 
     'crear' => 'Create',
     'guardar' => 'Save',

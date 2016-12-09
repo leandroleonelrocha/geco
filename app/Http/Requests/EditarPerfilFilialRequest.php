@@ -42,12 +42,11 @@ class EditarPerfilFilialRequest extends Request
     public function messages()
     {
         return [
-            'nombre.required' => 'Escriba un Nombre',
-            'direccion.required' => 'Escriba una dirección',
-            'localidad.required' => 'Escriba una localidad',
-            'codigo_postal.required' => 'Escriba el código postal',
-            'telefono.required' => 'Escriba el teléfono',  
+            'nombre.required' => 'El nombre es requerido',
+            'direccion.required' => 'La dirección es requerida',
+            'localidad.required' => 'La localidad es requerida',
+            'codigo_postal.required' => 'El CP es requerido',
+            'telefono.required' => 'El teléfono es requerido',  
         ];
     }
-
 }

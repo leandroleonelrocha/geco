@@ -21,7 +21,7 @@ Route::group(['middleware' => ['web']], function () {
         session(['lang' => $lang]);
         return \Redirect::back();
     })->where([
-        'lang' => 'en|es'
+        'lang' => 'en|es|pt'
     ]);
  
 });

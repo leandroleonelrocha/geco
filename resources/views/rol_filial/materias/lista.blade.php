@@ -27,7 +27,7 @@
       	            		        <td>{{ $m->Carrera->fullname}}</td>
 						            <td>{{ $m->descripcion }}</td>
 						           	<td class="text-center">
-					           		<a href="{{route('filial.materias_editar',$m->id)}}" title="Editar"><i class="btn btn-success glyphicon glyphicon-pencil"></i></a>	
+					           		<a href="{{route('filial.materias_editar',$m->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>	
 									</td>
 							    </tr>
 						    @endforeach

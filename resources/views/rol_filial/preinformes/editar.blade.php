@@ -71,7 +71,7 @@
 								<textarea disabled name="descripcion_interes" id="otros" class="form-control" cols="30" rows="4">@foreach ($intereses as $interes){{$interes->descripcion}}@endforeach</textarea>
 							</div>
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Guardar',array('class'=>'btn btn-success')) !!}
+								 <button type="submit" class="btn btn-success">@lang('preinforme.guardar')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>
@@ -80,7 +80,4 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
-	<!-- jQuery 2.1.4 -->
-    <script src="{{asset('plugins/jQuery/jQuery-2.1.4.min.js')}}"></script>
-	<script src="{{asset('js/functions/functions.js')}}"></script>
 @endsection

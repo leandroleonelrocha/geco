@@ -26,15 +26,11 @@ class EstadisticaController extends Controller
 
 	public function index(Request $request){
 
-	 $persona = $this->personaRepo->getPersonasFilial()->count();
-	 $asesores = $this->asesorFilialRepo->allAsesorFilial()->count();
-     return view('rol_filial.estadisticas.index', compact('persona','asesores'));
-	
+		$persona = $this->personaRepo->getPersonasFilial()->count();
+		$asesores = $this->asesorFilialRepo->allAsesorFilial()->count();
+		return view('rol_filial.estadisticas.index', compact('persona','asesores'));
 	}
 	
-
-	
-
 	public function detalles(Request $request)
 	{	
 		$persona = $this->personaRepo->getPersonasFilial()->count();
@@ -44,34 +40,28 @@ class EstadisticaController extends Controller
 		$inicio = date("Y-m-d", strtotime($array[0])).' 00:00:00.000000';
 		$fin = date("Y-m-d", strtotime($array[1])).' 00:00:00.000000';
 
-		
-			if($request->selectvalue == 'inscripcion')
-			{		
-				return $this->estadisticasFilialInscripcion($inicio, $fin);
-			}
+		if($request->selectvalue == 'inscripcion')
+		{		
+			return $this->estadisticasFilialInscripcion($inicio, $fin);
+		}
 
-			if($request->selectvalue == 'preinforme')
-			{		
-				$preinforme = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
-				return view('rol_filial.estadisticas.detalles', compact('preinforme'));
-			}
-
-			
-			if($request->selectvalue == 'recaudacion')
-			{
-				return $this->estadisticasFilialRecaudacion();
-			}
-
-			if($request->selectvalue == 'morosidad')
-			{
-				return $this->estadisticasFilialMorosidad();
-			}
-
+		if($request->selectvalue == 'preinforme')
+		{		
+			$preinforme = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
+			return view('rol_filial.estadisticas.detalles', compact('preinforme'));
+		}
 
 		
+		if($request->selectvalue == 'recaudacion')
+		{
+			return $this->estadisticasFilialRecaudacion();
+		}
 
+		if($request->selectvalue == 'morosidad')
+		{
+			return $this->estadisticasFilialMorosidad();
+		}
 	}
-
 
 	public function estadisticasFilialInscripcion($inicio, $fin){
 
@@ -84,23 +74,20 @@ class EstadisticaController extends Controller
 
 		$inscripcion=[];
 			
-			for($i =0; $i<count($labels); $i++ ){
-				$data['label'] = $nombre[$i];
-				$data['si']    = $this->personaRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
-				$data['no']	   = $this->personaRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
+		for($i =0; $i<count($labels); $i++ ){
+			$data['label'] = $nombre[$i];
+			$data['si']    = $this->personaRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
+			$data['no']	   = $this->personaRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
 
-				array_push($inscripcion, $data);
-			}
+			array_push($inscripcion, $data);
+		}
 
-			$total = $this->personaRepo->countTotal($inicio, $fin);
-			$genero = $this->personaRepo->getGenero($inicio, $fin);
-			$nivel = $this->personaRepo->estadisticasNivelEstudios($inicio, $fin);
+		$total = $this->personaRepo->countTotal($inicio, $fin);
+		$genero = $this->personaRepo->getGenero($inicio, $fin);
+		$nivel = $this->personaRepo->estadisticasNivelEstudios($inicio, $fin);
 
-			return view('rol_filial.estadisticas.index',compact('inscripcion', 'genero', 'total', 'persona', 'asesores','nivel'));
-		
-
+		return view('rol_filial.estadisticas.index',compact('inscripcion', 'genero', 'total', 'persona', 'asesores','nivel'));
 	}
-
 
 	public function estadisticasFilialMorosidad()
 	{
@@ -111,10 +98,5 @@ class EstadisticaController extends Controller
 	public function estadisticasFilialRecaudacion(){
 		return 'recaudacion';
 	}
-
-	
-
-	
-
 
 }

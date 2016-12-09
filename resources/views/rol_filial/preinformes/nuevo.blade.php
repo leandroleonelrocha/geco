@@ -67,7 +67,7 @@
 								{!! Form::textarea('descripcion_interes',null,array('id'=>'otros', 'class' => 'form-control','disabled','size'=>'30x4')) !!}
 							</div>
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Crear',array('class'=>'btn btn-success')) !!}
+							 	<button type="submit" class="btn btn-success">@lang('preinforme.crear')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>

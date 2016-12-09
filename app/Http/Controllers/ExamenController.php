@@ -47,7 +47,6 @@ class ExamenController extends Controller
 	{
 		//matriculaspermisos
 		//Docentes
-		
 		$examenes = $this->examenRepo->all();
 		$grupos = $this->grupoRepo->allEnable()->where('curso_id', null)->lists('full_name','id');
 		//$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
@@ -80,17 +79,14 @@ class ExamenController extends Controller
            	$this->examenRepo->create($data);
 
         }
-
 		//$this->examenPermisosRepo->create($data);
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen creado correctamente.');
 	}
-
 
 	public function editar(Request $request, $id = null)
 	{
 		
 		$model = $this->examenRepo->find($id);
-
 
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'persona_id');
 		$grupos = $this->grupoRepo->all()->lists('descripcion', 'id');
@@ -129,9 +125,9 @@ class ExamenController extends Controller
        		$matriculas = $grupo->Matricula;
        		 return response()->json(array('grupo'=>$grupo,'matriculas'=>$matriculas));
        	}else{
-       	$carrera = $grupo->Carrera;
-       	$materias = $grupo->Carrera->Materia;
-        $matriculas = $grupo->Matricula;
+		       	$carrera = $grupo->Carrera;
+		       	$materias = $grupo->Carrera->Materia;
+		        $matriculas = $grupo->Matricula;
 
         return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materias'=>$materias,'matriculas'=>$matriculas));
     	}
@@ -142,6 +138,4 @@ class ExamenController extends Controller
     	$examenes = Examen::where('nro_acta', $nro_acta)->get();
     	return view ('rol_filial.examenes.detalles', compact('examenes'));
     }
-
-
 }

@@ -7,9 +7,9 @@ use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
-use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Auth;
 
 class AsignacionAsesorAFilialController extends Controller {
 
@@ -27,7 +27,6 @@ class AsignacionAsesorAFilialController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
                 $asesor = $this->asesorFilialRepo->allAsesorFilial(); // Obtención de todos los Acesores activos de la filial 
-             
                 return view('rol_filial.asesores.asignacion.lista',compact('asesor'));
             }
             else
@@ -56,8 +55,6 @@ class AsignacionAsesorAFilialController extends Controller {
         if (null !== session('usuario')){
             if (session('usuario')['rol_id'] == 4){
 
-
-               // var_dump($this->asesorFilialRepo->findAsesorFilial($id));die;
                 $asesor=$this->asesorFilialRepo->findAsesorFilial($id);
                 if ( count($asesor)==0 ){
                   
@@ -78,7 +75,6 @@ class AsignacionAsesorAFilialController extends Controller {
         }
         else
             return redirect('login');
-
     }
 
     public function borrar($id){

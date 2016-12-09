@@ -5,7 +5,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3>Actualizar Matr&iacute;cula</h3>
+					<h3>@lang('matricula.actualizarmatricula')</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -14,12 +14,12 @@
 							} ?>
 							{!! Form::open(['route'=> 'filial.matriculas_actualizar_post', 'method'=>'post']) !!}
 			              	<div class="col-xs-12">
-			                	<h4 class="box-title text-center">Datos de la Matr&iacute;cula</h4>
+			                	<h4 class="box-title text-center">@lang('matricula.datosmatricula')</h4>
 			              	</div>
 							<div class="col-md-10 form-group">
 								{!! Form::hidden('matricula', $matricula->id, array('class'=>'form-control')) !!}
-								<label>Grupos</label>
-								<small>Ctrl + click para seleccionar m&aacute; de un grupo.</small>
+								<label>@lang('matricula.grupos')</label>
+								<small>Ctrl + click @lang('matricula.grupost').</small>
 								<select name="grupo[]" class='form-control' multiple>
 									<?php foreach ($grupos as $grupo) { ?>
 										<option value="{{$grupo}}"
@@ -33,11 +33,11 @@
 								</select>
 							</div>
 							<div class="col-md-2 form-group">
-								<label>Cancelar</label>
-								<div>{!! Form::checkbox('cancelado', '1', $matricula->cancelado) !!} Si</div>
+								<label>@lang('matricula.cancelar')</label>
+								<div>{!! Form::checkbox('cancelado', '1', $matricula->cancelado) !!} @lang('matricula.si')</div>
 							</div>
 							<div class="box-footer col-xs-12">
-								{!! Form::submit('Actualizar',array('class'=>'btn btn-success')) !!}
+						     	<button type="submit" class="btn btn-success">@lang('matricula.actualizar')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>
