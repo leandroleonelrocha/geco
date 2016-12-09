@@ -25,7 +25,7 @@ class CursoController extends Controller
 	
 	public function lista(){
 		
-		$curso=$this->cursoRepo->all();
+		$curso = $this->cursoRepo->listPaginate();
 		return view('rol_filial.cursos.lista',compact('curso'));
 		
 	}

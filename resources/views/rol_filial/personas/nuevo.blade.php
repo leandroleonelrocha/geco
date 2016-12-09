@@ -14,7 +14,7 @@
 
 					    	<div class="col-md-12 form-group">
 								<label>@lang('persona.asesor')</label>
-								{!! Form::select('asesor_id',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor_id',$asesores->toArray(),null,array('class' => 'form-control select2')) !!}
 							</div>
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">@lang('persona.titulo')</h4>
