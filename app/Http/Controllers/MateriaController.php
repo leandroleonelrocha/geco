@@ -27,7 +27,7 @@ class MateriaController extends Controller
 	}
 
 	public function lista(){
-		$materia=$this->materiaRepo->allMateria();
+		$materia=$this->materiaRepo->listPaginate();
 		return view('rol_filial.materias.lista',compact('materia'));
 	}
 

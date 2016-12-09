@@ -10,7 +10,7 @@
 <div class="col-xs-12">
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Collapsable</h3>
+    <h3 class="box-title">Búsqueda de estadísticas</h3>
   </div>
   <div class="box-body">
     {!! Form::model(Request::all(), ['route'=> 'dueno.estadisticas_detalles', 'method'=>'post', 'class'=>'form-horizontal']) !!} 
@@ -24,11 +24,11 @@
 @if(isset($secion))
 
     @if($secion == 'inscripcion')
-        @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
-    @endif
+        @include('partials.estadisticas.grafico_inscripcion', ['genero' => 'Estadísticas según género','nivel'=>'Estadísticas según nivel de estudios','persona'=> 'Estadísticas por persona'])
+    @endif  
 
     @if($secion == 'preinforme')
-        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
+        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones según preinformes'])
     @endif
 
 

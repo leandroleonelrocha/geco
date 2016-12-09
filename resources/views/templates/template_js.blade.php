@@ -50,18 +50,13 @@
         //Initialize Select2 Elements
         $(".select2").select2();
 
-        $("#example1").DataTable();
-        $('#example2').DataTable();
-        // $('#example2').DataTable({
-        //   "paging": true,
-        //   "lengthChange": false,
-        //   "searching": false,
-        //   "ordering": true,
-        //   "info": true,
-        //   "autoWidth": false
-        // });
-      
+        $('#example1').DataTable({
+            paging: false,
+            "bInfo" : false
+        });
 
+        $('#example2').DataTable();
+    
 
         //Datemask dd/mm/yyyy
         $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});

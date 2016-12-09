@@ -14,7 +14,7 @@ class PreinformeRepo extends BaseRepo {
 
     public function allFilial(){
 
-        return $this->model->where('filial_id', $this->filial)->get();
+        return $this->model->where('filial_id', $this->filial)->paginate(10);
     }
 
     public function estadisticas($inicio, $fin){

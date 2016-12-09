@@ -41,14 +41,10 @@ class FilialesController extends Controller
 	}
 
     public function index(){
-        $filial = session('usuario')['entidad_id'];
-        
-        $grupos = $this->grupoRepo->all()->lists('full_name', 'id');
-        $docentes = $this->docenteRepo->all()->lists('full_name', 'id');
-        $events = $this->claseRepo->all();
-
-
-
+        $filial     = session('usuario')['entidad_id'];
+        $grupos     = $this->grupoRepo->all()->lists('full_name', 'id');
+        $docentes   = $this->docenteRepo->all()->lists('full_name', 'id');
+        $events     = $this->claseRepo->all();
         return view('rol_filial.index', compact('grupos', 'docentes', 'events', 'filial'));
     
     }

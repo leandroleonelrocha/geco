@@ -45,14 +45,12 @@
 @if(isset($secion))
 
     @if($secion == 'inscripcion')
-        @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
+        @include('partials.estadisticas.grafico_inscripcion', ['genero' => 'Inscripciones según género','nivel'=>'Estadísticas según nivel de estudio','persona'=>'Estadística por personas'])
     @endif
 
     @if($secion == 'preinforme')
         @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
     @endif
-
-  
 
 @endif
 
@@ -74,7 +72,7 @@ $(function () {
          enabled: false
         },
         title: {
-            <?php if(isset($total)){?>
+            <?php if(isset($totalPersonasFilial)){?>
             text: ' Cantidad de inscriptos: {{$totalPersonasFilial}} '
             <?php }?>
             
@@ -113,7 +111,8 @@ $(function () {
                 //si existe preinforme
                  <?php
                 if(isset($preinforme))
-                {
+                { 
+                  
                     foreach ($preinforme as $key => $value) {
                     ?>
                       [ '{{$key}}', {{$value->count()}} ],

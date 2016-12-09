@@ -9,7 +9,7 @@
                   <p>Filiales</p>
                 </div>
                 <div class="icon">
-                  <i class="ion ion-bag"></i>
+                  <i class="fa  fa-bank "></i>
                 </div>
                 <a href="#" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
               </div>
@@ -45,9 +45,9 @@
 
 <div class="row">
 <div class="col-xs-12">
-<div class="box box-default">
+<div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Collapsable</h3>
+    <h3 class="box-title">Búsqueda de estadísticas</h3>
     <div class="box-tools pull-right">
       <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
     </div>
@@ -65,11 +65,11 @@
 @if(isset($secion))
 
     @if($secion == 'inscripcion')
-        @include('partials.estadisticas.grafico_inscripcion', ['titulo' => 'Inscripciones'])
+        @include('partials.estadisticas.grafico_inscripcion', ['genero' => 'Estadísticas según género','nivel'=>'Estadísticas según nivel de estudios','persona'=> 'Estadísticas por persona'])
     @endif  
 
     @if($secion == 'preinforme')
-        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
+        @include('partials.estadisticas.grafico_preinforme',['genero' => 'Estadisticas por generos','nivel' => 'Estadisticas por nivel de estudios','persona' => 'Estadisticas por personas'])
     @endif
 
 

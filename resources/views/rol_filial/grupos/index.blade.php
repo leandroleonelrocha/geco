@@ -55,6 +55,13 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+	<div class="row">
+        <div class="col-sm-12">
+	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+	        	{!! $grupos->render() !!}
+	        </div>
+        </div>
+    </div>
 @endsection
 
  

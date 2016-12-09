@@ -17,10 +17,6 @@ class DirectorRepo extends BaseRepo {
         return new Director();
     }
 
-    public function allEneable(){
-        return $this->model->where('activo', 1)->get();
-    }
-
     public function check($mail){
     	return $this->model->where('mail', $mail)->update(['activo'=>1]);
     }
@@ -33,11 +29,12 @@ class DirectorRepo extends BaseRepo {
     public function existeMail($mail){
         return $this->model->where('mail', $mail)->first();
     }
-
+    
     public function filialDirectores(){
         $email    = session('usuario')['usuario'];
 
         $director = $this->model->where('activo', 1)->where('mail', $email)->first();
+        
         $data_id  = [];
         foreach ($director->Filial as $value) {
             array_push($data_id, $value->id);
