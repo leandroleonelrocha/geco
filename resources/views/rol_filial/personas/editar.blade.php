@@ -108,7 +108,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.telefonos')</label>
-								<button class="add_input_telefono btn-xs btn-success">+</button>	
+								<button class="add_input_telefono btn btn-success">+</button>	
 								<div class="input_fields_telefono">
 									@foreach ($telefono as $t)
 										<input type="text" name="telefono[]" class="form-control" value="{{$t->telefono}}">
@@ -118,7 +118,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>E-Mails</label>
-								<button class="add_input_mail btn-xs btn-success"">+</button>	
+								<button class="add_input_mail btn btn-success"">+</button>	
 								<div class="input_fields_wrap">
 									@foreach ($mail as $m)
 										<input type="text" name="mail[]" class="form-control" value="{{$m->mail}}">
