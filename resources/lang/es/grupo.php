@@ -14,7 +14,7 @@ return [
 
     'carreras'=>'Carreras',
     'cursos'=>'Cursos',
-
+    'personasi' => 'Personas Inscriptas',
     'mañana'=>'Mañana',
     'tarde'=>'Tarde',
     'noche'=>'Noche',

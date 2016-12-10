@@ -8,7 +8,7 @@ return [
     'descripcion'=>'Description',
     'matricula'=>'Enrollments',
     'carrerasycursos'=>'Careers and Courses',
-
+    'personasi' => 'People registered',
     'seleccioncyc'=>'Select a career or course',
 
     'carreras'=>'Careers',

@@ -35,7 +35,6 @@ class EditarPerfilFilialRequest extends Request
             'direccion' => 'required',
             'localidad' => 'required',
             'codigo_postal' => 'required',
-            'telefono' => 'required',
             'mail' => 'required',
         ];
 

@@ -17,7 +17,7 @@
                 <div class="box-header">
                   <div class="box-header with-border">
                   <i class="fa fa-share-alt"></i>
-                  <h3 class="box-title">{{ $clase->Grupo->descripcion }} ({{$grupo_matricula->count()}} personas inscriptas)</h3>
+                  <h3 class="box-title">{{ $clase->Grupo->descripcion }} ({{$grupo_matricula->count()}} @lang('grupo.personasi'))</h3>
                   
                 </div>
 

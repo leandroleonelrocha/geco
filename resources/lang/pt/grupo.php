@@ -9,7 +9,7 @@ return [
     'carrerasycursos'=>'Carreiras e cursos',
 
     'seleccioncyc'=>'Selecione uma carreira ou curso',
-
+    'personasi' => 'Pessoas Inscritas',
     'carreras'=>'Carreiras',
     'cursos'=>'Cursos',
 
