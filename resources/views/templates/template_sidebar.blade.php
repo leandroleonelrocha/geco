@@ -1,6 +1,7 @@
-<aside class="main-sidebar">
+<aside class="main-sidebar ">
+  <div class="slimScrollDiv">
+  <section class="sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
           <!-- Sidebar user panel -->
         
           <ul id="Defaultses" class="sidebar-menu"> 
@@ -250,5 +251,6 @@
         </section>
 
         <!-- /.sidebar -->
+        </div>
       </aside>
    

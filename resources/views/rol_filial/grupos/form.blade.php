@@ -95,9 +95,9 @@
         </div>
 
 
-
          <button class="add_field_button btn btn-primary">@lang('grupo.agregarotrodia')</button><br>
             
+            @if(empty($model))
             <div class="row input_fields_wrap">
                 <div class="form-group">
                     <div class="col-xs-6">
@@ -124,6 +124,40 @@
 
                 </div>
             </div>
+            @else
+
+            <div class="row input_fields_wrap">
+                @foreach($model->GrupoHorario as $horario)
+              
+                <div class="form-group">
+                    <div class="col-xs-6">
+                    <label> Dia </label>
+                    <select name="dia[]" class="form-control">
+                       
+                        <option <?php if ($horario->dia == 'Lunes' )  echo 'selected' ; ?>  value="1" > @lang('grupo.lunes')</option>
+                        <option <?php if ($horario->dia == 'Martes' ) echo 'selected' ; ?>  value="2"> @lang('grupo.martes')</option>
+                        <option  <?php if ($horario->dia == 'Miercoles' ) echo 'selected' ; ?>  value="3"> @lang('grupo.miercoles')</option>
+                        <option  <?php if ($horario->dia == 'Jueves' ) echo 'selected' ; ?>  value="4"> @lang('grupo.jueves')</option>
+                        <option  <?php if ($horario->dia == 'Viernes' ) echo 'selected' ; ?>  value="5"> @lang('grupo.viernes')</option>
+                        <option  <?php if ($horario->dia == 'Sabado' ) echo 'selected' ; ?>  value="6"> @lang('grupo.sabados')</option>
+                     </select>
+                    </div>
+
+                  <div class="col-xs-3">
+                   <label> @lang('grupo.horacomienzo') </label>
+                    <input class="form-control" name="horario_desde[]" type="time" value="{{$horario->horario_desde}}" >
+                  </div>
+
+                  <div class="col-xs-3">
+                   <label> @lang('grupo.horafin') </label>
+                    <input class="form-control" name="horario_hasta[]" type="time" value="{{$horario->horario_hasta}}" >
+                  </div>
+
+                </div>
+                @endforeach
+            </div>
+
+            @endif
         
     </div><!-- /.box-body -->
 
