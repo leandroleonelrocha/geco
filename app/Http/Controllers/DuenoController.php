@@ -17,6 +17,7 @@ use App\Entities\TipoDocumento;
 use App\Entities\Filial;
 use App\Entities\DirectorTelfono;
 use App\Entities\Persona;
+use Mail;
 
 class DuenoController extends Controller
 {
