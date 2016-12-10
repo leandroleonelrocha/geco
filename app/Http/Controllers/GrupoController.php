@@ -15,6 +15,7 @@ use App\Entities\Clase;
 use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
 use App\Entities\GrupoHorario;
+use App\Http\Requests\CrearNuevoGrupoRequest;
 
 
 class GrupoController extends Controller
@@ -39,13 +40,8 @@ class GrupoController extends Controller
 		
 	}	
 
-<<<<<<< HEAD
-	public function index()
-	{
-
-=======
 	public function index(){
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
+
 		$grupos = $this->grupoRepo->allEnable();
 		return view('rol_filial.grupos.index', compact('grupos'));
 	}
@@ -68,7 +64,7 @@ class GrupoController extends Controller
 	}
 
 
-	public function postAdd(Request $request){
+	public function postAdd(CrearNuevoGrupoRequest $request){
         $data = $request->all();
         $array = explode("-", $request->get('fecha'));
 		$carrearas_cursos = explode(';',$request->carreras_cursos);
@@ -135,18 +131,7 @@ class GrupoController extends Controller
         return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
     }
 
-<<<<<<< HEAD
-	public function postEdit($id, Request $request)
-	{
-		$model = $this->grupoRepo->find($id);
-		
-		$data = $request->all();
-		$array = explode("-", $request->get('fecha'));
-	
-		$data['fecha_inicio'] = date("Y-m-d", strtotime($array[0]));
-		$data['fecha_fin'] = date("Y-m-d", strtotime($array[1]));
-=======
-	public function postEdit($id, Request $request){
+	public function postEdit($id, CrearNuevoGrupoRequest $request){
 		$model 					= $this->grupoRepo->find($id);
 		$data 					= $request->all();
 		$array 					= explode("-", $request->get('fecha'));
@@ -210,7 +195,6 @@ class GrupoController extends Controller
 				$contador ++;
 			}
 		}
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 
 		$data['filial_id'] = session('usuario')['entidad_id'];
 

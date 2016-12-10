@@ -12,12 +12,8 @@ return [
     'carrera'       => 'Careers',
     'materia'       => 'Matter',
     'grupo'         => 'Groups',
-<<<<<<< HEAD
     'examen'        => 'Exams',
-=======
     'clases'        => 'Classes',
-    'examen'        => 'Tests',
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
     'asesor'        => 'Advisors',
     'docente'       => 'Teachers',
     'estadistica'   => 'Statistics',

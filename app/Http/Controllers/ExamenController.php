@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -13,7 +12,6 @@ use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\MateriaRepo;
-
 class ExamenController extends Controller
 {
 	protected $examenRepo;
@@ -23,7 +21,6 @@ class ExamenController extends Controller
 	protected $grupoRepo;
 	protected $carreraRepo;
 	protected $materiaRepo;
-
 	public function __construct(ExamenRepo $examenRepo, ExamenPermisosRepo $examenPermisosRepo, MatriculaRepo $matriculaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo){
 		
 		$this->examenRepo = $examenRepo;
@@ -39,7 +36,6 @@ class ExamenController extends Controller
 		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->where('nro_acta', '!=', 99999)->get();
 		return view('rol_filial.examenes.lista', compact('examenes'));
 	}
-
 	public function nuevo(){
 		//matriculaspermisos
 		//Docentes
@@ -49,7 +45,6 @@ class ExamenController extends Controller
 		$docentes = $this->docenteRepo->all()->lists('full_name','id');
 		return view('rol_filial.examenes.form', compact('examenes', 'grupos', 'docentes'));
 	}
-
 	public function nuevo_post(Request $request)
 	{
  		
@@ -59,7 +54,6 @@ class ExamenController extends Controller
  		if(count($this->examenRepo->all()) > 0)
  		{
  			$ultimo = $this->examenRepo->all()->last()->nro_acta + 1;
-
  		}else{
  			$ultimo = 1000;
  		}	
@@ -69,27 +63,21 @@ class ExamenController extends Controller
         	$data['matricula_id'] = $request->matricula[$i];
             $data['nota'] = $request->nota[$i];
            	$this->examenRepo->create($data);
-
         }
 		//$this->examenPermisosRepo->create($data);
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen creado correctamente.');
 	}
-
 	public function editar(Request $request, $id = null)
 	{
 		
 		$model = $this->examenRepo->find($id);
-
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'persona_id');
 		$grupos 	= $this->grupoRepo->all()->lists('descripcion', 'id');
 		$carreras 	= $this->carreraRepo->all()->lists('nombre', 'id');
 		$materias 	= $this->materiaRepo->all()->lists('nombre', 'id');
 		$docentes 	= $this->docenteRepo->all()->lists('full_name', 'id');
-
 		return view('rol_filial.examenes.form',compact('matriculas', 'grupos', 'carreras', 'materias', 'docentes','model'));
-
 	}
-
 	public function editar_post(Request $request ,$id = null)
 	{
 		
@@ -104,29 +92,19 @@ class ExamenController extends Controller
 		$this->examenPermisosRepo->edit($examenPermisos, $data);
 		*/
 		return redirect()->route('filial.examenes')->with('msg_ok', 'Examen editado correctamente.');		
-
 	}
-
 	public function grupos_examenes(Request $request){
         $grupo_id = $request->get('grupo_id');
         $grupo = $this->grupoRepo->find($grupo_id);
-
        	if($grupo->curso_id != null)
        	{
        		$matriculas = $grupo->Matricula;
        		 return response()->json(array('grupo'=>$grupo,'matriculas'=>$matriculas));
        	}else{
-<<<<<<< HEAD
-		       	$carrera = $grupo->Carrera;
-		       	$materias = $grupo->Carrera->Materia;
-		        $matriculas = $grupo->Matricula;
-=======
        	$carrera = $grupo->Carrera;
        	// $materias = $grupo->Carrera->Materia;
        	$materia 	= $grupo->Materia;
         $matriculas = $grupo->Matricula;
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
-
         foreach ($matriculas as $matricula) {
         	$personas[] = $matricula->Persona;
         }
@@ -134,14 +112,12 @@ class ExamenController extends Controller
         return response()->json(array('grupo'=>$grupo, 'carrera'=>$carrera,'materia'=>$materia,'matriculas'=>$matriculas,'personas'=>$personas));
     	}
     }
-
     public function detalles(Request $request, $nro_acta)
     {
     	$examenes = Examen::where('nro_acta', $nro_acta)->get();
     	foreach ($examenes as $examen) {
     		$recuperartorios[] = $this->examenRepo->allRecuperatorio($examen->id);
     	}
-
     	$max = 0;
 		for ($i=0; $i < count($recuperartorios); $i++) {
 			foreach ($recuperartorios[$i] as $recuperartorio) {
@@ -153,15 +129,11 @@ class ExamenController extends Controller
     	
     	return view ('rol_filial.examenes.detalles', compact('examenes','recuperartorios', 'maxNota'));
     }
-<<<<<<< HEAD
-=======
-
     public function recuperartorio($id){
     	$examen 	= $this->examenRepo->find($id);
 		$docentes 	= $this->docenteRepo->all()->lists('full_name','id');
     	return view ('rol_filial.examenes.recuperatorio', compact('examen','docentes'));
     }
-
     public function recuperartorio_post(Request $request){
     	$data 				= $request->all();
     	$materia 			= $this->materiaRepo->find($data['materia_id']);
@@ -172,5 +144,4 @@ class ExamenController extends Controller
     	else
     		return redirect()->route('filial.examenes')->with('msg_error', 'El recuperatorio no ha podido ser creado.');
     }
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 }

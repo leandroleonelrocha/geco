@@ -13,6 +13,8 @@ return [
 
    	'contacto'=>'Entre em contato conosco',
 
+	'telefono'=>'Telefone',
+
     'titulof'=>'Filiales da mesma cadeia',
     'titulod'=>'Filiales diretor',
 ];

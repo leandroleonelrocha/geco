@@ -11,49 +11,49 @@ return [
   	'datosmatricula'=>'Datos de matrícula',
    	'datospersonales'=>'Datos personales',
 
-   	'cursos'=>'Cursos',
-   	'carreras'=>'Carreras',
-	'carrerasycursos'=>'Carreras y cursos',
+    'cursos'=>'Cursos',
+    'carreras'=>'Carreras',
+    'carrerasycursos'=>'Carreras y cursos',
 
-	'grupos'=>'Grupos',
+    'grupos'=>'Grupos',
 
-	'grupost'=>'Para seleccionar más de un grupo',
+    'grupost'=>'Para seleccionar más de un grupo',
 
-	'plandepagost'=>'A continuación cargue cada uno de los pagos que conformarán el plan',
+    'plandepagost'=>'A continuación cargue cada uno de los pagos que conformarán el plan',
 
-	'plandepagos'=>'Plan de pagos',
-	'numerodepago'=>'Número de pago',
-	'fechavencimiento'=>'Fecha de vencimiento',
-	'montooriginal'=>'Monto original',
+    'plandepagos'=>'Plan de pagos',
+    'numerodepago'=>'Número de pago',
+    'fechavencimiento'=>'Fecha de vencimiento',
+    'montooriginal'=>'Monto original',
 
-	'montoapagar'=>'Monto a pagar',
+    'montoapagar'=>'Monto a pagar',
 
-	'montoactual'=>'Monto actual',
+    'montoactual'=>'Monto actual',
 
-	'abono'=>'Abonó',
+    'abono'=>'Abonó',
 
 
-	'descuento'=>'Descuento',
-	'recargo'=>'Recargo',
-	'descripcion'=>'Descripción',
+    'descuento'=>'Descuento',
+    'recargo'=>'Recargo',
+    'descripcion'=>'Descripción',
 
-	'agregarnuevopago'=>'Agregar nuevo pago',
+    'agregarnuevopago'=>'Agregar nuevo pago',
 
-	'fechaalta'=>'Fecha alta',
-	'filialalta'=>'Filial alta',
-	'asesoralta'=>'Asesor alta',
-	'estado'=>'Estado',
+    'fechaalta'=>'Fecha alta',
+    'filialalta'=>'Filial alta',
+    'asesoralta'=>'Asesor alta',
+    'estado'=>'Estado',
 
     'listadopago' => 'Listado de pagos',
     'nro' => 'Nro',
     'actual' => 'Actual',
-   	'vencimiento' => 'Vencimiento',
-   	'pago' => 'Pago',
-   	'filial' => 'Filial',
+    'vencimiento' => 'Vencimiento',
+    'pago' => 'Pago',
+    'filial' => 'Filial',
 
-   	'actualizarpago' => 'Actualizar pago',
+    'actualizarpago' => 'Actualizar pago',
 
-   	'verpagos' => 'Ver pagos',
+    'verpagos' => 'Ver pagos',
 
 
 
@@ -75,7 +75,6 @@ return [
     'guardar' => 'Guardar',
     'modificar' => 'Modificar',
     'actualizar' => 'Actualizar',
-
-
+    'verrecibos' => 'Ver recibos',
  
 ];

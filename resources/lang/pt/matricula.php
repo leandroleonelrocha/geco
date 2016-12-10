@@ -69,5 +69,6 @@ return [
     'guardar' => 'Mudança',
     'modificar' => 'Mudança',
     'actualizar' => 'Atualizar',
+    'verrecibos' => 'Ver recibos',
 
 ];

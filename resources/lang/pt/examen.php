@@ -4,12 +4,15 @@ return [
     'listadoexamen' => 'Lista de Exame',
     'matricula'=>'Inscrição',
     'nombre'=>'Nome',
-    'matricula'=>'Nota',
+    'nota'=>'Nota',
     'recupatorio'=>'Recuperatorio',
 
     'seleccionemateria' => 'Selecionar Matéria',
 
     'materia' => 'Matéria',
+
+    'docente' => 'Professor',
+    'persona' => 'Pessoa',
      
     'nuevaacta' => 'Nuevo Certidão',
     'listadoacta' => 'Lista de Certidão',

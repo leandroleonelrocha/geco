@@ -54,21 +54,6 @@
 							</div>
 
 							<div class="col-md-6 form-group">
-								<label>@lang('persona.telefonos')</label>
-								<button class="add_input_telefono btn-xs btn-success">+</button>	
-								<div class="input_fields_telefono">
-									{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
-								</div>
-							</div>
-
-							<div class="col-md-6 form-group">
-								<label>E-Mails</label>
-								<button class="add_input_mail btn-xs btn-success"">+</button>	
-								<div class="input_fields_wrap">
-							   		{!! Form::email('mail[]',null,array('class'=>'form-control')) !!}
-								</div>	
-							</div>
-							<div class="col-md-6 form-group">
 								<label>@lang('persona.estadocivil')</label>
 								{!! Form::text('estado_civil',null,array('class'=>'form-control')) !!}
 							</div>
@@ -78,19 +63,11 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computacion')</label>
-<<<<<<< HEAD
-								<div>{!! Form::checkbox('estudio_computacion', '1') !!} @lang('persona.si')</div>
+								<div>{!! Form::checkbox('estudio_computacion', '1', null, array('class'=>'minimal')) !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.computadora')</label>
-								<div>{!! Form::checkbox('posee_computadora', '1') !!} @lang('persona.si')</div>
-=======
-								<div>{!! Form::checkbox('estudio_computacion', '1', null, array('class'=>'minimal')) !!} Si</div>
-							</div>
-							<div class="col-md-6 form-group">
-								<label>@lang('persona.computadora')</label>
-								<div>{!! Form::checkbox('posee_computadora', '1', null, array('class'=>'minimal')) !!} Si</div>
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
+								<div>{!! Form::checkbox('posee_computadora', '1', null, array('class'=>'minimal')) !!} @lang('persona.si')</div>
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.disponibilidad')</label>
@@ -111,6 +88,23 @@
 								<label>@lang('persona.aclaraciones')</label>
 								{!! Form::textarea('aclaraciones',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
+							
+							<div class="col-md-6 form-group">
+								<label>@lang('persona.telefonos')</label>
+								<button class="add_input_telefono btn btn-success">+</button>	
+								<div class="input_fields_telefono">
+									<input type="text" name="telefono[]" class="form-control">
+								</div>
+							</div>
+
+							<div class="col-md-6 form-group">
+								<label>E-Mails</label>
+								<button class="add_input_mail btn btn-success"">+</button>	
+								<div class="input_fields_wrap">
+							   		<input type="text" name="mail[]" class="form-control">
+								</div>	
+							</div>
+
 			              	<div class="col-xs-12">
 			                	<h4 class="box-title text-center">@lang('preinforme.datospreinforme')</h4>
 			              	</div>

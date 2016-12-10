@@ -73,5 +73,5 @@ return [
     'guardar' => 'Save',
     'modificar' => 'Edit',
     'actualzar' => 'Update',
-
+    'verrecibos' => 'View receipts',
 ];

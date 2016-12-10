@@ -18,6 +18,8 @@ return [
 
    	'contacto'=>'Contact us',
 
+    'telefono'=>'Telephone',
+
     'titulof'=>'Subsidiaries of the chain itself',
     'titulod'=>'The directors affiliates',
 ];

@@ -35,12 +35,12 @@ class CrearNuevoDocenteRequest extends Request
     public function messages()
     {
         return [
-            'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'El número de documento es requerido',  
-            'nro_documento.unique'=> 'El número de documento ya está en uso', 
-            'nro_documento.numeric'=> 'El número de documento es numérico', 
-            'apellidos.required' => 'El nombre es requerido',
-            'nombres.required' => 'El apellido es requerido',  
+            'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
+            'nro_documento.required' => 'El número de documento es requerido.',  
+            'nro_documento.unique'=> 'El número de documento ya está en uso.', 
+            'nro_documento.numeric'=> 'El número de documento es numérico.', 
+            'apellidos.required' => 'El nombre es requerido.',
+            'nombres.required' => 'El apellido es requerido.',  
         ];
     }
 }

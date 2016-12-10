@@ -33,7 +33,7 @@
 							<div class="col-md-3 form-group">
 	 				         <label>@lang('curso.taller')</label>
 		                            {!!Form::hidden('taller', '0') !!}
-		                            {!! Form::checkbox('taller','1')!!}
+		                            {!! Form::checkbox('taller','1',$curso->taller, array('class'=>'minimal'))!!}
 							</div>
 							<div class="box-footer col-xs-12">
 							<button type="submit" class="btn btn-success">@lang('curso.guardar') </button>

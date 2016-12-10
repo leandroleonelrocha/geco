@@ -32,9 +32,9 @@ class CrearNuevoCursoRequest extends Request
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre es requerido',
-            'nombre.unique'=> 'El nombre del curso ya está en uso' 
-            'duracion.required' => 'La duración es requerida',
+            'nombre.required' => 'El nombre es requerido.',
+            'nombre.unique'=> 'El nombre del curso ya está en uso.' 
+            'duracion.required' => 'La duración es requerida.',
         ];
     }
 }

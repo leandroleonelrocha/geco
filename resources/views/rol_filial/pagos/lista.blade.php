@@ -60,7 +60,7 @@
 							<?php
 								}
 							?>
-								<a href="{{route('filial.recibos',$pago->id)}}" title="Ver Recibos"><i class="btn-xs btn-primary glyphicon glyphicon-list-alt"></i></a>
+								<a href="{{route('filial.recibos',$pago->id)}}" title="@lang('matricula.verrecibos')"><i class="btn btn-warning glyphicon glyphicon-list-alt"></i></a>
 							</td>
 						</tr>
 						@endforeach

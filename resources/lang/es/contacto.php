@@ -17,6 +17,8 @@ return [
 
    	'contacto'=>'Contáctenos',
 
+    'telefono'=>'Teléfono',
+
     'titulof'=>'Filiales de la misma cadena',
     'titulod'=>'Filiales del director',
 

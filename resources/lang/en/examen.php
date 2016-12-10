@@ -5,12 +5,15 @@ return [
     'listadoexamen' => 'Exam List',
     'matricula'=>'Enrollments',
     'nombre'=>'Name',
-    'matricula'=>'Nota',
+    'nota'=>'Note',
     'recupatorio'=>'Recuperative',
 
     'seleccionemateria' => 'Select Matter',
 
     'materia' => 'Matter',
+
+    'docente' => 'Teachar',
+    'persona' => 'Person',
      
     'nuevaacta' => 'Nueva Expedition',
     'listadoacta' => 'Expedition Listing',

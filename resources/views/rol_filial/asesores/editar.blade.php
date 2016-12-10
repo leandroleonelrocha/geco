@@ -43,7 +43,7 @@
 								<button class="add_input_telefono btn btn-success">+</button>	
 								<div class="input_fields_telefono">
 								@foreach ($telefono as $t)
-									{!! Form::text('telefono[]', $t->telefono, array('class'=>'form-control')) !!}
+									<input type="text" name="telefono[]" class="form-control" value="{{$t->telefono}}">
 								@endforeach
 								</div>
 							</div>
@@ -53,7 +53,7 @@
 								<button class="add_input_mail btn btn-success"">+</button>	
 								<div class="input_fields_wrap">
 				   					@foreach ($mail as $m)
-										{!! Form::email('mail[]',$m->mail , array('class'=>'form-control')) !!}
+										<input type="text" name="mail[]" class="form-control" value="{{$m->mail}}">
 									@endforeach
 								</div>	
 							</div>

@@ -31,8 +31,8 @@ class EditarCursoRequest extends Request
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre es requerido',
-            'duracion.required' => 'La duración es requerida',
+            'nombre.required' => 'El nombre es requerido.',
+            'duracion.required' => 'La duración es requerida.',
         ];
     }
 

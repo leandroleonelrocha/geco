@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 use App\Http\Requests\Request;
 
-class CrearNuevaCarreraRequest extends Request
+class CrearNuevoGrupoRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,18 +23,17 @@ class CrearNuevaCarreraRequest extends Request
     public function rules()
     {
         return [
-            'nombre' => 'required',
-            'duracion' => 'required',
-            'nombre' => 'required|unique:carrera,nombre'
+            'fecha'=>'required',
+
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre es requerido.',
-            'duracion.required' => 'La duración es requerida.',
-            'nombre.unique'=> 'El nombre de la carrera ya está en uso.' 
+            'fecha.required' => 'El rango de fecha es requerida.',
+
         ];
     }
+
 }

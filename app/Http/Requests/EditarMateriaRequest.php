@@ -32,8 +32,8 @@ class EditarMateriaRequest extends Request
     public function messages()
     {
         return [
-            'carrera_id' => 'Seleccione una carrera',
-            'nombre.required' => 'El nombre es requerido',
+            'carrera_id' => 'Seleccione una carrera.',
+            'nombre.required' => 'El nombre es requerido.',
         ];
     }
 

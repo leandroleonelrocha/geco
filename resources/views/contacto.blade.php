@@ -1,44 +1,23 @@
 @extends('template')
-
 @section('content')
-
 	<div class="row">
 		<div class="col-xs-12">
 			<h2>@lang('contacto.contacto')</h2>
-
 			<div class="box">
 			
                 <div class="box-body box-profile">
-
-                  <img class="profile-user-img img-responsive img-circle" height="400" width="400"  src="{{asset('img/whiteoutteam.png')}}" alt="User profile picture">
+                  <img class="profile-user-img img-responsive img-circle" height="600" width="600"  src="{{asset('img/whiteoutteam.png')}}" alt="User profile picture">
                   <h3 class="profile-username text-center">The Whiteout Team</h3>
                   <p class="text-muted text-center">@lang('contacto.soporte')</p>
-
                   <p class="text-muted text-center">
-                  <strong><i class="fa fa-book margin-r-5"></i>  Teléfono</strong>
+                  <strong><i class="fa fa-book margin-r-5"></i>  @lang('contacto.telefono')</strong>
                   
                   	112345679
                   </p>
-
-<<<<<<< HEAD
-				<div class="box-body">
-					<div class="row">
-			  			<div class= "col-md-12">
-				    		<div class="thumbnail">
-				    						
-								<h2>@lang('contacto.soporte')</h2>
-								<h3>The Whiteout Team</h3>
-								<p>Tel:1132145678</p>
-					
-				      			<img src="{{asset('img/whiteoutteam.png')}}" height="200" width="200" class="img-circle">
-								<?php
-=======
                   <hr>
                   <?php
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 	    				    	$s= (session('usuario')['rol_id']);
-
-   								if ($s==4 || $s==2) {
+   								if ($s===4 || $s==2) {
        							?>
 								<table id="example1" class="table table-bordered table-striped">
 								<h4><strong>@lang('contacto.titulof')</strong></h4>
@@ -66,19 +45,15 @@
 						                     	@foreach($f->Director->DirectorTelefono as $directorTelefono)
 									            		{{$directorTelefono["telefono"]}}<br>
 								            	@endforeach</td>
-
 					                     		<td>{{ $f->Director->mail}}</td>       
-
 										    </tr>
 									    @endforeach
-
 				    				</tbody>
 							    </table>
 						        <?php
 						         }
 						         else{
 				              	?>
-
 								<table id="example1" class="table table-bordered table-striped">
 								<h4><strong>@lang('contacto.titulod')</strong></h4>
 									<thead> <tr>
@@ -97,20 +72,16 @@
 									            		{{$telefono->telefono}}<br>
 								            	@endforeach</td>
 								            	<td>{{ $f->mail}}</td>     
-
 										    </tr>
 									    @endforeach
-
 				    				</tbody>
 							    </table>
 						        <?php
 				               	
 				              	}
 					            ?>
-
                 </div><!-- /.box-body -->
            
-
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->

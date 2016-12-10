@@ -32,9 +32,9 @@ class CrearNuevaMateriaRequest extends Request
     public function messages()
     {
         return [
-            'carrera_id' => 'Seleccione una carrera',
-            'nombre.required' => 'El nombre es requerido',
-            'nombre.unique'=> 'El nombre de la materia ya está en uso', 
+            'carrera_id' => 'Seleccione una carrera.',
+            'nombre.required' => 'El nombre es requerido.',
+            'nombre.unique'=> 'El nombre de la materia ya está en uso.', 
         ];
     }
 

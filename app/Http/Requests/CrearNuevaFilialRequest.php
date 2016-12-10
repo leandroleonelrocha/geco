@@ -29,29 +29,39 @@ class CrearNuevaFilialRequest extends Request
      */
     public function rules()
     {
-        return [
+        $rules= [
             'nombre' => 'required',
             'direccion' => 'required',
             'localidad' => 'required',
             'codigo_postal' => 'required',
             'nombre' => 'required|unique:filial,nombre',
            	'director_id' => 'required',
-            'telefono' => 'required',
-           	'mail' => 'required',
+            'mail' => 'required',
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $rules['telefono.' . $index] = 'required';
+        }
+        return $rules;
     }
 
     public function messages()
     {
-        return [
-            'nombre.required' => 'El nombre es requerido',
-            'nombre.unique'=> 'El nombe de la filial ya está en uso',
-            'direccion.required' => 'La dirección es requerida',
-            'localidad.required' => 'La localidad es requerida',
-            'codigo_postal.required' => 'El CP es requerido',
-            'director_id.required' => 'Selecciona un director',
-            'telefono.required' => 'El teléfono es requerido',  
-            'mail.required' => 'El Mail es requerido',
+        $messages= [
+            'nombre.required' => 'El nombre es requerido.',
+            'nombre.unique'=> 'El nombe de la filial ya está en uso.',
+            'direccion.required' => 'La dirección es requerida.',
+            'localidad.required' => 'La localidad es requerida.',
+            'codigo_postal.required' => 'El CP es requerido.',
+            'director_id.required' => 'Selecciona un director.',
+            'mail.required' => 'El mail es requerido.',
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $messages['telefono.' . $index.'.required'] = 'Escriba almenos un teléfono.';
+        }
+        return $messages;
     }
 }

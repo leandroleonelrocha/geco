@@ -46,8 +46,7 @@ class AsesorController extends Controller {
   
     // Alta Asesor
     public function nuevo_post(CrearNuevoAsesorRequest $request){
-<<<<<<< HEAD
-        
+
         $data = $request->all(); // Obtengo todos los datos del formulario             
         // Corroboro que el asesor exista, si exite lo activa
         if ( $asesor = $this->asesorRepo->check($data['tipo_documento_id'],$data['nro_documento']) )
@@ -62,19 +61,9 @@ class AsesorController extends Controller {
                     
                     $mail['asesor_id'] = $asesor->id;
                     $mail['mail'] = $key;
-                    $this->asesorMailRepo->create($mail);
-                    
-=======
-       
-
-
-        $data = $request->all(); // Obtengo todos los datos del formulario
-                            
-                // Corroboro que el asesor exista, si exite lo activa
-                if ( $asesor = $this->asesorRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
-                        return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
+                    $this->asesorMailRepo->create($mail); 
                 }
+
                 foreach ($data['telefono'] as $key) {
                     
                     $telefono['asesor_id'] = $asesor->id;

@@ -74,13 +74,8 @@
 				
 
 						          	<td>
-<<<<<<< HEAD
 									<a href="{{route('filial.personas_editar',$p->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
 						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
-=======
-									<a href="{{route('filial.personas_editar',$p->id)}}"  title="Editar"><i class="btn-xs btn-success glyphicon glyphicon-pencil explicacion_editar"></i></a>
-						           	<a href="{{route('filial.personas_borrar',$p->id)}}" id="step_borrar"title="Eliminar" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash explicacion_borrar"></i></a></td>
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 								</tr>
 							@endforeach
 						</tbody>

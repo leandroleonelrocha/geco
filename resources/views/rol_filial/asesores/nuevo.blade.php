@@ -42,12 +42,7 @@
 								<label>@lang('asesor.telefonos')</label>
 								<button class="add_input_telefono btn btn-success">+</button>	
 								<div class="input_fields_telefono">
-<<<<<<< HEAD
-							<!-- 		{!! Form::text('telefono[]',null,array('class'=>'form-control')) !!} -->
 									<input type="text" name="telefono[]" class="form-control">
-=======
-									<input name="telefono[]" type="text" class="form-control">
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 								</div>
 							</div>
 
@@ -55,12 +50,7 @@
 								<label>@lang('asesor.mail')</label>
 								<button class="add_input_mail btn btn-success"">+</button>	
 								<div class="input_fields_wrap">
-<<<<<<< HEAD
-				<!-- 			   	{!! Form::email('mail[]',null,array('class'=>'form-control')) !!} -->
 									<input type="text" name="mail[]" class="form-control">
-=======
-							   		<input name="mail[]" type="text" class="form-control">
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 								</div>	
 							</div>
 		

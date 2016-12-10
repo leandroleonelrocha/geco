@@ -42,9 +42,9 @@
 
                             <div class="col-md-6 form-group">
                                 <label>@lang('filial.telefonos')</label>
-                                <button class="add_input_telefono btn-xs btn-success">+</button>   
+                                <button class="add_input_telefono btn btn-success">+</button>   
                                 <div class="input_fields_telefono">  
-                                    {!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}   
+                                    <input type="text" name="telefono[]" class="form-control"> 
                                 </div>
                             </div>
 

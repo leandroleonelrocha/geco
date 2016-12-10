@@ -28,21 +28,31 @@ class EditarDirectorRequest extends Request
             'nro_documento' => 'required|numeric',
             'apellidos' => 'required',
             'nombres' => 'required',
-            'telefono' => 'required',
             'mail' => 'required',
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $rules['telefono.' . $index] = 'required';
+        }
+        return $rules;
     }
 
     public function messages()
     {
         return [
-            'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'El número de documento es requerido',
+            'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
+            'nro_documento.required' => 'El número de documento es requerido.',
             'nro_documento.numeric'=> 'El número de documento es numérico',
-            'nombres.required' => 'El nombre es requerido',
-            'apellidos.required' => 'El apellido es requerido', 
-            'telefono.required' => 'El teléfono es requerido', 
-            'mail.required' => 'El mail es requerido', 
+            'nombres.required' => 'El nombre es requerido.',
+            'apellidos.required' => 'El apellido es requerido.',  
+            'mail.required' => 'El mail es requerido.', 
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $messages['telefono.' . $index.'.required'] = 'Escriba almenos un teléfono.';
+        }
+        return $messages;
     }
 }

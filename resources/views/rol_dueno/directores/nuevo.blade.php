@@ -33,7 +33,7 @@
                                 <label>@lang('director.telefonos')</label>
                                 <button class="add_input_telefono btn btn-success">+</button>   
                                 <div class="input_fields_telefono">
-                                    {!! Form::text('telefono[]',null,array('class'=>'form-control')) !!}
+                                    <input type="text" name="telefono[]" class="form-control">
                                 </div>
                             </div>
 

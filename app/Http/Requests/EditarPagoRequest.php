@@ -44,19 +44,19 @@ class EditarPagoRequest extends Request
     {
         return [
         
-            'vencimiento.required' => 'El vencimiento es requerido',
+            'vencimiento.required' => 'El vencimiento es requerido.',
 
-            'monto_original.required' => 'El monto original es requerido',
-            'monto_original.numeric'=> 'El monto original es numérico', 
-            'monto_original.max' => 'Escriba un monto original válido',
+            'monto_original.required' => 'El monto original es requerido.',
+            'monto_original.numeric'=> 'El monto original es numérico.', 
+            'monto_original.max' => 'Escriba un monto original válido.',
 
-            'descuento.required' => 'El descuento es requerido',
-            'descuento.numeric'=> 'El descuento es numérico', 
-            'descuento.max' => 'Escriba un descuento válido',
+            'descuento.required' => 'El descuento es requerido.',
+            'descuento.numeric'=> 'El descuento es numérico.', 
+            'descuento.max' => 'Escriba un descuento válido.',
 
-            'recargo.required' => 'El recargo es requerido',
-            'recargo.numeric'=> 'El recargo es numérico',
-            'recargo.max' => 'Escriba un recargo válido',
+            'recargo.required' => 'El recargo es requerido.',
+            'recargo.numeric'=> 'El recargo es numérico.',
+            'recargo.max' => 'Escriba un recargo válido.',
         ];
     }
 }

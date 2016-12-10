@@ -24,15 +24,11 @@
 				
 				<div class="lalocura col-xs-12" style="display: none">
 					<div class="form-group materia" >
-<<<<<<< HEAD
+
 			            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
 			            <select name="materia_id" class="form-control materia_id">
-			            <option>@lang('examen.seleccionemateria')</option>
-=======
-			            <label for="exampleInputEmail1">Materia</label>
-			            <select name="materia_id" class="form-control materia_id">
-			            <!-- <option>Seleccione materia</option> -->
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
+			       <!--      <option>@lang('examen.seleccionemateria')</option> -->
+
 			           	</select>
 			        </div>
 			        <div class="form-group materia" >

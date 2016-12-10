@@ -17,6 +17,7 @@ use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Requests\CrearNuevaMatriculaRequest;
+use App\Http\Requests\CrearNuevaPersonaRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;

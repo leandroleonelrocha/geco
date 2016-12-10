@@ -39,7 +39,7 @@ class LoginController extends Controller {
         'entidad_id'=>'1',
         'habilitado'=>'1'];
        */
-<<<<<<< HEAD
+
        // $cuentas = array(
        //              array(
        //              'id'          => 1,
@@ -89,65 +89,6 @@ class LoginController extends Controller {
        //   else
        //    $data = null;
        // }
-=======
-       $cuentas = array(
-                    array(
-                    'id'          => 1,
-                    'usuario'     => 'ferrari@dueño.com',
-                    'password'    => 1234,
-                    'rol_id'      => 2,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
-                    ),
-                    array(
-                    'id'          => 1,
-                    'usuario'     => 'director@director.com',
-                    'password'    => 1234,
-                    'rol_id'      => 3,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
-                    ),
-                    array(
-                    'id'          => 3,
-                    'usuario'     => 'filial@filial.com',
-                    'password'    => 1234,
-                    'rol_id'      => 4,
-                    'entidad_id'  => 3,
-                    'habilitado'  => 1,
-                    ),
-                    array(
-                    'id'          => 1,
-                    'usuario'     => 'filial2@filial.com',
-                    'password'    => 1234,
-                    'rol_id'      => 4,
-                    'entidad_id'  => 1,
-                    'habilitado'  => 1 
-                    )
-                    ,
-                    array(
-                    'id'          => 2,
-                    'usuario'     => 'filial3@filial.com',
-                    'password'    => 1234,
-                    'rol_id'      => 4,
-                    'entidad_id'  => 2,
-                    'habilitado'  => 0 
-                    )
-                  );
-
-       foreach ($cuentas as $cuenta) {
-         if ($request->usuario == $cuenta['usuario'] && $request->password == $cuenta['password']) {
-           $data['id']          = $cuenta['id'];
-           $data['usuario']     = $cuenta['usuario'];
-           $data['password']    = $cuenta['password'];
-           $data['rol_id']      = $cuenta['rol_id'];
-           $data['entidad_id']  = $cuenta['entidad_id'];
-           $data['habilitado']  = $cuenta['habilitado'];
-           break;
-         }
-         else
-          $data = null;
-       }
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 
 
       if ($data){

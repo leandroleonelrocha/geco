@@ -47,16 +47,16 @@ class CrearNuevoPagoRequest extends Request
     public function messages()
     {
         return [
-            'nro_pago.required' => 'El número de pago es requerido',
-            'nro_pago.numeric'=> 'El número de pago es numérico',
-            'nro_pago.numeric'=> 'Escriba un número de pago valido',
-            'nro_pago.unique'=> 'El número de pago ya está en uso', 
+            'nro_pago.required' => 'El número de pago es requerido.',
+            'nro_pago.numeric'=> 'El número de pago es numérico.',
+            'nro_pago.numeric'=> 'Escriba un número de pago valido.',
+            'nro_pago.unique'=> 'El número de pago ya está en uso.', 
 
-            'vencimiento.required' => 'El vencimiento es requerido',
+            'vencimiento.required' => 'El vencimiento es requerido.',
 
-            'monto_original.required' => 'El monto original es requerido',
-            'monto_original.numeric'=> 'El monto original es numérico', 
-            'monto_original.max' => 'Escriba un monto original válido',
+            'monto_original.required' => 'El monto original es requerido.',
+            'monto_original.numeric'=> 'El monto original es numérico.', 
+            'monto_original.max' => 'Escriba un monto original válido.',
 
             'descuento.required' => 'El descuento es requerido',
             'descuento.numeric'=> 'El descuento es numérico', 

@@ -21,6 +21,7 @@ use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\CursoRepo;
+use App\Http\Requests\CrearNuevaPersonaRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -122,7 +123,7 @@ class PreinformeController extends Controller {
     }
 
     // Alta de Preinforme y Persona Nueva
-    public function nuevaPersona_post(Request $request){
+    public function nuevaPersona_post(CrearNuevaPersonaRequest $request){
        
         $data                               = $request->all();
         // Datos Persona

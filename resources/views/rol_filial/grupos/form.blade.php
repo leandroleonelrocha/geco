@@ -10,7 +10,7 @@
         <div class="form-group">
             <label>@lang('grupo.carrerasycursos')</label>
             <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-            <option>@lang('grupo.seleccioncyc')</option>
+           <!--  <option>@lang('grupo.seleccioncyc')</option> -->
             <optgroup label=@lang('grupo.carreras')>
             @foreach($carreras as $carrera)
             <option value="carrera;{{$carrera->id}}" <?php if(!empty($model)){
@@ -47,7 +47,7 @@
         <div class="form-group">
             <label for="exampleInputEmail1">@lang('grupo.docente')</label>
             @if(empty($model))
-            {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control select2']) !!}
+            {!! Form::select('docente_id',( $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control select2']) !!}
             @else
             {!! Form::select('docente_id',['' => 'Seleccionar docente'] + $docentes->toArray() ,$model->Docente->id, ['id' => 'docente_id', 'class' => 'form-control select2']) !!}
             @endif
@@ -56,29 +56,18 @@
         <div class="form-group">
             <label>@lang('grupo.disponibilidad')</label>
             <div class="col-xs-12">
-<<<<<<< HEAD
-            {!! Form::checkbox('turno_manana', '1') !!} @lang('grupo.mañana')
+
+            {!! Form::checkbox('turno_manana', '1', null, array('class'=>'minimal')) !!} @lang('grupo.mañana')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_tarde', '1') !!} @lang('grupo.tarde')
+            {!! Form::checkbox('turno_tarde', '1', null, array('class'=>'minimal')) !!} @lang('grupo.tarde')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_noche', '1') !!} @lang('grupo.noche')
+            {!! Form::checkbox('turno_noche', '1', null, array('class'=>'minimal')) !!} @lang('grupo.noche')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('sabados', '1') !!} @lang('grupo.sabados')
-=======
-            {!! Form::checkbox('turno_manana', '1', null, array('class'=>'minimal')) !!} Ma&ntilde;ana
-            </div>
-            <div class="col-xs-12">
-            {!! Form::checkbox('turno_tarde', '1', null, array('class'=>'minimal')) !!} Tarde
-            </div>
-            <div class="col-xs-12">
-            {!! Form::checkbox('turno_noche', '1', null, array('class'=>'minimal')) !!} Noche
-            </div>
-            <div class="col-xs-12">
-            {!! Form::checkbox('sabados', '1', null, array('class'=>'minimal')) !!} S&aacute;bados
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
+            {!! Form::checkbox('sabados', '1', null, array('class'=>'minimal')) !!} @lang('grupo.sabados')
+
             </div>
         </div>
 

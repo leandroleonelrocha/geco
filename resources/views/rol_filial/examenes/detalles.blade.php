@@ -6,7 +6,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-<<<<<<< HEAD
+
 					<h3 class="box-title">@lang('examen.listadoexamen')</h3>
 					<div class="box-tools pull-right no-print">
 					
@@ -26,21 +26,6 @@
 						
 						</tr> 
 						</thead>
-=======
-					<h3 class="box-title">Listado de examenes</h3>
-					<div class="box-tools pull-right no-print">		
-					</div>
-				</div>
-				<div class="box-body">
-					<table id="example1" class="table table-bordered table-striped">
-						<thead><tr>
-							<th>Matricula</th>
-							<th>Nombre </th>
-							<th>Nota </th>
-							<th>Recuperatorio </th>
-							<th></th>
-						</tr></thead>
->>>>>>> 2abc0a207e526c52b9fddfdcf96b226ebd4603c9
 						<tbody>
 							<?php $count = 0; ?>
 						   @foreach($examenes as $examen)

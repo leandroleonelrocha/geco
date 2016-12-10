@@ -22,7 +22,7 @@ class CrearNuevoDirectorRequest extends Request
      */
     public function rules()
     {
-        return [
+        $rules= [
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
             'nro_documento' => 'required|unique:director,nro_documento',
@@ -30,21 +30,31 @@ class CrearNuevoDirectorRequest extends Request
             'apellidos' => 'required',
             'nombres' => 'required',
             'mail' => 'required',
-            'telefono' => 'required',
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $rules['telefono.' . $index] = 'required';
+        }
+        return $rules;
     }
 
     public function messages()
     {
-        return [
-            'tipo_documento_id.required' => 'Seleccione un tipo de documento',
-            'nro_documento.required' => 'El número de documento es requerido',
-            'nro_documento.unique'=> 'El número de documento ya está en uso', 
-            'nro_documento.numeric'=> 'El número de documento es numérico',
-            'nombres.required' => 'El nombre es requerido',
-            'apellidos.required' => 'El apellido es requerido', 
-            'mail.required' => 'El mail es requerido', 
-            'telefono.required' => 'El teléfono es requerido', 
+        $messages= [
+            'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
+            'nro_documento.required' => 'El número de documento es requerido.',
+            'nro_documento.unique'=> 'El número de documento ya está en uso.', 
+            'nro_documento.numeric'=> 'El número de documento es numérico.',
+            'nombres.required' => 'El nombre es requerido.',
+            'apellidos.required' => 'El apellido es requerido.', 
+            'mail.required' => 'El mail es requerido.', 
         ];
+
+        $nbr = count($this->input('telefono')) - 1;
+        foreach(range(0, $nbr) as $index) {
+            $messages['telefono.' . $index.'.required'] = 'Escriba almenos un teléfono.';
+        }
+        return $messages;
     }
 }

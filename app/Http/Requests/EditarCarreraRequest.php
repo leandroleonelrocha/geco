@@ -32,8 +32,8 @@ class EditarCarreraRequest extends Request
     {
         return [
 
-            'nombre.required' => 'El nombre es requerido',
-            'duracion.required' => 'La duración es requerida',
+            'nombre.required' => 'El nombre es requerido.',
+            'duracion.required' => 'La duración es requerida.',
         ];
     }
 
