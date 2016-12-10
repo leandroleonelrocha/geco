@@ -17,7 +17,7 @@ return [
 
      
     'nuevaacta' => 'Nueva acta',
-    'listadoacta' => 'Listado d Actas',
+    'listadoacta' => 'Listado de Actas',
     'numeroacta' => 'Número de Acta',
 
     'buscar' => 'Buscar',
