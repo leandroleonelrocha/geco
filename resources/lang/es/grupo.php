@@ -6,6 +6,7 @@ return [
     'nombre' => 'Nombre',
     'disponibilidad' => 'Disponibilidad',
     'descripcion'=>'Descripción',
+    'matricula'=>'matricula',
 
     'carrerasycursos'=>'Carreras y cursos',
 

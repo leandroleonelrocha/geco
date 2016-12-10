@@ -8,30 +8,30 @@
   <div class="small-box bg-yellow">
   <div class="inner">
   <h1>@if(isset($totalPersonas)){{$totalPersonas}}@endif</h1>
-  <p>Personas Inscriptas</p>
+  <p>@lang('estadistica.personasi')</p>
   </div>
   <div class="icon">
   <i class="ion ion-ios-people-outline"></i>
   </div>
-  <a href="#" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+  <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
   </div>
   </div>
   <div class="col-lg-6 col-xs-6">
   <div class="small-box bg-yellow">
   <div class="inner">
   <h1>@if(isset($totalAsesores)){{$totalAsesores}}@endif</h1>
-  <p>Asesores Registrados</p>
+  <p>@lang('estadistica.asesoresr')</p>
   </div>
   <div class="icon">
   <i class="ion ion-person-add"></i>
   </div>
-  <a href="#" class="small-box-footer">Más información <i class="fa fa-arrow-circle-right"></i></a>
+  <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
   </div>
   </div>
 </div>
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Ingrese una fecha y opción</h3>
+    <h3 class="box-title">@lang('estadistica.ingresefecha')</h3>
    </div>
   <div class="box-body">
    {!! Form::model(Request::all(), ['route'=> 'estadisticas.detalles', 'method'=>'post', 'class'=>'form-horizontal'] ) !!}

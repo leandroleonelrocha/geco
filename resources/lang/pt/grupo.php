@@ -5,7 +5,7 @@ return [
     'nombre' => 'Nome',
     'disponibilidad' => 'Disponibilidade',
     'descripcion'=>'Descrição',
-
+    'matricula'=>'Inscrição',
     'carrerasycursos'=>'Carreiras e cursos',
 
     'seleccioncyc'=>'Selecione uma carreira ou curso',

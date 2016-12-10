@@ -6,7 +6,7 @@ return [
     'nombre' => 'Name',
     'disponibilidad' => 'Availability',
     'descripcion'=>'Description',
-
+    'matricula'=>'Enrollments',
     'carrerasycursos'=>'Careers and Courses',
 
     'seleccioncyc'=>'Select a career or course',

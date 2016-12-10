@@ -89,8 +89,9 @@ class DocenteController extends Controller {
     //Calculo de horas  Docente
     public function calcularHoras($id){
 
-        $fecha1='1-11-26 00:00:00.000000';
+        $fecha1='1/11/26';
         $fecha2=date(("Y/m/d"));
+    
         $clases = $this->claseRepo->clasesDocente($id,$fecha1,$fecha2);
         $docente = $this->docenteRepo->find($id);
         $horasTotal=0;
@@ -102,7 +103,7 @@ class DocenteController extends Controller {
             $cantClases++;    
         }
 
-        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases'));  
+        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases','fecha2'));  
     }
 
     public function calcularHorasBusqueda(Request $request){

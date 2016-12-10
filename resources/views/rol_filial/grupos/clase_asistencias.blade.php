@@ -4,22 +4,22 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">Listado de grupos</h3>
+					<h3 class="box-title">@lang('grupo.listadogrupo')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> Nuevo grupo</a>
-						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> Ver clases</a>
+						<a href="{{route('grupos.nuevo')}}" class="btn btn-success text-white"> @lang('grupo.nuevogrupo')</a>
+						<a href="{{route('grupos.clases')}}" class="btn btn-success text-white"> @lang('grupo.verclases')</a>
 						
 					</div>
 				</div>
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead><tr>
-							<th>Matr&iacute;cula</th>
-							<th>Nombre</th>
-							<th>Apellido</th>
-							<th>Tipo de Documento</th>
-							<th>Nro de Documento</th>
-							<th>Asistencia</th>
+							<th>@lang('grupo.matricula')</th>
+							<th>@lang('persona.nombre')</th>
+							<th>@lang('persona.descripcion')</th>
+							<th>@lang('persona.descripcion')</th>
+							<th>@lang('persona.descripcion')</th>
+							<th>@lang('grupo.asistencia')</th>
 						</tr></thead>
 						<tbody>
 							@foreach($matriculas as $matricula)
