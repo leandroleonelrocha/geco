@@ -24,7 +24,7 @@ class CrearNuevaPersonaRequest extends Request
     {
         $rules= [
            // 'asesor_id' => 'required',
-            'tipo_documento_id' => 'required',
+            // 'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
             // 'nro_documento' => 'required|unique:persona,nro_documento',
             'nro_documento' => 'required|numeric',
@@ -56,7 +56,7 @@ class CrearNuevaPersonaRequest extends Request
     {
         $messages= [
             //  'asesor_id.required' => 'Seleccione un asesor',
-            'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
+            // 'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
             'nro_documento.required' => 'El número de documento es requerido.',
             // 'nro_documento.unique'=> 'El número de documento ya está en uso', 
             'nro_documento.numeric'=> 'El número de documento es numérico.', 

@@ -52,7 +52,7 @@ class PersonaController extends Controller {
     public function nuevo_post(CrearNuevaPersonaRequest $request){
        
     	$data = $request->all(); // Obtengo todos los datos del formulario
-        
+
         // Corroboro que la persona exista, si exite lo activa
         if ( $persona = $this->personaRepo->check($data['tipo_documento_id'],$data['nro_documento']) ) {
                 return redirect()->route('filial.personas')->with('msg_ok','La persona ha sida agregada con éxito');
