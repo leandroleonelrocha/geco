@@ -215,7 +215,6 @@ class GrupoController extends Controller
 	public function clases()
 	{
 		$filial = session('usuario')['entidad_id'];
-		
 		$grupos = $this->grupoRepo->all()->lists('full_name', 'id');
 		$docentes = $this->docenteRepo->all()->lists('full_name', 'id');
 		$events = $this->claseRepo->all();
@@ -226,7 +225,6 @@ class GrupoController extends Controller
 	public function nueva_clase(Request $request)
 	{
 		$data = $request->all();
-		
 		$this->claseRepo->create($data);
 		return redirect()->back()->with('msg_ok', 'Clase creada correctamente');
 		
@@ -246,10 +244,9 @@ class GrupoController extends Controller
 		$clase= $request->get('Event');
 
 		$id = $clase[0];
-		$fecha = $clase[1]; 
-		$model = $this->claseRepo->find($id);		
-		
-		$model->fecha = $fecha;
+		$fecha = explode(' ',$clase[1]);
+ 		$model = $this->claseRepo->find($id);
+		$model->fecha = $fecha[0];
 		$model->save();
 		if($model)
 				echo json_encode('La clase se ha editado correctamente.');
@@ -276,7 +273,7 @@ class GrupoController extends Controller
 	{
 		$clase = $this->claseRepo->find($data);
 		$grupo_matricula = GrupoMatricula::where('grupo_id', $clase->grupo_id)->get();
-		//$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();
+		
 		$clase_matricula = ClaseMatricula::where('clase_id', $clase->id)->get();		
      	$search = $this->claseMatriculaRepo;
      

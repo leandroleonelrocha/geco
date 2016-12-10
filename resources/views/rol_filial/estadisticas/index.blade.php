@@ -158,6 +158,7 @@ $(function () {
         });
 });
 $(".star_intro" ).click(function() {
+
     var texto ='¡Bienvenido al Tutorial de Estadística!';  
     <?php
         $array = [
@@ -165,11 +166,13 @@ $(".star_intro" ).click(function() {
             "#selectvalue"    =>  "Seleccione de que opción desea saber sus estadísticas",
           
             
+
         ];
     
     ?>
     startIntro(texto);
 });     
+
 </script>
 @include('partials.inicio_tutorial')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>

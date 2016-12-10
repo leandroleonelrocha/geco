@@ -122,7 +122,6 @@
                     <input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >
                   </div>
 
-
                 </div>
             </div>
         

@@ -16,10 +16,10 @@
 </div>
 
 @endsection
-
-@include('rol_filial.grupos.partials.nueva_clase_modal')
-@include('rol_filial.grupos.partials.editar_clase_modal')
-
+@section('modal')
+	@include('rol_filial.grupos.partials.nueva_clase_modal')
+	@include('rol_filial.grupos.partials.editar_clase_modal')
+@endsection
 
 @section('js')
 
@@ -40,6 +40,13 @@
 				right: 'month,agendaWeek,agendaDay,listWeek'
 
 			},
+			buttonText: {
+		          today:    'hoy', 
+		          month:    'mes',
+		          week:     'semana',
+		          day:      'dia',
+		          list:     'lista'
+		      },
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			selectable: true,
