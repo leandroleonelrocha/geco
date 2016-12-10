@@ -26,4 +26,5 @@ class Clase extends Entity {
     	 return $this->belongsTo(Docente::getClass());
     }
 	
+   
 }
