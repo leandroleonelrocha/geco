@@ -115,7 +115,8 @@
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('matricula.carrerasycursos')</label>
-								<select name="carreras_cursos" id="carreras_cursos" class="form-control">
+								<select name="carreras_cursos" id="cursos_carreras" class="form-control" data-url="{{route('filial.matriculas_grupos')}}">
+									<option value="">Seleccione una Carrera o Curso</option>
 									<optgroup label=@lang('matricula.carreras')>
 										@foreach($carreras as $carrera)
 											<option value="carrera;{{$carrera->id}}">{{$carrera->nombre}}</option>
@@ -131,7 +132,8 @@
 							<div class="col-md-12 form-group">
 								<label>@lang('matricula.grupos')</label>
 								<small>Ctrl + click @lang('matricula.grupost').</small>
-								{!! Form::select('grupo[]',$grupos->toArray(),null,array('id'=>'grupos', 'class' => 'form-control', 'multiple')) !!}
+								<select name="grupo[]" class="form-control select_grupo" multiple>
+					            </select>
 							</div>
 										<!-- ---------- Plan de Pagos ---------- -->
 							<div class="col-xs-12">

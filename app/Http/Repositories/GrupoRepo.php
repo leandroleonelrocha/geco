@@ -22,4 +22,12 @@ class GrupoRepo extends BaseRepo {
     public function allNuevo(){
         return Grupo::where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->where('nuevo', 1)->get();
     }
+
+    public function allGruposCarrera($id){
+        return $this->model->where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->where('carrera_id', $id)->get();
+    }
+
+    public function allGruposCurso($id){
+        return $this->model->where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->where('curso_id', $id)->get();
+    }
 }
