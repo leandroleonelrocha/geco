@@ -45,12 +45,31 @@ $(document).ready(function(){
     });
 
     // Bloquear Grupos según la carrera/curso elegido -- Datos de la Matrícula ~~ Alta Matrículas
-    function bloquearGrupos(){
-    	var cs = $('#carreras_cursos').val().split(';'); // cs -> Carrera/Curso Seleccionado
-    	// cs[0] = carrera/curso -- cs[1] = carrera_id/curso_id
-    	
-    }
-    // bloquearGrupos();
+    $("#cursos_carreras").change(function(){
+        var thiss = $(this).val(),
+            link = $("#cursos_carreras").data('url');
+        if (thiss == "") {
+            $(".select_grupo").empty();
+        }
+        else{
+            var tipo = thiss.split(';');
+            $.ajax({
+                url: link,
+                type: "POST",
+                data: {tipo: tipo[0], id: tipo[1]},
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(result){
+                   $(".select_grupo").empty();
+                   $.each(result, function(clave, valor) {
+                        $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.id+'</option>' );
+                   });
+                }
+            });
+        }
+            
+    });
 
     /* ------------------------- Agregar más E-mail y Teléfono ------------------------- */
     var max_fields      = 5; //maximum input boxes allowed

@@ -239,7 +239,11 @@ class MatriculaController extends Controller {
     // Realización de los pagos de la Matrícula
     public function actualizar($id){
         $matricula  = $this->matriculaRepo->find($id);
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+        if (isset($matricula->curso_id))
+            $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
+        else
+            $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
+        // $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
     }
 
@@ -336,5 +340,14 @@ class MatriculaController extends Controller {
             return Response::json(true,200);
         else
             return Response::json(false,200);
+    }
+
+    public function matriculas_grupos(Request $request){
+        if ($request->tipo == "carrera")
+            $grupos = $this->grupoRepo->allGruposCarrera($request->id);
+        else
+            $grupos = $this->grupoRepo->allGruposCurso($request->id);
+
+        return response()->json($grupos, 200);
     }
 }

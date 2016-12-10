@@ -260,6 +260,9 @@ class GrupoController extends Controller
     {
         $clase_id = $request->get('clase_id');
         $clase = $this->claseRepo->find($clase_id);
+        $grupo_matricula = GrupoMatricula::where('grupo_id', $clase->grupo_id)->count();
+        $clase->cantidad_personas = $grupo_matricula;
+        
         return response()->json($clase, 200);
  
     }

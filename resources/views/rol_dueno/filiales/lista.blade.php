@@ -39,8 +39,8 @@
 						            <td>{{ $f->Director->fullname}}</td>
 						           	<td>
 
-					           		<a href="{{route('dueño.filiales_editar',$f->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>	
-				           	   		<a href="{{route('dueño.filiales_borrar',$f->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar la filial?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+					           		<a href="{{route('dueño.filiales_editar',$f->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>	
+				           	   		<a href="{{route('dueño.filiales_borrar',$f->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar la filial?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>
 							    </tr>
 						    @endforeach
 					   	</tbody>

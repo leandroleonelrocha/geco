@@ -23,19 +23,16 @@
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('matricula.carrerasycursos')</label>
-								<select name="carreras_cursos" class="form-control">
-									<optgroup label=@lang('matricula.carreras')
+								<select name="carreras_cursos" id="cursos_carreras" class="form-control" data-url="{{route('filial.matriculas_grupos')}}">
+									<option value="">Seleccione una Carrera o Curso</option>
+									<optgroup label=@lang('matricula.carreras')>
 										@foreach($carreras as $carrera)
-											<option value="carrera;{{$carrera->id}}" <?php if($matricula->carrera_id == $carrera->id) echo 'selected' ?>>
-												{{$carrera->nombre}}
-											</option>
+											<option value="carrera;{{$carrera->id}}" <?php if($matricula->carrera_id == $carrera->id) echo 'selected' ?>>{{$carrera->nombre}}</option>
 										@endforeach
 									</optgroup>
-									<optgroup label="@lang('matricula.cursos')">
+									<optgroup label=@lang('matricula.cursos')>
 										@foreach($cursos as $curso)
-											<option value="curso;{{$curso->id}}" <?php if($matricula->curso_id == $curso->id) echo 'selected' ?>>
-												{{$curso->nombre}}
-											</option>
+											<option value="curso;{{$curso->id}}" <?php if($matricula->curso_id == $curso->id) echo 'selected' ?>>{{$curso->nombre}}</option>
 										@endforeach
 									</optgroup>
 								</select>

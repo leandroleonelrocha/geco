@@ -1,20 +1,4 @@
 @extends('template')
-@section('css')
-<style type="text/css">
-@-webkit-keyframes girando {
-  from { -webkit-transform: rotateY(0deg);    }
-  to   { -webkit-transform: rotateY(-360deg); }
-}
-
-	.girando {
-   -webkit-animation-name: girando;
-   -webkit-animation-timing-function: linear;
-   -webkit-animation-iteration-count: infinite;
-   -webkit-animation-duration: 3s;
-   -webkit-transform-style: preserve-3d;
-}
-</style>
-@endsection
 @section('content')
 							
 	<!-- <div class="alert alert-info alert-dismissable">
@@ -74,8 +58,8 @@
 				
 
 						          	<td>
-									<a href="{{route('filial.personas_editar',$p->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>
-						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('filial.personas_editar',$p->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>
+						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>
 								</tr>
 							@endforeach
 						</tbody>

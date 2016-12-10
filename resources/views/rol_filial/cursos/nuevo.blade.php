@@ -25,7 +25,7 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>@lang('curso.taller') {!! Form::checkbox('taller','1',null, array('class'=>'minimal'))!!}</label>
+                                <label>@lang('curso.taller') {!! Form::checkbox('taller','1',null, array('class'=>'flat-red'))!!}</label>
                             </div>
 
                             <div class="box-footer col-xs-12">

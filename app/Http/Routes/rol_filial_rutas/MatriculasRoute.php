@@ -87,3 +87,8 @@
 			'as'	=> 'filial.matriculas_pases_rechazar',
 			'uses'	=>	'MatriculaController@rechazar'
 		]);
+
+		Route::post('matriculas_grupos/',[
+			'as'	=> 'filial.matriculas_grupos',
+			'uses'	=>	'MatriculaController@matriculas_grupos'
+		]);
