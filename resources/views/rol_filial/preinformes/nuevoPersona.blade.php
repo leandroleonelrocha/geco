@@ -137,7 +137,7 @@
 							</div>
 							<div class="col-md-2 form-group">
 								<label>@lang('preinforme.ningunat')</label>
-								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna','class'=>'minimal')) !!}</div>
+								<div>{!! Form::checkbox('ninguna', '1',null,array('id'=>'ninguna')) !!}</div>
 							</div>
 							<div class="col-md-12 form-group">
 								<label>@lang('preinforme.otrost')</label>
