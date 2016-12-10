@@ -25,7 +25,7 @@ class CrearNuevaMateriaRequest extends Request
         return [
             'carrera_id'=>'required',
             'nombre' => 'required',
-            'nombre' => 'required|unique:materia,nombre'
+            'nombre' => 'required|unique:materia,nombre',
         ];
     }
 

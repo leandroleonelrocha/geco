@@ -17,7 +17,7 @@
                   <hr>
                   <?php
 	    				    	$s= (session('usuario')['rol_id']);
-   								if ($s===4 || $s==2) {
+   								if ($s==4 || $s==2) {
        							?>
 								<table id="example1" class="table table-bordered table-striped">
 								<h4><strong>@lang('contacto.titulof')</strong></h4>

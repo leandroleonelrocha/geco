@@ -59,7 +59,7 @@ class EditarPersonaRequest extends Request
             'nro_documento.numeric'=> 'El número de documento es numérico.', 
             'apellidos.required' => 'El apellido es requerido.',
             'nombres.required' => 'El nombre es requerido.',
-            // 'genero.required' => 'Seleccione un género',
+            'genero.required' => 'Seleccione un género',
             'fecha_nacimiento.required' => 'La fecha de nacimiento es requerida.',
             'domicilio.required' => 'El domicilio es requerido.',
             'localidad.required' => 'La localidad es requerida.',

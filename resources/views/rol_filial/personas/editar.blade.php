@@ -41,10 +41,10 @@
 							<div class="col-md-6 form-group">
 								<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'M',$persona->genero,array('class'=>'minimal')) !!} @lang('persona.masculino')
+									{!! Form::radio('genero', 'M',array('class'=>'minimal')) !!} @lang('persona.masculino')
 								</div>
 								<div class="col-xs-3">
-									{!! Form::radio('genero', 'F',$persona->genero,array('class'=>'minimal')) !!} @lang('persona.femenino')
+									{!! Form::radio('genero', 'F',array('class'=>'minimal')) !!} @lang('persona.femenino')
 								</div>
 							</div>
 							<div class="col-md-6 form-group">

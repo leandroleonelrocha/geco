@@ -24,7 +24,7 @@ class CrearNuevoCursoRequest extends Request
     {
         return [
             'nombre' => 'required',
-            'nombre' => 'required|unique:curso,nombre'
+            'nombre' => 'required|unique:curso,nombre',
             'duracion' => 'required',
         ];
     }
@@ -33,7 +33,7 @@ class CrearNuevoCursoRequest extends Request
     {
         return [
             'nombre.required' => 'El nombre es requerido.',
-            'nombre.unique'=> 'El nombre del curso ya está en uso.' 
+            'nombre.unique'=> 'El nombre del curso ya está en uso.',
             'duracion.required' => 'La duración es requerida.',
         ];
     }

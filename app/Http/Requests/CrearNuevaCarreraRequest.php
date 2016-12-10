@@ -25,7 +25,7 @@ class CrearNuevaCarreraRequest extends Request
         return [
             'nombre' => 'required',
             'duracion' => 'required',
-            'nombre' => 'required|unique:carrera,nombre'
+            'nombre' => 'required|unique:carrera,nombre',
         ];
     }
 
@@ -34,7 +34,7 @@ class CrearNuevaCarreraRequest extends Request
         return [
             'nombre.required' => 'El nombre es requerido.',
             'duracion.required' => 'La duración es requerida.',
-            'nombre.unique'=> 'El nombre de la carrera ya está en uso.' 
+            'nombre.unique'=> 'El nombre de la carrera ya está en uso.', 
         ];
     }
 }
