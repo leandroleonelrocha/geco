@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 use Controllers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use App\Entities\TipoDocumento;
 use App\Entities\Filial;
-use App\Entities\DirectorTelfono;
+use App\Entities\DirectorTelefono;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -16,7 +15,6 @@ use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
-
 use Mail;
 
 class DirectoresController extends Controller
@@ -236,7 +234,6 @@ class DirectoresController extends Controller
         }
         return redirect()->back()->with('msg_error','El perfil del director no ha podido ser modificado o existe el E-mail actual.');
     }
-
 
 
     public function estadisticas(){

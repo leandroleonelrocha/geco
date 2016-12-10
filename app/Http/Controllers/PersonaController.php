@@ -42,8 +42,6 @@ class PersonaController extends Controller {
 
     // Página de Nuevo
     public function nuevo(){
-       
-
 
         $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
