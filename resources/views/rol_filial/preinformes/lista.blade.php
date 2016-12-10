@@ -28,7 +28,7 @@
 								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
 								<td>{{$preinforme->medio}}</td>
 
-								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a></td>
+								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a></td>
 							</tr>
 						@endforeach
 						</tbody>

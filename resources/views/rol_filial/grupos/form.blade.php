@@ -57,16 +57,16 @@
             <label>@lang('grupo.disponibilidad')</label>
             <div class="col-xs-12">
 
-            {!! Form::checkbox('turno_manana', '1', null, array('class'=>'minimal')) !!} @lang('grupo.mañana')
+            {!! Form::checkbox('turno_manana', '1', null, array('class'=>'flat-red')) !!} @lang('grupo.mañana')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_tarde', '1', null, array('class'=>'minimal')) !!} @lang('grupo.tarde')
+            {!! Form::checkbox('turno_tarde', '1', null, array('class'=>'flat-red')) !!} @lang('grupo.tarde')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('turno_noche', '1', null, array('class'=>'minimal')) !!} @lang('grupo.noche')
+            {!! Form::checkbox('turno_noche', '1', null, array('class'=>'flat-red')) !!} @lang('grupo.noche')
             </div>
             <div class="col-xs-12">
-            {!! Form::checkbox('sabados', '1', null, array('class'=>'minimal')) !!} @lang('grupo.sabados')
+            {!! Form::checkbox('sabados', '1', null, array('class'=>'flat-red')) !!} @lang('grupo.sabados')
 
             </div>
         </div>

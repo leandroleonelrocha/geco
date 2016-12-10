@@ -6,11 +6,19 @@
 			 {!! Form::open(['route'=>'grupos.editar_clase'] ) !!}
 			
 			  <div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">@lang('grupo.editarclase')</h4>
 			  </div>
 			  <div class="modal-body">
 				
+			  	<div class="form-group row">
+			      <label for="inputEmail3" class="col-sm-2 col-form-label">Personas inscriptas</label>
+			      <div class="col-sm-10">
+			      	<span> 21</span>
+				  </div>
+			    </div>
+
 			  	<div class="form-group row">
 			      <label for="inputEmail3" class="col-sm-2 col-form-label">@lang('grupo.descripcion')</label>
 			      <div class="col-sm-10">

@@ -73,13 +73,13 @@
 						},
 						data: 'clase_id='+id,
 						success: function(data) {
-							console.log(data);
+							
 							$('#ModalEdit #clase_id').val(data.id);
 							$('#ModalEdit #descripcion').val(data.descripcion);
 							$('#ModalEdit #docente_id').val(data.docente_id);
 							$('#ModalEdit #horario_desde').val(data.horario_desde);
 							$('#ModalEdit #horario_hasta').val(data.horario_hasta);
-
+							$('#ModalEdit .cantidad_personas').html(data.cantidad_personas);
 							$('#ModalEdit #clase_matricula').attr('href', url );
 							$('#ModalEdit #clase_borrar').attr('href', urlborrar );
 

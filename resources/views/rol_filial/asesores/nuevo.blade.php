@@ -40,7 +40,7 @@
 
 							<div class="col-md-6 form-group">
 								<label>@lang('asesor.telefonos')</label>
-								<button class="add_input_telefono btn btn-success">+</button>	
+								<button class="add_input_telefono btn-xs btn-success">+</button>	
 								<div class="input_fields_telefono">
 									<input type="text" name="telefono[]" class="form-control">
 								</div>
@@ -48,7 +48,7 @@
 
 							<div class="col-md-6 form-group">	
 								<label>@lang('asesor.mail')</label>
-								<button class="add_input_mail btn btn-success"">+</button>	
+								<button class="add_input_mail btn-xs btn-success"">+</button>	
 								<div class="input_fields_wrap">
 									<input type="text" name="mail[]" class="form-control">
 								</div>	

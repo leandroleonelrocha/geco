@@ -32,7 +32,7 @@
 											<td>{{$persona->nombres}}</td>
 											<td>{{$persona->apellidos}}</td>
 											<td>{{$persona->nro_documento}}</td>
-											<td class="text-center explicacion_seleccion2"><a href="{{route('filial.preinformes_nuevo',$persona->id)}}" class="btn btn-success text-white">@lang('preinforme.seleccionar')</a></td>
+											<td class="text-center explicacion_seleccion2"><a href="{{route('filial.preinformes_nuevo',$persona->id)}}" class="btn-xs btn-success text-white">@lang('preinforme.seleccionar')</a></td>
 										</tr>
 								@endforeach
 							</tbody>
