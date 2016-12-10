@@ -27,11 +27,15 @@ class DirectoresController extends Controller
         $this->tipoDocumentoRepo = $tipoDocumentoRepo;
         $this->directorTelefonoRepo = $directorTelefonoRepo;
         $this->filialRepo = $filialRepo;
+        $this->data['total_filiales'] = count($this->directorRepo->filialDirectores());
+        $this->data['total_personas'] = $this->directorRepo->countTotalPersonas();
+        $this->data['total_asesores'] = $this->directorRepo->countTotalAsesores();
     }
 
     
     public function index(){
-        return view('rol_director.estadisticas.index');  
+
+        return view('rol_director.estadisticas.index')->with($this->data);  
     }
 
 
@@ -128,9 +132,6 @@ class DirectoresController extends Controller
     public function estadisticasDirectorInscripcion($inicio, $fin){
 
             //todas las filiales que le correspondan al director
-
-
-
             $secion = 'inscripcion';
             $labels  = helperslabelsEstadisticas();
             $nombres = helpersnombresEstadisticas();
@@ -144,10 +145,12 @@ class DirectoresController extends Controller
                 array_push($disponibilidad, $data);
             }
 
+            $total  = $this->directorRepo->countTotal($inicio, $fin);
+            
             $genero = $this->directorRepo->getGenero($inicio,$fin);
             $nivelEstudios  = $this->directorRepo->estadisticasNivelEstudios($inicio, $fin);
             
-            return view('rol_director.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivelEstudios', 'secion'));
+            return view('rol_director.estadisticas.index',compact('total', 'disponibilidad', 'genero', 'nivelEstudios', 'secion'))->with($this->data);
 
     }
 

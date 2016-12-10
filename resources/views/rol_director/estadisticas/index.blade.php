@@ -5,7 +5,7 @@
              
               <div class="small-box bg-aqua">
                 <div class="inner">
-                  <h3>@if(isset($totalFiliales)) {{$totalFiliales}}@endif</h3>
+                  <h3>@if(isset($total_filiales)) {{$total_filiales}}@endif</h3>
                   <p>Filiales</p>
                 </div>
                 <div class="icon">
@@ -18,7 +18,7 @@
             
               <div class="small-box bg-green">
                 <div class="inner">
-                  <h3>@if(isset($totalPersonas)) {{$totalPersonas}}@endif</h3>
+                  <h3>@if(isset($total_personas)) {{$total_personas}}@endif</h3>
                   <p>Personas</p>
                 </div>
                 <div class="icon">
@@ -31,7 +31,7 @@
               
               <div class="small-box bg-yellow">
                 <div class="inner">
-                  <h3>@if(isset($totalAsesores)) {{$totalAsesores}}@endif</h3>
+                  <h3>@if(isset($total_asesores)) {{$total_asesores}}@endif</h3>
                   <p>Asesores</p>
                 </div>
                 <div class="icon">
@@ -69,7 +69,7 @@
     @endif  
 
     @if($secion == 'preinforme')
-        @include('partials.estadisticas.grafico_preinforme',['genero' => 'Estadisticas por generos','nivel' => 'Estadisticas por nivel de estudios','persona' => 'Estadisticas por personas'])
+        @include('partials.estadisticas.grafico_preinforme',['titulo' => 'Preinformes por personas'])
     @endif
 
 
@@ -93,7 +93,7 @@ $(function () {
         },
         title: {
             <?php if(isset($total)){?>
-            text: ' Cantidad de inscriptos: {{$totalPersonasFilial}} '
+            text: ' Cantidad de inscriptos: {{$total}} '
             <?php }?>
             
         },
