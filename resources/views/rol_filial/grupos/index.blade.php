@@ -38,7 +38,7 @@
 						<td>{{ $grupo->descripcion }}</td>
 						<td>{{ $grupo->Docente->fullname }}</td>	
 						   	<td class="text-center">
-			           		<a href="{{route('grupos.edit',$grupo->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>	
+			           		<a href="{{route('grupos.edit',$grupo->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>	
 							</td>
 							   
 						</tr>					
