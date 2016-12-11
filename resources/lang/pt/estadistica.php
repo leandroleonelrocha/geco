@@ -15,4 +15,8 @@ return [
 	'porcentaje' => 'Percentual por sexo',
 	'nivelestudios' => 'Estudos de nível',
 	'estadisticapersonas' => 'Estatísticas pessoas inscritas',
+
+	'filiales' => 'Filiales',
+	'personas' => 'Pessoas',
+	'asesores' => 'Assessores',
 ];

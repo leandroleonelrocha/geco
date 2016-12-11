@@ -49,7 +49,7 @@ class AsesorController extends Controller {
 
         $data = $request->all(); // Obtengo todos los datos del formulario             
         // Corroboro que el asesor exista, si exite lo activa
-                var_dump($data);die;
+
         if ( $asesor = $this->asesorRepo->check($data['tipo_documento_id'],$data['nro_documento']) )
                 return redirect()->route('filial.asesores')->with('msg_ok','El asesor ha sido agregado con éxito.');
         else{

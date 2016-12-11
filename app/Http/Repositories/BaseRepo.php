@@ -23,7 +23,7 @@ abstract class BaseRepo {
 
     public function allEneable(){
 
-        return $this->model->where('activo', 1)->paginate(2);
+        return $this->model->where('activo', 1)->paginate(10);
     }
 
 

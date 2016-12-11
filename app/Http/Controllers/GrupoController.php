@@ -137,18 +137,22 @@ class GrupoController extends Controller
 		$array 					= explode("-", $request->get('fecha'));
 		$data['fecha_inicio'] 	= date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] 		= date("Y-m-d", strtotime($array[1]));
+		
 		$grupo_dias 			= [];
 		$dias_horas 			= [];
 		// $inicio 				= date("Y-m-d", strtotime($model->fecha_inicio));
 		$fin 					= date("Y-m-d", strtotime($model->fecha_fin));
 		$clases 				= $this->claseRepo->findAllClaseGrupo($model->id);
-        
+		
+		//$model->GrupoHorario()->delete();        
 		// Validar que Fecha FIN no sea anterior a una clase finalizada (ESTADO = 3)
 		foreach ($clases as $clase) {
 			if ($data['fecha_fin'] < $clase->fecha && $clase->clase_estado_id == 3) {
 				return redirect()->back()->with('msg_error', 'Hay clases finalizadas posterior a la fecha de FIN ingresada, ingresa una fecha de fin posterior.');
 			}
 		}
+
+
 
         foreach ($model->GrupoHorario as $value ) {
 			array_push($grupo_dias, $value->dia);
