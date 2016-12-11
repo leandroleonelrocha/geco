@@ -15,4 +15,8 @@ return [
 	'porcentaje' => 'Percentage by gender',
 	'nivelestudios' => 'Level of studies',
 	'estadisticapersonas' => 'Statistics of people registered',
+
+	'filiales' => 'Subsidiaries',
+	'personas' => 'People',
+	'asesores' => 'Adviser',
 ];
