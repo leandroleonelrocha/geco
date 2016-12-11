@@ -90,7 +90,7 @@
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.recargo')</label>
 									<div class="input-group">
-		  								<span class="input-group-addon">$</span>
+		  								<span class="input-group-addon">%</span>
 										{!! Form::text('recargo[]',null,array('class'=>'pago-item form-control')) !!}
 		  							</div>
 								</div>
@@ -101,7 +101,24 @@
 								</div>
 							</div><!-- Fin pagos -->
 							</div><!-- Fin planDePagos -->
-							<div id="mas" class="col-md-12 btn btn-danger">@lang('matricula.agregarnuevopago')</div>
+							<div class="col-md-3">
+								<input id="cantidadPagos" class="form-control" type="text" placeholder="@lang('matricula.cantidadpagos')">
+							</div>
+							<div id="mas" class="col-md-3">
+								<span class="btn btn-danger btn-pagos">
+									@lang('matricula.agregarpagos')
+								</span>
+							</div>
+							<div id="borrarTodo" class="col-md-3">
+								<span class="btn btn-danger btn-pagos">
+									@lang('matricula.borrarpagos')
+								</span>
+							</div>
+							<div id="borrarUltimo" class="col-md-3">
+								<span class="btn btn-danger btn-pagos">
+									@lang('matricula.borrarultimopago')
+								</span>
+							</div>
 							<div class="box-footer col-xs-12">
 					     		<button type="submit" class="btn btn-success">@lang('matricula.crear')</button>
 				          	</div>

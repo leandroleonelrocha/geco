@@ -37,7 +37,10 @@ return [
     'recargo'=>'Surcharge',
     'descripcion'=>'Description',
 
-    'agregarnuevopago'=>'Add new payment',
+    'cantidadpagos'=>'Quantity of Payments',
+    'agregarpagos'=>'Add payments',
+    'borrarpagos'=>'Delete payments',
+    'borrarultimopago'=>'Delete Last',
 
     'fechaalta'=>'Date high',
     'filialalta'=>'Subsidiary high',

@@ -38,10 +38,27 @@ $(document).ready(function(){
     });
 
    	/* ------------------------- Matrículas ------------------------- */
-   	// Duplicar los campos de Pagos -- Plan de Pagos ~~ Alta Matrículas
+   	// Duplicar los campos de Pagos -- Plan de Pagos ~~ Matrículas
    	$('#mas').click(function(){
-   		// Clonación - Búsqueda de cada campo - Reseteo del value
-    	$('.pagos:last').clone().appendTo('#planDePagos').find(".pago-item").val("");
+        var cant = $('#cantidadPagos').val();
+   		// Clonación - Búsqueda de cada campo
+        for (var i = 0; i < cant; i++) {
+    	   $('.pagos:last').clone().appendTo('#planDePagos').find(".pago-item");
+        }
+    });
+
+    $('#borrarTodo').click(function(){
+        var contador = 0;
+       $('.pagos').each(function(){
+            if(contador != 0)
+                $(this).remove();
+            contador++;
+       });
+    });
+
+    $('#borrarUltimo').click(function(){ 
+        if( $('.pagos').length > 1)
+            $('.pagos:last').remove();
     });
 
     // Bloquear Grupos según la carrera/curso elegido -- Datos de la Matrícula ~~ Alta Matrículas

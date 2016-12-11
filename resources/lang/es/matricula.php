@@ -36,8 +36,11 @@ return [
     'descuento'=>'Descuento',
     'recargo'=>'Recargo',
     'descripcion'=>'Descripción',
-
-    'agregarnuevopago'=>'Agregar nuevo pago',
+    
+    'cantidadpagos'=>'Cantidad de Pagos',
+    'agregarpagos'=>'Agregar pagos',
+    'borrarpagos'=>'Borrar pagos',
+    'borrarultimopago'=>'Borrar Último',
 
     'fechaalta'=>'Fecha alta',
     'filialalta'=>'Filial alta',

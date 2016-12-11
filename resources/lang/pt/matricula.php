@@ -35,7 +35,10 @@ return [
     'recargo'=>'Sobrecarregar',
     'descripcion'=>'Descrição',
 
-    'agregarnuevopago'=>'Adicionar Novo Pagamento',
+    'cantidadpagos'=>'Número de Pagamentos',
+    'agregarpagos'=>'Adicionar Pagamentos',
+    'borrarpagos'=>'Eliminar Pagamentos',
+    'borrarultimopago'=>'Eliminar Último',
 
     'fechaalta'=>'Data de alta',
     'filialalta'=>'Filial de alta',
