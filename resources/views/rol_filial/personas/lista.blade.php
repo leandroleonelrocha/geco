@@ -58,8 +58,8 @@
 				
 
 						          	<td>
-									<a href="{{route('filial.personas_editar',$p->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>
-						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>
+									<a href="{{route('filial.personas_editar',$p->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil explicacion_editar"></i></a>
+						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash explicacion_borrar"></i></a></td>
 								</tr>
 							@endforeach
 						</tbody>
@@ -88,7 +88,6 @@ $(".star_intro" ).click(function() {
 	<?php
 		$array = [
 		    "#explicacion_1"	 	=>	"Este boton sirve para agregar una nueva persona.",
-		    "#example1_length"   	=>	"Seleccione la cantidad de registros que desee ver.",
 		    "#example1_filter"   	=>	"Escriba aquí para filtrar un dato a buscar.",
 		    ".explicacion_editar" 	=>  "Este boton sirve para editar la persona.",
 		    ".explicacion_borrar"	=>  "Este boton sirve para borrar la persona.", 

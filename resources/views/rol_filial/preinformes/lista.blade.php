@@ -8,7 +8,7 @@
 				<div class="box-header">
 					<h3 class="box-title">@lang('preinforme.listadopreinforme')</h3>
 					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.preinformes_seleccion')}}" id="step1" class="btn btn-success text-white"> @lang('preinforme.agregarnuevo')</a>
+						<a href="{{route('filial.preinformes_seleccion')}}" id="step1" class="btn btn-success text-white explicacion_agregar"> @lang('preinforme.agregarnuevo')</a>
 					</div>
 				</div>
 				<div class="box-body">
@@ -28,7 +28,7 @@
 								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
 								<td>{{$preinforme->medio}}</td>
 
-								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a></td>
+								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil explicacion_editar"></i></a></td>
 							</tr>
 						@endforeach
 						</tbody>
@@ -57,8 +57,10 @@ $(".star_intro" ).click(function() {
 	<?php
 		$array = [
 		    // "#explicacion_1"	 	=>	"Este boton sirve para agregar una nueva persona.",
-		    "#example1_length"   	=>	"Seleccione la cantidad de registros que desee ver.",
+			".explicacion_agregar"	=> 	"Este boton sirve para agregar una nuevo preinforme.",
+		    //"#example1_length"   	=>	"Seleccione la cantidad de registros que desee ver.",
 		    "#example1_filter"   	=>	"Escriba aquí para filtrar un dato a buscar.",
+		    ".explicacion_editar"	=> 	"Este boton sirve para editar un preinforme"
 		    // ".explicacion_editar" 	=>  "Este boton sirve para editar la persona.",
 		    // ".explicacion_borrar"	=>  "Este boton sirve para borrar la persona.", 
 		];
