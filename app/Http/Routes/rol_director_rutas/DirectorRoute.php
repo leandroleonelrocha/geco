@@ -6,7 +6,5 @@ Route::group(['prefix' => 'director', 'middleware'=>'director'], function(){
 		'as' => 'director.inicio',
 		'uses' => 'DirectoresController@index'
 	 ]);
-		require_once('EstadisticasRoute.php');
-	
-
+	require_once('EstadisticasRoute.php');
 });

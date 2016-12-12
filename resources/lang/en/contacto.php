@@ -14,7 +14,9 @@ return [
     'mensaje'=>'Message',
    	'mensajedejar'=>'Leave your message',
 
+    'casacentral'=>'Cas Centrais',
    	'soporte'=>'Technical Support',
+    'soportelogico'=>'Logic Support',
 
    	'contacto'=>'Contact us',
 

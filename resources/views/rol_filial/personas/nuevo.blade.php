@@ -111,13 +111,12 @@
 							   		<input type="text" name="mail[]" class="form-control">
 								</div>	
 							</div>
-
-							<div class="box-footer col-xs-12">
-						     	<button type="submit" class="btn btn-success">@lang('persona.crear')</button>
-				          	</div>
 							{!! Form::close() !!}
 						</div>
 					</div>
+					<div class="box-footer">
+				     	<button type="submit" class="btn btn-success">@lang('persona.crear')</button>
+		          	</div>
         		</div><!-- Fin box-body -->
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->

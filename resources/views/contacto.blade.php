@@ -6,21 +6,34 @@
 			<div class="box">
 			
                 <div class="box-body box-profile">
-                  <img class="profile-user-img img-responsive img-circle" height="600" width="600"  src="{{asset('img/whiteoutteam.png')}}" alt="User profile picture">
-                  <h3 class="profile-username text-center">The Whiteout Team</h3>
-                  <p class="text-muted text-center">@lang('contacto.soporte')</p>
-                  <p class="text-muted text-center">
-                  <strong><i class="fa fa-book margin-r-5"></i>  @lang('contacto.telefono')</strong>
-                  
-                  	112345679
-                  </p>
-                  <hr>
-                  <?php
+                	<div class="col-xs-6 contact-info text-center">
+	                  <h3 class="profile-username">The Whiteout Team</h3>
+	                  <p class="text-muted">@lang('contacto.soporte')</p>
+	                  <p class="text-muted">
+	                  <strong><i class="fa fa-phone fa-lg margin-r-5"></i></strong>(011) 4095 - 1919</p>
+	                  <p class="text-muted">
+	                  <strong><i class="fa fa-envelope fa-lg margin-r-5"></i></strong>geco.whiteout@gmail.com</p>
+	                  <p class="text-muted">
+	                  <strong><i class="fa fa-envelope fa-lg margin-r-5"></i></strong>ian.whiteout@outlook.com</p>
+                	</div>
+                	<div class="col-xs-6 contact-info text-center">
+	                  <h3 class="profile-username">@lang('contacto.casacentral')</h3>
+	                  <p class="text-muted">@lang('contacto.soportelogico')</p>
+	                  <p class="text-muted">
+	                  <strong><i class="fa fa-phone fa-lg margin-r-5"></i></strong>(011) 5032 - 9965</p>
+	                  <p class="text-muted">
+	                  <strong><i class="fa fa-envelope fa-lg margin-r-5"></i></strong>administracion@igionline.com.ar</p>
+	                  <p class="text-muted">
+	                  <strong><i class="fa fa-envelope fa-lg margin-r-5"></i></strong>administracion@iaconline.com.ar</p>
+                	</div>
+                	<div class="row">
+                		<div class="col-xs-12">
+                		<hr>
+		                  <?php
 	    				    	$s= (session('usuario')['rol_id']);
    								if ($s==4 || $s==2) {
        							?>
 								<table id="example1" class="table table-bordered table-striped">
-								<h4><strong>@lang('contacto.titulof')</strong></h4>
 									<thead> <tr>
 									<th>@lang('contacto.nombre')</th>
 									<th>@lang('contacto.telefonosf')</th>
@@ -76,10 +89,9 @@
 									    @endforeach
 				    				</tbody>
 							    </table>
-						        <?php
-				               	
-				              	}
-					            ?>
+					        <?php } ?>
+                		</div>
+                	</div>
                 </div><!-- /.box-body -->
            
 			</div> <!-- Fin box -->

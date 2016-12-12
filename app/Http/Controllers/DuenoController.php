@@ -195,9 +195,7 @@ class DuenoController extends Controller
     }
 	
 	public function index(){
-		
-		return view('rol_dueno.estadisticas.index')->with($this->data);	
-	
+		return view('rol_dueno.estadisticas.index')->with($this->data);
 	}
 
 	public function estadisticas()

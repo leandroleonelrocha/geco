@@ -10,6 +10,7 @@ return [
     'mailsf'=>'E-Mails de Filial',
 
    	'soporte'=>'Suporte Técnico',
+    'soportelogico'=>'Suporte Lógico',
 
    	'contacto'=>'Entre em contato conosco',
 

@@ -11,7 +11,6 @@
 						<a href="{{route('filial.examenes_nuevo')}}" class="btn btn-success text-white"> @lang('examen.nuevaacta')</a>
 					</div>
 				</div>
-				@if(count($examenes) > 0)
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead><tr>
@@ -34,7 +33,6 @@
 				   		</tbody>
 				    </table>
         		</div><!-- Fin box-body -->
-        		@endif
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->

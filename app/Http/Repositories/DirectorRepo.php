@@ -5,6 +5,7 @@ use App\Entities\Director;
 use App\Entities\Filial;
 use App\Entities\AsesorFilial;
 
+use DB;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use App\Http\Repositories\BaseRepo;
@@ -32,7 +33,6 @@ class DirectorRepo extends BaseRepo {
     
     public function filialDirectores(){
         $email    = session('usuario')['usuario'];
-
         $director = $this->model->where('activo', 1)->where('mail', $email)->first();
         
         $data_id  = [];

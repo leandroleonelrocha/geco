@@ -1,18 +1,32 @@
+<?php switch (session('usuario')['rol_id']) {
+  case 2: $inicio = 'director.inicio';
+  break;
+  case 3: $inicio = 'dueño.inicio';
+  break;
+  case 4: $inicio = 'filial.inicio';
+  break;
+} ?>
 <header class="main-header">
         <!-- Logo -->
         <div href="#" class="logo">
-          <span class="logo-mini"><img src="{{asset('/img/logo/Geco-Negro.png')}}"   height="35" width="35" > </span>
+          <span class="logo-mini">
+            <a href="{{route($inicio)}}">
+              <img src="{{asset('/img/logo/Geco-Negro.png')}}"   height="35" width="35" >
+            </a>
+          </span>
           <!-- <span class="logo-lg"><b>Admin</b>LTE</span> -->
          
             <div class="pull-left info magia">
               
-            <a href="#"><i class="fa fa-circle text-<?php if($h==1) echo 'success'; else echo 'danger'; ?> "></i></a>
+            <i class="fa fa-circle text-<?php if($h==1) echo 'success'; else echo 'danger'; ?> "></i>
             </div>
            
           <div class="pull-left image" style="margin-top: -0.4%"> <!--PASAR A CSS!!!!!!!!!!!ESTO ES INACEPTABLE-->
+            <a href="{{route($inicio)}}">
               <img src="{{asset('/img/logo/Logotipo 2.png')}}"  height="40" width="112" >
-            </div>
+            </a>
           </div>
+        </div>
 
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
@@ -24,7 +38,7 @@
               
               <li class="dropdown messages-menu ">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="fa fa-language"></i>
+                  <i class="fa fa-globe fa-lg"></i>
                 </a>
                 <!--EMPIEZA EL BOTON QUE DESPLIEGA IDIOMA-->
                 <ul class="dropdown-menu">
@@ -64,11 +78,11 @@
 
               <li>
 
-                <a href="#" class="star_intro" ><i class="fa fa-info-circle"></i></a>
+                <a href="#" class="star_intro" ><i class="fa fa-question-circle fa-lg"></i></a>
               </li>
 
               <li class="dropdown user user-menu">
-                <a href="{{route('auth.getLogout')}}" class="fa fa-sign-out" > @lang('menu.salir')</a>
+                <a href="{{route('auth.getLogout')}}" class="fa fa-sign-out fa-lg" ></a>
               </li>
             </ul>
           </div>

@@ -12,8 +12,10 @@ return [
 
     'telefonosf'=>'Teléfonos de Filial',
     'mailsf'=>'E-Mails de Filial',
-
+    
+    'casacentral'=>'Casa Central',
    	'soporte'=>'Soporte Técnico',
+    'soportelogico'=>'Soporte Lógico',
 
    	'contacto'=>'Contáctenos',
 
