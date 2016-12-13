@@ -28,8 +28,7 @@ class ContactoController extends Controller{
 
 	}
 
-	public function index()
-	{
+	public function index(){
 		switch (session('usuario')['rol_id']) {
 			case 4: $cadena 	= $this->filialesRepo->filialCadena();
 					$filiales 	= $this->filialesRepo->allFilialCadena($cadena->cadena_id);
@@ -39,7 +38,7 @@ class ContactoController extends Controller{
 					// Eliminación de directores repetidos
 					$directores = array_values(array_unique($directores));
 					
-					return view('contacto',compact('filiales', 'directores'));
+					// return view('contacto',compact('filiales', 'directores'));
 			break;
 			case 3: $cadena 	= null;
 					$directorFiliales 	= $this->filialesRepo->allFilialDirector();
@@ -60,21 +59,26 @@ class ContactoController extends Controller{
 							$filiales[] = $filial;
 						}
 					}
-					return view('contacto',compact('filiales', 'directores'));
+					// return view('contacto',compact('filiales', 'directores'));
 			break;
-			case 2: $entidad 	= session('usuario')['entidad_id'];
-					$ch 	 	= curl_init();  
-					curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/obtenerCadena/{$entidad}");  
-					curl_setopt($ch, CURLOPT_HEADER, false);  
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-					$cadena		= json_decode(curl_exec($ch),true);
-					curl_close($ch);
+			case 2: 
+					$filiales 	= $this->filialesRepo->all();
+					// var_dump($filiales);die;
+					$directores = $this->directorRepo->all();
+					// $entidad 	= session('usuario')['entidad_id'];
+					// $ch 	 	= curl_init();  
+					// curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/obtenerCadena/{$entidad}");  
+					// curl_setopt($ch, CURLOPT_HEADER, false);  
+					// curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+					// $cadena		= json_decode(curl_exec($ch),true);
+					// curl_close($ch);
 
-					foreach ($cadena as $c) {
-						$filiales = $this->filialesRepo->allFilialCadena($c);
-					}
-			 		return view('contacto',compact('filiales'));
+					// foreach ($cadena as $c) {
+					// 	$filiales = $this->filialesRepo->allFilialCadena($c);
+					// }
+			 		// return view('contacto',compact('filiales', 'directores'));
 			break;
 		}
-	}	
+		return view('contacto',compact('filiales', 'directores'));
+	}
 }
