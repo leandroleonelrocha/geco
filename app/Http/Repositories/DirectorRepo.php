@@ -43,6 +43,14 @@ class DirectorRepo extends BaseRepo {
 
     }
 
+    public function allDirectorCadena($cadena){
+        return DB::table('director')
+                   ->join('filial', 'director.id', '=', 'filial.director_id')
+                   ->select('*')
+                   ->whereIn('filial.cadena_id', $cadena)
+                   ->get();
+    }
+
     public function countTotal($inicio, $fin){
         $filial_id = $this->filialDirectores();
         return Persona::whereIn('filial_id', $filial_id)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();

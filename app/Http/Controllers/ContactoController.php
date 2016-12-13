@@ -41,8 +41,26 @@ class ContactoController extends Controller{
 					
 					return view('contacto',compact('filiales', 'directores'));
 			break;
-			case 3: $filiales 	= $this->filialesRepo->allFilialDirector();
-					return view('contacto',compact('filiales'));
+			case 3: $cadena 	= null;
+					$directorFiliales 	= $this->filialesRepo->allFilialDirector();
+					foreach ($directorFiliales as $filial) {
+						$cadena[] = $filial->cadena_id;
+					}
+					$cadena = array_values(array_unique($cadena));
+					for ($i=0; $i < count($cadena); $i++) { 
+						$directorFiliales = $this->filialesRepo->allFilialCadena($cadena[$i]);
+						foreach ($directorFiliales as $filial) {
+							$directores[] = $filial->Director;
+						}
+					}
+
+					$directores = array_values(array_unique($directores));
+					foreach ($directores as $director) {
+						foreach ($director->Filial as $filial) {
+							$filiales[] = $filial;
+						}
+					}
+					return view('contacto',compact('filiales', 'directores'));
 			break;
 			case 2: $entidad 	= session('usuario')['entidad_id'];
 					$ch 	 	= curl_init();  
