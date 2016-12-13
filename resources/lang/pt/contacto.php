@@ -3,11 +3,8 @@
 return [
     'nombre' => 'Filial',
 
-    'telefonosd'=>'Telefone de Diretor',
-    'mailsd'=>'E-Mails de Diretor',
-    'telefonosf'=>'Telefone de Filial',
-
-    'mailsf'=>'E-Mails de Filial',
+    'telefonos'=>'Telefone',
+    'mails'=>'E-Mails',
 
    	'soporte'=>'Suporte Técnico',
     'soportelogico'=>'Suporte Lógico',
@@ -16,6 +13,8 @@ return [
 
 	'telefono'=>'Telefone',
 
-    'titulof'=>'Filiales da mesma cadeia',
-    'titulod'=>'Filiales diretor',
+	'filiales'=>'Filiales',
+    'listafilial'=>'Lista de Filiales',
+    'director'=>'Diretor',
+    'listadirector'=>'Lista de Diretores',
 ];

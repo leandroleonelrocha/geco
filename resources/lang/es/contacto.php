@@ -7,11 +7,8 @@ return [
     'tipoconsulta' => 'Tipo de consulta',
     'telefono'=>'Teléfono',
 
-    'telefonosd'=>'Teléfonos de Director',
-    'mailsd'=>'E-Mails de Director',
-
-    'telefonosf'=>'Teléfonos de Filial',
-    'mailsf'=>'E-Mails de Filial',
+    'telefonos'=>'Teléfonos',
+    'mails'=>'E-Mails',
     
     'casacentral'=>'Casa Central',
    	'soporte'=>'Soporte Técnico',
@@ -21,8 +18,10 @@ return [
 
     'telefono'=>'Teléfono',
 
-    'titulof'=>'Filiales de la misma cadena',
-    'titulod'=>'Filiales del director',
+    'filiales'=>'Filiales',
+    'listafilial'=>'Listado de Filiales',
+    'director'=>'Director',
+    'listadirector'=>'Listado de Directores',
 
     'crear' => 'Crear',
     'guardar' => 'Guardar',  

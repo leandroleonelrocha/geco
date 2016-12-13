@@ -33,18 +33,17 @@
 	    				    	$s= (session('usuario')['rol_id']);
    								if ($s==4 || $s==2) {
        							?>
+       							<div class="box-header">
+									<h3 class="box-title">@lang('contacto.listafilial')</h3>
+								</div>
 								<table id="example1" class="table table-bordered table-striped">
 									<thead> <tr>
-									<th>@lang('contacto.nombre')</th>
-									<th>@lang('contacto.telefonosf')</th>
-									<th>@lang('contacto.mailsf')</th>
-									<th>Director</th>
-								 	<th>@lang('contacto.telefonosd')</th>
-							 		<th>@lang('contacto.mailsd')</th>
-						
+									<th></th>
+									<th>@lang('contacto.telefonos')</th>
+									<th>@lang('contacto.mails')</th>
+									<th>@lang('contacto.director')</th>
 									</tr> </thead>
 				    				<tbody>
- 								
 								    	@foreach($filiales as $f)
 										    <tr role="row" class="odd">
 										        <td class="sorting_1">{{ $f->nombre }}</td>
@@ -53,12 +52,34 @@
 									            		{{$telefono->telefono}}<br>
 								            	@endforeach</td>
 								            	<td>{{ $f->mail}}</td>
-									            <td>{{ $f->Director->fullname}}</td>
-									            <td>
-						                     	@foreach($f->Director->DirectorTelefono as $directorTelefono)
-									            		{{$directorTelefono["telefono"]}}<br>
+									            <td>{{ $f->Director->fullname}}</td>  
+										    </tr>
+									    @endforeach
+				    				</tbody>
+							    </table>
+							    <div class="box-header">
+									<h3 class="box-title">@lang('contacto.listadirector')</h3>
+								</div>
+							    <table id="example2" class="table table-bordered table-striped">
+									<thead> <tr>
+									<th></th>
+									<th>@lang('contacto.telefonos')</th>
+									<th>@lang('contacto.mails')</th>
+									<th>@lang('contacto.filiales')</th>
+									</tr> </thead>
+				    				<tbody>
+								    	@foreach($directores as $d)
+								    		<tr role="row" class="odd">
+										        <td class="sorting_1">{{ $d->nombres }}</td>
+								                <td>
+						                     	@foreach($d->DirectorTelefono as $telefono)
+									            		{{$telefono->telefono}}<br>
 								            	@endforeach</td>
-					                     		<td>{{ $f->Director->mail}}</td>       
+								            	<td>{{ $d->mail}}</td>
+								            	<td>
+						                     	@foreach($d->Filial as $filial)
+									            		{{$filial->nombre}}<br>
+								            	@endforeach</td>
 										    </tr>
 									    @endforeach
 				    				</tbody>
@@ -67,16 +88,17 @@
 						         }
 						         else{
 				              	?>
+				              	<div class="box-header">
+									<h3 class="box-title">@lang('contacto.listafilial')</h3>
+								</div>
 								<table id="example1" class="table table-bordered table-striped">
-								<h4><strong>@lang('contacto.titulod')</strong></h4>
 									<thead> <tr>
 									<th>@lang('contacto.nombre')</th>
-									<th>@lang('contacto.telefonosf')</th>
-									<th>@lang('contacto.mailsf')</th>
+									<th>@lang('contacto.telefonos')</th>
+									<th>@lang('contacto.mails')</th>
 						
 									</tr> </thead>
 				    				<tbody>
- 								
 								    	@foreach($filiales as $f)
 										    <tr role="row" class="odd">
 										        <td class="sorting_1">{{ $f->nombre }}</td>
