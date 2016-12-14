@@ -14,6 +14,7 @@ return [
 
     'carreras'=>'Carreras',
     'cursos'=>'Cursos',
+    'materia'=>'Materia',
     'personasi' => 'Personas Inscriptas',
     'mañana'=>'Mañana',
     'tarde'=>'Tarde',
@@ -53,11 +54,17 @@ return [
     'noviembre'=>'Noviembre',
     'diciembre'=>'Diciembre',
 
+    'hoy'=>'hoy',
+    'mes'=>'mes',
+    'semana'=>'semana',
+    'dia'=>'día',
+    'lista'=>'lista',
+
 	'horacomienzo'=>'Hora comienzo',
 	'horafin'=>'Hora fin',
 
     'rangofecha'=>'Rango de fecha',
-
+    'color'=>'Color',
     'docente'=> 'Docente',
 
     'verclases'=> 'Ver clases',

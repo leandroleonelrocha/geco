@@ -12,7 +12,7 @@ return [
     'personasi' => 'Pessoas Inscritas',
     'carreras'=>'Carreiras',
     'cursos'=>'Cursos',
-
+    'materia'=>'Matéria',
     'mañana'=>'Amanhã',
     'tarde'=>'Tarde',
     'noche'=>'Noite',
@@ -31,8 +31,8 @@ return [
     'domingo'=>'Domingo',
 
     'lun'=>'Segunda-Feira',
-    'ma'=>'Terça-Feira',
-    'mier'=>'Quarta-Feira ',
+    'mar'=>'Terça-Feira',
+    'mie'=>'Quarta-Feira ',
     'jue'=>'Quinta-Feira',
     'vie'=>'Sexta-Feira',
     'sab'=>'Sábado',
@@ -51,11 +51,17 @@ return [
     'noviembre'=>'Novembro',
     'diciembre'=>'Dezembro',
 
+    'hoy'=>'hoje',
+    'mes'=>'mês',
+    'semana'=>'semana',
+    'dia'=>'dia',
+    'lista'=>'lista',
+
 	'horacomienzo'=>'A hora de início',
 	'horafin'=>'Hora do fin',
 
     'rangofecha'=>'Intervalo de datas',
-
+    'color'=>'Cor',
     'docente'=> 'Professor',
 
     'verclases'=> 'Ver as Aulas',

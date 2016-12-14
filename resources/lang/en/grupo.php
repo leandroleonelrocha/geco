@@ -13,6 +13,7 @@ return [
 
     'carreras'=>'Careers',
     'cursos'=>'Courses',
+    'materia'=>'Matter',
 
     'mañana'=>'Morning',
     'tarde'=>'Afternoon',
@@ -53,11 +54,17 @@ return [
 	'noviembre'=>'November',
 	'diciembre'=>'December',
 
+    'hoy'=>'today',
+    'mes'=>'month',
+    'semana'=>'week',
+    'dia'=>'day',
+    'lista'=>'list',
+
 	'horacomienzo'=>'Star time',
 	'horafin'=>'End time',
 
     'rangofecha'=>'Date range',
-
+    'color'=>'Color',
     'docente'=> 'Teacher',
 
     'verclases'=> 'View lessons',

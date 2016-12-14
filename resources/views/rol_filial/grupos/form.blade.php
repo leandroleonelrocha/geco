@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group materia" style="display: none">
-            <label for="exampleInputEmail1">Materia  </label>
+            <label for="exampleInputEmail1">@lang('grupo.materia'))  </label>
             <select name="materia_id" class="form-control select_materia">
             </select>
         </div>
@@ -86,7 +86,7 @@
         </div>
 
         <div class="form-group">
-            <label for="example-color-input">Color</label>
+            <label for="example-color-input">@lang('grupo.color')</label>
             @if(empty($model))
             <input class="form-control" name="color" type="color" value="#563d7c" id="example-color-input">
             @else
@@ -101,7 +101,7 @@
             <div class="row input_fields_wrap">
                 <div class="form-group">
                     <div class="col-xs-6">
-                    <label> Dia </label>
+                    <label> @lang('grupo.dia') </label>
                     <select name="dia[]" class="form-control">
                         <option value="1"> @lang('grupo.lunes')</option>
                         <option value="2"> @lang('grupo.martes')</option>
@@ -236,12 +236,12 @@
          var data = '<div class="form-group">'+
                     '<div class="col-xs-6">'+
                     '<select name="dia[]" class="form-control">'+
-                        '<option value="1"> Lunes</option>'+
-                        '<option value="2"> Martes</option>'+
-                        '<option value="3"> Miercoles</option>'+
-                        '<option value="4"> Jueves</option>'+
-                        '<option value="5"> Viernes</option>'+
-                        '<option value="6"> Sabados</option> ' +
+                        '<option value="1"> @lang('grupo.lunes')</option>'+
+                        '<option value="2"> @lang('grupo.martes')</option>'+
+                        '<option value="3"> @lang('grupo.miercoles')</option>'+
+                        '<option value="4"> @lang('grupo.jueves')</option>'+
+                        '<option value="5"> @lang('grupo.viernes')</option>'+
+                        '<option value="6"> @lang('grupo.sabado')</option> ' +
                      '</select>'+
                     '</div>'+
                         '<div class="col-xs-3">'+
