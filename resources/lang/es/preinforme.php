@@ -11,7 +11,7 @@ return [
 	'encontro'=>'¿Cómo nos encontró?',
 	'carreras'=>'Carreras',
 	'cursos'=>'Cursos',
-	'intereses'=>'Intereres',
+	'intereses'=>'Intereses',
 	'ningunat'=>'Ninguna',
 
 	'otrost'=>'Otros',

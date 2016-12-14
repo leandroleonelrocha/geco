@@ -33,6 +33,12 @@ return [
     'horariohasta' => 'Schedule until',
     'decripcion' => 'Description',
 
+    'tiene' => 'You have',
+    'horasdeclase' => 'hours of class and',
+    'clasesentotal' => 'classes in total.',
+
+
+
     'crear' => 'Create',
     'guardar' => 'Save',  
 ];

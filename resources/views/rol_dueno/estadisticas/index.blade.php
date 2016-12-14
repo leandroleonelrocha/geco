@@ -10,7 +10,7 @@
 <div class="col-xs-12">
 <div class="box box-success">
   <div class="box-header with-border">
-    <h3 class="box-title">Búsqueda de estadísticas</h3>
+    <h3 class="box-title">@lang('estadistica.busqueda')</h3>
   </div>
   <div class="box-body">
     {!! Form::model(Request::all(), ['route'=> 'dueno.estadisticas_detalles', 'method'=>'post', 'class'=>'form-horizontal']) !!} 

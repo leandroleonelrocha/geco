@@ -11,10 +11,13 @@ return [
 	'asesoresr' => 'Asesores Registrados',
 	'masinformacion' => 'Más información',
 	'ingresefecha' => 'Ingrese una fecha y opción',
+	'fecha' => 'Fecha',
+	'opciones' => 'Opciones',
 	'examen' => 'Examen',
 	'porcentaje' => 'Porcentaje por género',
 	'nivelestudios' => 'Nivel estudios',
 	'estadisticapersonas' => 'Estadisticas de personas inscriptas',
+	'busqueda' => 'Búsqueda de estadística',
 
 	'filiales' => 'Filiales',
 	'personas' => 'Personas',

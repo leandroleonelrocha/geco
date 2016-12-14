@@ -25,7 +25,7 @@
 
 				<div class="col-md-9 form-group">
 					<button type="submit" class="btn btn-success">@lang('docente.buscar')</button>
-					<h3>Tiene {{$horasTotal}} horas de clases y {{$cantClases}} clases en total</h3>
+					<h3>@lang('docente.tiene')  {{$horasTotal}} @lang('docente.horasdeclase') {{$cantClases}} @lang('docente.clasesentotal')</h3>
 				</div>
 				{!! Form::close() !!}
 				<div class="box-body">

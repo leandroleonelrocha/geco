@@ -70,6 +70,7 @@ return [
     'nuevamatricula' => 'Nueva Matrícula',
     'editarmatricula' => 'Editar Matrícula',
 
+    'agregarnuevopago' => 'Agregar Nuevo Pago',
      'nuevopago' => 'Nuevo Pago',
      'editarpago' => 'Editar Pago',
 

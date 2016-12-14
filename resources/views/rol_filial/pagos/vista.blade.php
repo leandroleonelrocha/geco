@@ -33,7 +33,7 @@
 								</td>
 								<td class="text-center">
 
-								<a href="{{route('filial.pagos',$matricula->id)}}" class="btn-xs btn-success">@lang('matricula.verpagos')</a>
+								<a href="{{route('filial.pagos',$matricula->id)}}" class="btn btn-success">@lang('matricula.verpagos')</a>
 
 								</td>
 							</tr>

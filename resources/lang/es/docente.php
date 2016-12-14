@@ -31,6 +31,11 @@ return [
     'horariohasta' => 'Horario hasta',
     'decripcion' => 'Descripcion',
 
+    'tiene' => 'Tiene',
+    'horasdeclase' => 'horas de clase y',
+    'clasesentotal' => 'clases en total.',
+
+
     'crear' => 'Crear',
     'guardar' => 'Guardar',  
 ];

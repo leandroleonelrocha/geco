@@ -68,6 +68,7 @@ return [
     'nuevamatricula' => 'New Enrollments',
     'editarmatricula' => 'Edit Enrollments',
 
+    'agregarnuevopago' => 'Add New Payment',
     'nuevopago' => 'New Payment',
     'editarpago' => 'Edit Payment ',
 
@@ -75,6 +76,6 @@ return [
     'crear' => 'Create',
     'guardar' => 'Save',
     'modificar' => 'Edit',
-    'actualzar' => 'Update',
+    'actualizar' => 'Update',
     'verrecibos' => 'View receipts',
 ];

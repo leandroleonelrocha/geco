@@ -65,6 +65,7 @@ return [
     'nuevamatricula' => 'Novo Inscriçãos',
     'editarmatricula' => 'Editar Inscriçãos',
 
+    'agregarnuevopago' => 'Adicionar Novo Pagamento',
     'nuevopago' => 'Novo Pagamento',
     'editarpago' => 'Editar Pagamento',
 

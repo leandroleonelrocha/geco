@@ -29,6 +29,10 @@ return [
     'horariohasta' => 'Horas até',
     'decripcion' => 'Descrição',
 
+    'tiene' => 'Você tem',
+    'horasdeclase' => 'horas de aula e',
+    'clasesentotal' => 'aulas no total.',
+
     'crear' => 'Salvar',
     'guardar' => 'Mudança', 
 ];
