@@ -10,7 +10,7 @@
         <div class="form-group">
             <label>@lang('grupo.carrerasycursos')</label>
             <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-           <!--  <option>@lang('grupo.seleccioncyc')</option> -->
+            <option>@lang('grupo.seleccioncyc')</option>
             <optgroup label=@lang('grupo.carreras')>
             @foreach($carreras as $carrera)
             <option value="carrera;{{$carrera->id}}" <?php if(!empty($model)){
@@ -33,6 +33,7 @@
         </div>
 
         <div class="form-group materia" style="display: none">
+
             <label for="exampleInputEmail1">@lang('grupo.materia') </label>
             <select name="materia_id" class="form-control select_materia">
             </select>

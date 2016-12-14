@@ -49,8 +49,8 @@ class Grupo extends Entity {
     {
         //10/26/2016 - 10/26/2016
 
-        $inicio = date("d/m/Y", strtotime($this->fecha_inicio));
-        $fin =date("d/m/Y", strtotime($this->fecha_fin));
+        $inicio = date("m/d/Y", strtotime($this->fecha_inicio));
+        $fin =date("m/d/Y", strtotime($this->fecha_fin));
         
         return $inicio .' - '. $fin;
     }
