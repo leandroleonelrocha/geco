@@ -1,6 +1,6 @@
 <?php
 
-// Route::group(['prefix' => 'dueño'], function(){
+Route::group(['prefix' => 'dueño'], function(){
 
 	//Inicio Rol Dueño
 	Route::get('inicio', [
@@ -19,4 +19,4 @@
 
 	// Rutas Operaciones ---------- Estadísticas
 	// require_once(__DIR__ . '/Routes/rol_filial_rutas/Filiales.php');
-// });
+});

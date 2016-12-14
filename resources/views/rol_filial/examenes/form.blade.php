@@ -7,44 +7,38 @@
 
 	<div class="row">
 		<div class="col-xs-12">
-
-			<div class="input-group input-group-sm">
-				{!! Form::select('grupo_id',(['' => 'Seleccionar grupo'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
-				<span class="input-group-btn">
-                      <button class="btn btn-info btn-flat buscar" type="button">@lang('examen.buscar')</button>
-                    </span>
-			</div>
-
-			<br>
-			{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">@lang('examen.listadoexamen')</h3>
 				</div>
-				
-				<div class="lalocura col-xs-12" style="display: none">
-					<div class="form-group materia" >
-
-			            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
-			            <select name="materia_id" class="form-control materia_id">
-			       <!--      <option>@lang('examen.seleccionemateria')</option> -->
-
-			           	</select>
-			        </div>
-			        <div class="form-group materia" >
-			           <label for="exampleInputEmail1">@lang('grupo.docente')  </label>
-			           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
-			        </div>
-
-			        <!--grupo_id -->
-			        {!! Form::hidden('grupo_id',null, ['class'=>'form-control grupo_id'])!!}
-				</div>
-
 				<div class="box-body">
+					<div class="col-xs-12 input-group input-group-sm">
+						{!! Form::select('grupo_id',(['' => 'Seleccionar grupo'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
+					</div><br>
+					<div class="body">
+						{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
+						<div class="lalocura col-xs-12" style="display: none">
+							<div class="form-group materia" >
+
+					            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
+					            <select name="materia_id" class="form-control materia_id">
+					       <!--      <option>@lang('examen.seleccionemateria')</option> -->
+
+					           	</select>
+					        </div>
+					        <div class="form-group materia" >
+					           <label for="exampleInputEmail1">@lang('grupo.docente')  </label>
+					           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
+					        </div>
+
+					        <!--grupo_id -->
+					        {!! Form::hidden('grupo_id',null, ['class'=>'form-control grupo_id'])!!}
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="box-footer">
-				<button type="submit" class="btn btn-success">@lang('examen.guardar')</button>
+				<div class="box-footer">
+					<button type="submit" class="btn btn-success">@lang('examen.guardar')</button>
+				</div>
 			</div>
 			{!! Form::close() !!}
 
@@ -55,8 +49,8 @@
 @section('js')
 <script type="text/javascript">
 
-	$( ".buscar" ).click(function() {
-		var grupo = $('.grupo_id').val();
+	$( ".grupo_id" ).click(function() {
+		var grupo = $(this).val();
 
 		// alert( "Handler for .click() called." );
 		$.ajax(
@@ -68,8 +62,8 @@
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
 			success: function(result){
-				$('.box-body').empty();
-				$('.box-body').append(table());
+				$('.body').empty();
+				$('.body').append(table());
 				$('.lalocura').show();
 				var body = $('#example1').children('tbody');
 				$('.docente_id').val(result.grupo.docente_id);

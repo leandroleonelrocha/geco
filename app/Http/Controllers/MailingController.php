@@ -42,12 +42,15 @@ class MailingController extends Controller
 				$pe[] = $m->Persona;
 				}
 			}
-			foreach ($pe as $p) {
-				foreach ($p->PersonaMail as $pm) {
-					$personaMail[] = $pm->mail;
+			if (isset($pe)){
+				foreach ($pe as $p) {
+					foreach ($p->PersonaMail as $pm) {
+						$personaMail[] = $pm->mail;
+					}
 				}
+				return $personaMail;
 			}
-			return $personaMail;
+			else return null;
 		}
 		else return null;
 	}

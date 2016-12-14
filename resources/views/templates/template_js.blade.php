@@ -55,7 +55,10 @@
             "bInfo" : false
         });
 
-        $('#example2').DataTable();
+        $('#example2').DataTable({
+            paging: false,
+            "bInfo" : false
+        });
     
 
         //Datemask dd/mm/yyyy

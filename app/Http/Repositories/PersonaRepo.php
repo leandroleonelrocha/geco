@@ -68,6 +68,7 @@ class PersonaRepo extends BaseRepo {
                    ->where('matricula.filial_id', $this->filial)
                    ->where('matricula.activo', 1)
                    ->where('matricula.cancelado', 0)
+                   ->where('matricula.terminado', 0)
                    ->where(DB::raw("DATEDIFF(pago.vencimiento, '".date('Y-m-d')."')"), '<=', 10)
                    ->where(DB::raw("DATEDIFF(pago.vencimiento, '".date('Y-m-d')."')"), '>=',  0)
                    ->get();
@@ -86,6 +87,7 @@ class PersonaRepo extends BaseRepo {
                    ->where('matricula.filial_id', $this->filial)
                    ->where('matricula.activo', 1)
                    ->where('matricula.cancelado', 0)
+                   ->where('matricula.terminado', 0)
                    ->get();
     }
 

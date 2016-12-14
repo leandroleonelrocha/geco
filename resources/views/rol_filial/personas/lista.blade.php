@@ -15,7 +15,6 @@
 					<div class="box-tools pull-right no-print">
 						<a href="{{route('filial.personas_nuevo')}}" class="btn btn-success text-white" id="explicacion_1"> @lang('persona.agregarnuevo')</a>
 					</div>
-					
 				</div>
 
 				<div class="box-body">

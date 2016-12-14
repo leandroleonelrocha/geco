@@ -5,6 +5,7 @@ use App\Entities\Director;
 use App\Entities\Filial;
 use App\Entities\AsesorFilial;
 
+use DB;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use App\Http\Repositories\BaseRepo;
@@ -32,7 +33,6 @@ class DirectorRepo extends BaseRepo {
     
     public function filialDirectores(){
         $email    = session('usuario')['usuario'];
-
         $director = $this->model->where('activo', 1)->where('mail', $email)->first();
         
         $data_id  = [];
@@ -41,6 +41,14 @@ class DirectorRepo extends BaseRepo {
         }
         return $data_id;
 
+    }
+
+    public function allDirectorCadena($cadena){
+        return DB::table('director')
+                   ->join('filial', 'director.id', '=', 'filial.director_id')
+                   ->select('*')
+                   ->whereIn('filial.cadena_id', $cadena)
+                   ->get();
     }
 
     public function countTotal($inicio, $fin){
