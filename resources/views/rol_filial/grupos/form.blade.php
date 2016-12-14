@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group materia" style="display: none">
-            <label for="exampleInputEmail1">@lang('grupo.materia'))  </label>
+            <label for="exampleInputEmail1">@lang('grupo.materia')  </label>
             <select name="materia_id" class="form-control select_materia">
             </select>
         </div>
