@@ -41,11 +41,11 @@
 
 			},
 			buttonText: {
-		          today:    'hoy', 
-		          month:    'mes',
-		          week:     'semana',
-		          day:      'dia',
-		          list:     'lista'
+		          today:    '@lang('grupo.hoy')', 
+		          month:    '@lang('grupo.mes')',
+		          week:     '@lang('grupo.semana')',
+		          day:      '@lang('grupo.dia')',
+		          list:     '@lang('grupo.lista')'
 		      },
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
