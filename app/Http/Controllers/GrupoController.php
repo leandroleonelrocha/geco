@@ -11,6 +11,7 @@ use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\ClaseMatriculaRepo;
+use App\Http\Repositories\AulaRepo;
 use App\Entities\Clase;
 use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
@@ -28,15 +29,16 @@ class GrupoController extends Controller
 	protected $claseRepo;
 	protected $claseMatriculaRepo;
 
-	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo)
+	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo, AulaRepo $aulaRepo)
 	{
-		$this->cursoRepo = $cursoRepo;
-		$this->carreraRepo = $carreraRepo;
-		$this->materiaRepo = $materiaRepo;
-		$this->docenteRepo = $docenteRepo;
-		$this->grupoRepo = $grupoRepo;
-		$this->claseRepo = $claseRepo;
-		$this->claseMatriculaRepo = $claseMatriculaRepo;
+		$this->cursoRepo 			= $cursoRepo;
+		$this->carreraRepo 			= $carreraRepo;
+		$this->materiaRepo 			= $materiaRepo;
+		$this->docenteRepo 			= $docenteRepo;
+		$this->grupoRepo 			= $grupoRepo;
+		$this->claseRepo 			= $claseRepo;
+		$this->claseMatriculaRepo 	= $claseMatriculaRepo;
+		$this->aulaRepo 			= $aulaRepo;
 		
 	}	
 
@@ -49,8 +51,9 @@ class GrupoController extends Controller
 	public function nuevo(){
 		$carreras 	= $this->carreraRepo->all();
         $cursos  	= $this->cursoRepo->all();
-		$materias 	=  $this->materiaRepo->lists('nombre','id');
-		$docentes 	= $this->docenteRepo->all()->lists('apellidos', 'id');
+		$materias 	= $this->materiaRepo->lists('nombre','id');
+		$docentes 	= $this->docenteRepo->allEneable()->lists('apellidos', 'id');
+		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
 		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
 
