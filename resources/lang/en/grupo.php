@@ -10,6 +10,7 @@ return [
     'carrerasycursos'=>'Careers and Courses',
     'personasi' => 'People registered',
     'seleccioncyc'=>'Select a career or course',
+    'seleccionmateria'=>'Select a matter',
 
     'carreras'=>'Careers',
     'cursos'=>'Courses',

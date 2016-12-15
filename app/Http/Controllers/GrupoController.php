@@ -47,10 +47,10 @@ class GrupoController extends Controller
 	}
 
 	public function nuevo(){
-		$carreras = $this->carreraRepo->all();
-        $cursos  = $this->cursoRepo->all();
-		$materias =  $this->materiaRepo->lists('nombre','id');
-		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
+		$carreras 	= $this->carreraRepo->all();
+        $cursos  	= $this->cursoRepo->all();
+		$materias 	=  $this->materiaRepo->lists('nombre','id');
+		$docentes 	= $this->docenteRepo->all()->lists('apellidos', 'id');
 		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
 
@@ -62,7 +62,6 @@ class GrupoController extends Controller
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
 		return view('rol_filial.grupos.form', compact('model', 'cursos', 'carreras', 'materias', 'docentes'));
 	}
-
 
 	public function postAdd(CrearNuevoGrupoRequest $request){
         $data = $request->all();
@@ -115,13 +114,15 @@ class GrupoController extends Controller
 			    	$data['clase_estado_id'] = 1;
 			    else
 			    	$data['clase_estado_id'] = 2;
-
+			    $materia 				 = $this->materiaRepo->find($data['materia_id']);
 			    $data['grupo_id'] 		 = $ultimo->id;
 			    $data['fecha'] 			 = $i;
 			    $data['docente_id'] 	 = $ultimo->docente_id;
-			    $data['descripcion'] 	 = '(La clase no tiene descripción)';
+			    $data['descripcion'] 	 = $ultimo->descripcion+' - '+$materia->nombre;
 			    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
 			    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
+			    $data['materia_id']  	 = $materia->id;
+			    $data['aula_id'] 		 = $aula->id;
 			    $data['enviado'] 	 	 = 0;
 
 			    $this->claseRepo->create($data);
