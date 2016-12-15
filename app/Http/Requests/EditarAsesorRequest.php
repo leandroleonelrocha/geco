@@ -22,7 +22,7 @@ class EditarAsesorRequest extends Request
      */
     public function rules()
     {
-        return [
+         $rules= [
 
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required', 
@@ -55,7 +55,7 @@ class EditarAsesorRequest extends Request
             'nombres.required' => 'El nombre es requerido.',
             'apellidos.required' => 'El apellido es requerido.', 
             'direccion.required' => 'La dirección es requerida.',
-            'localidad.required' => 'La localidad es requerida',
+            'localidad.required' => 'La localidad es requerida.',
         ];
 
         $nbr = count($this->input('telefono')) - 1;

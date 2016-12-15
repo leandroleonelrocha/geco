@@ -39,8 +39,9 @@
 				<div class="box-footer">
 					<button type="submit" class="btn btn-success">@lang('examen.guardar')</button>
 				</div>
+				{!! Form::close() !!}
 			</div>
-			{!! Form::close() !!}
+			
 
 		</div>
 	</div>
@@ -97,9 +98,9 @@
 
 		var table = '<table id="example1" class="table table-bordered table-striped">'+
 					'<thead> <tr>'+
-					'<th>Matricula</th>'+
-					'<th>Persona</th>'+
-					'<th>Nota</th>'+
+					'<th>@lang('examen.matricula')</th>'+
+					'<th>@lang('examen.persona')</th>'+
+					'<th>@lang('examen.nota')</th>'+
 					'</tr></thead>'+
 					'<tbody>'+
 					'</tbody>'+

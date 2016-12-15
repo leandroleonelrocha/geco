@@ -118,12 +118,14 @@ apellidos			varchar(50) not null,
 nombres				varchar(50) not null,
 direccion			varchar(50),
 localidad			varchar(50),
+filial_id			int not null,
 activo				boolean not null default true,
 created_at			timestamp not null default '0000-00-00 00:00:00',
 updated_at			timestamp not null default '0000-00-00 00:00:00',
 primary key 		(id),
 unique key			(tipo_documento_id, nro_documento),
-foreign key 		(tipo_documento_id)	references tipo_documento	(id)
+foreign key 		(tipo_documento_id)	references tipo_documento(id),
+foreign key 		(filial_id)	references filial (id)
 );
 
 create table if not exists asesor_filial(
@@ -345,6 +347,14 @@ foreign key 				(tipo_documento_id)						references tipo_documento	(id),
 foreign key 				(filial_id)							    references filial			(id)
 );
 
+create table if not exists aula(
+id 			int not null auto_increment,
+nombre 		varchar(50) not null,
+created_at 	timestamp not null default '0000-00-00 00:00:00',
+updated_at 	timestamp not null default '0000-00-00 00:00:00',
+primary key (id)
+);
+
 create table if not exists grupo_color(
 id 			int not null auto_increment,
 color 		varchar(50) not null,
@@ -357,7 +367,6 @@ create table if not exists grupo(
 id				int not null auto_increment,
 curso_id		int,
 carrera_id		int,
-materia_id 		int,
 descripcion		varchar(300),
 docente_id		int not null,
 nuevo			boolean not null default true,
@@ -377,7 +386,6 @@ updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),
 foreign key 	(curso_id)						references curso		(id),
 foreign key 	(carrera_id)					references carrera		(id),
-foreign key 	(materia_id)					references materia		(id),
 foreign key 	(docente_id)					references docente		(id),
 foreign key 	(filial_id)						references filial		(id)
 );
@@ -387,10 +395,14 @@ grupo_id		int not null,
 dia				ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'),
 horario_desde	time not null,
 horario_hasta	time not null,
+materia_id		int  not null,
+aula_id			int  not null,
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key		(grupo_id, dia, horario_desde, horario_hasta),
-foreign key		(grupo_id)										references grupo	(id)
+foreign key		(grupo_id)		references grupo		(id),
+foreign key 	(materia_id) 	references materia_id	(id),
+foreign key		(aula_id)		references aula			(id)
 );
 
 create table if not exists grupo_matricula(
@@ -420,6 +432,8 @@ docente_id		int not null,
 dia				int(1) not null,
 horario_desde	time not null,
 horario_hasta	time not null,
+materia_id		int  not null,
+aula_id			int  not null,
 enviado 		boolean not null default false,
 descripcion		varchar(300),
 created_at  	timestamp not null default '0000-00-00 00:00:00',
@@ -427,7 +441,9 @@ updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key		(id),
 foreign key		(clase_estado_id)	references clase_estado	(id),
 foreign key		(grupo_id)			references grupo		(id),
-foreign key		(docente_id)		references docente		(id)
+foreign key		(docente_id)		references docente		(id),
+foreign key 	(materia_id) 		references materia_id	(id),
+foreign key		(aula_id)			references aula			(id)
 );
 
 create table if not exists clase_matricula(
@@ -541,17 +557,17 @@ values  (1, 'Filial 1' , 'Direccion', 'Localidad', 1736, 1, 'filial@filial.com' 
 -- Asesores
 --
 
-insert into asesor (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `direccion`, `localidad`, `activo`, `created_at`, `updated_at`)
-values  (1, 30159752, 'Sosa'  , 'Victoria', 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 29159752, 'Ruiz'  , 'Matías'  , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 28159752, 'Alonso', 'Gabriel' , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 31159752, 'Ortiz' , 'Daniel'  , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 32159752, 'Rojas' , 'Jazmin'  , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 25159752, 'Blanco', 'Luciano' , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 20159752, 'Paz'   , 'Emma'    , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 22159752, 'Correa', 'Mario'   , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 34159752, 'Vera'  , 'Valeria' , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(1, 21159752, 'Lucero', 'Jimena'  , 'Direccion', 'Localidad', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into asesor (`tipo_documento_id`, `nro_documento`, `apellidos`, `nombres`, `direccion`, `localidad`,`filial_id`, `activo`, `created_at`, `updated_at`)
+values  (1, 30159752, 'Sosa'  , 'Victoria', 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 29159752, 'Ruiz'  , 'Matías'  , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 28159752, 'Alonso', 'Gabriel' , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 31159752, 'Ortiz' , 'Daniel'  , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 32159752, 'Rojas' , 'Jazmin'  , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 25159752, 'Blanco', 'Luciano' , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 20159752, 'Paz'   , 'Emma'    , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 22159752, 'Correa', 'Mario'   , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 34159752, 'Vera'  , 'Valeria' , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(1, 21159752, 'Lucero', 'Jimena'  , 'Direccion', 'Localidad', 3, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Docentes
