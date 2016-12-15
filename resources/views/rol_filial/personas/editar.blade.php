@@ -11,12 +11,6 @@
 					<div class="row">
 						<div class="col-xs-12">
 							{!! Form::open(['route'=> 'filial.personas_editar_post', 'method'=>'post']) !!}
-
-					    	<div class="col-md-12 form-group">
-		    					{!! Form::hidden('persona', $persona->id, array('class'=>'form-control')) !!}
-								<label>@lang('persona.asesor')</label>
-								{!! Form::select('asesor_id',$asesores->toArray(),$persona->Asesor->id,array('class' => 'form-control')) !!}
-							</div>
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">@lang('persona.titulo')</h4>
 				            </div>
