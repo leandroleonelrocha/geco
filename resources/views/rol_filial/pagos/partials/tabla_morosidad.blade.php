@@ -1,4 +1,4 @@
-<table id="example1" class="table table-bordered table-striped">
+<table id="tabla_morosidad" class="table table-bordered table-striped">
 <thead><tr>
 <th class="text-center">Matrícula</th>
 <th class="text-center">Grupo</th>

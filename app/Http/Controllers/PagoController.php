@@ -139,7 +139,12 @@ class PagoController extends Controller
 
     public function tabla_morisidad(Request $request){
 
-        dd($request->all());
+        $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+        $morosos =  $this->pagoRepo->allMorososEntreFechas($fechas);
+        $morosos->nombre = $morosos->Matricula;
+        dd($morosos);
+        return response()->json($morosos, 200);
+       
 
     }
 
