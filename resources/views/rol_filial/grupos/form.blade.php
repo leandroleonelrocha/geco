@@ -6,6 +6,10 @@
         {!! Form::open(['route'=>'grupos.postAdd']) !!}
     @endif
 
+    <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">@lang('asesor.nuevoasesor')</h3>
+                </div>
     <div class="box-body">
         <div class="form-group">
             <label>@lang('grupo.carrerasycursos')</label>
@@ -32,12 +36,13 @@
             </select>
         </div>
 
+       
         <div class="form-group materia" style="display: none">
-
             <label for="exampleInputEmail1">@lang('grupo.materia') </label>
             <select name="materia_id" class="form-control select_materia">
             </select>
         </div>
+       
 
 
         <div class="form-group">
@@ -173,14 +178,28 @@
 <script type="text/javascript">
    
    $(document).ready(function() {
+       // Ya hiciste el grupom me traigo la materia por defecto 
+       <?php
+       if(isset($model->Materia) )
+       {
+       ?>
+       $(".materia").show();
+       $('.select_materia').append('<option value="1">{{ $model->Materia->nombre}}</option>' );
+       <?php
+       }
+       ?>
+
+
        $("#carreras_cursos").change(function(){
             var carreras_cursos=$('select[id=carreras_cursos]').val(); 
             var tipo = carreras_cursos.split(';');
+            var url = "{{ URL::route('grupos.post_materias_carreras') }}";
+            
             if(tipo[0] == "carrera"){   
                 $(".materia").show();
                 $.ajax(
                     {
-                    url: "post_materias_carreras",
+                    url: url,
                     type: "POST",
                     data: 'carrera_id='+tipo[1],
                     headers: {
@@ -231,7 +250,6 @@
             e.preventDefault(); $(this).parent('div').remove(); x--;
 
         })
-
 
         function add_input(){
          var data = '<div class="form-group">'+

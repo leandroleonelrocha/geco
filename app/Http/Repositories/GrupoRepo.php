@@ -30,4 +30,16 @@ class GrupoRepo extends BaseRepo {
     public function allGruposCurso($id){
         return $this->model->where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->where('curso_id', $id)->get();
     }
+
+    public function grupo_carrera_o_curso($valor)
+    {
+            $carrearas_cursos = explode(';',$valor);
+            if ($carrearas_cursos[0] == 'carrera')
+                $data['carrera_id']    =   $carrearas_cursos[1];
+            elseif ($carrearas_cursos[0] == 'curso')
+                $data['curso_id']      =   $carrearas_cursos[1];
+            return $data;
+    }
+
+
 }
