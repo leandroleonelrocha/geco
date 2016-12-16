@@ -63,7 +63,7 @@ class PreinformeController extends Controller {
     public function nuevo($id){
        
         $persona    = $this->personaRepo->find($id);
-        $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+        $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
         $carreras   = $this->carreraRepo->all()->lists('nombre','id');
         $cursos     = $this->cursoRepo->all()->lists('nombre','id');
         return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));     
@@ -145,7 +145,6 @@ class PreinformeController extends Controller {
         $persona['disponibilidad_sabados']  =   $request->disponibilidad_sabados;
         $persona['aclaraciones']            =   $request->aclaraciones;
         $persona['filial_id']               =   session('usuario')['entidad_id'];
-        $persona['asesor_id']               =   $request->asesor;
 
         if($this->personaRepo->create($persona)){
             //Datos Telefónicos y Mails

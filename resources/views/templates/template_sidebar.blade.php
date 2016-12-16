@@ -112,13 +112,8 @@
                     </ul>
                   </li>
 
-                  <li class="treeview">
-                    <a href="{{route('filial.pagos_matriculas')}}">
-                      <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li class="active"><a href="{{route('filial.pagos_matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
-                    </ul>
+                  <li>
+                    <a href="{{route('filial.pagos_matriculas')}}"> <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
                   </li>
 
                   <li class="treeview">
@@ -212,14 +207,8 @@
                     </ul>
                   </li>
 
-
-                  <li class="treeview">
-                    <a href="{{route('filial.mails')}}">
-                      <i class="fa fa-envelope"></i> <span>Mails</span><i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li class="active"><a href="{{route('filial.mails')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
-                    </ul>
+                  <li>
+                    <a href="{{route('filial.mails')}}"> <i class="fa fa-envelope"></i> <span>Mails</span> </a>
                   </li>
 
                   <li>
@@ -232,7 +221,7 @@
                     </a>
                     <ul class="treeview-menu">
                       <li> <a href="{{route('filial.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i>@lang('menu.perfil')</a></li>
-                      <li> <a href="{{route('filial.asignacionAsesores') }}"><i class="fa fa-circle-o"></i> @lang('menu.asignar')</a></li>
+                      <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>Asignar Aulas</a></li>
                       <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
                     </ul>
                   </li> 

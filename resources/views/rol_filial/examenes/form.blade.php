@@ -15,24 +15,24 @@
 					<div class="col-xs-12 input-group input-group-sm">
 						{!! Form::select('grupo_id',(['' => 'Seleccionar grupo'] + $grupos->toArray()), null, [ 'class' => 'form-control grupo_id']) !!}
 					</div><br>
-					<div class="body">
-						{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
-						<div class="lalocura col-xs-12" style="display: none">
-							<div class="form-group materia" >
+					{!! Form::open(['route'=>'filial.examenes_nuevo_post']) !!}
+					<div class="lalocura col-xs-12" style="display: none">
+						<div class="form-group materia" >
 
-					            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
-					            <select name="materia_id" class="form-control materia_id">
-					       <!--      <option>@lang('examen.seleccionemateria')</option> -->
+				            <label for="exampleInputEmail1">@lang('examen.materia')  </label>
+				            <select name="materia_id" class="form-control materia_id">
+				       <!--      <option>@lang('examen.seleccionemateria')</option> -->
 
-					           	</select>
-					        </div>
-					        <div class="form-group materia" >
-					           <label for="exampleInputEmail1">@lang('grupo.docente')  </label>
-					           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
-					        </div>
+				           	</select>
+				        </div>
+				        <div class="form-group materia" >
+				           <label for="exampleInputEmail1">@lang('grupo.docente')  </label>
+				           {!! Form::select('docente_id',(['' => 'Seleccionar docente'] + $docentes->toArray()), null, [ 'class' => 'form-control docente_id']) !!}
+				        </div>
 
-					        <!--grupo_id -->
-					        {!! Form::hidden('grupo_id',null, ['class'=>'form-control grupo_id'])!!}
+				        <!--grupo_id -->
+				        {!! Form::hidden('grupo_id',null, ['class'=>'form-control grupo_id'])!!}
+						<div class="body">
 						</div>
 					</div>
 				</div>
@@ -69,7 +69,8 @@
 				var body = $('#example1').children('tbody');
 				$('.docente_id').val(result.grupo.docente_id);
 				$('.grupo_id').val(result.grupo.id);
-				var select_materia = $('.materia_id');				
+				var select_materia = $('.materia_id');
+				select_materia.empty();				
 					// $.each(result.materia, function(clave, valor) {
 					// 	select_materia.append('<option value='+valor.id+'>'+valor.nombre+'</option>');
 					// });

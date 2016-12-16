@@ -11,7 +11,6 @@ use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
-use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
@@ -28,7 +27,7 @@ class MatriculaController extends Controller {
     protected $matriculaRepo;
     protected $tipoDocumentoRepo;
 
-    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo)
+    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo)
     {
         $this->matriculaRepo            = $matriculaRepo;
         $this->personaRepo              = $personaRepo;
@@ -61,7 +60,7 @@ class MatriculaController extends Controller {
     // Página de Nuevo -- Persona Existente
     public function nuevo($id){
         $persona    = $this->personaRepo->find($id);
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+        $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
         $carreras   = $this->carreraRepo->all();
         $cursos     = $this->cursoRepo->all();
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
@@ -138,7 +137,6 @@ class MatriculaController extends Controller {
         $persona['disponibilidad_sabados']  =   $request->disponibilidad_sabados;
         $persona['aclaraciones']            =   $request->aclaraciones;
         $persona['filial_id']               =   session('usuario')['entidad_id'];
-        $persona['asesor_id']               =   $request->asesor;
         if($this->personaRepo->create($persona)){
             //Datos Telefónicos y Mails
             $persona=$this->personaRepo->all()->last();

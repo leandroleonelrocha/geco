@@ -10,7 +10,6 @@ use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PersonaMailRepo;
 use App\Http\Repositories\PersonaTelefonoRepo;
 use App\Http\Repositories\AsesorRepo;
-use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevaPersonaRequest;
@@ -22,14 +21,12 @@ class PersonaController extends Controller {
 
 	protected $personaRepo;
 	
-    public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo  )
+    public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo)
 	{
 		$this->personaRepo         =   $personaRepo;
 		$this->tipoDocumentoRepo   =   $tipoDocumentoRepo;
         $this->personaMailRepo     =   $personaMailRepo;
         $this->personaTelefonoRepo =   $personaTelefonoRepo;
-        $this->asesorRepo          =   $asesorRepo;
-        $this->asesorFilialRepo    =   $asesorFilialRepo;
 	}
 
     // Página principal de Acesor
@@ -42,10 +39,8 @@ class PersonaController extends Controller {
 
     // Página de Nuevo
     public function nuevo(){
-
         $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        return view('rol_filial.personas.nuevo',compact('tipos','asesores'));    
+        return view('rol_filial.personas.nuevo',compact('tipos'));    
     }
 
     // Alta persona
@@ -96,12 +91,11 @@ class PersonaController extends Controller {
     // Página de Editar
     public function editar($id){
        
-    	$persona = $this->personaRepo->find($id); // Obtengo a la persona
-    	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $asesores = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        $mail=$this->personaMailRepo->findMail($id);// Obtengo al mail
-        $telefono=$this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
-    	return view('rol_filial.personas.editar',compact('persona','tipos','asesores','mail','telefono')); 
+    	$persona   = $this->personaRepo->find($id); // Obtengo a la persona
+    	$tipos     = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $mail      = $this->personaMailRepo->findMail($id);// Obtengo al mail
+        $telefono  = $this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
+    	return view('rol_filial.personas.editar',compact('persona','tipos','mail','telefono')); 
     }
 
     //Modificación de la persona

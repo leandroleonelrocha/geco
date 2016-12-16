@@ -43,8 +43,8 @@ Route::group(['prefix' => 'filial'], function(){
 
 	require_once('AsesoresRoute.php');
 
-	// Rutas Operaciones ---------- Asignación de Asesores
-	require_once('AsignacionAsesoresRoute.php');
+	// Rutas Operaciones ---------- Asignación de Aulas
+	require_once('AsignacionAulasRoute.php');
 
 	// Rutas Operaciones ---------- Estadísticas
 
