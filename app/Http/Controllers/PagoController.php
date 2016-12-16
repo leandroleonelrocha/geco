@@ -141,8 +141,7 @@ class PagoController extends Controller
 
         $fechas  =  herlpersObtenerFechas($request->get('fecha'));
         $morosos =  $this->pagoRepo->allMorososEntreFechas($fechas);
-        $morosos->nombre = $morosos->Matricula;
-        dd($morosos);
+       
         return response()->json($morosos, 200);
        
 

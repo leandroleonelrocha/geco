@@ -99,7 +99,7 @@
 				var body = $('#tabla_morosidad').children('tbody');
 					console.log(result);
 					$.each(result, function(clave, valor) {
-						body.append(tr(valor.id));
+						body.append(tr(valor.matricula_id));
 							
 						
 					});
@@ -128,7 +128,6 @@
 
 		var tr = '<tr>'+
 				 '<td>'+ matricula + '</td>'+
-				 '<td>'+ persona + '</td>'+
 				 
 				 '</tr>';
 		return tr;
