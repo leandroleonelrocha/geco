@@ -32,14 +32,17 @@
                 <div class="tab-pane" id="tab_2">
 
                 	<div class="form-group">
-					
+					{!! Form::open(['route'=> 'filial.tabla_morisidad', 'method'=>'post']) !!}
 						 <div class="input-group input-group-sm">
 		                   {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
 		                    <span class="input-group-btn">
 		                      <button class="btn btn-default btn-flat" type="button">Buscar</button>
 		                    </span>
 		                  </div><!-- /input-group -->
-		                  <p>Listado de morosidad</p>
+		         	{!! Form::close() !!}  
+		            
+		            <p>Listado de morosidad</p>
+		             
 
             		@include('rol_filial.pagos.partials.tabla_morosidad')
 

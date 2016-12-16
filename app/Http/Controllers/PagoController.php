@@ -135,4 +135,12 @@ class PagoController extends Controller
 		else
 			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
     }
+
+
+    public function tabla_morisidad(Request $request){
+
+        dd($request->all());
+
+    }
+
 }

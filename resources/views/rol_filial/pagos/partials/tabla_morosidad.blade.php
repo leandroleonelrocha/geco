@@ -1,9 +1,15 @@
 <table id="example1" class="table table-bordered table-striped">
 <thead><tr>
-<th class="text-center">@lang('matricula.nro')</th>
-<th class="text-center">@lang('matricula.descripcion')</th>
-<th class="text-center">@lang('matricula.estado')</th>
-<th class="text-center">@lang('matricula.actual')</th>
+<th class="text-center">Matrícula</th>
+<th class="text-center">Grupo</th>
+<th class="text-center">Nombre</th>
+<th class="text-center">Cuota</th>
+<th class="text-center">Fecha pago</th>
+<th class="text-center">Vencimiento</th>
+<th class="text-center">Salgo</th>
+<th class="text-center">Teléfonos</th>
+<th class="text-center">Correos</th>
+
 </tr> </thead>
 <tbody>
 @foreach($pagos as $pago)
