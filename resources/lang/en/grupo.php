@@ -23,7 +23,6 @@ return [
 
     'agregarotrodia'=>'Add another day',
 
-    'dia'=>'Day',
 
 	'lunes'=>'Monday',
 	'martes'=>'Tuesday',
@@ -55,11 +54,11 @@ return [
 	'noviembre'=>'November',
 	'diciembre'=>'December',
 
-    'hoy'=>'today',
-    'mes'=>'month',
-    'semana'=>'week',
-    'dia'=>'day',
-    'lista'=>'list',
+    'hoy'=>'Today',
+    'mes'=>'Month',
+    'semana'=>'Week',
+    'dia'=>'Day',
+    'lista'=>'List',
 
 	'horacomienzo'=>'Star time',
 	'horafin'=>'End time',
@@ -91,6 +90,10 @@ return [
 
     'nuevogrupo' => 'New Group',
 
+    'asignacionaulas' => 'Assignment of Classrooms',
+    'nombreaula' => 'Classroom name',
+
+    'crear' => 'Create',
     'editar' => 'Edit',
 
     'guardar' => 'Save',

@@ -32,7 +32,6 @@ class MatriculaController extends Controller {
         $this->matriculaRepo            = $matriculaRepo;
         $this->personaRepo              = $personaRepo;
         $this->asesorRepo               = $asesorRepo;
-        $this->asesorFilialRepo         = $asesorFilialRepo;
         $this->tipoDocumentoRepo        = $tipoDocumentoRepo;
         $this->personaEmailRepo         = $personaMailRepo;
         $this->personaTelefonoRepo      = $personaTelefonoRepo;
@@ -70,7 +69,7 @@ class MatriculaController extends Controller {
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+        $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
         $carreras   = $this->carreraRepo->all();
         $cursos     = $this->cursoRepo->all();
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
@@ -195,7 +194,7 @@ class MatriculaController extends Controller {
     public function editar($id){
         $matricula  = $this->matriculaRepo->find($id);
         $pagos      = $this->pagoRepo->allMatricula($id);
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
+        $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
         $carreras   = $this->carreraRepo->all();
         $cursos     = $this->cursoRepo->all();
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');

@@ -23,9 +23,9 @@ return [
     'nuevo' =>'Nuevo',
     'lista' =>'Lista',
     'pases' =>'Pases',
-    'asignar' =>'Asignar asesores',
+    'asignaraulas' =>'Asignar aulas',
     'perfil' =>'Perfil',
-      'cambiarcontraseña' =>'Cambiar contraseña',
+    'cambiarcontraseña' =>'Cambiar contraseña',
 
     'cerrarsesion' =>'Cerrar sesión',
     'salir' =>'Salir',

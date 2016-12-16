@@ -378,7 +378,7 @@
                     $(".materia").hide();
                 }
         }
->>>>>>> dc2369a088572edc0efb5ec121570824cc4ec22f
+
 
         obtenerMaterias();
         $("#carreras_cursos").change(function(){ obtenerMaterias(); });
@@ -407,7 +407,7 @@
             var row = $(this).data('id');
             e.preventDefault(); $(this).parent('div').remove(); x--;
 
-<<<<<<< HEAD
+
         })
 
         function add_input(){
@@ -431,7 +431,7 @@
                     '</div>';
           return data;      
         }
-=======
+
         });
 
         // function add_input(){
@@ -460,7 +460,7 @@
         //             '</div>';
         //   return data;      
         // }
->>>>>>> dc2369a088572edc0efb5ec121570824cc4ec22f
+
 });
 
 

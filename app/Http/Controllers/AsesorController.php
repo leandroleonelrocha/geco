@@ -4,11 +4,9 @@ use App\Entities\Asesor;
 use App\Entities\TipoDocumento;
 use App\Entities\AsesorMail;
 use App\Entities\AsesorTelefono;
-use App\Entities\AsesorFilial;
 use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\AsesorMailRepo;
 use App\Http\Repositories\AsesorTelefonoRepo;
-use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevoAsesorRequest;
@@ -21,13 +19,12 @@ class AsesorController extends Controller {
 
 	protected $asesorRepo;
 	
-    public function __construct(AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, AsesorMailRepo $asesorMailRepo, AsesorTelefonoRepo $asesorTelefonoRepo,AsesorFilialRepo $asesorFilialRepo)
+    public function __construct(AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, AsesorMailRepo $asesorMailRepo, AsesorTelefonoRepo $asesorTelefonoRepo)
 	{
 		$this->asesorRepo        = $asesorRepo;
 		$this->tipoDocumentoRepo  = $tipoDocumentoRepo;
         $this->asesorMailRepo  = $asesorMailRepo;
         $this->asesorTelefonoRepo  = $asesorTelefonoRepo;
-        $this->asesorFilialRepo  = $asesorFilialRepo;
 	}
     // Página principal de Acesor
     public function lista(){

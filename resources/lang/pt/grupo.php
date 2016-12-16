@@ -53,11 +53,11 @@ return [
     'noviembre'=>'Novembro',
     'diciembre'=>'Dezembro',
 
-    'hoy'=>'hoje',
-    'mes'=>'mês',
-    'semana'=>'semana',
-    'dia'=>'dia',
-    'lista'=>'lista',
+    'hoy'=>'Hoje',
+    'mes'=>'Mês',
+    'semana'=>'Semana',
+    'dia'=>'Dia',
+    'lista'=>'Lista',
 
 	'horacomienzo'=>'A hora de início',
 	'horafin'=>'Hora do fin',
@@ -88,6 +88,11 @@ return [
     'grupo' => 'Grupo',
 
     'nuevogrupo' => 'Novo Grupo',
+
+    'asignacionaulas' => 'Alocação de salas de aula',
+    'nombreaula' => 'Nome salas de aula',
+
+    'crear' => 'Salvar',
 
     'editar' => 'Editar',
 

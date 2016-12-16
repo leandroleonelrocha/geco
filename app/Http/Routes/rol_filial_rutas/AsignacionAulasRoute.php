@@ -11,7 +11,7 @@
 		'uses' => 'AulaController@nuevo'
 	]);
 
-	Route::get('asignacionAulas_nuevo_post/{id}', [
+	Route::post('asignacionAulas_nuevo_post', [
 
 		'as' => 'filial.asignacionAulas_nuevo_post',
 		'uses' => 'AulaController@nuevo_post'

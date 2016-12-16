@@ -23,7 +23,7 @@ return [
     'nuevo' =>'New',
     'lista' =>'List',
     'pases' =>'Pases',
-    'asignar' =>'Assign advisors',
+    'asignaraulas' =>'Assign classrooms',
     'perfil' =>'Profile',
     'cambiarcontraseña' =>'Change password',
 

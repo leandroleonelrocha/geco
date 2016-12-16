@@ -204,7 +204,7 @@ class PreinformeController extends Controller {
         
         $preinforme = $this->preinformeRepo->find($id);
         $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
-        $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+        $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
         $carreras   = $this->carreraRepo->all();
         $cursos     = $this->cursoRepo->all();
         return view('rol_filial.preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));

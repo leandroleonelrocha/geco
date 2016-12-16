@@ -5,7 +5,6 @@ use App\Entities\TipoDocumento;
 use App\Entities\Persona;
 use App\Entities\PersonaMail;
 use App\Entities\PersonaTelefono;
-use App\Entities\AsesorFilial;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PersonaMailRepo;
 use App\Http\Repositories\PersonaTelefonoRepo;

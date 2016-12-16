@@ -36,8 +36,4 @@ class Asesor extends Entity
         return $this->hasMany(AsesorTelefono::getClass());
     }
 
-    public function AsesorFilial(){
-        return $this->hasMany(AsesorFilial::getClass());
-    }
-
 }
