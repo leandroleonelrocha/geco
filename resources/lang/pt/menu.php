@@ -22,7 +22,7 @@ return [
     'nuevo' =>'Novo',
     'lista' =>'Lista',
     'pases' =>'Passes',
-    'asignar' =>'Atribuir assessores',
+    'asignaraulas' =>'Atribuir salas de aula',
     'perfil' =>'Perfil',
     'cambiarcontraseña' =>'Mudança senha',
     'cerrarsesion' =>'Fechar Sessão',

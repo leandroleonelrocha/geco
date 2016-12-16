@@ -135,4 +135,16 @@ class PagoController extends Controller
 		else
 			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
     }
+
+
+    public function tabla_morisidad(Request $request){
+
+        $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+        $morosos =  $this->pagoRepo->allMorososEntreFechas($fechas);
+       
+        return response()->json($morosos, 200);
+       
+
+    }
+
 }

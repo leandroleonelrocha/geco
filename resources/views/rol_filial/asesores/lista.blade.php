@@ -1,8 +1,7 @@
 @extends('template')
 
 @section('content')
-		
-						
+	
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -26,7 +25,7 @@
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
-						    @foreach($asesor as $a)
+						    @foreach($asesores as $a)
 							    <tr role="row" class="odd">
 							      	<td>{{ $a->nro_documento}}</td>
 							        <td>{{ $a->apellidos }}</td>
@@ -57,11 +56,4 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
-	<div class="row">
-        <div class="col-sm-12">
-	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-	        	{!! $asesor->render() !!}
-	        </div>
-        </div>
-    </div>
 @endsection

@@ -24,8 +24,6 @@ return [
 
     'agregarotrodia'=>'Agregar otro día',
 
-    'dia'=>'Día',
-
 	'lunes'=>'Lunes',
 	'martes'=>'Martes',
 	'miercoles'=>'Miércoles',
@@ -55,11 +53,11 @@ return [
     'noviembre'=>'Noviembre',
     'diciembre'=>'Diciembre',
 
-    'hoy'=>'hoy',
-    'mes'=>'mes',
-    'semana'=>'semana',
-    'dia'=>'día',
-    'lista'=>'lista',
+    'hoy'=>'Hoy',
+    'mes'=>'Mes',
+    'semana'=>'Semana',
+    'dia'=>'Día',
+    'lista'=>'Lista',
 
 	'horacomienzo'=>'Hora comienzo',
 	'horafin'=>'Hora fin',
@@ -91,6 +89,11 @@ return [
     'grupo' => 'Grupo',
 
     'nuevogrupo' => 'Nuevo Grupo',
+
+    'asignacionaulas' => 'Asignación de Aulas',
+    'nombreaula' => 'Nombre de aula',
+
+    'crear' => 'Crear',
 
     'editar' => 'Editar',
 

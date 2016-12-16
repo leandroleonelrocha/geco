@@ -15,7 +15,7 @@ use App\Http\Requests\CrearNuevoDirectorRequest;
 use App\Http\Requests\EditarDirectorRequest;
 use App\Entities\TipoDocumento;
 use App\Entities\Filial;
-use App\Entities\DirectorTelfono;
+use App\Entities\DirectorTelefono;
 use App\Entities\Persona;
 use Mail;
 

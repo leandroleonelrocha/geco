@@ -54,9 +54,9 @@
 											<td>{{$paseE->nombres}} {{$paseE->apellidos}}</td>
 											<td>
 												<?php if($paseE->confirmar == 0){ ?>
-													<span class="text-danger"> PENDIENTE </span> 
+													<span class="text-danger"> @lang('pase.pendiente') </span> 
 												<?php }else{ ?>
-													<span class="text-success"> REALIZADO </span>
+													<span class="text-success"> @lang('pase.realizado') </span>
 												<?php } ?>	
 											</td>
 											<td class="text-center"> - </td>

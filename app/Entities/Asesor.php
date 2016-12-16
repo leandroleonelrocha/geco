@@ -12,7 +12,7 @@ class Asesor extends Entity
      *
      * @var array
      */
-    protected $fillable = ['tipo_documento_id','nro_documento','apellidos','nombres','direccion','localidad','activo'];
+    protected $fillable = ['tipo_documento_id','nro_documento','apellidos','nombres','direccion','localidad','filial_id','activo'];
 
     public function getFullNameAttribute()
     {
@@ -34,10 +34,6 @@ class Asesor extends Entity
 
     public function AsesorTelefono(){
         return $this->hasMany(AsesorTelefono::getClass());
-    }
-
-    public function AsesorFilial(){
-        return $this->hasMany(AsesorFilial::getClass());
     }
 
 }

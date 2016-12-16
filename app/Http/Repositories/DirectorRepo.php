@@ -3,7 +3,7 @@
 namespace App\Http\Repositories;
 use App\Entities\Director;
 use App\Entities\Filial;
-use App\Entities\AsesorFilial;
+
 
 use DB;
 use App\Entities\Persona;
@@ -63,7 +63,7 @@ class DirectorRepo extends BaseRepo {
 
     public function countTotalAsesores(){
         $filial_id = $this->filialDirectores();
-        return AsesorFilial::whereIn('filial_id', $filial_id)->get()->count();
+        return Asesor::whereIn('filial_id', $filial_id)->get()->count();
     }
 
 

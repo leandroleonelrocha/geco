@@ -23,7 +23,6 @@ class CrearNuevaPersonaRequest extends Request
     public function rules()
     {
         $rules= [
-           // 'asesor_id' => 'required',
             // 'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
             // 'nro_documento' => 'required|unique:persona,nro_documento',
@@ -55,12 +54,11 @@ class CrearNuevaPersonaRequest extends Request
     public function messages()
     {
         $messages= [
-            //  'asesor_id.required' => 'Seleccione un asesor',
             // 'tipo_documento_id.required' => 'Seleccione un tipo de documento.',
             'nro_documento.required' => 'El número de documento es requerido.',
             // 'nro_documento.unique'=> 'El número de documento ya está en uso', 
             'nro_documento.numeric'=> 'El número de documento es numérico.', 
-            'apellidos.required' => 'El apellido es requerido',
+            'apellidos.required' => 'El apellido es requerido.',
             'nombres.required' => 'El nombre es requerido.',
             'genero.required' => 'Seleccione un género',
             'fecha_nacimiento.required' => 'La fecha de nacimiento es requerida.',

@@ -5,12 +5,10 @@ use App\Entities\TipoDocumento;
 use App\Entities\Persona;
 use App\Entities\PersonaMail;
 use App\Entities\PersonaTelefono;
-use App\Entities\AsesorFilial;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PersonaMailRepo;
 use App\Http\Repositories\PersonaTelefonoRepo;
 use App\Http\Repositories\AsesorRepo;
-use App\Http\Repositories\AsesorFilialRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevaPersonaRequest;
@@ -22,13 +20,12 @@ class PersonaController extends Controller {
 
 	protected $personaRepo;
 	
-    public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo, AsesorFilialRepo $asesorFilialRepo  )
+    public function __construct(PersonaRepo $personaRepo, TipoDocumento $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, AsesorRepo $asesorRepo)
 	{
 		$this->personaRepo         =   $personaRepo;
 		$this->tipoDocumentoRepo   =   $tipoDocumentoRepo;
         $this->personaMailRepo     =   $personaMailRepo;
         $this->personaTelefonoRepo =   $personaTelefonoRepo;
-        $this->asesorFilialRepo    =   $asesorFilialRepo;
 	}
 
     // Página principal de Acesor

@@ -22,7 +22,7 @@ class EditarDirectorRequest extends Request
      */
     public function rules()
     {
-        return [
+         $rules= [
             'tipo_documento_id' => 'required',
             'nro_documento' => 'required',
             'nro_documento' => 'required|numeric',

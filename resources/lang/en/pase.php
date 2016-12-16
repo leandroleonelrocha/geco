@@ -8,6 +8,9 @@ return [
     'persona'=>'Person',
     'estado' => 'State',
 
+ 	'pendiente' => 'PENDING',
+	'realizado' => 'REALIZED',
+
     'confirmar' => 'Confirm',
     'rechazar' => 'To refuse',
  

@@ -5,7 +5,8 @@ use App\Http\Repositories\PagoRepo;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PreinformeRepo;
 use App\Http\Repositories\ExamenRepo;
-use App\Http\Repositories\AsesorFilialRepo;;
+use App\Http\Repositories\AsesorRepo;
+use App\Entities\Asesor;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
 use Illuminate\Http\Request;
@@ -15,13 +16,13 @@ class EstadisticaController extends Controller
     protected  $totalPersonas;
     protected  $totalAsesores;
     protected  $data;
-	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo, AsesorFilialRepo $asesorFilialRepo)
+	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo,AsesorRepo $asesorRepo)
 	{
 		$this->pagoRepo         = $pagoRepo;
 		$this->personaRepo      = $personaRepo;
 		$this->preinformeRepo   = $preinformeRepo;
 		$this->examenRepo       = $examenRepo;
-		$this->asesorFilialRepo = $asesorFilialRepo;
+		$this->asesorRepo       = $asesorRepo;
         $this->data['totalPersonas']    = $this->total_personas();
         $this->data['totalAsesores']    = $this->total_asesores();
 	}
@@ -29,7 +30,7 @@ class EstadisticaController extends Controller
         return $this->personaRepo->getPersonasFilial()->count();
     }
     public function total_asesores(){
-        return $this->asesorFilialRepo->allAsesorFilial()->count();
+        return $this->asesorRepo->allAsesores()->count();
     }
 	public function index(){
     return view('rol_filial.estadisticas.index')->with($this->data);

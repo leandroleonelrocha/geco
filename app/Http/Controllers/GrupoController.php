@@ -91,6 +91,8 @@ class GrupoController extends Controller
             $grupo->GrupoHorario()->create($data);
         }
 
+
+        
 		$grupo_dias =[];
 		$dias_horas = [];
         $ultimo = $this->grupoRepo->all()->last();
@@ -149,25 +151,38 @@ class GrupoController extends Controller
 		$fin 					= date("Y-m-d", strtotime($model->fecha_fin));
 		$clases 				= $this->claseRepo->findAllClaseGrupo($model->id);
 		
-		//$model->GrupoHorario()->delete();        
+		$data['filial_id'] = session('usuario')['entidad_id'];
+		
+
+		$carrearas_cursos = explode(';',$request->carreras_cursos);
+        	if ($carrearas_cursos[0] == 'carrera'){
+        		$data['curso_id']     =	null;
+        		$data['carrera_id']   =	$carrearas_cursos[1];
+        	}
+             
+            if ($carrearas_cursos[0] == 'curso'){
+                $data['curso_id']     =	$carrearas_cursos[1];
+            	$data['materia_id']   =	null;
+            	$data['carrera_id']   =	null; 		
+	        }
+   		
 		// Validar que Fecha FIN no sea anterior a una clase finalizada (ESTADO = 3)
 		foreach ($clases as $clase) {
 			if ($data['fecha_fin'] < $clase->fecha && $clase->clase_estado_id == 3) {
 				return redirect()->back()->with('msg_error', 'Hay clases finalizadas posterior a la fecha de FIN ingresada, ingresa una fecha de fin posterior.');
 			}
 		}
+		
 
-
-
-        foreach ($model->GrupoHorario as $value ) {
-			array_push($grupo_dias, $value->dia);
-		}
-
-		foreach ($model->GrupoHorario as $value) {
-		  	$d['horario_desde'] = $value->horario_desde;
-		  	$d['horario_hasta'] = $value->horario_hasta;
-			array_push($dias_horas, $d);
-		}
+		// Edicion de dia y horario del grupo
+		$model->GrupoHorario()->delete(); 
+ 		$longitud = count($request->dia);
+        for($i=0;$i<$longitud;$i++) {
+            $d['dia'] = $request->dia[$i];
+            $d['horario_desde'] = $request->horario_desde[$i];
+            $d['horario_hasta'] = $request->horario_hasta[$i];
+            $model->GrupoHorario()->create($d);
+        }
 
 		// Cambio Fecha FIN
 		// Si la fecha es anterior se eliminan las clases de más
@@ -205,7 +220,6 @@ class GrupoController extends Controller
 			}
 		}
 
-		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->edit($model,$data);
 		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo editado correctamente');

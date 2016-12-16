@@ -29,7 +29,7 @@ class EditarPerfilFilialRequest extends Request
      */
     public function rules()
     {
-        return [
+         $rules= [
 
             'nombre' => 'required',
             'direccion' => 'required',

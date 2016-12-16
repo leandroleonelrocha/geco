@@ -12,6 +12,10 @@ class AsesorRepo extends BaseRepo {
         return new Asesor();
     }
 
+    public function allAsesores(){
+        return $this->model->where('filial_id', $this->filial)->where('activo', 1)->get();
+    }
+
 
     public function check($tipo,$nro){
         return $this->model->where('tipo_documento_id', $tipo)->where('nro_documento', $nro)->update(['activo'=>1]);

@@ -12,6 +12,7 @@ use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\MateriaRepo;
+use App\Http\Requests\CrearNuevoExamenRequest;
 class ExamenController extends Controller
 {
 	protected $examenRepo;

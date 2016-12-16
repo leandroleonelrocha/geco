@@ -40,4 +40,11 @@
 			'as'	=> 'filial.pagos_actualizar_post',
 			'uses'	=>	'PagoController@actualizar_post'
 		]);
+
+		Route::post('tabla_morisidad',[
+
+			'as'	=> 'filial.tabla_morisidad',
+			'uses'	=>	'PagoController@tabla_morisidad'
+
+		]);
 	});
