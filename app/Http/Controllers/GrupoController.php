@@ -11,6 +11,7 @@ use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\ClaseMatriculaRepo;
+use App\Http\Repositories\AulaRepo;
 use App\Entities\Clase;
 use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
@@ -28,15 +29,16 @@ class GrupoController extends Controller
 	protected $claseRepo;
 	protected $claseMatriculaRepo;
 
-	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo)
+	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo, AulaRepo $aulaRepo)
 	{
-		$this->cursoRepo = $cursoRepo;
-		$this->carreraRepo = $carreraRepo;
-		$this->materiaRepo = $materiaRepo;
-		$this->docenteRepo = $docenteRepo;
-		$this->grupoRepo = $grupoRepo;
-		$this->claseRepo = $claseRepo;
-		$this->claseMatriculaRepo = $claseMatriculaRepo;
+		$this->cursoRepo 			= $cursoRepo;
+		$this->carreraRepo 			= $carreraRepo;
+		$this->materiaRepo 			= $materiaRepo;
+		$this->docenteRepo 			= $docenteRepo;
+		$this->grupoRepo 			= $grupoRepo;
+		$this->claseRepo 			= $claseRepo;
+		$this->claseMatriculaRepo 	= $claseMatriculaRepo;
+		$this->aulaRepo 			= $aulaRepo;
 		
 	}	
 
@@ -47,10 +49,11 @@ class GrupoController extends Controller
 	}
 
 	public function nuevo(){
-		$carreras = $this->carreraRepo->all();
-        $cursos  = $this->cursoRepo->all();
-		$materias =  $this->materiaRepo->lists('nombre','id');
-		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
+		$carreras 	= $this->carreraRepo->all();
+        $cursos  	= $this->cursoRepo->all();
+		$materias 	= $this->materiaRepo->lists('nombre','id');
+		$docentes 	= $this->docenteRepo->allEneable()->lists('apellidos', 'id');
+		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
 		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
 	}
 
@@ -62,7 +65,6 @@ class GrupoController extends Controller
 		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
 		return view('rol_filial.grupos.form', compact('model', 'cursos', 'carreras', 'materias', 'docentes'));
 	}
-
 
 	public function postAdd(CrearNuevoGrupoRequest $request){
         $data = $request->all();
@@ -88,6 +90,8 @@ class GrupoController extends Controller
             $grupo->GrupoHorario()->create($data);
         }
 
+
+        
 		$grupo_dias =[];
 		$dias_horas = [];
         $ultimo = $this->grupoRepo->all()->last();
@@ -115,13 +119,15 @@ class GrupoController extends Controller
 			    	$data['clase_estado_id'] = 1;
 			    else
 			    	$data['clase_estado_id'] = 2;
-
+			    $materia 				 = $this->materiaRepo->find($data['materia_id']);
 			    $data['grupo_id'] 		 = $ultimo->id;
 			    $data['fecha'] 			 = $i;
 			    $data['docente_id'] 	 = $ultimo->docente_id;
-			    $data['descripcion'] 	 = '(La clase no tiene descripción)';
+			    $data['descripcion'] 	 = $ultimo->descripcion+' - '+$materia->nombre;
 			    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
 			    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
+			    $data['materia_id']  	 = $materia->id;
+			    $data['aula_id'] 		 = $aula->id;
 			    $data['enviado'] 	 	 = 0;
 
 			    $this->claseRepo->create($data);
@@ -144,25 +150,38 @@ class GrupoController extends Controller
 		$fin 					= date("Y-m-d", strtotime($model->fecha_fin));
 		$clases 				= $this->claseRepo->findAllClaseGrupo($model->id);
 		
-		//$model->GrupoHorario()->delete();        
+		$data['filial_id'] = session('usuario')['entidad_id'];
+		
+
+		$carrearas_cursos = explode(';',$request->carreras_cursos);
+        	if ($carrearas_cursos[0] == 'carrera'){
+        		$data['curso_id']     =	null;
+        		$data['carrera_id']   =	$carrearas_cursos[1];
+        	}
+             
+            if ($carrearas_cursos[0] == 'curso'){
+                $data['curso_id']     =	$carrearas_cursos[1];
+            	$data['materia_id']   =	null;
+            	$data['carrera_id']   =	null; 		
+	        }
+   		
 		// Validar que Fecha FIN no sea anterior a una clase finalizada (ESTADO = 3)
 		foreach ($clases as $clase) {
 			if ($data['fecha_fin'] < $clase->fecha && $clase->clase_estado_id == 3) {
 				return redirect()->back()->with('msg_error', 'Hay clases finalizadas posterior a la fecha de FIN ingresada, ingresa una fecha de fin posterior.');
 			}
 		}
+		
 
-
-
-        foreach ($model->GrupoHorario as $value ) {
-			array_push($grupo_dias, $value->dia);
-		}
-
-		foreach ($model->GrupoHorario as $value) {
-		  	$d['horario_desde'] = $value->horario_desde;
-		  	$d['horario_hasta'] = $value->horario_hasta;
-			array_push($dias_horas, $d);
-		}
+		// Edicion de dia y horario del grupo
+		$model->GrupoHorario()->delete(); 
+ 		$longitud = count($request->dia);
+        for($i=0;$i<$longitud;$i++) {
+            $d['dia'] = $request->dia[$i];
+            $d['horario_desde'] = $request->horario_desde[$i];
+            $d['horario_hasta'] = $request->horario_hasta[$i];
+            $model->GrupoHorario()->create($d);
+        }
 
 		// Cambio Fecha FIN
 		// Si la fecha es anterior se eliminan las clases de más
@@ -200,7 +219,6 @@ class GrupoController extends Controller
 			}
 		}
 
-		$data['filial_id'] = session('usuario')['entidad_id'];
 
 		$this->grupoRepo->edit($model,$data);
 		return redirect()->route('grupos.index')->with('msg_ok', 'Grupo editado correctamente');

@@ -329,9 +329,12 @@ foreign key 				(filial_id)							    references filial			(id)
 create table if not exists aula(
 id 			int not null auto_increment,
 nombre 		varchar(50) not null,
+filial_id 	int not null,
 created_at 	timestamp not null default '0000-00-00 00:00:00',
 updated_at 	timestamp not null default '0000-00-00 00:00:00',
-primary key (id)
+primary key (id),
+unique key	(nombre),
+foreign key (filial_id) references filial (id)
 );
 
 create table if not exists grupo_color(
@@ -411,7 +414,7 @@ docente_id		int not null,
 dia				int(1) not null,
 horario_desde	time not null,
 horario_hasta	time not null,
-materia_id		int  not null,
+materia_id		int,
 aula_id			int  not null,
 enviado 		boolean not null default false,
 descripcion		varchar(300),
