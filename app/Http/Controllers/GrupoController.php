@@ -51,19 +51,20 @@ class GrupoController extends Controller
 	public function nuevo(){
 		$carreras 	= $this->carreraRepo->all();
         $cursos  	= $this->cursoRepo->all();
-		$materias 	= $this->materiaRepo->lists('nombre','id');
+		// $materias 	= $this->materiaRepo->lists('nombre','id');
 		$docentes 	= $this->docenteRepo->allEneable()->lists('apellidos', 'id');
 		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
-		return view('rol_filial.grupos.form', compact('cursos', 'carreras', 'materias','docentes'));
+		return view('rol_filial.grupos.form', compact('cursos', 'carreras','docentes', 'aulas'));
 	}
 
 	public function edit($id){
-		$model = $this->grupoRepo->find($id);
-		$carreras = $this->carreraRepo->all();
-        $cursos  = $this->cursoRepo->all();
-		$materias =  $this->materiaRepo->lists('nombre','id');
-		$docentes = $this->docenteRepo->all()->lists('apellidos', 'id');
-		return view('rol_filial.grupos.form', compact('model', 'cursos', 'carreras', 'materias', 'docentes'));
+		$model 		= $this->grupoRepo->find($id);
+		$carreras 	= $this->carreraRepo->all();
+        $cursos  	= $this->cursoRepo->all();
+		$materias 	= $model->Carrera->Materia->lists('nombre','id');
+		$docentes 	= $this->docenteRepo->all()->lists('apellidos', 'id');
+		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
+		return view('rol_filial.grupos.form', compact('model', 'cursos', 'carreras', 'materias', 'docentes', 'aulas'));
 	}
 
 	public function postAdd(CrearNuevoGrupoRequest $request){

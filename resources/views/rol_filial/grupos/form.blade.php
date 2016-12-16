@@ -95,16 +95,20 @@
                                        <select name="materia_id" class="form-control select_materia">
                                        </select>
                                     </div>
-                                    <div class="col-xs-6">
-                                    <label> @lang('grupo.dia') </label>
-                                    <select name="dia[]" class="form-control">
-                                        <option value="1"> @lang('grupo.lunes')</option>
-                                        <option value="2"> @lang('grupo.martes')</option>
-                                        <option value="3"> @lang('grupo.miercoles')</option>
-                                        <option value="4"> @lang('grupo.jueves')</option>
-                                        <option value="5"> @lang('grupo.viernes')</option>
-                                        <option value="6"> @lang('grupo.sabados')</option>
-                                     </select>
+                                    <div class="col-xs-3">
+                                       <label> @lang('grupo.aula') </label>
+                                       {!! Form::select('aula',$aulas->toArray(),null,array('class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="col-xs-3">
+                                        <label> @lang('grupo.dia') </label>
+                                        <select name="dia[]" class="form-control">
+                                            <option value="1"> @lang('grupo.lunes')</option>
+                                            <option value="2"> @lang('grupo.martes')</option>
+                                            <option value="3"> @lang('grupo.miercoles')</option>
+                                            <option value="4"> @lang('grupo.jueves')</option>
+                                            <option value="5"> @lang('grupo.viernes')</option>
+                                            <option value="6"> @lang('grupo.sabados')</option>
+                                        </select>
                                     </div>
 
                                   <div class="col-xs-3">
@@ -123,12 +127,17 @@
                                 @foreach($model->GrupoHorario as $horario)
                               
                                 <div class="form-group horario">
-                                    <div class="col-xs-12 materia" style="display: none;">
+                                    @if(!empty($horario->materia_id))
+                                    <div class="col-xs-12 materia">
                                        <label> @lang('grupo.materia') </label>
-                                       <select name="materia_id" class="form-control select_materia">
-                                       </select>
+                                       {!! Form::select('materia_id',$materias->toArray(), $horario->materias_id ,array('class' => 'form-control select_materia')) !!}
                                     </div>
-                                    <div class="col-xs-6">
+                                    @endif
+                                    <div class="col-xs-3">
+                                       <label> @lang('grupo.aula') </label>
+                                       {!! Form::select('aula',$aulas->toArray(), $horario->aula_id ,array('class' => 'form-control')) !!}
+                                    </div>
+                                    <div class="col-xs-3">
                                     <label> Dia </label>
                                     <select name="dia[]" class="form-control">
                                        
