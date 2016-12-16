@@ -11,6 +11,7 @@ return [
     'carrerasycursos'=>'Carreras y cursos',
 
     'seleccioncyc'=>'Seleccione una carrera o curso',
+    'seleccionmateria'=>'Seleccione una materia',
 
     'carreras'=>'Carreras',
     'cursos'=>'Cursos',

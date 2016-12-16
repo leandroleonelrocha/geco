@@ -138,7 +138,6 @@ class MatriculaController extends Controller {
         $persona['disponibilidad_sabados']  =   $request->disponibilidad_sabados;
         $persona['aclaraciones']            =   $request->aclaraciones;
         $persona['filial_id']               =   session('usuario')['entidad_id'];
-        $persona['asesor_id']               =   $request->asesor;
         if($this->personaRepo->create($persona)){
             //Datos Telefónicos y Mails
             $persona=$this->personaRepo->all()->last();

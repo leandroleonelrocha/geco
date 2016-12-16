@@ -40,7 +40,7 @@ class LoginController extends Controller {
                      'habilitado'  => 1 
                      ),
                      array(
-                     'id'          => 1,
+                     'id'          => 2,
                      'usuario'     => 'director@director.com',
                      'password'    => 1234,
                      'rol_id'      => 3,

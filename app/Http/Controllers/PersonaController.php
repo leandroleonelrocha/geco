@@ -28,7 +28,6 @@ class PersonaController extends Controller {
 		$this->tipoDocumentoRepo   =   $tipoDocumentoRepo;
         $this->personaMailRepo     =   $personaMailRepo;
         $this->personaTelefonoRepo =   $personaTelefonoRepo;
-        $this->asesorRepo          =   $asesorRepo;
         $this->asesorFilialRepo    =   $asesorFilialRepo;
 	}
 
@@ -42,10 +41,8 @@ class PersonaController extends Controller {
 
     // Página de Nuevo
     public function nuevo(){
-
         $tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $asesores   = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        return view('rol_filial.personas.nuevo',compact('tipos','asesores'));    
+        return view('rol_filial.personas.nuevo',compact('tipos'));    
     }
 
     // Alta persona
@@ -96,12 +93,11 @@ class PersonaController extends Controller {
     // Página de Editar
     public function editar($id){
        
-    	$persona = $this->personaRepo->find($id); // Obtengo a la persona
-    	$tipos = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $asesores = $this->asesorFilialRepo->allAsesorFilial()->lists('fullname','asesor_id');
-        $mail=$this->personaMailRepo->findMail($id);// Obtengo al mail
-        $telefono=$this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
-    	return view('rol_filial.personas.editar',compact('persona','tipos','asesores','mail','telefono')); 
+    	$persona   = $this->personaRepo->find($id); // Obtengo a la persona
+    	$tipos     = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $mail      = $this->personaMailRepo->findMail($id);// Obtengo al mail
+        $telefono  = $this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
+    	return view('rol_filial.personas.editar',compact('persona','tipos','mail','telefono')); 
     }
 
     //Modificación de la persona
