@@ -160,14 +160,20 @@ class PagoController extends Controller
         */
 
         foreach ($morosos as $key => $value) {
-            
-            $datos['nro_pago']              = $value->nro_pago;
+           
+            if($value->nro_pago == 0)
+                $datos['nro_pago']  = 'Matricula';
+            else
+                $datos['nro_pago']  = $value->nro_pago;
+
+
             $datos['vencimiento']           = $value->vencimiento;
+            $datos['saldo']                 = $value->monto_pago;
             $datos['matricula']             = $value->Matricula->id;
             $datos['persona']               = $value->Matricula->Persona->fullname;
             $datos['grupo']                 = 'grupo 1';
-            $datos['persona_email']         = 'persona_email';
-            $datos['persona_telefono']      = 'persona_telefono';
+            $datos['persona_email']         = $value->Matricula->Persona->PersonaMail;
+            $datos['persona_telefono']      = $value->Matricula->Persona->PersonaTelefono;
             
             array_push($data, $datos);
         }
@@ -180,7 +186,10 @@ class PagoController extends Controller
 
     public function imprimir_morosidad(){
        
-       dd(Session::get('morosos'));
+       $model = Session::get('morosos');
+       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model'));
+       return $pdf->stream();
+       //dd(Session::get('morosos'));
     }
 
 }

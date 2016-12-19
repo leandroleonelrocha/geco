@@ -53,7 +53,7 @@
 				     	<b>Listado de morosidad</b>
 				       <div class="btn-group pull-right">
 				      	
-				        <a href="{{route('filial.imprimir_morosidad')}}" type="button" class="btn btn-default">
+				        <a href="{{route('filial.imprimir_morosidad')}}" target="_blank" type="button" class="btn btn-default">
 			               	Imprimir
 						    <span class="glyphicon glyphicon-print"></span> 
 						</a>
@@ -122,9 +122,9 @@
 					$.each(result, function(clave, valor){
 
 						console.log(valor)
-						
-
-						body.append(tr(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, 'fecha', valor.vencimiento, 'saldo', 'telefono', 'mail'));
+						var mail 	 = persona_email(valor.persona_email);
+						var telefono = persona_telefono(valor.persona_telefono);
+						body.append(tr(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, 'fecha', valor.vencimiento, valor.saldo, telefono, mail));
 	
 						
 					});
