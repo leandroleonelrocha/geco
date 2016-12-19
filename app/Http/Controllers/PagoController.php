@@ -13,6 +13,7 @@ use App\Http\Requests\CrearNuevoPagoRequest;
 use App\Http\Requests\EditarPagoRequest;
 use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PagoRepo;
+use PDF;
 
 class PagoController extends Controller
 {
@@ -141,10 +142,25 @@ class PagoController extends Controller
 
         $fechas  =  herlpersObtenerFechas($request->get('fecha'));
         $morosos =  $this->pagoRepo->allMorososEntreFechas($fechas);
-       
-        return response()->json($morosos, 200);
+        $data    = [];   
+
+        foreach ($morosos as $key => $value) {
+            
+            $datos['pago']      = $value;
+            $datos['matricula'] = $value->Matricula;
+            $datos['persona']   = $value->Matricula->Persona;
+            $datos['grupo']     = $value->Matricula->Grupo;
+            $datos['persona_email'] = $value->Matricula->Persona->PersonaMail;
+            array_push($data, $datos);
+        }
+
+        return response()->json($data, 200);
        
 
+    }
+
+    public function imprimir_morosidad(){
+        
     }
 
 }
