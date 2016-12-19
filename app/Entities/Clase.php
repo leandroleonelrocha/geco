@@ -6,7 +6,7 @@ class Clase extends Entity {
     protected  $table= 'clase';
    // protected $primaryKey= 'id_curso';
 
-    protected $fillable   = ['id', 'clase_estado_id', 'grupo_id', 'fecha', 'descripcion', 'docente_id', 'horario_desde', 'horario_hasta', 'enviado'];
+    protected $fillable   = ['id', 'clase_estado_id', 'grupo_id', 'fecha', 'descripcion', 'docente_id', 'horario_desde', 'horario_hasta', 'materia_id', 'aula_id', 'enviado'];
 
   
     
