@@ -129,21 +129,12 @@
                                     <div class="col-xs-12 materia">
                                        <label> @lang('grupo.materia') </label>
                                        {!! Form::select('materia_id',$materias->toArray(), $horario->materia_id ,array('class' => 'form-control select_materia')) !!}
-<<<<<<< HEAD
                                     </div>
                                     @endif
                                     <div class="col-xs-3">
                                        <label> @lang('grupo.aula') </label>
                                        {!! Form::select('aula',$aulas->toArray(), $horario->aula_id ,array('class' => 'form-control')) !!}
                                     </div>
-=======
-                                    </div>
-                                    @endif
-                                    <div class="col-xs-3">
-                                       <label> @lang('grupo.aula') </label>
-                                       {!! Form::select('aula',$aulas->toArray(), $horario->aula_id ,array('class' => 'form-control')) !!}
-                                    </div>
->>>>>>> 748d6f2546e7e6c614063ca122e4e1146049d15b
                                     <div class="col-xs-3">
                                     <label> Dia </label>
                                     <select name="dia[]" class="form-control">
@@ -217,10 +208,6 @@
                     $(".materia").hide();
                 }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 748d6f2546e7e6c614063ca122e4e1146049d15b
         obtenerMaterias();
         $("#carreras_cursos").change(function(){ obtenerMaterias(); });
         var max_fields      = 10; //maximum input boxes allowed
@@ -246,10 +233,6 @@
             
             var row = $(this).data('id');
             e.preventDefault(); $(this).parent('div').remove(); x--;
-<<<<<<< HEAD
-=======
-
->>>>>>> 748d6f2546e7e6c614063ca122e4e1146049d15b
         });
         // function add_input(){
         //     return $('.horario').clone();
