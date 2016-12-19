@@ -16,6 +16,8 @@ class Aula extends Entity
 
 
     // Relaciones
-
+    public function GrupoHorario(){
+    	return $this->hasMany(GrupoHorario::getClass());
+    }
 
 }
