@@ -100,7 +100,6 @@
 					console.log(result);
 					$.each(result, function(clave, valor) {
 						body.append(tr(valor.matricula_id));
-							
 						
 					});
 
