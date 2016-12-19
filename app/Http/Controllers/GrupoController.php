@@ -43,7 +43,6 @@ class GrupoController extends Controller
 	}	
 
 	public function index(){
-
 		$grupos = $this->grupoRepo->allEnable();
 		return view('rol_filial.grupos.index', compact('grupos'));
 	}
@@ -61,6 +60,7 @@ class GrupoController extends Controller
 		$model 		= $this->grupoRepo->find($id);
 		$carreras 	= $this->carreraRepo->all();
         $cursos  	= $this->cursoRepo->all();
+        if(isset($model->Carrera))
 		$materias 	= $model->Carrera->Materia->lists('nombre','id');
 		$docentes 	= $this->docenteRepo->all()->lists('apellidos', 'id');
 		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
@@ -86,15 +86,17 @@ class GrupoController extends Controller
         $longitud = count($request->dia);
         for($i=0;$i<$longitud;$i++) {
             $data['dia'] = $request->dia[$i];
-            $data['horario_desde'] = $request->horario_desde[$i];
-            $data['horario_hasta'] = $request->horario_hasta[$i];
+            $data['horario_desde'] 	= $request->horario_desde[$i];
+            $data['horario_hasta'] 	= $request->horario_hasta[$i];
+            $data['materia_id'] 	= $request->materia_id[$i];
+            $data['aula_id'] 		= $request->aula_id[$i];
             $grupo->GrupoHorario()->create($data);
         }
 
-
-        
-		$grupo_dias =[];
+		$grupo_dias = [];
 		$dias_horas = [];
+		$materia 	= [];
+		$aula 		= [];
         $ultimo = $this->grupoRepo->all()->last();
         foreach ($ultimo->GrupoHorario as $value ) {
 			array_push($grupo_dias, $value->dia);
@@ -103,14 +105,20 @@ class GrupoController extends Controller
 		foreach ($ultimo->GrupoHorario as $value ) {
 		  	$d['horario_desde'] = $value->horario_desde;
 		  	$d['horario_hasta'] = $value->horario_hasta;
+		  	if (isset($value->materia_id)){
+		  		$m['materia_id'] = $value->materia_id;
+		  		array_push($materia, $m);
+		  	}
+		  	$a['aula_id'] = $value->aula_id;
 			array_push($dias_horas, $d);
+			array_push($aula, $a);
 		}
 
 		$fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
 		$fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
-		
+
+		$contador = 0;
 		for($i=$fecha1;$i<=$fecha2;$i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-			$contador = 0;
 			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
 			$fecha = $dias[date('N', strtotime($i))];
 
@@ -120,20 +128,25 @@ class GrupoController extends Controller
 			    	$data['clase_estado_id'] = 1;
 			    else
 			    	$data['clase_estado_id'] = 2;
-			    $materia 				 = $this->materiaRepo->find($data['materia_id']);
 			    $data['grupo_id'] 		 = $ultimo->id;
 			    $data['fecha'] 			 = $i;
 			    $data['docente_id'] 	 = $ultimo->docente_id;
-			    $data['descripcion'] 	 = $ultimo->descripcion+' - '+$materia->nombre;
+			    if (!empty($materia[$contador]['materia_id'])){
+			    	$mat  = $this->materiaRepo->find($materia[$contador]['materia_id']);
+			    	$data['descripcion']  = $ultimo->descripcion.' - '.$mat->nombre;
+			    	$data['materia_id']   = $materia[$contador]['materia_id'];
+			    }
+			    else
+			    	$data['descripcion'] = $ultimo->descripcion;
 			    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
 			    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
-			    $data['materia_id']  	 = $materia->id;
-			    $data['aula_id'] 		 = $aula->id;
+			    $data['aula_id'] 		 = $aula[$contador]['aula_id'];
 			    $data['enviado'] 	 	 = 0;
-
 			    $this->claseRepo->create($data);
+				$contador ++;
+				if( $contador == count($ultimo->GrupoHorario) )
+					$contador = 0;
 			}
-			$contador ++;
 		}
         return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
     }
@@ -147,6 +160,8 @@ class GrupoController extends Controller
 		
 		$grupo_dias 			= [];
 		$dias_horas 			= [];
+		$materia 				= [];
+		$aula 					= [];
 		// $inicio 				= date("Y-m-d", strtotime($model->fecha_inicio));
 		$fin 					= date("Y-m-d", strtotime($model->fecha_fin));
 		$clases 				= $this->claseRepo->findAllClaseGrupo($model->id);
@@ -178,9 +193,11 @@ class GrupoController extends Controller
 		$model->GrupoHorario()->delete(); 
  		$longitud = count($request->dia);
         for($i=0;$i<$longitud;$i++) {
-            $d['dia'] = $request->dia[$i];
-            $d['horario_desde'] = $request->horario_desde[$i];
-            $d['horario_hasta'] = $request->horario_hasta[$i];
+            $d['dia'] 				= $request->dia[$i];
+            $d['horario_desde'] 	= $request->horario_desde[$i];
+            $d['horario_hasta'] 	= $request->horario_hasta[$i];
+            $d['materia_id'] 		= $request->materia_id[$i];
+            $d['aula_id'] 			= $request->aula_id[$i];
             $model->GrupoHorario()->create($d);
         }
 
@@ -196,8 +213,8 @@ class GrupoController extends Controller
 			}
 		}
 		elseif( $data['fecha_fin'] > $model->fecha_fin ){
+			$contador = 0;
 			for( $i = $fin; $i <= $data['fecha_fin']; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-				$contador = 0;
 				$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
 				$fecha = $dias[date('N', strtotime($i))];
 				if (in_array($fecha, $grupo_dias)) {
@@ -210,13 +227,22 @@ class GrupoController extends Controller
 				    $data['grupo_id'] 		 = $model->id;
 				    $data['fecha'] 			 = $i;
 				    $data['docente_id'] 	 = $model->docente_id;
-				    $data['descripcion'] 	 = '(La clase no tiene descripción)';
+					if (!empty($materia[$contador]['materia_id'])){
+				    	$mat  = $this->materiaRepo->find($materia[$contador]['materia_id']);
+				    	$data['descripcion']  = $ultimo->descripcion.' - '.$mat->nombre;
+				    	$data['materia_id']   = $materia[$contador]['materia_id'];
+				    }
+				    else
+				    	$data['descripcion'] = $ultimo->descripcion;
 				    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
 				    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
+				    $data['aula_id'] 		 = $aula[$contador]['aula_id'];
 				    $data['enviado'] 	 	 = 0;
 				    $this->claseRepo->create($data);
+				    $contador ++;
+					if( $contador == count($ultimo->GrupoHorario) )
+						$contador = 0;
 				}
-				$contador ++;
 			}
 		}
 
