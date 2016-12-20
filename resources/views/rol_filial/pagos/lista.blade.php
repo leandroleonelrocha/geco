@@ -119,20 +119,12 @@
 				
 				var body = $('#tabla_morosidad').children('tbody');
 					
-<<<<<<< HEAD
-					$.each(result, function(clave, valor) {
-					
-						body.append(tr(valor.pago.matricula_id, valor.grupo[0].descripcion, valor.persona.nombres, valor.pago.nro_pago, 'fecha', valor.pago.vencimiento, 'saldo', 'telefono', valor.persona_email));
-							
-=======
 					$.each(result, function(clave, valor){
 
-						console.log(valor)
 						var mail 	 = persona_email(valor.persona_email);
 						var telefono = persona_telefono(valor.persona_telefono);
 						body.append(tr(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, 'fecha', valor.vencimiento, valor.saldo, telefono, mail));
-	
->>>>>>> bcef40c26e67b621128cfad9c1ac51a60d64a612
+
 						
 					});
 

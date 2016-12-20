@@ -11,10 +11,7 @@
               padding:2px;
           }
 
-          table{
-              border-collapse: collapse;
-          }
-
+      
           .titulo{
               width: 100%;
               margin-top: 5px;
@@ -71,45 +68,67 @@
               padding:0 !important;
           }
 
+          table, th, td {
+              border: 1px solid ;
+              border-collapse: collapse;
+              text-align: center;
+          }
+          li {  
+            list-style-type: none;
+            font-size: small;
+          }
+
 
       </style>
   </head>
   <body>
 
   <div class="titulo">
-      <span>Fecha</span>
+      <span>Fecha desde: {{$datos['fecha_desde']}} - Fecha hasta: {{$datos['fecha_hasta']}}</span>
       <span>Filial</span>
   </div>
 
 <div class="content">
-	<table id="tabla_morosidad" class="table table-bordered table-striped">
-	<thead>
-	<tr>
-	<th class="text-center">Matrícula</th>
-	<th class="text-center">Grupo</th>
-	<th class="text-center">Nombre</th>
-	<th class="text-center">Cuota</th>
-	<th class="text-center">Fecha pago</th>
-	<th class="text-center">Vencimiento</th>
-	<th class="text-center">Saldo</th>
-	<th class="text-center">Teléfonos</th>
-	<th class="text-center">Correos</th>
-	</tr> 
-	</thead>
-	<tbody>
-	@foreach($model as $m)
-	<tr>
-	<td>{{$m['matricula']}}</td>
-	<td>{{$m['grupo']}}</td>
-	<td>{{$m['persona']}}</td>
-	<td>{{$m['nro_pago']}}</td>
-	<td>fecha pago</td>
-	<td>{{$m['saldo']}}</td>
-	<td>{{$m['vencimiento']}}</td>
-	<td>{{$m['vencimiento']}}</td>							        
-	</tr>
-	@endforeach
-	</tbody>
+	<table>
+  	<thead>
+    	<tr>
+    	<th >Matrícula</th>
+    	<th >Grupo</th>
+    	<th >Nombre</th>
+    	<th >Cuota</th>
+    	<th >Vencimiento</th>
+    	<th >Saldo</th>
+      <th >Email</th>
+      <th >Teléfonos</th>
+    	</tr> 
+  	</thead>
+  	<tbody>
+  	@foreach($model as $m)
+    	<tr>
+    	<td>{{$m['matricula']}}</td>
+    	<td>{{$m['grupo']}}</td>
+    	<td>{{$m['persona']}}</td>
+    	<td>{{$m['nro_pago']}}</td>
+    	<td>{{$m['vencimiento']}}</td>
+    	<td>{{$m['saldo']}}</td>
+    	<td>
+         <ul>
+         @foreach($m['persona_email'] as $email)
+          <li>{{$email->mail}}</li>
+        @endforeach
+        </ul>
+      </td>
+      <td>
+         <ul>
+         @foreach($m['persona_telefono'] as $telefono)
+          <li>{{$telefono->telefono}}</li>
+        @endforeach
+        </ul>
+      </td>
+      			        
+    	</tr>
+  	@endforeach
+  	</tbody>
 	</table>
 </div>
 
