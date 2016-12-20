@@ -53,10 +53,10 @@
 				     	<b>Listado de morosidad</b>
 				       <div class="btn-group pull-right">
 				      	
-				        <button type="button" class="btn btn-default buscar_fecha">
+				        <a href="{{route('filial.imprimir_morosidad')}}" target="_blank" type="button" class="btn btn-default">
 			               	Imprimir
 						    <span class="glyphicon glyphicon-print"></span> 
-						</button>
+						</a>
 				      
 				      </div>
 				  	</div>
@@ -69,7 +69,7 @@
 						<th class="text-center">Cuota</th>
 						<th class="text-center">Fecha pago</th>
 						<th class="text-center">Vencimiento</th>
-						<th class="text-center">Salgo</th>
+						<th class="text-center">Saldo</th>
 						<th class="text-center">Teléfonos</th>
 						<th class="text-center">Correos</th>
 
@@ -80,9 +80,7 @@
 						</table>
 
 					</div>
-
-		          
-						            		
+		            		
 
                 </div><!-- /.tab-pane -->
                 </div><!-- /.tab-content -->
@@ -121,10 +119,20 @@
 				
 				var body = $('#tabla_morosidad').children('tbody');
 					
+<<<<<<< HEAD
 					$.each(result, function(clave, valor) {
 					
 						body.append(tr(valor.pago.matricula_id, valor.grupo[0].descripcion, valor.persona.nombres, valor.pago.nro_pago, 'fecha', valor.pago.vencimiento, 'saldo', 'telefono', valor.persona_email));
 							
+=======
+					$.each(result, function(clave, valor){
+
+						console.log(valor)
+						var mail 	 = persona_email(valor.persona_email);
+						var telefono = persona_telefono(valor.persona_telefono);
+						body.append(tr(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, 'fecha', valor.vencimiento, valor.saldo, telefono, mail));
+	
+>>>>>>> bcef40c26e67b621128cfad9c1ac51a60d64a612
 						
 					});
 
@@ -133,6 +141,22 @@
 		);
 
 	});
+	
+	function persona_email(obj){
+		var mail = new Array();
+		$.each(obj, function(key, val) {
+		   mail.push(val.mail);
+		});	
+		return mail;
+	}
+
+	function persona_telefono(obj){
+		var telefono = new Array();
+		$.each(obj, function(key, val) {
+		   telefono.push(val.telefono);
+		});	
+		return telefono;
+	}
 	
 	function table() {
 
@@ -148,7 +172,7 @@
 		return table;
 	}
 
-	function tr(matricula, grupo, nombre, cuota, fecha_pago, fecha_vencimiento, saldo, telefono, correo) {
+	function tr(matricula, grupo, nombre, cuota, fecha_pago, fecha_vencimiento, saldo, telefono, mail) {
 
 		var tr = '<tr>'+
 				 '<td>'+ matricula + '</td>'+
@@ -159,7 +183,7 @@
 				 '<td>'+ fecha_vencimiento + '</td>'+
 				 '<td>'+ saldo + '</td>'+
 				 '<td>'+ telefono + '</td>'+
-				 '<td>'+ correo + '</td>'+
+				 '<td>'+ mail + '</td>'+
 				 
 				 '</tr>';
 		return tr;
