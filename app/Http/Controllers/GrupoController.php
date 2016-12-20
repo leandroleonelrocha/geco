@@ -68,8 +68,27 @@ class GrupoController extends Controller
 	}
 
 	public function postAdd(CrearNuevoGrupoRequest $request){
-        $data = $request->all();
-        $array = explode("-", $request->get('fecha'));
+        $grupos 		  = $this->grupoRepo->allEnable();
+        $data 			  = $request->all();
+        
+        if (!empty($grupos)) {
+	        foreach ($grupos as $grupo) {
+	        	foreach ($grupo->GrupoHorario as $horario) {
+		        	for ($i=0; $i < count($data['aula_id']); $i++) {
+		        		$hora = date("h:i:s", strtotime($data['horario_desde'][$i]));
+		        		$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
+		        		$dia = $dias[$data['dia'][$i]];
+
+		        		if( ( $data['aula_id'][$i] == $horario->aula_id ) && ( $dia == $horario->dia ) && ( $hora >= $horario->horario_desde && $hora < $horario->horario_hasta ) ){
+		        			$aula = $this->aulaRepo->find($data['aula_id'][$i]);
+		        			return redirect()->back()->with('msg_error', 'El aula '.$aula->nombre.' ya se está reservada el día '.$dia.' al horario ingresado por el grupo '.$grupo->descripcion.'.');
+		        		}
+		        	}
+	        	}
+	        }
+        }
+
+        $array 			  = explode("-", $request->get('fecha'));
 		$carrearas_cursos = explode(';',$request->carreras_cursos);
             if ($carrearas_cursos[0] == 'carrera')
                 $data['carrera_id']    =   $carrearas_cursos[1];
@@ -156,8 +175,27 @@ class GrupoController extends Controller
     }
 
 	public function postEdit($id, CrearNuevoGrupoRequest $request){
-		$model 					= $this->grupoRepo->find($id);
-		$data 					= $request->all();
+		$model 	= $this->grupoRepo->find($id);
+		$data 	= $request->all();
+		$grupos = $this->grupoRepo->allEnable();
+		
+		if (!empty($grupos)) {
+	        foreach ($grupos as $grupo) {
+	        	foreach ($grupo->GrupoHorario as $horario) {
+		        	for ($i=0; $i < count($data['aula_id']); $i++) {
+		        		$hora = date("h:i:s", strtotime($data['horario_desde'][$i]));
+		        		$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
+		        		$dia = $dias[$data['dia'][$i]];
+
+		        		if( ( $data['aula_id'][$i] == $horario->aula_id ) && ( $dia == $horario->dia ) && ( $hora >= $horario->horario_desde && $hora < $horario->horario_hasta ) ){
+		        			$aula = $this->aulaRepo->find($data['aula_id'][$i]);
+		        			return redirect()->back()->with('msg_error', 'El aula '.$aula->nombre.' ya se está reservada el día '.$dia.' al horario ingresado por el grupo '.$grupo->descripcion.'.');
+		        		}
+		        	}
+	        	}
+	        }
+        }
+
 		$array 					= explode("-", $request->get('fecha'));
 		$data['fecha_inicio'] 	= date("Y-m-d", strtotime($array[0]));
 		$data['fecha_fin'] 		= date("Y-m-d", strtotime($array[1]));
