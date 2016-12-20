@@ -110,7 +110,6 @@
                                             <option value="6"> @lang('grupo.sabados')</option>
                                         </select>
                                     </div>
-
                                   <div class="col-xs-3">
                                    <label> @lang('grupo.horacomienzo') </label>
                                     <input class="form-control" name="horario_desde[]" type="time" value="08:00:00" >
@@ -119,7 +118,6 @@
                                    <label> @lang('grupo.horafin') </label>
                                     <input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" >
                                   </div>
-
                                 </div>
                             </div>
                             @else
@@ -149,17 +147,14 @@
                                         <option  <?php if ($horario->dia == 'Sabado' ) echo 'selected' ; ?>  value="6"> @lang('grupo.sabados')</option>
                                      </select>
                                     </div>
-
                                   <div class="col-xs-3">
                                    <label> @lang('grupo.horacomienzo') </label>
                                     <input class="form-control" name="horario_desde[]" type="time" value="{{$horario->horario_desde}}" >
                                   </div>
-
                                   <div class="col-xs-3">
                                    <label> @lang('grupo.horafin') </label>
                                     <input class="form-control" name="horario_hasta[]" type="time" value="{{$horario->horario_hasta}}" >
                                   </div>
-
                                 </div>
                                 @endforeach
                             </div>
@@ -206,19 +201,15 @@
                                }
                             
                         }}
-
                     );
                 }
-
                 if(tipo[0] == "curso"){
                     $(".select_materia").empty(); 
                     $(".materia").hide();
                 }
         }
-
         obtenerMaterias();
         $("#carreras_cursos").change(function(){ obtenerMaterias(); });
-
         var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
@@ -242,14 +233,10 @@
             
             var row = $(this).data('id');
             e.preventDefault(); $(this).parent('div').remove(); x--;
-
         });
-
         // function add_input(){
         //     return $('.horario').clone();
         // }
-
-
         // function add_input(){
         //  var data = '<div class="form-group">'+
         //             '<div class="col-xs-6">'+
@@ -272,11 +259,7 @@
         //   return data;      
         // }
 });
-
-
 $(".star_intro" ).click(function() {
-
-
     var texto ='¡Bienvenido al Tutorial de Grupos!';  
     <?php
         $array = [
@@ -286,12 +269,8 @@ $(".star_intro" ).click(function() {
         ];
     
     ?>
-
     startIntro(texto);
-
 });     
-
 </script>
 @include('partials.inicio_tutorial')
-
 @endsection

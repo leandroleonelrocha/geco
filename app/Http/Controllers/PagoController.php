@@ -13,6 +13,8 @@ use App\Http\Requests\CrearNuevoPagoRequest;
 use App\Http\Requests\EditarPagoRequest;
 use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PagoRepo;
+use PDF;
+use Session;
 
 class PagoController extends Controller
 {
@@ -141,10 +143,53 @@ class PagoController extends Controller
 
         $fechas  =  herlpersObtenerFechas($request->get('fecha'));
         $morosos =  $this->pagoRepo->allMorososEntreFechas($fechas);
-       
-        return response()->json($morosos, 200);
+        $data    =  [];   
+
+        /*
+        foreach ($morosos as $key => $value) {
+            
+            $datos['pago']              = $value;
+            $datos['matricula']         = $value->Matricula;
+            $datos['persona']           = $value->Matricula->Persona;
+            $datos['grupo']             = $value->Matricula->Grupo;
+            $datos['persona_email']     = $value->Matricula->Persona->PersonaMail;
+            $datos['persona_telefono']  = $value->Matricula->Persona->PersonaTelefono;
+            
+            array_push($data, $datos);
+        }
+        */
+
+        foreach ($morosos as $key => $value) {
+           
+            if($value->nro_pago == 0)
+                $datos['nro_pago']  = 'Matricula';
+            else
+                $datos['nro_pago']  = $value->nro_pago;
+
+
+            $datos['vencimiento']           = $value->vencimiento;
+            $datos['saldo']                 = $value->monto_pago;
+            $datos['matricula']             = $value->Matricula->id;
+            $datos['persona']               = $value->Matricula->Persona->fullname;
+            $datos['grupo']                 = 'grupo 1';
+            $datos['persona_email']         = $value->Matricula->Persona->PersonaMail;
+            $datos['persona_telefono']      = $value->Matricula->Persona->PersonaTelefono;
+            
+            array_push($data, $datos);
+        }
+
+        Session::put('morosos', $data);
+        return response()->json($data, 200);
        
 
+    }
+
+    public function imprimir_morosidad(){
+       
+       $model = Session::get('morosos');
+       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model'));
+       return $pdf->stream();
+       //dd(Session::get('morosos'));
     }
 
 }

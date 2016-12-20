@@ -15,7 +15,7 @@ class Pago extends Entity
 
     // Relaciones
     public function Matricula(){
-        return $this->hasMany(Matricula::getClass());
+        return $this->belongsTo(Matricula::getClass());
     }
 
     public function Recibos(){

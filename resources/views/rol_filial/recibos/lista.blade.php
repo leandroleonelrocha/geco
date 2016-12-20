@@ -25,7 +25,7 @@
 								<td>{{$recibo->monto}}</td>
 								<td>{{$recibo->ReciboConceptoPago->concepto_pago}}</td>
 								<td>{{$recibo->descripcion}}</td>
-								<td><a href="{{route('filial.recibo_imprimir',$recibo->id)}}" title="@lang('lista.imprimir')"><i class="btn btn-warning glyphicon glyphicon-print"></i></a></td>
+								<td><a href="{{route('filial.recibo_imprimir',$recibo->id)}}" target="_blank" title="@lang('lista.imprimir')"><i class="btn btn-warning glyphicon glyphicon-print"></i></a></td>
 							</tr>
 							@endforeach
 						</tbody>
