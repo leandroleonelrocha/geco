@@ -16,6 +16,7 @@ use App\Http\Repositories\ReciboRepo;
 use App\Http\Repositories\ReciboTipoRepo;
 use App\Http\Repositories\ReciboConceptoPagoRepo;
 use App\Http\Repositories\PagoRepo;
+use App\Http\Funciones\NumberToLetterConverter;
 use PDF;
 
 class ReciboController extends Controller
@@ -53,14 +54,13 @@ class ReciboController extends Controller
 
 	public function imprimir($id){
 		$recibo = $this->reciboRepo->find($id);
-		//$pdf 	= PDF::loadView('pdf.recibos', $recibo);
-		//return $pdf->download('recibos.pdf');
-		//$pdf->download('recibos.pdf');
-		//return redirect()->back();
+		$clase = new NumberToLetterConverter();
+		$miMoneda = null;
+		$recibo->monto_letra = $clase->convertNumber($recibo->monto,$miMoneda, 'entero');
 		
-		$pdf  = PDF::loadView('impresiones.recibo',compact('recibo'));
+		$pdf    = PDF::loadView('impresiones.recibo',compact('recibo'));
 		return $pdf->stream();
-		//return $pdf->download('invoice.pdf');
+		
 	}
 
 

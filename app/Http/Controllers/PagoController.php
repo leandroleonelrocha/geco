@@ -13,6 +13,8 @@ use App\Http\Requests\CrearNuevoPagoRequest;
 use App\Http\Requests\EditarPagoRequest;
 use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PagoRepo;
+use App\Http\Funciones\NumberToLetterConverter;
+
 use PDF;
 use Session;
 
@@ -142,43 +144,35 @@ class PagoController extends Controller
     public function tabla_morisidad(Request $request){
 
         $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+        
         $morosos =  $this->pagoRepo->allMorososEntreFechas($fechas);
         $data    =  [];   
-
-        /*
-        foreach ($morosos as $key => $value) {
-            
-            $datos['pago']              = $value;
-            $datos['matricula']         = $value->Matricula;
-            $datos['persona']           = $value->Matricula->Persona;
-            $datos['grupo']             = $value->Matricula->Grupo;
-            $datos['persona_email']     = $value->Matricula->Persona->PersonaMail;
-            $datos['persona_telefono']  = $value->Matricula->Persona->PersonaTelefono;
-            
-            array_push($data, $datos);
-        }
-        */
+      
 
         foreach ($morosos as $key => $value) {
            
             if($value->nro_pago == 0)
-                $datos['nro_pago']  = 'Matricula';
+                $d['nro_pago']  = 'Matricula';
             else
-                $datos['nro_pago']  = $value->nro_pago;
+                $d['nro_pago']  = $value->nro_pago;
 
 
-            $datos['vencimiento']           = $value->vencimiento;
-            $datos['saldo']                 = $value->monto_pago;
-            $datos['matricula']             = $value->Matricula->id;
-            $datos['persona']               = $value->Matricula->Persona->fullname;
-            $datos['grupo']                 = 'grupo 1';
-            $datos['persona_email']         = $value->Matricula->Persona->PersonaMail;
-            $datos['persona_telefono']      = $value->Matricula->Persona->PersonaTelefono;
+            $d['vencimiento']           = $value->vencimiento;
+            $d['saldo']                 = $value->monto_pago;
+            $d['matricula']             = $value->Matricula->id;
+            $d['persona']               = $value->Matricula->Persona->fullname;
+            $d['grupo']                 = 'grupo 1';
+            $d['persona_email']         = $value->Matricula->Persona->PersonaMail;
+            $d['persona_telefono']      = $value->Matricula->Persona->PersonaTelefono;
             
-            array_push($data, $datos);
+            array_push($data, $d);
         }
 
+        $datos['fecha_desde'] = $fechas[0];
+        $datos['fecha_hasta'] = $fechas[1];
+
         Session::put('morosos', $data);
+        Session::put('datos', $datos);
         return response()->json($data, 200);
        
 
@@ -187,7 +181,8 @@ class PagoController extends Controller
     public function imprimir_morosidad(){
        
        $model = Session::get('morosos');
-       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model'));
+       $datos = Session::get('datos');
+       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model','datos'));
        return $pdf->stream();
        //dd(Session::get('morosos'));
     }

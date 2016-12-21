@@ -121,11 +121,10 @@
 					
 					$.each(result, function(clave, valor){
 
-						console.log(valor)
 						var mail 	 = persona_email(valor.persona_email);
 						var telefono = persona_telefono(valor.persona_telefono);
 						body.append(tr(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, 'fecha', valor.vencimiento, valor.saldo, telefono, mail));
-	
+
 						
 					});
 

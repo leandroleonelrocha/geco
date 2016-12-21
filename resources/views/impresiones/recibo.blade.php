@@ -3,32 +3,48 @@
 <head>
 	<title></title>
 	<style type="text/css">
-		body {
-
-    	text-align: center;
-		}
+	
 		#container {
 		    width: 700px;
 		    margin: 0px auto;
-		    text-align: center;
-		}
-		#header{
-			text-align: right;
+		    font-family: monospace;
 		}
 
+		#header{
+			top:20px;
+			text-align: right;
+			position: relative;
+   			left: -150px;
+		}
+
+
 		#sidebar {
-		    width: 200px;
-		    padding: 10px;
-		    float: left;
+		    padding-top: 100px;
+            margin-top: -40px !important;
+            font-size: 18px;
+		
 		}
 		#main {
-			width: 200px;
-		    padding: 10px;
+			padding-top: 10px;
+            margin-top: -40px !important;
 		    float: left;
+		    font-size: 18px;
 		}
 		#footer {
 		    clear: both;
 		}
+		.right{
+          display: inline-block;
+          vertical-align: bottom !important;
+          width: 50%;
+        }
+
+        .left{
+          width: 50%;
+          display: inline-block;
+          vertical-align: top !important;
+        }
+     
 	</style>
 </head>
 
@@ -36,26 +52,47 @@
 <div id="container">
     <div id="header">
 
-        <h2>Fecha:  <?php echo date('d/m/Y'); ?></h2>
+        <h2 >Fecha:  <?php echo date('d/m/Y'); ?></h2>
 
     </div>
     <div id="sidebar">
 
-        <p>{{ $recibo->Pago->Matricula->Persona->fullname }}</p>
-        <p>{{ $recibo->Pago->Matricula->Persona->domicilio }}</p>
-        <p>1242 SOLANO</p>
-        <p>Mozo y camarero</p>
+    	<div class="right">
+	        <p>{{ $recibo->Pago->Matricula->Persona->fullname }}</p>
+	        <p>{{ $recibo->Pago->Matricula->Persona->domicilio }}</p>
+	        <p>
+	        	Grupo:
+
+	        	@foreach($recibo->Pago->Matricula->Grupo as $grupo)
+	        		@if(isset($grupo->Curso->nombre))
+	        			{{$grupo->Curso->nombre}}
+	        		@endif
+	        		@if(isset($grupo->Carrera->nombre))
+	        			{{$grupo->Carrera->nombre}}
+	        		@endif
+				
+	        	@endforeach
+	        </p>
+        </div>
+
+        <div class="left">
+	        <p>Nro Matricula: {{ $recibo->Pago->Matricula->id }}</p>
+	        <p>Teléfono: 
+	        	@foreach($recibo->Pago->Matricula->Persona->PersonaTelefono as $telefono)
+	        	{{$telefono->telefono }}
+	        	@endforeach
+	        </p>
+	     
+        </div>
         
     </div>
     <div id="main">
 
         <h3>Plan de Pago</h3>
         <p>Matricula completa</p>
-        <p>Son quinientos pesos ----------------------------------- total 500.00</p>
+        <p>Son {{$recibo->monto_letra}} pesos -------------------------- total ${{$recibo->monto}}.00</p>
         
     </div>
-    <div id="footer">
-        <p>Pie de página</p>
-    </div>
+   
 </div>
 </body>
