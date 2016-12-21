@@ -89,6 +89,7 @@ return [
 
     'nuevogrupo' => 'Novo Grupo',
 
+    'aula' => 'Aula',
     'asignacionaulas' => 'Alocação de salas de aula',
     'nombreaula' => 'Nome salas de aula',
 

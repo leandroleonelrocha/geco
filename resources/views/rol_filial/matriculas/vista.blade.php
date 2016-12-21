@@ -88,7 +88,7 @@
 									else echo '-';
 									?></td>
 									<td>${{$pago->monto_original}}</td>
-									<td>${{$pago->recargo}}</td>
+									<td>%{{$pago->recargo}}</td>
 									<td>{{$pago->Filial->nombre}}</td>
 									<td>
 											<?php

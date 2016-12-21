@@ -10,6 +10,8 @@ return [
     'cancelado'=>'Canceled',
     'datosmatricula'=>'Enrollments data',
     'datospersonales'=>'Person data',
+    'matricula'=>'Enrollment',
+    'restopago'=>'Other of payments',
 
     'cursos'=>'Courses',
     'carreras'=>'Careers',
