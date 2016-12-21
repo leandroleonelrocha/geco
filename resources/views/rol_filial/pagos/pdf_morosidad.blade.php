@@ -1,16 +1,22 @@
-<table id="tabla_morosidad" class="table table-bordered table-striped">
-						<thead><tr>
-						<th class="text-center">Matrícula</th>
-						<th class="text-center">Grupo</th>
-						<th class="text-center">Nombre</th>
-						<th class="text-center">Cuota</th>
-						<th class="text-center">Fecha pago</th>
-						<th class="text-center">Vencimiento</th>
-						<th class="text-center">Saldo</th>
-						<th class="text-center">Teléfonos</th>
-						<th class="text-center">Correos</th>
+<table>
+   <tr>
+      <td>Números de Teléfono</td>
 
-						</tr> </thead>
+   </tr>
+
+						<thead>
+						<tr>
+						<th >Matrícula</th>
+						<th >Grupo</th>
+						<th >Nombre</th>
+						<th >Cuota</th>
+						<th >Fecha pago</th>
+						<th >Vencimiento</th>
+						<th >Saldo</th>
+						<th>Teléfonos</th>
+						<th >Correos</th>
+						</tr> 
+						</thead> 
 						<tbody>
 					    @foreach($model as $m)
 					      <tr>
@@ -23,11 +29,11 @@
 					        <td>{{$m['saldo']}}</td>
 					        <td>{{$m['vencimiento']}}</td>
 					        <td>{{$m['vencimiento']}}</td>
-					        
+
 					      </tr>
 					      @endforeach
-						</tbody>
-						</table>
-
-
+						</tbody>  
+   
 </table>
+
+						
