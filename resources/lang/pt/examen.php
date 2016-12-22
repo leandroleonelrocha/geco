@@ -5,7 +5,7 @@ return [
     'matricula'=>'Inscrição',
     'nombre'=>'Nome',
     'nota'=>'Nota',
-    'recupatorio'=>'Recuperatorio',
+    'recuperatorio'=>'Recuperatorio',
 
     'seleccionemateria' => 'Selecionar Matéria',
 
