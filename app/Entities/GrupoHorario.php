@@ -5,12 +5,17 @@ class GrupoHorario extends Entity {
 
     protected  $table= 'grupo_horario';
 	
-    protected $fillable   = ['grupo_id', 'dia', 'horario_desde', 'horario_hasta'];
+    protected $fillable   = ['grupo_id', 'dia', 'horario_desde', 'horario_hasta', 'materia_id', 'aula_id'];
 
-    public function Grupo()
-    {
+    public function Grupo(){
     	return $this->belongsTo(Grupo::getClass());
     }
 
-    
+    public function Materia(){
+    	return $this->belongsTo(Materia::getClass());
+    }
+
+    public function Aula(){
+    	return $this->belongsTo(Aula::getClass());
+    }
 }

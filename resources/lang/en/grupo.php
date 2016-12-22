@@ -90,6 +90,7 @@ return [
 
     'nuevogrupo' => 'New Group',
 
+    'aula' => 'Classroom',
     'asignacionaulas' => 'Assignment of Classrooms',
     'nombreaula' => 'Classroom name',
 

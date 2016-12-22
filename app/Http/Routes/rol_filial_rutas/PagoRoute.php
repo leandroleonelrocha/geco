@@ -43,8 +43,16 @@
 
 		Route::post('tabla_morisidad',[
 
-			'as'	=> 'filial.tabla_morisidad',
+			'as'	=>	'filial.tabla_morisidad',
 			'uses'	=>	'PagoController@tabla_morisidad'
 
 		]);
+
+		Route::get('imprimir_morosidad',[
+
+			'as'	=>	'filial.imprimir_morosidad',
+			'uses'	=>	'PagoController@imprimir_morosidad'
+		
+		]);
+
 	});

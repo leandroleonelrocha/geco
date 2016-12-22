@@ -9,6 +9,8 @@ return [
     'cancelado'=>'Cancelado',
     'datosmatricula'=>'Dados de Registro',
     'datospersonales'=>'Dados Pessoal',
+    'matricula'=>'Inscrição',
+    'restopago'=>'Outros pagamentos',
 
     'cursos'=>'Cursos',
     'carreras'=>'Carreiras',
