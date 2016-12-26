@@ -72,7 +72,7 @@
 				  {!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
 				    <div class="row setup-content" id="step-1">
 				      <div class="col-xs-12">
-				        <div class="col-md-12">
+				        
 				        
 				          <div class="form-group">
 								<label>@lang('persona.tipodocumento')</label>
@@ -91,40 +91,40 @@
 							{!! Form::text('nombres',null,array('class'=>'form-control', 'required' => 'required', 'placeholder' => 'Escriba el nombre' )) !!}
 				          </div>
 				          	
-
-							<div class="col-md-6 form-group">
-								<label>@lang('persona.domicilio')</label>
-								{!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
-							</div>
-							<div class="col-md-6 form-group">
-								<label>@lang('persona.localidad')</label>
-								{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
-							</div>
-
-							<div class="col-md-6 form-group">
-								<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
-								<div class="col-xs-3">
-									{!! Form::radio('genero', 'M',null, array('class'=>'flat-red') ) !!} @lang('persona.masculino')
+				          	<div class="row">
+								<div class="col-md-6 form-group">
+									<label>@lang('persona.domicilio')</label>
+									{!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
 								</div>
-								<div class="col-xs-3">
-									{!! Form::radio('genero', 'F',null, array('class'=>'flat-red') ) !!} @lang('persona.femenino')
+								<div class="col-md-6 form-group">
+									<label>@lang('persona.localidad')</label>
+									{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 								</div>
 							</div>
-
-							<div class="col-md-6 form-group">
-								<label>@lang('persona.fnacimiento')</label>
-								{!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
-							</div>
-
-				          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-				        </div>
+						
+							<div class="row">
+			                    <div class="col-xs-6">
+			                     	<div class="col-xs-12"><label>@lang('persona.genero')</label></div>
+									<div class="col-xs-3">
+										{!! Form::radio('genero', 'M',null, array('class'=>'flat-red') ) !!} @lang('persona.masculino')
+									</div>
+									<div class="col-xs-3">
+										{!! Form::radio('genero', 'F',null, array('class'=>'flat-red') ) !!} @lang('persona.femenino')
+									</div>
+			                    </div>
+			                    <div class="col-xs-6">
+			                     	<label>@lang('persona.fnacimiento')</label>
+									{!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
+			                    </div>
+		                   	</div>
+		                    <hr>
+                   			<button class="btn btn-primary nextBtn  pull-right" type="button" >Siguiente</button>
+                 			
 				      </div>
 				    </div>
 				    <div class="row setup-content" id="step-2">
 				      <div class="col-xs-12">
-				        <div class="col-md-12">
-				          
-				          
+				       
 				            <div class="form-group">
 								<label>@lang('persona.estadocivil')</label>
 								{!! Form::text('estado_civil',null,array('class'=>'form-control')) !!}
@@ -145,23 +145,36 @@
 
 							<div class="form-group">
 								<label>@lang('persona.disponibilidad')</label>
-								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_manana', '1', null,array('class'=>'flat-red')) !!} @lang('persona.mañana')
+								<div class="form-check">
+								  <label>
+								   {!! Form::checkbox('disponibilidad_manana', '1', null,array('class'=>'flat-red')) !!} 
+								   @lang('persona.mañana')
+								  </label>
 								</div>
-								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_tarde', '1', null,array('class'=>'flat-red')) !!} @lang('persona.tarde')
+								<div class="form-check">
+								  <label class="form-check-label">
+								    {!! Form::checkbox('disponibilidad_tarde', '1', null,array('class'=>'flat-red')) !!} 
+								  @lang('persona.tarde')
+								  </label>
 								</div>
-								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_noche', '1', null,array('class'=>'flat-red')) !!} @lang('persona.noche')
+								<div class="form-check">
+								  <label class="form-check-label">
+								  {!! Form::checkbox('disponibilidad_noche', '1', null,array('class'=>'flat-red')) !!} 
+								  @lang('persona.noche')
+								  </label>
 								</div>
-								<div class="col-xs-12">
-									{!! Form::checkbox('disponibilidad_sabados', '1', null,array('class'=>'flat-red')) !!} @lang('persona.sabados')
+								<div class="form-check">
+								  <label class="form-check-label">
+								  {!! Form::checkbox('disponibilidad_sabados', '1', null,array('class'=>'flat-red')) !!}
+								  @lang('persona.sabados')
+								  </label>
 								</div>
+
 							</div>	
+						<hr>
+				        <button class="btn btn-primary nextBtn pull-right" type="button" >Siguiente</button>
 
-				          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
-
-				        </div>
+				       
 				      </div>
 				    </div>
 				    <div class="row setup-content" id="step-3">
@@ -188,8 +201,8 @@
 							   		<input type="text" name="mail[]" class="form-control">
 								</div>	
 							</div>
-
-				          <button class="btn btn-success pull-right" type="submit">@lang('persona.crear')</button>
+						<hr>	
+				        <button class="btn btn-success pull-right" type="submit">@lang('persona.crear')</button>
 				  
 				      </div>
 				    </div>
