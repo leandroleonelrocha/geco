@@ -68,8 +68,12 @@
 					      </div>
 					    </div>
   					</div>
-  
-				  {!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
+  				 @if(isset($model))
+  				 {!! Form::model($model,['route'=>['filial.personas_editar_post',$model->id]]) !!}
+  				 @else
+  				 {!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
+  				 @endif		
+
 				    <div class="row setup-content" id="step-1">
 				      <div class="col-xs-12">
 				        
@@ -190,15 +194,30 @@
 								<label>@lang('persona.telefonos')</label>
 								<button class="add_input_telefono btn btn-success">+</button>	
 								<div class="input_fields_telefono">
-									<input type="text" name="telefono[]" class="form-control">
+									@if(isset($model))
+										@foreach ($telefono as $t)
+											<input type="text" name="telefono[]" class="form-control" value="{{$t->telefono}}">
+										@endforeach
+									@else
+										<input type="text" name="telefono[]" class="form-control">
+									@endif
+								
 								</div>
+
 							</div>
 
 							<div class="form-group">
 								<label>E-Mails</label>
 								<button class="add_input_mail btn btn-success">+</button>	
 								<div class="input_fields_wrap">
-							   		<input type="text" name="mail[]" class="form-control">
+								@if(isset($model))
+										@foreach ($mail as $m)
+										<input type="text" name="mail[]" class="form-control" value="{{$m->mail}}">
+										@endforeach
+									@else
+										<input type="text" name="mail[]" class="form-control">
+									@endif
+							   		
 								</div>	
 							</div>
 						<hr>	
@@ -216,48 +235,5 @@
 
 
 @section('js')
-<script type="text/javascript">
-	$(document).ready(function () {
-  var navListItems = $('div.setup-panel div a'),
-          allWells = $('.setup-content'),
-          allNextBtn = $('.nextBtn');
-
-  allWells.hide();
-
-  navListItems.click(function (e) {
-      e.preventDefault();
-      var $target = $($(this).attr('href')),
-              $item = $(this);
-
-      if (!$item.hasClass('disabled')) {
-          navListItems.removeClass('btn-primary').addClass('btn-default');
-          $item.addClass('btn-primary');
-          allWells.hide();
-          $target.show();
-          $target.find('input:eq(0)').focus();
-      }
-  });
-
-  allNextBtn.click(function(){
-      var curStep = $(this).closest(".setup-content"),
-          curStepBtn = curStep.attr("id"),
-          nextStepWizard = $('div.setup-panel div a[href="#' + curStepBtn + '"]').parent().next().children("a"),
-          curInputs = curStep.find("input[type='text'],input[type='url']"),
-          isValid = true;
-
-      $(".form-group").removeClass("has-error");
-      for(var i=0; i<curInputs.length; i++){
-          if (!curInputs[i].validity.valid){
-              isValid = false;
-              $(curInputs[i]).closest(".form-group").addClass("has-error");
-          }
-      }
-
-      if (isValid)
-          nextStepWizard.removeAttr('disabled').trigger('click');
-  });
-
-  $('div.setup-panel div a.btn-primary').trigger('click');
-});
-</script>
+<script src="{{asset('js/form-wizard.js')}}"></script>
 @endsection
