@@ -95,12 +95,11 @@
 
 	$( ".buscar_fecha" ).click(function() {
 		var link = $(this);
-
 		link.find('span').remove();
 		link.append('<span class="fa fa-refresh fa-spin"></span>');
-		
 		var fecha = $('#reservation').val();
 		var url   = "{{ URL::route('filial.tabla_morisidad') }}";
+		
 		
 		$.ajax(
 			{
