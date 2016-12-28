@@ -26,13 +26,13 @@
 					if ($pago->terminado == 1) echo 'Terminado';
 					else echo 'Pendiente';
 				?></td>
-				<td>${{$pago->monto_actual}}</td>
+				<td><?php echo session('moneda')['simbolo']; ?>{{$pago->monto_actual}}</td>
 				<td>{{$pago->vencimiento}}</td>
 				<td><?php
-				if ($pago->monto_pago != null) echo '$'.$pago->monto_pago;
+				if ($pago->monto_pago != null) echo session('moneda')['simbolo'].$pago->monto_pago;
 				else echo '-';
 				?></td>
-				<td>${{$pago->monto_original}}</td>
+				<td><?php echo session('moneda')['simbolo']; ?>{{$pago->monto_original}}</td>
 				<td>%{{$pago->recargo}}</td>
 				<td>{{$pago->Filial->nombre}}</td>
 				<td>

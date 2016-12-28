@@ -75,6 +75,7 @@ class PagoController extends Controller
 	public function nuevo_post(CrearNuevoPagoRequest $request){
 		$url 						= 	session('urlBack'); session()->forget('urlBack');
         $pago['matricula_id']   	=   $request->matricula;
+        $pago['tipo_moneda_id']     =   session('moneda')['id'];
         $pago['nro_pago']       	=   $request->nro_pago;
         $pago['pago_individual'] 	=  	1;
         $pago['descripcion']    	=   $request->descripcion;

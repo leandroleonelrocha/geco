@@ -19,4 +19,8 @@ class TipoMoneda extends Entity
         return $this->hasMany(Pais::getClass());
     }
 
+    public function Pago(){
+        return $this->hasMany(Pago::getClass());
+    }
+
 }

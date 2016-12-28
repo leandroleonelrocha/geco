@@ -106,10 +106,11 @@ class MatriculaController extends Controller {
                 $pago['descripcion']    =   $request->descripcion[$i];
                 $pago['vencimiento']    =   $request->vencimiento[$i];
                 $pago['monto_original'] =   $request->monto_original[$i];
-                $pago['monto_actual'] =     $pago['monto_original'];
+                $pago['monto_actual']   =     $pago['monto_original'];
                 $pago['descuento']      =   $request->descuento[$i];
                 $pago['recargo']        =   $request->recargo[$i];
                 $pago['filial_id']      =   session('usuario')['entidad_id'];
+                $pago['tipo_moneda_id'] =   session('moneda')['id'];
                 $this->pagoRepo->create($pago);
             }
             return redirect()->route('filial.matriculas');

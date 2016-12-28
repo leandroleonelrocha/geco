@@ -23,14 +23,18 @@
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.montooriginal')</label>
 									<div class="input-group">
-		  								<span class="input-group-addon">$</span>
+		  								<span class="input-group-addon">
+		  									<?php echo session('moneda')['simbolo']; ?>
+		  								</span>
 										{!! Form::text('monto_original',null,array('class'=>'pago-item form-control')) !!}
 									</div>
 								</div>
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.descuento')</label>
 									<div class="input-group">
-		  								<span class="input-group-addon">$</span>
+		  								<span class="input-group-addon">
+		  									<?php echo session('moneda')['simbolo']; ?>
+		  								</span>
 										{!! Form::text('descuento',null,array('class'=>'pago-item form-control')) !!}
 		  							</div>
 								</div>

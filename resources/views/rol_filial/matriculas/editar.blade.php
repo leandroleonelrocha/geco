@@ -55,7 +55,9 @@
 									<div class="col-md-6 form-group">
 										<label>@lang('matricula.montoapagar')</label>
 										<div class="input-group">
-			  								<span class="input-group-addon">$</span>
+			  								<span class="input-group-addon">
+			  									<?php echo session('moneda')['simbolo']; ?>
+			  								</span>
 											{!! Form::text('monto_original[]',$pago->monto_original,array('class'=>'pago-item form-control')) !!}
 										</div>
 									</div>
@@ -74,24 +76,6 @@
 								</div><!-- Fin pagos -->
 							@endforeach
 							</div><!-- Fin planDePagos -->
-							<div class="col-md-3">
-								<input id="cantidadPagos" class="form-control" type="text" placeholder="@lang('matricula.cantidadpagos')">
-							</div>
-							<div id="mas" class="col-md-3">
-								<span class="btn btn-danger btn-pagos">
-									@lang('matricula.agregarpagos')
-								</span>
-							</div>
-							<div id="borrarTodo" class="col-md-3">
-								<span class="btn btn-danger btn-pagos">
-									@lang('matricula.borrarpagos')
-								</span>
-							</div>
-							<div id="borrarUltimo" class="col-md-3">
-								<span class="btn btn-danger btn-pagos">
-									@lang('matricula.borrarultimopago')
-								</span>
-							</div>
 							<div class="box-footer col-xs-12">
 					     		<button type="submit" class="btn btn-success">@lang('matricula.modificar')</button>
 				          	</div>
