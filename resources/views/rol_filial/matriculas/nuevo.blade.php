@@ -34,7 +34,7 @@
 			              	</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('matricula.asesor')</label>
-								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control select2')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('matricula.carrerasycursos')</label>

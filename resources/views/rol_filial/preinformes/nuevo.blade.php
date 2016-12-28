@@ -33,7 +33,7 @@
 			              	</div>
 			              	<div class="col-md-12 form-group">
 								<label>@lang('persona.asesor')</label>
-								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control select2')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('preinforme.descripcion')</label>

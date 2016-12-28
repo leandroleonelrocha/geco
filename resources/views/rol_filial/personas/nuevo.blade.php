@@ -1,8 +1,6 @@
 @extends('template')
-
 @section('css')
 <style type="text/css">
-
 .stepwizard-step p {
     margin-top: 10px;
 }
@@ -73,7 +71,6 @@
   				 @else
   				 {!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
   				 @endif		
-
 				    <div class="row setup-content" id="step-1">
 				      <div class="col-xs-12">
 				        
@@ -96,14 +93,19 @@
 				          </div>
 				          	
 				          	<div class="row">
-								<div class="col-md-6 form-group">
+								<div class="col-md-4 form-group">
 									<label>@lang('persona.domicilio')</label>
 									{!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
 								</div>
-								<div class="col-md-6 form-group">
+								<div class="col-md-4 form-group">
 									<label>@lang('persona.localidad')</label>
 									{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 								</div>
+
+				                 <div class="col-md-4 form-group">
+	                                <label>@lang('filial.pais')</label>
+	                                {!! Form::select('pais_id', $paises->toArray() , null, array('class'=>'form-control select2')) !!}
+                            	</div>
 							</div>
 						
 							<div class="row">
@@ -145,8 +147,6 @@
 								<label>@lang('persona.computadora')</label>
 								<div>{!! Form::checkbox('posee_computadora', '1', null, array('class'=>'flat-red')) !!} @lang('persona.si')</div>
 							</div>
-
-
 							<div class="form-group">
 								<label>@lang('persona.disponibilidad')</label>
 								<div class="form-check">
@@ -173,11 +173,9 @@
 								  @lang('persona.sabados')
 								  </label>
 								</div>
-
 							</div>	
 						<hr>
 				        <button class="btn btn-primary nextBtn pull-right" type="button" >Siguiente</button>
-
 				       
 				      </div>
 				    </div>
@@ -189,7 +187,6 @@
 								<label>@lang('persona.aclaraciones')</label>
 								{!! Form::textarea('aclaraciones',null,array('class'=>'form-control','size'=>'30x4')) !!}
 							</div>
-
 							<div class="form-group">
 								<label>@lang('persona.telefonos')</label>
 								<button class="add_input_telefono btn btn-success">+</button>	
@@ -203,9 +200,7 @@
 									@endif
 								
 								</div>
-
 							</div>
-
 							<div class="form-group">
 								<label>E-Mails</label>
 								<button class="add_input_mail btn btn-success">+</button>	
@@ -226,14 +221,11 @@
 				      </div>
 				    </div>
 				{!! Form::close() !!}
-
         		</div><!-- Fin box-body -->
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
 @endsection
-
-
 @section('js')
 <script src="{{asset('js/form-wizard.js')}}"></script>
 @endsection

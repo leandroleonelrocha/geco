@@ -10,6 +10,7 @@ return [
     'codigopostal'=>'Postal Code',
     'telefonos' => 'Telephones',
     'cadena'=>'Chain',
+    'pais'=>'Country',
 
     'cuenta' => 'E-Mail (Access account)',
     'bienvenido' => 'Welcome',

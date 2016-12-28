@@ -3,10 +3,10 @@
 return [
  
     'listadoexamen' => 'Listado de Examenes',
-    'matricula'=>'matricula',
+    'matricula'=>'Matrícula',
     'nombre'=>'Nombre',
     'nota'=>'Nota',
-    'recupatorio'=>'recuperatorio',
+    'recuperatorio'=>'Recuperatorio',
 
     'seleccionemateria' => 'Seleccionar materia',
 

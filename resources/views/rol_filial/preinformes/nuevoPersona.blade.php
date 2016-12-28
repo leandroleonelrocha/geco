@@ -1,8 +1,6 @@
 @extends('template')
-
 @section('css')
 <style type="text/css">
-
 .stepwizard-step p {
     margin-top: 10px;
 }
@@ -103,14 +101,19 @@
 									<label>@lang('persona.fnacimiento')</label>
 									{!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
 								</div>
-								<div class="col-md-6 form-group">
+								<div class="col-md-4 form-group">
 									<label>@lang('persona.domicilio')</label>
 									{!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
 								</div>
-								<div class="col-md-6 form-group">
+								<div class="col-md-4 form-group">
 									<label>@lang('persona.localidad')</label>
 									{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 								</div>
+
+		                	 	<div class="col-md-4 form-group">
+	                                <label>@lang('filial.pais')</label>
+	                                {!! Form::select('pais_id', $paises->toArray() , null, array('class'=>'form-control select2')) !!}
+                            	</div>
 
 								<div class="col-md-6 form-group">
 									<label>@lang('persona.estadocivil')</label>
@@ -155,7 +158,6 @@
 										<input type="text" name="telefono[]" class="form-control">
 									</div>
 								</div>
-
 								<div class="col-md-6 form-group">
 									<label>E-Mails</label>
 									<button class="add_input_mail btn btn-success"">+</button>	
@@ -168,12 +170,11 @@
 								<button class="btn btn-primary nextBtn  pull-right" type="button" >Siguiente</button>
 								</div>
 							</div> <!-- wizard  -->
-
 							<div class="row setup-content" id="step-2">
 				              
 				              	<div class="col-md-12 form-group">
 									<label>@lang('persona.asesor')</label>
-									{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+									{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control select2')) !!}
 								</div>
 				              	<div class="col-md-6 form-group">
 									<label>@lang('preinforme.descripcion')</label>
@@ -187,13 +188,10 @@
 									<label>@lang('preinforme.encontro')</label>
 									{!! Form::textarea('como_encontro',null,array('class'=>'form-control','size'=>'30x4')) !!}
 								</div>
-
 								<div class="col-xs-12">
 								<button class="btn btn-primary nextBtn  pull-right" type="button" >Siguiente</button>
 								</div>
 							</div>
-
-
 							<div class="row setup-content" id="step-3">
 							
 				              	<div class="col-md-5 form-group">
@@ -212,7 +210,6 @@
 									<label>@lang('preinforme.otrost')</label>
 									{!! Form::textarea('descripcion_interes',null,array('id'=>'otros', 'class' => 'form-control','disabled','size'=>'30x4')) !!}
 								</div>
-
 								<div class="col-xs-12">
 					     		<button type="submit" class="btn btn-success pull-right">@lang('persona.crear')</button>
 				          		</div>
@@ -226,7 +223,6 @@
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
 @endsection
-
 @section('js')
 <script src="{{asset('js/form-wizard.js')}}"></script>
 @endsection

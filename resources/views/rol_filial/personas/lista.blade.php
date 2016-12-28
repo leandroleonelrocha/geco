@@ -25,6 +25,7 @@
 						<th>@lang('persona.apellido')</th>
 						<th>@lang('persona.fnacimiento')</th>
 						<th>@lang('persona.localidad')</th>
+						<th>@lang('filial.pais')</th>
 						<th>@lang('persona.telefonos')</th>
 						<th>E-mails</th>
 						<th>@lang('persona.disponibilidad')</th>
@@ -39,6 +40,7 @@
 									<td>{{$p->apellidos}}</td>
 									<td>{{$p->fecha_nacimiento}}</td>
 									<td>{{$p->localidad}}</td>
+								  	<td>{{$p->Pais->pais }}</td>
 									<td>
 							     	@foreach($p->PersonaTelefono as $telefono)
 						            		{{$telefono->telefono}}   </br>

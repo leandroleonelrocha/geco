@@ -16,7 +16,7 @@
 						<th>@lang('filial.cadena')</th>
 						<th>@lang('filial.direccion')</th>
 						<th>@lang('filial.localidad')</th>
-						<th>CP</th>
+						<th>@lang('filial.pais')</th>
 						<th>@lang('filial.telefonos')</th>
 						<th>E-Mail</th>
 						<th>Director</th>
@@ -30,7 +30,7 @@
 							        <td>{{ $f->Cadena->nombre }}</td>
 							        <td>{{ $f->direccion }}</td>
 							        <td>{{ $f->localidad }}</td>
-					                <td>{{ $f->codigo_postal }}</td>
+					                <td>{{ $f->Pais->pais }}</td>
 					                <td>
 			                     	@foreach($f->FilialTelefono as $telefono)
 						            		{{$telefono->telefono}}<br>

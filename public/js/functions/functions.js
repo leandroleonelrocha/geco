@@ -133,7 +133,7 @@ $(document).ready(function(){
 
         /* ------------------------- Agregar Nombre de aulas ------------------------- */
     var max_fields      = 50; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_nombre"); //Fields wrapper
+    var wrapperN         = $(".input_fields_nombre"); //Fields wrapper
     var add_button_nombre      = $(".add_input_nombre"); //Add button ID
 
     var x = 1; //initlal text box count
@@ -141,11 +141,11 @@ $(document).ready(function(){
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(wrapper).append('<div><input type="text" name="nombre[]" class="form-control"/><a href="#" class="remove_fieldnombre" >&times;</a></div>'); //add input box
+            $(wrapperN).append('<div><input type="text" name="nombre[]" class="form-control"/><a href="#" class="remove_fieldnombre" >&times;</a></div>'); //add input box
         }
     });
 
-    $(wrapper).on("click",".remove_fieldnombre", function(e){ //click en eliminar campo
+    $(wrapperN).on("click",".remove_fieldnombre", function(e){ //click en eliminar campo
        
         if( x > 1 ) {
             $(this).parent('div').remove(); //eliminar el campo

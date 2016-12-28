@@ -31,9 +31,11 @@ class LoginController extends Controller {
         // curl_close($ch);
          
 
+
         //Rol 2 Dueño
         //Rol 3 Director
         //Rol 4 Filial
+      
 
         $cuentas = array(
                      array(

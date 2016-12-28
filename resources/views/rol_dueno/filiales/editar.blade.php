@@ -39,14 +39,19 @@
                                		{!! Form::text('codigo_postal', $filial->codigo_postal, array('class'=>'form-control')) !!}
 							</div>
 
+                            <div class="col-md-6 form-group">
+                                <label>@lang('filial.pais')</label>
+                                {!! Form::select('pais_id', $paises->toArray() , $filial->Pais->id, array('class'=>'form-control select2')) !!}
+                            </div>
+
                            	<div class="col-md-6 form-group">
                                 <label>@lang('filial.cadena')</label>
-                                {!! Form::select('cadena_id', $cadenas->toArray() , $filial->Cadena->id, array('class'=>'form-control')) !!}
+                                {!! Form::select('cadena_id', $cadenas->toArray() , $filial->Cadena->id, array('class'=>'form-control select2')) !!}
                             </div>
 
 							<div class="col-md-6 form-group">
 								<label>Director</label>
-     				            {!! Form::select('director_id', $directores->toArray() , $filial->Director->id, array('class'=>'form-control')) !!}
+     				            {!! Form::select('director_id', $directores->toArray() , $filial->Director->id, array('class'=>'form-control select2')) !!}
 							</div>
 
                             <div class="col-md-6 form-group">
