@@ -79,21 +79,21 @@ create table if not exists pais(
 id 				int not null auto_increment,
 pais  			varchar (50) not null,
 lenguaje  		char (5) not null,
+tipo_moneda_id	int not null;
 created_at  	timestamp not null default '0000-00-00 00:00:00',
 updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id)
+foreign key		(tipo_moneda_id) 	references tipo_moneda(id)
 );
 
 create table if not exists tipo_moneda(
 id 			int not null auto_increment,
-pais_id 	int not null,
 nombre  	varchar (50) not null,
 simbolo 	char(10) not null,
 abreviacion char(10) not null,
 created_at  timestamp not null default '0000-00-00 00:00:00',
 updated_at  timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),
-foreign key		(pais_id) 	references pais (id)
 );
 
 create table if not exists filial(
@@ -516,21 +516,38 @@ insert into cadena (`nombre`, `mail`, `telefono`, `created_at`, `updated_at`)
 values  ('IGI', 'test@igi.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('IAC', 'test@iac.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
+
+		--
+-- Tipo Moneda
+--
+insert into tipo_moneda (`nombre`, `simbolo`, `abreviacion`, `created_at`, `updated_at`)
+values  ('Peso Argentino'	, '$'	, 'ARS'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Peso Colombiano'	, '$'	, 'COP'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Peso Boliviano'	, 'Bs'	, 'BOB'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Peso Chileno'		, '$'	, 'CLP'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Peso Uruguayo'	, 'UYU'	, 'UYU'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Guarani Paraguayo', '--'	, 'PEN'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Nuevo Sol peruano', 'S/'	, 'PYG'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Real Brasileño'	, 'R$'	, 'BRL'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Dolar Americano'	, '$'	, 'USD'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Peso Mexicano'	, 'R$'	, 'MXN'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Dólar Canadiense'	, 'C$'	, 'CAD'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
 --
 -- Pais
 --
-insert into pais (`pais`, `lenguaje`, `created_at`, `updated_at`)
-values  ('Argentina', 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Colombia' , 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Bolivia' 	, 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Chile' 	, 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Uruguay' 	, 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Paraguay' , 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Perú' 	, 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Brasil' 	, 'pt', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('EE UU' 	, 'en', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('México' 	, 'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('Canada' 	, 'en', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into pais (`pais`, `lenguaje`, `tipo_moneda_id`, `created_at`, `updated_at`)
+values  ('Argentina', 'es',1, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Colombia' , 'es',2, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Bolivia' 	, 'es',3, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Chile' 	, 'es',4, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Uruguay' 	, 'es',5, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Paraguay' , 'es',6, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Perú' 	, 'es',7, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('Brasil' 	, 'pt',8, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('EE UU' 	, 'en',9, '2016-11-11 00:00:00'	, '2016-11-11 00:00:00'),
+		('México' 	, 'es',10, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Canada' 	, 'en',11, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 
 --
@@ -552,21 +569,7 @@ values 	('Contado', 'CON', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('Cheque', 'CHE', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('Tranferencia', 'TRA', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('Tarjeta Crédito', 'TAR', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
---
--- Tipo Moneda
---
-insert into tipo_moneda (`pais_id`, `nombre`, `simbolo`, `abreviacion`, `created_at`, `updated_at`)
-values  (1, 'Peso Argentino'	, '$'	, 'ARS'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(2, 'Peso Colombiano'	, '$'	, 'COP'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(3, 'Peso Boliviano'	, 'Bs'	, 'BOB'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(4, 'Peso Chileno'		, '$'	, 'CLP'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(5, 'Peso Uruguayo'		, 'UYU'	, 'UYU'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(6, 'Guarani Paraguayo'	, '--'	, 'PEN'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(7, 'Nuevo Sol peruano'	, 'S/'	, 'PYG'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(8, 'Real Brasileño'	, 'R$'	, 'BRL'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(9, 'Dolar Americano'	, '$'	, 'USD'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(10, 'Peso Mexicano'	, 'R$'	, 'MXN'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(11, 'Dólar Canadiense'	, 'C$'	, 'CAD'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
 --
 -- Tipos de Documento
 --
