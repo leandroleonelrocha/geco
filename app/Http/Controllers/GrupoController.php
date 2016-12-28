@@ -17,6 +17,7 @@ use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
 use App\Entities\GrupoHorario;
 use App\Http\Requests\CrearNuevoGrupoRequest;
+use PDF;
 
 
 class GrupoController extends Controller
@@ -459,5 +460,13 @@ class GrupoController extends Controller
 		$carrera = $this->carreraRepo->find($carrera_id);
 		$materia = $carrera->Materia;
 		return response()->json($materia, 200);
+	}
+
+	public function imprimir_asistencias($id){
+		$grupo      = $this->grupoRepo->find($id);
+		$matriculas = $grupo->Matricula;
+		$pdf    = PDF::loadView('impresiones.asistencias',compact('grupo','matriculas'));
+		return $pdf->stream();
+
 	}
 }

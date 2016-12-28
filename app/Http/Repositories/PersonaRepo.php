@@ -22,8 +22,7 @@ class PersonaRepo extends BaseRepo {
     }
 
     public function getPersonasFilial(){
-    	$filial = session('usuario')['entidad_id'];
-      return Persona::where('filial_id', $filial)->get();
+      return Persona::where('filial_id', $this->filial)->get();
     }
 
     public function countTotal($inicio, $fin){
@@ -53,7 +52,7 @@ class PersonaRepo extends BaseRepo {
     }
 
     public function estadisticasPersonas($campo, $valor, $inicio, $fin){
-      return $this->model->where($campo,$valor)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
+      return $this->model->where('filial_id', $this->filial)->where($campo,$valor)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
 
     public function allPreMorosos(){
