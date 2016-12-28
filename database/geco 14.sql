@@ -75,16 +75,7 @@ primary key	(director_id, telefono),
 foreign key	(director_id) 				references director	(id)
 );
 
-create table if not exists pais(
-id 				int not null auto_increment,
-pais  			varchar (50) not null,
-lenguaje  		char (5) not null,
-tipo_moneda_id	int not null;
-created_at  	timestamp not null default '0000-00-00 00:00:00',
-updated_at  	timestamp not null default '0000-00-00 00:00:00',
-primary key 	(id)
-foreign key		(tipo_moneda_id) 	references tipo_moneda(id)
-);
+
 
 create table if not exists tipo_moneda(
 id 			int not null auto_increment,
@@ -93,7 +84,18 @@ simbolo 	char(10) not null,
 abreviacion char(10) not null,
 created_at  timestamp not null default '0000-00-00 00:00:00',
 updated_at  timestamp not null default '0000-00-00 00:00:00',
+primary key 	(id)
+);
+
+create table if not exists pais(
+id 				int not null auto_increment,
+pais  			varchar (50) not null,
+lenguaje  		char (5) not null,
+tipo_moneda_id	int not null,
+created_at  	timestamp not null default '0000-00-00 00:00:00',
+updated_at  	timestamp not null default '0000-00-00 00:00:00',
 primary key 	(id),
+foreign key		(tipo_moneda_id) 	references tipo_moneda(id)
 );
 
 create table if not exists filial(
