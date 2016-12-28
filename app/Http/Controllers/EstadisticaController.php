@@ -18,11 +18,11 @@ class EstadisticaController extends Controller
     protected  $data;
 	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo,AsesorRepo $asesorRepo)
 	{
-		$this->pagoRepo         = $pagoRepo;
-		$this->personaRepo      = $personaRepo;
-		$this->preinformeRepo   = $preinformeRepo;
-		$this->examenRepo       = $examenRepo;
-		$this->asesorRepo       = $asesorRepo;
+		$this->pagoRepo        			= $pagoRepo;
+		$this->personaRepo      		= $personaRepo;
+		$this->preinformeRepo  			= $preinformeRepo;
+		$this->examenRepo      			= $examenRepo;
+		$this->asesorRepo     			= $asesorRepo;
         $this->data['totalPersonas']    = $this->total_personas();
         $this->data['totalAsesores']    = $this->total_asesores();
 	}
@@ -77,7 +77,7 @@ class EstadisticaController extends Controller
 			for($i =0; $i<count($labels); $i++ ){
 				$data['label'] = $nombres[$i];
 				$data['si']    = $this->personaRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
-				$data['no']	   = $this->personaRepo->estadisticasPersonas($labels[$i], 1, $inicio, $fin);
+				$data['no']	   = $this->personaRepo->estadisticasPersonas($labels[$i], 0, $inicio, $fin);
 				array_push($disponibilidad, $data);
 			}
 			$totalPersonasFilial = $this->personaRepo->countTotal($inicio, $fin);

@@ -27,8 +27,8 @@
 <script src="{{asset('dist/js/demo.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <!-- <script src="{{asset('js/angular.min.js')}}"></script> -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-<script src="{{ asset('js/bootstrap-confirm-delete.js') }}"> </script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="{{asset('js/bootstrap-confirm-delete.js') }}"> </script>
 
 <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
@@ -39,6 +39,8 @@
 <script src="{{asset('plugins/intro/intro.js')}}"></script>
                         <!-- ******************** PACE JS ******************** -->
 <script src="{{asset('plugins/pace/pace.js')}}"></script>
+                        <!-- ******************** STEPS JS ******************** -->
+<script src="{{asset('js/steps/jquery.steps.js')}}"></script>
 
 <!-- Bootstrap-checkbox -->
 <!-- <script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>

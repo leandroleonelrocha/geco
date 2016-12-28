@@ -33,6 +33,10 @@
 
 <!-- Js de tutorial -->
 <link rel="stylesheet" href="{{asset('plugins/intro/introjs.css')}}">
+<!-- Steps -->
+
+
+<link rel="stylesheet" href="{{asset('css/steps/jquery.steps.css')}}">
 
 <!-- Recargo de paginn -->
 <link rel="stylesheet" href="{{asset('plugins/pace/themes/pace-theme-flat-top.css')}}">

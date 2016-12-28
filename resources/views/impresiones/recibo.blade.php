@@ -14,7 +14,7 @@
 			top:20px;
 			text-align: right;
 			position: relative;
-   			left: -150px;
+   			left: -100px;
 		}
 
 
@@ -34,6 +34,7 @@
 		    clear: both;
 		}
 		.right{
+		  line-height:10px;	
           display: inline-block;
           vertical-align: bottom !important;
           width: 50%;

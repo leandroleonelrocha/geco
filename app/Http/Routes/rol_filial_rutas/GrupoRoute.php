@@ -92,6 +92,11 @@ Route::group(['prefix' => 'grupos'], function(){
 			'uses' => 'GrupoController@post_materias_carreras'
 		]);
 
+		Route::get('imprimir_asistencias/{id}',[
+			'as'  => 'grupos.imprimir_asistencias',
+			'uses'=> 'GrupoController@imprimir_asistencias'
+		]);
+
 	});
 	
 });
