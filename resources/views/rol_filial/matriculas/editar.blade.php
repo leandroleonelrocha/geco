@@ -17,7 +17,7 @@
 			              	<div class="col-md-6 form-group">
 								<label>@lang('matricula.asesor')</label>
 								{!! Form::hidden('matricula', $matricula->id, array('class'=>'form-control')) !!}
-								{!! Form::select('asesor',$asesores->toArray(),$matricula->Asesor->id,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor',$asesores->toArray(),$matricula->Asesor->id,array('class' => 'form-control select2')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('matricula.carrerasycursos')</label>

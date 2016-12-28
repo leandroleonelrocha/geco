@@ -25,19 +25,24 @@
                                 {!! Form::text('localidad',null,array('class'=>'form-control')) !!}
                             </div>
 
-                           <div class="col-md-6 form-group">
+                            <div class="col-md-6 form-group">
                                 <label>@lang('filial.codigopostal')</label>
                                 {!! Form::text('codigo_postal',null,array('class'=>'form-control')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
+                                <label>@lang('filial.pais')</label>
+                                {!! Form::select('pais_id', $paises->toArray() , null, array('class'=>'form-control select2')) !!}
+                            </div>
+
+                            <div class="col-md-6 form-group">
                                 <label>@lang('filial.cadena')</label>
-                                {!! Form::select('cadena_id', $cadenas->toArray() , null, array('class'=>'form-control')) !!}
+                                {!! Form::select('cadena_id', $cadenas->toArray() , null, array('class'=>'form-control select2')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label>Director</label>
-                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control')) !!}
+                                {!! Form::select('director_id', $directores->toArray() , null, array('class'=>'form-control select2')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">

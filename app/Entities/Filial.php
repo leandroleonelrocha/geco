@@ -6,11 +6,15 @@ class Filial extends Entity {
     protected  $table= 'filial';
   //  protected $primaryKey= 'id_filial';
 
-    protected $fillable   = ['cadena_id', 'nombre', 'direccion', 'localidad', 'director_id','codigo_postal', 'mail'];
+    protected $fillable   = ['cadena_id', 'pais_id', 'nombre', 'direccion', 'localidad', 'director_id','codigo_postal', 'mail'];
     
     // Relaciones
     public function Cadena(){
         return $this->belongsTo(Cadena::getClass());
+    }
+
+    public function Pais(){
+        return $this->belongsTo(Pais::getClass());
     }
 
     public function Director(){

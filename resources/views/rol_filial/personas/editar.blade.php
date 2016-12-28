@@ -14,7 +14,7 @@
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">@lang('persona.titulo')</h4>
 				            </div>
-
+				            {!! Form::hidden('persona', $persona->id, array('class'=>'form-control')) !!}
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.tipodocumento')</label>
 								{!! Form::select('tipo_documento_id',$tipos->toArray(),$persona->TipoDocumento->id,array('class' => 'form-control')) !!}
@@ -45,14 +45,19 @@
 								<label>@lang('persona.fnacimiento')</label>
 								{!! Form::date('fecha_nacimiento',$persona->fecha_nacimiento,array('class'=>'form-control')) !!}
 							</div>
-							<div class="col-md-6 form-group">
+							<div class="col-md-4 form-group">
 								<label>@lang('persona.domicilio')</label>
 								{!! Form::text('domicilio',$persona->domicilio,array('class'=>'form-control')) !!}
 							</div>
-							<div class="col-md-6 form-group">
+							<div class="col-md-4 form-group">
 								<label>@lang('persona.localidad')</label>
 								{!! Form::text('localidad',$persona->localidad,array('class'=>'form-control')) !!}
 							</div>
+
+                        	<div class="col-md-4 form-group">
+                                <label>@lang('filial.pais')</label>
+                                {!! Form::select('pais_id', $paises->toArray() ,$persona->Pais->id, array('class'=>'form-control select2')) !!}
+                            </div>
 
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.estadocivil')</label>

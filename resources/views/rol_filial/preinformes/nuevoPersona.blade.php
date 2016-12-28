@@ -44,14 +44,19 @@
 								<label>@lang('persona.fnacimiento')</label>
 								{!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
 							</div>
-							<div class="col-md-6 form-group">
+							<div class="col-md-4 form-group">
 								<label>@lang('persona.domicilio')</label>
 								{!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
 							</div>
-							<div class="col-md-6 form-group">
+							<div class="col-md-4 form-group">
 								<label>@lang('persona.localidad')</label>
 								{!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 							</div>
+
+                            <div class="col-md-4 form-group">
+                                <label>@lang('filial.pais')</label>
+                                {!! Form::select('pais_id', $paises->toArray() , null, array('class'=>'form-control select2')) !!}
+                            </div>
 
 							<div class="col-md-6 form-group">
 								<label>@lang('persona.estadocivil')</label>
@@ -110,7 +115,7 @@
 			              	</div>
 			              	<div class="col-md-12 form-group">
 								<label>@lang('persona.asesor')</label>
-								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor',$asesores->toArray(),null,array('class' => 'form-control select2')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('preinforme.descripcion')</label>

@@ -15,6 +15,7 @@ use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\PaisRepo;
 use App\Http\Requests\CrearNuevaMatriculaRequest;
 use App\Http\Requests\CrearNuevaPersonaRequest;
 use Auth;
@@ -27,7 +28,7 @@ class MatriculaController extends Controller {
     protected $matriculaRepo;
     protected $tipoDocumentoRepo;
 
-    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo)
+    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
     {
         $this->matriculaRepo            = $matriculaRepo;
         $this->personaRepo              = $personaRepo;
@@ -41,6 +42,7 @@ class MatriculaController extends Controller {
         $this->grupoRepo                = $grupoRepo;
         $this->matriculaPermisosRepo    = $matriculaPermisosRepo;
         $this->filialRepo               = $filialRepo;
+        $this->paisRepo                 = $paisRepo;
     }
 
     // Página principal de Matrículas
@@ -69,11 +71,12 @@ class MatriculaController extends Controller {
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $paises= $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
         $carreras   = $this->carreraRepo->all();
         $cursos     = $this->cursoRepo->all();
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos'));
+        return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos','paises'));
     }
 
     // Alta de Matrícula y Persona Existente
