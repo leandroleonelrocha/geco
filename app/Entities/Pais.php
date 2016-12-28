@@ -12,7 +12,7 @@ class Pais extends Entity
      *
      * @var array
      */
-    protected $fillable = ['pais','lenguaje'];
+    protected $fillable = ['pais','lenguaje', 'tipo_moneda_id'];
 
     // Relaciones
     public function Filial(){
@@ -24,6 +24,6 @@ class Pais extends Entity
     }
 
     public function TipoMoneda(){
-        return $this->hasMany(TipoMoneda::getClass());
+        return $this->belongsTo(TipoMoneda::getClass());
     }
 }

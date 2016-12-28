@@ -12,11 +12,11 @@ class TipoMoneda extends Entity
      *
      * @var array
      */
-    protected $fillable = ['pais_id','nombre', 'simbolo','abreviacion'];
+    protected $fillable = ['nombre', 'simbolo','abreviacion'];
 
     // Relaciones
     public function Pais(){
-        return $this->belongsTo(Pais::getClass());
+        return $this->hasMany(Pais::getClass());
     }
 
 }
