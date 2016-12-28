@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\User;
+use App\Http\Repositories\FilialRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ use PDF;
 
 
 class LoginController extends Controller {
+
+  public function __construct(FilialRepo $filialeRepo){
+    $this->filialeRepo = $filialeRepo;
+  }
 
     public function getLogin()
     {
@@ -98,6 +103,9 @@ class LoginController extends Controller {
             return redirect()->route('director.inicio');
           break;
           case 4: // Rol de Filial
+            $filial =  $this->filialeRepo->find(session('usuario')['id']);
+            $tipo_moneda = $filial->Pais->TipoMoneda;
+            session(['moneda' => $tipo_moneda]);
             return redirect()->route('filial.inicio');
           break;
         }
