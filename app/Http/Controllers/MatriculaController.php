@@ -196,13 +196,14 @@ class MatriculaController extends Controller {
     }
 
     public function editar($id){
-        $matricula  = $this->matriculaRepo->find($id);
-        $pagos      = $this->pagoRepo->allMatricula($id);
-        $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.editar',compact('matricula','pagos','asesores','carreras','cursos','grupos'));
+        $matricula          = $this->matriculaRepo->find($id);
+        $planPagos          = $this->pagoRepo->allMatriculaPlan($id);
+        $pagosIndividuales  = $this->pagoRepo->allMatriculaIndividual($id);
+        $asesores           = $this->asesorRepo->allAsesores()->lists('fullname','id');
+        $carreras           = $this->carreraRepo->all();
+        $cursos             = $this->cursoRepo->all();
+        $grupos             = $this->grupoRepo->allEnable()->lists('id','id');
+        return view('rol_filial.matriculas.editar',compact('matricula','planPagos','pagosIndividuales','asesores','carreras','cursos','grupos'));
     }
 
     public function editar_post(Request $request){
@@ -225,22 +226,6 @@ class MatriculaController extends Controller {
        // Matrícula
         $modelM = $this->matriculaRepo->find($data['matricula']); // Busco la Matrícula
         $this->matriculaRepo->edit($modelM,$matricula);
-        // var_dump(count($request->nro_pago));die;
-        for ($i=0; $i < count($request->nro_pago); $i++){
-            $modelP = $this->pagoRepo->find($request->pago[$i]);
-            if ( ($modelP->vencimiento < date('Y-m-d')) && ($request->vencimiento > $modelP->vencimiento) ){
-                $modelP->monto_actual = $request->monto_original[$i] - $modelP->monto_pago;
-                $modelP->save();
-            }
-            $modelP->nro_pago       =   $request->nro_pago[$i];
-            $modelP->descripcion    =   $request->descripcion[$i];
-            $modelP->vencimiento    =   $request->vencimiento[$i];
-            $modelP->monto_actual  +=   $request->monto_original[$i]-$modelP->monto_original;
-            $modelP->monto_original =   $request->monto_original[$i];
-            $modelP->descuento      =   $request->descuento[$i];
-            $modelP->recargo        =   $request->recargo[$i];
-            $modelP->save();
-        }
 
         return redirect()->route('filial.matriculas');
     }

@@ -19,10 +19,10 @@ return [
     'grupos'=>'Grupos',
 
     'grupost'=>'Para selecionar mais de um grupo',
-
     'plandepagost'=>'A seguir carga cada um dos pagos',
-
     'plandepagos'=>'Plano de pagamento',
+    'pagosindividuales'=>'Pagamentos individuais',
+
     'numerodepago'=>'Número de pagamento',
     'fechavencimiento'=>'Data de vencimento',
     'montooriginal'=>'Dinheiro original',

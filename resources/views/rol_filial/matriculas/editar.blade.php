@@ -35,47 +35,21 @@
 									</optgroup>
 								</select>
 							</div>
-										<!-- ---------- Plan de Pagos ---------- -->
-							<div class="col-xs-12">
-			                	<h4 class="box-title text-center">@lang('matricula.plandepagos')</h4>
-			                	<div>@lang('matricula.plandepagost')</div>
-			              	</div>
-							<div id="planDePagos">
-							@foreach($pagos as $pago)
-								<div class="pagos">
-					              	<div class="col-md-6 form-group">
-										<label>@lang('matricula.numerodepago')</label>
-										<input name="pago[]" type="hidden" value="{{$pago->id}}">
-										{!! Form::text('nro_pago[]',$pago->nro_pago,array('class'=>'pago-item form-control')) !!}
-									</div>
-									<div class="col-md-6 form-group">
-										<label>@lang('matricula.vencimiento')</label>
-										{!! Form::date('vencimiento[]',$pago->vencimiento,array('class'=>'pago-item form-control')) !!}
-									</div>
-									<div class="col-md-6 form-group">
-										<label>@lang('matricula.montoapagar')</label>
-										<div class="input-group">
-			  								<span class="input-group-addon">
-			  									<?php echo session('moneda')['simbolo']; ?>
-			  								</span>
-											{!! Form::text('monto_original[]',$pago->monto_original,array('class'=>'pago-item form-control')) !!}
-										</div>
-									</div>
-									<div class="col-md-6 form-group">
-										<label>@lang('matricula.recargo')</label>
-										<div class="input-group">
-			  								<span class="input-group-addon">%</span>
-											{!! Form::text('recargo[]',$pago->recargo,array('class'=>'pago-item form-control')) !!}
-			  							</div>
-									</div>
-									<div class="col-md-12 form-group">
-										<label>@lang('matricula.descripcion')</label>
-										{!! Form::textarea('descripcion[]',$pago->descripcion,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
-										<div class="line"></div>
-									</div>
-								</div><!-- Fin pagos -->
-							@endforeach
-							</div><!-- Fin planDePagos -->
+							<div class="nav-tabs-custom col-xs-12">
+								<ul class="nav nav-tabs">
+									<li class="active"><a href="#tab_1" data-toggle="tab">@lang('matricula.plandepagos')</a></li>
+									<li><a href="#tab_2" data-toggle="tab">@lang('matricula.pagosindividuales')</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane active" id="tab_1">
+										@include('rol_filial.matriculas.partials.tabla_plandepago')
+									</div><!-- /.tab-pane -->
+									<div class="tab-pane" id="tab_2">
+										@include('rol_filial.matriculas.partials.tabla_pagosindividuales')
+									</div><!-- /.tab-pane -->
+								</div><!-- tab-content -->
+							</div><!-- nav-tabs-custom -->
+							
 							<div class="box-footer col-xs-12">
 					     		<button type="submit" class="btn btn-success">@lang('matricula.modificar')</button>
 				          	</div>

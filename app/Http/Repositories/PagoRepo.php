@@ -21,6 +21,14 @@ class PagoRepo extends BaseRepo {
         return $this->model->where('matricula_id', $id)->get();
     }
 
+    public function allMatriculaPlan($id){
+        return $this->model->where('matricula_id', $id)->where('pago_individual', 0)->get();
+    }
+
+    public function allMatriculaIndividual($id){
+        return $this->model->where('matricula_id', $id)->where('pago_individual', 1)->get();
+    }
+
     //SELECT DE TODOS LOS MOROSOS ENTRE FECHAS DE LA MISMA FILIAL
     public function allMorososEntreFechas($valor){
         $from        = helpersfuncionFecha($valor[0]);

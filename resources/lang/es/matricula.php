@@ -22,8 +22,9 @@ return [
     'grupost'=>'Para seleccionar más de un grupo',
 
     'plandepagost'=>'A continuación cargue cada uno de los pagos que conformarán el plan',
-
     'plandepagos'=>'Plan de pagos',
+    'pagosindividuales'=>'Pagos individuales',
+
     'numerodepago'=>'Número de pago',
     'fechavencimiento'=>'Fecha de vencimiento',
     'montooriginal'=>'Monto original',
