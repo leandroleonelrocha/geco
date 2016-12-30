@@ -22,8 +22,9 @@ return [
     'grupost'=>'To select more than one group',
 
     'plandepagost'=>'Then charge each of the payments that will make up the plan',
-
     'plandepagos'=>'Payment plan',
+    'pagosindividuales'=>'Individual payment',
+
     'numerodepago'=>'Payment number',
     'fechavencimiento'=>'Expiration date',
     'montooriginal'=>'Original money',

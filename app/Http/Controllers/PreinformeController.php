@@ -11,6 +11,7 @@ use App\Entities\Persona;
 use App\Entities\Carrera;
 use App\Entities\Asesor;
 use App\Entities\Curso;
+use App\Entities\Pais;
 use App\Http\Repositories\PersonaTelefonoRepo;
 use App\Http\Repositories\PersonaInteresRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
@@ -21,6 +22,7 @@ use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\CursoRepo;
+use App\Http\Repositories\PaisRepo;
 use App\Http\Requests\CrearNuevaPersonaRequest;
 use Auth;
 use Illuminate\Routing\Controller;
@@ -30,17 +32,18 @@ class PreinformeController extends Controller {
 
     protected $preinformeRepo;
 
-    public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo)
+    public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo, PaisRepo $paisRepo)
     {
         $this->preinformeRepo       = $preinformeRepo;
         $this->personaRepo          = $personaRepo;
         $this->asesorRepo           = $asesorRepo;
         $this->tipoDocumentoRepo    = $tipoDocumentoRepo;
-        $this->personaMailRepo     = $personaMailRepo;
+        $this->personaMailRepo      = $personaMailRepo;
         $this->personaTelefonoRepo  = $personaTelefonoRepo;
         $this->carreraRepo          = $carreraRepo;
         $this->cursoRepo            = $cursoRepo;
         $this->personaInteresRepo   = $personaInteresRepo;
+        $this->paisRepo             = $paisRepo;
     }
 
     // Página principal de Preinformes
@@ -72,11 +75,12 @@ class PreinformeController extends Controller {
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
         
-         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-         $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-         $carreras   = $this->carreraRepo->all()->lists('nombre','id');
-         $cursos     = $this->cursoRepo->all()->lists('nombre','id');
-         return view('rol_filial.preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos'));
+        $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $paises= $this->paisRepo->all()->lists('pais','id');
+        $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+        $carreras   = $this->carreraRepo->all()->lists('nombre','id');
+        $cursos     = $this->cursoRepo->all()->lists('nombre','id');
+        return view('rol_filial.preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos','paises'));
            
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Controllers;
 use App\Entities\NombreDirector;
 use App\Entities\FilialTelefono;
+use App\Entities\Pais;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -15,6 +16,7 @@ use App\Http\Requests\EditarPerfilFilialRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialTelefonoRepo;
+use App\Http\Repositories\PaisRepo;
 use App\Http\Repositories\CadenaRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
@@ -29,7 +31,7 @@ class FilialesController extends Controller
     protected $claseRepo;
     protected $docenteRepo;
 
-	public function __construct(GrupoRepo $grupoRepo,ClaseRepo $claseRepo,DocenteRepo $docenteRepo, FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo){
+	public function __construct(GrupoRepo $grupoRepo,ClaseRepo $claseRepo,DocenteRepo $docenteRepo, FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo,PaisRepo $paisRepo){
 
 		$this->directorRepo       = $directorRepo;
 		$this->filialesRepo       = $filialesRepo;
@@ -37,7 +39,8 @@ class FilialesController extends Controller
         $this->cadenaRepo         = $cadenaRepo;
         $this->grupoRepo          = $grupoRepo;
         $this->claseRepo          = $claseRepo;
-        $this->docenteRepo        = $docenteRepo;  
+        $this->docenteRepo        = $docenteRepo; 
+        $this->paisRepo           = $paisRepo;   
 	}
 
     public function index(){
@@ -57,7 +60,8 @@ class FilialesController extends Controller
 	public function  nuevo(){
 		$directores = $this->directorRepo->all()->lists('fullname','id');
         $cadenas    = $this->cadenaRepo->all()->lists('nombre','id');
-		return view('rol_dueno.filiales.nuevo', compact('directores', 'cadenas'));
+        $paises     = $this->paisRepo->all()->lists('pais','id');
+		return view('rol_dueno.filiales.nuevo', compact('directores', 'cadenas','paises'));
 	}
 
 	public function nuevo_post(CrearNuevaFilialRequest $request){
@@ -148,9 +152,10 @@ class FilialesController extends Controller
 
     	$directores = $this->directorRepo->all()->lists('fullname','id');
         $cadenas    = $this->cadenaRepo->all()->lists('nombre','id');
+        $paises     = $this->paisRepo->all()->lists('pais','id');
     	$filial = $this->filialesRepo->find($id);
         $telefono=$this->filialTelefonoRepo->findTelefono($id);
-    	return view('rol_dueno.filiales.editar',compact('filial','directores','telefono','cadenas'));
+    	return view('rol_dueno.filiales.editar',compact('filial','directores','telefono','cadenas','paises'));
     }
 
     public function editar_post(EditarFilialRequest $request){
@@ -200,10 +205,11 @@ class FilialesController extends Controller
     }
 
     public function editarPerfil($id){
-        $filial = $this->filialesRepo->find($id);
-        $cadenas    = $this->cadenaRepo->all()->lists('nombre','id');
-        $telefono=$this->filialTelefonoRepo->findTelefono($id);
-        return view('perfiles.filial',compact('filial','telefono','cadenas'));
+        $filial   = $this->filialesRepo->find($id);
+        $cadenas  = $this->cadenaRepo->all()->lists('nombre','id');
+        $paises   = $this->paisRepo->all()->lists('pais','id');
+        $telefono =$this->filialTelefonoRepo->findTelefono($id);
+        return view('perfiles.filial',compact('filial','telefono','cadenas','paises'));
     }
 
     public function editarPerfil_post(EditarPerfilFilialRequest $request){

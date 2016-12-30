@@ -17,7 +17,7 @@
 			              	<div class="col-md-12 form-group">
 			              		{!! Form::hidden('preinforme', $preinforme->id, array('class'=>'form-control')) !!}
 								<label>@lang('persona.asesor')</label>
-								{!! Form::select('asesor',$asesores->toArray(),$preinforme->Asesor->id,array('class' => 'form-control')) !!}
+								{!! Form::select('asesor',$asesores->toArray(),$preinforme->Asesor->id,array('class' => 'form-control select2')) !!}
 							</div>
 			              	<div class="col-md-6 form-group">
 								<label>@lang('preinforme.descripcion')</label>

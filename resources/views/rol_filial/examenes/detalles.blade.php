@@ -20,7 +20,7 @@
 						<th>@lang('examen.matricula') </th>
 						<th>@lang('examen.nombre') </th>
 						<th>@lang('examen.nota') </th>
-						<th>@lang('examen.recupertorio') </th>
+						<th>@lang('examen.recuperatorio') </th>
 								
 					
 						

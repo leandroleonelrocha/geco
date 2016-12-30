@@ -15,6 +15,7 @@ use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\PaisRepo;
 use App\Http\Requests\CrearNuevaMatriculaRequest;
 use App\Http\Requests\CrearNuevaPersonaRequest;
 use Auth;
@@ -27,7 +28,7 @@ class MatriculaController extends Controller {
     protected $matriculaRepo;
     protected $tipoDocumentoRepo;
 
-    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo)
+    public function __construct(MatriculaRepo $matriculaRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumentoRepo $tipoDocumentoRepo, PersonaMailRepo $personaMailRepo, PersonaTelefonoRepo $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PagoRepo $pagoRepo, GrupoRepo $grupoRepo, MatriculaPermisosRepo $matriculaPermisosRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
     {
         $this->matriculaRepo            = $matriculaRepo;
         $this->personaRepo              = $personaRepo;
@@ -41,6 +42,7 @@ class MatriculaController extends Controller {
         $this->grupoRepo                = $grupoRepo;
         $this->matriculaPermisosRepo    = $matriculaPermisosRepo;
         $this->filialRepo               = $filialRepo;
+        $this->paisRepo                 = $paisRepo;
     }
 
     // Página principal de Matrículas
@@ -69,11 +71,12 @@ class MatriculaController extends Controller {
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
+        $paises= $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
         $carreras   = $this->carreraRepo->all();
         $cursos     = $this->cursoRepo->all();
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos'));
+        return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos','paises'));
     }
 
     // Alta de Matrícula y Persona Existente
@@ -103,10 +106,11 @@ class MatriculaController extends Controller {
                 $pago['descripcion']    =   $request->descripcion[$i];
                 $pago['vencimiento']    =   $request->vencimiento[$i];
                 $pago['monto_original'] =   $request->monto_original[$i];
-                $pago['monto_actual'] =     $pago['monto_original'];
+                $pago['monto_actual']   =     $pago['monto_original'];
                 $pago['descuento']      =   $request->descuento[$i];
                 $pago['recargo']        =   $request->recargo[$i];
                 $pago['filial_id']      =   session('usuario')['entidad_id'];
+                $pago['tipo_moneda_id'] =   session('moneda')['id'];
                 $this->pagoRepo->create($pago);
             }
             return redirect()->route('filial.matriculas');
@@ -192,13 +196,14 @@ class MatriculaController extends Controller {
     }
 
     public function editar($id){
-        $matricula  = $this->matriculaRepo->find($id);
-        $pagos      = $this->pagoRepo->allMatricula($id);
-        $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.editar',compact('matricula','pagos','asesores','carreras','cursos','grupos'));
+        $matricula          = $this->matriculaRepo->find($id);
+        $planPagos          = $this->pagoRepo->allMatriculaPlan($id);
+        $pagosIndividuales  = $this->pagoRepo->allMatriculaIndividual($id);
+        $asesores           = $this->asesorRepo->allAsesores()->lists('fullname','id');
+        $carreras           = $this->carreraRepo->all();
+        $cursos             = $this->cursoRepo->all();
+        $grupos             = $this->grupoRepo->allEnable()->lists('id','id');
+        return view('rol_filial.matriculas.editar',compact('matricula','planPagos','pagosIndividuales','asesores','carreras','cursos','grupos'));
     }
 
     public function editar_post(Request $request){
@@ -221,22 +226,6 @@ class MatriculaController extends Controller {
        // Matrícula
         $modelM = $this->matriculaRepo->find($data['matricula']); // Busco la Matrícula
         $this->matriculaRepo->edit($modelM,$matricula);
-        // var_dump(count($request->nro_pago));die;
-        for ($i=0; $i < count($request->nro_pago); $i++){
-            $modelP = $this->pagoRepo->find($request->pago[$i]);
-            if ( ($modelP->vencimiento < date('Y-m-d')) && ($request->vencimiento > $modelP->vencimiento) ){
-                $modelP->monto_actual = $request->monto_original[$i] - $modelP->monto_pago;
-                $modelP->save();
-            }
-            $modelP->nro_pago       =   $request->nro_pago[$i];
-            $modelP->descripcion    =   $request->descripcion[$i];
-            $modelP->vencimiento    =   $request->vencimiento[$i];
-            $modelP->monto_actual  +=   $request->monto_original[$i]-$modelP->monto_original;
-            $modelP->monto_original =   $request->monto_original[$i];
-            $modelP->descuento      =   $request->descuento[$i];
-            $modelP->recargo        =   $request->recargo[$i];
-            $modelP->save();
-        }
 
         return redirect()->route('filial.matriculas');
     }

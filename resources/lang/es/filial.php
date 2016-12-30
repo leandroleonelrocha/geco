@@ -10,6 +10,8 @@ return [
     'codigopostal'=>'Código postal',
     'telefonos' => 'Teléfonos',
     'cadena'=>'Cadena',
+    'pais'=>'País',
+
 
     'cuenta' => 'Email(Cuenta de acceso)',
 
