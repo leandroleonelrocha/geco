@@ -128,12 +128,12 @@
                                     @if(!empty($horario->materia_id))
                                     <div class="col-xs-12 materia">
                                        <label> @lang('grupo.materia') </label>
-                                       {!! Form::select('materia_id',$materias->toArray(), $horario->materia_id ,array('class' => 'form-control select_materia')) !!}
+                                       {!! Form::select('materia_id[]',$materias->toArray(), $horario->materia_id ,array('class' => 'form-control select_materia')) !!}
                                     </div>
                                     @endif
                                     <div class="col-xs-3">
                                        <label> @lang('grupo.aula') </label>
-                                       {!! Form::select('aula',$aulas->toArray(), $horario->aula_id ,array('class' => 'form-control')) !!}
+                                       {!! Form::select('aula_id[]',$aulas->toArray(), $horario->aula_id ,array('class' => 'form-control')) !!}
                                     </div>
                                     <div class="col-xs-3">
                                     <label> Dia </label>

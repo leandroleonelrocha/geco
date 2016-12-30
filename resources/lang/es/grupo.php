@@ -89,7 +89,8 @@ return [
     'grupo' => 'Grupo',
 
     'nuevogrupo' => 'Nuevo Grupo',
-
+    
+    'aula' => 'Aula',
     'asignacionaulas' => 'Asignación de Aulas',
     'nombreaula' => 'Nombre de aula',
 

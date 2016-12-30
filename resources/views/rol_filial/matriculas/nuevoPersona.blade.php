@@ -140,6 +140,49 @@
 			                	<h4 class="box-title text-center">@lang('matricula.plandepagos')</h4>
 			                	<div>@lang('matricula.plandepagost')</div>
 			              	</div>
+			              	<!-- ---------- Pago Matrícula ---------- -->
+			              	<div class="col-xs-12">
+				            	<h4 class="box-title text-left">@lang('matricula.matricula')</h4>
+				            </div>
+			              	<div class="col-xs-12">
+			                	<div class="col-md-6 form-group">
+									<label>@lang('matricula.numerodepago')</label>
+									{!! Form::text('nro_pago[]',null,array('class'=>'pago-item form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('matricula.fechavencimiento')</label>
+									{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('matricula.montooriginal')</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">$</span>
+										{!! Form::text('monto_original[]',null,array('class'=>'pago-item form-control')) !!}
+									</div>
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('matricula.descuento')</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">$</span>
+										{!! Form::text('descuento[]',null,array('class'=>'pago-item form-control')) !!}
+		  							</div>
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('matricula.recargo')</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">%</span>
+										{!! Form::text('recargo[]',null,array('class'=>'pago-item form-control')) !!}
+		  							</div>
+								</div>
+								<div class="col-md-12 form-group">
+									<label>@lang('matricula.descripcion')</label>
+									{!! Form::textarea('descripcion[]',null,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
+									<div class="line"></div>
+								</div>
+			              	</div><!-- Fin Pago Matrícula -->
+			              	<div class="col-xs-12">
+				            	<h4 class="box-title text-left">@lang('matricula.restopago')</h4>
+				            </div>
 							<div id="planDePagos">
 							<div class="pagos">
 				              	<div class="col-md-6 form-group">
@@ -161,7 +204,7 @@
 									<label>@lang('matricula.descuento')</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">$</span>
-										{!! Form::text('descuento',null,array('class'=>'pago-item form-control')) !!}
+										{!! Form::text('descuento[]',null,array('class'=>'pago-item form-control')) !!}
 		  							</div>
 								</div>
 								<div class="col-md-6 form-group">
