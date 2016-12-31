@@ -40,7 +40,7 @@
                         <!-- ******************** PACE JS ******************** -->
 <script src="{{asset('plugins/pace/pace.js')}}"></script>
                         <!-- ******************** STEPS JS ******************** -->
-<script src="{{asset('js/steps/jquery.steps.js')}}"></script>
+
 
 <!-- Bootstrap-checkbox -->
 <!-- <script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>
