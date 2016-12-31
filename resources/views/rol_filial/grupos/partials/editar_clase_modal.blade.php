@@ -13,9 +13,16 @@
 			  <div class="modal-body">
 				
 			  	<div class="form-group row">
-			      <label for="inputEmail3" class="col-sm-2 col-form-label ">@lang('grupo.personasi'))</label>
+			      <label for="inputEmail3" class="col-sm-2 col-form-label ">@lang('grupo.personasi')</label>
 			      <div class="col-sm-10">
 					<span class="badge bg-green cantidad_personas"></span>
+				  </div>
+			    </div>
+
+			    <div class="form-group row">
+			      <label for="inputEmail3" class="col-sm-2 col-form-label ">Aula</label>
+			      <div class="col-sm-10">
+					<span class="clase_aula"></span>
 				  </div>
 			    </div>
 

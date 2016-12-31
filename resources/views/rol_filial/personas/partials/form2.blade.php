@@ -1,7 +1,14 @@
-<div class="form-group">
-								<label>@lang('persona.estadocivil')</label>
-								{!! Form::text('estado_civil',null,array('class'=>'form-control')) !!}
-							</div>
+							<div class="row">
+								<div class="col-xs-6 form-group">
+									<label>@lang('persona.estadocivil')</label>
+									{!! Form::text('estado_civil',null,array('class'=>'form-control')) !!}
+								</div>
+							    <div class="col-xs-6">
+			                     	<label>@lang('persona.fnacimiento')</label>
+									{!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
+			                    </div>
+			                </div>    
+
 							<div class="form-group">
 								<label>@lang('persona.nivelestudios')</label>
 								{!! Form::select('nivel_estudios',['Secundario Completo' => 'Secundario Completo','Terciario' => 'Terciario','Universitario' => 'Universitario'],null,array('class' => 'form-control')) !!}
