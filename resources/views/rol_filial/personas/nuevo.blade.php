@@ -51,7 +51,7 @@
 
 		
   				 @if(isset($model))
-  				 {!! Form::model($model,['route'=>['filial.personas_editar_post',$model->id]]) !!}
+  				 {!! Form::model($model,['route'=>['filial.personas_editar_post',$model->id] , 'id'=>'form-persona']) !!}
   				 @else
   				 {!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
   				 @endif		
@@ -93,7 +93,9 @@
 @section('js')
 <script type="text/javascript">
 	$(document).ready(function () {
-    //Initialize tooltips
+
+
+
     $('.nav-tabs > li a[title]').tooltip();
     
     //Wizard
