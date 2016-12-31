@@ -50,8 +50,8 @@
 				<div class="box-body">
 
 		
-  				 @if(isset($model))
-  				 {!! Form::model($model,['route'=>['filial.personas_editar_post',$model->id]]) !!}
+  				 @if(isset($persona))
+  				 {!! Form::model($persona,['route'=>['filial.personas_editar_post',$persona->id]]) !!}
   				 @else
   				 {!! Form::open(['route'=> 'filial.personas_nuevo_post', 'method'=>'post']) !!}
   				 @endif		
