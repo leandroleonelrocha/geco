@@ -119,6 +119,14 @@
             showInputs: false
         });
 
+        $('.scrollbar').slimScroll({
+            height: '550px',
+            color: '#1E961E',
+            alwaysVisible: true,
+            distance: '0px',
+
+        });
+
     });
 </script>
 
