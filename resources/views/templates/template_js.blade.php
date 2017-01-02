@@ -120,7 +120,7 @@
         });
 
         $('.scrollbar').slimScroll({
-            height: '550px',
+            height: '600px',
             color: '#1E961E',
             alwaysVisible: true,
             distance: '0px',
