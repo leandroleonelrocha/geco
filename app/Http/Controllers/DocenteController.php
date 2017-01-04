@@ -94,16 +94,26 @@ class DocenteController extends Controller {
     
         $clases = $this->claseRepo->clasesDocente($id,$fecha1,$fecha2);
         $docente = $this->docenteRepo->find($id);
-        $horasTotal=0;
-        $cantClases=0;
-        foreach ($clases as $hora) {
+        $horasTotala=0;
+        $cantClasesa=0;
+        $horasTotalp=0;
+        $cantClasesp=0;
+        foreach ($clases as $clase) {
 
-            $horas=($hora->horario_hasta)-($hora->horario_desde);
-            $horasTotal += $horas; 
-            $cantClases++;    
+            $horas=($clase->horario_hasta)-($clase->horario_desde);
+
+            // if ($fecha2>=date("Y/m/d")){
+            //     $horasTotalp += $horas; 
+            //     $cantClasesp++;    
+            // }
+
+           // if ($fecha2<date("Y/m/d")){
+                $horasTotala += $horas; 
+                $cantClasesa++;    
+            // }   
         }
 
-        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases','fecha2'));  
+        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotalp','docente','cantClasesp','horasTotala','cantClasesa','fecha2'));  
     }
 
     public function calcularHorasBusqueda(Request $request){
@@ -115,14 +125,24 @@ class DocenteController extends Controller {
         $id=$data['docente'];
         $clases = $this->claseRepo->clasesDocente($id,$fecha1,$fecha2);
         $docente = $this->docenteRepo->find($id);
-        $horasTotal=0;
-        $cantClases=0;
-        foreach ($clases as $hora) {
+        $horasTotala=0;
+        $cantClasesa=0;
+        $horasTotalp=0;
+        $cantClasesp=0;
+        foreach ($clases as $clase) {
 
-            $horas=($hora->horario_hasta)-($hora->horario_desde);
-            $horasTotal += $horas; 
-            $cantClases++;    
+            $horas=($clase->horario_hasta)-($clase->horario_desde);
+
+            if ($clase->fecha >=date("Y/m/d")){
+                $horasTotalp += $horas; 
+                $cantClasesp++;    
+            }
+
+           if ($clase->fecha<date("Y/m/d")){
+                $horasTotala += $horas; 
+                $cantClasesa++;    
+            }
         }
-        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotal','docente','cantClases'));    
+        return view('rol_filial.docentes.calculoHoras.lista',compact('clases','horasTotalp','docente','cantClasesp','horasTotala','cantClasesa'));    
     }
 }

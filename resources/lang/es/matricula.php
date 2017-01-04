@@ -63,7 +63,7 @@ return [
 
 
 
-   	'actualizarmatricula' => 'actualizar matrícula',
+   	'actualizarmatricula' => 'Actualizar Matrícula',
    	'cancelar'=> 'Cancelar',
    	'si'=> 'Si',
 
