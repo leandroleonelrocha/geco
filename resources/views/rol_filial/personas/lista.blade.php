@@ -23,7 +23,6 @@
 						<th>@lang('persona.numerodocumento')</th>
 						<th>@lang('persona.nombre')</th>
 						<th>@lang('persona.apellido')</th>
-						<th>@lang('persona.fnacimiento')</th>
 						<th>@lang('persona.localidad')</th>
 						<th>@lang('filial.pais')</th>
 						<th>@lang('persona.telefonos')</th>
@@ -38,7 +37,6 @@
 									<td>{{$p->nro_documento}}</td>
 									<td>{{$p->nombres}}</td>
 									<td>{{$p->apellidos}}</td>
-									<td>{{$p->fecha_nacimiento}}</td>
 									<td>{{$p->localidad}}</td>
 								  	<td>{{$p->Pais->pais }}</td>
 									<td>

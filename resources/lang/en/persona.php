@@ -40,6 +40,10 @@ return [
     'nuevopersona' => 'New Person',
     'editarpersona' => 'Edit Person',
 
+    'siguiente' => 'Next',
+    'anterior' => 'Back',
+    'continuar' => 'Continue',
+
     'crear' => 'Create',
     'guardar' => 'Save',
 

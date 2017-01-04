@@ -22,7 +22,7 @@ return [
    	'genero'=>'Gênero',
     'masculino'=>'Masculino',
     'femenino'=>'Feminino',
-    'domicilio'=>'casa',
+    'domicilio'=>'Casa',
     'nivelestudios'=>'Nivel de estudos',
     'computadora'=>'Tem um computador',
     'computacion'=>'Estudió computacion',
@@ -39,6 +39,10 @@ return [
     'agregarnuevo' => 'Adicionar Novos',
     'nuevopersona' => 'Nova Pessoa',
     'editarpersona' => 'Editar Pessoa',
+
+    'siguiente' => 'Seguinte',
+    'anterior' => 'Anterior',
+    'continuar' => 'Continuar',
 
     'crear' => 'Salvar',
     'guardar' => 'Mudança',

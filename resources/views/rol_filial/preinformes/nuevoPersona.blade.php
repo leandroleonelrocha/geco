@@ -91,18 +91,18 @@
 				                                    {!! Form::text('domicilio',null,array('class'=>'form-control')) !!}
 				                                </div>
 
-				                                <div class="col-md-3 form-group">
-				                                    <label>@lang('filial.pais')</label>
-				                                    {!! Form::select('pais_id', $paises->toArray() , null, array('class'=>'form-control select2')) !!}
-				                                </div>
+
 
 				                                <div class="col-md-3 form-group">
 				                                    <label>@lang('persona.localidad')</label>
 				                                    {!! Form::text('localidad',null,array('class'=>'form-control')) !!}
 				                                </div>
 
+				                                <div class="col-md-3 form-group">
+				                                    <label>@lang('filial.pais')</label>
+				                                    {!! Form::select('pais_id', $paises->toArray() , null, array('class'=>'form-control select2')) !!}
+				                                </div>
 				                               
-
 				                                <div class="col-md-6 form-group">
 				                                    <label>@lang('persona.fnacimiento')</label>
 				                                    {!! Form::date('fecha_nacimiento',null,array('class'=>'form-control')) !!}
@@ -129,7 +129,7 @@
 				                                </div>
 				                                
 				                                <div class="col-xs-12">
-				                                <button class="btn btn-primary next-step  pull-right" type="button" >Siguiente</button>
+				                                <button class="btn btn-primary next-step  pull-right" type="button" >@lang('persona.siguiente')</button>
 				                                </div>
 				                    </div>
 				                    <div class="tab-pane" role="tabpanel" id="step2">
@@ -181,8 +181,8 @@
 				                            
 				                                 <div class="col-xs-12">
 							                        <ul class="list-inline pull-right">
-							                            <li><button type="button" class="btn btn-default prev-step">Anterior</button></li>
-							                            <li><button type="button" class="btn btn-primary next-step">Continuar</button></li>
+							                            <li><button type="button" class="btn btn-default prev-step">@lang('persona.anterior')</button></li>
+							                            <li><button type="button" class="btn btn-primary next-step">@lang('persona.continuar')</button></li>
 							                        </ul>
 				                        		</div>
 				                    </div>
