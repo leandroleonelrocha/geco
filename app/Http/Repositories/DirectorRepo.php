@@ -3,8 +3,7 @@
 namespace App\Http\Repositories;
 use App\Entities\Director;
 use App\Entities\Filial;
-
-
+use App\Entities\Asesor;
 use DB;
 use App\Entities\Persona;
 use App\Entities\Preinforme;

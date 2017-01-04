@@ -31,6 +31,14 @@
         @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones según preinformes'])
     @endif
 
+    @if($secion == 'recaudacion')
+       @include('partials.estadisticas.grafico_recaudacion', ['titulo' => 'Recaudacion según filiales'])    
+    @endif
+
+    @if($secion == 'morosidad')
+       @include('partials.estadisticas.grafico_morosidad', ['titulo' => 'Recaudacion según filiales'])    
+    @endif
+
 
 @endif
 
@@ -38,6 +46,7 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="{{asset('js/functions/estadisticas_dueno/recaudacion.js')}}"></script>
 <script type="text/javascript">
 $(function () {
     $('#torta').highcharts({
@@ -102,10 +111,11 @@ $(function () {
 
             ]
         }]
-    });//Fin de la torta
+    });
+    //Fin de la torta
 
 
-    //BAR CHART
+        //BAR CHART
         var bar = new Morris.Bar({
           element: 'bar-chart',
           resize: true,

@@ -94,13 +94,13 @@ class PersonaController extends Controller {
     // Página de Editar
     public function editar($id){
         
-    	$model   = $this->personaRepo->find($id); // Obtengo a la persona
+    	$persona   = $this->personaRepo->find($id); // Obtengo a la persona
     	$tipos     = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $mail      = $this->personaMailRepo->findMail($id);// Obtengo al mail
         $telefono  = $this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
 
         $paises    = $this->paisRepo->all()->lists('pais','id');
-    	return view('rol_filial.personas.editar',compact('persona','tipos','mail','telefono','paises')); 
+    	return view('rol_filial.personas.nuevo',compact('persona','tipos','mail','telefono','paises')); 
     }
 
     //Modificación de la persona

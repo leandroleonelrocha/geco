@@ -80,6 +80,8 @@
 							$('#ModalEdit #horario_desde').val(data.horario_desde);
 							$('#ModalEdit #horario_hasta').val(data.horario_hasta);
 							$('#ModalEdit .cantidad_personas').html(data.cantidad_personas);
+							$('#ModalEdit .clase_aula').html(data.clase_aula);
+
 							$('#ModalEdit #clase_matricula').attr('href', url );
 							$('#ModalEdit #clase_borrar').attr('href', urlborrar );
 
