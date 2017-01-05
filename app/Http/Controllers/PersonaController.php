@@ -98,7 +98,6 @@ class PersonaController extends Controller {
     	$tipos     = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $mail      = $this->personaMailRepo->findMail($id);// Obtengo al mail
         $telefono  = $this->personaTelefonoRepo->findTelefono($id); // Obtengo al telefono
-
         $paises    = $this->paisRepo->all()->lists('pais','id');
     	return view('rol_filial.personas.nuevo',compact('persona','tipos','mail','telefono','paises')); 
     }
