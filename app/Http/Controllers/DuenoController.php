@@ -267,27 +267,39 @@ class DuenoController extends Controller
 
 	public function estadisticasDuenoRecaudacion($inicio, $fin){
 
-        $secion         = 'recaudacion';
-        $recaudacion    = $this->duenoRepo->estadisticasRecaudacion($inicio, $fin);
-        dd($recaudacion);
-        return view('rol_dueno.estadisticas.index', compact('secion'))->with($this->data); 
+        $secion                 = 'recaudacion';
+        $recaudacion            = $this->duenoRepo->estadisticasRecaudacion($inicio, $fin);
+        $total_recaudacion      = $this->duenoRepo->montoTotalRecaudacion($inicio, $fin);
+
+      
+        return view('rol_dueno.estadisticas.index', compact('secion', 'recaudacion', 'total_recaudacion'))->with($this->data); 
 		
 	}
 
 
 	public function estadisticasDuenoMorisidad($inicio, $fin){
 
+<<<<<<< HEAD
 		$secion         = 'morosidad';
         $morosidad    = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
      
         return view('rol_dueno.estadisticas.index', compact('morosidad'))->with($this->data); 
+=======
+
+		$secion               = 'morosidad';
+        $morosidad            = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
+        $total_morosidad      = $this->duenoRepo->montoTotalMorosidad($inicio, $fin);
+        
+        return view('rol_dueno.estadisticas.index', compact('secion','morosidad','total_morosidad'))->with($this->data); 
+>>>>>>> 47d6238e3c7feacb959a6ce4819c74e3d3ddd895
 	}
 
 	public function estadisticasDuenoExamen($inicio, $fin){
-			$examenes = $this->examenRepo->allExamenFilialMatricula()->groupBy('nro_acta');
-			foreach ($examenes as $key => $value) {
-				dd($key);
-			}
+		$examenes = $this->duenoRepo->estadisticasExamen($inicio, $fin);
+        dd($examenes);
+
 	}
+
+
 
 }

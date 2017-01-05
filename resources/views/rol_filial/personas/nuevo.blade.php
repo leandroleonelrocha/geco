@@ -44,7 +44,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				 <div class="box-header">
-                    <h3 class="box-title">@lang('persona.nueva')</h3>
+                    <h3 class="box-title">@lang('persona.nuevopersona')</h3>
                 </div>	
 
 				<div class="box-body">
@@ -61,20 +61,20 @@
                     <div class="tab-pane active" role="tabpanel" id="step1">
                     	@include('rol_filial.personas.partials.form1')
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-primary next-step">Siguiente</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">@lang('persona.siguiente')</button></li>
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2">
                     	@include('rol_filial.personas.partials.form2')
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Anterior</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Continuar</button></li>
+                            <li><button type="button" class="btn btn-default prev-step">@lang('persona.anterior')</button></li>
+                            <li><button type="button" class="btn btn-primary next-step">@lang('persona.continuar')</button></li>
                         </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
                        @include('rol_filial.personas.partials.form3')
                         <ul class="list-inline pull-right">
-                            <li><button type="button" class="btn btn-default prev-step">Anterior</button></li>
+                            <li><button type="button" class="btn btn-default prev-step">@lang('persona.anterior')</button></li>
                           
                         </ul>
                     </div>

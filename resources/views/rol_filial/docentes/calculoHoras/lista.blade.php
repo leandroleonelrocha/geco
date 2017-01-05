@@ -8,7 +8,7 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
-					<h3 class="box-title">@lang('docente.docente') <strong>{{$docente->nombres}} {{$docente->apellidos}}</strong> </br>@lang('docente.titulo')</h3>	
+					<h3 class="box-title">@lang('docente.docente') <strong>{{$docente->nombres}} {{$docente->apellidos}}</strong> </br></br>@lang('docente.titulo')</h3>	
 				</div>
 	
 				{!! Form::open(['route'=> 'filial.docentes_calcularHorasBusqueda', 'method'=>'post']) !!}
@@ -25,7 +25,10 @@
 
 				<div class="col-md-9 form-group">
 					<button type="submit" class="btn btn-success">@lang('docente.buscar')</button>
-					<h3>@lang('docente.tiene')  {{$horasTotal}} @lang('docente.horasdeclase') {{$cantClases}} @lang('docente.clasesentotal')</h3>
+
+					<span class="text-success"><h3>@lang('docente.tiene')  {{$horasTotala}} @lang('docente.horasdeclase') {{$cantClasesa}} @lang('docente.clasesentotal') @lang('docente.realizadas')</h3></span> 
+
+					<span class="text-danger"><h3>@lang('docente.tiene')  {{$horasTotalp}} @lang('docente.horasdeclase') {{$cantClasesp}} @lang('docente.clasesentotal') @lang('docente.arealizar')</h3></span> 
 				</div>
 				{!! Form::close() !!}
 				<div class="box-body">
@@ -42,7 +45,13 @@
 							@foreach($clases as $c)
 								<tr>
 									<td>{{$c->id}}</td>
-									<td>{{$c->fecha}}</td>
+									<td>
+										<?php if($c->fecha > date("Y/m/d")){ ?>	
+												<span class="text-danger"> {{$c->fecha}} </span> 
+										<?php }else{ ?>
+												<span class="text-success"> {{$c->fecha}} </span>
+										<?php } ?>	
+									</td>
 									<td>{{$c->horario_desde}}</td>
 									<td>{{$c->horario_hasta}}</td>
 									<td>{{$c->descripcion}}</td>
