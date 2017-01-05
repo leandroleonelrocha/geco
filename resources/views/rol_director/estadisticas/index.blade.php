@@ -71,6 +71,14 @@
     @if($secion == 'preinforme')
         @include('partials.estadisticas.grafico_preinforme',['titulo' => 'Preinformes por personas'])
     @endif
+    
+    @if($secion == 'recaudacion')
+        @include('partials.estadisticas.grafico_recaudacion',['titulo' => 'Preinformes por personas'])
+    @endif
+
+    @if($secion == 'morosidad')
+        @include('partials.estadisticas.grafico_morosidad',['titulo' => 'Preinformes por personas'])
+    @endif
 
 
 @endif
@@ -196,6 +204,8 @@ $(function () {
 <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
 <script src="{{asset('js/Highcharts-4.1.5/js/highcharts.js')}}"></script>
 <script src="{{asset('js/Highcharts-4.1.5/js/modules/exporting.js')}}"></script>
+@include('rol_director.partials.recaudacion_js')
+@include('rol_director.partials.morosidad_js')
 @endsection
 
 

@@ -6,6 +6,7 @@ use App\Entities\Filial;
 use App\Entities\Asesor;
 use DB;
 use App\Entities\Persona;
+use App\Entities\Pago;
 use App\Entities\Preinforme;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
@@ -104,4 +105,53 @@ class DirectorRepo extends BaseRepo {
       return Persona::whereIn('filial_id',$filial_id)->where($campo,$valor)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
 
+    public function estadisticasRecaudacion($inicio, $fin){
+         $qry         = DB::table('pago')
+                         ->join('filial', 'pago.filial_id', '=', 'filial.id')
+                         ->where('filial.director_id', $this->filial )
+                         ->select(DB::raw('SUM(monto_actual) as total, filial.nombre'))
+                         ->whereDate('pago.created_at','>=',$inicio)
+                         ->whereDate('pago.created_at','<=',$fin)
+                         ->where('terminado',1)
+                         ->groupBy('filial_id')
+                         ->get();
+        return $qry;    
+    }
+    public function totalRecaudacion($inicio, $fin){
+      $filial_id = $this->filialDirectores();
+      return Pago::whereIn('filial_id',$filial_id)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('terminado',1)->sum('monto_actual');
+    }
+
+    public function estadisticasMorosidad($inicio, $fin){
+        $fecha_hoy   = date("Y-m-d H:i:s");
+        $qry         = DB::table('pago')
+                         ->join('filial', 'pago.filial_id', '=', 'filial.id')
+                         ->where('filial.director_id', $this->filial )
+                         ->select(DB::raw('SUM(monto_actual) as total, filial.nombre'))
+                         ->whereDate('pago.created_at','>=',$inicio)
+                         ->whereDate('pago.created_at','<=',$fin)
+                         ->where('vencimiento', '>', $fecha_hoy)
+                         ->where('terminado',0)
+                         ->groupBy('filial_id')
+                         ->get();
+       return $qry;
+    }
+
+    public function totalMorosidad($inicio, $fin){
+      $fecha_hoy   = date("Y-m-d H:i:s");  
+      $filial_id = $this->filialDirectores();
+      return Pago::whereIn('filial_id',$filial_id)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('vencimiento', '>', $fecha_hoy)->where('terminado',0)->sum('monto_actual');
+    }
+
+    public function estadisticasExamen($inicio, $fin){
+         $qry         = DB::table('examen')
+                         ->join('grupo', 'examen.grupo_id', '=', 'grupo.id')
+                         ->join('matricula', 'examen.matricula_id', '=', 'matricula.id')
+                         ->where('matricula.filial_id', $this->filial)
+                         ->select(DB::raw('AVG(nota) as promedio, examen.nro_acta' ))
+                         ->groupBy('nro_acta')
+                         ->get();
+       dd($qry);
+
+    }
 }

@@ -69,18 +69,6 @@ class DuenoRepo {
     public function estadisticasMorosidad($inicio, $fin){
         $fecha_hoy   = date("Y-m-d H:i:s");
         $qry         = DB::table('pago')
-<<<<<<< HEAD
-                       ->join('filial', 'pago.filial_id', '=', 'filial.id')
-                       ->select(DB::raw('SUM(monto_actual) as total, filial.nombre'))
-                       ->whereDate('pago.created_at','>=',$inicio)
-                       ->whereDate('pago.created_at','<=',$fin)
-                       ->where('vencimiento', '>', $fecha_hoy)
-                       ->where('terminado',0)
-                       ->groupBy('filial_id')
-                       ->get();
-        return $qry;       
-
-=======
                          ->join('filial', 'pago.filial_id', '=', 'filial.id')
                          ->select(DB::raw('SUM(monto_actual) as total, filial.nombre'))
                          ->whereDate('pago.created_at','>=',$inicio)
@@ -109,7 +97,7 @@ class DuenoRepo {
                          ->groupBy('nro_acta')
                          ->get();
         return $qry;   
->>>>>>> 47d6238e3c7feacb959a6ce4819c74e3d3ddd895
+
     }
 
 }
