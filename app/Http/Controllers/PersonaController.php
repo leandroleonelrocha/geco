@@ -106,7 +106,7 @@ class PersonaController extends Controller {
     public function editar_post(EditarPersonaRequest $request){
 
         $data = $request->all();
-        $model = $this->personaRepo->find($data['persona']); // Busco a la persona
+        $model = $this->personaRepo->find($request->id); // Busco a la persona
           
         if($this->personaRepo->edit($model,$data)) // Modificación de los datos
         {

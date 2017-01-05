@@ -5,28 +5,28 @@
 @section('content')    
 <div class="row">      
   <div class="col-lg-6 col-xs-6">
-  <div class="small-box bg-yellow">
-  <div class="inner">
-  <h1>@if(isset($totalPersonas)){{$totalPersonas}}@endif</h1>
-  <p>@lang('estadistica.personasi')</p>
-  </div>
-  <div class="icon">
-  <i class="ion ion-ios-people-outline"></i>
-  </div>
-  <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
-  </div>
+    <div class="small-box bg-yellow">
+    <div class="inner">
+      <h1>@if(isset($totalPersonas)){{$totalPersonas}}@endif</h1>
+      <p>@lang('estadistica.personasi')</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-ios-people-outline"></i>
+    </div>
+      <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
   </div>
   <div class="col-lg-6 col-xs-6">
-  <div class="small-box bg-yellow">
-  <div class="inner">
-  <h1>@if(isset($totalAsesores)){{$totalAsesores}}@endif</h1>
-  <p>@lang('estadistica.asesoresr')</p>
-  </div>
-  <div class="icon">
-  <i class="ion ion-person-add"></i>
-  </div>
-  <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
-  </div>
+    <div class="small-box bg-yellow">
+      <div class="inner">
+      <h1>@if(isset($totalAsesores)){{$totalAsesores}}@endif</h1>
+      <p>@lang('estadistica.asesoresr')</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-person-add"></i>
+    </div>
+      <a href="#" class="small-box-footer">@lang('estadistica.masinformacion') <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
   </div>
 </div>
 <div class="box box-success">
@@ -39,14 +39,24 @@
     {!! Form::close() !!}
   </div>
 </div>
-@if(isset($secion))
-    @if($secion == 'inscripcion')
-        @include('partials.estadisticas.grafico_inscripcion', ['genero' => 'Inscripciones según género','nivel'=>'Estadísticas según nivel de estudio','persona'=>'Estadística por personas'])
-    @endif
-    @if($secion == 'preinforme')
-        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
-    @endif
-@endif
+  @if(isset($secion))
+      @if($secion == 'inscripcion')
+          @include('partials.estadisticas.grafico_inscripcion', ['genero' => 'Inscripciones según género','nivel'=>'Estadísticas según nivel de estudio','persona'=>'Estadística por personas'])
+      @endif
+      @if($secion == 'preinforme')
+          @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones'])
+      @endif
+      @if($secion == 'recaudacion')
+          @include('partials.estadisticas.grafico_recaudacion', ['titulo' => 'Inscripciones'])
+      @endif
+      @if($secion == 'morosidad')
+          @include('partials.estadisticas.grafico_morosidad', ['titulo' => 'Inscripciones'])
+      @endif
+
+      @if($secion == 'examen')
+          @include('rol_filial.estadisticas.partials.estadistica_examen')
+      @endif
+  @endif
 @endsection
 @section('js')
 <script type="text/javascript">
@@ -179,6 +189,8 @@ $(".star_intro" ).click(function() {
 <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
 <script src="{{asset('js/Highcharts-4.1.5/js/highcharts.js')}}"></script>
 <script src="{{asset('js/Highcharts-4.1.5/js/modules/exporting.js')}}"></script>
+@include('rol_filial.estadisticas.partials.recaudacion_js')
+@include('rol_filial.estadisticas.partials.morosidad_js')
 @endsection
 
 

@@ -6,6 +6,7 @@ use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PreinformeRepo;
 use App\Http\Repositories\ExamenRepo;
 use App\Http\Repositories\AsesorRepo;
+use App\Http\Repositories\FilialRepo;
 use App\Entities\Asesor;
 use App\Entities\Persona;
 use App\Entities\Preinforme;
@@ -16,13 +17,14 @@ class EstadisticaController extends Controller
     protected  $totalPersonas;
     protected  $totalAsesores;
     protected  $data;
-	public function __construct(PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo,AsesorRepo $asesorRepo)
+	public function __construct(FilialRepo $filialRepo, PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo,AsesorRepo $asesorRepo)
 	{
 		$this->pagoRepo        			= $pagoRepo;
 		$this->personaRepo      		= $personaRepo;
 		$this->preinformeRepo  			= $preinformeRepo;
 		$this->examenRepo      			= $examenRepo;
 		$this->asesorRepo     			= $asesorRepo;
+		$this->filialRepo 				= $filialRepo;
         $this->data['totalPersonas']    = $this->total_personas();
         $this->data['totalAsesores']    = $this->total_asesores();
 	}
@@ -52,7 +54,7 @@ class EstadisticaController extends Controller
 		    case 'preinforme':
 		       return $this->estadisticasFilialPreinforme($inicio, $fin); break;
 		       
-		    case 'morosidad':
+		    case 'recaudacion':
 		       return $this->estadisticasFilialRecaudacion($inicio, $fin); break;
 		    
 		    case 'morosidad':
@@ -90,7 +92,7 @@ class EstadisticaController extends Controller
 	Estadisticas relacionadas a los pre informes
 	*/
 	public function estadisticasFilialPreinforme($inicio, $fin){
-        $this->data['secion'] = 'preinforme';
+        $this->data['secion']	  = 'preinforme';
 		$this->data['preinforme'] = $this->preinformeRepo->estadisticas($inicio, $fin)->get()->groupBy('como_encontro');
 		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
@@ -98,19 +100,26 @@ class EstadisticaController extends Controller
 	Estadisticas relacionadas a la recaudacion
 	*/
 	public function estadisticasFilialRecaudacion($inicio, $fin){
-		return 'recaudacion';
+		$this->data['secion']				  = 'recaudacion';
+		$this->data['total_recaudacion']	  = $this->filialRepo->montoTotalRecaudacion($inicio, $fin);
+		$this->data['recaudacion'] 			  = $this->filialRepo->estadisticasRecaudacion($inicio, $fin);
+		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
 	/*
 	Estadisticas relacionadas a la morosidad
 	*/
 	public function estadisticasFilialMorosidad($inicio, $fin)
 	{
-		return 'morosidad';
+		$this->data['secion']	  		  = 'morosidad';
+		$this->data['total_morosidad']	  = $this->filialRepo->montoTotalMorosidad($inicio, $fin);
+		$this->data['morosidad'] = $this->filialRepo->estadisticasMorosidad($inicio, $fin);
+		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
 	public function estadisticasFilialExamen($inicio, $fin)
 	{
-       $examenes= $this->examenRepo->allExamenFilialMatricula();
-		return 'examen';
+		$this->data['secion'] 	= 'examen';	
+    	$this->data['examenes']	= $this->filialRepo->estadisticasExamen($inicio, $fin);
+		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
 	
 }

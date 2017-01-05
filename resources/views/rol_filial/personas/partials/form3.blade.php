@@ -6,7 +6,7 @@
 								<label>@lang('persona.telefonos')</label>
 								<button class="add_input_telefono btn-xs btn-success">+</button>	
 								<div class="input_fields_telefono">
-									@if(isset($model))
+									@if(isset($persona))
 										@foreach ($telefono as $t)
 											<input type="text" name="telefono[]" class="form-control" value="{{$t->telefono}}">
 										@endforeach
@@ -20,7 +20,7 @@
 								<label>E-Mails</label>
 								<button class="add_input_mail btn-xs btn-success">+</button>	
 								<div class="input_fields_wrap">
-								@if(isset($model))
+								@if(isset($persona))
 										@foreach ($mail as $m)
 										<input type="text" name="mail[]" class="form-control" value="{{$m->mail}}">
 										@endforeach
