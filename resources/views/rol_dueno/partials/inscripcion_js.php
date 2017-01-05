@@ -1,52 +1,5 @@
-@extends('template')
-@section('css')
-<link rel="stylesheet" href="{{asset('plugins/morris/morris.css')}}">
-@endsection
-@section('content')
-
-@include('rol_dueno.partials.row_dueno')
-
-<div class="row">
-<div class="col-xs-12">
-<div class="box box-success">
-  <div class="box-header with-border">
-    <h3 class="box-title">@lang('estadistica.busqueda')</h3>
-  </div>
-  <div class="box-body">
-    {!! Form::model(Request::all(), ['route'=> 'dueno.estadisticas_detalles', 'method'=>'post', 'class'=>'form-horizontal']) !!} 
-      @include('partials.estadisticas.view_form')  
-    {!! Form::close() !!}
-  </div>
-</div>
-</div>
-</div>
-
-@if(isset($secion))
-
-    @if($secion == 'inscripcion')
-        @include('partials.estadisticas.grafico_inscripcion', ['genero' => 'Estadísticas según género','nivel'=>'Estadísticas según nivel de estudios','persona'=> 'Estadísticas por persona'])
-    @endif  
-
-    @if($secion == 'preinforme')
-        @include('partials.estadisticas.grafico_preinforme', ['titulo' => 'Inscripciones según preinformes'])
-    @endif
-
-    @if($secion == 'recaudacion')
-       @include('partials.estadisticas.grafico_recaudacion', ['titulo' => 'Recaudacion según filiales'])    
-    @endif
-
-    @if($secion == 'morosidad')
-       @include('partials.estadisticas.grafico_morosidad', ['titulo' => 'Recaudacion según filiales'])    
-    @endif
-
-
-@endif
-
-
-@endsection
-
-@section('js')
-
+<?php
+?>
 <script type="text/javascript">
 $(function () {
     $('#torta').highcharts({
@@ -149,7 +102,7 @@ $(function () {
            {
             foreach ($nivelEstudios as $key => $value) {
             ?>
-
+            //{label: "Download Sales", value: 12},
             { label:'{{$key}}', value: {{$value->count()}} },
 
             <?php
@@ -163,12 +116,3 @@ $(function () {
 
 });
 </script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="{{asset('plugins/morris/morris.min.js')}}"></script>
-<script src="{{asset('js/Highcharts-4.1.5/js/highcharts.js')}}"></script>
-<script src="{{asset('js/Highcharts-4.1.5/js/modules/exporting.js')}}"></script>
-@include('rol_dueno.partials.morosidad_js')
-@include('rol_dueno.partials.recaudacion_js')
-
-@endsection
