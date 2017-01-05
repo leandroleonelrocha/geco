@@ -47,7 +47,6 @@ class DuenoRepo {
     }
 
     public function estadisticasNivelEstudios($inicio, $fin){
-
         return $this->persona->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->groupBy('nivel_estudios');
     }
 
@@ -59,17 +58,16 @@ class DuenoRepo {
     public function estadisticasMorosidad($inicio, $fin){
         $fecha_hoy   = date("Y-m-d H:i:s");
         $qry         = DB::table('pago')
-                   ->join('filial', 'pago.filial_id', '=', 'filial.id')
-                   ->select(DB::raw('SUM(monto_actual) as total'))
-                   ->whereDate('pago.created_at','>=',$inicio)
-                   ->whereDate('pago.created_at','<=',$fin)
-                   ->where('vencimiento', '>', $fecha_hoy)
-                   ->where('terminado',0)
-                   ->groupBy('filial_id')
-                   ->get();
-         dd($qry);          
+                       ->join('filial', 'pago.filial_id', '=', 'filial.id')
+                       ->select(DB::raw('SUM(monto_actual) as total, filial.nombre'))
+                       ->whereDate('pago.created_at','>=',$inicio)
+                       ->whereDate('pago.created_at','<=',$fin)
+                       ->where('vencimiento', '>', $fecha_hoy)
+                       ->where('terminado',0)
+                       ->groupBy('filial_id')
+                       ->get();
+        return $qry;       
 
-       //return $this->pago->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('vencimiento', '>', $fecha_hoy)->where('terminado',0)->get()->groupBy('filial_id');
     }
 
 }

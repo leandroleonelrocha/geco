@@ -279,7 +279,7 @@ class DuenoController extends Controller
 
 		$secion         = 'morosidad';
         $morosidad    = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
-        dd($morosidad);
+     
         return view('rol_dueno.estadisticas.index', compact('morosidad'))->with($this->data); 
 	}
 
