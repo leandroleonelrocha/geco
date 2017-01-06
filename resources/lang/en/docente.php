@@ -35,7 +35,9 @@ return [
 
     'tiene' => 'You have',
     'horasdeclase' => 'hours of class and',
-    'clasesentotal' => 'classes in total.',
+    'clasesentotal' => 'classes ',
+    'arealizar' => 'to make.',
+    'realizadas' => 'made to date today.',
 
 
 

@@ -20,7 +20,7 @@ return [
     'editardocente' => 'Editar Docente',
 
     'docente' => 'Docente',
-    'titulo' => 'Busqueda de clases para informar las horas trabajadas por docente',
+    'titulo' => 'Busqueda de clases para informar las horas trabajadas por docente:',
     'fechadesde' => 'Fecha desde',
     'fechahasta' => 'Fecha hasta',
     'buscar' => 'Buscar clases',
@@ -29,11 +29,13 @@ return [
     'fecha' => 'Fecha',
     'horariodesde' => 'Horario desde',
     'horariohasta' => 'Horario hasta',
-    'decripcion' => 'Descripcion',
+    'decripcion' => 'Descripción',
 
     'tiene' => 'Tiene',
     'horasdeclase' => 'horas de clase y',
-    'clasesentotal' => 'clases en total.',
+    'clasesentotal' => 'clases ',
+    'arealizar' => 'a realizar.',
+    'realizadas' => 'realizadas a la fecha de hoy.',
 
 
     'crear' => 'Crear',

@@ -31,7 +31,9 @@ return [
 
     'tiene' => 'Você tem',
     'horasdeclase' => 'horas de aula e',
-    'clasesentotal' => 'aulas no total.',
+    'clasesentotal' => 'aulas ',
+    'arealizar' => 'para fazer.',
+    'realizadas' => 'realizados à data de hoje',
 
     'crear' => 'Salvar',
     'guardar' => 'Mudança', 

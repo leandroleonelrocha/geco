@@ -267,20 +267,33 @@ class DuenoController extends Controller
 
 	public function estadisticasDuenoRecaudacion($inicio, $fin){
 
-		return 'recaudacion';
+        $secion                 = 'recaudacion';
+        $recaudacion            = $this->duenoRepo->estadisticasRecaudacion($inicio, $fin);
+        $total_recaudacion      = $this->duenoRepo->montoTotalRecaudacion($inicio, $fin);
+
+      
+        return view('rol_dueno.estadisticas.index', compact('secion', 'recaudacion', 'total_recaudacion'))->with($this->data); 
+		
 	}
 
 
 	public function estadisticasDuenoMorisidad($inicio, $fin){
 
-		return 'morosidad';
+
+		$secion               = 'morosidad';
+        $morosidad            = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
+        $total_morosidad      = $this->duenoRepo->montoTotalMorosidad($inicio, $fin);
+        
+        return view('rol_dueno.estadisticas.index', compact('secion','morosidad','total_morosidad'))->with($this->data); 
+
 	}
 
 	public function estadisticasDuenoExamen($inicio, $fin){
-			$examenes = $this->examenRepo->allExamenFilialMatricula()->groupBy('nro_acta');
-			foreach ($examenes as $key => $value) {
-				dd($key);
-			}
+		$examenes = $this->duenoRepo->estadisticasExamen($inicio, $fin);
+        dd($examenes);
+
 	}
+
+
 
 }

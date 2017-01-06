@@ -13,7 +13,7 @@ class Clase extends Entity {
     // Relaciones
     public function Matricula()
     {
-    	return $this->belongsToMany(Matricula::getClass())->withPivot('asistio');
+        return $this->belongsToMany(Matricula::getClass())->withPivot('asistio');
     }
 
     public function Grupo()
@@ -23,8 +23,11 @@ class Clase extends Entity {
 
     public function Docente()
     {
-    	 return $this->belongsTo(Docente::getClass());
+        return $this->belongsTo(Docente::getClass());
     }
 	
+    public function Aula(){
+        return $this->belongsTo(Aula::getClass());
+    }
    
 }

@@ -8,7 +8,7 @@ return [
     'numerodocumento' => 'Documento',
     'apellido' => 'Apellidos',
     'nombre' => 'Nombres',
-    'fnacimiento' => 'F Nacimiento',
+    'fnacimiento' => 'Fecha Nacimiento',
     'estadocivil' => 'Estado civil',
     'localidad' => 'Localidad',
     'telefonos' => 'Teléfonos',
@@ -39,6 +39,11 @@ return [
     'agregarnuevo' => 'Agregar Nueva',
     'nuevopersona' => 'Nueva Persona',
     'editarpersona' => 'Editar Persona',
+
+    'siguiente' => 'Siguiente',
+    'anterior' => 'Anterior',
+    'continuar' => 'Continuar',
+
 
     'crear' => 'Crear',
     'guardar' => 'Guardar',

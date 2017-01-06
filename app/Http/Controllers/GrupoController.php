@@ -410,6 +410,7 @@ class GrupoController extends Controller
         $clase = $this->claseRepo->find($clase_id);
         $grupo_matricula = GrupoMatricula::where('grupo_id', $clase->grupo_id)->count();
         $clase->cantidad_personas = $grupo_matricula;
+        $clase->clase_aula 			  = $clase->Aula->nombre;
         
         return response()->json($clase, 200);
  

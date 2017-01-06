@@ -22,7 +22,7 @@
 			'uses'	=>	'PersonaController@editar'
 		]);
 
-		Route::post('personas_editar_post',[
+		Route::post('personas_editar_post/{id}',[
 			'as'	=> 'filial.personas_editar_post',
 			'uses'	=>	'PersonaController@editar_post'
 		]);

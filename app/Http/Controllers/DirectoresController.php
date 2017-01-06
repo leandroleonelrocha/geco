@@ -158,7 +158,6 @@ class DirectoresController extends Controller
 
         $this->data['secion'] = 'preinforme';
         $this->data['preinforme'] = $this->directorRepo->estadisticasPreInformes($inicio, $fin)->get()->groupBy('como_encontro');
-        
 
         return view('rol_director.estadisticas.index')->with($this->data);
     }
@@ -166,14 +165,25 @@ class DirectoresController extends Controller
 
     public function estadisticasDirectorRecaudacion($inicio, $fin){
 
+        $this->data['secion']            = 'recaudacion';
+        $this->data['recaudacion']       = $this->directorRepo->estadisticasRecaudacion($inicio, $fin);
+        $this->data['total_recaudacion'] = $this->directorRepo->totalRecaudacion($inicio, $fin);
+        
+
+        return view('rol_director.estadisticas.index')->with($this->data);
     }
 
     public function estadisticasDirectorMorisidad($inicio, $fin){
-
+        $this->data['secion']          = 'morosidad';
+        $this->data['morosidad']       = $this->directorRepo->estadisticasMorosidad($inicio, $fin);
+        $this->data['total_morosidad'] = $this->directorRepo->totalMorosidad($inicio, $fin);
+        return view('rol_director.estadisticas.index')->with($this->data);
     }
 
     public function estadisticasDirectorExamen($inicio, $fin){
-
+        $this->data['secion']        = 'examen';
+        $this->data['examenes']      = $this->directorRepo->estadisticasExamen($inicio, $fin);
+        return view('rol_director.estadisticas.index')->with($this->data);
     }
 
 
