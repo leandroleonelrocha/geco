@@ -279,19 +279,12 @@ class DuenoController extends Controller
 
 	public function estadisticasDuenoMorisidad($inicio, $fin){
 
-<<<<<<< HEAD
-		$secion         = 'morosidad';
-        $morosidad    = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
-     
-        return view('rol_dueno.estadisticas.index', compact('morosidad'))->with($this->data); 
-=======
-
 		$secion               = 'morosidad';
         $morosidad            = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
         $total_morosidad      = $this->duenoRepo->montoTotalMorosidad($inicio, $fin);
         
         return view('rol_dueno.estadisticas.index', compact('secion','morosidad','total_morosidad'))->with($this->data); 
->>>>>>> 47d6238e3c7feacb959a6ce4819c74e3d3ddd895
+
 	}
 
 	public function estadisticasDuenoExamen($inicio, $fin){
