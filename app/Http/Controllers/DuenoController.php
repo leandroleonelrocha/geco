@@ -279,6 +279,10 @@ class DuenoController extends Controller
 
 	public function estadisticasDuenoMorisidad($inicio, $fin){
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f5c304bb7878e354f96c76965b3ff4a69d8244a5
 		$secion               = 'morosidad';
         $morosidad            = $this->duenoRepo->estadisticasMorosidad($inicio, $fin);
         $total_morosidad      = $this->duenoRepo->montoTotalMorosidad($inicio, $fin);

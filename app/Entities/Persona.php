@@ -11,7 +11,7 @@ class Persona extends Entity
      *
      * @var array
      */
-    protected $fillable = ['tipo_documento_id','nro_documento', 'pais_id','apellidos','nombres','genero','fecha_nacimiento','domicilio','localidad','estado_civil','nivel_estudios','estudio_computacion','posee_computadora','disponibilidad_manana','disponibilidad_tarde','disponibilidad_noche','disponibilidad_sabados','aclaraciones','filial_id','asesor_id','activo'];
+    protected $fillable = ['tipo_documento_id','nro_documento', 'pais_id','apellidos','nombres','genero','fecha_nacimiento','domicilio','localidad','estado_civil','nivel_estudios','estudio_computacion','posee_computadora','disponibilidad_manana','disponibilidad_tarde','disponibilidad_noche','disponibilidad_sabados','aclaraciones','filial_id','activo'];
 
 
     public function findPersona($tipo_documento, $nro_documento){
