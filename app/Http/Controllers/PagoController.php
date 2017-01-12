@@ -188,4 +188,35 @@ class PagoController extends Controller
        //dd(Session::get('morosos'));
     }
 
+    public function nuevo_plan($id){
+        $matricula = $this->matriculaRepo->find($id);
+        $url = redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
+        return view('rol_filial.matriculas.pagos.nuevo_plan',compact('matricula'));
+    }
+
+    public function nuevo_plan_post(Request $request){
+        $url                        =   session('urlBack'); session()->forget('urlBack');
+        for ($i = 0; $i < count($request->nro_pago); $i++) {
+            $pago['matricula_id']       =   $request->matricula;
+            $pago['tipo_moneda_id']     =   session('moneda')['id'];
+            $pago['nro_pago']           =   $request->nro_pago[$i];
+            $pago['descripcion']        =   $request->descripcion[$i];
+            $pago['vencimiento']        =   $request->vencimiento[$i];
+            $pago['monto_original']     =   $request->monto_original[$i];
+            $pago['monto_actual']       =   $pago['monto_original'];
+            $pago['descuento']          =   $request->descuento[$i];
+            $pago['recargo']            =   $request->recargo[$i];
+            $pago['filial_id']          =   session('usuario')['entidad_id'];
+
+            $this->pagoRepo->create($pago);
+        }
+            return redirect()->to($url);
+    }
+
+    public function borrar($id){
+        $pago = $this->pagoRepo->find($id);
+        $pago->delete();
+        return redirect()->back();
+    }
+
 }

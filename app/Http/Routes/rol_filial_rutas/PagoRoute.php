@@ -21,6 +21,21 @@
 			'uses'	=>	'PagoController@nuevo_post'
 		]);
 
+		Route::get('pagos_plan_nuevo/{id}',[
+			'as'	=> 'filial.pagos_plan_nuevo',
+			'uses'	=>	'PagoController@nuevo_plan'
+		]);
+
+		Route::post('pagos_plan_nuevo_post',[
+			'as'	=> 'filial.pagos_plan_nuevo_post',
+			'uses'	=>	'PagoController@nuevo_plan_post'
+		]);
+
+		Route::get('pagos_borrar/{id}',[
+			'as'	=> 'filial.pagos_borrar',
+			'uses'	=>	'PagoController@borrar'
+		]);
+
 		Route::get('pagos_editar/{id}',[
 			'as'	=> 'filial.pagos_editar',
 			'uses'	=>	'PagoController@editar'
