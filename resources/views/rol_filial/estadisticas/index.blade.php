@@ -29,6 +29,9 @@
     </div>
   </div>
 </div>
+
+
+
 <div class="box box-success">
   <div class="box-header with-border">
     <h3 class="box-title">@lang('estadistica.ingresefecha')</h3>
@@ -60,6 +63,7 @@
 @endsection
 @section('js')
 <script type="text/javascript">
+
 $(function () {
     //Grafico torata para generos
     $('#torta').highcharts({
@@ -184,6 +188,8 @@ $(".star_intro" ).click(function() {
 });     
 
 </script>
+
+
 @include('partials.inicio_tutorial')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{asset('plugins/morris/morris.min.js')}}"></script>
