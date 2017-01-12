@@ -6,11 +6,6 @@
    <h4><i class="icon fa fa-info"></i> Alert!</h4>
    Info alert preview. This alert is dismissable.
    </div> -->
-   <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-    <span>asd</span> <b class="caret"></b>
-</div>
-
 
 
 	<div class="row">
