@@ -97,6 +97,11 @@ Route::group(['prefix' => 'grupos'], function(){
 			'uses'=> 'GrupoController@imprimir_asistencias'
 		]);
 
+		Route::get('imprimir_asistencias_dia/{id}',[
+			'as'  => 'grupos.imprimir_asistencias_dia',
+			'uses'=> 'GrupoController@imprimir_asistencias_dia'
+		]);
+
 	});
 	
 });
