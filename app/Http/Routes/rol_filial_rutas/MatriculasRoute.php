@@ -71,6 +71,14 @@
 			'as'	=> 'filial.matriculas_pase_nuevo',
 			'uses'	=>	'MatriculaController@pase_nuevo'
 		]);
+		
+		Route::get('matriculas_imprimir/{id}',[
+			'as'	=> 'filial.matriculas_imprimir',
+			'uses'	=>	'MatriculaController@matriculas_imprimir'
+		]);
+
+
+
 	});
 
 		Route::get('matriculas_pases',[

@@ -22,6 +22,7 @@ use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Response;
+use PDF;
 
 class MatriculaController extends Controller {
 
@@ -351,5 +352,16 @@ class MatriculaController extends Controller {
             $grupos = $this->grupoRepo->allGruposCurso($request->id);
 
         return response()->json($grupos, 200);
+    }
+
+    public function matriculas_imprimir($id){
+
+        $matricula      = $this->matriculaRepo->find($id);
+        
+        
+        $pdf            = PDF::loadView('impresiones.matricula',compact('matricula'));
+       
+        return $pdf->stream();
+
     }
 }

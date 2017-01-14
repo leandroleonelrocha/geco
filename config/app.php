@@ -154,7 +154,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         /*Dompdf*/    
-        // Barryvdh\DomPDF\ServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
 
     ],
