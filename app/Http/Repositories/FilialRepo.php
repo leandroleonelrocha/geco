@@ -80,13 +80,12 @@ class FilialRepo extends BaseRepo {
     }
 
      public function montoTotalMorosidad($inicio, $fin){
-         $d = session('usuario')['entidad_id'];
         $fecha_hoy   = date("Y-m-d H:i:s");
-        return Pago::whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('filial_id',$d)->where('vencimiento', '>', $fecha_hoy)->where('terminado',0)->sum('monto_actual');
+        return Pago::whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('filial_id',$this->filial)->where('vencimiento', '>', $fecha_hoy)->where('terminado',0)->sum('monto_actual');
     }
 
       public function montoTotalRecaudacion($inicio, $fin){
-         return Pago::whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('filial_id',$d)->where('terminado',1)->sum('monto_actual');
+         return Pago::whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('filial_id',$this->filial)->where('terminado',1)->sum('monto_actual');
     }
 
      public function estadisticasRecaudacion($inicio, $fin){

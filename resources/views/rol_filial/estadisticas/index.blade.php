@@ -75,6 +75,11 @@ $(function () {
             <?php if(isset($totalPersonasFilial)){?>
             text: ' Cantidad de inscriptos: {{$totalPersonasFilial}} '
             <?php }?>
+
+            <?php if(isset($preinforme)){?>
+            text: ' ¿Cómo nos encontró? '
+            <?php }?>
+            
             
         },
         tooltip: {
