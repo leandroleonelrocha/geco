@@ -32,7 +32,7 @@
 		?></td>
 		<td><?php echo session('moneda')['simbolo']; ?>{{$pago->monto_original}}</td>
 		<td><?php echo session('moneda')['simbolo']; ?>{{$pago->descuento}}</td>
-		<td><?php echo session('moneda')['simbolo']; ?>{{$pago->recargo}}</td>
+		<td>%{{$pago->recargo}}</td>
 		<td>{{$pago->Filial->nombre}}</td>
 		<td>
 		<?php

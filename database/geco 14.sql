@@ -317,7 +317,7 @@ primary key 			(id)
 );
 
 create table if not exists recibo(
-id						int not null,
+id						int not null auto_increment,
 recibo_tipo_id			int not null,
 tipo_moneda_id 			int not null,
 pago_id					int not null,		
@@ -334,7 +334,7 @@ foreign key 			(tipo_moneda_id)			references tipo_moneda			(id),
 foreign key 			(pago_id)					references pago					(id),
 foreign key				(recibo_concepto_pago_id)	references recibo_concepto_pago	(id),
 foreign key 			(filial_id)					references filial				(id)
-);
+)AUTO_INCREMENT=100;
 
 create table if not exists docente(
 id							int not null auto_increment,
