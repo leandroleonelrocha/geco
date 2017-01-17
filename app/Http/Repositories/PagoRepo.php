@@ -35,8 +35,14 @@ class PagoRepo extends BaseRepo {
         $to          = helpersfuncionFecha($valor[1]);
         $fecha_hoy   = date("Y-m-d H:i:s");
         $filial_id   = $this->filial;   
-        return $this->model->where('vencimiento','>',$fecha_hoy)->where('filial_id',$filial_id)->whereBetween('created_at', array($from, $to))->get();
+        return $this->model->where('vencimiento','>',$fecha_hoy)->where('terminado',0)->where('filial_id',$filial_id)->whereBetween('created_at', array($from, $to))->get();
     }
 
-    
+    //SELECT LIBRO IVA ENTRE FECHAS DE LA MISMA FILIAL
+    public function libroIvaEntreFechas($valor){
+        $from        = helpersfuncionFecha($valor[0]);
+        $to          = helpersfuncionFecha($valor[1]);
+        $filial_id   = $this->filial;   
+        return $this->model->where('terminado',1)->where('filial_id',$filial_id)->whereBetween('created_at', array($from, $to))->get();
+    }
 }

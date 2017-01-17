@@ -2,7 +2,8 @@
 		var link = $(this);
 		link.find('span').remove();
 		link.append('<span class="fa fa-refresh fa-spin"></span>');
-		var fecha = $('.daterangerp').val();
+		var fecha = $('.dateranger2').val();
+		
 		var url   = 'tabla_iva';
 
 			$.ajax(

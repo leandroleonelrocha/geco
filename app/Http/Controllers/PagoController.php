@@ -182,6 +182,9 @@ class PagoController extends Controller
     public function tabla_iva(Request $request){
         
         $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+        $iva     =  $this->pagoRepo->libroIvaEntreFechas($fechas);
+        dd($iva);
+        
     }
 
 

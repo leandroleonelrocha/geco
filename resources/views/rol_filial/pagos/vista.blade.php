@@ -109,7 +109,7 @@
                 	<div class="form-group">
 					{!! Form::open(['route'=> 'filial.tabla_morisidad', 'method'=>'post']) !!}
 						 <div class="input-group input-group-sm">
-		                   {!! Form::text('fecha', null ,  array('class'=>'form-control daterangerp')) !!}
+		                   {!! Form::text('fecha', null ,  array('class'=>'form-control dateranger2')) !!}
 		                    <span class="input-group-btn">
 		                      <!--<button class="btn btn-default btn-flat buscar_fecha" type="button">Buscar</button> -->
 		                      
@@ -166,6 +166,11 @@
 @endsection
 
 @section('js')
+<script type="text/javascript">
+	 $('.daterangerp').daterangepicker();
+	 $('.dateranger2').daterangepicker();
+
+</script>
 <script type="text/javascript" src="{{asset('js/functions/buscar_morosos.js')}}"></script>
 <script type="text/javascript" src="{{asset('js/functions/buscar_libro_iva.js')}}"></script>
 @endsection
