@@ -126,10 +126,12 @@
                               
                                 <div class="form-group horario">
                                     @if(!empty($horario->materia_id))
+                                    @if(isset($materias))
                                     <div class="col-xs-12 materia">
                                        <label> @lang('grupo.materia') </label>
                                        {!! Form::select('materia_id[]',$materias->toArray(), $horario->materia_id ,array('class' => 'form-control select_materia')) !!}
                                     </div>
+                                    @endif
                                     @endif
                                     <div class="col-xs-3">
                                        <label> @lang('grupo.aula') </label>
