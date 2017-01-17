@@ -179,13 +179,23 @@ class PagoController extends Controller
 
     }
 
+    public function tabla_iva(Request $request){
+        
+        $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+    }
+
+
     public function imprimir_morosidad(){
        
        $model = Session::get('morosos');
        $datos = Session::get('datos');
-       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model','datos'));
+       $pdf = PDF::loadView('impresiones.impresion_morosidad',compact('model','datos'));
        return $pdf->stream();
        //dd(Session::get('morosos'));
+    }
+
+    public function imprimir_iva(){
+        return 'asd';
     }
 
     public function nuevo_plan($id){

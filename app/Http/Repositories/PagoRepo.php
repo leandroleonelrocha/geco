@@ -37,4 +37,6 @@ class PagoRepo extends BaseRepo {
         $filial_id   = $this->filial;   
         return $this->model->where('vencimiento','>',$fecha_hoy)->where('filial_id',$filial_id)->whereBetween('created_at', array($from, $to))->get();
     }
+
+    
 }
