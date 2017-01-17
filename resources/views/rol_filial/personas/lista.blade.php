@@ -7,6 +7,7 @@
    Info alert preview. This alert is dismissable.
    </div> -->
 
+
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -77,7 +78,6 @@
 @endsection
 
 @section('js')
-
 <script type="text/javascript">
 // $(".alert-dismissable").show();
 // $(".alert-dismissable").delay(3000).hide(600);

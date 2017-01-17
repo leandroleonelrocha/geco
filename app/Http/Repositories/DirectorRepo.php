@@ -72,7 +72,7 @@ class DirectorRepo extends BaseRepo {
 
         $filial_id = $this->filialDirectores();
         $query = Persona::whereIn('filial_id', $filial_id)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->groupBy('genero');
-        
+            
         $resultado=[];
         foreach ($query as $qry => $q)
         {     

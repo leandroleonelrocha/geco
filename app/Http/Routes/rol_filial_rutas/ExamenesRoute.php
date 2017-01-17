@@ -52,6 +52,15 @@ Route::group(['prefix' => 'examenes'], function(){
 			'as'	=> 'filial.examenes_recuperatorio_post',
 			'uses'	=> 'ExamenController@recuperartorio_post'
 		]);
+
+		Route::get('imprimir_acta', function () {
+		   
+		    $pdf   		= PDF::loadView('impresiones.impresion_acta_examen');
+			return $pdf->stream();
+		});
+
+
+
 	    
 	});
 

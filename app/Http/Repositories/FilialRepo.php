@@ -80,6 +80,7 @@ class FilialRepo extends BaseRepo {
     }
 
      public function montoTotalMorosidad($inicio, $fin){
+
         $fecha_hoy   = date("Y-m-d H:i:s");
         return Pago::whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->where('filial_id',$this->filial)->where('vencimiento', '>', $fecha_hoy)->where('terminado',0)->sum('monto_actual');
     }

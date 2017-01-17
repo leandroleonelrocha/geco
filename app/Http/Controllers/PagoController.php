@@ -179,13 +179,84 @@ class PagoController extends Controller
 
     }
 
+    public function tabla_iva(Request $request){
+        
+        $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+        $iva     =  $this->pagoRepo->libroIvaEntreFechas($fechas);
+        $total   =  $this->pagoRepo->totalPorRecibo($fechas);
+        dd($total);
+
+        $data    =  [];   
+      
+
+        foreach ($iva as $key => $value) {
+
+            $d['fecha']        = $value->created_at;
+            $d['recibo']       = 'A';
+            $d['importe']      = $value->monto_actual;
+            $d['nombre']       = $value->Matricula->Persona->fullname;
+       
+            
+            array_push($data, $d);
+        }
+
+        $datos['fecha_desde'] = $fechas[0];
+        $datos['fecha_hasta'] = $fechas[1];
+
+        Session::put('libro_iva', $data);
+        Session::put('datos', $datos);
+        return response()->json($data, 200);
+       
+        
+    }
+
+
     public function imprimir_morosidad(){
        
        $model = Session::get('morosos');
        $datos = Session::get('datos');
-       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model','datos'));
+       $pdf   = PDF::loadView('impresiones.impresion_morosidad',compact('model','datos'));
        return $pdf->stream();
-       //dd(Session::get('morosos'));
+
+    }
+
+    public function imprimir_iva(){
+
+       $model = Session::get('libro_iva');
+       $datos = Session::get('datos');
+       $pdf   = PDF::loadView('impresiones.impresion_libro_IVA',compact('model','datos'));
+       return $pdf->stream();
+    }
+
+    public function nuevo_plan($id){
+        $matricula = $this->matriculaRepo->find($id);
+        $url = redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
+        return view('rol_filial.matriculas.pagos.nuevo_plan',compact('matricula'));
+    }
+
+    public function nuevo_plan_post(Request $request){
+        $url                        =   session('urlBack'); session()->forget('urlBack');
+        for ($i = 0; $i < count($request->nro_pago); $i++) {
+            $pago['matricula_id']       =   $request->matricula;
+            $pago['tipo_moneda_id']     =   session('moneda')['id'];
+            $pago['nro_pago']           =   $request->nro_pago[$i];
+            $pago['descripcion']        =   $request->descripcion[$i];
+            $pago['vencimiento']        =   $request->vencimiento[$i];
+            $pago['monto_original']     =   $request->monto_original[$i];
+            $pago['monto_actual']       =   $pago['monto_original'];
+            $pago['descuento']          =   $request->descuento[$i];
+            $pago['recargo']            =   $request->recargo[$i];
+            $pago['filial_id']          =   session('usuario')['entidad_id'];
+
+            $this->pagoRepo->create($pago);
+        }
+            return redirect()->to($url);
+    }
+
+    public function borrar($id){
+        $pago = $this->pagoRepo->find($id);
+        $pago->delete();
+        return redirect()->back();
     }
 
 }

@@ -20,7 +20,10 @@
 				<td>{{$pago->descuento}}</td>
 				<td>{{$pago->recargo}}</td>
 				<td>{{$pago->descripcion}}</td>
-				<td>borrar/editar</td>
+				<td>
+					<a href="{{route('filial.pagos_borrar',$pago->id)}}" title="@lang('lista.eliminar')"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a>
+					<a href="{{route('filial.pagos_editar',$pago->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>
+				</td>
 			</tr>
 		@endforeach
 	</tbody>
