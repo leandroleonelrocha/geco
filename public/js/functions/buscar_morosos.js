@@ -24,10 +24,10 @@ $( ".buscar_fecha" ).click(function() {
 				var body = $('#tabla_morosidad').children('tbody');
 					
 					$.each(result, function(clave, valor){
-
 						var mail 	 = persona_email(valor.persona_email);
 						var telefono = persona_telefono(valor.persona_telefono);
-						body.append(tr(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, 'fecha', valor.vencimiento, valor.saldo, telefono, mail));
+						body.append(tr_morosos(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, valor.fecha_pago, valor.vencimiento, valor.saldo, telefono, mail));
+						
 					});
 			}}
 
@@ -53,7 +53,7 @@ $( ".buscar_fecha" ).click(function() {
 	
 
 
-	function tr(matricula, grupo, nombre, cuota, fecha_pago, fecha_vencimiento, saldo, telefono, mail) {
+	function tr_morosos(matricula, grupo, nombre, cuota, fecha_pago, fecha_vencimiento, saldo, telefono, mail) {
 
 		var tr = '<tr>'+
 				 '<td>'+ matricula + '</td>'+

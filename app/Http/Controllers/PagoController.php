@@ -159,6 +159,7 @@ class PagoController extends Controller
 
 
             $d['vencimiento']           = $value->vencimiento;
+            $d['fecha_pago']            = '20/11/2016';
             $d['saldo']                 = $value->monto_pago;
             $d['matricula']             = $value->Matricula->id;
             $d['persona']               = $value->Matricula->Persona->fullname;
@@ -184,7 +185,7 @@ class PagoController extends Controller
         $fechas  =  herlpersObtenerFechas($request->get('fecha'));
         $iva     =  $this->pagoRepo->libroIvaEntreFechas($fechas);
         $total   =  $this->pagoRepo->totalPorRecibo($fechas);
-        dd($total);
+        
 
         $data    =  [];   
       

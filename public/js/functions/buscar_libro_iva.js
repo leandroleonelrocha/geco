@@ -24,7 +24,7 @@
 					
 					$.each(result, function(clave, valor){
 						console.log(valor);	
-						body.append(tr(valor.fecha, 'A', valor.nombre, valor.importe));
+						body.append(tr_iva(valor.fecha, 'A', valor.nombre, valor.importe));
 					});
 			}}
 
@@ -32,7 +32,7 @@
 
 	});	
 
-function tr(fecha, recibo, nombre, importe) {
+function tr_iva(fecha, recibo, nombre, importe) {
 
 		var tr = '<tr>'+ 
 				 '<td>'+ fecha   + '</td>'+

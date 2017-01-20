@@ -61,8 +61,8 @@ class PagoRepo extends BaseRepo {
                          //->where('terminado',1)
                          ->groupBy('recibo.recibo_tipo_id')
                          ->get();
-        dd($qry);                 
-        //return $qry;      
+                         
+        return $qry;      
     }
 
 }
