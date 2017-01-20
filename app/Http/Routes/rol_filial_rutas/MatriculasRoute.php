@@ -73,7 +73,7 @@
 		]);
 		
 		Route::get('matriculas_imprimir/{id}',[
-			'as'	=> 'filial.matriculas_imprimir',
+			'as'	=>  'filial.matriculas_imprimir',
 			'uses'	=>	'MatriculaController@matriculas_imprimir'
 		]);
 

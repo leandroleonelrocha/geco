@@ -152,9 +152,20 @@
     </div>
    
    <div id="sidebar">
-   		<p>CANTIDAD DE CLASES</p>
-   		<p>CANTIDAD DE CLASES ASISTIDAS</p>
-   		<p>PROMEDIO DE CLASES</p>
+   		<p>Nota promedio : 8</p>
+   		<div class="right">
+   			<p>CANTIDAD DE CLASES</p>
+   			<p>CANTIDAD DE CLASES ASISTIDAS</p>
+   			<p>PROMEDIO DE CLASES</p>
+   		
+   		</div>
+
+
+        <div class="left">
+        	<p>10</p>
+        	<p>7</p>
+        	<p>74.000</p>
+        </div>
    		
    </div>
 

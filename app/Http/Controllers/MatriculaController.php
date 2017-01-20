@@ -357,7 +357,7 @@ class MatriculaController extends Controller {
     public function matriculas_imprimir($id){
 
         $matricula      = $this->matriculaRepo->find($id);
-        
+   
         
         $pdf            = PDF::loadView('impresiones.matricula',compact('matricula'));
        

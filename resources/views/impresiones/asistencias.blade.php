@@ -4,100 +4,149 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Listado de asistencias</title>
       <style>
-
-          *{
-              font-size: 90%;
-              margin:5px;
-              padding:2px;
-          }
-
+        .Table{  
+            display: table;  
+            width: 100%;
+        }
+     
+  
+        .Title{  
+            display: table-caption;  
+            text-align: center;  
+            font-weight: bold;  
+            font-size: larger;   
+        }  
+  
+        .Heading{  
+            display: table-row;  
+            font-weight: bold;  
+            text-align: center;  
+        }  
+  
+        .Row{  
+          display: table-row;  
+        }  
+  
+        .cell1{
+            width: 5%;   
+            display: table-cell;  
+            border: solid;  
+            border-width: thin;  
+            
+        }  
+           .cell2{
+            width: 20%;   
+            display: table-cell;  
+            border: solid;  
+            border-width: thin;  
       
-          .titulo{
-              width: 100%;
-              margin-top: 5px;
-              margin-bottom: -25px !important;
-          }
+        }  
+           .cell3{
+            width: 30%;   
+            display: table-cell;  
+            border: solid;  
+            border-width: thin;  
+           
+        }  
+         }  
+           .cell4{
+            width: 10%;   
+            display: table-cell;  
+            border: solid;  
+            border-width: thin;  
+           
+        }  
+         }  
+           .cell5{
+            width: 10%;   
+            display: table-cell;  
+            border: solid;  
+            border-width: thin;  
+           
+        }  
 
-          .titulo *{
-              vertical-align: middle !important;
-              display: inline-block;
-          }
 
-          .titulo span{
-              width: 50%;
-              /*border: 1px solid red;*/
-          }
+      hr.style18 { 
+        height: 30px; 
+        border-style: solid; 
+        border-color: #8c8b8b; 
+        border-width: 1px 0 0 0; 
+        border-radius: 20px; 
+      } 
+      hr.style18:before { 
+        display: block; 
+        content: ""; 
+        height: 30px; 
+        margin-top: -31px; 
+        border-style: solid; 
+        border-color: #8c8b8b; 
+        border-width: 0 0 1px 0; 
+        border-radius: 20px; 
+      }
+      .borde{
+        border-right:  1px solid ; 
+        display: inline;
+        width: 100%;
 
-      
-
-          .content{
-              border-top: 1px solid #c1c1c1;
-              padding-top: 10px;
-              margin-top: -40px !important;
-          }
-
-          .content span,.content p{
-              display: inline-block;
-              vertical-align: top !important;
-          }
-
-          .content span{
-              width:100%;
-          }
-
-          .border{
-              /*border-bottom: 1px solid black;*/
-              margin-top: -10px !important;
-              padding-top: 0 !important;
-              margin-bottom: -20px !important;
-              padding-bottom: 0 !important;
-          }
-
-          table, th, td {
-              border: 1px solid ;
-              border-collapse: collapse;
-              text-align: center;
-              width: 100%;
-               height: 50px;
-          }
-          li {  
-            list-style-type: none;
-            font-size: small;
-          }
+      }
+      .contenedor_asistencia{
+        color:red;
+        margin-left:10px;
+        
+        
+      }
 
 
       </style>
   </head>
   <body>
 
-  <div class="titulo">
-      <span>Fecha: </span>
-      <span>Grupo: {{$grupo->fullname}} </span>
-  </div>
+          <br>
+          <hr class="style18">
+          <hr class="style18">
+        
+ <div class="Table">  
+        
+      
+        <div class="Heading">  
+            <div class="cell1">  
+                <p> ORD</p>  
+            </div>  
+  
+            <div class="cell2">  
+                <p> Apellido y Nombre</p>  
+            </div>  
+  
+            <div class="cell3">  
+                <p> Asistencias de Noviembre</p> 
+                <div class="contenedor_asistencia">
+                    <div class="borde"> &nbsp;</div>
+                    <div class="borde"> &nbsp;</div>
+                    <div class="borde"> &nbsp;</div>
+                    <div class="borde"> &nbsp;</div>
+                    <div class="borde"> &nbsp;</div>
+                    <div class="borde"> &nbsp;</div>
+                    <div class="borde"> &nbsp;</div>
+                     <div class="borde"> &nbsp;</div>
+                      <div class="borde"> &nbsp;</div>
+                       <div class="borde"> &nbsp;</div>
 
-<div class="content">
-	<table>
-  	<thead>
-    	<tr>
-    	<th>Matrícula</th>
-      <th>Apellido y Nombre</th>
-      <th>Asistencia</th>
-    	</tr> 
-  	</thead>
-  	<tbody>
-  	@foreach($matriculas as $matricula)
-    	<tr>
-    	<td>{{ $matricula->id }}</td>
-      <td>{{ $matricula->Persona->fullname }}</td>
-      <td></td>
-
-   
-      			        
-    	</tr>
-  	@endforeach
-  	</tbody>
-	</table>
-</div>
+                </div>
+            </div>  
+            <div class="cell4">  
+                <p> Ficha</p>  
+            </div>  
+            <div class="cell4">  
+                <p> Curso</p>  
+            </div>  
+  
+        </div>  
+  
+      
+  
+       
+  
+    </div>  
 
 </body>
 </html>
