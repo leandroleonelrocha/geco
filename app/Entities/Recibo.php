@@ -6,7 +6,7 @@ class Recibo extends Entity
 {
     protected $table = 'recibo';
 
-    protected $fillable = ['recibo_tipo_id','pago_id','monto','recibo_concepto_pago_id','descripcion','filial_id'];
+    protected $fillable = ['recibo_tipo_id','tipo_moneda_id','pago_id','monto','recibo_concepto_pago_id','descripcion','filial_id'];
 
     // Relaciones
     public function Pago(){

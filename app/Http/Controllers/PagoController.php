@@ -179,13 +179,53 @@ class PagoController extends Controller
 
     }
 
+    public function tabla_iva(Request $request){
+        
+        $fechas  =  herlpersObtenerFechas($request->get('fecha'));
+        $iva     =  $this->pagoRepo->libroIvaEntreFechas($fechas);
+        $total   =  $this->pagoRepo->totalPorRecibo($fechas);
+        dd($total);
+
+        $data    =  [];   
+      
+
+        foreach ($iva as $key => $value) {
+
+            $d['fecha']        = $value->created_at;
+            $d['recibo']       = 'A';
+            $d['importe']      = $value->monto_actual;
+            $d['nombre']       = $value->Matricula->Persona->fullname;
+       
+            
+            array_push($data, $d);
+        }
+
+        $datos['fecha_desde'] = $fechas[0];
+        $datos['fecha_hasta'] = $fechas[1];
+
+        Session::put('libro_iva', $data);
+        Session::put('datos', $datos);
+        return response()->json($data, 200);
+       
+        
+    }
+
+
     public function imprimir_morosidad(){
        
        $model = Session::get('morosos');
        $datos = Session::get('datos');
-       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model','datos'));
+       $pdf   = PDF::loadView('impresiones.impresion_morosidad',compact('model','datos'));
        return $pdf->stream();
-       //dd(Session::get('morosos'));
+
+    }
+
+    public function imprimir_iva(){
+
+       $model = Session::get('libro_iva');
+       $datos = Session::get('datos');
+       $pdf   = PDF::loadView('impresiones.impresion_libro_IVA',compact('model','datos'));
+       return $pdf->stream();
     }
 
     public function nuevo_plan($id){
