@@ -182,9 +182,10 @@ class PagoController extends Controller
 
     public function tabla_iva(Request $request){
         
-        $fechas  =  herlpersObtenerFechas($request->get('fecha'));
-        $iva     =  $this->pagoRepo->libroIvaEntreFechas($fechas);
-        $total   =  $this->pagoRepo->totalPorRecibo($fechas);
+        $fechas         =  herlpersObtenerFechas($request->get('fecha'));
+        $iva            =  $this->pagoRepo->libroIvaEntreFechas($fechas);
+        $suma_recibo    =  $this->pagoRepo->totalPorRecibo($fechas);
+        $total_general  =  $this->pagoRepo->totaEntreFechas($fechas);
         
 
         $data    =  [];   
@@ -206,6 +207,9 @@ class PagoController extends Controller
 
         Session::put('libro_iva', $data);
         Session::put('datos', $datos);
+        Session::put('suma_recibo', $suma_recibo);
+        Session::put('total_general', $total_general);
+        
         return response()->json($data, 200);
        
         
@@ -223,9 +227,11 @@ class PagoController extends Controller
 
     public function imprimir_iva(){
 
-       $model = Session::get('libro_iva');
-       $datos = Session::get('datos');
-       $pdf   = PDF::loadView('impresiones.impresion_libro_IVA',compact('model','datos'));
+       $model           = Session::get('libro_iva');
+       $datos           = Session::get('datos');
+       $suma_recibo     = Session::get('suma_recibo');
+       $total_general   = Session::get('total_general');
+       $pdf   = PDF::loadView('impresiones.impresion_libro_IVA',compact('model','datos','suma_recibo','total_general'));
        return $pdf->stream();
     }
 

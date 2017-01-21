@@ -57,12 +57,20 @@ class PagoRepo extends BaseRepo {
                          ->join('recibo_tipo', 'recibo.recibo_tipo_id', '=', 'recibo_tipo.id')
                          //->join('recibo', 'recibo.pago_id', '=', 'recibo.id')
                          ->select(DB::raw('SUM(recibo.monto) as total, recibo_tipo.recibo_tipo as recibo'))
-                         
                          //->where('terminado',1)
                          ->groupBy('recibo.recibo_tipo_id')
                          ->get();
                          
         return $qry;      
+    }
+
+    public function totaEntreFechas($valor){
+        $from        = helpersfuncionFecha($valor[0]);
+        $to          = helpersfuncionFecha($valor[1]);
+        $filial_id   = $this->filial;   
+        return $this->model->where('terminado',1)->where('filial_id',$filial_id)->whereBetween('created_at', array($from, $to))->sum('monto_pago');
+                         
+       
     }
 
 }

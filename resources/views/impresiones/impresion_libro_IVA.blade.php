@@ -80,6 +80,25 @@
           }
 
 
+		#sidebar {
+		    padding-top: 100px;
+            margin-top: -40px !important;
+            font-size: 18px;
+		
+		}
+			.right{
+		  
+          display: inline-block;
+          vertical-align: bottom !important;
+          width: 50%;
+        }
+
+        .left{
+          width: 50%;
+          display: inline-block;
+          vertical-align: top !important;
+        }
+
       </style>
   </head>
   <body>
@@ -114,6 +133,27 @@
   	</tbody>
 	</table>
 </div>
+
+<table>
+  	<thead>
+    	<tr>
+        <th>RECIBO</th>
+        <th>IMPORTE</th>
+      </tr>
+  	</thead>
+  	<tbody>
+
+   @foreach($suma_recibo as $recibo)
+    		<tr>
+    		<td>{{$recibo->recibo}}</td>
+        	<td>{{$recibo->total}}</td>
+        	</tr>
+   	@endforeach
+  	</tbody>
+
+</table>
+<p>TOTAL GENERAL : {{$total_general}}</p>
+
 
 </body>
 </html>
