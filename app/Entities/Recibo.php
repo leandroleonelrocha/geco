@@ -24,4 +24,9 @@ class Recibo extends Entity
     public function Filial(){
         return $this->belongsTo(Filial::getClass());
     }
+
+    public function getCreatedAtAttribute($value)
+    {
+      return date('d-m-Y', strtotime($value));
+    }
 }

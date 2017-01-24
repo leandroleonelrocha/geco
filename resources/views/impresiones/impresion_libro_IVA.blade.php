@@ -152,7 +152,35 @@
   	</tbody>
 
 </table>
-<p>TOTAL GENERAL : {{$total_general}}</p>
+
+<p>TOTAL GENERAL : {{$total_general[0]->total}}</p>
+<hr>
+
+<table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>RECIBO A</th>
+        <th>RECIBO B</th>
+        <th>RECIBO C</th>
+        <th>RECIBO X</th>
+
+       
+      </tr>
+    </thead>
+    <tbody>
+
+   @foreach($suma_grupo as $grupo)
+        
+        <tr>
+          <td>{{$grupo->grupo}}</td>
+          
+          </tr>
+    @endforeach
+    </tbody>
+
+</table>
+
 
 
 </body>
