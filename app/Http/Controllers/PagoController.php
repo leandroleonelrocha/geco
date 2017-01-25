@@ -29,7 +29,8 @@ class PagoController extends Controller
 	}
 
 	public function vista(){
-      
+        $suma_grupo     = $this->pagoRepo->totalPorGrupo();
+        dd($suma_grupo);
     	$matriculas = $this->matriculaRepo->allEneable();
         return view('rol_filial.pagos.vista',compact('matriculas'));
     }

@@ -119,9 +119,7 @@ class PagoRepo extends BaseRepo {
                          ->join('grupo','grupo.id','=','grupo_matricula.grupo_id')
                          ->groupBy('grupo_matricula.grupo_id')
                          ->get();
-        $qry = Grupo::select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
-                ->join('grupo_matricula', 'grupo.id', '=','grupo_matricula.grupo_id')
-                ->join('matricula', 'pago.matricula_id', '=', 'matricula.id')
+       
 
         return $qry;      
     }
