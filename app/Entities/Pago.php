@@ -29,4 +29,13 @@ class Pago extends Entity
     public function TipoMoneda(){
         return $this->belongsTo(TipoMoneda::getClass());
     }
+
+
+    public function getCreatedAtAttribute($value)
+    {
+      return date('d-m-Y', strtotime($value));
+    }
+ 
+
+
 }

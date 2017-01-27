@@ -29,6 +29,8 @@ class PagoController extends Controller
 	}
 
 	public function vista(){
+        $suma_grupo     = $this->pagoRepo->totalPorGrupo();
+        dd($suma_grupo);
     	$matriculas = $this->matriculaRepo->allEneable();
         return view('rol_filial.pagos.vista',compact('matriculas'));
     }
@@ -159,6 +161,7 @@ class PagoController extends Controller
 
 
             $d['vencimiento']           = $value->vencimiento;
+            $d['fecha_pago']            = '20/11/2016';
             $d['saldo']                 = $value->monto_pago;
             $d['matricula']             = $value->Matricula->id;
             $d['persona']               = $value->Matricula->Persona->fullname;
@@ -179,13 +182,77 @@ class PagoController extends Controller
 
     }
 
+    public function tabla_iva(Request $request){
+        
+        $fechas         =  herlpersObtenerFechas($request->get('fecha'));
+        $iva            =  $this->pagoRepo->libroIvaEntreFechas($fechas);
+        $suma_recibo    =  $this->pagoRepo->totalPorRecibo($fechas);
+        $total_general  =  $this->pagoRepo->totalEntreFechas($fechas);
+       
+        //FALTA SUMA GRUPO
+        $suma_grupo     = $this->pagoRepo->totalPorGrupo();
+        //dd($suma_grupo);
+
+        $data    =  [];   
+        $data2   =  [];
+
+        foreach ($suma_grupo as $key => $value) {
+           
+
+            $d['recibo']       = $value->recibo_tipo;
+            $d['total']        = $value->total;
+       
+            array_push($data, $d);
+                   
+        }
+        dd($data2);
+
+        foreach ($iva as $key => $value) {
+            
+
+            $d['fecha']        = $value->created_at;
+            $d['recibo']       = $value->ReciboTipo->recibo_tipo;
+            $d['importe']      = $value->monto;
+            $d['nombre']       = $value->Pago->Matricula->Persona->fullname;
+       
+            array_push($data, $d);
+        }
+
+       
+
+        $datos['fecha_desde'] = $fechas[0];
+        $datos['fecha_hasta'] = $fechas[1];
+
+        Session::put('libro_iva', $data);
+        Session::put('datos', $datos);
+        Session::put('suma_recibo', $suma_recibo);
+        Session::put('total_general', $total_general);
+        Session::put('suma_grupo',$suma_grupo);
+        
+        return response()->json($data, 200);
+       
+        
+    }
+
+
     public function imprimir_morosidad(){
        
        $model = Session::get('morosos');
        $datos = Session::get('datos');
-       $pdf = PDF::loadView('rol_filial.pagos.pdf_morosidad',compact('model','datos'));
+       $pdf   = PDF::loadView('impresiones.impresion_morosidad',compact('model','datos'));
        return $pdf->stream();
-       //dd(Session::get('morosos'));
+
+    }
+
+    public function imprimir_iva(){
+
+       $model           = Session::get('libro_iva');
+       $datos           = Session::get('datos');
+       $suma_recibo     = Session::get('suma_recibo');
+       $total_general   = Session::get('total_general');
+       $suma_grupo      = Session::get('suma_grupo');
+       $pdf   = PDF::loadView('impresiones.impresion_libro_IVA',compact('model','datos','suma_recibo','total_general','suma_grupo'));
+       return $pdf->stream();
     }
 
     public function nuevo_plan($id){

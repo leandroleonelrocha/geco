@@ -6,7 +6,7 @@ class Recibo extends Entity
 {
     protected $table = 'recibo';
 
-    protected $fillable = ['recibo_tipo_id','pago_id','monto','recibo_concepto_pago_id','descripcion','filial_id'];
+    protected $fillable = ['recibo_tipo_id','tipo_moneda_id','pago_id','monto','recibo_concepto_pago_id','descripcion','filial_id'];
 
     // Relaciones
     public function Pago(){
@@ -23,5 +23,10 @@ class Recibo extends Entity
 
     public function Filial(){
         return $this->belongsTo(Filial::getClass());
+    }
+
+    public function getCreatedAtAttribute($value)
+    {
+      return date('d-m-Y', strtotime($value));
     }
 }

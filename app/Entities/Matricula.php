@@ -52,7 +52,7 @@ class Matricula extends Entity
     }
 
     public function Examen(){ 
-        return $this->hasMany(Clase::getClass())->withPivot('asistio');
+        return $this->hasMany(Examen::getClass());
     
     }
 

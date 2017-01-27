@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Listado de asistencias</title>
+    <title>Listado de morosidad</title>
       <style>
 
           *{
@@ -28,7 +28,17 @@
               /*border: 1px solid red;*/
           }
 
-      
+          .right{
+              display: inline-block;
+              vertical-align: bottom !important;
+              width: 50%;
+          }
+
+          .left{
+              width: 50%;
+              display: inline-block;
+              vertical-align: top !important;
+          }
 
           .content{
               border-top: 1px solid #c1c1c1;
@@ -53,12 +63,15 @@
               padding-bottom: 0 !important;
           }
 
+          .datos_medicos p{
+              margin:0 !important;
+              padding:0 !important;
+          }
+
           table, th, td {
               border: 1px solid ;
               border-collapse: collapse;
               text-align: center;
-              width: 100%;
-               height: 50px;
           }
           li {  
             list-style-type: none;
@@ -71,28 +84,48 @@
   <body>
 
   <div class="titulo">
-      <span>Fecha: </span>
-      <span>Grupo: {{$grupo->fullname}} </span>
+      <span>Fecha desde: {{$datos['fecha_desde']}} - Fecha hasta: {{$datos['fecha_hasta']}}</span>
+      <span>Filial</span>
   </div>
 
 <div class="content">
 	<table>
   	<thead>
     	<tr>
-    	<th>Matrícula</th>
-      <th>Apellido y Nombre</th>
-      <th>Asistencia</th>
-    	</tr> 
+        <th>MATRICULA</th>
+        <th>GRUPO</th>
+        <th>PERSONA</th>
+        <th>NRO PAGO</th>
+        <th>FECHA</th>
+        <th>SALDO</th>
+        <th>EMAIL</th>
+        <th>TELEFONO</th>
+        
+        
+      </tr>
   	</thead>
   	<tbody>
-  	@foreach($matriculas as $matricula)
+  	@foreach($model as $m)
     	<tr>
-    	<td>{{ $matricula->id }}</td>
-      <td>{{ $matricula->Persona->fullname }}</td>
-      <td></td>
-
-   
-      			        
+    	<td>{{$m['matricula']}}</td>
+    	<td>{{$m['grupo']}}</td>
+    	<td>{{$m['persona']}}</td>
+    	<td>{{$m['nro_pago']}}</td>
+    	<td>{{$m['vencimiento']}}</td>
+      <td>{{$m['saldo']}}</td>
+      
+    	<td>
+        @foreach($m['persona_email'] as $e)
+         {{ $e->mail}}
+        @endforeach
+      </td>
+      <td>
+         @foreach($m['persona_telefono'] as $t)
+         {{ $t->telefono}}
+        @endforeach  
+      </td>
+      
+    				        
     	</tr>
   	@endforeach
   	</tbody>

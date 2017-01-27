@@ -45,9 +45,11 @@ class ReciboController extends Controller
 	}
 
 	public function nuevo_post(Request $request){
-		$url 					= 	session('urlBack'); session()->forget('urlBack');
-		$recibo 				= 	$request->all();
-		$recibo['filial_id'] 	= 	session('usuario')['entidad_id'];
+		$url 						= 	session('urlBack'); session()->forget('urlBack');
+		$recibo 					= 	$request->all();
+		$recibo['filial_id'] 		= 	session('usuario')['entidad_id'];
+		$recibo['tipo_moneda_id'] 	= 	session('moneda')['id'];
+		
 		$this->reciboRepo->create($recibo);
 		return redirect()->to($url);
 	}

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Ayuda Directa</title>
+    <title>Acta examen</title>
       <style>
 
           *{
@@ -112,7 +112,7 @@
    <div class="content">
       <div class="border left">
           <h4>
-              ** TITULAR
+              ** 
           </h4>
 
 
@@ -134,7 +134,7 @@
 
       <div class="border right">
           <h4>
-              ** RETIRA EN FARMACIA
+              ** 
           </h4>
 
 
