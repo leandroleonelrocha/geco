@@ -174,6 +174,8 @@
         
         <tr>
           <td>{{$grupo->grupo}}</td>
+          <td>{{$grupo->total}}</td>
+           <td>{{$grupo->recibo_tipo}}</td>
           
           </tr>
     @endforeach
