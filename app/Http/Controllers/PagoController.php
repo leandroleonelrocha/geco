@@ -29,8 +29,10 @@ class PagoController extends Controller
 	}
 
 	public function vista(){
+
         $suma_grupo     = $this->pagoRepo->totalPorGrupo();
-        //dd($suma_grupo);
+        //dd($suma_grupo); 
+
     	$matriculas = $this->matriculaRepo->allEneable();
         return view('rol_filial.pagos.vista',compact('matriculas'));
     }
@@ -194,18 +196,7 @@ class PagoController extends Controller
         //dd($suma_grupo);
 
         $data    =  [];   
-        $data2   =  [];
-
-        foreach ($suma_grupo as $key => $value) {
-           
-
-            $d['recibo']       = $value->recibo_tipo;
-            $d['total']        = $value->total;
-       
-            array_push($data, $d);
-                   
-        }
-        dd($data2);
+      
 
         foreach ($iva as $key => $value) {
             

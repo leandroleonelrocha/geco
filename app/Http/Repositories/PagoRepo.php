@@ -109,18 +109,28 @@ class PagoRepo extends BaseRepo {
                          ->select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(grupo_matricula.grupo_id) as Countgrupo_id'))
                          ->groupBy('grupo_matricula.grupo_id,recibo_tipo.id')
                          ->get();                 
-        */
-        $qry         = Recibo::select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
-                         ->join('pago', 'pago.id', '=', 'recibo.pago_id')
+        //select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
+        $qry         = Recibo::join('pago', 'pago.id', '=', 'recibo.pago_id')
                          ->join('recibo_tipo', 'recibo.recibo_tipo_id', '=', 'recibo_tipo.id')
-                         ->where('recibo.recibo_tipo_id',1)
+                         //->where('recibo.recibo_tipo_id',1)
                          ->join('matricula', 'pago.matricula_id', '=', 'matricula.id')
                          ->join('grupo_matricula', 'matricula.id', '=','grupo_matricula.matricula_id')
                          ->join('grupo','grupo.id','=','grupo_matricula.grupo_id')
                          ->groupBy('grupo_matricula.grupo_id')
                          ->get();
-       
+        */
 
+
+        $qry         = Recibo::join('pago', 'pago.id', '=', 'recibo.pago_id')
+       ->select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
+                         ->join('recibo_tipo', 'recibo.recibo_tipo_id', '=', 'recibo_tipo.id')
+                         //->where('recibo.recibo_tipo_id',1)
+                         ->join('matricula', 'pago.matricula_id', '=', 'matricula.id')
+                         ->join('grupo_matricula', 'matricula.id', '=','grupo_matricula.matricula_id')
+                         ->join('grupo','grupo.id','=','grupo_matricula.grupo_id')
+                         ->groupBy('grupo_matricula.grupo_id','recibo_tipo_id')
+                         ->get();
+                        
         return $qry;      
     }
 
