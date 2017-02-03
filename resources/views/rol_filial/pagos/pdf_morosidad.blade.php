@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Listado Morosidad</title>
+    <title>@lang('impresiones/morosidad.listado')</title>
       <style>
 
           *{
@@ -84,52 +84,52 @@
   <body>
 
   <div class="titulo">
-      <span>Fecha desde: {{$datos['fecha_desde']}} - Fecha hasta: {{$datos['fecha_hasta']}}</span>
-      <span>Filial</span>
+      <span>@lang('impresiones/morosidad.fechadesde') {{$datos['fecha_desde']}} - @lang('impresiones/morosidad.fechahasta') {{$datos['fecha_hasta']}}</span>
+      <span>@lang('impresiones/morosidad.filial')</span>
   </div>
 
 <div class="content">
-	<table>
-  	<thead>
-    	<tr>
-    	<th >Matrícula</th>
-    	<th >Grupo</th>
-    	<th >Nombre</th>
-    	<th >Cuota</th>
-    	<th >Vencimiento</th>
-    	<th >Saldo</th>
-      <th >Email</th>
-      <th >Teléfonos</th>
-    	</tr> 
-  	</thead>
-  	<tbody>
-  	@foreach($model as $m)
-    	<tr>
-    	<td>{{$m['matricula']}}</td>
-    	<td>{{$m['grupo']}}</td>
-    	<td>{{$m['persona']}}</td>
-    	<td>{{$m['nro_pago']}}</td>
-    	<td>{{$m['vencimiento']}}</td>
-    	<td>{{$m['saldo']}}</td>
-    	<td>
-         <ul>
-         @foreach($m['persona_email'] as $email)
-          <li>{{$email->mail}}</li>
+  <table>
+    <thead>
+      <tr>
+        <th>@lang('impresiones/morosidad.matricula')</th>
+        <th>@lang('impresiones/morosidad.grupo')</th>
+        <th>@lang('impresiones/morosidad.persona')</th>
+        <th>@lang('impresiones/morosidad.npago')</th>
+        <th>@lang('impresiones/morosidad.fecha')</th>
+        <th>@lang('impresiones/morosidad.saldo')</th>
+        <th>EMAIL</th>
+        <th>@lang('impresiones/morosidad.telefono')</th>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($model as $m)
+      <tr>
+      <td>{{$m['matricula']}}</td>
+      <td>{{$m['grupo']}}</td>
+      <td>{{$m['persona']}}</td>
+      <td>{{$m['nro_pago']}}</td>
+      <td>{{$m['vencimiento']}}</td>
+      <td>{{$m['saldo']}}</td>
+      
+      <td>
+        @foreach($m['persona_email'] as $e)
+         {{ $e->mail}}
         @endforeach
-        </ul>
       </td>
       <td>
-         <ul>
-         @foreach($m['persona_telefono'] as $telefono)
-          <li>{{$telefono->telefono}}</li>
-        @endforeach
-        </ul>
+         @foreach($m['persona_telefono'] as $t)
+         {{ $t->telefono}}
+        @endforeach  
       </td>
-      			        
-    	</tr>
-  	@endforeach
-  	</tbody>
-	</table>
+      
+                    
+      </tr>
+    @endforeach
+    </tbody>
+  </table>
 </div>
 
 </body>

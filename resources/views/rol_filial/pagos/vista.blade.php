@@ -8,8 +8,8 @@
 			<div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                   <li class="active"><a href="#tab_1" data-toggle="tab">@lang('matricula.listadomatricula')</a></li>
-                  <li><a href="#tab_2" data-toggle="tab">Morosidad</a></li>
-                  <li><a href="#tab_3" data-toggle="tab">Libro IVA</a></li>
+                  <li><a href="#tab_2" data-toggle="tab">@lang('impresiones/morosidad.listado')</a></li>
+                  <li><a href="#tab_3" data-toggle="tab">@lang('impresiones/libro_iva.libro')</a></li>
                 </ul>
 
                 <div class="tab-content">

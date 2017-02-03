@@ -5,7 +5,7 @@
 		                    <span class="input-group-btn">
 		                      
 			                <button type="button" class="btn btn-default buscar_fecha">
-			               		Buscar
+			               		@lang('lista.buscar')
 						     	<span class="glyphicon glyphicon-search "></span> 
 						    </button>
 
@@ -18,11 +18,11 @@
 		            <div class="panel panel-default">
 					  <!-- Default panel contents -->
 					<div class="panel-heading clearfix">
-				     	<b>Listado de morosidad</b>
+				     	<b>@lang('impresiones/morosidad.listado')</b>
 				       <div class="btn-group pull-right">
 				      	
 				        <a href="{{route('filial.imprimir_morosidad')}}" target="_blank" type="button" class="btn btn-default">
-			               	Imprimir
+			               	@lang('lista.imprimir')
 						    <span class="glyphicon glyphicon-print"></span> 
 						</a>
 				      
@@ -31,15 +31,15 @@
 					
 					    <table id="tabla_morosidad" class="table table-bordered table-striped">
 						<thead><tr>
-						<th class="text-center">Matrícula</th>
-						<th class="text-center">Grupo</th>
-						<th class="text-center">Nombre</th>
-						<th class="text-center">Cuota</th>
-						<th class="text-center">Fecha pago</th>
-						<th class="text-center">Vencimiento</th>
-						<th class="text-center">Saldo</th>
-						<th class="text-center">Teléfonos</th>
-						<th class="text-center">Correos</th>
+						<th class="text-center">@lang('impresiones/morosidad.matricula')</th>
+						<th class="text-center">@lang('impresiones/morosidad.grupo')</th>
+						<th class="text-center">@lang('impresiones/morosidad.nombre')</th>
+						<th class="text-center">@lang('impresiones/morosidad.cuota')</th>
+						<th class="text-center">@lang('impresiones/morosidad.fechapago')</th>
+						<th class="text-center">@lang('impresiones/morosidad.vencimiento')</th>
+						<th class="text-center">@lang('impresiones/morosidad.saldo')</th>
+						<th class="text-center">@lang('impresiones/morosidad.telefono')</th>
+						<th class="text-center">Emails</th>
 
 						</tr> </thead>
 						<tbody>

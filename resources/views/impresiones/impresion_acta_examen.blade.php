@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Acta examen</title>
+    <title>@lang('impresiones/acta_examen.acta')</title>
       <style>
 
           *{
@@ -84,12 +84,12 @@
   <table width="100%" cellpadding="10" border="1" style="margin-top: -10px !important;">
       <tr>
           <th></th>
-          <th>Apellido y Nombre</th>
-          <th>Teorico</th> 
-          <th>Practico</th>
-          <th>Recuperatorios</th>
-          <th>Ficha</th>
-          <th>Curso</th>
+          <th>@lang('impresiones/acta_examen.ayn')</th>
+          <th>@lang('impresiones/acta_examen.teorico')</th> 
+          <th>@lang('impresiones/acta_examen.practico')</th>
+          <th>@lang('impresiones/acta_examen.recuperatorios')</th>
+          <th>@lang('impresiones/acta_examen.ficha')</th>
+          <th>@lang('impresiones/acta_examen.curso')</th>
            
       </tr>
       <tr>
@@ -118,11 +118,11 @@
 
           <div>
               <div>
-                  <b>Codigo</b>:1234 OPW OFFICE FULL
+                  <b>@lang('impresiones/acta_examen.codigo')</b>:1234 OPW OFFICE FULL
               </div>
 
               <div>
-                  <b>Profesor</b>: Esteban Vals
+                  <b>@lang('impresiones/acta_examen.profesor')</b>: Esteban Vals
          
               </div>
 
@@ -140,12 +140,12 @@
 
           <div>
               <div>
-                  <b>Nombre y apellido</b>:
+                  <b>@lang('impresiones/acta_examen.ayn')</b>:
                   zassda 
               </div>
 
               <div>
-                  <b>Numero documento</b>:
+                  <b>@lang('impresiones/acta_examen.ndocumento')</b>:
                  546456
               </div>
           </div>

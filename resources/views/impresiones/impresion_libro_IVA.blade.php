@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Libro IVA</title>
+    <title>@lang('impresiones/libro_iva.libro')</title>
       <style>
 
           *{
@@ -105,18 +105,18 @@
 
   <div class="titulo">
 
-      <span>Fecha desde: {{$datos['fecha_desde']}} - Fecha hasta: {{$datos['fecha_hasta']}}</span>
-      <span>Filial</span>
+      <span>@lang('impresiones/libro_iva.fechadesde') {{$datos['fecha_desde']}} - @lang('impresiones/libro_iva.fechahasta') {{$datos['fecha_hasta']}}</span>
+      <span>@lang('impresiones/libro_iva.filial')</span>
   </div>
 
 <div class="content">
 	<table>
   	<thead>
     	<tr>
-        <th>FECHA</th>
-        <th>RECIBO</th>
-        <th>NOMBRE</th>
-        <th>IMPORTE</th>
+        <th>@lang('impresiones/libro_iva.fecha')</th>
+        <th>@lang('impresiones/libro_iva.recibo')</th>
+        <th>@lang('impresiones/libro_iva.nombre')</th>
+        <th>@lang('impresiones/libro_iva.importe')</th>
       </tr>
   	</thead>
   	<tbody>
@@ -137,8 +137,8 @@
 <table>
   	<thead>
     	<tr>
-        <th>RECIBO</th>
-        <th>IMPORTE</th>
+        <th>@lang('impresiones/libro_iva.recibo')</th>
+        <th>@lang('impresiones/libro_iva.importe')</th>
       </tr>
   	</thead>
   	<tbody>
@@ -153,17 +153,17 @@
 
 </table>
 
-<p>TOTAL GENERAL : {{$total_general[0]->total}}</p>
+<p>@lang('impresiones/libro_iva.totalgeneral') {{$total_general[0]->total}}</p>
 <hr>
 
 <table>
     <thead>
       <tr>
         <th></th>
-        <th>RECIBO A</th>
-        <th>RECIBO B</th>
-        <th>RECIBO C</th>
-        <th>RECIBO X</th>
+        <th>@lang('impresiones/libro_iva.reciboa')</th>
+        <th>@lang('impresiones/libro_iva.recibob')</th>
+        <th>@lang('impresiones/libro_iva.reciboc')</th>
+        <th>@lang('impresiones/libro_iva.recibox')</th>
 
        
       </tr>

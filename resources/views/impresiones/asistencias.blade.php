@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Listado de asistencias</title>
+    <title>@lang('impresiones/asistencias.listado')</title>
       <style>
         .Table{  
             display: table;  
@@ -110,15 +110,15 @@
       
         <div class="Heading">  
             <div class="cell1">  
-                <p> ORD</p>  
+                <p> @lang('impresiones/asistencias.ord')</p>  
             </div>  
   
             <div class="cell2">  
-                <p> Apellido y Nombre</p>  
+                <p> @lang('impresiones/asistencias.ayn')</p>  
             </div>  
   
             <div class="cell3">  
-                <p> Asistencias de Noviembre</p> 
+                <p> @lang('impresiones/asistencias.asisenciasn')</p> 
                 <div class="contenedor_asistencia">
                     <div class="borde"> &nbsp;</div>
                     <div class="borde"> &nbsp;</div>
@@ -134,10 +134,10 @@
                 </div>
             </div>  
             <div class="cell4">  
-                <p> Ficha</p>  
+                <p> @lang('impresiones/asistencias.ficha')</p>  
             </div>  
             <div class="cell4">  
-                <p> Curso</p>  
+                <p> @lang('impresiones/asistencias.curso')</p>  
             </div>  
   
         </div>  

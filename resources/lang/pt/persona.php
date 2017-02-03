@@ -26,8 +26,8 @@ return [
     'nivelestudios'=>'Nivel de estudos',
     'computadora'=>'Tem um computador',
     'computacion'=>'Estudió computacion',
-    'aclaraciones'=>'esclarecimientos',
-    'titulo'=>'Dados pessoais',
+    'aclaraciones'=>'Esclarecimientos',
+    'titulo'=>'Dados Pessoais',
 
     'no'=>'Não',
     'si'=>'Se',

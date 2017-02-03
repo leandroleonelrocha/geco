@@ -76,7 +76,7 @@
 <div id="container">
     <div id="header">
 
-        <h2 >CERTIFICADO ANALITICO</h2>
+        <h2 >@lang('impresiones/matricula.certificado')</h2>
 
 
     </div>
@@ -101,11 +101,11 @@
         </div>
 
         <div class="left">
-        	<p>Nombre: 	{{$matricula->Persona->fullname}} </p>
-	        <p>Domicilio: {{$matricula->Persona->domicilio}} </p>
+        	<p>@lang('impresiones/matricula.nombre') 	{{$matricula->Persona->fullname}} </p>
+	        <p>@lang('impresiones/matricula.domicilio') {{$matricula->Persona->domicilio}} </p>
 	        
 	        </p>
-	        <p>Nro Matricula: {{ $matricula->id }}</p>
+	        <p>@lang('impresiones/matricula.nmatricula') {{ $matricula->id }}</p>
 	     
         </div>
         
@@ -114,12 +114,12 @@
 	    <table>
 		  	<thead>
 		    	<tr>
-			    	<th>MODULO</th>
-			      	<th>GRUPO</th>
-			      	<th>NOTA</th>
-			      	<th>N.ACTA</th>
-			      	<th>FECHA</th>
-			      	<th>DOCENTE</th>
+			    	<th>@lang('impresiones/matricula.modulo')</th>
+			      	<th>@lang('impresiones/matricula.grupo')</th>
+			      	<th>@lang('impresiones/matricula.nota')</th>
+			      	<th>@lang('impresiones/matricula.acta')</th>
+			      	<th>@lang('impresiones/matricula.fecha')</th>
+			      	<th>@lang('impresiones/matricula.docente')</th>
 			      	
 		    	</tr> 
 		  	</thead>
@@ -152,11 +152,11 @@
     </div>
    
    <div id="sidebar">
-   		<p>Nota promedio : 8</p>
+   		<p>@lang('impresiones/matricula.notapromedio') 8</p>
    		<div class="right">
-   			<p>CANTIDAD DE CLASES</p>
-   			<p>CANTIDAD DE CLASES ASISTIDAS</p>
-   			<p>PROMEDIO DE CLASES</p>
+   			<p>@lang('impresiones/matricula.cantidadclases')</p>
+   			<p>@lang('impresiones/matricula.cantidadclasesasistidas')</p>
+   			<p>@lang('impresiones/matricula.promedioclases')</p>
    		
    		</div>
 

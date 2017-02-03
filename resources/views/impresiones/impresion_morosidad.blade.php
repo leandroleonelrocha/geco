@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Listado de morosidad</title>
+    <title>@lang('impresiones/morosidad.listado')</title>
       <style>
 
           *{
@@ -84,22 +84,22 @@
   <body>
 
   <div class="titulo">
-      <span>Fecha desde: {{$datos['fecha_desde']}} - Fecha hasta: {{$datos['fecha_hasta']}}</span>
-      <span>Filial</span>
+      <span>@lang('impresiones/morosidad.fechadesde') {{$datos['fecha_desde']}} - @lang('impresiones/morosidad.fechahasta') {{$datos['fecha_hasta']}}</span>
+      <span>@lang('impresiones/morosidad.filial')</span>
   </div>
 
 <div class="content">
 	<table>
   	<thead>
     	<tr>
-        <th>MATRICULA</th>
-        <th>GRUPO</th>
-        <th>PERSONA</th>
-        <th>NRO PAGO</th>
-        <th>FECHA</th>
-        <th>SALDO</th>
-        <th>EMAIL</th>
-        <th>TELEFONO</th>
+        <th>@lang('impresiones/morosidad.matricula')</th>
+        <th>@lang('impresiones/morosidad.grupo')</th>
+        <th>@lang('impresiones/morosidad.persona')</th>
+        <th>@lang('impresiones/morosidad.npago')</th>
+        <th>@lang('impresiones/morosidad.fecha')</th>
+        <th>@lang('impresiones/morosidad.saldo')</th>
+        <th>E-Mails</th>
+        <th>@lang('impresiones/morosidad.telefono')</th>
         
         
       </tr>

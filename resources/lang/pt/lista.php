@@ -11,4 +11,5 @@ return [
 	'asignar'=>'Atribuir',
 	'verrecibos'=>'Ver Recibos',
 	'imprimir'=>'Plotar',
+	'buscar'=>'Busca',
 ];

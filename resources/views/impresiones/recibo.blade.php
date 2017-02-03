@@ -53,7 +53,7 @@
 <div id="container">
     <div id="header">
 
-        <h2 >Fecha:  <?php echo date('d/m/Y'); ?></h2>
+        <h2 >@lang('impresiones/recibo.fecha')  <?php echo date('d/m/Y'); ?></h2>
 
     </div>
     <div id="sidebar">
@@ -62,7 +62,7 @@
 	        <p>{{ $recibo->Pago->Matricula->Persona->fullname }}</p>
 	        <p>{{ $recibo->Pago->Matricula->Persona->domicilio }}</p>
 	        <p>
-	        	Grupo:
+	        	@lang('impresiones/recibo.grupo'):
 
 	        	@foreach($recibo->Pago->Matricula->Grupo as $grupo)
 	        		@if(isset($grupo->Curso->nombre))
@@ -77,8 +77,8 @@
         </div>
 
         <div class="left">
-	        <p>Nro Matricula: {{ $recibo->Pago->Matricula->id }}</p>
-	        <p>Teléfono: 
+	        <p>@lang('impresiones/recibo.nmatricula') {{ $recibo->Pago->Matricula->id }}</p>
+	        <p>@lang('impresiones/recibo.telefono') 
 	        	@foreach($recibo->Pago->Matricula->Persona->PersonaTelefono as $telefono)
 	        	{{$telefono->telefono }}
 	        	@endforeach
@@ -89,9 +89,9 @@
     </div>
     <div id="main">
 
-        <h3>Plan de Pago</h3>
-        <p>Matricula completa</p>
-        <p>Son {{$recibo->monto_letra}} pesos -------------------------- total ${{$recibo->monto}}.00</p>
+        <h3>@lang('impresiones/recibo.planpago')</h3>
+        <p>@lang('impresiones/recibo.matriculacompleta')</p>
+        <p>@lang('impresiones/recibo.son') {{$recibo->monto_letra}} @lang('impresiones/recibo.pesos') -------------------------- @lang('impresiones/recibo.total') ${{$recibo->monto}}.00</p>
         
     </div>
    

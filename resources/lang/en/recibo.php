@@ -2,7 +2,7 @@
 
 return [
  
-    'listadorecibo' => 'List of Receipts',
+    'listadorecibo' => 'List of Receipt',
   	'tipo' => 'Type',
     'monto' => 'Money',
     'concepto' => 'Payment concept',
