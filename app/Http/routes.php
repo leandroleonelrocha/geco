@@ -33,6 +33,7 @@ require_once(__DIR__ . '/Routes/UsuarioRoute.php'); // Esto?
 
 require_once(__DIR__ . '/Routes/ContrasenaRoute.php'); 
 require_once(__DIR__ . '/Routes/RestauracionCuentaRoute.php'); 
+require_once(__DIR__ . '/Routes/ManualRoute.php'); 
 
 Route::get('/', function () {
     return view('login');

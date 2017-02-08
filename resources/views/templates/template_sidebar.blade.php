@@ -236,6 +236,12 @@
                 </a>
               </li>
 
+              <li>
+                <a href="{{ route('manual.index')}}">
+                  <i class="fa fa-book"></i> <span>Manual</span>
+                </a>
+              </li>
+
             </ul>
           </section>
     <!-- /.sidebar -->
