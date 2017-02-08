@@ -15,7 +15,7 @@
                                 <label>@lang('grupo.nombreaula')</label>
                                 <button class="add_input_nombre btn-xs btn-success">+</button>   
                                 <div class="input_fields_nombre">
-                                    <input type="text" name="nombre[]" class="form-control" placeholder="Exemplo 20, AA30">
+                                    <input type="text" name="nombre[]" class="form-control" placeholder="20, AA30">
                                 </div>
                             </div>
 
@@ -26,8 +26,28 @@
                             {!! Form::close() !!}
                         </div>
                     </div>
+
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead> <tr>
+                            <th>@lang('grupo.listaaulasasignadas')</th>
+                        </tr> </thead>
+                        <tbody>
+                            @foreach($aulas as $a)
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1">{{ $a->nombre }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div><!-- Fin box-body -->
             </div> <!-- Fin box -->
         </div> <!-- Fin col -->
     </div> <!-- Fin row -->
+        <div class="row">
+        <div class="col-sm-12">
+            <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                {!! $aulas->render() !!}
+            </div>
+        </div>
+    </div>
 @endsection

@@ -26,7 +26,9 @@ class AulaController extends Controller
 	}
 
 	public function nuevo(){
-		return view('rol_filial.grupos.asignacionAula.nuevo');	
+
+		$aulas= $this->aulaRepo->allAulasPaginadas();
+		return view('rol_filial.grupos.asignacionAula.nuevo',compact('aulas'));	
 	}
 
 	public function nuevo_post(CrearNuevaAulaRequest $request){

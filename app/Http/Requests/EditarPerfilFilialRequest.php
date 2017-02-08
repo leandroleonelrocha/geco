@@ -31,10 +31,10 @@ class EditarPerfilFilialRequest extends Request
     {
          $rules= [
 
-            'nombre' => 'required',
-            'direccion' => 'required',
-            'localidad' => 'required',
-            'codigo_postal' => 'required',
+            // 'nombre' => 'required',
+            // 'direccion' => 'required',
+            // 'localidad' => 'required',
+            // 'codigo_postal' => 'required',
             'mail' => 'required',
         ];
 
@@ -49,10 +49,10 @@ class EditarPerfilFilialRequest extends Request
     public function messages()
     {
         return [
-            'nombre.required' => 'El nombre es requerido.',
-            'direccion.required' => 'La dirección es requerida.',
-            'localidad.required' => 'La localidad es requerida.',
-            'codigo_postal.required' => 'El CP es requerido.',
+            // 'nombre.required' => 'El nombre es requerido.',
+            // 'direccion.required' => 'La dirección es requerida.',
+            // 'localidad.required' => 'La localidad es requerida.',
+            // 'codigo_postal.required' => 'El CP es requerido.',
             'mail.required' => 'El mail es requerido.',  
         ];
 

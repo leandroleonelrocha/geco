@@ -93,6 +93,7 @@ return [
     'aula' => 'Aula',
     'asignacionaulas' => 'Asignación de Aulas',
     'nombreaula' => 'Nombre de aula',
+    'listaaulasasignadas' => 'Lista de Aulas Asignadas',
 
     'crear' => 'Crear',
 
