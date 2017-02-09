@@ -94,6 +94,9 @@ return [
     'asignacionaulas' => 'Asignación de Aulas',
     'nombreaula' => 'Nombre de aula',
     'listaaulasasignadas' => 'Lista de Aulas Asignadas',
+    'editaraula' => 'Editar Aula',
+
+    'atras' => 'Atrás',
 
     'crear' => 'Crear',
 

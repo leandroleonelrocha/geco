@@ -21,7 +21,7 @@
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
-					    	@foreach($carrera as $ca)
+					    	@foreach($carreras as $ca)
 						    	<tr role="row" class="odd">
 
 						        	<td class="sorting_1">{{ $ca->nombre }}</td>
@@ -43,7 +43,7 @@
 	<div class="row">
         <div class="col-sm-12">
 	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-	        	{!! $carrera->render() !!}
+	        	{!! $carreras->render() !!}
 	        </div>
         </div>
     </div>

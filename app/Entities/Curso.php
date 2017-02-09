@@ -6,7 +6,7 @@ class Curso extends Entity {
     protected  $table= 'curso';
    // protected $primaryKey= 'id_curso';
 
-    protected $fillable   = ['id', 'nombre','duracion', 'descripcion','taller'];
+    protected $fillable   = ['id', 'nombre','duracion', 'descripcion','taller', 'lenguaje'];
 
 	public function PersonaInteres(){
         return $this->belongsTo(PersonaInteres::getClass());

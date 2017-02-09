@@ -11,4 +11,8 @@ class CarreraRepo extends BaseRepo {
     {
         return new Carrera();
     }
+
+    public function allCarreras($len){
+        return $this->model->where('lenguaje', $len)->paginate(10);
+    }
 }

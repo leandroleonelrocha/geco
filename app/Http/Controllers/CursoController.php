@@ -13,21 +13,29 @@ use App\Http\Requests\EditarCursoRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
+use App\Http\Repositories\paisRepo;
 
 class CursoController extends Controller
 {
 	protected $cursoRepo;
 
-	public function __construct(CursoRepo $cursoRepo)
+	public function __construct(CursoRepo $cursoRepo, PaisRepo $paisRepo, FilialRepo $filialRepo)
 	{
 		$this->cursoRepo = $cursoRepo;
+		$this->paisRepo = $paisRepo;
+		$this->filialRepo = $filialRepo;
 	}
 
 	public function lista(){
-		
-		$curso = $this->cursoRepo->listPaginate();
 
-		return view('rol_filial.cursos.lista',compact('curso'));
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
+		
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+		
+		$cursos = $this->cursoRepo->allCursos($pais->lenguaje);
+
+		return view('rol_filial.cursos.lista',compact('cursos'));
 	}
 
 	public function nuevo()
@@ -37,7 +45,15 @@ class CursoController extends Controller
 
 	public function nuevo_post(CrearNuevoCursoRequest $request){
 		
-		$this->cursoRepo->create($request->all());
+		$data = $request->all();
+
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
+		
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
+		$data['lenguaje'] =$pais->lenguaje;
+		$this->cursoRepo->create($data);
 		return redirect()->route('filial.cursos')->with('msg_ok', 'Curso creado correctamente');
 	}
 

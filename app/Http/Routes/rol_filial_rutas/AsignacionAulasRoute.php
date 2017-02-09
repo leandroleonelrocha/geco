@@ -16,3 +16,15 @@
 		'as' => 'filial.asignacionAulas_nuevo_post',
 		'uses' => 'AulaController@nuevo_post'
 	]);
+
+	Route::get('asignacionAulas_editar/{id}', [
+
+		'as' => 'filial.asignacionAulas_editar',
+		'uses' => 'AulaController@editar'
+	]);
+
+	Route::post('asignacionAulas_editar_post', [
+
+		'as' => 'filial.asignacionAulas_editar_post',
+		'uses' => 'AulaController@editar_post'
+	]);

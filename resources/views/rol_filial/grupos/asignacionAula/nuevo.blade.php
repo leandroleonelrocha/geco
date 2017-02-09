@@ -30,11 +30,16 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead> <tr>
                             <th>@lang('grupo.listaaulasasignadas')</th>
+                        <th class="no-print"></th>
                         </tr> </thead>
                         <tbody>
                             @foreach($aulas as $a)
                                 <tr role="row" class="odd">
+
                                     <td class="sorting_1">{{ $a->nombre }}</td>
+                                    <td class="text-center">
+
+                                    <a href="{{route('filial.asignacionAulas_editar',$a->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>  
                                 </tr>
                             @endforeach
                         </tbody>
