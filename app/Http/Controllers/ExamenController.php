@@ -12,6 +12,8 @@ use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\MateriaRepo;
+use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\PaisRepo;
 use App\Http\Requests\CrearNuevoExamenRequest;
 class ExamenController extends Controller
 {
@@ -22,7 +24,7 @@ class ExamenController extends Controller
 	protected $grupoRepo;
 	protected $carreraRepo;
 	protected $materiaRepo;
-	public function __construct(ExamenRepo $examenRepo, ExamenPermisosRepo $examenPermisosRepo, MatriculaRepo $matriculaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo){
+	public function __construct(ExamenRepo $examenRepo, ExamenPermisosRepo $examenPermisosRepo, MatriculaRepo $matriculaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, PaisRepo $paisRepo, FilialRepo $filialRepo){
 		
 		$this->examenRepo = $examenRepo;
 		$this->examenPermisosRepo = $examenPermisosRepo;
@@ -31,6 +33,8 @@ class ExamenController extends Controller
 		$this->grupoRepo = $grupoRepo;
 		$this->carreraRepo = $carreraRepo;
 		$this->materiaRepo = $materiaRepo;
+        $this->paisRepo             = $paisRepo;
+        $this->filialRepo           = $filialRepo;
 	}
 	
 	public function index(){
@@ -74,7 +78,7 @@ class ExamenController extends Controller
 		$model = $this->examenRepo->find($id);
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'persona_id');
 		$grupos 	= $this->grupoRepo->all()->lists('descripcion', 'id');
-		$carreras 	= $this->carreraRepo->all()->lists('nombre', 'id');
+		$carreras 	= $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
 		$materias 	= $this->materiaRepo->all()->lists('nombre', 'id');
 		$docentes 	= $this->docenteRepo->all()->lists('full_name', 'id');
 		return view('rol_filial.examenes.form',compact('matriculas', 'grupos', 'carreras', 'materias', 'docentes','model'));

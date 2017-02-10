@@ -63,6 +63,14 @@ abstract class BaseRepo {
         return $this->model->lists($data, $id);
     }
 
+    public function lenguajeLista($data, $id,$len){
+        return $this->model->where('lenguaje', $len)->lists($data, $id);
+    }
+
+    public function allLenguajeLista($len){
+        return $this->model->where('lenguaje', $len)->get();
+    }
+
    
     public function baseWhere($campo,$valor,$inicio,$fin){
     
