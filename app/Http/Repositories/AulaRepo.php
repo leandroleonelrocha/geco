@@ -15,4 +15,8 @@ class AulaRepo extends BaseRepo {
     public function allAulas(){
         return $this->model->where('filial_id', $this->filial)->get();
     }
+
+    public function allAulasPaginadas(){
+        return $this->model->where('filial_id', $this->filial)->paginate(5);
+    }
 }

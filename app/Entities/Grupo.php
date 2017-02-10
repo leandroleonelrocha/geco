@@ -63,8 +63,5 @@ class Grupo extends Entity {
 
     public function GrupoHorario(){
         return $this->hasMany(GrupoHorario::getClass());
-    }  
-
-   
-
+    }
 }

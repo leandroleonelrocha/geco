@@ -4,7 +4,9 @@ return [
     'nombre' => 'Nome',
     'duracion' => 'Duração',
     'descripcion' => 'Descrição',
-    'taller' => 'Ateliê',  
+    'taller' => 'Atende Ateliê',
+    'siasiste' => 'Se, Atende',
+    'noasiste' => 'No Atende',
 
     'listadodecursos' => 'Lista de Cursos',
     'agregarnuevo' => 'Adicionar Novos',

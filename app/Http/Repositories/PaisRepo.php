@@ -11,4 +11,8 @@ class PaisRepo extends BaseRepo {
     {
         return new Pais();
     }
+
+    public function obtenerLenguaje($pais_id){
+        return $this->model->where('id', $pais_id)->first();
+    }
 }

@@ -13,21 +13,29 @@ use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\CarreraRepo;
+use App\Http\Repositories\PaisRepo;
 
 
 class CarreraController extends Controller
 {
 	protected $carreraRepo;
 
-	public function __construct(CarreraRepo $carreraRepo)
+	public function __construct(CarreraRepo $carreraRepo, PaisRepo $paisRepo, FilialRepo $filialRepo)
 	{
 		$this->carreraRepo = $carreraRepo;
+		$this->paisRepo = $paisRepo;
+		$this->filialRepo = $filialRepo;
 	}
 
 	public function lista(){
+
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
-		$carrera=$this->carreraRepo->listPaginate();
-		return view('rol_filial.carreras.lista',compact('carrera'));
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+		
+		$carreras=$this->carreraRepo->allCarreras($pais->lenguaje);
+		return view('rol_filial.carreras.lista',compact('carreras'));
 		
 	}
 
@@ -38,9 +46,18 @@ class CarreraController extends Controller
 	}
 
 	public function nuevo_post(CrearNuevaCarreraRequest $request){
-	
-		$this->carreraRepo->create($request->all());
-     	return redirect()->route('filial.carreras')->with('msg_ok', 'Carrera creada correctamente');
+		
+		$data = $request->all();
+
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
+		
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
+		$data['lenguaje'] =$pais->lenguaje;
+
+		$this->carreraRepo->create($data);
+		return redirect()->route('filial.carreras')->with('msg_ok', 'Carrera creada correctamente');
 	}
 
   	public function editar($id){

@@ -104,5 +104,9 @@ class FilialRepo extends BaseRepo {
 
     }
 
+    public function obtenerFilialPais(){
+        return $this->model->where('id', $this->filial)->get();
+    }
+
 
 }

@@ -20,32 +20,32 @@
 
 							<div class="col-md-6 form-group">
 								<label>@lang('filial.nombre')</label>
-								{!! Form::text('nombre', $filial->nombre, array('class'=>'form-control')) !!}
+								{!! Form::text('nombre', $filial->nombre, array('class'=>'form-control','disabled')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>@lang('filial.direccion')</label>
-								{!! Form::text('direccion', $filial->direccion, array('class'=>'form-control')) !!}
+								{!! Form::text('direccion', $filial->direccion, array('class'=>'form-control','disabled')) !!}
 							</div>
 
 							<div class="col-md-6 form-group">
 								<label>@lang('filial.localidad')</label>
-			     				{!! Form::text('localidad', $filial->localidad, array('class'=>'form-control')) !!}
+			     				{!! Form::text('localidad', $filial->localidad, array('class'=>'form-control','disabled')) !!}
 							</div>
 
 					        <div class="col-md-6 form-group">
                                 <label>@lang('filial.codigopostal')</label>
-                               		{!! Form::text('codigo_postal', $filial->codigo_postal, array('class'=>'form-control')) !!}
+                               		{!! Form::text('codigo_postal', $filial->codigo_postal, array('class'=>'form-control','disabled')) !!}
 							</div>
 
                             <div class="col-md-6 form-group">
                                 <label>@lang('filial.pais')</label>
-                                {!! Form::select('pais_id', $paises->toArray() , $filial->Pais->id, array('class'=>'form-control select2')) !!}
+                                {!! Form::select('pais_id', $paises->toArray() , $filial->Pais->id, array('class'=>'form-control select2','disabled', 'selected')) !!}
                             </div>
 
 			          		<div class="col-md-6 form-group">
                                 <label>@lang('filial.cadena')</label>
-                                {!! Form::select('cadena_id', $cadenas->toArray() , $filial->Cadena->id, array('class'=>'form-control')) !!}
+                                {!! Form::select('cadena_id', $cadenas->toArray() , $filial->Cadena->id, array('class'=>'form-control select2','disabled', 'selected')) !!}
                             </div>
 
          					<div class="col-md-6 form-group">

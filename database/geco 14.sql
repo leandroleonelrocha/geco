@@ -8,6 +8,7 @@ nombre		varchar(50) not null,
 duracion 	varchar(50),
 descripcion	varchar(300) default 'Sin Descripción.',
 taller		boolean default false,
+lenguaje  	char (5) not null,
 created_at	timestamp not null default '0000-00-00 00:00:00',
 updated_at	timestamp not null default '0000-00-00 00:00:00',
 primary key	(id)
@@ -18,6 +19,7 @@ id			int not null auto_increment,
 nombre		varchar(50) not null,
 duracion 	varchar(50),
 descripcion	varchar(300) default 'Sin Descripción.',
+lenguaje  	char (5) not null,
 created_at	timestamp not null default '0000-00-00 00:00:00',
 updated_at	timestamp not null default '0000-00-00 00:00:00',
 primary key	(id)
@@ -285,6 +287,7 @@ pago_individual	boolean default false,
 descripcion		varchar(50) default 'Sin Descripción.',
 terminado		boolean not null default false,
 vencimiento		date,
+fecha_recargo	date,
 monto_original	float not null,
 monto_actual	float,
 monto_pago		float,
@@ -1067,38 +1070,38 @@ values 	(1,		4, 'Interesado'		, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.
 -- Cursos
 --
 
-insert into curso (`id`, `nombre`, `duracion`, `descripcion`, `taller`, `created_at`, `updated_at`)
-values  (1 , 'Introducción a la cocina'			, '1 Año'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Enología y Maridaje' 				, '15 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Barman y Tragos' 					, '50 Días'	, 'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-    	(11, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (12, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (13, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (14, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (15, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into curso (`id`, `nombre`, `duracion`, `descripcion`, `taller`,`lenguaje`, `created_at`, `updated_at`)
+values  (1 , 'Introducción a la cocina'			, '1 Año'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3 , 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (4 , 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (5 , 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (6 , 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (7 , 'Enología y Maridaje' 				, '15 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (8 , 'Barman y Tragos' 					, '50 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (10, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+    	(11, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (12, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (13, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (14, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (15, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Carreras
 --
 
-insert into carrera (`id`, `nombre`, `duracion`, `descripcion`, `created_at`, `updated_at`)
-values  (1 , 'Profesional Gastronómico'			, '1 Año'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into carrera (`id`, `nombre`, `duracion`, `descripcion`,`lenguaje`, `created_at`, `updated_at`)
+values  (1 , 'Profesional Gastronómico'			, '1 Año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (4 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (5 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (6 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (7 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (8 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (10, 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Materias
@@ -1190,7 +1193,7 @@ values  (1 , 1	 , null, 3, 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:
 -- Pagos
 --
 
-insert into pago (`matricula_id`, `tipo_moneda_id`, `nro_pago`, `pago_individual`, `descripcion`, `terminado`, `vencimiento`, `monto_original`, `monto_actual`, `monto_pago`, `descuento`, `recargo`, `filial_id`, `created_at`, `updated_at`)
+insert into pago (`matricula_id`, `tipo_moneda_id`, `nro_pago`, `pago_individual`, `descripcion`, `terminado`, `vencimiento`,`monto_original`, `monto_actual`, `monto_pago`, `descuento`, `recargo`, `filial_id`, `created_at`, `updated_at`)
 values  (1000, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1000, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1000, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),

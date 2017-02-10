@@ -6,7 +6,9 @@ return [
     'nombre' => 'Nombre',
     'duracion' => 'Duración',
     'descripcion' => 'Descripción',
-    'taller' => 'Taller',  
+    'taller' => 'Asiste a Taller',
+    'siasiste' => 'Si Asiste',
+    'noasiste' => 'No Asiste',  
 
     'listadodecursos' => 'Listado de Cursos',
     'agregarnuevo' => 'Agregar Nuevo',

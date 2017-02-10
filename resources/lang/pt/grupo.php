@@ -92,6 +92,10 @@ return [
     'aula' => 'Aula',
     'asignacionaulas' => 'Alocação de salas de aula',
     'nombreaula' => 'Nome salas de aula',
+    'listaaulasasignadas' => 'Lista de sala de aula atribuídot',
+    'editaraula' => 'Editar sala de aula',
+
+    'atras' => 'Anterior',
 
     'crear' => 'Salvar',
 

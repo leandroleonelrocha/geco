@@ -23,7 +23,7 @@
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
-						    @foreach($curso as $c)
+						    @foreach($cursos as $c)
 							    <tr role="row" class="odd">
 
 							        <td class="sorting_1">{{ $c->nombre }}</td>
@@ -47,7 +47,7 @@
 	<div class="row">
         <div class="col-sm-12">
 	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-	        	{!! $curso->render() !!}
+	        	{!! $cursos->render() !!}
 	        </div>
         </div>
     </div>
