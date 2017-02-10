@@ -61,21 +61,31 @@ class MatriculaController extends Controller {
 
     // Página de Nuevo -- Persona Existente
     public function nuevo($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
         $persona    = $this->personaRepo->find($id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos','grupos'));
     }
 
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $paises= $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos','paises'));
     }
@@ -197,12 +207,17 @@ class MatriculaController extends Controller {
     }
 
     public function editar($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+        
         $matricula          = $this->matriculaRepo->find($id);
         $planPagos          = $this->pagoRepo->allMatriculaPlan($id);
         $pagosIndividuales  = $this->pagoRepo->allMatriculaIndividual($id);
         $asesores           = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras           = $this->carreraRepo->all();
-        $cursos             = $this->cursoRepo->all();
+        $carreras           = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos             = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
         $grupos             = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.editar',compact('matricula','planPagos','pagosIndividuales','asesores','carreras','cursos','grupos'));
     }
@@ -274,25 +289,26 @@ class MatriculaController extends Controller {
             // Obtener fecha del primer día del mes
             $month   = date('m');
             $year    = date('Y');
-            $first   = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
-            $date1   = date_create ( $first );
-            $date2   = date_create ( date('Y-m-d') );
+            // $first   = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+            // $date1   = date_create ( $first );
             // Obtengo el día nro diez de cada mes
-            $date1->modify('+9 day');
+            // $date1->modify('+9 day');
+            $actualDate   = date('Y-m-d');
 
             $recargo = $pago->monto_original * ( $pago->recargo * 0.01);
             $montoR  = $pago->monto_original + $recargo - $pago->monto_pago;
             $montoD  = $pago->monto_original - $pago->descuento - $pago->monto_pago;
             
-            if ($pago->vencimiento < date('Y-m-d') && $montoR != $pago->monto_actual){
+            
+            if ($pago->fecha_recargo < $actualDate && $montoR != $pago->monto_actual){
                 $pago->monto_actual += $recargo;
                 $pago->save();
             }
-            if ($date2 <= $date1 && $montoD != $pago->monto_actual && $pago->vencimiento > date('Y-m-d')) {
+            if ($actualDate <= $pago->vencimiento && $montoD != $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
                 $pago->monto_actual -= $pago->descuento;
                 $pago->save();
             }
-            if ($date2 >= $date1 && $montoD == $pago->monto_actual && $pago->vencimiento > date('Y-m-d')) {
+            if ($actualDate > $pago->vencimiento && $montoD == $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
                 $pago->monto_actual += $pago->descuento;
                 $pago->save();
             }

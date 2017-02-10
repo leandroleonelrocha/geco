@@ -44,25 +44,25 @@ class PagoController extends Controller
         	// Obtener fecha del primer día del mes
             $month   = date('m');
             $year    = date('Y');
-            $first   = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
-            $date1   = date_create ( $first );
-            $date2   = date_create ( date('Y-m-d') );
+            // $first   = date('Y-m-d', mktime(0,0,0, $month, 1, $year));
+            // $date1   = date_create ( $first );
             // Obtengo el día nro diez de cada mes
-            $date1->modify('+9 day');
+            // $date1->modify('+9 day');
+            $actualDate   = date_create ( date('Y-m-d') );
 
             $recargo = $pago->monto_original * ( $pago->recargo * 0.01);
             $montoR  = $pago->monto_original + $recargo - $pago->monto_pago;
             $montoD  = $pago->monto_original - $pago->descuento - $pago->monto_pago;
             
-            if ($pago->vencimiento < date('Y-m-d') && $montoR != $pago->monto_actual){
+            if ($pago->fecha_recargo < date('Y-m-d') && $montoR != $pago->monto_actual){
                 $pago->monto_actual += $recargo;
                 $pago->save();
             }
-            if ($date2 <= $date1 && $montoD != $pago->monto_actual && $pago->vencimiento > date('Y-m-d')) {
+            if ($actualDate <= $pago->vencimiento && $montoD != $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
                 $pago->monto_actual -= $pago->descuento;
                 $pago->save();
             }
-            if ($date2 >= $date1 && $montoD == $pago->monto_actual && $pago->vencimiento > date('Y-m-d')) {
+            if ($actualDate > $pago->vencimiento && $montoD == $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
                 $pago->monto_actual += $pago->descuento;
                 $pago->save();
             }

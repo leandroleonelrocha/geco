@@ -23,16 +23,18 @@ use App\Http\Repositories\InteresRepo;
 use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PaisRepo;
+use App\Http\Repositories\FilialRepo;
 use App\Http\Requests\CrearNuevaPersonaRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 
 class PreinformeController extends Controller {
 
     protected $preinformeRepo;
 
-    public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo, PaisRepo $paisRepo)
+    public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo, PaisRepo $paisRepo, FilialRepo $filialRepo)
     {
         $this->preinformeRepo       = $preinformeRepo;
         $this->personaRepo          = $personaRepo;
@@ -44,6 +46,7 @@ class PreinformeController extends Controller {
         $this->cursoRepo            = $cursoRepo;
         $this->personaInteresRepo   = $personaInteresRepo;
         $this->paisRepo             = $paisRepo;
+        $this->filialRepo           = $filialRepo;
     }
 
     // Página principal de Preinformes
@@ -64,22 +67,30 @@ class PreinformeController extends Controller {
 
     // Página de Nuevo -- Persona Existente
     public function nuevo($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
        
         $persona    = $this->personaRepo->find($id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
-        $carreras   = $this->carreraRepo->all()->lists('nombre','id');
-        $cursos     = $this->cursoRepo->all()->lists('nombre','id');
+        $carreras   = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
+        $cursos     = $this->cursoRepo->lenguajeLista('nombre','id',$pais->lenguaje);
         return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));     
     }
 
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
         
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $paises= $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-        $carreras   = $this->carreraRepo->all()->lists('nombre','id');
-        $cursos     = $this->cursoRepo->all()->lists('nombre','id');
+        $carreras   = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
+        $cursos     = $this->cursoRepo->lenguajeLista('nombre','id',$pais->lenguaje);
         return view('rol_filial.preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos','paises'));
            
     }
@@ -205,12 +216,17 @@ class PreinformeController extends Controller {
     }
 
     public function editar($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
         
         $preinforme = $this->preinformeRepo->find($id);
         $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
+
         return view('rol_filial.preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
         
     }
