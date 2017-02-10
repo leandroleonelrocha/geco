@@ -107,13 +107,13 @@
                         <li class="active"><a href="{{route('filial.matriculas')}}"><i class="fa fa-circle-o"></i> @lang('menu.lista')</a></li>
                         <?php if($h == 1){ ?>
                         <li> <a href="{{route('filial.matriculas_seleccion') }}"><i class="fa fa-circle-o"></i> @lang('menu.nueva')</a></li>
-                        <li> <a href="{{route('filial.matriculas_pases') }}"><i class="fa fa-circle-o"></i> @lang('menu.pases')</a></li>
+                        <li> <a href="#" class="not-active"><i class="fa fa-circle-o"></i> @lang('menu.pases')</a></li>
                         <?php } ?>
                       </ul>
                     </li>
 
                     <li>
-                      <a href="{{route('filial.pagos_matriculas')}}"> <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
+                      <a href="#" class="not-active"> <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
                     </li>
 
                     <li class="treeview">
@@ -208,11 +208,11 @@
                     </li>
 
                     <li>
-                      <a href="{{route('filial.mails')}}"> <i class="fa fa-envelope"></i> <span>Mails</span> </a>
+                      <a href="#" class="not-active"> <i class="fa fa-envelope"></i> <span>Mails</span> </a>
                     </li>
 
                     <li>
-                      <a href="{{route('filial.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                      <a href="#" class="not-active"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                     </li>
     
                     <li class="treeview">
@@ -237,7 +237,7 @@
               </li>
 
               <li>
-                <a href="{{ route('manual.index')}}">
+                <a href="https://drive.google.com/file/d/0Bynkrt-QFIH7dVh0R2paX0lRLXM/view?usp=sharing" target="_blank">
                   <i class="fa fa-book"></i> <span>Manual</span>
                 </a>
               </li>
