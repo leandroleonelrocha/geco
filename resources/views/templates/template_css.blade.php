@@ -41,3 +41,10 @@
 <!-- Recargo de paginn -->
 <link rel="stylesheet" href="{{asset('plugins/pace/themes/pace-theme-flat-top.css')}}">
 
+<style type="text/css">
+	.not-active {
+   cursor:no-drop;
+   color: red;
+
+}
+</style>
