@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Entities\User;
 use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\CuentaRepo;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use PDF;
-
+use Hash;
 
 class LoginController extends Controller {
 
-  public function __construct(FilialRepo $filialeRepo){
+  public function __construct(FilialRepo $filialeRepo, CuentaRepo $cuentaRepo){
     $this->filialeRepo = $filialeRepo;
+    $this->cuentaRepo  = $cuentaRepo;
   }
 
     public function getLogin()
@@ -23,6 +25,42 @@ class LoginController extends Controller {
 
     public function postLogin(Request $request){
         
+        $usuario  = $request->usuario;
+        $password = $request->password;
+        $cuenta   = $this->cuentaRepo->findUser($usuario, $password);
+        
+        if(count($cuenta) > 0)
+        {
+            $data['id']          = $cuenta['id'];
+            $data['usuario']     = $cuenta['usuario'];
+            $data['password']    = $cuenta['password'];
+            $data['rol_id']      = $cuenta['rol_id'];
+            $data['entidad_id']  = $cuenta['entidad_id'];
+            $data['habilitado']  = $cuenta['habilitado'];
+        }
+
+        if ($data){
+        session(['usuario' => $data]);
+        switch ($data['rol_id']) {
+         
+          case 2: // Rol de Dueño
+            return redirect()->route('dueño.inicio');
+          break;
+          case 3: // Rol de Director
+            return redirect()->route('director.inicio');
+          break;
+          case 4: // Rol de Filial
+            $filial =  $this->filialeRepo->find(session('usuario')['id']);
+            $tipo_moneda = $filial->Pais->TipoMoneda;
+            session(['moneda' => $tipo_moneda]);
+            return redirect()->route('filial.inicio');
+          break;
+        }
+      }
+      else
+        return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');
+
+
         // $ch = curl_init();  
         // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
         // curl_setopt($ch, CURLOPT_HEADER, false);  
@@ -36,7 +74,7 @@ class LoginController extends Controller {
         //Rol 3 Director
         //Rol 4 Filial
       
-
+        /*
         $cuentas = array(
                      array(
                     'id'          => 1,
@@ -114,6 +152,7 @@ class LoginController extends Controller {
       }
       else
         return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');
+    */
     }
     
     // login local

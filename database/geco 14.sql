@@ -510,6 +510,27 @@ foreign key			(filial_id) 	references filial	  (id),
 foreign key			(pago_id)     	references pago     (id)
 );
 
+create table if not exists rol(
+id int(11) NOT NULL,
+rol varchar(45) DEFAULT NULL,
+created_at			timestamp not null default '0000-00-00 00:00:00',
+updated_at			timestamp not null default '0000-00-00 00:00:00',
+primary key			(id)
+);
+
+create table if not exists cuenta(
+id int(11) not null auto_increment,
+usuario varchar(255) DEFAULT NULL,
+contrasena varchar(255) DEFAULT NULL,
+habilitado tinyint(1) DEFAULT NULL,
+rol_id int(11) NOT NULL,
+created_at			timestamp not null default '0000-00-00 00:00:00',
+updated_at			timestamp not null default '0000-00-00 00:00:00',
+primary key			(id),
+foreign key			(rol_id) 	references rol 	(id)
+);
+
+
 -- --------------------------------------------------------
 -- ---------- Inserción de Datos
 
