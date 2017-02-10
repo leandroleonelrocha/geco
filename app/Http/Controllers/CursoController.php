@@ -13,7 +13,7 @@ use App\Http\Requests\EditarCursoRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
-use App\Http\Repositories\paisRepo;
+use App\Http\Repositories\PaisRepo;
 
 class CursoController extends Controller
 {
