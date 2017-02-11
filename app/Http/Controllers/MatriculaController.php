@@ -61,21 +61,31 @@ class MatriculaController extends Controller {
 
     // Página de Nuevo -- Persona Existente
     public function nuevo($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
         $persona    = $this->personaRepo->find($id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos','grupos'));
     }
 
     // Página de Nuevo -- Persona Nueva
     public function nuevaPersona(){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $paises= $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->all();
-        $cursos     = $this->cursoRepo->all();
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos','paises'));
     }
@@ -197,17 +207,14 @@ class MatriculaController extends Controller {
     }
 
     public function editar($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+        
         $matricula          = $this->matriculaRepo->find($id);
         $planPagos          = $this->pagoRepo->allMatriculaPlan($id);
         $pagosIndividuales  = $this->pagoRepo->allMatriculaIndividual($id);
-        $asesores           = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras           = $this->carreraRepo->all();
-        $cursos             = $this->cursoRepo->all();
-        if (isset($matricula->curso_id))
-            $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
-        else
-            $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
-
         return view('rol_filial.matriculas.editar',compact('matricula','planPagos','pagosIndividuales','asesores','carreras','cursos','grupos'));
     }
 

@@ -12,6 +12,8 @@ use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\ClaseMatriculaRepo;
 use App\Http\Repositories\AulaRepo;
+use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\PaisRepo;
 use App\Entities\Clase;
 use App\Entities\GrupoMatricula;
 use App\Entities\ClaseMatricula;
@@ -30,7 +32,7 @@ class GrupoController extends Controller
 	protected $claseRepo;
 	protected $claseMatriculaRepo;
 
-	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo, AulaRepo $aulaRepo)
+	public function __construct(CursoRepo $cursoRepo, CarreraRepo $carreraRepo, MateriaRepo $materiaRepo, DocenteRepo $docenteRepo, GrupoRepo $grupoRepo, ClaseRepo $claseRepo , ClaseMatriculaRepo $claseMatriculaRepo, AulaRepo $aulaRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
 	{
 		$this->cursoRepo 			= $cursoRepo;
 		$this->carreraRepo 			= $carreraRepo;
@@ -40,6 +42,8 @@ class GrupoController extends Controller
 		$this->claseRepo 			= $claseRepo;
 		$this->claseMatriculaRepo 	= $claseMatriculaRepo;
 		$this->aulaRepo 			= $aulaRepo;
+		$this->filialRepo 			= $filialRepo;
+		$this->paisRepo 			= $paisRepo;
 		
 	}	
 
@@ -49,8 +53,13 @@ class GrupoController extends Controller
 	}
 
 	public function nuevo(){
-		$carreras 	= $this->carreraRepo->all();
-        $cursos  	= $this->cursoRepo->all();
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
 		// $materias 	= $this->materiaRepo->lists('nombre','id');
 		$docentes 	= $this->docenteRepo->allEneable()->lists('apellidos', 'id');
 		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
@@ -58,9 +67,14 @@ class GrupoController extends Controller
 	}
 
 	public function edit($id){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
 		$model 		= $this->grupoRepo->find($id);
-		$carreras 	= $this->carreraRepo->all();
-        $cursos  	= $this->cursoRepo->all();
+        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
+        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
         if(isset($model->Carrera))
 		$materias 	= $model->Carrera->Materia->lists('nombre','id');
 		$docentes 	= $this->docenteRepo->all()->lists('apellidos', 'id');

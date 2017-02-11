@@ -20,7 +20,7 @@
           </div>
 
           <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" placeholder="@lang('contrasena.cambio2')"> 
+            <input type="password" name="contrasena" class="form-control" placeholder="@lang('contrasena.cambio2')"> 
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
 

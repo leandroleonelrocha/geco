@@ -68,6 +68,7 @@ class FilialesController extends Controller
 		
         // Corroboro que el cliente exista, si existe lo activa
         $data = $request->all();
+       
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/activarCuenta/{$request->mail}/4");  
         curl_setopt($ch, CURLOPT_HEADER, false);  

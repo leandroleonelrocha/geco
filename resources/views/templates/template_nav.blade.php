@@ -49,7 +49,7 @@
                         <a href="{{ url('lang', ['es']) }}">
                           @lang('header.espanol')
                           <div class="pull-left">
-                            <img src=" {{asset('dist/img/español_128.png')}}" class="img-circle" alt="User Image">
+                            <img src="{{asset('dist/img/espanol_128.png')}}" class="img-circle" alt="User Image">
                           </div>
                         </a>
                       </li>
