@@ -30,41 +30,42 @@ class LoginController extends Controller {
         $usuario  = $request->usuario;
         $password = $request->password;
         $cuenta   = Cuenta::where('usuario',$usuario)->first();
-
-        $estado   = Hash::check($password, $cuenta->contrasena);
         
-        
-        if($estado == true)
+        if($cuenta == true)
         {
-            $data['id']          = $cuenta['id'];
-            $data['usuario']     = $cuenta['usuario'];
-            $data['password']    = $cuenta['password'];
-            $data['rol_id']      = $cuenta['rol_id'];
-            $data['entidad_id']  = $cuenta['entidad_id'];
-            $data['habilitado']  = $cuenta['habilitado'];
+            $estado   = Hash::check($password, $cuenta->contrasena);
 
-            session(['usuario' => $data]);
-            switch ($data['rol_id']) {
-             
-              case 2: // Rol de Dueño
-                return redirect()->route('dueño.inicio');
-              break;
-              case 3: // Rol de Director
-                return redirect()->route('director.inicio');
-              break;
-              case 4: // Rol de Filial
-                $filial =  $this->filialeRepo->find(session('usuario')['id']);
-                $tipo_moneda = $filial->Pais->TipoMoneda;
-                session(['moneda' => $tipo_moneda]);
-                return redirect()->route('filial.inicio');
-              break;
+            if($estado== true){
+              $data['id']          = $cuenta['id'];
+              $data['usuario']     = $cuenta['usuario'];
+              $data['password']    = $cuenta['password'];
+              $data['rol_id']      = $cuenta['rol_id'];
+              $data['entidad_id']  = $cuenta['entidad_id'];
+              $data['habilitado']  = $cuenta['habilitado'];
+
+              session(['usuario' => $data]);
+              switch ($data['rol_id']) {
+               
+                case 2: // Rol de Dueño
+                  return redirect()->route('dueño.inicio');
+                break;
+                case 3: // Rol de Director
+                  return redirect()->route('director.inicio');
+                break;
+                case 4: // Rol de Filial
+                  $filial =  $this->filialeRepo->find(session('usuario')['id']);
+                  $tipo_moneda = $filial->Pais->TipoMoneda;
+                  session(['moneda' => $tipo_moneda]);
+                  return redirect()->route('filial.inicio');
+                break;
+              }
             }
-        }
-
-      
-      else
-        return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');
-
+            else 
+               return redirect()->back()->with('msg_error', 'La combinación de Usuario y Contraseña son incorrectos.'); 
+          }
+          else 
+               return redirect()->back()->with('msg_error', 'Usuario no válido para ingresar.');
+       
 
         // $ch = curl_init();  
         // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaLogin/{$request->usuario}/{$request->password}");  
@@ -83,7 +84,7 @@ class LoginController extends Controller {
         $cuentas = array(
                      array(
                     'id'          => 1,
-                     'usuario'     => 'ferrari@dueño.com',
+                     'usuario'     => 'ferrari@administrador.com',
                      'password'    => 1234,
                     'rol_id'      => 2,
                      'entidad_id'  => 1,
@@ -192,13 +193,20 @@ class LoginController extends Controller {
         if ( $rol== 4 || $rol==3 || $rol==2){
 
           $user=$request->all();
-          
-          if ($user['passwordr'] == $user['contrasena']){
             
-            $mail   = session('usuario')['usuario'];
-            $cuenta = Cuenta::where('usuario',$mail)->first();
-            $this->cuentaRepo->edit($cuenta, $user);
+          $mail   = session('usuario')['usuario'];
+          $cuenta = Cuenta::where('usuario',$mail)->first();
+          
+          $estado   = Hash::check($user['passwordActual'],$cuenta->contrasena);
 
+          if ($estado == true) {
+
+            if ($user['passwordr'] == $user['contrasena']){
+
+              $this->cuentaRepo->edit($cuenta, $user);
+              return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
+            }
+            else
             /*
             $ch = curl_init();  
             curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarpassword/{$mail}/{$request->password}/{$request->passwordActual}");  
@@ -207,11 +215,10 @@ class LoginController extends Controller {
             $data = json_decode(curl_exec($ch),true);
             curl_close($ch);
             */
-            return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
-           
+              return redirect()->route('contrasena.nueva')->with('msg_error', 'Las contraseñas no son iguales, reingrese nuevamente las contraseñas');
           }
           else
-            return redirect()->route('contrasena.nueva')->with('msg_error', 'Las contraseñas no son iguales, reingrese nuevamente las contraseñas');
+            return redirect()->route('contrasena.nueva')->with('msg_error', 'La contraseña anterior es incorrecta.');
         }
         else
           return redirect()->back();

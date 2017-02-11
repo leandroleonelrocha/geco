@@ -40,13 +40,13 @@ class CuentaRepo extends BaseRepo
 	 public function allCuenta()
     {   
         
-        $cuentas = $this->cuentaRepo->all();
+        $cuentas = $this->model->all();
         return Response::json($cuentas,200);
     }
 
     public function getCuenta($id)
     {
-    	$cuenta = $this->cuentaRepo->find($id);
+    	$cuenta = $this->model->find($id);
         $resultado['results'] = [];
         if(is_null($cuenta)){
             return false;
@@ -59,7 +59,7 @@ class CuentaRepo extends BaseRepo
     public function getCuentaLogin($usuario, $password){
 
         //$cuenta = Cuenta::where('usuario',$usuario)->first();
-        $cuenta = $this->cuentaRepo->findUser($usuario, $password);
+        $cuenta = $this->model->findUser($usuario, $password);
         $estado = Hash::check($password, $cuenta->password);
         
         if(count($cuenta) >0)
@@ -82,15 +82,15 @@ class CuentaRepo extends BaseRepo
     }
 
     public function createCuenta($usuario,$entidad,$rol){
-        $password = $this->cuentaRepo->generarCodigo();
-        $cuenta = array('usuario' => $usuario, 'password' => $password, 'rol_id' => $rol, 'entidad_id' => $entidad);
-        $this->cuentaRepo->create($cuenta);
-        return response()->json($password, 400);
+        $contrasena = $this->generarCodigo();
+        $cuenta = array('usuario' => $usuario, 'contrasena' => $contrasena, 'rol_id' => $rol, 'entidad_id' => $entidad);
+        $this->model->create($cuenta);
+        return $contrasena;
     }
 
     public function saveCuenta()
     {
-    	$cuenta = $this->cuentaRepo->find($id);
+    	$cuenta = $this->model->find($id);
         if(is_null($cuenta))
         {
             return Response::json(['response'=>"Cuenta no encontrada!"], 400);
@@ -100,7 +100,7 @@ class CuentaRepo extends BaseRepo
   
     public function updateCuenta(Request $request, $id)
     {
-        $cuenta = $this->cuentaRepo->find($id);
+        $cuenta = $this->model->find($id);
         $datos = $request->all();    
         if(is_null($cuenta)){
             return Response::json(['response'=>"La Cuenta no pudo ser actualizada!"], 400);
@@ -111,10 +111,46 @@ class CuentaRepo extends BaseRepo
 
     public function deleteCuenta($id)
     {
-        $cuenta = $this->cuentaRepo->find($id);
+        $cuenta = $this->model->find($id);
         $cuenta->delete();
         return Response::json(['response'=>"Cuenta borrada!"], 200);
     	
     }
 
+        public function activarCuenta($mail,$rol)
+    {
+        $estado= $this->model->check($mail,$rol);
+
+        if ($estado==1){
+            $cuenta = $this->model->findUser($mail);
+            $password = $this->model->generarCodigo();
+            $cuenta->password   = $password;
+            $cuenta->save(); 
+            return Response::json($password, 200);
+        }
+        else{
+            $password=0;
+            return Response::json($password, 200);
+        } 
+       
+    }
+
+    public function actualizarCuenta($mail,$mailnuevo,$entidad,$rol)
+    {
+        $password = $this->model->generarCodigo();
+        $cuenta   = $this->model->findUserActualizar($mail,$entidad,$rol);
+
+        if ($cuenta == true) {
+            $cuenta->usuario=$mailnuevo;  
+            $estado   = Hash::check($password,$cuenta->password);
+            $cuenta->password   = $password;
+            $cuenta->save();
+            return response()->json($password, 200);
+        }
+    }
+
+    public function disable($cuenta){
+       $cuenta->activo = 0;
+       return $cuenta->save();
+     }
 }

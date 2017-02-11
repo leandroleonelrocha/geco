@@ -195,7 +195,8 @@ class DuenoController extends Controller
     }
 	
 	public function index(){
-		return view('rol_dueno.estadisticas.index')->with($this->data);
+		 $directores=$this->directorRepo->allEneable();
+        return view('rol_dueno.directores.lista', compact('directores'));   
 	}
 
 	public function estadisticas()

@@ -5,6 +5,7 @@ use Controllers;
 use App\Entities\NombreDirector;
 use App\Entities\FilialTelefono;
 use App\Entities\Pais;
+use App\Entities\Cuenta;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -21,6 +22,8 @@ use App\Http\Repositories\CadenaRepo;
 use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\DocenteRepo;
+use App\Http\Repositories\CuentaRepo;
+
 use Mail;
 
 class FilialesController extends Controller
@@ -30,8 +33,9 @@ class FilialesController extends Controller
     protected $grupoRepo;
     protected $claseRepo;
     protected $docenteRepo;
+    protected $cuentaRepo;
 
-	public function __construct(GrupoRepo $grupoRepo,ClaseRepo $claseRepo,DocenteRepo $docenteRepo, FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo,PaisRepo $paisRepo){
+	public function __construct(CuentaRepo $cuentaRepo, GrupoRepo $grupoRepo,ClaseRepo $claseRepo,DocenteRepo $docenteRepo, FilialRepo $filialesRepo, DirectorRepo $directorRepo, FilialTelefonoRepo $filialTelefonoRepo, CadenaRepo $cadenaRepo,PaisRepo $paisRepo){
 
 		$this->directorRepo       = $directorRepo;
 		$this->filialesRepo       = $filialesRepo;
@@ -41,6 +45,7 @@ class FilialesController extends Controller
         $this->claseRepo          = $claseRepo;
         $this->docenteRepo        = $docenteRepo; 
         $this->paisRepo           = $paisRepo;   
+        $this->cuentaRepo         = $cuentaRepo;
 	}
 
     public function index(){
@@ -68,7 +73,7 @@ class FilialesController extends Controller
 		
         // Corroboro que el cliente exista, si existe lo activa
         $data = $request->all();
-       
+
         $ch = curl_init();  
         curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/activarCuenta/{$request->mail}/4");  
         curl_setopt($ch, CURLOPT_HEADER, false);  
@@ -105,19 +110,16 @@ class FilialesController extends Controller
                     $telefono['filial_id'] = $filial->id;
                     $telefono['telefono'] = $key;
                     $this->filialTelefonoRepo->create($telefono);
-                }
-        	  	$ch = curl_init();  
-                curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$filial->id}/4");  
-                curl_setopt($ch, CURLOPT_HEADER, false);  
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-                $pass = json_decode(curl_exec($ch),true);
-                curl_close($ch);
+                } 
+
+                $cuenta = $this->cuentaRepo->createCuenta($request->mail,$filial->id, 4);
+               
 
                 // Datos del mail
                 $user = $request->mail;
                 $datosMail = array(	'filial' 	=> $request->nombre, 
                 					'user' 		=> $user, 
-                					'password' 	=> $pass);
+                					'password' 	=> $cuenta);
                 // Envío del mail nuevo
                 Mail::send('mailing.cuenta',$datosMail,function($msj) use($user){
                 	$msj->subject('GeCo -- Nueva Cuenta');
@@ -130,17 +132,21 @@ class FilialesController extends Controller
 
     public function borrar($id){
 
-        $cuenta=$this->filialesRepo->find($id);
-        $mail=$cuenta['mail'];
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/borrarCuenta/{$mail}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
+        $cuentaFilial=$this->filialesRepo->find($id);
+        $mail=$cuentaFilial['mail'];
 
-        if ($data){
-            if($this->filialesRepo->disable($cuenta))
+        $cuenta   = Cuenta::where('usuario',$mail)->first();
+        $this->cuentaRepo->disable($cuenta);
+        // $ch = curl_init();  
+        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/borrarCuenta/{$mail}");  
+        // curl_setopt($ch, CURLOPT_HEADER, false);  
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        // $data = json_decode(curl_exec($ch),true);
+        // curl_close($ch);
+        
+
+        if ($cuenta){
+            if($this->filialesRepo->disable($cuentaFilial))
 
                 return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
             else
