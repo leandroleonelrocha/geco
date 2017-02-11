@@ -59,12 +59,7 @@ class DuenoController extends Controller
         
         // Corroboro que el cliente exista, si exite lo activa
         $data = $request->all();
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/activarCuenta/{$request->mail}/3");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $pass = json_decode(curl_exec($ch),true);
-        curl_close($ch);
+        $pass = $this->cuentaRepo->activarCuenta($request->mail, 3);
 
         if ($pass){
             if ( $director = $this->directorRepo->check($data['mail']))
