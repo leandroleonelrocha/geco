@@ -7,6 +7,7 @@ return [
     'persona'=>'Pessoa',
     'terminado'=>'Concluido',
     'cancelado'=>'Cancelado',
+    'cursa'    =>'Percorrendo',
     'datosmatricula'=>'Dados de Registro',
     'datospersonales'=>'Dados Pessoal',
     'matricula'=>'Inscrição',

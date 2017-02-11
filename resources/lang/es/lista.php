@@ -4,7 +4,7 @@ return [
  
 	'editar'=>'Editar',
 	'eliminar'=>'Eiminar',
-	'actualizar'=>'Actualizar',
+	'abonar'=>'Abonar',
 	'horas'=>'horas clase',
 	'vistadetallada'=>'Vista detallada',
 	'pases'=>'Pases',
