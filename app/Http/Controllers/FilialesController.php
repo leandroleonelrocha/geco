@@ -170,12 +170,9 @@ class FilialesController extends Controller
         $mailn=$data['mail'];
         $entidad=$data['id'];
         if  ($mail!==$mailn) {
-            $ch = curl_init();  
-            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/4");  
-            curl_setopt($ch, CURLOPT_HEADER, false);  
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-            $pass = json_decode(curl_exec($ch),true);
-            curl_close($ch);
+
+            $pass = $this->cuentaRepo->actualizarCuenta($mail, $mailn,$entidad,4);
+
             if ($pass !==null){
                 // Datos del mail
                 $user =$mailn;

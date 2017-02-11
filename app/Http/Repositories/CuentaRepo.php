@@ -21,11 +21,8 @@ class CuentaRepo extends BaseRepo
     }
 
     public function findUser($user){
-    	
-    return $this->model->where('usuario',$user)->first();
-		
-
-    }
+        return $this->model->where('usuario',$user)->first();
+	}
 
 	function generarCodigo(){
 		$patron = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
@@ -129,12 +126,13 @@ class CuentaRepo extends BaseRepo
 
     public function activarCuenta($mail,$rol)
     {
-        $estado= $this->model->check($mail,$rol);
 
-        if ($estado==1){
-            $cuenta = $this->model->findUser($mail);
-            $password = $this->model->generarCodigo();
-            $cuenta->password   = $password;
+        $cuenta = Cuenta::where('usuario',$mail)->where('rol_id',$rol)->first();
+     
+        if (count($cuenta) > 0){
+            $password = $this->generarCodigo();
+            $cuenta->activo     = 1;
+            $cuenta->contrasena   = $password;
             $cuenta->save(); 
             return $password;
         }
@@ -148,15 +146,15 @@ class CuentaRepo extends BaseRepo
 
     public function actualizarCuenta($mail,$mailnuevo,$entidad,$rol)
     {
-        $password = $this->model->generarCodigo();
-        $cuenta   = $this->model->findUserActualizar($mail,$entidad,$rol);
+        $password = $this->generarCodigo();
+        $cuenta   = Cuenta::where('usuario',$mail)->where('rol_id',$rol)->first();
 
         if ($cuenta == true) {
             $cuenta->usuario=$mailnuevo;  
             $estado   = Hash::check($password,$cuenta->password);
-            $cuenta->password   = $password;
+            $cuenta->contrasena   = $password;
             $cuenta->save();
-            return response()->json($password, 200);
+            $password;
         }
     }
 

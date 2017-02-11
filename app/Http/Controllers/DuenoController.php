@@ -64,7 +64,7 @@ class DuenoController extends Controller
         $data = $request->all();
         
         $pass = $this->cuentaRepo->activarCuenta($request->mail, 3);
-        dd($pass);
+        
         if ($pass){
             if ( $director = $this->directorRepo->check($data['mail']))
             {// Datos del mail        
