@@ -19,20 +19,20 @@
 								{!! Form::hidden('matricula', $matricula->id, array('class'=>'form-control')) !!}
 								{!! Form::select('asesor',$asesores->toArray(),$matricula->Asesor->id,array('class' => 'form-control select2')) !!}
 							</div>
-			              	<div class="col-md-6 form-group">
-								<label>@lang('matricula.carrerasycursos')</label>
-								<select name="carreras_cursos" id="cursos_carreras" class="form-control" data-url="{{route('filial.matriculas_grupos')}}">
-									<option value="">Seleccione una Carrera o Curso</option>
-									<optgroup label=@lang('matricula.carreras')>
-										@foreach($carreras as $carrera)
-											<option value="carrera;{{$carrera->id}}" <?php if($matricula->carrera_id == $carrera->id) echo 'selected' ?>>{{$carrera->nombre}}</option>
-										@endforeach
-									</optgroup>
-									<optgroup label=@lang('matricula.cursos')>
-										@foreach($cursos as $curso)
-											<option value="curso;{{$curso->id}}" <?php if($matricula->curso_id == $curso->id) echo 'selected' ?>>{{$curso->nombre}}</option>
-										@endforeach
-									</optgroup>
+							<div class="col-md-10 form-group">
+								{!! Form::hidden('matricula', $matricula->id, array('class'=>'form-control')) !!}
+								<label>@lang('matricula.grupos')</label>
+								<small>Ctrl + click @lang('matricula.grupost').</small>
+								<select name="grupo[]" class='form-control' multiple>
+									<?php foreach ($grupos as $grupo) { ?>
+										<option value="{{$grupo}}"
+										<?php foreach ($matricula->Grupo as $mg){
+											if( $mg->id == $grupo )
+												echo 'selected';
+										}?> >
+											{{$grupo}}
+										</option>
+									<?php } ?>
 								</select>
 							</div>
 							<div class="nav-tabs-custom col-xs-12">
@@ -49,6 +49,11 @@
 									</div><!-- /.tab-pane -->
 								</div><!-- tab-content -->
 							</div><!-- nav-tabs-custom -->
+
+							<div class="col-md-2 form-group">
+								<label>@lang('matricula.cancelar')</label>
+								<div>{!! Form::checkbox('cancelado', '1', $matricula->cancelado) !!} @lang('matricula.si')</div>
+							</div>
 							
 							<div class="box-footer col-xs-12">
 					     		<button type="submit" class="btn btn-success">@lang('matricula.modificar')</button>

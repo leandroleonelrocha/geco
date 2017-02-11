@@ -76,7 +76,7 @@ class PreinformeController extends Controller {
     public function nuevaPersona(){
         
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $paises= $this->paisRepo->all()->lists('pais','id');
+        $paises     = $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->all()->lists('full_name','id');
         $carreras   = $this->carreraRepo->all()->lists('nombre','id');
         $cursos     = $this->cursoRepo->all()->lists('nombre','id');
@@ -136,6 +136,7 @@ class PreinformeController extends Controller {
         $persona['nombres']                 =   $request->nombres;
         $persona['apellidos']               =   $request->apellidos;
         $persona['genero']                  =   $request->genero;
+        $persona['pais_id']                 =   $request->pais_id;
         $persona['fecha_nacimiento']        =   $request->fecha_nacimiento;
         $persona['domicilio']               =   $request->domicilio;
         $persona['localidad']               =   $request->localidad;
