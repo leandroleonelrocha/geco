@@ -14,16 +14,19 @@ use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\MateriaRepo;
+use App\Http\Repositories\PaisRepo;
 
 
 class MateriaController extends Controller
 {
 	protected $materiaRepo;
 
-	public function __construct(MateriaRepo $materiaRepo, CarreraRepo $carreraRepo)
+	public function __construct(MateriaRepo $materiaRepo, CarreraRepo $carreraRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
 	{
 		$this->materiaRepo = $materiaRepo;
 		$this->carreraRepo = $carreraRepo;
+		$this->filialRepo = $filialRepo;
+		$this->paisRepo = $paisRepo;
 	}
 
 	public function lista(){
@@ -32,7 +35,12 @@ class MateriaController extends Controller
 	}
 
 	public function nuevo(){
-		$carreras = $this->carreraRepo->lists('nombre','id');
+
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
+		
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+		$carreras = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
 		return view('rol_filial.materias.nuevo', compact('carreras'));	
 	}
 
@@ -42,7 +50,13 @@ class MateriaController extends Controller
 	}
 
  	public function editar($id){
-		$carreras = $this->carreraRepo->lists('nombre','id');
+
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
+		
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
+		$carreras = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
 		$materia = $this->materiaRepo->find($id);
 		return view('rol_filial.materias.editar',compact('materia','carreras'));	
     }

@@ -31,7 +31,6 @@ class CarreraController extends Controller
 
 		$filial=$this->filialRepo->obtenerFilialPais();
 		foreach ($filial as $f) $pais_id=$f->pais_id;
-		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
 		
 		$carreras=$this->carreraRepo->allCarreras($pais->lenguaje);
