@@ -20,7 +20,7 @@ class CuentaRepo extends BaseRepo
         return new Cuenta();
     }
 
-    public function findUser($user,$password){
+    public function findUser($user){
     	
     return $this->model->where('usuario',$user)->first();
 		
@@ -117,7 +117,17 @@ class CuentaRepo extends BaseRepo
     	
     }
 
-        public function activarCuenta($mail,$rol)
+    public function borrarCuenta($mail)
+    {
+        $cuenta = $this->findUser($mail);
+        $cuenta->habilitado = 0;
+        $cuenta->save();    
+        return $cuenta;   
+
+    }
+
+
+    public function activarCuenta($mail,$rol)
     {
         $estado= $this->model->check($mail,$rol);
 
@@ -126,11 +136,12 @@ class CuentaRepo extends BaseRepo
             $password = $this->model->generarCodigo();
             $cuenta->password   = $password;
             $cuenta->save(); 
-            return Response::json($password, 200);
+            return $password;
         }
         else{
+
             $password=0;
-            return Response::json($password, 200);
+            return $password;
         } 
        
     }

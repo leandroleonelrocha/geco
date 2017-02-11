@@ -10,6 +10,7 @@ use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\AsesorRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
+use App\Http\Repositories\CuentaRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Requests\CrearNuevoDirectorRequest;
 use App\Http\Requests\EditarDirectorRequest;
@@ -28,8 +29,9 @@ class DuenoController extends Controller
 	protected $asesorRepo;
 	protected $directorRepo;
     protected $data;
+    protected $cuentaRepo;
 
-	public function __construct(TipoDocumento $tipoDocumentoRepo, DirectorTelefonoRepo $directorTelefonoRepo, DirectorRepo $directorRepo,ExamenRepo $examenRepo, PersonaRepo $personaRepo, DuenoRepo $duenoRepo, FilialRepo $filialRepo, AsesorRepo $asesorRepo ){
+	public function __construct(CuentaRepo $cuentaRepo, TipoDocumento $tipoDocumentoRepo, DirectorTelefonoRepo $directorTelefonoRepo, DirectorRepo $directorRepo,ExamenRepo $examenRepo, PersonaRepo $personaRepo, DuenoRepo $duenoRepo, FilialRepo $filialRepo, AsesorRepo $asesorRepo ){
 		$this->examenRepo  			 = $examenRepo;
 		$this->personaRepo 			 = $personaRepo;
 		$this->duenoRepo  			 = $duenoRepo;
@@ -38,6 +40,7 @@ class DuenoController extends Controller
 		$this->directorRepo          = $directorRepo; 
         $this->tipoDocumentoRepo     = $tipoDocumentoRepo;
         $this->directorTelefonoRepo  = $directorTelefonoRepo;
+        $this->cuentaRepo            = $cuentaRepo;
         $this->data['total_persona'] = $this->personaRepo->all()->count();
 		$this->data['total_filial']  = $this->filialRepo->all()->count();
 		$this->data['total_asesor']  = $this->asesorRepo->all()->count();	
@@ -59,13 +62,9 @@ class DuenoController extends Controller
         
         // Corroboro que el cliente exista, si exite lo activa
         $data = $request->all();
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/activarCuenta/{$request->mail}/3");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $pass = json_decode(curl_exec($ch),true);
-        curl_close($ch);
-
+        
+        $pass = $this->cuentaRepo->activarCuenta($request->mail, 3);
+        dd($pass);
         if ($pass){
             if ( $director = $this->directorRepo->check($data['mail']))
             {// Datos del mail        
@@ -96,12 +95,8 @@ class DuenoController extends Controller
                         $telefono['telefono'] = $key;
                         $this->directorTelefonoRepo->create($telefono);
                     }
-                    $ch = curl_init();  
-                    curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$director->id}/3");  
-                    curl_setopt($ch, CURLOPT_HEADER, false);  
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-                    $pass = json_decode(curl_exec($ch),true);
-                    curl_close($ch);
+                   
+                    $cuenta = $this->cuentaRepo->createCuenta($request->mail,$director->id, 3);
 
                     // Datos del mail
                     $user = $request->mail;
@@ -123,15 +118,9 @@ class DuenoController extends Controller
 
     public function borrar($id){
 
-        $cuenta=$this->directorRepo->find($id);
-        $mail=$cuenta->mail;
-       
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/borrarCuenta/{$mail}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
+        $cuenta = $this->directorRepo->find($id);
+        $mail   = $cuenta->mail;
+        $data   = $this->cuentaRepo->disable($cuenta);
 
         if ($data){
             if($this->directorRepo->disable($this->directorRepo->find($id)))
