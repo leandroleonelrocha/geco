@@ -96,12 +96,8 @@ class DuenoController extends Controller
                         $telefono['telefono'] = $key;
                         $this->directorTelefonoRepo->create($telefono);
                     }
-                    $ch = curl_init();  
-                    curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/cuentaCreate/{$request->mail}/{$director->id}/3");  
-                    curl_setopt($ch, CURLOPT_HEADER, false);  
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-                    $pass = json_decode(curl_exec($ch),true);
-                    curl_close($ch);
+                   
+                    $cuenta = $this->cuentaRepo->createCuenta($request->mail,$director->id, 3);
 
                     // Datos del mail
                     $user = $request->mail;
