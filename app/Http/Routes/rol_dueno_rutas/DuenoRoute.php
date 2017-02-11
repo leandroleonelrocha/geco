@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'dueño'], function(){
+Route::group(['prefix' => 'administrador'], function(){
 
 	//Inicio Rol Dueño
 	Route::get('inicio', [

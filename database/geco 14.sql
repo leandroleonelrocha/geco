@@ -524,6 +524,7 @@ usuario varchar(255) DEFAULT NULL,
 contrasena varchar(255) DEFAULT NULL,
 habilitado tinyint(1) DEFAULT NULL,
 rol_id int(11) NOT NULL,
+entidad_id int(11) NOT NULL,
 created_at			timestamp not null default '0000-00-00 00:00:00',
 updated_at			timestamp not null default '0000-00-00 00:00:00',
 primary key			(id),
@@ -537,13 +538,22 @@ foreign key			(rol_id) 	references rol 	(id)
 --
 -- Cadenas
 --
+insert into rol (`id`, `rol`,  `created_at`, `updated_at`)
+values  ('2', 'dueno', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('3', 'director', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('4', 'filial', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+insert into cuenta (`id`, `usuario`,`contrasena`,  `habilitado`, `rol_id`, `entidad_id`, `created_at`, `updated_at`)
+values  ('1', 'mferrari@igionline.com.ar', '$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i','1','2','1','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('3', 'filial@filial.com', '$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i','1','4','3','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('4', 'flores@filial.com','$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i','1','4','4','2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 insert into cadena (`nombre`, `mail`, `telefono`, `created_at`, `updated_at`)
 values  ('IGI', 'test@igi.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('IAC', 'test@iac.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 
-		--
+--
 -- Tipo Moneda
 --
 insert into tipo_moneda (`nombre`, `simbolo`, `abreviacion`, `created_at`, `updated_at`)

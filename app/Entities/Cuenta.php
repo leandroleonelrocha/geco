@@ -10,9 +10,9 @@ namespace App\Entities;
 
 
 class Cuenta extends Entity{
-
+    
     protected $table = 'cuenta';
-    protected $fillable = ['usuario','password','rol_id', 'entidad_id', 'habilitado'];
+    protected $fillable = ['usuario','contrasena','rol_id', 'entidad_id', 'habilitado'];
     
    
     //relaciones
@@ -22,9 +22,9 @@ class Cuenta extends Entity{
     }
 
    
-    public function setPasswordAttribute($value)
+    public function setContrasenaAttribute($value)
     {
-        $this->attributes['password'] = bcrypt($value);
+        $this->attributes['contrasena'] = bcrypt($value);
     }
 
  

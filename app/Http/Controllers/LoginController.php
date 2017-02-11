@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Entities\User;
+use App\Entities\Cuenta;
+
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\CuentaRepo;
 use Auth;
@@ -27,9 +29,12 @@ class LoginController extends Controller {
         
         $usuario  = $request->usuario;
         $password = $request->password;
-        $cuenta   = $this->cuentaRepo->findUser($usuario, $password);
+        $cuenta   = Cuenta::where('usuario',$usuario)->first();
+
+        $estado   = Hash::check($password, $cuenta->contrasena);
         
-        if(count($cuenta) > 0)
+        
+        if($estado == true)
         {
             $data['id']          = $cuenta['id'];
             $data['usuario']     = $cuenta['usuario'];
@@ -37,26 +42,26 @@ class LoginController extends Controller {
             $data['rol_id']      = $cuenta['rol_id'];
             $data['entidad_id']  = $cuenta['entidad_id'];
             $data['habilitado']  = $cuenta['habilitado'];
+
+            session(['usuario' => $data]);
+            switch ($data['rol_id']) {
+             
+              case 2: // Rol de Dueño
+                return redirect()->route('dueño.inicio');
+              break;
+              case 3: // Rol de Director
+                return redirect()->route('director.inicio');
+              break;
+              case 4: // Rol de Filial
+                $filial =  $this->filialeRepo->find(session('usuario')['id']);
+                $tipo_moneda = $filial->Pais->TipoMoneda;
+                session(['moneda' => $tipo_moneda]);
+                return redirect()->route('filial.inicio');
+              break;
+            }
         }
 
-        if ($data){
-        session(['usuario' => $data]);
-        switch ($data['rol_id']) {
-         
-          case 2: // Rol de Dueño
-            return redirect()->route('dueño.inicio');
-          break;
-          case 3: // Rol de Director
-            return redirect()->route('director.inicio');
-          break;
-          case 4: // Rol de Filial
-            $filial =  $this->filialeRepo->find(session('usuario')['id']);
-            $tipo_moneda = $filial->Pais->TipoMoneda;
-            session(['moneda' => $tipo_moneda]);
-            return redirect()->route('filial.inicio');
-          break;
-        }
-      }
+      
       else
         return redirect()->back()->with('msg_error', 'La combinación de Usuario Y Contraseña son incorrectos.');
 
@@ -187,23 +192,23 @@ class LoginController extends Controller {
         if ( $rol== 4 || $rol==3 || $rol==2){
 
           $user=$request->all();
-      
-          if ($user['passwordr']==$user['password']){
+          
+          if ($user['passwordr'] == $user['contrasena']){
+            
+            $mail   = session('usuario')['usuario'];
+            $cuenta = Cuenta::where('usuario',$mail)->first();
+            $this->cuentaRepo->edit($cuenta, $user);
 
-            $mail=session('usuario')['usuario'];
-
+            /*
             $ch = curl_init();  
             curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarpassword/{$mail}/{$request->password}/{$request->passwordActual}");  
             curl_setopt($ch, CURLOPT_HEADER, false);  
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
             $data = json_decode(curl_exec($ch),true);
             curl_close($ch);
-
-            if ($data) 
-              return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
-            else
-
-              return redirect()->route('contrasena.nueva')->with('msg_error', 'La combinación de E-Mail y Contraseña son incorrectos.');
+            */
+            return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
+           
           }
           else
             return redirect()->route('contrasena.nueva')->with('msg_error', 'Las contraseñas no son iguales, reingrese nuevamente las contraseñas');
@@ -212,6 +217,7 @@ class LoginController extends Controller {
           return redirect()->back();
       }
      else
+        session()->flush(); // Elimina todos los datos de la session
         return redirect('login');  
     }
 }
