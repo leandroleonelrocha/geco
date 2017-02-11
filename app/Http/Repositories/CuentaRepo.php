@@ -137,15 +137,15 @@ class CuentaRepo extends BaseRepo
 
     public function actualizarCuenta($mail,$mailnuevo,$entidad,$rol)
     {
-        $password = $this->model->generarCodigo();
-        $cuenta   = $this->model->findUserActualizar($mail,$entidad,$rol);
+        $password = $this->generarCodigo();
+        $cuenta   = $this->findUserActualizar($mail,$entidad,$rol);
 
         if ($cuenta == true) {
             $cuenta->usuario=$mailnuevo;  
-            $estado   = Hash::check($password,$cuenta->password);
-            $cuenta->password   = $password;
+            $estado   = Hash::check($password,$cuenta->contrasena);
+            $cuenta->contrasena  = $password;
             $cuenta->save();
-            return response()->json($password, 200);
+            return $password;
         }
     }
 
@@ -153,4 +153,8 @@ class CuentaRepo extends BaseRepo
        $cuenta->activo = 0;
        return $cuenta->save();
      }
+
+    public function findUserActualizar($user,$entidad,$rol){
+        return $this->model->where('usuario',$user)->where('activo',1)->where('entidad_id',$entidad)->where('rol_id',$rol)->first();
+    }
 }
