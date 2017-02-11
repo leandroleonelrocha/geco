@@ -22,7 +22,7 @@ class PersonaRepo extends BaseRepo {
     }
 
     public function getPersonasFilial(){
-      return Persona::where('filial_id', $this->filial)->get();
+      return Persona::where('filial_id', $this->filial)->orderBy('id','DESC')->where('activo', 1)->paginate(10);
     }
 
     public function countTotal($inicio, $fin){

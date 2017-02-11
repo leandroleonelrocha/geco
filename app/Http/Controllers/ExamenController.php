@@ -15,6 +15,7 @@ use App\Http\Repositories\MateriaRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\PaisRepo;
 use App\Http\Requests\CrearNuevoExamenRequest;
+use DB;
 class ExamenController extends Controller
 {
 	protected $examenRepo;
@@ -35,11 +36,21 @@ class ExamenController extends Controller
 		$this->materiaRepo = $materiaRepo;
         $this->paisRepo             = $paisRepo;
         $this->filialRepo           = $filialRepo;
+
 	}
 	
 	public function index(){
+		/*
+		$examenes = DB::table('examen')
+				   ->distinct()
+                   ->join('matricula', 'matricula.id', '=', 'examen.matricula_id')
+                   ->where('matricula.filial_id',session('usuario')['entidad_id'] )
+                   ->where('nro_acta', '!=', 99999)
+                   ->get();
+		*/
+        $filial   = session('usuario')['entidad_id'];
 		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->where('nro_acta', '!=', 99999)->get();
-		return view('rol_filial.examenes.lista', compact('examenes'));
+		return view('rol_filial.examenes.lista', compact('examenes','filial'));
 	}
 	public function nuevo(){
 		//matriculaspermisos
