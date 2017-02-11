@@ -18,6 +18,7 @@ use App\Entities\TipoDocumento;
 use App\Entities\Filial;
 use App\Entities\DirectorTelefono;
 use App\Entities\Persona;
+use App\Entities\Cuenta;
 use Mail;
 
 class DuenoController extends Controller
@@ -118,11 +119,13 @@ class DuenoController extends Controller
 
     public function borrar($id){
 
-        $cuenta = $this->directorRepo->find($id);
-        $mail   = $cuenta->mail;
-        $data   = $this->cuentaRepo->disable($cuenta);
+        $cuentaDirector=$this->directorRepo->find($id);
+        $mail=$cuentaDirector['mail'];
 
-        if ($data){
+        $cuenta   = Cuenta::where('usuario',$mail)->first();
+        $this->cuentaRepo->disable($cuenta);
+
+        if ($cuenta){
             if($this->directorRepo->disable($this->directorRepo->find($id)))
                 return redirect()->back()->with('msg_ok', 'Director eliminado correctamente.');
             else
@@ -141,23 +144,24 @@ class DuenoController extends Controller
     public function editar_post(EditarDirectorRequest $request){
 
         $data = $request->all();
-        $pass=NULL;
+        $cuenta=NULL;
         $mail=$data['maila'];
         $mailn=$data['mail'];
         $entidad=$data['id'];
         if  ($mail!==$mailn) {
-            $ch = curl_init();  
-            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/3");  
-            curl_setopt($ch, CURLOPT_HEADER, false);  
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-            $pass = json_decode(curl_exec($ch),true);
-            curl_close($ch);
-            if ($pass !==null){
+            // $ch = curl_init();  
+            // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/3");  
+            // curl_setopt($ch, CURLOPT_HEADER, false);  
+            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+            // $pass = json_decode(curl_exec($ch),true);
+            // curl_close($ch);
+            $cuenta = $this->cuentaRepo->actualizarCuenta($mail,$mailn,$entidad, 3);
+            if ($cuenta !==null){
                 // Datos del mail
                 $user =$mailn;
                 $datosMail = array( 'filial'    => $request->nombre, 
                                     'user'      => $user, 
-                                    'password'  => $pass);
+                                    'password'  => $cuenta);
                 // Envío del mail nuevo
                 Mail::send('mailing.actualizacion_cuenta',$datosMail,function($msj) use($user){
                     $msj->subject('GeCo -- Actualización de Cuenta');
@@ -165,7 +169,7 @@ class DuenoController extends Controller
                 });
             } 
         }
-        if ($pass !==null || $mail==$mailn){
+        if ($cuenta !==null || $mail==$mailn){
             $model = $this->directorRepo->find($data['id']);
             if($this->directorRepo->edit($model,$data)){
               

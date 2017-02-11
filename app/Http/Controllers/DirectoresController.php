@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Entities\TipoDocumento;
 use App\Entities\Filial;
 use App\Entities\DirectorTelefono;
+use App\Entities\Cuenta;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -15,18 +16,21 @@ use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorTelefonoRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
+use App\Http\Repositories\CuentaRepo;
 use Mail;
 
 class DirectoresController extends Controller
 {
     protected $directorRepo;
+    protected $cuentaRepo;
 
-    public function __construct( DirectorRepo $directorRepo,TipoDocumento $tipoDocumentoRepo, DirectorTelefonoRepo $directorTelefonoRepo,FilialRepo $filialRepo){
+    public function __construct(CuentaRepo $cuentaRepo, DirectorRepo $directorRepo,TipoDocumento $tipoDocumentoRepo, DirectorTelefonoRepo $directorTelefonoRepo,FilialRepo $filialRepo){
         
         $this->directorRepo = $directorRepo;
         $this->tipoDocumentoRepo = $tipoDocumentoRepo;
         $this->directorTelefonoRepo = $directorTelefonoRepo;
         $this->filialRepo = $filialRepo;
+        $this->cuentaRepo         = $cuentaRepo;
         $this->data['total_filiales'] = count($this->directorRepo->filialDirectores());
         $this->data['total_personas'] = $this->directorRepo->countTotalPersonas();
         $this->data['total_asesores'] = $this->directorRepo->countTotalAsesores();
@@ -51,23 +55,19 @@ class DirectoresController extends Controller
     public function editarPerfil_post(Request $request){
 
         $data = $request->all();
-        $pass=NULL;
+        $cuenta=NULL;
         $mail=$data['maila'];
         $mailn=$data['mail'];
         $entidad=$data['id'];
         if  ($mail!==$mailn) {
-            $ch = curl_init();  
-            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/3");  
-            curl_setopt($ch, CURLOPT_HEADER, false);  
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-            $pass = json_decode(curl_exec($ch),true);
-            curl_close($ch);
-            if ($pass !==null){
+            
+            $cuenta = $this->cuentaRepo->actualizarCuenta($mail,$mailn,$entidad, 3);
+            if ($cuenta !==null){
                 // Datos del mail
                 $user =$mailn;
                 $datosMail = array( 'filial'    => $request->nombre, 
                                     'user'      => $user, 
-                                    'password'  => $pass);
+                                    'password'  => $cuenta);
                 // Envío del mail nuevo
                 Mail::send('mailing.actualizacion_cuenta',$datosMail,function($msj) use($user){
                     $msj->subject('GeCo -- Actualización de Cuenta');
@@ -75,7 +75,7 @@ class DirectoresController extends Controller
                 });
             } 
         }
-        if ($pass !==null || $mail==$mailn){
+        if ($cuenta !==null || $mail==$mailn){
             $model = $this->directorRepo->find($data['id']);
             if($this->directorRepo->edit($model,$data)){
                 $model->DirectorTelefono()->delete();
