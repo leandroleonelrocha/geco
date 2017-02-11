@@ -72,13 +72,7 @@ class FilialesController extends Controller
 		
         // Corroboro que el cliente exista, si existe lo activa
         $data = $request->all();
-
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/activarCuenta/{$request->mail}/4");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $pass = json_decode(curl_exec($ch),true);
-        curl_close($ch);
+        $pass = $this->cuentaRepo->activarCuenta($request->mail, 4);
 
         if ($pass){
             if ( $this->filialesRepo->check($data['mail'])){
@@ -116,6 +110,7 @@ class FilialesController extends Controller
 
                 // Datos del mail
                 $user = $request->mail;
+               
                 $datosMail = array(	'filial' 	=> $request->nombre, 
                 					'user' 		=> $user, 
                 					'password' 	=> $cuenta);
@@ -131,15 +126,10 @@ class FilialesController extends Controller
 
     public function borrar($id){
 
-        $cuenta=$this->filialesRepo->find($id);
-        $mail=$cuenta['mail'];
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/borrarCuenta/{$mail}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
-
+        $cuenta = $this->filialesRepo->find($id);
+        $mail   = $cuenta['mail'];
+        $data   = $this->cuentaRepo->borrarCuenta($mail);
+       
         if ($data){
             if($this->filialesRepo->disable($cuenta))
 
