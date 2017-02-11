@@ -208,11 +208,16 @@ class MatriculaController extends Controller {
 
     public function editar($id){
 
-        $filial=$this->filialRepo->obtenerFilialPais();
-        foreach ($filial as $f) $pais_id=$f->pais_id;
-        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
-        
-        $matricula          = $this->matriculaRepo->find($id);
+        $filial     = $this->filialRepo->obtenerFilialPais();
+        $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
+        foreach ($filial as $f) $pais_id = $f->pais_id;
+        $pais       = $this->paisRepo->obtenerLenguaje($pais_id);
+        $matricula  = $this->matriculaRepo->find($id);
+
+        if (isset($matricula->curso_id))
+            $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
+        else
+            $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
         $planPagos          = $this->pagoRepo->allMatriculaPlan($id);
         $pagosIndividuales  = $this->pagoRepo->allMatriculaIndividual($id);
         return view('rol_filial.matriculas.editar',compact('matricula','planPagos','pagosIndividuales','asesores','carreras','cursos','grupos'));
@@ -250,15 +255,15 @@ class MatriculaController extends Controller {
     }
 
     // Realización de los pagos de la Matrícula
-    // public function actualizar($id){
-    //     $matricula  = $this->matriculaRepo->find($id);
-    //     if (isset($matricula->curso_id))
-    //         $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
-    //     else
-    //         $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
-    //     // $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-    //     return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
-    // }
+    public function actualizar($id){
+        $matricula  = $this->matriculaRepo->find($id);
+        // if (isset($matricula->curso_id))
+        //     $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
+        // else
+        //     $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
+        // $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+        return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
+    }
 
     // public function actualizar_post(Request $request){
     //     $data = $request->all();
@@ -277,8 +282,10 @@ class MatriculaController extends Controller {
 
     // Vista Detallada
     public function vista($id){
-        $matricula  = $this->matriculaRepo->find($id);
-        $pagos  = $this->pagoRepo->allMatricula($id);
+        $matricula           = $this->matriculaRepo->find($id);
+        $pagos               = $this->pagoRepo->allMatricula($id);
+        $planPagosV          = $this->pagoRepo->allMatriculaPlan($id);
+        $pagosIndividualesV  = $this->pagoRepo->allMatriculaIndividual($id);
         // Se debe ejecutar solo 1 vez
         foreach ($pagos as $pago) {
             // Obtener fecha del primer día del mes
@@ -308,7 +315,7 @@ class MatriculaController extends Controller {
                 $pago->save();
             }
         }
-        return view('rol_filial.matriculas.vista',compact('matricula','pagos'));
+        return view('rol_filial.matriculas.vista',compact('matricula','planPagosV','pagosIndividualesV'));
     }
 
     //Pase

@@ -9,3 +9,25 @@
 .btn-pagos{
 	width: 100%;
 }
+
+
+/* ----------------------------------- Datos Matrículas ----------------------------------- */
+.modal-header{
+	background-color: #008d4c !important; /* 1E501E */
+	color: #fff;
+}
+
+.modal-body{
+	height: 150px;
+	background-color: #00a65a !important; /* 1E961E */
+	color: #fff;
+}
+
+.modal-body span{
+	font-size: 17px;
+	font-weight: bold;
+}
+
+.modal-lg {
+    width: 100%;
+}

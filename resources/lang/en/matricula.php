@@ -8,6 +8,7 @@ return [
     'persona'=>'Person',
     'terminado'=>'Finished',
     'cancelado'=>'Canceled',
+    'cursa'    =>'Courses',
     'datosmatricula'=>'Enrollments data',
     'datospersonales'=>'Person data',
     'matricula'=>'Enrollment',
