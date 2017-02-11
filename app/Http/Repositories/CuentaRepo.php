@@ -148,4 +148,9 @@ class CuentaRepo extends BaseRepo
             return response()->json($password, 200);
         }
     }
+
+    public function disable($cuenta){
+       $cuenta->activo = 0;
+       return $cuenta->save();
+     }
 }

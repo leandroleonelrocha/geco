@@ -5,6 +5,7 @@ use Controllers;
 use App\Entities\NombreDirector;
 use App\Entities\FilialTelefono;
 use App\Entities\Pais;
+use App\Entities\Cuenta;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -131,17 +132,21 @@ class FilialesController extends Controller
 
     public function borrar($id){
 
-        $cuenta=$this->filialesRepo->find($id);
-        $mail=$cuenta['mail'];
-        $ch = curl_init();  
-        curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/borrarCuenta/{$mail}");  
-        curl_setopt($ch, CURLOPT_HEADER, false);  
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-        $data = json_decode(curl_exec($ch),true);
-        curl_close($ch);
+        $cuentaFilial=$this->filialesRepo->find($id);
+        $mail=$cuentaFilial['mail'];
 
-        if ($data){
-            if($this->filialesRepo->disable($cuenta))
+        $cuenta   = Cuenta::where('usuario',$mail)->first();
+        $this->cuentaRepo->disable($cuenta);
+        // $ch = curl_init();  
+        // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/borrarCuenta/{$mail}");  
+        // curl_setopt($ch, CURLOPT_HEADER, false);  
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
+        // $data = json_decode(curl_exec($ch),true);
+        // curl_close($ch);
+        
+
+        if ($cuenta){
+            if($this->filialesRepo->disable($cuentaFilial))
 
                 return redirect()->back()->with('msg_ok', 'Filial eliminada correctamente.');
             else
