@@ -215,10 +215,6 @@ class MatriculaController extends Controller {
         $matricula          = $this->matriculaRepo->find($id);
         $planPagos          = $this->pagoRepo->allMatriculaPlan($id);
         $pagosIndividuales  = $this->pagoRepo->allMatriculaIndividual($id);
-        $asesores           = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras           = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
-        $cursos             = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
-        $grupos             = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.editar',compact('matricula','planPagos','pagosIndividuales','asesores','carreras','cursos','grupos'));
     }
 
@@ -228,19 +224,18 @@ class MatriculaController extends Controller {
 
         // Datos de la Matrícula
         $matricula['asesor_id']         = $data['asesor'];
-        //Determinar si se seleccionó un Curso o Carrera
-        $cs = explode(';',$request->carreras_cursos);
-        if ($cs[0] == 'carrera'){
-            $matricula['carrera_id']    =   $cs[1];
-            $matricula['curso_id']      =   null;
-        }
-        elseif ($cs[0] == 'curso'){
-            $matricula['curso_id']      =   $cs[1];
-            $matricula['carrera_id']    =   null;
-        }
+        if (!isset($data['cancelado']))
+            $matricula['cancelado'] = 0;
+        else
+            $matricula['cancelado'] = $data['cancelado'];
 
        // Matrícula
         $modelM = $this->matriculaRepo->find($data['matricula']); // Busco la Matrícula
+        if (isset($data['grupo']))
+            $modelM->Grupo()->sync($data['grupo']);
+        else
+            return redirect()->back()->with('msg_error','Debe seleccionar al menos un grupo.');
+
         $this->matriculaRepo->edit($modelM,$matricula);
 
         return redirect()->route('filial.matriculas');
@@ -255,30 +250,30 @@ class MatriculaController extends Controller {
     }
 
     // Realización de los pagos de la Matrícula
-    public function actualizar($id){
-        $matricula  = $this->matriculaRepo->find($id);
-        if (isset($matricula->curso_id))
-            $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
-        else
-            $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
-        // $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
-        return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
-    }
+    // public function actualizar($id){
+    //     $matricula  = $this->matriculaRepo->find($id);
+    //     if (isset($matricula->curso_id))
+    //         $grupos = $this->grupoRepo->allGruposCurso($matricula->curso_id)->lists('id','id');
+    //     else
+    //         $grupos = $this->grupoRepo->allGruposCarrera($matricula->carrera_id)->lists('id','id');
+    //     // $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+    //     return view('rol_filial.matriculas.actualizar',compact('matricula','grupos'));
+    // }
 
-    public function actualizar_post(Request $request){
-        $data = $request->all();
-        // Matrícula
-        if (!isset($data['cancelado']))
-            $matricula['cancelado'] = 0;
-        else
-            $matricula['cancelado'] = $data['cancelado'];
-        $modelM = $this->matriculaRepo->find($data['matricula']);
+    // public function actualizar_post(Request $request){
+    //     $data = $request->all();
+    //     // Matrícula
+    //     if (!isset($data['cancelado']))
+    //         $matricula['cancelado'] = 0;
+    //     else
+    //         $matricula['cancelado'] = $data['cancelado'];
+    //     $modelM = $this->matriculaRepo->find($data['matricula']);
 
-        if ($this->matriculaRepo->edit($modelM,$matricula) && $modelM->Grupo()->sync($data['grupo']))
-            return redirect()->route('filial.matriculas')->with('msg_ok',' La Matrícula ha sido actualizada con éxito.');
-        else
-            return redirect()->route('filial.matriculas')->with('msg_error',' La Matrícula no ha podido ser actualizada.');
-    }
+    //     if ($this->matriculaRepo->edit($modelM,$matricula) && $modelM->Grupo()->sync($data['grupo']))
+    //         return redirect()->route('filial.matriculas')->with('msg_ok',' La Matrícula ha sido actualizada con éxito.');
+    //     else
+    //         return redirect()->route('filial.matriculas')->with('msg_error',' La Matrícula no ha podido ser actualizada.');
+    // }
 
     // Vista Detallada
     public function vista($id){

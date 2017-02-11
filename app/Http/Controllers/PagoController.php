@@ -48,7 +48,7 @@ class PagoController extends Controller
             // $date1   = date_create ( $first );
             // Obtengo el día nro diez de cada mes
             // $date1->modify('+9 day');
-            $actualDate   = date_create ( date('Y-m-d') );
+            $actualDate   = date('Y-m-d');
 
             $recargo = $pago->monto_original * ( $pago->recargo * 0.01);
             $montoR  = $pago->monto_original + $recargo - $pago->monto_pago;

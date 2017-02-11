@@ -84,7 +84,7 @@ class LoginController extends Controller {
         $cuentas = array(
                      array(
                     'id'          => 1,
-                     'usuario'     => 'ferrari@dueño.com',
+                     'usuario'     => 'ferrari@administrador.com',
                      'password'    => 1234,
                     'rol_id'      => 2,
                      'entidad_id'  => 1,

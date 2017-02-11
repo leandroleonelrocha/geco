@@ -42,7 +42,7 @@
                   </li>
 
                   <li>
-                    <a href="{{route('dueño.estadisticas')}}"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                    <a href="#" class="not-active"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                   </li>
 
                   <li class="treeview">
