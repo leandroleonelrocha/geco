@@ -213,7 +213,7 @@
 						                        <div class="col-xs-12">
 							                        <ul class="list-inline pull-right">
 							                            <li><button type="button" class="btn btn-default prev-step">Anterior</button></li>
-							                            <li><button type="button" class="btn btn-primary next-step">@lang('persona.crear')</button></li>
+							                            <li><button type="submit" class="btn btn-primary next-step">@lang('persona.crear')</button></li>
 							                           
 							                        </ul>
 						                        </div>

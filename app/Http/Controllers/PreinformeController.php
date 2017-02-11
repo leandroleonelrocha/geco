@@ -87,7 +87,7 @@ class PreinformeController extends Controller {
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
         
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
-        $paises= $this->paisRepo->all()->lists('pais','id');
+        $paises     = $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->all()->lists('full_name','id');
         $carreras   = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
         $cursos     = $this->cursoRepo->lenguajeLista('nombre','id',$pais->lenguaje);
@@ -147,6 +147,7 @@ class PreinformeController extends Controller {
         $persona['nombres']                 =   $request->nombres;
         $persona['apellidos']               =   $request->apellidos;
         $persona['genero']                  =   $request->genero;
+        $persona['pais_id']                 =   $request->pais_id;
         $persona['fecha_nacimiento']        =   $request->fecha_nacimiento;
         $persona['domicilio']               =   $request->domicilio;
         $persona['localidad']               =   $request->localidad;
