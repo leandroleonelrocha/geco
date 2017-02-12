@@ -20,6 +20,7 @@
 						<th>@lang('filial.telefonos')</th>
 						<th>E-Mail</th>
 						<th>Director</th>
+						<th>Cuenta</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
@@ -37,6 +38,19 @@
 					            	@endforeach</td>
 					            	<td>{{ $f->mail}}</td>
 						            <td>{{ $f->Director->fullname}}</td>
+						            <td>
+						            @if(isset($f->Cuenta))
+				      					@if($f->Cuenta->habilitado == 1 && $f->Cuenta->rol_id == 4)
+				      				<a href="{{route('dueño.desactivarCuenta', ['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-danger btn-xs">Desactivar</a>
+				      					@endif
+
+				      				@if($f->Cuenta->habilitado == 0 && $f->Cuenta->rol_id == 4)
+				      				<a href="{{route('dueño.habilitarCuenta',['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-success btn-xs">Habilitar</a>
+				      					@endif
+				      				
+				      				@endif
+
+						            </td>
 						           	<td>
 
 					           		<a href="{{route('dueño.filiales_editar',$f->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>	

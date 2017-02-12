@@ -13,6 +13,19 @@ Route::group(['prefix' => 'administrador'], function(){
 	require_once('FilialesRoute.php');
 	require_once('EstadisticasRoute.php');
 
+	Route::get('habilitar/{id}/{rol_id}',[ 
+	//Route::get('habilitar/{id}/{rol}/',[
+
+		'as' => 'dueño.habilitarCuenta',
+		'uses' => 'DuenoController@habilitarCuenta',
+		'middleware' => 'dueno'
+	]);
+
+	Route::get('desactivar/{id}/{rol_id}/',[
+		'as' => 'dueño.desactivarCuenta',
+		'uses' => 'DuenoController@desactivarCuenta',
+		'middleware' => 'dueno'
+	]);
 
 	// Rutas Operaciones ---------- Directores
 	// require_once('DirectoresRoute.php');

@@ -41,4 +41,7 @@ class Filial extends Entity {
         return $this->hasMany(MatriculaPermisos::getClass());
     }
 
+    public function Cuenta(){
+        return $this->hasOne(Cuenta::getClass(), 'entidad_id', 'id');
+    }
 }

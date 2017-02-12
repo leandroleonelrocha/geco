@@ -25,4 +25,8 @@ class Director extends Entity {
     public function DirectorTelefono(){
         return $this->hasMany(DirectorTelefono::getClass());
     }
+
+    public function Cuenta(){
+        return $this->hasOne(Cuenta::getClass(), 'entidad_id', 'id');
+    }
 }

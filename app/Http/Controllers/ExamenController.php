@@ -40,14 +40,7 @@ class ExamenController extends Controller
 	}
 	
 	public function index(){
-		/*
-		$examenes = DB::table('examen')
-				   ->distinct()
-                   ->join('matricula', 'matricula.id', '=', 'examen.matricula_id')
-                   ->where('matricula.filial_id',session('usuario')['entidad_id'] )
-                   ->where('nro_acta', '!=', 99999)
-                   ->get();
-		*/
+		
         $filial   = session('usuario')['entidad_id'];
 		$examenes = Examen::select('nro_acta', 'grupo_id', 'docente_id')->distinct()->where('nro_acta', '!=', 99999)->get();
 		return view('rol_filial.examenes.lista', compact('examenes','filial'));

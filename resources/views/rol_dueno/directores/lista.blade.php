@@ -21,10 +21,13 @@
 						<th>@lang('director.nombre')</th>
 						<th>@lang('director.telefonos')</th> 
 						<th>E-Mail</th>
+						<th>Cuenta</th>
+						
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
 						    @foreach($directores as $d)
+						    
 							    <tr role="row" class="odd">
 				    				<td>{{$d->TipoDocumento->tipo_documento}}</td>
 							      	<td>{{ $d->nro_documento}}</td>
@@ -35,7 +38,22 @@
 						            		{{$telefono->telefono}}</br>
 					            	@endforeach</td>
 					            	<td>{{$d->mail}}</td>
-				      
+				      				<td>
+
+				      				@if(isset($d->Cuenta))
+				      					@if($d->Cuenta->habilitado == 1 && $d->Cuenta->rol_id == 3)
+				      				<a href="{{route('dueño.desactivarCuenta',['id'=>$d->id,'rol_id'=>$d->Cuenta->rol_id])}}" class="btn btn-block btn-danger btn-xs">Desactivar</a>
+				      					@endif
+
+				      				@if($d->Cuenta->habilitado == 0 && $d->Cuenta->rol_id == 3)
+				      				<a href="{{route('dueño.habilitarCuenta',['id'=>$d->id,'rol_id'=>$d->Cuenta->rol_id] )}}" class="btn btn-block btn-success btn-xs">Habilitar</a>
+				      					@endif
+				      				
+				      				@endif
+
+				      				</td>
+				      				
+
 						           	<td class="text-center">
 									<a href="{{route('dueño.directores_editar',$d->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>
 						           	<a href="{{route('dueño.directores_borrar',$d->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar el director?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash"></i></a></td>

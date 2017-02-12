@@ -202,4 +202,19 @@ class CuentaRepo extends BaseRepo
     public function findUserActualizar($user,$entidad,$rol){
         return $this->model->where('usuario',$user)->where('activo',1)->where('entidad_id',$entidad)->where('rol_id',$rol)->first();
     }
+
+    public function habilitarCuenta($entidad_id,$rol_id){
+        $model = $this->model->where('entidad_id',$entidad_id)->where('rol_id',$rol_id)->first();
+        $model->habilitado = 1;
+        $model->save();
+        return $model;
+    }
+
+    public function desactivarCuenta($entidad_id,$rol_id){
+        $model = $this->model->where('entidad_id',$entidad_id)->where('rol_id', $rol_id)->first();
+        $model->habilitado = 0;
+        $model->save();
+        return $model;
+    }
+
 }

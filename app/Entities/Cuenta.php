@@ -15,6 +15,7 @@ class Cuenta extends Entity{
     protected $fillable = ['usuario','contrasena','rol_id', 'entidad_id', 'habilitado','activo'];
     
    
+   
     //relaciones
     public function Rol()
     {
@@ -26,6 +27,8 @@ class Cuenta extends Entity{
     {
         $this->attributes['contrasena'] = bcrypt($value);
     }
+
+ 
 
  
 }
