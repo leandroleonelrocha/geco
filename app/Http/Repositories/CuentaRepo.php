@@ -20,6 +20,37 @@ class CuentaRepo extends BaseRepo
         return new Cuenta();
     }
 
+    
+
+    public function postLogin(Request $request){
+        return redirect()->route('administracion.cuentas_lista');
+    }
+
+    public function cuentas_lista(){
+        $cuentas = $this->cuentaRepo->allCuentas();
+        return view('administracion.cuentas.lista', compact('cuentas'));
+    }
+
+    public function habilitar($id){
+        $cuenta = $this->cuentaRepo->find($id);
+        if($cuenta->habilitado == 1){
+            $cuenta->habilitado = 0;
+            $resultado = '<i class="btn btn-red fa fa-thumbs-o-down" title="Inhabilitado"></i>';
+        }
+        else
+        {
+            $cuenta->habilitado = 1;
+            $resultado = '<i class="btn btn-green fa fa-thumbs-o-up" title="Habilitado"></i>';
+        }
+
+        if ($cuenta->save())
+            return Response::json($resultado,200);
+    }
+
+
+
+
+
     public function findUser($user){
         return $this->model->where('usuario',$user)->first();
 	}
@@ -125,7 +156,7 @@ class CuentaRepo extends BaseRepo
     public function activarCuenta($mail,$rol)
     {
 
-        $cuenta = Cuenta::where('usuario',$mail)->where('rol_id',$rol)->first();
+        $cuenta = Cuenta::where('usuario',$mail)->where('rol_id',$rol)->where('activo',0)->first();
      
         if (count($cuenta) > 0){
             $password = $this->generarCodigo();

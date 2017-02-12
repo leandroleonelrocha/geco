@@ -87,7 +87,7 @@ class FilialesController extends Controller
                     $msj->subject('GeCo -- Reactivación de Cuenta');
                     $msj->to($user);
                 }); 
-                return redirect()->route('dueño.filiales')->with('msg_ok', 'La Filial ha sido agregada con éxito.');}
+                return redirect()->route('dueño.filiales')->with('msg_ok', 'La cuenta de la Filial ha sido activada con éxito.');}
             else
                 return redirect()->route('dueño.filiales')->with('msg_error', 'La Filial no ha sido agregada.');
         }

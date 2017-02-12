@@ -79,7 +79,7 @@ class DuenoController extends Controller
                     $msj->subject('GeCo -- Reactivación Cuenta');
                     $msj->to($user);
                 });
-                return redirect()->route('dueño.directores')->with('msg_ok','El director ha sido agregado con éxito');
+                return redirect()->route('dueño.directores')->with('msg_ok','La Cuenta del director ha sido activado con éxito');
             }
             else
                 return redirect()->route('dueño.directores')->with('msg_error','El director no ha sido agregado');
