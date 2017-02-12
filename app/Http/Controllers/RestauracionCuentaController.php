@@ -38,15 +38,12 @@ class RestauracionCuentaController extends Controller {
         // curl_close($ch);
 
     	$usuario  = $request->mail;
-        $cuenta   = Cuenta::where('usuario',$usuario)->first();
+        $pass = $this->cuentaRepo->restaurarCuenta($usuario);
         					
-  		if ($cuenta) {
-  			$password = $this->cuentaRepo->generarCodigo();
-            $cuenta->contrasena  = $password;
-            $cuenta->save(); 
+  		if ($pass){
 			// Datos del mail
         	$datosMail = array(	'user' 		=> $usuario, 
-        					'password' 	=> $password);
+        					'password' 	=> $pass);
        
 	        // Envío del mail
 	        Mail::send('mailing.restauracion_cuenta',$datosMail,function($msj) use($usuario){
@@ -58,7 +55,7 @@ class RestauracionCuentaController extends Controller {
 	    }
 	    else{
 
-    		return redirect()->route('restaurarCuenta.nueva')->with('msg_error', 'El E-mail no existe, escriba otro !!!');
+    		return redirect()->route('restaurarCuenta.nueva')->with('msg_error', 'El E-mail no existe o no esta activo, escriba otro !!!');
 	    }
     }
 }

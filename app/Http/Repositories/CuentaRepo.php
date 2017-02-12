@@ -106,21 +106,19 @@ class CuentaRepo extends BaseRepo
         return Response::json(['response'=>"Cuenta actualizada!"], 200);
     }
 
-    public function deleteCuenta($id)
+    public function deleteCuenta($id)//borrado fisico
     {
         $cuenta = $this->model->find($id);
         $cuenta->delete();
         return Response::json(['response'=>"Cuenta borrada!"], 200);
-    	
     }
 
     public function borrarCuenta($mail)
     {
         $cuenta = $this->findUser($mail);
-        $cuenta->habilitado = 0;
+        $cuenta->activo = 0;
         $cuenta->save();    
         return $cuenta;   
-
     }
 
 
@@ -144,19 +142,20 @@ class CuentaRepo extends BaseRepo
        
     }
 
+    public function restaurarCuenta($mail)
+    {
+        $cuenta   = Cuenta::where('usuario',$mail)->where('activo',1)->first();
+                            
+        if ($cuenta) {
+            $password = $this->generarCodigo();
+            $cuenta->contrasena  = $password;
+            $cuenta->save();
+            return $password;
+        }
+    }
+
     public function actualizarCuenta($mail,$mailnuevo,$entidad,$rol)
     {
-        /*    
-        $cuenta   = Cuenta::where('usuario',$mail)->where('rol_id',$rol)->first();
-
-        if ($cuenta == true) {
-            $cuenta->usuario=$mailnuevo;  
-            $estado   = Hash::check($password,$cuenta->password);
-            $cuenta->contrasena   = $password;
-            $cuenta->save();
-            $password;
-        }    
-        */
         $password = $this->generarCodigo();
         $cuenta   = $this->findUserActualizar($mail,$entidad,$rol);
 
@@ -166,14 +165,8 @@ class CuentaRepo extends BaseRepo
             $cuenta->contrasena  = $password;
             $cuenta->save();
             return $password;
-
         }
     }
-
-    public function disable($cuenta){
-       $cuenta->activo = 0;
-       return $cuenta->save();
-     }
 
     public function findUserActualizar($user,$entidad,$rol){
         return $this->model->where('usuario',$user)->where('activo',1)->where('entidad_id',$entidad)->where('rol_id',$rol)->first();

@@ -127,12 +127,9 @@ class FilialesController extends Controller
 
     public function borrar($id){
 
-
         $cuentaFilial=$this->filialesRepo->find($id);
         $mail=$cuentaFilial['mail'];
-        $cuenta   = Cuenta::where('usuario',$mail)->first();
-        $this->cuentaRepo->disable($cuenta);
-
+        $cuenta=$this->cuentaRepo->borrarCuenta($mail);
         
         if ($cuenta){
             if($this->filialesRepo->disable($cuentaFilial))
@@ -164,9 +161,9 @@ class FilialesController extends Controller
         $entidad=$data['id'];
         if  ($mail!==$mailn) {
 
-            $pass = $this->cuentaRepo->actualizarCuenta($mail, $mailn,$entidad,4);
+            $cuenta = $this->cuentaRepo->actualizarCuenta($mail, $mailn,$entidad,4);
 
-            if ($pass !==null){
+            if ($cuenta !==null){
 
                 // Datos del mail
                 $user =$mailn;

@@ -29,7 +29,7 @@ class LoginController extends Controller {
         
         $usuario  = $request->usuario;
         $password = $request->password;
-        $cuenta   = Cuenta::where('usuario',$usuario)->first();
+        $cuenta   = Cuenta::where('usuario',$usuario)->where('activo',1)->first();
         
         if($cuenta == true)
         {

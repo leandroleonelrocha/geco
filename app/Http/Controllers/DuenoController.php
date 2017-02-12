@@ -104,7 +104,7 @@ class DuenoController extends Controller
                     $nombrefull= $request->nombres . " " . $request->apellidos; 
                     $datosMail = array( 'filial'    => $nombrefull, 
                                 'user'      => $user, 
-                                'password'  => $pass);
+                                'password'  => $cuenta);
                     // Envío del mail
                     Mail::send('mailing.cuenta',$datosMail,function($msj) use($user){
                         $msj->subject('GeCo -- Nueva Cuenta');
@@ -121,9 +121,7 @@ class DuenoController extends Controller
 
         $cuentaDirector=$this->directorRepo->find($id);
         $mail=$cuentaDirector['mail'];
-
-        $cuenta   = Cuenta::where('usuario',$mail)->first();
-        $this->cuentaRepo->disable($cuenta);
+        $cuenta=$this->cuentaRepo->borrarCuenta($mail);
 
         if ($cuenta){
             if($this->directorRepo->disable($this->directorRepo->find($id)))
