@@ -14,5 +14,5 @@ return [
 	'buscar'=>'Buscar',
 	'cuenta'=>'Cuenta',
 	'habilitar'=>'Habilitar',
-	'desactivar'=>'Desactivar',
+	'deshabilitar'=>'Deshabilitar',
 ];
