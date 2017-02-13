@@ -68,13 +68,17 @@
 				            	<h4 class="box-title text-left">@lang('matricula.matricula')</h4>
 				            </div>
 			              	<div class="col-xs-12">
-			                	<div class="col-md-6 form-group">
-									<label>@lang('matricula.numerodepago')</label>
-									{!! Form::text('nro_pago[]',null,array('class'=>'pago-item form-control')) !!}
+			                	<div>
+									<!-- <label>@lang('matricula.numerodepago')</label> -->
+									{!! Form::hidden('nro_pago[]',0,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.fechavencimiento')</label>
 									{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>Fecha Recargo</label>
+									{!! Form::date('fecha_recargo[]',null,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.montooriginal')</label>
@@ -119,6 +123,10 @@
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.fechavencimiento')</label>
 									{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>Fecha Recargo</label>
+									{!! Form::date('fecha_recargo[]',null,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.montooriginal')</label>
