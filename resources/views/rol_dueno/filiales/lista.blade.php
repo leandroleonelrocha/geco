@@ -20,7 +20,7 @@
 						<th>@lang('filial.telefonos')</th>
 						<th>E-Mail</th>
 						<th>Director</th>
-						<th>Cuenta</th>
+						<th>@lang('lista.cuenta')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 	    				<tbody>
@@ -41,11 +41,11 @@
 						            <td>
 						            @if(isset($f->Cuenta))
 				      					@if($f->Cuenta->habilitado == 1 && $f->Cuenta->rol_id == 4)
-				      				<a href="{{route('dueño.desactivarCuenta', ['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-danger btn-xs">Desactivar</a>
+				      				<a href="{{route('dueño.desactivarCuenta', ['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-danger btn-xs">@lang('lista.desactivar')</a>
 				      					@endif
 
 				      				@if($f->Cuenta->habilitado == 0 && $f->Cuenta->rol_id == 4)
-				      				<a href="{{route('dueño.habilitarCuenta',['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-success btn-xs">Habilitar</a>
+				      				<a href="{{route('dueño.habilitarCuenta',['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-success btn-xs">@lang('lista.habilitar')</a>
 				      					@endif
 				      				
 				      				@endif

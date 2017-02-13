@@ -12,4 +12,7 @@ return [
 	'verrecibos'=>'View Recibos',
 	'imprimir'=>'Print',
 	'buscar'=>'Search',
+	'cuenta'=>'Account',
+	'habilitar'=>'Enable',
+	'desactivar'=>'Disabled',
 ];

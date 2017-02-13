@@ -288,13 +288,13 @@ class DuenoController extends Controller
 
     public function habilitarCuenta($entidad_id, $rol_id){
         $this->cuentaRepo->habilitarCuenta($entidad_id, $rol_id);
-        return redirect()->back()->with('msg_ok','La cuenta se ha activado con éxito.');
+        return redirect()->back()->with('msg_ok','La cuenta se ha Habilitado con éxito.');
         
     }
 
     public function desactivarCuenta($entidad_id, $rol_id){
          $this->cuentaRepo->desactivarCuenta($entidad_id, $rol_id);
-        return redirect()->back()->with('msg_ok','La cuenta ha sido desactivada con éxito.');
+        return redirect()->back()->with('msg_ok','La cuenta ha sido Deshabilitado con éxito.');
     }
 
 

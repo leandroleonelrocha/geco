@@ -21,7 +21,7 @@
 						<th>@lang('director.nombre')</th>
 						<th>@lang('director.telefonos')</th> 
 						<th>E-Mail</th>
-						<th>Cuenta</th>
+						<th>@lang('lista.cuenta')</th>
 						
 						<th class="no-print"></th>
 						</tr> </thead>
@@ -42,11 +42,11 @@
 
 				      				@if(isset($d->Cuenta))
 				      					@if($d->Cuenta->habilitado == 1 && $d->Cuenta->rol_id == 3)
-				      				<a href="{{route('dueño.desactivarCuenta',['id'=>$d->id,'rol_id'=>$d->Cuenta->rol_id])}}" class="btn btn-block btn-danger btn-xs">Desactivar</a>
+				      				<a href="{{route('dueño.desactivarCuenta',['id'=>$d->id,'rol_id'=>$d->Cuenta->rol_id])}}" class="btn btn-block btn-danger btn-xs">@lang('lista.desactivar')</a>
 				      					@endif
 
 				      				@if($d->Cuenta->habilitado == 0 && $d->Cuenta->rol_id == 3)
-				      				<a href="{{route('dueño.habilitarCuenta',['id'=>$d->id,'rol_id'=>$d->Cuenta->rol_id] )}}" class="btn btn-block btn-success btn-xs">Habilitar</a>
+				      				<a href="{{route('dueño.habilitarCuenta',['id'=>$d->id,'rol_id'=>$d->Cuenta->rol_id] )}}" class="btn btn-block btn-success btn-xs">@lang('lista.habilitar')</a>
 				      					@endif
 				      				
 				      				@endif
