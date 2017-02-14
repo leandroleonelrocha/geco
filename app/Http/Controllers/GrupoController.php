@@ -472,9 +472,11 @@ class GrupoController extends Controller
 
 	public function post_materias_carreras(Request $request){	
 		$carrera_id = $request->get('carrera_id');
-		$carrera = $this->carreraRepo->find($carrera_id);
-		$materia = $carrera->Materia;
-		return response()->json($materia, 200);
+		$tp 		= $request->get('tp');
+		// $carrera = $this->carreraRepo->find($carrera_id);
+		// $materia = $carrera->Materia;
+		$materias = $this->materiaRepo->findMateriasCarrera($carrera_id, $tp);
+		return response()->json($materias, 200);
 	}
 
 	public function imprimir_asistencias($id){
