@@ -24,7 +24,13 @@
 								<label>@lang('materia.carrera')</label>
 							   	{!! Form::select('carrera_id', $carreras->toArray() , $materia->Carrera->id, array('class'=>'form-control select2')) !!}
 							</div>
-
+							<div class="col-md-6 form-group teorica_practica">
+                                <label>@lang('materia.tipomateria')</label>
+                                <div>
+                                    <input type='radio' class='flat-red' name='teorica_practica' value="1" <?php if($materia->practica == 1) echo 'checked'; ?> >@lang('materia.practica')
+                                    <input type='radio' class='flat-red' name='teorica_practica' value="0" <?php if($materia->teorica == 1) echo 'checked'; ?> >@lang('materia.teorica')
+                                </div>
+                            </div>
 							<div class="col-md-6 form-group">
 								<label>@lang('materia.descripcion')</label>
 					     		{!! Form::textarea('descripcion',$materia->descripcion,array('class'=>'form-control','size'=>'30x3')) !!}
