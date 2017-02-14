@@ -100,3 +100,5 @@
 			'as'	=> 'filial.matriculas_grupos',
 			'uses'	=>	'MatriculaController@matriculas_grupos'
 		]);
+
+		

@@ -382,4 +382,6 @@ class MatriculaController extends Controller {
         return $pdf->stream();
 
     }
+
+   
 }

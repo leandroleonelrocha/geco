@@ -2,6 +2,12 @@
 
 @section('content')
 	<div class="row">
+    <div class="col-xs-12 destino">
+      
+    </div> <!-- Fin col -->
+  </div> <!-- Fin row -->
+
+	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
@@ -53,7 +59,7 @@
 		  							</div>
 								</div>
 								<div class="box-footer col-xs-12">
-								   	<button type="submit" class="btn btn-success">@lang('matricula.actualizar')</button>
+								   	<button  class="btn btn-success enlaceajax">@lang('matricula.actualizar')</button>
 				          	</div>
 							{!! Form::close() !!}
 						</div>
@@ -62,4 +68,19 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+
+@section('js')
+<script type="text/javascript">
+
+  alert('asdasd');
+  $(".enlaceajax").click(function(evento){
+    //  evento.preventDefault();
+      $(".destino").load("{{ URL::to('/filial/carrito') }}");
+   
+  }); 
+
+
+</script>
 @endsection
