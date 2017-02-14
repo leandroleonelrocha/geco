@@ -2,10 +2,8 @@
 
 @section('content')
 	<div class="row">
-	    <div class="col-xs-12">
-	      <div class="box-tools pull-right no-print destino">
-	       
-	      </div>
+	    <div class="col-xs-12 destino">
+	      
 	    </div> <!-- Fin col -->
     </div> <!-- Fin row -->
 
@@ -94,4 +92,18 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+@section('js')
+<script type="text/javascript">
+
+  alert('asdasd');
+  $(".enlaceajax").click(function(evento){
+    //  evento.preventDefault();
+      $(".destino").load("{{ URL::to('/filial/carrito') }}");
+   
+  }); 
+
+
+</script>
 @endsection

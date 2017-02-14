@@ -35,7 +35,15 @@
           </a>
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              
+                 <!--
+              <li class="dropdown messages-menu">
+
+                <a href="#" class="dropdown-toggle" data-toggle="modal" data-target="#exampleModalLong" aria-expanded="false">
+                  <i class="fa fa-envelope-o"></i>
+                  <span class="label label-success">4</span>
+                </a>
+              </li>-->
+
               <li class="dropdown messages-menu ">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-globe fa-lg"></i>
@@ -74,6 +82,8 @@
                     </ul>
                   </li>
                 </ul>
+
+
               </li>
 
               <li>

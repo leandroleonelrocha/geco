@@ -1,11 +1,8 @@
 @extends('template')
 
 @section('content')
-	<div class="row">
-    <div class="col-xs-12 destino">
-      
-    </div> <!-- Fin col -->
-  </div> <!-- Fin row -->
+
+	@include('rol_filial.matriculas.partials.carrito')
 
 	<div class="row">
 		<div class="col-xs-12">
@@ -75,8 +72,8 @@
 									{!! Form::textarea('descripcion',null,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
 								</div>
 								<div class="box-footer col-xs-12">
-								   	<button  class="btn btn-success enlaceajax">@lang('matricula.actualizar')</button>
 				          	</div>
+							<button type="submite" class="btn btn-success enlaceajax">@lang('matricula.actualizar')</button>
 							{!! Form::close() !!}
 						</div>
 					</div>
@@ -86,17 +83,3 @@
 	</div> <!-- Fin row -->
 @endsection
 
-
-@section('js')
-<script type="text/javascript">
-
-  alert('asdasd');
-  $(".enlaceajax").click(function(evento){
-    //  evento.preventDefault();
-      $(".destino").load("{{ URL::to('/filial/carrito') }}");
-   
-  }); 
-
-
-</script>
-@endsection
