@@ -38,6 +38,13 @@
                                 </optgroup>
                                 </select>
                             </div>
+                            <div class="form-group teorica_practica">
+                                <label>@lang('materia.tipomateria')</label>
+                                <div>
+                                    <input type='radio' class='flat-red' name='teorica_practica' value="1" >@lang('materia.practica')
+                                    <input type='radio' class='flat-red' name='teorica_practica' value="0">@lang('materia.teorica')
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>@lang('grupo.descripcion')</label>
                                 {!! Form::text('descripcion', null ,  array('class'=>'form-control')) !!}
@@ -176,11 +183,13 @@
 <script type="text/javascript">
    
    $(document).ready(function() {
+        $('.teorica_practica').hide();
         function obtenerMaterias(){
             var carreras_cursos=$('select[id=carreras_cursos]').val(); 
                 var tipo = carreras_cursos.split(';');
                 if(tipo[0] == "carrera"){   
                     $(".materia").show();
+                    $(".teorica_practica").show();
                     $.ajax(
                         {
                         url: "post_materias_carreras",
@@ -193,10 +202,12 @@
                                if(result.length == 0){
                                     $(".materia").show();
                                     $(".materia").empty();
+                                    $(".teorica_practica").hide();
                                }
                                if(result.length > 0){
                                    $(".materia").show();
                                    $(".select_materia").empty();
+                                   $(".teorica_practica").show();
                                    $.each(result, function(clave, valor) {
                                         $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
                                    });
@@ -208,6 +219,7 @@
                 if(tipo[0] == "curso"){
                     $(".select_materia").empty(); 
                     $(".materia").hide();
+                    $(".teorica_practica").hide();
                 }
         }
         obtenerMaterias();
