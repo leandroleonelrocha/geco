@@ -13,7 +13,7 @@ class CarreraRepo extends BaseRepo {
     }
 
     public function allCarreras($len){
-        return $this->model->where('lenguaje', $len)->paginate(10);
+        return $this->model->where('lenguaje', $len)->get();
     }
 
 }

@@ -12,7 +12,7 @@ class GrupoRepo extends BaseRepo {
     }
     
     public function allEnable(){
-        return $this->model->where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->paginate(10);
+        return $this->model->where('filial_id', $this->filial)->where('activo', 1)->where('terminado', 0)->get();
     }
 
     public function allCancelado(){

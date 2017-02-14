@@ -38,3 +38,4 @@ require_once(__DIR__ . '/Routes/ManualRoute.php');
 Route::get('/', function () {
     return view('login');
 });
+

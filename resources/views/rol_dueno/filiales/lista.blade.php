@@ -41,7 +41,7 @@
 						            <td>
 						            @if(isset($f->Cuenta))
 				      					@if($f->Cuenta->habilitado == 1 && $f->Cuenta->rol_id == 4)
-				      				<a href="{{route('dueño.desactivarCuenta', ['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-danger btn-xs">@lang('lista.desactivar')</a>
+				      				<a href="{{route('dueño.desactivarCuenta', ['id'=>$f->id,'rol_id'=>$f->Cuenta->rol_id] )}}" class="btn btn-block btn-danger btn-xs">@lang('lista.deshabilitar')</a>
 				      					@endif
 
 				      				@if($f->Cuenta->habilitado == 0 && $f->Cuenta->rol_id == 4)

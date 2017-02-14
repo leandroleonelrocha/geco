@@ -1,6 +1,14 @@
 @extends('template')
 
 @section('content')
+		<div class="row">
+    <div class="col-xs-12">
+      <div class="box-tools pull-right no-print destino">
+       
+      </div>
+    </div> <!-- Fin col -->
+  </div> <!-- Fin row -->
+  
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">

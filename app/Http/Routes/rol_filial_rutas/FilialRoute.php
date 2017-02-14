@@ -62,4 +62,9 @@ Route::group(['prefix' => 'filial'], function(){
 	// Rutas Operaciones ---------- Mails
 	require_once('MailsRoute.php');
 
+	Route::get('carrito',[
+			'as'	=>	'filial.carrito',
+			'uses'	=>	'FilialesController@carrito'
+		]);
+
 });

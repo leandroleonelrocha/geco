@@ -76,4 +76,5 @@
 			'uses'	=>	'PagoController@imprimir_morosidad'
 		]);
 
+		
 	});

@@ -13,6 +13,6 @@ class CursoRepo extends BaseRepo {
     }
 
     public function allCursos($len){
-        return $this->model->where('lenguaje', $len)->paginate(10);
+        return $this->model->where('lenguaje', $len)->get();
     }
 }

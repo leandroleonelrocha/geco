@@ -300,4 +300,7 @@ class PagoController extends Controller
         return redirect()->back();
     }
 
+    public function carrito(){
+        return view('rol_filial.matriculas.partials.carrito');
+    }
 }
