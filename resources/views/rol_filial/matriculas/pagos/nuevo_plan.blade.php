@@ -2,6 +2,12 @@
 
 @section('content')
 	<div class="row">
+	    <div class="col-xs-12 destino">
+	      
+	    </div> <!-- Fin col -->
+    </div> <!-- Fin row -->
+
+	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
@@ -21,6 +27,10 @@
 										<div class="col-md-6 form-group">
 											<label>@lang('matricula.fechavencimiento')</label>
 											{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
+										</div>
+										<div class="col-md-6 form-group">
+											<label>Fecha Recargo</label>
+											{!! Form::date('fecha_recargo[]',null,array('class'=>'pago-item form-control')) !!}
 										</div>
 										<div class="col-md-6 form-group">
 											<label>@lang('matricula.montooriginal')</label>
@@ -82,4 +92,18 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+@section('js')
+<script type="text/javascript">
+
+  alert('asdasd');
+  $(".enlaceajax").click(function(evento){
+    //  evento.preventDefault();
+      $(".destino").load("{{ URL::to('/filial/carrito') }}");
+   
+  }); 
+
+
+</script>
 @endsection

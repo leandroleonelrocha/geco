@@ -44,6 +44,8 @@ id			int not null auto_increment,
 carrera_id	int not null,
 cadena_id	int not null,
 nombre		varchar(50) not null,
+practica	boolean default false,
+teorica		boolean default false,
 descripcion	varchar(300) default 'Sin Descripción.',
 created_at	timestamp not null default '0000-00-00 00:00:00',
 updated_at	timestamp not null default '0000-00-00 00:00:00',
@@ -1183,6 +1185,7 @@ values  (1 , 'Profesional Gastronómico'			, '1 Año'	, 'Sin Descripción.','es'
 -- Materias
 --
 
+<<<<<<< HEAD
 insert into materia (`cadena_id`,`carrera_id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
 values  (1,1 , 'Cocina Básica y Servicio'					, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1,1 , 'Panadería' 									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
@@ -1231,6 +1234,52 @@ values  (1,1 , 'Cocina Básica y Servicio'					, 'Sin Descripción.', '2016-11-1
         (2,12, 'Redes I'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (2,11, 'Introducción a word'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (2,14, 'Sistemas Operativos'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+=======
+insert into materia (`carrera_id`, `nombre`, `practica`, `teorica`, `descripcion`, `created_at`, `updated_at`)
+values  (1 , 'Cocina Básica y Servicio'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Panadería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Pastelería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Cocina Argentina y Latinoamericana'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Cocina Internacional' 						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3 , 'Enología y Maridaje' 							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (3 , 'Repostería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Barman' 										, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (4 , 'Repostería Inicial y Repostería Avanzada' 	, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (5 , 'Legislación y Admin de personal'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (5 , 'Comercialización'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Relaciones públicas y congresos'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (6 , 'Arte Culinario'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (7 , 'Gestión de la calidad gastronómica'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (7 , 'Gestión de alimentos y bebidas'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (8 , 'Cocina Industrial'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Cocina Básica y Servicio'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Prácticas en Eventos'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Planificación y organización del servicio'	, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Organización de eventos'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (10, 'Materias Primas y Nutrición'					, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (7 , 'Elaboración del Menú'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (7 , 'Diseño y Ambientación de Restaurantes'		, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Cultura y Crítica Gastronómica'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (8 , 'Prácticas para la Elaboración de Alimentos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Instalación y Equipamientos Gastronómicos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Costos y Compras'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Informática General y Aplicada'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (10, 'Francés Gastronómico'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Cocina I'										, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Cocina fría'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Pastas y Salsas'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (10, 'Cocina asiatica'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Cocina II'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (9 , 'Nutrición I'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Contabilidad y costos'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (6, 'Gestión de personal'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Inglés técnico'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (6, 'Nutrición II'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Tecnología alimentaria'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (5 , 'Cocina dietoterápica'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1, 'Historia de la cultura'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (10, 'Diseño, equipamiento y seguridad'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+>>>>>>> a58e64a7b136ff08050a4e5a9c429f1fa4b6308c
 --	
 -- Matrículas
 --

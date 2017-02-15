@@ -2,6 +2,12 @@
 
 @section('content')
 	<div class="row">
+	    <div class="col-xs-12 destino">
+	      
+	    </div> <!-- Fin col -->
+  	</div> <!-- Fin row -->
+  
+	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-header">
@@ -59,4 +65,29 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+@section('js')
+<script type="text/javascript">
+
+   $(".enlaceajax").click(function(evento){
+    //  evento.preventDefault();
+    var nro_pago     = $("input[name=nro_pago]").val();
+    var matricula_id = $('.matricula_id').val();
+
+    var cars = [
+	    nro_pago,
+	    matricula_id,
+	    "BMW"
+	];	
+	console.log(cars);
+
+    console.log($("input[name=nro_pago]").val());
+    console.log($('.matricula_id').val());		
+      
+      $(".destino").load("{{ URL::to('/filial/carrito') }}");
+   
+  }); 
+
+</script>
 @endsection

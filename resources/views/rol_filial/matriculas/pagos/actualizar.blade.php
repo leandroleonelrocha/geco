@@ -1,6 +1,8 @@
 @extends('template')
 
 @section('content')
+
+	
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -52,9 +54,25 @@
 										{!! Form::text('monto_a_pagar',null, array('class'=>'pago-item form-control')) !!}
 		  							</div>
 								</div>
+								<div class="box-header">
+									<h3 class="box-title">@lang('recibo.nuevorecibo')</h3>
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('recibo.tipo')<label>
+									{!! Form::select('recibo_tipo_id', $tipos->toArray(),null, array('class'=>'form-control')) !!}
+									{!! Form::hidden('pago_id', $pago->id, array('class'=>'form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('recibo.concepto')</label>
+									{!! Form::select('recibo_concepto_pago_id', $conceptos->toArray(), null, array('class'=>'form-control')) !!}
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('recibo.descripcion')</label>
+									{!! Form::textarea('descripcion',null,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
+								</div>
 								<div class="box-footer col-xs-12">
-								   	<button type="submit" class="btn btn-success">@lang('matricula.actualizar')</button>
 				          	</div>
+							<button type="submite" class="btn btn-success enlaceajax">@lang('matricula.actualizar')</button>
 							{!! Form::close() !!}
 						</div>
 					</div>
@@ -62,4 +80,8 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+@section('modal')
+@include('rol_filial.matriculas.partials.carrito')
 @endsection

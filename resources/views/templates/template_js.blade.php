@@ -53,13 +53,21 @@
         $(".select2").select2();
 
         $('#example1').DataTable({
-            paging: false,
-            "bInfo" : false
+             "paging": true,
+          "lengthChange": false,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
         });
 
         $('#example2').DataTable({
-            paging: false,
-            "bInfo" : false
+             "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
         });
     
 

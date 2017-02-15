@@ -23,7 +23,7 @@ use App\Http\Repositories\GrupoRepo;
 use App\Http\Repositories\ClaseRepo;
 use App\Http\Repositories\DocenteRepo;
 use App\Http\Repositories\CuentaRepo;
-
+use Session;
 use Mail;
 
 class FilialesController extends Controller
@@ -250,5 +250,14 @@ class FilialesController extends Controller
         }
         else
             return redirect()->back()->with('msg_error','El perfil de la filial no ha podido ser modificado o existe el E-mail actual.');
+    }
+
+
+    public function carrito(Request $request){
+       //return 'asdasd';
+        
+        Session::put('morosos', 'data');
+
+        return view('rol_filial.matriculas.partials.carrito');
     }
 }

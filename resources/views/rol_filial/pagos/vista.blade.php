@@ -1,7 +1,15 @@
 @extends('template')
 
 @section('content')
-					
+
+	<div class="row">
+    <div class="col-xs-12">
+      <div class="box-tools pull-right no-print destino">
+       
+      </div>
+    </div> <!-- Fin col -->
+  </div> <!-- Fin row -->
+
 	<div class="row">
 		<div class="col-xs-12">
 			
@@ -13,6 +21,7 @@
                 </ul>
 
                 <div class="tab-content">
+
                 <div class="tab-pane active" id="tab_1">
                		@include('rol_filial.pagos.partials.tabla_matriculas')
                 </div><!-- /.tab-pane -->
@@ -25,7 +34,7 @@
                 	@include('rol_filial.pagos.partials.tabla_libro_iva')
                 </div><!-- /.tab-content -->
 
-              </div><!-- nav-tabs-custom -->
+                </div><!-- nav-tabs-custom -->
             </div><!-- /.col -->
 
 		</div> <!-- Fin col -->
@@ -36,6 +45,14 @@
 <script type="text/javascript">
 	 $('.daterangerp').daterangepicker();
 	 $('.dateranger2').daterangepicker();
+
+   alert('asdasd');
+  //$("#enlaceajax").click(function(evento){
+    //  evento.preventDefault();
+      $(".destino").load("{{ URL::to('/filial/carrito') }}");
+   
+  //}); 
+
 
 </script>
 <script type="text/javascript" src="{{asset('js/functions/buscar_morosos.js')}}"></script>

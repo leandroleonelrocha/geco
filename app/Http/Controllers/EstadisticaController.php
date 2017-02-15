@@ -29,7 +29,8 @@ class EstadisticaController extends Controller
         $this->data['totalAsesores']    = $this->total_asesores();
 	}
 	public function total_personas(){
-        return $this->personaRepo->getPersonasFilial()->count();
+		
+        return $this->personaRepo->getPersonasFilial()->total();
     }
     public function total_asesores(){
         return $this->asesorRepo->allAsesores()->count();

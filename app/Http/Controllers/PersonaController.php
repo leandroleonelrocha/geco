@@ -35,6 +35,7 @@ class PersonaController extends Controller {
     public function lista(){
 
         $persona = $this->personaRepo->getPersonasFilial(); // Obtención de todos las personas activos
+       
         return view('rol_filial.personas.lista',compact('persona'));
      
     }

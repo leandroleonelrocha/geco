@@ -48,10 +48,22 @@ class MateriaController extends Controller
 	}
 
 	public function nuevo_post(CrearNuevaMateriaRequest $request){
-		$data = $request->all();
+
+		$materia = $request->all();
 		$cadena 	= $this->filialRepo->filialCadena();
-		$data['cadena_id'] =$cadena->cadena_id;
-		$this->materiaRepo->create($data);
+		$materia['cadena_id'] =$cadena->cadena_id;
+
+		if (isset($materia["teorica_practica"])) {
+			if ($materia["teorica_practica"] == 1){
+				$materia["practica"] = 1;
+				$materia["teorica"]  = 0;
+			}
+			else{
+				$materia["practica"] = 0;
+				$materia["teorica"]  = 1;
+			}
+		}
+		$this->materiaRepo->create($materia);
 		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
 	}
 
@@ -69,6 +81,16 @@ class MateriaController extends Controller
 
     public function editar_post(EditarMateriaRequest $request){
 		$data = $request->all();
+		if (isset($data["teorica_practica"])) {
+			if ($data["teorica_practica"] == 1){
+				$data["practica"] = 1;
+				$data["teorica"]  = 0;
+			}
+			else{
+				$data["practica"] = 0;
+				$data["teorica"]  = 1;
+			}
+		}
 		$model = $this->materiaRepo->find($data['id']);
 
 		if($this->materiaRepo->edit($model,$data))	

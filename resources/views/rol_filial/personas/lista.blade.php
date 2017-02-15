@@ -71,7 +71,7 @@
 	<div class="row">
         <div class="col-sm-12">
 	        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-	        	{!! $persona->render() !!}
+	        	
 	        </div>
         </div>
     </div>

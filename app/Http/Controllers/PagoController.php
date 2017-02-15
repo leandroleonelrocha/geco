@@ -14,6 +14,9 @@ use App\Http\Requests\EditarPagoRequest;
 use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Funciones\NumberToLetterConverter;
+use App\Http\Repositories\ReciboRepo;
+use App\Http\Repositories\ReciboTipoRepo;
+use App\Http\Repositories\ReciboConceptoPagoRepo;
 
 use PDF;
 use Session;
@@ -22,10 +25,13 @@ class PagoController extends Controller
 {
 	protected $pagoRepo;
 
-	public function __construct(PagoRepo $pagoRepo, MatriculaRepo $matriculaRepo)
+	public function __construct(PagoRepo $pagoRepo, MatriculaRepo $matriculaRepo, ReciboRepo $reciboRepo, ReciboTipoRepo $reciboTipoRepo, ReciboConceptoPagoRepo $reciboConceptoPagoRepo)
 	{
-		$this->pagoRepo = $pagoRepo;
-		$this->matriculaRepo = $matriculaRepo;
+		$this->pagoRepo                 = $pagoRepo;
+		$this->matriculaRepo            = $matriculaRepo;
+        $this->reciboRepo               = $reciboRepo;
+        $this->reciboTipoRepo           = $reciboTipoRepo;
+        $this->reciboConceptoPagoRepo   = $reciboConceptoPagoRepo;
 	}
 
 	public function vista(){
@@ -84,6 +90,7 @@ class PagoController extends Controller
         $pago['pago_individual'] 	=  	1;
         $pago['descripcion']    	=   $request->descripcion;
         $pago['vencimiento']    	=   $request->vencimiento;
+        $pago['fecha_recargo']      =   $request->fecha_recargo[$i];
         $pago['monto_original'] 	=   $request->monto_original;
         $pago['monto_actual'] 		=   $pago['monto_original'];
         $pago['descuento']        	=   $request->descuento;
@@ -120,13 +127,26 @@ class PagoController extends Controller
     }
 
     public function actualizar($id){
-    	$url 	= redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
-		$pago 	= $this->pagoRepo->find($id);
-		return view('rol_filial.matriculas.pagos.actualizar',compact('pago'));
+    	$url 	    = redirect()->back()->getTargetUrl(); session(['urlBack' => $url]);
+		$pago 	    = $this->pagoRepo->find($id);
+        $tipos      = $this->reciboTipoRepo->all()->lists('recibo_tipo','id');
+        $conceptos  = $this->reciboConceptoPagoRepo->all()->lists('concepto_pago','id');
+		return view('rol_filial.matriculas.pagos.actualizar',compact('pago','tipos','conceptos'));
     }
 
     public function actualizar_post(Request $request){
-    	$url 	= 	session('urlBack');
+
+        $data = ($request->all());
+        //Session::put('pagos', $data);
+        $request->session()->push('pagos', $data);
+
+       
+        
+        //array_push($_SESSION['pagos'], $data);
+        
+        /*
+
+        $url 	= 	session('urlBack');
 		$modelP = 	$this->pagoRepo->find($request->pago);
 		if ($request->monto_a_pagar <= $modelP['monto_actual']){
 			$pago['monto_actual'] 	= $modelP['monto_actual'] - $request->monto_a_pagar;
@@ -134,8 +154,21 @@ class PagoController extends Controller
 			if ( $pago['monto_actual'] == 0 )
 				$pago['terminado'] = 1;
 
-			if( $this->pagoRepo->edit($modelP,$pago) )
-				return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
+			if( $this->pagoRepo->edit($modelP,$pago) ){
+                $recibo['recibo_tipo_id']           =   $request->recibo_tipo_id;
+                $recibo['pago_id']                  =   $request->pago;
+                $recibo['monto']                    =   $request->monto_a_pagar;
+                $recibo['recibo_concepto_pago_id']  =   $request->recibo_concepto_pago_id;
+                $recibo['descripcion']              =   $request->descripcion;
+                $recibo['filial_id']                =   session('usuario')['entidad_id'];
+                $recibo['tipo_moneda_id']           =   session('moneda')['id'];
+                
+                if ($this->reciboRepo->create($recibo)) {
+                    $id = $this->reciboRepo->all()->last()->id;
+                    return redirect()->route('filial.recibo_imprimir', $id);
+                }
+				// return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
+            }
 			else{
 				session()->forget('urlBack');
 				return redirect()->to($url)->with('msg_error','El pago no ha podido ser actualizado');
@@ -143,6 +176,9 @@ class PagoController extends Controller
 		}
 		else
 			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
+
+        */
+            return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
     }
 
 
@@ -260,6 +296,7 @@ class PagoController extends Controller
             $pago['nro_pago']           =   $request->nro_pago[$i];
             $pago['descripcion']        =   $request->descripcion[$i];
             $pago['vencimiento']        =   $request->vencimiento[$i];
+            $pago['fecha_recargo']      =   $request->fecha_recargo[$i];
             $pago['monto_original']     =   $request->monto_original[$i];
             $pago['monto_actual']       =   $pago['monto_original'];
             $pago['descuento']          =   $request->descuento[$i];
@@ -277,4 +314,7 @@ class PagoController extends Controller
         return redirect()->back();
     }
 
+    public function carrito(){
+        return view('rol_filial.matriculas.partials.carrito');
+    }
 }

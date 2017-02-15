@@ -24,7 +24,7 @@ abstract class BaseRepo {
 
     public function allEneable(){
 
-        return $this->model->orderBy('id','DESC')->where('activo', 1)->paginate(10);
+        return $this->model->orderBy('id','DESC')->where('activo', 1)->get();
     }
 
 

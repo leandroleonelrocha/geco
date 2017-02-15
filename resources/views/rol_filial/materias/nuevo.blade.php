@@ -22,11 +22,18 @@
                                 {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control select2')) !!}
                             </div>
                    
+                            <div class="col-md-6 form-group teorica_practica">
+                                <label>@lang('materia.tipomateria')</label>
+                                <div>
+                                    <input type='radio' class='flat-red' name='teorica_practica' value="1" >@lang('materia.practica')
+                                    <input type='radio' class='flat-red' name='teorica_practica' value="0">@lang('materia.teorica')
+                                </div>
+                            </div>
+                            
                             <div class="col-md-6 form-group">
                                 <label>@lang('materia.descripcion')</label>
                                 {!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x3')) !!}
                             </div>
-
 
                             <div class="box-footer col-xs-12">
                             <button type="submit" class="btn btn-success">@lang('materia.crear') </button>

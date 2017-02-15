@@ -118,15 +118,18 @@ class MatriculaController extends Controller {
                 $pago['nro_pago']       =   $request->nro_pago[$i];
                 $pago['descripcion']    =   $request->descripcion[$i];
                 $pago['vencimiento']    =   $request->vencimiento[$i];
+                $pago['fecha_recargo']  =   $request->fecha_recargo[$i];
                 $pago['monto_original'] =   $request->monto_original[$i];
-                $pago['monto_actual']   =     $pago['monto_original'];
+                $pago['monto_actual']   =   $pago['monto_original'];
                 $pago['descuento']      =   $request->descuento[$i];
                 $pago['recargo']        =   $request->recargo[$i];
                 $pago['filial_id']      =   session('usuario')['entidad_id'];
                 $pago['tipo_moneda_id'] =   session('moneda')['id'];
                 $this->pagoRepo->create($pago);
+                $p[] = $this->pagoRepo->all()->last();
             }
-            return redirect()->route('filial.matriculas');
+                // return redirect()->route('filial.matriculas');
+                return redirect()->route('filial.pagos_actualizar', $p[0]->id);
         }
         else
             return redirect()->route('filial.matriculas')->with('msg_error','La matrícula no ha podido ser agregado');
@@ -194,14 +197,17 @@ class MatriculaController extends Controller {
                     $pago['nro_pago']       =   $request->nro_pago[$i];
                     $pago['descripcion']    =   $request->descripcion[$i];
                     $pago['vencimiento']    =   $request->vencimiento[$i];
+                    $pago['fecha_recargo']  =   $request->fecha_recargo[$i];
                     $pago['monto_original'] =   $request->monto_original[$i];
-                    $pago['monto_actual']   =     $pago['monto_original'];
+                    $pago['monto_actual']   =   $pago['monto_original'];
                     $pago['descuento']      =   $request->descuento[$i];
                     $pago['recargo']        =   $request->recargo[$i];
                     $pago['filial_id']      =   session('usuario')['entidad_id'];
                     $this->pagoRepo->create($pago);
+                    $p[] = $this->pagoRepo->all()->last();
                 }
-                return redirect()->route('filial.matriculas');
+                // return redirect()->route('filial.matriculas');
+                return redirect()->route('filial.pagos_actualizar', $p[0]->id);
             }
             else
                 return redirect()->route('filial.matriculas')->with('msg_error','La matrícula no ha podido ser agregado');
@@ -381,4 +387,6 @@ class MatriculaController extends Controller {
         return $pdf->stream();
 
     }
+
+   
 }

@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label>@lang('grupo.carrerasycursos')</label>
                                 <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-                                <option>@lang('grupo.seleccioncyc')</option>
+                                <option value="0">@lang('grupo.seleccioncyc')</option>
                                 <optgroup label=@lang('grupo.carreras')>
                                 @foreach($carreras as $carrera)
                                 <option value="carrera;{{$carrera->id}}" <?php if(!empty($model)){
@@ -37,6 +37,13 @@
                                 @endforeach
                                 </optgroup>
                                 </select>
+                            </div>
+                            <div class="form-group teorica_practica">
+                                <label>@lang('materia.tipomateria')</label>
+                                <div>
+                                    <input type='radio' class='flat-red tp' name='teorica_practica' value="practica" >@lang('materia.practica')
+                                    <input type='radio' class='flat-red tp' name='teorica_practica' value="teorica">@lang('materia.teorica')
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>@lang('grupo.descripcion')</label>
@@ -176,16 +183,73 @@
 <script type="text/javascript">
    
    $(document).ready(function() {
-        function obtenerMaterias(){
+        $('.teorica_practica').hide();
+        // function obtenerMaterias(){
+        //     var carreras_cursos=$('select[id=carreras_cursos]').val(); 
+        //         var tipo = carreras_cursos.split(';');
+        //         if(tipo[0] == "carrera"){   
+        //             $(".materia").show();
+        //             $(".teorica_practica").show();
+        //             var tp = $(".tp").val();
+        //             $.ajax(
+        //                 {
+        //                 url: "post_materias_carreras",
+        //                 type: "POST",
+        //                 data: 'carrera_id='+tipo[1],
+        //                 headers: {
+        //                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //                 },
+        //                 success: function(result){
+        //                        if(result.length == 0){
+        //                             $(".materia").show();
+        //                             $(".materia").empty();
+        //                             $(".teorica_practica").hide();
+        //                        }
+        //                        if(result.length > 0){
+        //                            $(".materia").show();
+        //                            $(".select_materia").empty();
+        //                            $(".teorica_practica").show();
+        //                            $.each(result, function(clave, valor) {
+        //                                 $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
+        //                            });
+        //                        }
+                            
+        //                 }}
+        //             );
+        //         }
+        //         if(tipo[0] == "curso"){
+        //             $(".select_materia").empty(); 
+        //             $(".materia").hide();
+        //             $(".teorica_practica").hide();
+        //         }
+        // }
+
+         function showTP(){
             var carreras_cursos=$('select[id=carreras_cursos]').val(); 
                 var tipo = carreras_cursos.split(';');
                 if(tipo[0] == "carrera"){   
+                    // $(".materia").show();
+                    $(".teorica_practica").show();
+                }
+                else{
+                    $(".select_materia").empty(); 
+                    $(".materia").hide();
+                    $(".teorica_practica").hide();
+                }
+        }
+
+        function obtenerMaterias(){
+            var carreras_cursos = $('select[id=carreras_cursos]').val(),
+                tipo            = carreras_cursos.split(';'),
+                tipoM           = $(".tp:checked").val();
+                if(carreras_cursos != 0){
                     $(".materia").show();
+                    $(".teorica_practica").show();
                     $.ajax(
                         {
                         url: "post_materias_carreras",
                         type: "POST",
-                        data: 'carrera_id='+tipo[1],
+                        data: {carrera_id: tipo[1], tp: tipoM},
                         headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -193,10 +257,13 @@
                                if(result.length == 0){
                                     $(".materia").show();
                                     $(".materia").empty();
+                                    // $(".teorica_practica").hide();
                                }
                                if(result.length > 0){
                                    $(".materia").show();
                                    $(".select_materia").empty();
+                                   $(".teorica_practica").show();
+                                   console.log(result);
                                    $.each(result, function(clave, valor) {
                                         $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
                                    });
@@ -205,13 +272,12 @@
                         }}
                     );
                 }
-                if(tipo[0] == "curso"){
-                    $(".select_materia").empty(); 
-                    $(".materia").hide();
-                }
         }
+
+        showTP();
         obtenerMaterias();
-        $("#carreras_cursos").change(function(){ obtenerMaterias(); });
+        $("#carreras_cursos").change(function(){ showTP(); });
+        $(".iCheck-helper").click(function(){ obtenerMaterias(); });
         var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
