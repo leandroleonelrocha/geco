@@ -2,8 +2,7 @@
 
 @section('content')
 
-	@include('rol_filial.matriculas.partials.carrito')
-
+	
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -83,3 +82,6 @@
 	</div> <!-- Fin row -->
 @endsection
 
+@section('modal')
+@include('rol_filial.matriculas.partials.carrito')
+@endsection

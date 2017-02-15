@@ -4,15 +4,20 @@
 </button>
  -->
 
-<div class="example-modal" id="exampleModalLong">
-            <div class="modal">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Modal Default</h4>
-                  </div>
-                  <div class="modal-body">
+
+
+<div class="modal fade" id="ModalEdit"  role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+       {!! Form::open(['route'=>'grupos.editar_clase'] ) !!}
+      
+        <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">@lang('grupo.editarclase')</h4>
+        </div>
+        <div class="modal-body">
+          <div class="modal-body">
                             <div class="box box-info">
                         <div class="box-header with-border">
                           <h3 class="box-title">Latest Orders</h3>
@@ -61,15 +66,14 @@
                         </div><!-- /.box-footer -->
                       </div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                  </div>
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
-          </div>
-
-            
-
               
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('grupo.cerrar')</button>
+        <button type="submit" class="btn btn-success">@lang('grupo.guardar')</button>
+        </div>
+      {!! Form::close() !!}
+      </div>
+      </div>
+    </div>
+
