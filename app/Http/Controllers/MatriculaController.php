@@ -303,21 +303,24 @@ class MatriculaController extends Controller {
             $actualDate   = date('Y-m-d');
 
             $recargo = $pago->monto_original * ( $pago->recargo * 0.01);
-            $montoR  = $pago->monto_original + $recargo - $pago->monto_pago;
-            $montoD  = $pago->monto_original - $pago->descuento - $pago->monto_pago;
+            $montoR  = $pago->monto_original + $recargo + $pago->recargo_adicional - $pago->monto_pago;
+            $montoD  = $pago->monto_original - $pago->descuento - $pago->monto_pago - $pago->descuento_adicional;
+
+            if($pago->monto_actual  != 0){
+                if ($pago->fecha_recargo < $actualDate && $montoR != $pago->monto_actual){
+                    $pago->monto_actual += $recargo;
+                    $pago->save();
+                }
+                if ($actualDate <= $pago->vencimiento && $montoD != $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
+                    $pago->monto_actual -= $pago->descuento;
+                    $pago->save();
+                }
+                if ($actualDate > $pago->vencimiento && $montoD == $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
+                    $pago->monto_actual += $pago->descuento;
+                    $pago->save();
+                }
+            }
             
-            if ($pago->fecha_recargo < $actualDate && $montoR != $pago->monto_actual){
-                $pago->monto_actual += $recargo;
-                $pago->save();
-            }
-            if ($actualDate <= $pago->vencimiento && $montoD != $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
-                $pago->monto_actual -= $pago->descuento;
-                $pago->save();
-            }
-            if ($actualDate > $pago->vencimiento && $montoD == $pago->monto_actual && $pago->fecha_recargo > date('Y-m-d')) {
-                $pago->monto_actual += $pago->descuento;
-                $pago->save();
-            }
         }
         return view('rol_filial.matriculas.vista',compact('matricula','planPagosV','pagosIndividualesV'));
     }

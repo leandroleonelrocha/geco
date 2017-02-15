@@ -148,7 +148,10 @@ class PagoController extends Controller
 
         $url 	= 	session('urlBack');
 		$modelP = 	$this->pagoRepo->find($request->pago);
-		if ($request->monto_a_pagar <= $modelP['monto_actual']){
+        $ma     =   $modelP['monto_actual'] + $request->recargo_adicional;
+        $map    =   (float)$request->monto_a_pagar;
+        
+		if ($map <= $ma){
             if (isset($request->descuento_adicional)){
                 $pago['descuento_adicional'] = $request->descuento_adicional;
                 $modelP['monto_actual']      -= $request->descuento_adicional;
