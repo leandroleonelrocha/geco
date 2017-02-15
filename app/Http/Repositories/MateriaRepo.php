@@ -16,5 +16,11 @@ class MateriaRepo extends BaseRepo {
         return Materia::where('id', '=', $id)->delete();
     }
 
-   
+    public function allMaterias($cad){
+        return $this->model->where('cadena_id', $cad)->paginate(10);
+    }
+
+    public function allMateriasLista($data, $id,$cad){
+        return $this->model->where('cadena_id', $cad)->lists($data, $id);
+    }
 }

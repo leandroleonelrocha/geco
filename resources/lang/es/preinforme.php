@@ -21,6 +21,10 @@ return [
 
 	'personasexistentes'=>'Personas existentes',
 
+	'asignardatos'=>'Asignar Datos Para Preinformes',
+	'listamedios'=>'Lista Medios de Preinformes',
+	'listacomoencontro'=>'Lista ¿Cómo nos encontró? de Preinformes',
+
 	'agregarnuevapersona' => 'Agregar Nueva Persona',
     'agregarnuevo' => 'Agregar Nuevo',
     'nuevopreinforme' => 'Nuevo  Preinforme',

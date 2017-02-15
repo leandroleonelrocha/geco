@@ -222,6 +222,7 @@
                       <ul class="treeview-menu">
                         <li> <a href="{{route('filial.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i>@lang('menu.perfil')</a></li>
                         <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignaraulas')</a></li>
+                        <li> <a href="{{route('filial.preinformes_nuevoDatos')}}"><i class="fa fa-circle-o"></i>Asignar Datos Preinforme</a></li>
                         <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
                       </ul>
                     </li> 

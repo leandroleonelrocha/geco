@@ -68,8 +68,9 @@ class MatriculaController extends Controller {
 
         $persona    = $this->personaRepo->find($id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
-        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos','grupos'));
     }
@@ -84,8 +85,9 @@ class MatriculaController extends Controller {
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $paises= $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
-        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
         $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
         return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos','paises'));
     }
@@ -208,10 +210,7 @@ class MatriculaController extends Controller {
 
     public function editar($id){
 
-        $filial     = $this->filialRepo->obtenerFilialPais();
         $asesores   = $this->asesorRepo->allAsesores()->lists('fullname','id');
-        foreach ($filial as $f) $pais_id = $f->pais_id;
-        $pais       = $this->paisRepo->obtenerLenguaje($pais_id);
         $matricula  = $this->matriculaRepo->find($id);
 
         if (isset($matricula->curso_id))

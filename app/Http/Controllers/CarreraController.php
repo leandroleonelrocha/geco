@@ -32,10 +32,10 @@ class CarreraController extends Controller
 		$filial=$this->filialRepo->obtenerFilialPais();
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+		$cadena 	= $this->filialRepo->filialCadena();
 		
-		$carreras=$this->carreraRepo->allCarreras($pais->lenguaje);
+		$carreras=$this->carreraRepo->allCarreras($pais->lenguaje,$cadena->cadena_id);
 		return view('rol_filial.carreras.lista',compact('carreras'));
-		
 	}
 
 	public function  nuevo(){
@@ -52,7 +52,8 @@ class CarreraController extends Controller
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-
+		$cadena 	= $this->filialRepo->filialCadena();
+		$data['cadena_id'] =$cadena->cadena_id;
 		$data['lenguaje'] =$pais->lenguaje;
 
 		$this->carreraRepo->create($data);

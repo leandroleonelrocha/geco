@@ -6,7 +6,7 @@ class Materia extends Entity {
     protected  $table= 'materia';
   //  protected $primaryKey= 'id_materia';
 
-    protected $fillable   = ['id', 'carrera_id', 'nombre','descripcion'];
+    protected $fillable   = ['carrera_id','cadena_id','nombre','descripcion'];
 
 
     public function Carrera(){

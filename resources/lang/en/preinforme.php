@@ -22,6 +22,10 @@ return [
 
 	'personasexistentes'=>'Existing persons',
 
+    'asignardatos'=>'Assign Data to Pre-Reports',
+    'listamedios'=>'Pre-Reports Media List',
+    'listacomoencontro'=>'List How do we meet? of Reports',
+
 
 	'agregarnuevapersona' => 'Add New Person',
     'agregarnuevo' => 'Add New',

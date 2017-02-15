@@ -11,7 +11,7 @@ class Preinforme extends Entity
      *
      * @var array
      */
-    protected $fillable = ['persona_id','asesor_id','descripcion','medio','como_encontro','filial_id'];
+    protected $fillable = ['persona_id','asesor_id','descripcion','medio_id','como_encontro_id','filial_id'];
 
     // Relaciones
     public function Persona(){
@@ -24,5 +24,13 @@ class Preinforme extends Entity
 
     public function PersonaInteres(){
         return $this->belongsTo(PersonaInteres::getClass());
+    }
+
+    public function PreinformeMedio(){
+        return $this->belongsTo(PreinformeMedio::getClass());
+    }
+
+    public function PreinformeComoEncontro(){
+        return $this->belongsTo(PreinformeComoEncontro::getClass());
     }
 }

@@ -6,7 +6,7 @@ class Carrera extends Entity {
     protected  $table= 'carrera';
    // protected $primaryKey= 'id_carrera';
 
-    protected $fillable   = ['id', 'nombre','duracion', 'descripcion', 'lenguaje'];
+    protected $fillable   = ['cadena_id', 'nombre','duracion', 'descripcion', 'lenguaje'];
 
     public function PersonaInteres(){
         return $this->belongsTo(PersonaInteres::getClass());

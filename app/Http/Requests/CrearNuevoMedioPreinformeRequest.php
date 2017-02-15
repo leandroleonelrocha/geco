@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Requests;
+use App\Http\Requests\Request;
+
+class CrearNuevoMedioPreinformeRequest extends Request
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'medio' => 'required',
+            'medio' => 'required|unique:preinforme_medio,medio',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'medio.required' => 'El campo medio es requerido.',
+            'medio.unique'=> 'El campo medio ya está en uso.', 
+        ];
+    }
+
+}

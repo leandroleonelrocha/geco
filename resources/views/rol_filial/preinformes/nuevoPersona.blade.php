@@ -174,10 +174,17 @@
 				                                    <label>@lang('preinforme.descripcion')</label>
 				                                    {!! Form::textarea('descripcion_preinforme',null,array('class'=>'form-control','size'=>'30x4')) !!}
 				                                </div>
+
 				                                <div class="col-md-6 form-group">
 				                                    <label>Medio</label>
-				                                    {!! Form::textarea('medio',null,array('class'=>'form-control','size'=>'30x4')) !!}
+				                                    {!! Form::select('medio_id',$medios->toArray(),null,array('class' => 'form-control select2')) !!}
 				                                </div>
+
+				                                <div class="col-md-6 form-group">
+				                                    <label>@lang('preinforme.encontro')</label>
+				                                    {!! Form::select('como_encontro_id',$comoEncontro->toArray(),null,array('class' => 'form-control select2')) !!}
+				                                </div>
+
 				                            
 				                                 <div class="col-xs-12">
 							                        <ul class="list-inline pull-right">
@@ -187,10 +194,8 @@
 				                        		</div>
 				                    </div>
 				                    <div class="tab-pane" role="tabpanel" id="step3">
-				                                <div class="col-md-12 form-group">
-				                                    <label>@lang('preinforme.encontro')</label>
-				                                    {!! Form::textarea('como_encontro',null,array('class'=>'form-control','size'=>'30x4')) !!}
-				                                </div>
+
+
 				                             
 
 				                                <div class="col-md-5 form-group">

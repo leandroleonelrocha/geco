@@ -154,6 +154,29 @@ $(document).ready(function(){
         return false;
     });
 
+            /* ------------------------- Agregar Medio Preinforme ------------------------- */
+    var max_fields      = 50; //maximum input boxes allowed
+    var wrapperMedio         = $(".input_fields_medio"); //Fields wrapper
+    var add_button_medio      = $(".add_input_medio"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button_medio).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapperMedio).append('<div><input type="text" name="medio[]" class="form-control"/><a href="#" class="remove_fieldmedio" >&times;</a></div>'); //add input box
+        }
+    });
+
+    $(wrapperMedio).on("click",".remove_fieldmedio", function(e){ //click en eliminar campo
+       
+        if( x > 1 ) {
+            $(this).parent('div').remove(); //eliminar el campo
+            x--;
+        }
+        return false;
+    });
+
    /* ------------------------- Aceptar/Rechazar Pases ------------------------- */
     $('.CR').on('click', function(event) {
         event.preventDefault();

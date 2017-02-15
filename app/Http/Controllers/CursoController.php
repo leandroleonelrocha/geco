@@ -32,8 +32,8 @@ class CursoController extends Controller
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-		
-		$cursos = $this->cursoRepo->allCursos($pais->lenguaje);
+		$cadena 	= $this->filialRepo->filialCadena();
+		$cursos = $this->cursoRepo->allCursos($pais->lenguaje,$cadena->cadena_id);
 
 		return view('rol_filial.cursos.lista',compact('cursos'));
 	}
@@ -49,9 +49,9 @@ class CursoController extends Controller
 
 		$filial=$this->filialRepo->obtenerFilialPais();
 		foreach ($filial as $f) $pais_id=$f->pais_id;
-		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-
+		$cadena 	= $this->filialRepo->filialCadena();
+		$data['cadena_id'] =$cadena->cadena_id;
 		$data['lenguaje'] =$pais->lenguaje;
 		$this->cursoRepo->create($data);
 		return redirect()->route('filial.cursos')->with('msg_ok', 'Curso creado correctamente');

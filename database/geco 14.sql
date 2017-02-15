@@ -2,40 +2,6 @@ drop database if exists geco;
 create database geco;
 use geco;
 
-create table if not exists curso(
-id			int not null auto_increment,
-nombre		varchar(50) not null,
-duracion 	varchar(50),
-descripcion	varchar(300) default 'Sin Descripción.',
-taller		boolean default false,
-lenguaje  	char (5) not null,
-created_at	timestamp not null default '0000-00-00 00:00:00',
-updated_at	timestamp not null default '0000-00-00 00:00:00',
-primary key	(id)
-);
-
-create table if not exists carrera(
-id			int not null auto_increment,
-nombre		varchar(50) not null,
-duracion 	varchar(50),
-descripcion	varchar(300) default 'Sin Descripción.',
-lenguaje  	char (5) not null,
-created_at	timestamp not null default '0000-00-00 00:00:00',
-updated_at	timestamp not null default '0000-00-00 00:00:00',
-primary key	(id)
-);
-
-create table if not exists materia(
-id			int not null auto_increment,
-carrera_id	int not null,
-nombre		varchar(50) not null,
-descripcion	varchar(300) default 'Sin Descripción.',
-created_at	timestamp not null default '0000-00-00 00:00:00',
-updated_at	timestamp not null default '0000-00-00 00:00:00',
-primary key (id, carrera_id),
-foreign key (carrera_id)				references carrera	(id)
-);
-
 create table if not exists cadena(
 id					int not null auto_increment,
 nombre				varchar(50) not null,
@@ -44,6 +10,46 @@ telefono			varchar(50) not null,
 created_at  		timestamp not null default '0000-00-00 00:00:00',
 updated_at  		timestamp not null default '0000-00-00 00:00:00',
 primary key 		(id)
+);
+
+create table if not exists curso(
+id			int not null auto_increment,
+cadena_id	int not null,
+nombre		varchar(50) not null,
+duracion 	varchar(50),
+descripcion	varchar(300) default 'Sin Descripción.',
+taller		boolean default false,
+lenguaje  	char (5) not null,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key	(id),
+foreign key	(cadena_id) 	references cadena 	(id)
+);
+
+create table if not exists carrera(
+id			int not null auto_increment,
+cadena_id	int not null,
+nombre		varchar(50) not null,
+duracion 	varchar(50),
+descripcion	varchar(300) default 'Sin Descripción.',
+lenguaje  	char (5) not null,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key	(id),
+foreign key	(cadena_id) 	references cadena 	(id)
+);
+
+create table if not exists materia(
+id			int not null auto_increment,
+carrera_id	int not null,
+cadena_id	int not null,
+nombre		varchar(50) not null,
+descripcion	varchar(300) default 'Sin Descripción.',
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key (id, carrera_id),
+foreign key (carrera_id)				references carrera	(id),
+foreign key	(cadena_id) 	references cadena 	(id)
 );
 
 create table if not exists tipo_documento(
@@ -213,20 +219,40 @@ primary key	(persona_id, mail),
 foreign key	(persona_id) 		references persona	(id)
 );
 
-create table if not exists preinforme(
+create table if not exists preinforme_medio(
+id			int not null auto_increment,
+medio		varchar(50) not null,
+lenguaje  	char (5) not null,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key 			(id)
+);
+
+create table if not exists preinforme_como_encontro(
 id				int not null auto_increment,
-persona_id		int not null,
-asesor_id		int not null,
-descripcion		varchar(300),
-medio			varchar(50),
-como_encontro	varchar(50),
-filial_id		int not null,
+como_encontro	varchar(50) not null,
+lenguaje  		char (5) not null,
 created_at		timestamp not null default '0000-00-00 00:00:00',
 updated_at		timestamp not null default '0000-00-00 00:00:00',
-primary key 	(id),
-foreign key 	(persona_id)				references persona	(id),
-foreign key 	(asesor_id)					references asesor	(id),
-foreign key 	(filial_id)					references filial	(id)
+primary key 			(id)
+);
+
+create table if not exists preinforme(
+id					int not null auto_increment,
+persona_id			int not null,
+asesor_id			int not null,
+descripcion			varchar(300),
+medio_id			int not null,
+como_encontro_id	int not null,
+filial_id			int not null,
+created_at			timestamp not null default '0000-00-00 00:00:00',
+updated_at			timestamp not null default '0000-00-00 00:00:00',
+primary key 		(id),
+foreign key 		(persona_id)				references persona	(id),
+foreign key 		(asesor_id)					references asesor	(id),
+foreign key 		(filial_id)					references filial	(id),
+foreign key 		(medio_id)					references preinforme_medio	(id),
+foreign key 		(como_encontro_id)			references preinforme_como_encontro	(id)
 );
 
 create table if not exists persona_interes(
@@ -1074,116 +1100,137 @@ values  (1 , 'persona1@persona.com'		, '2016-11-11 00:00:00', '2016-11-11 00:00:
         (50, 'persona50@persona.com'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
+-- Preeinformes Medio
+--
+insert into preinforme_medio (`medio`,`lenguaje`, `created_at`, `updated_at`) 
+values 	('Publicidad','es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
+
+--
+-- Preeinformes Como Encontro
+--
+insert into preinforme_como_encontro (`como_encontro`,`lenguaje`, `created_at`, `updated_at`) 
+values 	('Internet'	 ,'es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Trabajo'	 ,'es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Televisión','es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Diario'	 ,'es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Work'		 ,'en','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
+--
 -- Preeinformes
 --
-insert into preinforme (`persona_id`, `asesor_id`, `descripcion`, `medio`, `como_encontro`, `filial_id`, `created_at`, `updated_at`) 
-values 	(1,		4, 'Interesado'		, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(2,		4, 'Vuelve dps'		, 'publicidad'	, 'Internet'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(3,		8, 'Se com por tel'	, 'publicidad'	, 'Revista'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(4, 	4, 'Nada'			, 'publicidad'	, 'Universidad'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(8, 	4, 'Se anota'		, 'publicidad'	, 'Publicidad'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(10, 	2, 'Muy convencido'	, 'publicidad'	, 'Internet'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(13, 	4, 'Sospechoso'		, 'publicidad'	, 'Radio'		, 2, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(14, 	1, 'Vuelve dps'		, 'publicidad'	, 'Comentario'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(20, 	3, 'Se com por tel'	, 'publicidad'	, 'Trabajo'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(24, 	4, 'Nada'			, 'publicidad'	, 'Transporte'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(26, 	2, 'Se anota'		, 'publicidad'	, 'Diario'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(27,	1, 'Muy convencido'	, 'publicidad'	, 'Internet'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(28, 	4, 'Sospechoso'		, 'publicidad'	, 'TV'			, 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(14, 	1, 'No Cocina'		, 'publicidad'	, 'Anuncio'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(20, 	3, 'Se com por tel'	, 'publicidad'	, 'Trabajo'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(24, 	4, 'Nada'			, 'publicidad'	, 'Internet'	, 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(26, 	2, 'Nada'			, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(27,	1, 'Llama dps'		, 'publicidad'	, 'Filial'		, 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(28, 	4, 'Interesado'		, 'publicidad'	, 'Radio'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(35, 	4, 'No sabe'		, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
+insert into preinforme (`persona_id`, `asesor_id`, `descripcion`, `medio_id`, `como_encontro_id`, `filial_id`, `created_at`, `updated_at`) 
+values 	(1,		4, 'Interesado'		, 1	, 2	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(2,		4, 'Vuelve dps'		, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(3,		8, 'Se com por tel'	, 1	, 3 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(4, 	4, 'Nada'			, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(8, 	4, 'Se anota'		, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(10, 	2, 'Muy convencido'	, 1	, 2 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(13, 	4, 'Sospechoso'		, 1	, 1 , 2, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(14, 	1, 'Vuelve dps'		, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(20, 	3, 'Se com por tel'	, 1	, 4 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(24, 	4, 'Nada'			, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(26, 	2, 'Se anota'		, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(27,	1, 'Muy convencido'	, 1	, 3 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(28, 	4, 'Sospechoso'		, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(14, 	1, 'No Cocina'		, 1	, 3 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(20, 	3, 'Se com por tel'	, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(24, 	4, 'Nada'			, 1	, 1 , 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(26, 	2, 'Nada'			, 1	, 2 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(27,	1, 'Llama dps'		, 1	, 1 , 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(28, 	4, 'Interesado'		, 1	, 2 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(35, 	4, 'No sabe'		, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
 
 --
 -- Cursos
 --
 
-insert into curso (`id`, `nombre`, `duracion`, `descripcion`, `taller`,`lenguaje`, `created_at`, `updated_at`)
-values  (1 , 'Introducción a la cocina'			, '1 Año'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Enología y Maridaje' 				, '15 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Barman y Tragos' 					, '50 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-    	(11, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (12, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (13, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (14, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (15, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into curso (`cadena_id`,`nombre`, `duracion`, `descripcion`, `taller`,`lenguaje`, `created_at`, `updated_at`)
+values  (1 	, 'Introducción a la cocina'		, '1 Año'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Enología y Maridaje' 			, '15 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Barman y Tragos' 				, '50 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+    	(1	, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Carreras
 --
 
-insert into carrera (`id`, `nombre`, `duracion`, `descripcion`,`lenguaje`, `created_at`, `updated_at`)
+insert into carrera (`cadena_id`, `nombre`, `duracion`, `descripcion`,`lenguaje`, `created_at`, `updated_at`)
 values  (1 , 'Profesional Gastronómico'			, '1 Año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
-
+        (1 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Operador de PC' 					, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Técnico en redes' 				, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Analista de sistema' 				, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Técnico en reparación de pc'		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 --
 -- Materias
 --
 
-insert into materia (`carrera_id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
-values  (1 , 'Cocina Básica y Servicio'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Panadería' 									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Pastelería' 									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Cocina Argentina y Latinoamericana'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Cocina Internacional' 						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Enología y Maridaje' 							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Repostería' 									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Barman' 										, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Repostería Inicial y Repostería Avanzada' 	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Legislación y Admin de personal'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Comercialización'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Relaciones públicas y congresos'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Arte Culinario'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Gestión de la calidad gastronómica'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Gestión de alimentos y bebidas'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Cocina Industrial'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cocina Básica y Servicio'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Prácticas en Eventos'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Planificación y organización del servicio'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Organización de eventos'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Materias Primas y Nutrición'					, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Elaboración del Menú'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Diseño y Ambientación de Restaurantes'		, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cultura y Crítica Gastronómica'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Prácticas para la Elaboración de Alimentos'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Instalación y Equipamientos Gastronómicos'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Costos y Compras'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Informática General y Aplicada'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Francés Gastronómico'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cocina I'										, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Cocina fría'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Pastas y Salsas'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Cocina asiatica'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cocina II'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Nutrición I'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Contabilidad y costos'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6, 'Gestión de personal'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Inglés técnico'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6, 'Nutrición II'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Tecnología alimentaria'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Cocina dietoterápica'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Historia de la cultura'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Diseño, equipamiento y seguridad'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
-
+insert into materia (`cadena_id`,`carrera_id`, `nombre`, `descripcion`, `created_at`, `updated_at`)
+values  (1,1 , 'Cocina Básica y Servicio'					, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Panadería' 									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Pastelería' 								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,2 , 'Cocina Argentina y Latinoamericana'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,2 , 'Cocina Internacional' 						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,3 , 'Enología y Maridaje' 						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,3 , 'Repostería' 								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Barman' 									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,4 , 'Repostería Inicial y Repostería Avanzada' 	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,5 , 'Legislación y Admin de personal'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,5 , 'Comercialización'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Relaciones públicas y congresos'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,6 , 'Arte Culinario'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Gestión de la calidad gastronómica'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Gestión de alimentos y bebidas'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,8 , 'Cocina Industrial'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cocina Básica y Servicio'					, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Prácticas en Eventos'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 ,'Planificación y organización del servicio'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Organización de eventos'					, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Materias Primas y Nutrición'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Elaboración del Menú'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Diseño y Ambientación de Restaurantes'		, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cultura y Crítica Gastronómica'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,8 , 'Prácticas para la Elaboración de Alimentos'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Instalación y Equipamientos Gastronómicos'	, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Costos y Compras'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Informática General y Aplicada'				, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Francés Gastronómico'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cocina I'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Cocina fría'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Pastas y Salsas'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Cocina asiatica'							, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cocina II'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Nutrición I'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Contabilidad y costos'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Gestión de personal'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Inglés técnico'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,6 , 'Nutrición II'								, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Tecnología alimentaria'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,5 , 'Cocina dietoterápica'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Historia de la cultura'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Diseño, equipamiento y seguridad'			, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,12, 'Topologias'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,12, 'Redes I'									, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,11, 'Introducción a word'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,14, 'Sistemas Operativos'						, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 --	
 -- Matrículas
 --
