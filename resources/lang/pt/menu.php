@@ -23,6 +23,7 @@ return [
     'lista' =>'Lista',
     'pases' =>'Passes',
     'asignaraulas' =>'Atribuir salas de aula',
+    'asignardatospreinforme' =>'Atribuir Dados Pré-Informaçãos',
     'perfil' =>'Perfil',
     'cambiarcontraseña' =>'Mudança senha',
     'cerrarsesion' =>'Fechar Sessão',

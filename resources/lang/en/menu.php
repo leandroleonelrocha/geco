@@ -24,6 +24,7 @@ return [
     'lista' =>'List',
     'pases' =>'Pases',
     'asignaraulas' =>'Assign classrooms',
+    'asignardatospreinforme' =>'Assign Data to Pre-Reports',
     'perfil' =>'Profile',
     'cambiarcontraseña' =>'Change password',
 

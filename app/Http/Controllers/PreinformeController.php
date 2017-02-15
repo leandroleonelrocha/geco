@@ -307,23 +307,28 @@ class PreinformeController extends Controller {
         $filial=$this->filialRepo->obtenerFilialPais();
         foreach ($filial as $f) $pais_id=$f->pais_id;
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
-        $data['lenguaje'] =$pais->lenguaje;
-        $this->preinformeMedioRepo->create($data);
-        // foreach ($data['nombre'] as $key) {
-        //     $aula['nombre'] = $key;;
-        //     $this->aulaRepo->create($aula);
-        // }
+        $medio['lenguaje'] =$pais->lenguaje;
+
+        foreach ($data['medio'] as $key) {
+            $medio['medio'] = $key;;
+            $this->preinformeMedioRepo->create($medio);
+        }
         return redirect()->back()->with('msg_ok', 'Medios de preinforme agregados correctamente');
     }
 
     public function nuevoDatosEncontro_post(CrearNuevoEncontroPreinformeRequest $request){
-        $data = $request->all();
+        $como_encontro = $request->all();
 
         $filial=$this->filialRepo->obtenerFilialPais();
         foreach ($filial as $f) $pais_id=$f->pais_id;
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
-        $data['lenguaje'] =$pais->lenguaje;
-        $this->preinformeComoEncontroRepo->create($data);
+        $como_encontro['lenguaje'] =$pais->lenguaje;
+
+        // foreach ($data['como_encontro'] as $key) {
+        //     $como_encontro['como_encontro'] = $key;;
+        //     $this->preinformeMedioRepo->create($como_encontro);
+        // }
+        $this->preinformeComoEncontroRepo->create($como_encontro);
         return redirect()->back()->with('msg_ok', 'Como nos encontro de preinforme agregados correctamente');
     }
 }

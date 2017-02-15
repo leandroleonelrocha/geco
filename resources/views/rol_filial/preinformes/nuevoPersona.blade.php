@@ -165,6 +165,7 @@
 				                                    </div>
 				                                   
 				                                </div>
+
 				                                <div class="col-md-6 form-group">
 				                                    <label>@lang('persona.aclaraciones')</label>
 				                                    {!! Form::textarea('aclaraciones',null,array('class'=>'form-control','size'=>'30x4')) !!}
@@ -175,15 +176,7 @@
 				                                    {!! Form::textarea('descripcion_preinforme',null,array('class'=>'form-control','size'=>'30x4')) !!}
 				                                </div>
 
-				                                <div class="col-md-6 form-group">
-				                                    <label>Medio</label>
-				                                    {!! Form::select('medio_id',$medios->toArray(),null,array('class' => 'form-control select2')) !!}
-				                                </div>
-
-				                                <div class="col-md-6 form-group">
-				                                    <label>@lang('preinforme.encontro')</label>
-				                                    {!! Form::select('como_encontro_id',$comoEncontro->toArray(),null,array('class' => 'form-control select2')) !!}
-				                                </div>
+				               
 
 				                            
 				                                 <div class="col-xs-12">
@@ -196,7 +189,15 @@
 				                    <div class="tab-pane" role="tabpanel" id="step3">
 
 
-				                             
+                                              	<div class="col-md-5 form-group">
+				                                    <label>Medio</label>
+				                                    {!! Form::select('medio_id',$medios->toArray(),null,array('class' => 'form-control select2')) !!}
+				                                </div>
+
+				                                <div class="col-md-5 form-group">
+				                                    <label>@lang('preinforme.encontro')</label>
+				                                    {!! Form::select('como_encontro_id',$comoEncontro->toArray(),null,array('class' => 'form-control select2')) !!}
+				                                </div>
 
 				                                <div class="col-md-5 form-group">
 				                                    <label>@lang('preinforme.carreras')</label>

@@ -21,11 +21,10 @@
 										{!! Form::open(['route'=> 'filial.preinformes_nuevoDatosMedio_post', 'method'=>'post']) !!}
 										<div class="col-md-6 form-group">
 	                        				<label>Medio</label> 
-	                        				<!-- <button class="add_input_medio btn-xs btn-success">+</button>   
+	                        				<button class="add_input_medio btn-xs btn-success">+</button>   
                                 			<div class="input_fields_medio">
                                     			<input type="text" name="medio[]" class="form-control">
-                                			</div> -->
-                                			{!!Form::text('medio',null,array('class'=>'form-control')) !!}
+                                			</div>
                                 		</div>
 
                                 		 <div class="box-footer col-xs-12">
@@ -51,7 +50,11 @@
 									<div class="tab-pane" id="tab_2">
 										{!! Form::open(['route'=> 'filial.preinformes_nuevoDatosEncontro_post', 'method'=>'post']) !!}
 										<div class="col-md-6 form-group">
-                                			<label>@lang('preinforme.encontro')</label> 
+                                			<label>@lang('preinforme.encontro')</label>
+<!--                                             <button class="add_input_encontro btn-xs btn-success">+</button>
+                                            <div class="input_fields_encontro">
+                                                <input type="text" name="como_encontro[]" class="form-control">
+                                            </div>  -->
                                 			{!!Form::text('como_encontro',null,array('class'=>'form-control')) !!}
 										</div>
 

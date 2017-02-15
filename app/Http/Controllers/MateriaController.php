@@ -43,7 +43,7 @@ class MateriaController extends Controller
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
 		$cadena = $this->filialRepo->filialCadena();
-		$carreras = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+		$carreras = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
 		return view('rol_filial.materias.nuevo', compact('carreras'));	
 	}
 
@@ -73,8 +73,8 @@ class MateriaController extends Controller
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-
-		$carreras = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
+		$cadena 	= $this->filialRepo->filialCadena();
+		$carreras = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
 		$materia = $this->materiaRepo->find($id);
 		return view('rol_filial.materias.editar',compact('materia','carreras'));	
     }

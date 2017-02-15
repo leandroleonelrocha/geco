@@ -30,7 +30,7 @@ class MateriaRepo extends BaseRepo {
     }
 
     public function allMaterias($cad){
-        return $this->model->where('cadena_id', $cad)->paginate(10);
+        return $this->model->where('cadena_id', $cad)->get();
     }
 
     public function allMateriasLista($data, $id,$cad){

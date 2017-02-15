@@ -177,6 +177,29 @@ $(document).ready(function(){
         return false;
     });
 
+                /* ------------------------- Agregar Como nos Encontro Preinforme ------------------------- */
+    var max_fields      = 50; //maximum input boxes allowed
+    var wrapperEncontro         = $(".input_fields_encontro"); //Fields wrapper
+    var add_button_encontro      = $(".add_input_encontro"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button_encontro).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapperEncontro).append('<div><input type="text" name="como_encontro[]" class="form-control"/><a href="#" class="remove_fieldencontro" >&times;</a></div>'); //add input box
+        }
+    });
+
+    $(wrapperEncontro).on("click",".remove_fieldencontro", function(e){ //click en eliminar campo
+       
+        if( x > 1 ) {
+            $(this).parent('div').remove(); //eliminar el campo
+            x--;
+        }
+        return false;
+    });
+
    /* ------------------------- Aceptar/Rechazar Pases ------------------------- */
     $('.CR').on('click', function(event) {
         event.preventDefault();
