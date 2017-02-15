@@ -61,4 +61,6 @@ return [
     'modificar'           => 'Modificar',
     'actualizar'          => 'Actualizar',
     'verrecibos'          => 'Ver recibos',
+    'descuentoadicional'  => 'Descuento adicional',
+    'recargoadicional'    => 'Recargo adicional',
 ];

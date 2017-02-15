@@ -365,10 +365,10 @@ $(".star_intro" ).click(function() {
     startIntro(texto);
 });
 
-$('.fecha_inicio').on('blur', function(){
-    var thiss = $(this).val();
-    console.log(thiss);
-});   
+// $('.fecha_inicio').on('blur', function(){
+//     var thiss = $(this).val();
+//     console.log(thiss);
+// });   
 </script>
 @include('partials.inicio_tutorial')
 @endsection

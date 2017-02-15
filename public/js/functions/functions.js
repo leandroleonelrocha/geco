@@ -227,4 +227,25 @@ $(document).ready(function(){
             console.log("error");
         });
     });
+
+    /* ------------------------- Pagos ------------------------- */
+    var actual  = parseFloat($('.monto_actual').val()); // Monto actual - antes de ser modificado
+    // Descuento adicional
+    $('.descuento_adicional').keyup(function(){
+        var descAd      = parseFloat($('.descuento_adicional').val()),
+            desc        = actual - descAd;
+
+        $('.monto_actual').val(desc);
+        if (isNaN(descAd)) $('.monto_actual').val(actual);
+    });
+
+    // Reecargo adicional
+    $('.recargo_adicional').keyup(function(){
+        var recAd      = parseFloat($('.recargo_adicional').val()),
+            rec        = actual + recAd;
+
+        $('.monto_actual').val(rec);
+
+        if (isNaN(recAd)) $('.monto_actual').val(actual);
+    });
 });

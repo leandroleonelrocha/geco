@@ -306,7 +306,6 @@ class MatriculaController extends Controller {
             $montoR  = $pago->monto_original + $recargo - $pago->monto_pago;
             $montoD  = $pago->monto_original - $pago->descuento - $pago->monto_pago;
             
-            
             if ($pago->fecha_recargo < $actualDate && $montoR != $pago->monto_actual){
                 $pago->monto_actual += $recargo;
                 $pago->save();
