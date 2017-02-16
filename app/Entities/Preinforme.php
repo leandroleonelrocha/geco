@@ -27,10 +27,10 @@ class Preinforme extends Entity
     }
 
     public function PreinformeMedio(){
-        return $this->belongsTo(PreinformeMedio::getClass());
+        return $this->belongsTo(PreinformeMedio::getClass(), 'medio_id');
     }
 
     public function PreinformeComoEncontro(){
-        return $this->belongsTo(PreinformeComoEncontro::getClass());
+        return $this->belongsTo(PreinformeComoEncontro::getClass(),'como_encontro_id');
     }
 }

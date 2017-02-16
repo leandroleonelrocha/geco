@@ -23,23 +23,17 @@
 						<thead><tr>
 						<th>@lang('persona.numerodocumento')</th>
 						<th>@lang('persona.nombre')</th>
-						<th>@lang('persona.apellido')</th>
-						<th>@lang('persona.localidad')</th>
-						<th>@lang('filial.pais')</th>
 						<th>@lang('persona.telefonos')</th>
 						<th>E-mails</th>
-						<th>@lang('persona.disponibilidad')</th>
+						<th>@lang('persona.matriculado')</th>
 
 						<th class="no-print"></th>
 						</tr></thead>
 						<tbody>
 							@foreach($persona as $p)
 								<tr>
-									<td>{{$p->nro_documento}}</td>
-									<td>{{$p->nombres}}</td>
-									<td>{{$p->apellidos}}</td>
-									<td>{{$p->localidad}}</td>
-								  	<td>{{$p->Pais->pais }}</td>
+									<td>{{$p->TipoDocumento->tipo_documento}} {{$p->nro_documento}}</td>
+									<td>{{$p->apellidos}}, {{$p->apellidos}}</td>
 									<td>
 							     	@foreach($p->PersonaTelefono as $telefono)
 						            		{{$telefono->telefono}}   </br>
@@ -48,15 +42,16 @@
 				            	   	@foreach($p->PersonaMail as $mail)
 						            		{{$mail->mail}} </br>
 					            	@endforeach</td>
-							
-						         	<td><?php if($p->disponibilidad_manana == 1) echo'M ';?>
-						         		<?php if($p->disponibilidad_tarde == 1) echo'T ';?>
-										<?php if($p->disponibilidad_noche == 1) echo'N ';?>
-										<?php if($p->disponibilidad_sabados == 1)  echo 'SAB';?>
-										<?php if($p->disponibilidad_sabados == 0 and $p->disponibilidad_manana == 0 and $p->disponibilidad_tarde == 0 and $p->disponibilidad_noche == 0) echo'Ninguna';?>
-						         	</td>  
-				
+					            	<td>
 
+					            	@if (count($p->Matricula) > 0)
+					           			SI 
+					           		@else	
+					           			NO
+					           		@endif
+					            		
+					            	</td>
+					           
 						          	<td>
 									<a href="{{route('filial.personas_editar',$p->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil explicacion_editar"></i></a>
 						           	<a href="{{route('filial.personas_borrar',$p->id)}}" title="@lang('lista.eliminar')" onclick="return confirm('¿Está seguro que desea eliminar  la persona?);"><i class="btn-xs btn-danger glyphicon glyphicon-trash explicacion_borrar"></i></a></td>

@@ -313,7 +313,7 @@ class PreinformeController extends Controller {
             $medio['medio'] = $key;;
             $this->preinformeMedioRepo->create($medio);
         }
-        return redirect()->back()->with('msg_ok', 'Medios de preinforme agregados correctamente');
+        return redirect()->back()->with('msg_ok', 'Medios para preinformes agregados correctamente');
     }
 
     public function nuevoDatosEncontro_post(CrearNuevoEncontroPreinformeRequest $request){
@@ -329,6 +329,6 @@ class PreinformeController extends Controller {
         //     $this->preinformeMedioRepo->create($como_encontro);
         // }
         $this->preinformeComoEncontroRepo->create($como_encontro);
-        return redirect()->back()->with('msg_ok', 'Como nos encontro de preinforme agregados correctamente');
+        return redirect()->back()->with('msg_ok', 'Como ¿Como nos encontro? para preinformes agregados correctamente');
     }
 }
