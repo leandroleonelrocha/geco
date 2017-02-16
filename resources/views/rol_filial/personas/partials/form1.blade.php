@@ -4,7 +4,7 @@
 								{!! Form::select('tipo_documento_id',$tipos->toArray(),null,array('class' => 'form-control', 'required' => 'required')) !!}
 						    </div>
 				          <div class="col-md-6 form-group">
-				            <label>@lang('persona.tipodocumento')</label>
+				            <label>@lang('persona.numerodocumento')</label>
 							{!! Form::text('nro_documento',null,array('class'=>'form-control', 'required' => 'required', 'placeholder' => 'Escriba el númnero de documento' )) !!}
 				          </div>
 				        </div>  

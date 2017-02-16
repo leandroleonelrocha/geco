@@ -71,7 +71,7 @@ class MatriculaController extends Controller {
         $cadena     = $this->filialRepo->filialCadena();
         $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
         $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+        $grupos     = $this->grupoRepo->allEnable()->lists('id','descripcion');
         return view('rol_filial.matriculas.nuevo',compact('persona','asesores','carreras','cursos','grupos'));
     }
 
@@ -88,7 +88,7 @@ class MatriculaController extends Controller {
         $cadena     = $this->filialRepo->filialCadena();
         $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
         $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
-        $grupos     = $this->grupoRepo->allEnable()->lists('id','id');
+        $grupos     = $this->grupoRepo->allEnable()->lists('id','descripcion');
         return view('rol_filial.matriculas.nuevoPersona',compact('tipos','asesores','carreras','cursos','grupos','paises'));
     }
 
