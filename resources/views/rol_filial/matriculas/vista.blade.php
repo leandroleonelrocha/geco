@@ -88,10 +88,10 @@
 @section('js')
 <script type="text/javascript">
 
-  alert('asdasd');
+  // alert('asdasd');
   //$("#enlaceajax").click(function(evento){
     //  evento.preventDefault();
-      $(".destino").load("{{ URL::to('/filial/carrito') }}");
+      // $(".destino").load("{{ URL::to('/filial/carrito') }}");
    
   //}); 
 

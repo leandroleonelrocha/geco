@@ -26,11 +26,11 @@
 										</div>
 										<div class="col-md-6 form-group">
 											<label>@lang('matricula.fechavencimiento')</label>
-											{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control')) !!}
+											{!! Form::date('vencimiento[]',null,array('class'=>'pago-item form-control', 'required')) !!}
 										</div>
 										<div class="col-md-6 form-group">
 											<label>Fecha Recargo</label>
-											{!! Form::date('fecha_recargo[]',null,array('class'=>'pago-item form-control')) !!}
+											{!! Form::date('fecha_recargo[]',null,array('class'=>'pago-item form-control', 'required')) !!}
 										</div>
 										<div class="col-md-6 form-group">
 											<label>@lang('matricula.montooriginal')</label>

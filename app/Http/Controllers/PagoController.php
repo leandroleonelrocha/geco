@@ -136,19 +136,31 @@ class PagoController extends Controller
 
     public function actualizar_post(Request $request){
 
-        $data = ($request->all());
+        // $data = ($request->all());
         //Session::put('pagos', $data);
-        $request->session()->push('pagos', $data);
+        // $request->session()->push('pagos', $data);
 
        
         
         //array_push($_SESSION['pagos'], $data);
         
-        /*
+        
 
         $url 	= 	session('urlBack');
 		$modelP = 	$this->pagoRepo->find($request->pago);
-		if ($request->monto_a_pagar <= $modelP['monto_actual']){
+        $ma     =   $modelP['monto_actual'] + $request->recargo_adicional;
+        $map    =   (float)$request->monto_a_pagar;
+        
+		if ($map <= $ma){
+            if (isset($request->descuento_adicional)){
+                $pago['descuento_adicional'] = $request->descuento_adicional;
+                $modelP['monto_actual']      -= $request->descuento_adicional;
+            }
+            if (isset($request->recargo_adicional)){
+                $pago['recargo_adicional'] = $request->recargo_adicional;
+                $modelP['monto_actual']      += $request->recargo_adicional;
+            }
+
 			$pago['monto_actual'] 	= $modelP['monto_actual'] - $request->monto_a_pagar;
 			$pago['monto_pago'] 	= $modelP['monto_pago'] + $request->monto_a_pagar;
 			if ( $pago['monto_actual'] == 0 )
@@ -177,8 +189,8 @@ class PagoController extends Controller
 		else
 			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
 
-        */
-            return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
+        
+            // return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
     }
 
 

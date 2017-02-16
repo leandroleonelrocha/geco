@@ -6,7 +6,7 @@ return [
     'numero' =>'Número de preinforme',
     'persona'=>'Persona',
     'datospreinforme'=>'Datos del Preinforme',
-  	'descripcion'=>'Description',
+  	'descripcion'=>'Descrición',
 
 	'encontro'=>'¿Cómo nos encontró?',
 	'carreras'=>'Carreras',

@@ -72,7 +72,8 @@
                                         {!! Form::checkbox('sabados', '1', null, array('class'=>'flat-red')) !!} @lang('grupo.sabados')
                                     </div>
                             </div>
-                            <div class="form-group">
+
+                            <!-- <div class="form-group">
                                 <label>@lang('grupo.rangofecha')</label>
                                 <div class="input-group">
                                     <div class="input-group-addon">
@@ -83,8 +84,8 @@
                                     @else
                                     {!! Form::text('fecha', $model->fulldate ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
                                     @endif
-                                </div><!-- /.input group -->
-                            </div>
+                                </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="example-color-input">@lang('grupo.color')</label>
                                 @if(empty($model))
@@ -93,7 +94,24 @@
                                 {!! Form::color('color', null ,  array('class'=>'form-control', 'id'=>'example-color-input')) !!}
                                 @endif
                             </div>
-                            <button class="add_field_button btn btn-primary">@lang('grupo.agregarotrodia')</button><br>
+
+                            <div class="form-group materia">
+                                <table class="table table-bordered table-stripe">
+                                    <thead> 
+                                    <tr>
+                                        <th class="text-center">Materias</th>
+                                        <th class="text-center">@lang('grupo.aula')</th>
+                                        <th class="text-center">@lang('grupo.fechainicio')</th>
+                                        <th class="text-center">@lang('grupo.horacomienzo')</th>
+                                        <th class="text-center">@lang('grupo.horafin')</th>
+                                        <th class="text-center">@lang('grupo.cantclases')</th>
+                                    </tr> 
+                                    </thead>
+                                    <tbody class="select_materia">
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- <button class="add_field_button btn btn-primary">@lang('grupo.agregarotrodia')</button><br> -->
                             @if(empty($model))
                             <div class="row input_fields_wrap">
                                 <div class="form-group horario">
@@ -106,7 +124,7 @@
                                        <label> @lang('grupo.aula') </label>
                                        {!! Form::select('aula_id[]',$aulas->toArray(),null,array('class' => 'form-control')) !!}
                                     </div>
-                                    <div class="col-xs-3">
+                                    <!-- <div class="col-xs-3">
                                         <label> @lang('grupo.dia') </label>
                                         <select name="dia[]" class="form-control">
                                             <option value="1"> @lang('grupo.lunes')</option>
@@ -116,15 +134,18 @@
                                             <option value="5"> @lang('grupo.viernes')</option>
                                             <option value="6"> @lang('grupo.sabados')</option>
                                         </select>
-                                    </div>
-                                  <div class="col-xs-3">
+                                    </div> -->
+                                  <div class="col-xs-3 horario">
                                    <label> @lang('grupo.horacomienzo') </label>
                                     <input class="form-control" name="horario_desde[]" type="time" value="08:00:00" >
                                   </div>
-                                  <div class="col-xs-3">
+                                  <div class="col-xs-3 horario">
                                    <label> @lang('grupo.horafin') </label>
                                     <input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" >
                                   </div>
+                                  <div class="form-group col-xs-3">
+                                  <label> @lang('grupo.fechainicio') </label>
+                                  <div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control"></div></div>
                                 </div>
                             </div>
                             @else
@@ -134,10 +155,10 @@
                                 <div class="form-group horario">
                                     @if(!empty($horario->materia_id))
                                     @if(isset($materias))
-                                    <div class="col-xs-12 materia">
+                                    <!-- <div class="col-xs-12 materia">
                                        <label> @lang('grupo.materia') </label>
                                        {!! Form::select('materia_id[]',$materias->toArray(), $horario->materia_id ,array('class' => 'form-control select_materia')) !!}
-                                    </div>
+                                    </div> -->
                                     @endif
                                     @endif
                                     <div class="col-xs-3">
@@ -146,7 +167,7 @@
                                     </div>
                                     <div class="col-xs-3">
                                     <label> Dia </label>
-                                    <select name="dia[]" class="form-control">
+                                    <!-- <select name="dia[]" class="form-control">
                                        
                                         <option <?php if ($horario->dia == 'Lunes' )  echo 'selected' ; ?>  value="1" > @lang('grupo.lunes')</option>
                                         <option <?php if ($horario->dia == 'Martes' ) echo 'selected' ; ?>  value="2"> @lang('grupo.martes')</option>
@@ -154,7 +175,7 @@
                                         <option  <?php if ($horario->dia == 'Jueves' ) echo 'selected' ; ?>  value="4"> @lang('grupo.jueves')</option>
                                         <option  <?php if ($horario->dia == 'Viernes' ) echo 'selected' ; ?>  value="5"> @lang('grupo.viernes')</option>
                                         <option  <?php if ($horario->dia == 'Sabado' ) echo 'selected' ; ?>  value="6"> @lang('grupo.sabados')</option>
-                                     </select>
+                                     </select> -->
                                     </div>
                                   <div class="col-xs-3">
                                    <label> @lang('grupo.horacomienzo') </label>
@@ -230,8 +251,10 @@
                 if(tipo[0] == "carrera"){   
                     // $(".materia").show();
                     $(".teorica_practica").show();
+                    $(".horario").hide();
                 }
                 else{
+                    $(".horario").show();
                     $(".select_materia").empty(); 
                     $(".materia").hide();
                     $(".teorica_practica").hide();
@@ -265,19 +288,21 @@
                                    $(".teorica_practica").show();
                                    console.log(result);
                                    $.each(result, function(clave, valor) {
-                                        $('.select_materia').append( '<option value="'+valor.id+'">'+valor.nombre+'</option>' );
+                                        $('.select_materia').append( '<tr><td><input type="hidden" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center">-</td></tr>' );
                                    });
                                }
-                            
                         }}
                     );
                 }
         }
+        
+        // Suceción de fecha de inicio ~~ Carreras y Cursos
 
         showTP();
         obtenerMaterias();
         $("#carreras_cursos").change(function(){ showTP(); });
         $(".iCheck-helper").click(function(){ obtenerMaterias(); });
+
         var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
         var add_button      = $(".add_field_button"); //Add button ID
@@ -338,7 +363,12 @@ $(".star_intro" ).click(function() {
     
     ?>
     startIntro(texto);
-});     
+});
+
+// $('.fecha_inicio').on('blur', function(){
+//     var thiss = $(this).val();
+//     console.log(thiss);
+// });   
 </script>
 @include('partials.inicio_tutorial')
 @endsection

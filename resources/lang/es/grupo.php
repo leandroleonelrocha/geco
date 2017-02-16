@@ -7,11 +7,11 @@ return [
     'disponibilidad' => 'Disponibilidad',
     'descripcion'=>'Descripción',
     'matricula'=>'matricula',
-
+    'fechainicio'=>'Fecha de inicio',
     'carrerasycursos'=>'Carreras y cursos',
     'seleccioncyc'=>'Seleccione una carrera o curso',
     'seleccionmateria'=>'Seleccione una materia',
-
+    'cantclases'=>'Cantidad de Clases',
     'carreras'=>'Carreras',
     'cursos'=>'Cursos',
     'materia'=>'Materia',

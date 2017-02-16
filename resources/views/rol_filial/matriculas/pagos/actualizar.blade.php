@@ -19,6 +19,24 @@
 									{!! Form::text('nro_pago',$pago->nro_pago,array('class'=>'pago-item form-control', 'disabled')) !!}
 								</div>
 								<div class="col-md-6 form-group">
+									<label>@lang('matricula.descuentoadicional')</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">
+		  									<?php echo session('moneda')['simbolo']; ?>
+		  								</span>
+										{!! Form::text('descuento_adicional',null, array('class'=>'pago-item form-control descuento_adicional')) !!}
+		  							</div>
+								</div>
+								<div class="col-md-6 form-group">
+									<label>@lang('matricula.recargoadicional')</label>
+									<div class="input-group">
+		  								<span class="input-group-addon">
+		  									<?php echo session('moneda')['simbolo']; ?>
+		  								</span>
+										{!! Form::text('recargo_adicional',null, array('class'=>'pago-item form-control recargo_adicional')) !!}
+		  							</div>
+								</div>
+								<div class="col-md-6 form-group">
 									<label>@lang('matricula.montooriginal')</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">
@@ -33,7 +51,7 @@
 		  								<span class="input-group-addon">
 		  									<?php echo session('moneda')['simbolo']; ?>
 		  								</span>
-										{!! Form::text('monto_actual',$pago->monto_actual, array('class'=>'pago-item form-control', 'disabled')) !!}
+										{!! Form::text('monto_actual',$pago->monto_actual, array('class'=>'pago-item form-control monto_actual', 'disabled')) !!}
 		  							</div>
 								</div>
 								<div class="col-md-6 form-group">

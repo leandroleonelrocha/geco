@@ -4,12 +4,14 @@ return [
  
  	'asesor' => 'Asesor',
     'listadopersona' => 'Listado de Personas',
-    'tipodocumento' =>'Tipo de documento',
+    'tipodocumento' =>'Tipo de Documento',
     'numerodocumento' => 'Documento',
     'apellido' => 'Apellidos',
-    'nombre' => 'Nombre',
-    'fnacimiento' => 'Fecha Nacimiento',
-    'estadocivil' => 'Estado civil',
+
+    'nombre' => 'Nombres',
+    'fnacimiento' => 'Fecha de Nacimiento',
+    'estadocivil' => 'Estado Civil',
+
     'localidad' => 'Localidad',
     'telefonos' => 'Teléfonos',
     'mail' => 'E-Mails',
@@ -24,16 +26,16 @@ return [
     'masculino'=>'Masculino',
     'femenino'=>'Femenino',
     'domicilio'=>'Domicilio',
-    'nivelestudios'=>'Nivel de estudios',
-    'computadora'=>'Tiene computadora',
-    'computacion'=>'Estudió computacion',
+    'nivelestudios'=>'Nivel de Estudios',
+    'computadora'=>'Tiene Computadora',
+    'computacion'=>'Estudió Computacion',
     'aclaraciones'=>'Aclaraciones',
-    'titulo'=>'Datos personales',
+    'titulo'=>'Datos Personales',
 
     'no'=>'No',
-    'si'=>'Si',
+    'si'=>'Sí',
 
-    'secundario'=>'Secundario completo',
+    'secundario'=>'Secundario Completo',
     'terciario'=>'Terciario',
     'universitario'=>'Universitario',
 

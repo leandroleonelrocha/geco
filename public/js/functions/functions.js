@@ -80,7 +80,19 @@ $(document).ready(function(){
                 success: function(result){
                    $(".select_grupo").empty();
                    $.each(result, function(clave, valor) {
-                        $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.id+'</option>' );
+                        var tp;
+                        <?php if (session('lang') == "es"){
+                            if (valor.practica == 1) { tp = " - Practica"}
+                            if (valor.teorica == 1) { tp = " - Teorica"}
+                        }elseif(session('lang') == "en"{
+                            if (valor.practica == 1) { tp = " - Practical"}
+                            if (valor.teorica == 1) { tp = " - Theoretical"}
+                        }elseif(session('lang') == "es"){
+                            if (valor.practica == 1) { tp = " - Prática"}
+                            if (valor.teorica == 1) { tp = " - Teórica"}
+                        } ?>
+                        if (valor.practica == null && valor.teorica == null) { tp = ""}
+                        $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+tp+'</option>' );
                    });
                 }
             });
@@ -226,5 +238,26 @@ $(document).ready(function(){
         .fail(function() {
             console.log("error");
         });
+    });
+
+    /* ------------------------- Pagos ------------------------- */
+    var actual  = parseFloat($('.monto_actual').val()); // Monto actual - antes de ser modificado
+    // Descuento adicional
+    $('.descuento_adicional').keyup(function(){
+        var descAd      = parseFloat($('.descuento_adicional').val()),
+            desc        = actual - descAd;
+
+        $('.monto_actual').val(desc);
+        if (isNaN(descAd)) $('.monto_actual').val(actual);
+    });
+
+    // Reecargo adicional
+    $('.recargo_adicional').keyup(function(){
+        var recAd      = parseFloat($('.recargo_adicional').val()),
+            rec        = actual + recAd;
+
+        $('.monto_actual').val(rec);
+
+        if (isNaN(recAd)) $('.monto_actual').val(actual);
     });
 });
