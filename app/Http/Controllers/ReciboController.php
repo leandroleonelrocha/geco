@@ -18,6 +18,7 @@ use App\Http\Repositories\ReciboConceptoPagoRepo;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Funciones\NumberToLetterConverter;
 use PDF;
+use View;
 use Session;
 
 class ReciboController extends Controller
@@ -75,9 +76,26 @@ class ReciboController extends Controller
 	}
 
 	public function carrito_imprimir(){
+		//$view = View::make('rol_filial.matriculas.vista');
+		//$sections = $view->renderSections();
+		
 		$model  = Session::get('pagos');
-		$pdf    = PDF::loadView('impresiones.impresion_carrito',compact('model'));
+		Session::forget('pagos');
+		
+		$total=0;
+		$miMoneda = null;
+        foreach ($model as $pago) {
+        $total += $pago['monto_a_pagar'] + $pago['recargo_adicional'];
+        $total -= $pago['descuento_adicional'];
+        }
+        $clase = new NumberToLetterConverter();
+    	$letra = $clase->convertNumber($total,$miMoneda, 'entero');
+    	
+		$pdf    = PDF::loadView('impresiones.impresion_carrito',compact('model','total','letra'));
 		return $pdf->stream();
+
+
+
 	}
 
 	

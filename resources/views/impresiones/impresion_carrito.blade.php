@@ -50,7 +50,6 @@
 </head>
 
 <body>
-			{{dd($model)}}
 
 <div id="container">
     <div id="header">
@@ -60,29 +59,25 @@
     <div id="sidebar">
 
     	<div class="right">
-	        <p>{{ $recibo->Pago->Matricula->Persona->fullname }}</p>
-	        <p>{{ $recibo->Pago->Matricula->Persona->domicilio }}</p>
+    		<?php
+    			$matricula = Session::get('matricula');
+    		?>
+	        <p>{{ $matricula->Persona->fullname }}</p>
+	        <p>{{ $matricula->Persona->domicilio }}</p>
 	        <p>
-	        	@lang('impresiones/recibo.grupo'):
+    		@lang('impresiones/recibo.grupo'):
 
-	        	
-
-	        	@foreach($recibo->Pago->Matricula->Grupo as $grupo)
-	        		@if(isset($grupo->Curso->nombre))
-	        			{{$grupo->Curso->nombre}}
-	        		@endif
-	        		@if(isset($grupo->Carrera->nombre))
-	        			{{$grupo->Carrera->nombre}}
-	        		@endif
-				
-	        	@endforeach
+	        	<?php 
+				if ($matricula->carrera_id != null) echo $matricula->Carrera->nombre;
+				else echo $matricula->Curso->nombre;
+				?>
 	        </p>
         </div>
 
         <div class="left">
-	        <p>@lang('impresiones/recibo.nmatricula') {{ $recibo->Pago->Matricula->id }}</p>
+	        <p>@lang('impresiones/recibo.nmatricula') {{ $matricula->id }}</p>
 	        <p>@lang('impresiones/recibo.telefono') 
-	        	@foreach($recibo->Pago->Matricula->Persona->PersonaTelefono as $telefono)
+	        	@foreach($matricula->Persona->PersonaTelefono as $telefono)
 	        	{{$telefono->telefono }}
 	        	@endforeach
 	        </p>
@@ -91,12 +86,17 @@
         
     </div>
     <div id="main">
-    	@foreach($model as $recibo)
-    		  <p>@lang('impresiones/recibo.matriculacompleta')</p>
+    	<p>Cantidad de pagos: {{count($model)}}</p>
+    	@foreach($model as $pago)
+    		<p>$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}</p>
     	@endforeach
-        <h3>@lang('impresiones/recibo.planpago')</h3>
-        <p>@lang('impresiones/recibo.matriculacompleta')</p>
-        <p>@lang('impresiones/recibo.son') {{$recibo->monto_letra}} @lang('impresiones/recibo.pesos') -------------------------- @lang('impresiones/recibo.total') ${{$recibo->monto}}.00</p>
+    	<p>
+    		SON ${{$letra}} pesos
+    		------------------------------------------
+    		TOTAL : $
+    		{{$total}}.00
+    	</p>
+	   	
         
     </div>
    
