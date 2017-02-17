@@ -6,8 +6,11 @@ Route::get('estadisticas',[
 
 
 Route::post('detalles',[
-
 	'as' => 'estadisticas.detalles',
 	'uses' => 'EstadisticaController@detalles'
+]);
 
+Route::get('estadisticas/lista',[
+	'as' => 'estadisticas.lista',
+	'uses' => 'EstadisticaController@lista'
 ]);

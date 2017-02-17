@@ -25,8 +25,8 @@ class EstadisticaController extends Controller
 		$this->examenRepo      			= $examenRepo;
 		$this->asesorRepo     			= $asesorRepo;
 		$this->filialRepo 				= $filialRepo;
-        $this->data['totalPersonas']    = $this->total_personas();
-        $this->data['totalAsesores']    = $this->total_asesores();
+       // $this->data['totalPersonas']    = $this->total_personas();
+       // $this->data['totalAsesores']    = $this->total_asesores();
 	}
 	public function total_personas(){
 		
@@ -35,8 +35,14 @@ class EstadisticaController extends Controller
     public function total_asesores(){
         return $this->asesorRepo->allAsesores()->count();
     }
+
+    public function lista(){
+    	return 'lista';
+    }
+
 	public function index(){
-    return view('rol_filial.estadisticas.index')->with($this->data);
+    	return view('rol_filial.estadisticas.lista');
+    //return view('rol_filial.estadisticas.index')->with($this->data);
 	
 	}
 	public function count_personas(){
