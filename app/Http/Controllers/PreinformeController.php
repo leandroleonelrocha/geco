@@ -302,17 +302,18 @@ class PreinformeController extends Controller {
     }
 
     public function nuevoDatosMedio_post(CrearNuevoMedioPreinformeRequest $request){
-        $data = $request->all();
+        $medio = $request->all();
 
         $filial=$this->filialRepo->obtenerFilialPais();
         foreach ($filial as $f) $pais_id=$f->pais_id;
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
         $medio['lenguaje'] =$pais->lenguaje;
 
-        foreach ($data['medio'] as $key) {
-            $medio['medio'] = $key;;
-            $this->preinformeMedioRepo->create($medio);
-        }
+        // foreach ($data['medio'] as $key) {
+        //     $medio['medio'] = $key;;
+        //     $this->preinformeMedioRepo->create($medio);
+        // }
+        $this->preinformeMedioRepo->create($medio);
         return redirect()->back()->with('msg_ok', 'Medios para preinformes agregados correctamente');
     }
 
