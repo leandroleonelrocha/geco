@@ -25,11 +25,11 @@
 							</div>
 							<div class="col-md-6 form-group">
 								<label>Medio</label>
-								{!! Form::select('medio_id',$medios->toArray(),null,array('class' => 'form-control select2')) !!}
+								{!! Form::select('medio_id',$medios->toArray(),$preinforme->PreinformeMedio->id,array('class' => 'form-control select2')) !!}
 							</div>
 							<div class="col-md-6 form-group">
 								<label>@lang('preinforme.encontro')</label>
-								{!! Form::select('como_encontro_id',$comoEncontro->toArray(),null,array('class' => 'form-control select2')) !!}
+								{!! Form::select('como_encontro_id',$comoEncontro->toArray(),$preinforme->PreinformeComoEncontro->id,array('class' => 'form-control select2')) !!}
 							</div>
 							<div class="col-xs-12">
 			                	<h4 class="box-title text-center">@lang('preinforme.intereses')</h4>

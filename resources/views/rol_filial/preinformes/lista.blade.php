@@ -14,7 +14,7 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>Fecha</th>
+						<th>@lang('preinforme.fecha')</th>
 						<th>@lang('persona.asesor')</th>
 						<th>@lang('preinforme.persona')</th>
 						<th>Medio</th>
@@ -26,7 +26,12 @@
 						@foreach($preinformes as $preinforme)
 
 							<tr>
-								<td>{{$preinforme->created_at}}</td>
+								<td>
+								<?php
+								$fecha=date_format($preinforme->created_at, 'd-m-Y');
+								echo $fecha;
+								?>
+								</td>
 								<td>{{$preinforme->Asesor->nombres}} {{$preinforme->Asesor->apellidos}}</td>
 								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
 								<td>{{$preinforme->PreinformeMedio->medio}}</td>

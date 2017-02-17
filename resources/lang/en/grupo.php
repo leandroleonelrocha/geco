@@ -91,7 +91,9 @@ return [
     'nuevogrupo' => 'New Group',
 
     'aula' => 'Classroom',
-    'asignacionaulas' => 'Assignment of Classrooms',
+    'asignacionaulas' => 'Classrooms Assignment',
+    'asignaraulas' => 'Assign classrooms',
+    'aulasasignadasengrupos' => 'Classrooms assigned in groups',
     'nombreaula' => 'Classroom name',
     'listaaulasasignadas' => 'Assigned classroom list',
     'editaraula' => 'Edit classroom',

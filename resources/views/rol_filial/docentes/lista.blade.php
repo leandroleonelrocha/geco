@@ -17,7 +17,8 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
 						<th>@lang('docente.documento')</th>
-						<th>@lang('docente.nombre')</th>					
+						<th>@lang('docente.nombre')</th>	
+						<th>@lang('docente.descripcion')</th>				
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
@@ -29,7 +30,7 @@
 										
 									</td>
 									<td>{{$docente->apellidos }} {{ $docente->nombres }}</td>
-
+									<td>{{$docente->descripcion}}</td>
 									
 									<td class="text-center">
 

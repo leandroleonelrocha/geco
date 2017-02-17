@@ -13,6 +13,7 @@ return [
     'telefonos' => 'Phones',
     'mail' => 'E-Mails',
   	'disponibilidad' => 'Availability',
+    'matriculado' => 'Matriculate',
     'mañana'=>'Morning',
     'tarde'=>'Afternoon',
     'noche'=>'Night',
