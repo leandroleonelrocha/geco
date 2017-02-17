@@ -23,6 +23,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use Response;
 use PDF;
+use App;
 
 class MatriculaController extends Controller {
 
@@ -61,7 +62,6 @@ class MatriculaController extends Controller {
 
     // Página de Nuevo -- Persona Existente
     public function nuevo($id){
-
         $filial=$this->filialRepo->obtenerFilialPais();
         foreach ($filial as $f) $pais_id=$f->pais_id;
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
@@ -375,6 +375,8 @@ class MatriculaController extends Controller {
             $grupos = $this->grupoRepo->allGruposCarrera($request->id);
         else
             $grupos = $this->grupoRepo->allGruposCurso($request->id);
+
+        foreach ($grupos as $g) { $g->lang = App::getLocale(); } // Negrada?
 
         return response()->json($grupos, 200);
     }

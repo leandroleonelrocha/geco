@@ -288,7 +288,7 @@
                                    $(".teorica_practica").show();
                                    console.log(result);
                                    $.each(result, function(clave, valor) {
-                                        $('.select_materia').append( '<tr><td><input type="hidden" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center">-</td></tr>' );
+                                        $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
                                    });
                                }
                         }}
