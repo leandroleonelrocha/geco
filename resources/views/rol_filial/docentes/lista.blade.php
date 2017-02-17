@@ -16,11 +16,9 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>@lang('docente.tipodocumento')</th>
-						<th>@lang('docente.numerodocumento')</th>
-						<th>@lang('docente.apellido')</th>
-						<th>@lang('docente.nombre')</th>					
-						<th>@lang('docente.disponibilidad')</th>
+						<th>@lang('docente.documento')</th>
+						<th>@lang('docente.nombre')</th>	
+						<th>@lang('docente.descripcion')</th>				
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
@@ -28,19 +26,12 @@
 							<tr>
 									<td>
 										<input type="hidden" value="{{$docente->id}}">
-										{{$docente->TipoDocumento->tipo_documento}}
+										{{ $docente->TipoDocumento->tipo_documento}} {{$docente->nro_documento}}
 										
 									</td>
-									<td>{{$docente->nro_documento}}</td>
-									<td>{{$docente->apellidos}}</td>
-									<td>{{$docente->nombres}}</td>
+									<td>{{$docente->apellidos }} {{ $docente->nombres }}</td>
+									<td>{{$docente->descripcion}}</td>
 									
-						         	<td><?php if($docente->disponibilidad_manana == 1) echo'M ';?>
-						         		<?php if($docente->disponibilidad_tarde == 1) echo'T ';?>
-										<?php if($docente->disponibilidad_noche == 1) echo'N ';?>
-										<?php if($docente->disponibilidad_sabados == 1)  echo 'SAB';?>
-										<?php if($docente->disponibilidad_sabados == 0 and $docente->disponibilidad_manana == 0 and $docente->disponibilidad_tarde == 0 and $docente->disponibilidad_noche == 0) echo'Ninguna';?>
-						         	</td> 
 									<td class="text-center">
 
 									<a href="{{route('filial.docentes_editar',$docente->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>

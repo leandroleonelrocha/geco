@@ -4,6 +4,7 @@ return [
 
     'listadopreinforme' => 'List of Reports',
     'numero' =>'Report number',
+    'fecha'=>'Date',
     'persona'=>'Person',
     'datospersonales'=>'Person data',
     'datospreinforme'=>'Report data',

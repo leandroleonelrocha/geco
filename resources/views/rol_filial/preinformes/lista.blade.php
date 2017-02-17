@@ -14,20 +14,37 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>@lang('preinforme.numero')</th>
+						<th>@lang('preinforme.fecha')</th>
 						<th>@lang('persona.asesor')</th>
 						<th>@lang('preinforme.persona')</th>
 						<th>Medio</th>
+						<th>@lang('preinforme.encontro')</th>
+						<th>@lang('persona.matriculado')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
 						@foreach($preinformes as $preinforme)
+
 							<tr>
-								<td>{{$preinforme->id}}</td>
+								<td>
+								<?php
+								$fecha=date_format($preinforme->created_at, 'd-m-Y');
+								echo $fecha;
+								?>
+								</td>
 								<td>{{$preinforme->Asesor->nombres}} {{$preinforme->Asesor->apellidos}}</td>
 								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
-								<td>{{$preinforme->medio}}</td>
+								<td>{{$preinforme->PreinformeMedio->medio}}</td>
+								<td>{{$preinforme->PreinformeComoEncontro->como_encontro}}</td>
+				            	<td>
 
+					            	@if (count($preinforme->Persona->Matricula) > 0)
+					           			SI 
+					           		@else	
+					           			NO
+					           		@endif
+					            		
+				            	</td>
 								<td class="text-center"><a href="{{route('filial.preinformes_editar',$preinforme->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil explicacion_editar"></i></a></td>
 							</tr>
 						@endforeach

@@ -576,10 +576,11 @@ values  ('2', 'dueno', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('3', 'director', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
 		('4', 'filial', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
-insert into cuenta (`id`, `usuario`,`contrasena`,  `habilitado`, `rol_id`, `entidad_id`, `created_at`, `updated_at`)
-values  ('1', 'mferrari@igionline.com.ar', '$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i','1','2','1','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('3', 'filial@filial.com', '$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i','1','4','3','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		('4', 'flores@filial.com','$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i','1','4','4','2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into cuenta (`id`, `usuario`,`contrasena`,  `habilitado`, `rol_id`, `entidad_id`,`activo`, `created_at`, `updated_at`)
+values  ('1', 'mferrari@igionline.com.ar', '$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i'	,'1','2','1','1','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('3', 'filial@filial.com', '$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i'			,'1','4','3','1','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('4', 'filial4@filial.com','$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i'			,'1','4','4','1','2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('5', 'director@director.com','$2y$10$0PsN63XTqAdphh3onJ7dZOcC1JOfPwCTk66jHpPbX5yYNAlmrzt.i'		,'1','3','1','1','2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 insert into cadena (`nombre`, `mail`, `telefono`, `created_at`, `updated_at`)
 values  ('IGI', 'test@igi.com', '12345678', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
@@ -714,7 +715,7 @@ insert into filial (`cadena_id`, `pais_id`, `nombre`, `direccion`, `localidad`, 
 values  (1, 1, 'Filial 1' 	, 'Av de Mayo 546'		, 'Ramos Mejia'	, 1456, 1, 'filial2@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1, 1, 'Filial 2' 	, 'Av Diaz Velez 678'	, 'Ciudadela'	, 1702, 1, 'filial3@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1, 1, 'Filial 3' 	, 'Av Rivadavia 14567'	, 'Haedo'		, 1730, 2, 'filial@filial.com' 	, 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1, 'Filial 4' 	, 'Av Mitre 2345'		, 'Munro'		, 1736, 8, 'filial4@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2, 1, 'Filial 4' 	, 'Av Mitre 2345'		, 'Munro'		, 1736, 8, 'filial4@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (1, 1, 'Filial 5' 	, 'Estrada 456'			, 'Villa Luro'	, 1666, 3, 'filial5@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (2, 1, 'Filial 6' 	, 'Cerrito 765'			, 'Flores'		, 1736, 3, 'filial6@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
         (2, 1, 'Filial 7' 	, 'Ruta 8 km 44'		, 'San Miguel'	, 1234, 4, 'filial7@filial.com' , 	1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),

@@ -90,7 +90,9 @@ return [
     'nuevogrupo' => 'Novo Grupo',
 
     'aula' => 'Aula',
-    'asignacionaulas' => 'Alocação de salas de aula',
+    'asignacionaulas' => 'Alocação de Aulas',
+    'asignaraulas' => 'Atribuir Aulas',
+    'aulasasignadasengrupos' => 'Aulas atribuídas em grupos',
     'nombreaula' => 'Nome salas de aula',
     'listaaulasasignadas' => 'Lista de sala de aula atribuídot',
     'editaraula' => 'Editar sala de aula',

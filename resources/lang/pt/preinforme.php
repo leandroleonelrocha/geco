@@ -4,6 +4,7 @@ return [
 
     'listadopreinforme' => 'Lista de Pré-Informação',
     'numero' =>'Número de Pré-Informação',
+    'fecha'=>'Data',
     'persona'=>'Pessoa',
     'datospreinforme'=>'Dados Pré-Informação',
   	'descripcion'=>'Descrição',

@@ -25,8 +25,8 @@ class EstadisticaController extends Controller
 		$this->examenRepo      			= $examenRepo;
 		$this->asesorRepo     			= $asesorRepo;
 		$this->filialRepo 				= $filialRepo;
-        $this->data['totalPersonas']    = $this->total_personas();
-        $this->data['totalAsesores']    = $this->total_asesores();
+       // $this->data['totalPersonas']    = $this->total_personas();
+       // $this->data['totalAsesores']    = $this->total_asesores();
 	}
 	public function total_personas(){
 		
@@ -35,10 +35,26 @@ class EstadisticaController extends Controller
     public function total_asesores(){
         return $this->asesorRepo->allAsesores()->count();
     }
-	public function index(){
-    return view('rol_filial.estadisticas.index')->with($this->data);
+
+    public function lista(){
+
+    	return 'lista';
+    }
+
+	public function caja_diaria(){
+
+    	//return view('rol_filial.estadisticas.index')->with($this->data);
+    	$hoy = getdate();
+		dd(date("Y/m/d"));
+	
+    	return view('rol_filial.estadisticas.caja_diaria');
 	
 	}
+
+	public function preinforme(){
+		return view('rol_filial.estadisticas.preinforme');
+	}
+
 	public function count_personas(){
         return $this->personaRepo->getPersonasFilial()->count();
     }
@@ -122,5 +138,8 @@ class EstadisticaController extends Controller
     	$this->data['examenes']	= $this->filialRepo->estadisticasExamen($inicio, $fin);
 		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
+
+
+
 	
 }

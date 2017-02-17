@@ -15,10 +15,17 @@
 			'uses'	=>	'ReciboController@nuevo_post'
 		]);
 
-		Route::get('recibo_imprimir/{id}',[
+		Route::get('recibo_imprimir/{id?}',[
 			'as'	=> 'filial.recibo_imprimir',
 			'uses'	=>	'ReciboController@imprimir'
 		]);
+
+		Route::get('carrito_imprimir',[
+			'as'	=> 'filial.carrito_imprimir',
+			'uses'	=>	'ReciboController@carrito_imprimir'
+		]);
+
+
 	});
 
 	// Route::get('recibo_imprimir/{id}',function(){

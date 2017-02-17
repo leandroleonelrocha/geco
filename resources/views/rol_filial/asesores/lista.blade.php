@@ -14,11 +14,8 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>@lang('asesor.numerodocumento')</th>
-						<th>@lang('asesor.apellido')</th>
+						<th>@lang('asesor.documento')</th>
 						<th>@lang('asesor.nombre')</th>
-						<th>@lang('asesor.direccion')</th>
-						<th>@lang('asesor.localidad')</th>
 						<th>@lang('asesor.telefonos')</th>
 						<th>@lang('asesor.mail')</th>
 			
@@ -27,11 +24,8 @@
 	    				<tbody>
 						    @foreach($asesores as $a)
 							    <tr role="row" class="odd">
-							      	<td>{{ $a->nro_documento}}</td>
-							        <td>{{ $a->apellidos }}</td>
-							        <td>{{ $a->nombres }}</td>
-						          	<td>{{ $a->direccion }}</td>
-						            <td>{{ $a->localidad }}</td>
+							      	<td>{{ $a->TipoDocumento->tipo_documento}} {{$a->nro_documento}}</td>
+							        <td>{{ $a->apellidos }} {{ $a->nombres }}</td>
 						           	<td>
 
 					            	@foreach($a->AsesorTelefono as $telefono)

@@ -14,6 +14,7 @@ return [
     'telefonos' => 'Telefone',
     'mail' => 'E-Mails',
   	'disponibilidad' => 'Disponibilidade',
+    'matriculado' => 'Registrado',
     'mañana'=>'Amanhã',
     'tarde'=>'Tarde',
     'noche'=>'Noite',

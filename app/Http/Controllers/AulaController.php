@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Controllers;
 use App\Entities\Aula;
+use App\Entities\GrupoHorario;
 use App\Http\Repositories\AulaRepo;
+use App\Http\Repositories\GrupoRepo;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,9 +18,10 @@ class AulaController extends Controller
 {
 	protected $aulaRepo;
 
-	public function __construct(AulaRepo $aulaRepo)
+	public function __construct(AulaRepo $aulaRepo,GrupoRepo $grupoRepo)
 	{
 		$this->aulaRepo = $aulaRepo;
+		$this->grupoRepo = $grupoRepo;
 	}
 
 	public function lista(){
@@ -27,8 +30,9 @@ class AulaController extends Controller
 
 	public function nuevo(){
 
-		$aulas= $this->aulaRepo->allAulasPaginadas();
-		return view('rol_filial.grupos.asignacionAula.nuevo',compact('aulas'));	
+		$grupos=$this->grupoRepo->allEnable();
+		$aulas= $this->aulaRepo->allAulas();
+		return view('rol_filial.grupos.asignacionAula.nuevo',compact('grupos','aulas'));	  
 	}
 
 

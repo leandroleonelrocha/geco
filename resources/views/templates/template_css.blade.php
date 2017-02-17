@@ -21,8 +21,9 @@
 
 <link rel="stylesheet" href="{{asset('css/fontello.css') }}">
 <link rel="stylesheet" href="{{asset('plugins/datatables/dataTables.bootstrap.css')}}">
-<!-- Our Style -->
+<!-- Our Style 
 <link rel="stylesheet" href="{{asset('css/geco-styles.css')}}">
+-->
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{asset('/font-awesome-4.7.0/css/font-awesome.min.css')}}">
 <!-- Ionicons -->

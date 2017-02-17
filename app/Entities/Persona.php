@@ -64,5 +64,4 @@ class Persona extends Entity
         return $this->belongsTo(Filial::getClass());
     }
 
-
 }

@@ -4,6 +4,7 @@ return [
 
     'listadopreinforme' => 'Listado de Preinformes',
     'numero' =>'Número de preinforme',
+    'fecha'=>'Fecha',
     'persona'=>'Persona',
     'datospreinforme'=>'Datos del Preinforme',
   	'descripcion'=>'Descrición',

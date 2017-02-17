@@ -7,13 +7,16 @@ return [
     'tipodocumento' =>'Tipo de Documento',
     'numerodocumento' => 'Documento',
     'apellido' => 'Apellidos',
+
     'nombre' => 'Nombres',
     'fnacimiento' => 'Fecha de Nacimiento',
     'estadocivil' => 'Estado Civil',
+
     'localidad' => 'Localidad',
     'telefonos' => 'Teléfonos',
     'mail' => 'E-Mails',
   	'disponibilidad' => 'Disponibilidad',
+    'matriculado' => 'Matriculado',
     'mañana'=>'Mañana',
     'tarde'=>'Tarde',
     'noche'=>'Noche',
