@@ -37,14 +37,24 @@ class EstadisticaController extends Controller
     }
 
     public function lista(){
+
     	return 'lista';
     }
 
-	public function index(){
-    	return view('rol_filial.estadisticas.lista');
-    //return view('rol_filial.estadisticas.index')->with($this->data);
+	public function caja_diaria(){
+
+    	//return view('rol_filial.estadisticas.index')->with($this->data);
+    	$hoy = getdate();
+		dd(date("Y/m/d"));
+	
+    	return view('rol_filial.estadisticas.caja_diaria');
 	
 	}
+
+	public function preinforme(){
+		return view('rol_filial.estadisticas.preinforme');
+	}
+
 	public function count_personas(){
         return $this->personaRepo->getPersonasFilial()->count();
     }
@@ -128,5 +138,8 @@ class EstadisticaController extends Controller
     	$this->data['examenes']	= $this->filialRepo->estadisticasExamen($inicio, $fin);
 		return view('rol_filial.estadisticas.index')->with($this->data);
 	}
+
+
+
 	
 }

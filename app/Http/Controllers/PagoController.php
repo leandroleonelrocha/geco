@@ -17,7 +17,6 @@ use App\Http\Funciones\NumberToLetterConverter;
 use App\Http\Repositories\ReciboRepo;
 use App\Http\Repositories\ReciboTipoRepo;
 use App\Http\Repositories\ReciboConceptoPagoRepo;
-
 use PDF;
 use Session;
 

@@ -18,6 +18,7 @@ use App\Http\Repositories\ReciboConceptoPagoRepo;
 use App\Http\Repositories\PagoRepo;
 use App\Http\Funciones\NumberToLetterConverter;
 use PDF;
+use Session;
 
 class ReciboController extends Controller
 {
@@ -57,17 +58,27 @@ class ReciboController extends Controller
 		return redirect()->route('filial.recibo_imprimir', $id);
 	}
 
-	public function imprimir($id){
+	public function imprimir($id = null){
+
+		if(isset($id)){
+
 		$recibo = $this->reciboRepo->find($id);
 		$clase = new NumberToLetterConverter();
 		$miMoneda = null;
 		$recibo->monto_letra = $clase->convertNumber($recibo->monto,$miMoneda, 'entero');
-		
 		$pdf    = PDF::loadView('impresiones.recibo',compact('recibo'));
 		return $pdf->stream();
+		}
 		
+		
+
 	}
 
+	public function carrito_imprimir(){
+		$model  = Session::get('pagos');
+		$pdf    = PDF::loadView('impresiones.impresion_carrito',compact('model'));
+		return $pdf->stream();
+	}
 
 	
 }

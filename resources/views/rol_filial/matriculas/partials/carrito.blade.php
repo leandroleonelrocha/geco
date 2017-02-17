@@ -3,6 +3,7 @@
   Launch demo modal
 </button>
  -->
+
 <div class="modal fade" id="ModalEdit"  role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -13,6 +14,7 @@
       <div class="modal-body">
         <div class="table-responsive">
                             <table class="table no-margin">
+
                               <thead>
                                 <tr>
                                   <th>Order ID</th>
@@ -55,11 +57,12 @@
                                                                 
                               </tbody>
                             </table>
-                      </div>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Guardar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+        
+        <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Guardar</a>
       </div>
     </div>
   </div>

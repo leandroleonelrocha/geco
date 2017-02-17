@@ -212,7 +212,12 @@
                     </li>
 
                     <li>
-                      <a href="#" class="not-active"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                      <a href="#" > <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                      <ul class="treeview-menu">
+                        <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> caja diaria</a></li>
+                          <li class="active"><a href="{{route('estadisticas.preinforme')}}"><i class="fa fa-circle-o"></i> preinforme</a></li>
+                       
+                      </ul>
                     </li>
     
                     <li class="treeview">
