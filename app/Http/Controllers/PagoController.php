@@ -136,12 +136,9 @@ class PagoController extends Controller
 
     public function actualizar_post(Request $request){
 
-        // $data = ($request->all());
-        //Session::put('pagos', $data);
-        // $request->session()->push('pagos', $data);
-
-       
-        
+        $data = ($request->all());
+        $request->session()->push('pagos', $data);
+ 
         //array_push($_SESSION['pagos'], $data);
         
         
@@ -177,20 +174,20 @@ class PagoController extends Controller
                 
                 if ($this->reciboRepo->create($recibo)) {
                     $id = $this->reciboRepo->all()->last()->id;
-                    return redirect()->route('filial.recibo_imprimir', $id);
+                    //return redirect()->route('filial.recibo_imprimir', $id);
+                    return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
                 }
-				// return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
+                // return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
             }
-			else{
-				session()->forget('urlBack');
-				return redirect()->to($url)->with('msg_error','El pago no ha podido ser actualizado');
-			}
-		}
-		else
-			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
+            else{
+                session()->forget('urlBack');
+                return redirect()->to($url)->with('msg_error','El pago no ha podido ser actualizado');
+            }
+        }
+        else
+            return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
 
         
-            // return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
     }
 
 
