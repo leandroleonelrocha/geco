@@ -6,7 +6,7 @@ return [
     'numero' =>'Número de preinforme',
     'persona'=>'Persona',
     'datospreinforme'=>'Datos del Preinforme',
-  	'descripcion'=>'Description',
+  	'descripcion'=>'Descrición',
 
 	'encontro'=>'¿Cómo nos encontró?',
 	'carreras'=>'Carreras',
@@ -20,6 +20,10 @@ return [
 	'seleccion'=>'Seleccione una persona o cree un preinforme con una nueva persona',
 
 	'personasexistentes'=>'Personas existentes',
+
+	'asignardatos'=>'Asignar Datos Para Preinformes',
+	'listamedios'=>'Lista Medios de Preinformes',
+	'listacomoencontro'=>'Lista ¿Cómo nos encontró? de Preinformes',
 
 	'agregarnuevapersona' => 'Agregar Nueva Persona',
     'agregarnuevo' => 'Agregar Nuevo',

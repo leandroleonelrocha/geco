@@ -82,4 +82,6 @@ return [
     'modificar' => 'Edit',
     'actualizar' => 'Update',
     'verrecibos' => 'View receipts',
+    'descuentoadicional'  => 'Discount aditional',
+    'recargoadicional'    => 'Surcharge aditional',
 ];

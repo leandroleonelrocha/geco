@@ -5,7 +5,7 @@ class Grupo extends Entity {
 
     protected  $table= 'grupo';
 
-   protected $fillable   = ['curso_id', 'carrera_id', 'descripcion', 'docente_id', 'nuevo', 'turno_manana', 'turno_tarde', 'turno_noche', 'sabados', 'color', 'fecha_inicio', 'fecha_fin' , 'filial_id', 'activo', 'terminado', 'cancelado'];
+   protected $fillable   = ['curso_id', 'carrera_id', 'practica', 'teorica', 'descripcion', 'docente_id', 'nuevo', 'turno_manana', 'turno_tarde', 'turno_noche', 'sabados', 'color', 'fecha_inicio', 'fecha_fin' , 'filial_id', 'activo', 'terminado', 'cancelado'];
     
 
     //Relaciones

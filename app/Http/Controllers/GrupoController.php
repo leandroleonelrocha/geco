@@ -58,8 +58,9 @@ class GrupoController extends Controller
         foreach ($filial as $f) $pais_id=$f->pais_id;
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
 
-        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
-        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
 		// $materias 	= $this->materiaRepo->lists('nombre','id');
 		$docentes 	= $this->docenteRepo->allEneable()->lists('apellidos', 'id');
 		$aulas		= $this->aulaRepo->allAulas()->lists('nombre', 'id');
@@ -73,8 +74,9 @@ class GrupoController extends Controller
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
 
 		$model 		= $this->grupoRepo->find($id);
-        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
-        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
         if(isset($model->Carrera))
 		$materias 	= $model->Carrera->Materia->lists('nombre','id');
 		$docentes 	= $this->docenteRepo->all()->lists('apellidos', 'id');

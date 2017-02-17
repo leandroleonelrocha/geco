@@ -78,12 +78,16 @@ class ExamenController extends Controller
 	}
 	public function editar(Request $request, $id = null)
 	{
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
 		
 		$model = $this->examenRepo->find($id);
 		$matriculas = $this->matriculaRepo->allEneable()->lists('id', 'persona_id');
 		$grupos 	= $this->grupoRepo->all()->lists('descripcion', 'id');
-		$carreras 	= $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
-		$materias 	= $this->materiaRepo->all()->lists('nombre', 'id');
+		$cadena     = $this->filialRepo->filialCadena();
+		$carreras   = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+		$materias 	= $this->materiaRepo->allMateriasLista('nombre', 'id',$cadena->cadena_id);
 		$docentes 	= $this->docenteRepo->all()->lists('full_name', 'id');
 		return view('rol_filial.examenes.form',compact('matriculas', 'grupos', 'carreras', 'materias', 'docentes','model'));
 	}

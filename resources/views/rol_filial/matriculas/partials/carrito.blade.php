@@ -3,55 +3,68 @@
   Launch demo modal
 </button>
  -->
-<!-- Modal -->
-<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="ModalEdit"  role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <h5 class="modal-title">Modal title</h5>
+        
       </div>
       <div class="modal-body">
-       <table class="table no-margin">
+        <div class="table-responsive">
+                            <table class="table no-margin">
+
                               <thead>
                                 <tr>
                                   <th>Order ID</th>
-                                  <th>Item</th>
-                                  <th>Status</th>
-                                  <th>Popularity</th>
+                                  <th>Recargo</th>
+                                  <th>Descuento</th>
+                                  <th>Monto</th>
                                 </tr>
                               </thead>
                               <tbody>
 
                                  <?php
                                   $model           = Session::get('pagos');
-                                 ?>
-
-                                @if(count($model) > 0)
-                                @foreach($model as $pago)
-                              
-                                <tr>
-                                  <td><a href="pages/examples/invoice.html">Numero de pago: {{$pago['pago']}}</a></td>
-                                  <td>Call of Duty IV</td>
-                                  <td><span class="label label-success">Monto: {{ $pago['monto_a_pagar']}}</span></td>
-                                  <td><div class="sparkbar" data-color="#00a65a" data-height="20"><canvas width="34" height="20" style="display: inline-block; width: 34px; height: 20px; vertical-align: top;"></canvas></div></td>
-                                </tr>
-                                @endforeach
-                                @endif
                                
-                                 
+                                 ?>
+                               
+                                @if(count($model) > 0)
+                                  @foreach($model as $pago)
+                                  
+                                  <tr>
+                                    <td><a href="pages/examples/invoice.html">Numero de pago: {{$pago['pago']}}</a></td>
+                                    <td>$ {{$pago['recargo_adicional']}}</td>
+                                    <td>$ {{$pago['descuento_adicional'] }}</td>
+                                    <td>$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}</td>
+                                    
+                                  </tr>
+                                
+                                  @endforeach
+                                  <?php
+                                    $total = $pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'];
+
+                                  ?>
+                                  <tr><td>TOTAL</td><td></td><td></td>
+                                  <td>
+                                  $ {{$total}}
+                                  </td>
+                                  </tr>
+
+
+                                @endif
+                                                                
                               </tbody>
                             </table>
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+        
+        <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Guardar</a>
       </div>
     </div>
   </div>
 </div>
-
- 
 

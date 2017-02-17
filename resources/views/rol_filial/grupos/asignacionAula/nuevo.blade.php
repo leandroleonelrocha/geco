@@ -39,7 +39,7 @@
                                     <td class="sorting_1">{{ $a->nombre }}</td>
                                     <td class="text-center">
 
-                                    <a href="{{route('filial.asignacionAulas_editar',$a->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>  
+                                    <a href="{{route('filial.asignacionAulas_editar',$a->id)}}" title="@lang('lista.editar')"><i class="btn btn-primary glyphicon glyphicon-pencil"></i></a>  </td>
                                 </tr>
                             @endforeach
                         </tbody>

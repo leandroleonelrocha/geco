@@ -7,6 +7,8 @@ use App\Entities\PersonaInteres;
 use App\Entities\TipoDocumento;
 use App\Entities\PersonaMail;
 use App\Entities\Preinforme;
+use App\Entities\PreinformeMedio;
+use App\Entities\PreinformeComoEncontro;
 use App\Entities\Persona;
 use App\Entities\Carrera;
 use App\Entities\Asesor;
@@ -17,6 +19,8 @@ use App\Http\Repositories\PersonaInteresRepo;
 use App\Http\Repositories\TipoDocumentoRepo;
 use App\Http\Repositories\PersonaMailRepo;
 use App\Http\Repositories\PreinformeRepo;
+use App\Http\Repositories\PreinformeMedioRepo;
+use App\Http\Repositories\PreinformeComoEncontroRepo;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\InteresRepo;
@@ -25,6 +29,8 @@ use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\PaisRepo;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Requests\CrearNuevaPersonaRequest;
+use App\Http\Requests\CrearNuevoMedioPreinformeRequest;
+use App\Http\Requests\CrearNuevoEncontroPreinformeRequest;
 use Auth;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
@@ -34,7 +40,7 @@ class PreinformeController extends Controller {
 
     protected $preinformeRepo;
 
-    public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo, PaisRepo $paisRepo, FilialRepo $filialRepo)
+    public function __construct(PreinformeRepo $preinformeRepo, PersonaRepo $personaRepo, AsesorRepo $asesorRepo, TipoDocumento $tipoDocumentoRepo, PersonaMail $personaMailRepo, PersonaTelefono $personaTelefonoRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, PersonaInteresRepo $personaInteresRepo, PaisRepo $paisRepo, FilialRepo $filialRepo,PreinformeMedioRepo $preinformeMedioRepo,PreinformeComoEncontroRepo $preinformeComoEncontroRepo)
     {
         $this->preinformeRepo       = $preinformeRepo;
         $this->personaRepo          = $personaRepo;
@@ -47,6 +53,8 @@ class PreinformeController extends Controller {
         $this->personaInteresRepo   = $personaInteresRepo;
         $this->paisRepo             = $paisRepo;
         $this->filialRepo           = $filialRepo;
+        $this->preinformeMedioRepo  = $preinformeMedioRepo;
+        $this->preinformeComoEncontroRepo=$preinformeComoEncontroRepo;
     }
 
     // Página principal de Preinformes
@@ -71,12 +79,15 @@ class PreinformeController extends Controller {
         $filial=$this->filialRepo->obtenerFilialPais();
         foreach ($filial as $f) $pais_id=$f->pais_id;
         $pais=$this->paisRepo->obtenerLenguaje($pais_id);
-       
+          
         $persona    = $this->personaRepo->find($id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
-        $carreras   = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
-        $cursos     = $this->cursoRepo->lenguajeLista('nombre','id',$pais->lenguaje);
-        return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos'));     
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+        $medios     = $this->preinformeMedioRepo->lenguajeLista('medio','id',$pais->lenguaje);
+        $comoEncontro    = $this->preinformeComoEncontroRepo->lenguajeLista('como_encontro','id',$pais->lenguaje);
+        return view('rol_filial.preinformes.nuevo',compact('persona','asesores','carreras','cursos','medios','comoEncontro'));     
     }
 
     // Página de Nuevo -- Persona Nueva
@@ -89,10 +100,12 @@ class PreinformeController extends Controller {
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $paises     = $this->paisRepo->all()->lists('pais','id');
         $asesores   = $this->asesorRepo->all()->lists('full_name','id');
-        $carreras   = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
-        $cursos     = $this->cursoRepo->lenguajeLista('nombre','id',$pais->lenguaje);
-        return view('rol_filial.preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos','paises'));
-           
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+        $medios     = $this->preinformeMedioRepo->lenguajeLista('medio','id',$pais->lenguaje);
+        $comoEncontro    = $this->preinformeComoEncontroRepo->lenguajeLista('como_encontro','id',$pais->lenguaje);
+        return view('rol_filial.preinformes.nuevoPersona',compact('tipos','asesores','carreras','cursos','paises','medios','comoEncontro'));
     }
 
     // Alta de Preinforme y Persona Existente
@@ -103,8 +116,8 @@ class PreinformeController extends Controller {
         $preinforme['persona_id']       =   $request->persona;
         $preinforme['asesor_id']        =   $request->asesor;
         $preinforme['descripcion']      =   $request->descripcion_preinforme;
-        $preinforme['medio']            =   $request->medio;
-        $preinforme['como_encontro']    =   $request->como_encontro;
+        $preinforme['medio_id']            =   $request->medio_id;
+        $preinforme['como_encontro_id']    =   $request->como_encontro_id;
         $preinforme['filial_id']        =   session('usuario')['entidad_id'];
         if($this->preinformeRepo->create($preinforme)){
             // Intereces
@@ -182,8 +195,8 @@ class PreinformeController extends Controller {
             $preinforme['persona_id']       =   $persona['id'];
             $preinforme['asesor_id']        =   $request->asesor;
             $preinforme['descripcion']      =   $request->descripcion_preinforme;
-            $preinforme['medio']            =   $request->medio;
-            $preinforme['como_encontro']    =   $request->como_encontro;
+            $preinforme['medio_id']            =   $request->medio_id;
+            $preinforme['como_encontro_id']    =   $request->como_encontro_id;
             $preinforme['filial_id']        =   session('usuario')['entidad_id'];
             if($this->preinformeRepo->create($preinforme)){
                 // Intereces
@@ -225,10 +238,13 @@ class PreinformeController extends Controller {
         $preinforme = $this->preinformeRepo->find($id);
         $intereses  = $this->personaInteresRepo->findPreinforme($preinforme->id);
         $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
-        $carreras   = $this->carreraRepo->allLenguajeLista($pais->lenguaje);
-        $cursos     = $this->cursoRepo->allLenguajeLista($pais->lenguaje);
+        $cadena     = $this->filialRepo->filialCadena();
+        $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $medios     = $this->preinformeMedioRepo->lenguajeLista('medio','id',$pais->lenguaje);
+        $comoEncontro    = $this->preinformeComoEncontroRepo->lenguajeLista('como_encontro','id',$pais->lenguaje);
 
-        return view('rol_filial.preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos'));
+        return view('rol_filial.preinformes.editar',compact('preinforme','intereses','asesores','carreras','cursos','medios','comoEncontro'));
         
     }
 
@@ -239,8 +255,8 @@ class PreinformeController extends Controller {
         // Datos del Preinforme
         $preinforme['asesor_id']        = $data['asesor'];
         $preinforme['descripcion']      = $data['descripcion_preinforme'];
-        $preinforme['medio']            = $data['medio'];
-        $preinforme['como_encontro']    = $data['como_encontro'];
+        $preinforme['medio_id']            = $data['medio_id'];
+        $preinforme['como_encontro_id']    = $data['como_encontro_id'];
 
         $modelP = $this->preinformeRepo->find($data['preinforme']); // Busco el preinforme
         // Modificación de los datos del preinforme
@@ -271,5 +287,48 @@ class PreinformeController extends Controller {
             }
         }
         return redirect()->route('filial.preinformes');   
+    }
+
+
+    public function nuevoDatos(){
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+
+        $medios=$this->preinformeMedioRepo->allLengDatosPreinforme(($pais->lenguaje));
+        $comoEncontro=$this->preinformeComoEncontroRepo->allLengDatosPreinforme(($pais->lenguaje));
+        return view('rol_filial.preinformes.AsignacionDatos.nuevo',compact('medios','comoEncontro'));
+    }
+
+    public function nuevoDatosMedio_post(CrearNuevoMedioPreinformeRequest $request){
+        $data = $request->all();
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+        $medio['lenguaje'] =$pais->lenguaje;
+
+        foreach ($data['medio'] as $key) {
+            $medio['medio'] = $key;;
+            $this->preinformeMedioRepo->create($medio);
+        }
+        return redirect()->back()->with('msg_ok', 'Medios de preinforme agregados correctamente');
+    }
+
+    public function nuevoDatosEncontro_post(CrearNuevoEncontroPreinformeRequest $request){
+        $como_encontro = $request->all();
+
+        $filial=$this->filialRepo->obtenerFilialPais();
+        foreach ($filial as $f) $pais_id=$f->pais_id;
+        $pais=$this->paisRepo->obtenerLenguaje($pais_id);
+        $como_encontro['lenguaje'] =$pais->lenguaje;
+
+        // foreach ($data['como_encontro'] as $key) {
+        //     $como_encontro['como_encontro'] = $key;;
+        //     $this->preinformeMedioRepo->create($como_encontro);
+        // }
+        $this->preinformeComoEncontroRepo->create($como_encontro);
+        return redirect()->back()->with('msg_ok', 'Como nos encontro de preinforme agregados correctamente');
     }
 }

@@ -2,42 +2,6 @@ drop database if exists geco;
 create database geco;
 use geco;
 
-create table if not exists curso(
-id			int not null auto_increment,
-nombre		varchar(50) not null,
-duracion 	varchar(50),
-descripcion	varchar(300) default 'Sin Descripción.',
-taller		boolean default false,
-lenguaje  	char (5) not null,
-created_at	timestamp not null default '0000-00-00 00:00:00',
-updated_at	timestamp not null default '0000-00-00 00:00:00',
-primary key	(id)
-);
-
-create table if not exists carrera(
-id			int not null auto_increment,
-nombre		varchar(50) not null,
-duracion 	varchar(50),
-descripcion	varchar(300) default 'Sin Descripción.',
-lenguaje  	char (5) not null,
-created_at	timestamp not null default '0000-00-00 00:00:00',
-updated_at	timestamp not null default '0000-00-00 00:00:00',
-primary key	(id)
-);
-
-create table if not exists materia(
-id			int not null auto_increment,
-carrera_id	int not null,
-nombre		varchar(50) not null,
-practica	boolean default false,
-teorica		boolean default false,
-descripcion	varchar(300) default 'Sin Descripción.',
-created_at	timestamp not null default '0000-00-00 00:00:00',
-updated_at	timestamp not null default '0000-00-00 00:00:00',
-primary key (id, carrera_id),
-foreign key (carrera_id)				references carrera	(id)
-);
-
 create table if not exists cadena(
 id					int not null auto_increment,
 nombre				varchar(50) not null,
@@ -46,6 +10,48 @@ telefono			varchar(50) not null,
 created_at  		timestamp not null default '0000-00-00 00:00:00',
 updated_at  		timestamp not null default '0000-00-00 00:00:00',
 primary key 		(id)
+);
+
+create table if not exists curso(
+id			int not null auto_increment,
+cadena_id	int not null,
+nombre		varchar(50) not null,
+duracion 	varchar(50),
+descripcion	varchar(300) default 'Sin Descripción.',
+taller		boolean default false,
+lenguaje  	char (5) not null,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key	(id),
+foreign key	(cadena_id) 	references cadena 	(id)
+);
+
+create table if not exists carrera(
+id			int not null auto_increment,
+cadena_id	int not null,
+nombre		varchar(50) not null,
+duracion 	varchar(50),
+descripcion	varchar(300) default 'Sin Descripción.',
+lenguaje  	char (5) not null,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key	(id),
+foreign key	(cadena_id) 	references cadena 	(id)
+);
+
+create table if not exists materia(
+id			int not null auto_increment,
+carrera_id	int not null,
+cadena_id	int not null,
+nombre		varchar(50) not null,
+practica	boolean default false,
+teorica		boolean default false,
+descripcion	varchar(300) default 'Sin Descripción.',
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key (id, carrera_id),
+foreign key (carrera_id)				references carrera	(id),
+foreign key	(cadena_id) 	references cadena 	(id)
 );
 
 create table if not exists tipo_documento(
@@ -215,20 +221,40 @@ primary key	(persona_id, mail),
 foreign key	(persona_id) 		references persona	(id)
 );
 
-create table if not exists preinforme(
+create table if not exists preinforme_medio(
+id			int not null auto_increment,
+medio		varchar(50) not null,
+lenguaje  	char (5) not null,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key 			(id)
+);
+
+create table if not exists preinforme_como_encontro(
 id				int not null auto_increment,
-persona_id		int not null,
-asesor_id		int not null,
-descripcion		varchar(300),
-medio			varchar(50),
-como_encontro	varchar(50),
-filial_id		int not null,
+como_encontro	varchar(50) not null,
+lenguaje  		char (5) not null,
 created_at		timestamp not null default '0000-00-00 00:00:00',
 updated_at		timestamp not null default '0000-00-00 00:00:00',
-primary key 	(id),
-foreign key 	(persona_id)				references persona	(id),
-foreign key 	(asesor_id)					references asesor	(id),
-foreign key 	(filial_id)					references filial	(id)
+primary key 			(id)
+);
+
+create table if not exists preinforme(
+id					int not null auto_increment,
+persona_id			int not null,
+asesor_id			int not null,
+descripcion			varchar(300),
+medio_id			int not null,
+como_encontro_id	int not null,
+filial_id			int not null,
+created_at			timestamp not null default '0000-00-00 00:00:00',
+updated_at			timestamp not null default '0000-00-00 00:00:00',
+primary key 		(id),
+foreign key 		(persona_id)				references persona	(id),
+foreign key 		(asesor_id)					references asesor	(id),
+foreign key 		(filial_id)					references filial	(id),
+foreign key 		(medio_id)					references preinforme_medio	(id),
+foreign key 		(como_encontro_id)			references preinforme_como_encontro	(id)
 );
 
 create table if not exists persona_interes(
@@ -281,27 +307,29 @@ foreign key 	(filial_id)					references filial		(id)
 );
 
 create table if not exists pago(
-id 				int not null auto_increment,
-matricula_id	int not null,
-tipo_moneda_id 	int not null,
-nro_pago		int not null,
-pago_individual	boolean default false,
-descripcion		varchar(50) default 'Sin Descripción.',
-terminado		boolean not null default false,
-vencimiento		date,
-fecha_recargo	date,
-monto_original	float not null,
-monto_actual	float,
-monto_pago		float,
-descuento		float not null,
-recargo			float not null,
-filial_id		int not null,
-created_at  	timestamp not null default '0000-00-00 00:00:00',
-updated_at  	timestamp not null default '0000-00-00 00:00:00',
-primary key 	(id),
-foreign key 	(matricula_id)				references matricula	(id),
-foreign key 	(tipo_moneda_id)			references tipo_moneda	(id),
-foreign key 	(filial_id)					references filial		(id)
+id 							int not null auto_increment,
+matricula_id				int not null,
+tipo_moneda_id 				int not null,
+nro_pago					int not null,
+pago_individual				boolean default false,
+descripcion					varchar(50) default 'Sin Descripción.',
+terminado					boolean not null default false,
+vencimiento					date not null,
+fecha_recargo				date not null,
+monto_original				float not null,
+monto_actual				float,
+monto_pago					float,
+descuento					float not null,
+recargo						float not null,
+descuento_adicional			float,
+recargo_adicional			float ,
+filial_id					int not null,
+created_at  				timestamp not null default '0000-00-00 00:00:00',
+updated_at  				timestamp not null default '0000-00-00 00:00:00',
+primary key 				(id),
+foreign key 				(matricula_id)				references matricula	(id),
+foreign key 				(tipo_moneda_id)			references tipo_moneda	(id),
+foreign key 				(filial_id)					references filial		(id)
 );
 
 create table if not exists recibo_tipo(
@@ -385,6 +413,8 @@ create table if not exists grupo(
 id				int not null auto_increment,
 curso_id		int,
 carrera_id		int,
+practica		boolean,
+teorica			boolean,
 descripcion		varchar(300),
 docente_id		int not null,
 nuevo			boolean not null default true,
@@ -1076,115 +1106,138 @@ values  (1 , 'persona1@persona.com'		, '2016-11-11 00:00:00', '2016-11-11 00:00:
         (50, 'persona50@persona.com'	, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
+-- Preeinformes Medio
+--
+insert into preinforme_medio (`medio`,`lenguaje`, `created_at`, `updated_at`) 
+values 	('Publicidad','es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
+
+--
+-- Preeinformes Como Encontro
+--
+insert into preinforme_como_encontro (`como_encontro`,`lenguaje`, `created_at`, `updated_at`) 
+values 	('Internet'	 ,'es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Trabajo'	 ,'es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Televisión','es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Diario'	 ,'es','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		('Work'		 ,'en','2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
+--
 -- Preeinformes
 --
-insert into preinforme (`persona_id`, `asesor_id`, `descripcion`, `medio`, `como_encontro`, `filial_id`, `created_at`, `updated_at`) 
-values 	(1,		4, 'Interesado'		, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(2,		4, 'Vuelve dps'		, 'publicidad'	, 'Internet'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(3,		8, 'Se com por tel'	, 'publicidad'	, 'Revista'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(4, 	4, 'Nada'			, 'publicidad'	, 'Universidad'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(8, 	4, 'Se anota'		, 'publicidad'	, 'Publicidad'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(10, 	2, 'Muy convencido'	, 'publicidad'	, 'Internet'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(13, 	4, 'Sospechoso'		, 'publicidad'	, 'Radio'		, 2, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(14, 	1, 'Vuelve dps'		, 'publicidad'	, 'Comentario'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(20, 	3, 'Se com por tel'	, 'publicidad'	, 'Trabajo'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(24, 	4, 'Nada'			, 'publicidad'	, 'Transporte'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(26, 	2, 'Se anota'		, 'publicidad'	, 'Diario'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(27,	1, 'Muy convencido'	, 'publicidad'	, 'Internet'	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(28, 	4, 'Sospechoso'		, 'publicidad'	, 'TV'			, 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(14, 	1, 'No Cocina'		, 'publicidad'	, 'Anuncio'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(20, 	3, 'Se com por tel'	, 'publicidad'	, 'Trabajo'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(24, 	4, 'Nada'			, 'publicidad'	, 'Internet'	, 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
-		(26, 	2, 'Nada'			, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(27,	1, 'Llama dps'		, 'publicidad'	, 'Filial'		, 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(28, 	4, 'Interesado'		, 'publicidad'	, 'Radio'		, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
- 		(35, 	4, 'No sabe'		, 'publicidad'	, 'TV'			, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
+insert into preinforme (`persona_id`, `asesor_id`, `descripcion`, `medio_id`, `como_encontro_id`, `filial_id`, `created_at`, `updated_at`) 
+values 	(1,		4, 'Interesado'		, 1	, 2	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(2,		4, 'Vuelve dps'		, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(3,		8, 'Se com por tel'	, 1	, 3 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(4, 	4, 'Nada'			, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(8, 	4, 'Se anota'		, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(10, 	2, 'Muy convencido'	, 1	, 2 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(13, 	4, 'Sospechoso'		, 1	, 1 , 2, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(14, 	1, 'Vuelve dps'		, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(20, 	3, 'Se com por tel'	, 1	, 4 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(24, 	4, 'Nada'			, 1	, 1	, 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(26, 	2, 'Se anota'		, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(27,	1, 'Muy convencido'	, 1	, 3 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(28, 	4, 'Sospechoso'		, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(14, 	1, 'No Cocina'		, 1	, 3 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(20, 	3, 'Se com por tel'	, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(24, 	4, 'Nada'			, 1	, 1 , 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+		(26, 	2, 'Nada'			, 1	, 2 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(27,	1, 'Llama dps'		, 1	, 1 , 1, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(28, 	4, 'Interesado'		, 1	, 2 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000'),
+ 		(35, 	4, 'No sabe'		, 1	, 1 , 3, '2016-11-11 00:00:00.000000', '2016-11-11 00:00:00.000000');
 
 --
 -- Cursos
 --
 
-insert into curso (`id`, `nombre`, `duracion`, `descripcion`, `taller`,`lenguaje`, `created_at`, `updated_at`)
-values  (1 , 'Introducción a la cocina'			, '1 Año'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Enología y Maridaje' 				, '15 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Barman y Tragos' 					, '50 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-    	(11, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (12, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (13, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (14, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (15, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into curso (`cadena_id`,`nombre`, `duracion`, `descripcion`, `taller`,`lenguaje`, `created_at`, `updated_at`)
+values  (1 	, 'Introducción a la cocina'		, '1 Año'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Enología y Maridaje' 			, '15 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Barman y Tragos' 				, '50 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 	, 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+    	(1	, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1	, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Carreras
 --
 
-insert into carrera (`id`, `nombre`, `duracion`, `descripcion`,`lenguaje`, `created_at`, `updated_at`)
+insert into carrera (`cadena_id`, `nombre`, `duracion`, `descripcion`,`lenguaje`, `created_at`, `updated_at`)
 values  (1 , 'Profesional Gastronómico'			, '1 Año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
-
+        (1 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1 , 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Operador de PC' 					, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Técnico en redes' 				, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Analista de sistema' 				, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2 , 'Técnico en reparación de pc'		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 --
 -- Materias
 --
 
-insert into materia (`carrera_id`, `nombre`, `practica`, `teorica`, `descripcion`, `created_at`, `updated_at`)
-values  (1 , 'Cocina Básica y Servicio'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Panadería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Pastelería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Cocina Argentina y Latinoamericana'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Cocina Internacional' 						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Enología y Maridaje' 							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (3 , 'Repostería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Barman' 										, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (4 , 'Repostería Inicial y Repostería Avanzada' 	, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Legislación y Admin de personal'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Comercialización'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Relaciones públicas y congresos'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6 , 'Arte Culinario'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Gestión de la calidad gastronómica'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Gestión de alimentos y bebidas'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Cocina Industrial'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cocina Básica y Servicio'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Prácticas en Eventos'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Planificación y organización del servicio'	, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Organización de eventos'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Materias Primas y Nutrición'					, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Elaboración del Menú'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (7 , 'Diseño y Ambientación de Restaurantes'		, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cultura y Crítica Gastronómica'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (8 , 'Prácticas para la Elaboración de Alimentos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Instalación y Equipamientos Gastronómicos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Costos y Compras'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Informática General y Aplicada'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Francés Gastronómico'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cocina I'										, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Cocina fría'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Pastas y Salsas'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Cocina asiatica'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Cocina II'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (9 , 'Nutrición I'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Contabilidad y costos'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6, 'Gestión de personal'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Inglés técnico'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (6, 'Nutrición II'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Tecnología alimentaria'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (5 , 'Cocina dietoterápica'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 'Historia de la cultura'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (10, 'Diseño, equipamiento y seguridad'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into materia (`cadena_id`,`carrera_id`, `nombre`, `practica`, `teorica`, `descripcion`, `created_at`, `updated_at`)
+values  (1,1 , 'Cocina Básica y Servicio'					, 1, 0,'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Panadería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Pastelería' 								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,2 , 'Cocina Argentina y Latinoamericana'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,2 , 'Cocina Internacional' 						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,3 , 'Enología y Maridaje' 						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,3 , 'Repostería' 								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Barman' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,4 , 'Repostería Inicial y Repostería Avanzada' 	, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,5 , 'Legislación y Admin de personal'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,5 , 'Comercialización'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Relaciones públicas y congresos'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,6 , 'Arte Culinario'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Gestión de la calidad gastronómica'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Gestión de alimentos y bebidas'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,8 , 'Cocina Industrial'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cocina Básica y Servicio'					, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Prácticas en Eventos'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 ,'Planificación y organización del servicio'	, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Organización de eventos'					, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Materias Primas y Nutrición'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Elaboración del Menú'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,7 , 'Diseño y Ambientación de Restaurantes'		, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cultura y Crítica Gastronómica'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,8 , 'Prácticas para la Elaboración de Alimentos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Instalación y Equipamientos Gastronómicos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Costos y Compras'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Informática General y Aplicada'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Francés Gastronómico'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cocina I'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Cocina fría'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Pastas y Salsas'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Cocina asiatica'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Cocina II'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,9 , 'Nutrición I'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Contabilidad y costos'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Gestión de personal'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Inglés técnico'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,6 , 'Nutrición II'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Tecnología alimentaria'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,5 , 'Cocina dietoterápica'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,1 , 'Historia de la cultura'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1,10, 'Diseño, equipamiento y seguridad'			, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,12, 'Topologias'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,12, 'Redes I'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,11, 'Introducción a word'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (2,14, 'Sistemas Operativos'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
 --	
 -- Matrículas
 --
@@ -1226,97 +1279,97 @@ values  (1 , 1	 , null, 3, 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:
 -- Pagos
 --
 
-insert into pago (`matricula_id`, `tipo_moneda_id`, `nro_pago`, `pago_individual`, `descripcion`, `terminado`, `vencimiento`,`monto_original`, `monto_actual`, `monto_pago`, `descuento`, `recargo`, `filial_id`, `created_at`, `updated_at`)
-values  (1000, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1000, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1000, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1001, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1001, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1001, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1002, 1,  0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1002, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1002, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1003, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1003, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1003, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1004, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1004, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1004, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1005, 1,  0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1005, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1005, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1006, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1006, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1006, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1007, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1007, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1007, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1008, 1,  0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1008, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1008, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1009, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1009, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1009, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1010, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1010, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1010, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1011, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1011, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1011, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1012, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1012, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1012, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1013, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1013, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1013, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1014, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1014, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1014, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1015, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1015, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1015, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1016, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1016, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1016, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1017, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1017, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1017, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1018, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1018, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1018, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1019, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1019, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1019, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1020, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1020, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1020, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1021, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1021, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1021, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1022, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1022, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1022, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1023, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1023, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1023, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1024, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1024, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1024, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1025, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1025, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1025, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1026, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1026, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1026, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1027, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1027, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1027, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1028, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1028, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1028, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1029, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1029, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1029, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into pago (`matricula_id`, `tipo_moneda_id`, `nro_pago`, `pago_individual`, `descripcion`, `terminado`, `vencimiento`, `fecha_recargo`,`monto_original`, `monto_actual`, `monto_pago`, `descuento`, `recargo`, `filial_id`, `created_at`, `updated_at`)
+values  (1000, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1000, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1000, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1001, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1001, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1001, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1002, 1,  0, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1002, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1002, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1003, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1003, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1003, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1004, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1004, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1004, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1005, 1,  0, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1005, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1005, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1006, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1006, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1006, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1007, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1007, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1007, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1008, 1,  0, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1008, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1008, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1009, 1,  0, 0, 'Sin Descripción.', 0, '2015-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1009, 1,  1, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1009, 1,  2, 0, 'Sin Descripción.', 0, '2017-12-10','2017-12-10',  5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1010, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1010, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1010, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1011, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1011, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1011, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1012, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1012, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1012, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1013, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1013, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1013, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1014, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1014, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1014, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1015, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1015, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1015, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1016, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1016, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1016, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1017, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1017, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1017, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1018, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1018, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1018, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1019, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1019, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1019, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1020, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1020, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1020, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1021, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1021, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1021, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1022, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1022, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1022, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1023, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1023, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1023, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1024, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1024, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1024, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1025, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1025, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1025, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1026, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1026, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1026, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 3, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1027, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1027, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1027, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1028, 1, 0, 0, 'Sin Descripción.', 0, '2015-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1028, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1028, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1029, 1, 0, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1029, 1, 1, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+        (1029, 1, 2, 0, 'Sin Descripción.', 0, '2017-12-10', '2017-12-10', 5000, 5000, 0, 100, 15, 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Aulas
@@ -1371,22 +1424,22 @@ values 	('AA123'	, '3', '0000-00-00 00:00:00.000000', '0000-00-00 00:00:00.00000
 -- Grupos
 --
 
-insert into grupo (`curso_id`, `carrera_id`, `descripcion`, `docente_id`, `nuevo`, `turno_manana`, `turno_tarde`, `turno_noche`, `sabados`, `color`, `fecha_inicio`, `fecha_fin`, `filial_id`, `activo`, `terminado`, `cancelado`, `created_at`, `updated_at`)
-values  (1	 , null,  'Grupo 1'	, 1, 0, 1, 1, 1, 1, '#563d7c', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(2	 , null,  'Grupo 2'	, 2, 0, 1, 1, 1, 1, '#b90000', '2017-01-02', '2017-03-01', 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(3	 , null,  'Grupo 3'	, 3, 0, 1, 1, 1, 1, '#8000ff', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 2    , 'Grupo 4'	, 4, 0, 1, 1, 1, 1, '#2d2d2d', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 3    , 'Grupo 5'	, 5, 0, 1, 1, 1, 1, '#892e2e', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 1    , 'Grupo 6'	, 6, 0, 1, 1, 1, 1, '#3f1afa', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 5    , 'Grupo 7'	, 7, 0, 1, 1, 1, 1, '#c6c752', '2017-01-02', '2017-03-01', 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 7   	, 'Grupo 8'	, 8, 0, 1, 1, 1, 1, '#39bc8c', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 1    , 'Grupo 9'	, 4, 0, 1, 1, 1, 1, '#2d2d2d', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 9    , 'Grupo 10', 5, 0, 1, 1, 1, 1,	'#892e2e', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 9    , 'Grupo 11', 8, 0, 1, 1, 1, 1,	'#3f1afa', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 1    , 'Grupo 12', 9, 0, 1, 1, 1, 1,	'#c6c752', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 7   	, 'Grupo 13', 9, 0, 1, 1, 1, 1,	'#39bc8c', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 8    , 'Grupo 14', 11,0, 1, 1, 1 ,1,	'#c6c752', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-  		(null, 9   	, 'Grupo 15', 2, 0, 1, 1, 1, 1, '#39bc8c', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into grupo (`curso_id`, `carrera_id`, `practica`, `teorica`, `descripcion`, `docente_id`, `nuevo`, `turno_manana`, `turno_tarde`, `turno_noche`, `sabados`, `color`, `fecha_inicio`, `fecha_fin`, `filial_id`, `activo`, `terminado`, `cancelado`, `created_at`, `updated_at`)
+values  (1	 , null,  null, null, 'Grupo 1'	, 1, 0, 1, 1, 1, 1, '#563d7c', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(2	 , null,  null, null, 'Grupo 2'	, 2, 0, 1, 1, 1, 1, '#b90000', '2017-01-02', '2017-03-01', 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(3	 , null,  null, null, 'Grupo 3'	, 3, 0, 1, 1, 1, 1, '#8000ff', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 2    , 1, 0, 'Grupo 4'	, 4, 0, 1, 1, 1, 1, '#2d2d2d', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 3    , 1, 0, 'Grupo 5'	, 5, 0, 1, 1, 1, 1, '#892e2e', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 1    , 1, 0, 'Grupo 6'	, 6, 0, 1, 1, 1, 1, '#3f1afa', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 5    , 1, 0, 'Grupo 7'	, 7, 0, 1, 1, 1, 1, '#c6c752', '2017-01-02', '2017-03-01', 1, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 7   	, 1, 0, 'Grupo 8'	, 8, 0, 1, 1, 1, 1, '#39bc8c', '2017-01-02', '2017-03-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 1    , 1, 0, 'Grupo 9'	, 4, 0, 1, 1, 1, 1, '#2d2d2d', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 9    , 0, 1, 'Grupo 10', 5, 0, 1, 1, 1, 1,	'#892e2e', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 9    , 0, 1, 'Grupo 11', 8, 0, 1, 1, 1, 1,	'#3f1afa', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 1    , 0, 1, 'Grupo 12', 9, 0, 1, 1, 1, 1,	'#c6c752', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 7   	, 0, 1, 'Grupo 13', 9, 0, 1, 1, 1, 1,	'#39bc8c', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 8    , 0, 1, 'Grupo 14', 11,0, 1, 1, 1 ,1,	'#c6c752', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+  		(null, 9   	, 0, 1, 'Grupo 15', 2, 0, 1, 1, 1, 1, '#39bc8c', '2016-12-01', '2017-01-01', 3, 1, 0, 0, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 --	
 -- Grupo Horarios
 --

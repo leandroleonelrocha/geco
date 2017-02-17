@@ -212,7 +212,12 @@
                     </li>
 
                     <li>
-                      <a href="#" class="not-active"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                      <a href="#" > <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                      <ul class="treeview-menu">
+                        <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> caja diaria</a></li>
+                          <li class="active"><a href="{{route('estadisticas.preinforme')}}"><i class="fa fa-circle-o"></i> preinforme</a></li>
+                       
+                      </ul>
                     </li>
     
                     <li class="treeview">
@@ -222,6 +227,7 @@
                       <ul class="treeview-menu">
                         <li> <a href="{{route('filial.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i>@lang('menu.perfil')</a></li>
                         <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignaraulas')</a></li>
+                        <li> <a href="{{route('filial.preinformes_nuevoDatos')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignardatospreinforme')</a></li>
                         <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
                       </ul>
                     </li> 

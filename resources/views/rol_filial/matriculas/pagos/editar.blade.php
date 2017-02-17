@@ -27,6 +27,10 @@
 									{!! Form::date('vencimiento',$pago->vencimiento,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
+									<label>Fecha Recargo</label>
+									{!! Form::date('fecha_recargo',$pago->fecha_recargo,array('class'=>'pago-item form-control', 'required')) !!}
+								</div>
+								<div class="col-md-6 form-group">
 									<label>@lang('matricula.montooriginal')</label>
 									<div class="input-group">
 		  								<span class="input-group-addon">

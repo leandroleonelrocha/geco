@@ -12,8 +12,8 @@ class CarreraRepo extends BaseRepo {
         return new Carrera();
     }
 
-    public function allCarreras($len){
-        return $this->model->where('lenguaje', $len)->get();
+    public function allCarreras($len,$cad){
+        return $this->model->where('lenguaje', $len)->where('cadena_id', $cad)->get();
     }
 
 }

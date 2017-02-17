@@ -7,10 +7,10 @@ return [
     'descripcion'=>'Descrição',
     'matricula'=>'Inscrição',
     'carrerasycursos'=>'Carreiras e cursos',
-
+    'fechainicio'=>'Data de início',
     'seleccioncyc'=>'Selecione uma carreira ou curso',
     'seleccionmateria'=>'Selecione uma matéria',
-
+    'cantclases'=>'Número de classes',
     'personasi' => 'Pessoas Inscritas',
     'carreras'=>'Carreiras',
     'cursos'=>'Cursos',

@@ -77,5 +77,7 @@ return [
     'modificar' => 'Mudança',
     'actualizar' => 'Atualizar',
     'verrecibos' => 'Ver recibos',
+    'descuentoadicional'  => 'Desconto aditional',
+    'recargoadicional'    => 'Sobrecarregar aditional',
 
 ];

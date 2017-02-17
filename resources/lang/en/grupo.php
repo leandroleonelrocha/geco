@@ -11,11 +11,11 @@ return [
     'personasi' => 'People registered',
     'seleccioncyc'=>'Select a career or course',
     'seleccionmateria'=>'Select a matter',
-
+    'fechainicio'=>'Start date',
     'carreras'=>'Careers',
     'cursos'=>'Courses',
     'materia'=>'Matter',
-
+    'cantclases'=>'Quantity of classes',
     'mañana'=>'Morning',
     'tarde'=>'Afternoon',
     'noche'=>'Night',

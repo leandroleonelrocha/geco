@@ -80,7 +80,19 @@ $(document).ready(function(){
                 success: function(result){
                    $(".select_grupo").empty();
                    $.each(result, function(clave, valor) {
-                        $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.id+'</option>' );
+                        var tp;
+                        <?php if (session('lang') == "es"){
+                            if (valor.practica == 1) { tp = " - Practica"}
+                            if (valor.teorica == 1) { tp = " - Teorica"}
+                        }elseif(session('lang') == "en"{
+                            if (valor.practica == 1) { tp = " - Practical"}
+                            if (valor.teorica == 1) { tp = " - Theoretical"}
+                        }elseif(session('lang') == "es"){
+                            if (valor.practica == 1) { tp = " - Prática"}
+                            if (valor.teorica == 1) { tp = " - Teórica"}
+                        } ?>
+                        if (valor.practica == null && valor.teorica == null) { tp = ""}
+                        $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+tp+'</option>' );
                    });
                 }
             });
@@ -154,6 +166,52 @@ $(document).ready(function(){
         return false;
     });
 
+            /* ------------------------- Agregar Medio Preinforme ------------------------- */
+    var max_fields      = 50; //maximum input boxes allowed
+    var wrapperMedio         = $(".input_fields_medio"); //Fields wrapper
+    var add_button_medio      = $(".add_input_medio"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button_medio).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapperMedio).append('<div><input type="text" name="medio[]" class="form-control"/><a href="#" class="remove_fieldmedio" >&times;</a></div>'); //add input box
+        }
+    });
+
+    $(wrapperMedio).on("click",".remove_fieldmedio", function(e){ //click en eliminar campo
+       
+        if( x > 1 ) {
+            $(this).parent('div').remove(); //eliminar el campo
+            x--;
+        }
+        return false;
+    });
+
+                /* ------------------------- Agregar Como nos Encontro Preinforme ------------------------- */
+    var max_fields      = 50; //maximum input boxes allowed
+    var wrapperEncontro         = $(".input_fields_encontro"); //Fields wrapper
+    var add_button_encontro      = $(".add_input_encontro"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button_encontro).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapperEncontro).append('<div><input type="text" name="como_encontro[]" class="form-control"/><a href="#" class="remove_fieldencontro" >&times;</a></div>'); //add input box
+        }
+    });
+
+    $(wrapperEncontro).on("click",".remove_fieldencontro", function(e){ //click en eliminar campo
+       
+        if( x > 1 ) {
+            $(this).parent('div').remove(); //eliminar el campo
+            x--;
+        }
+        return false;
+    });
+
    /* ------------------------- Aceptar/Rechazar Pases ------------------------- */
     $('.CR').on('click', function(event) {
         event.preventDefault();
@@ -180,5 +238,26 @@ $(document).ready(function(){
         .fail(function() {
             console.log("error");
         });
+    });
+
+    /* ------------------------- Pagos ------------------------- */
+    var actual  = parseFloat($('.monto_actual').val()); // Monto actual - antes de ser modificado
+    // Descuento adicional
+    $('.descuento_adicional').keyup(function(){
+        var descAd      = parseFloat($('.descuento_adicional').val()),
+            desc        = actual - descAd;
+
+        $('.monto_actual').val(desc);
+        if (isNaN(descAd)) $('.monto_actual').val(actual);
+    });
+
+    // Reecargo adicional
+    $('.recargo_adicional').keyup(function(){
+        var recAd      = parseFloat($('.recargo_adicional').val()),
+            rec        = actual + recAd;
+
+        $('.monto_actual').val(rec);
+
+        if (isNaN(recAd)) $('.monto_actual').val(actual);
     });
 });

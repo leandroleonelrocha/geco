@@ -30,7 +30,9 @@ class MateriaController extends Controller
 	}
 
 	public function lista(){
-		$materia=$this->materiaRepo->listPaginate();
+
+		$cadena = $this->filialRepo->filialCadena();
+		$materia=$this->materiaRepo->allMaterias($cadena->cadena_id);
 		return view('rol_filial.materias.lista',compact('materia'));
 	}
 
@@ -40,12 +42,17 @@ class MateriaController extends Controller
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-		$carreras = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
+		$cadena = $this->filialRepo->filialCadena();
+		$carreras = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
 		return view('rol_filial.materias.nuevo', compact('carreras'));	
 	}
 
 	public function nuevo_post(CrearNuevaMateriaRequest $request){
+
 		$materia = $request->all();
+		$cadena 	= $this->filialRepo->filialCadena();
+		$materia['cadena_id'] =$cadena->cadena_id;
+
 		if (isset($materia["teorica_practica"])) {
 			if ($materia["teorica_practica"] == 1){
 				$materia["practica"] = 1;
@@ -66,8 +73,8 @@ class MateriaController extends Controller
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-
-		$carreras = $this->carreraRepo->lenguajeLista('nombre','id',$pais->lenguaje);
+		$cadena 	= $this->filialRepo->filialCadena();
+		$carreras = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
 		$materia = $this->materiaRepo->find($id);
 		return view('rol_filial.materias.editar',compact('materia','carreras'));	
     }

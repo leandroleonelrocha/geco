@@ -17,7 +17,6 @@ use App\Http\Funciones\NumberToLetterConverter;
 use App\Http\Repositories\ReciboRepo;
 use App\Http\Repositories\ReciboTipoRepo;
 use App\Http\Repositories\ReciboConceptoPagoRepo;
-
 use PDF;
 use Session;
 
@@ -137,18 +136,27 @@ class PagoController extends Controller
     public function actualizar_post(Request $request){
 
         $data = ($request->all());
-        //Session::put('pagos', $data);
         $request->session()->push('pagos', $data);
-
-       
-        
+ 
         //array_push($_SESSION['pagos'], $data);
         
-        /*
+        
 
         $url 	= 	session('urlBack');
 		$modelP = 	$this->pagoRepo->find($request->pago);
-		if ($request->monto_a_pagar <= $modelP['monto_actual']){
+        $ma     =   $modelP['monto_actual'] + $request->recargo_adicional;
+        $map    =   (float)$request->monto_a_pagar;
+        
+		if ($map <= $ma){
+            if (isset($request->descuento_adicional)){
+                $pago['descuento_adicional'] = $request->descuento_adicional;
+                $modelP['monto_actual']      -= $request->descuento_adicional;
+            }
+            if (isset($request->recargo_adicional)){
+                $pago['recargo_adicional'] = $request->recargo_adicional;
+                $modelP['monto_actual']      += $request->recargo_adicional;
+            }
+
 			$pago['monto_actual'] 	= $modelP['monto_actual'] - $request->monto_a_pagar;
 			$pago['monto_pago'] 	= $modelP['monto_pago'] + $request->monto_a_pagar;
 			if ( $pago['monto_actual'] == 0 )
@@ -165,20 +173,20 @@ class PagoController extends Controller
                 
                 if ($this->reciboRepo->create($recibo)) {
                     $id = $this->reciboRepo->all()->last()->id;
-                    return redirect()->route('filial.recibo_imprimir', $id);
+                    //return redirect()->route('filial.recibo_imprimir', $id);
+                    return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
                 }
-				// return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
+                // return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
             }
-			else{
-				session()->forget('urlBack');
-				return redirect()->to($url)->with('msg_error','El pago no ha podido ser actualizado');
-			}
-		}
-		else
-			return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
+            else{
+                session()->forget('urlBack');
+                return redirect()->to($url)->with('msg_error','El pago no ha podido ser actualizado');
+            }
+        }
+        else
+            return redirect()->back()->with('msg_error','El monto a pagar no puede sobrepasar el monto actual.');
 
-        */
-            return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
+        
     }
 
 

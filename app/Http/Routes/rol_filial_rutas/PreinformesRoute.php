@@ -42,4 +42,19 @@
 			'uses'	=>	'PreinformeController@editar_post'
 		]);
 
+		Route::get('preinformes_nuevoDatos',[
+			'as'	=>	'filial.preinformes_nuevoDatos',
+			'uses'	=>	'PreinformeController@nuevoDatos'
+		]);
+
+		Route::post('preinformes_nuevoDatosMedio_post',[
+			'as'	=>	'filial.preinformes_nuevoDatosMedio_post',
+			'uses'	=>	'PreinformeController@nuevoDatosMedio_post'
+		]);
+
+		Route::post('preinformes_nuevoDatosEncontro_post',[
+			'as'	=>	'filial.preinformes_nuevoDatosEncontro_post',
+			'uses'	=>	'PreinformeController@nuevoDatosEncontro_post'
+		]);
+
 	});
