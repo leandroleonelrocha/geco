@@ -3,32 +3,18 @@
   Launch demo modal
 </button>
  -->
-
-
-
-<div class="modal fade" id="ModalEdit"  role="dialog" aria-labelledby="myModalLabel">
-      <div class="modal-dialog" role="document">
-      <div class="modal-content">
-       {!! Form::open(['route'=>'grupos.editar_clase'] ) !!}
-      
-        <div class="modal-header">
+<!-- Modal -->
+<div class="modal fade" id="ModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">@lang('grupo.editarclase')</h4>
-        </div>
-        <div class="modal-body">
-          <div class="modal-body">
-                            <div class="box box-info">
-                        <div class="box-header with-border">
-                          <h3 class="box-title">Latest Orders</h3>
-                          <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                          </div>
-                        </div><!-- /.box-header -->
-                        <div class="box-body">
-                          <div class="table-responsive">
-                            <table class="table no-margin">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <table class="table no-margin">
                               <thead>
                                 <tr>
                                   <th>Order ID</th>
@@ -58,22 +44,14 @@
                                  
                               </tbody>
                             </table>
-                          </div><!-- /.table-responsive -->
-                        </div><!-- /.box-body -->
-                        <div class="box-footer clearfix">
-                          <a href="javascript::;" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                          <a href="javascript::;" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
-                        </div><!-- /.box-footer -->
-                      </div>
-                  </div>
-              
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">@lang('grupo.cerrar')</button>
-        <button type="submit" class="btn btn-success">@lang('grupo.guardar')</button>
-        </div>
-      {!! Form::close() !!}
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
+  </div>
+</div>
+
+ 
 
