@@ -113,7 +113,7 @@
                             </div>
                             <!-- <button class="add_field_button btn btn-primary">@lang('grupo.agregarotrodia')</button><br> -->
                             @if(empty($model))
-                            <div class="row input_fields_wrap">
+                            <!-- <div class="row input_fields_wrap">
                                 <div class="form-group horario">
                                     <div class="col-xs-12 materia" style="display: none;">
                                        <label> @lang('grupo.materia') </label>
@@ -123,7 +123,7 @@
                                     <div class="col-xs-3">
                                        <label> @lang('grupo.aula') </label>
                                        {!! Form::select('aula_id[]',$aulas->toArray(),null,array('class' => 'form-control')) !!}
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="col-xs-3">
                                         <label> @lang('grupo.dia') </label>
                                         <select name="dia[]" class="form-control">
@@ -135,7 +135,7 @@
                                             <option value="6"> @lang('grupo.sabados')</option>
                                         </select>
                                     </div> -->
-                                  <div class="col-xs-3 horario">
+                                  <!-- <div class="col-xs-3 horario">
                                    <label> @lang('grupo.horacomienzo') </label>
                                     <input class="form-control" name="horario_desde[]" type="time" value="08:00:00" >
                                   </div>
@@ -147,7 +147,7 @@
                                   <label> @lang('grupo.fechainicio') </label>
                                   <div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control"></div></div>
                                 </div>
-                            </div>
+                            </div> -->
                             @else
                             <div class="row input_fields_wrap">
                                 @foreach($model->GrupoHorario as $horario)
