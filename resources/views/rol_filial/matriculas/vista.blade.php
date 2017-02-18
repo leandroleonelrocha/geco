@@ -85,16 +85,16 @@
 	</div> <!-- Fin row -->
 @endsection
 
+@section('modal')
+@include('rol_filial.matriculas.partials.carrito')
+@endsection
+
 @section('js')
 <script type="text/javascript">
+	$('#ModalEdit').click(function(){
 
-  // alert('asdasd');
-  //$("#enlaceajax").click(function(evento){
-    //  evento.preventDefault();
-      // $(".destino").load("{{ URL::to('/filial/carrito') }}");
-   
-  //}); 
-
-
+	// elimino la session y recargo		
+   location.reload();
+        });
 </script>
 @endsection

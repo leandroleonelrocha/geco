@@ -17,9 +17,11 @@
 
                               <thead>
                                 <tr>
-                                  <th>Order ID</th>
+                                  <th>#</th>
+                                  <th>Original</th>
                                   <th>Recargo</th>
                                   <th>Descuento</th>
+                                  
                                   <th>Monto</th>
                                 </tr>
                               </thead>
@@ -27,28 +29,35 @@
 
                                  <?php
                                   $model           = Session::get('pagos');
-                               
+                                  
                                  ?>
                                
                                 @if(count($model) > 0)
                                   @foreach($model as $pago)
-                                  
                                   <tr>
-                                    <td><a href="pages/examples/invoice.html">Numero de pago: {{$pago['pago']}}</a></td>
-                                    <td>$ {{$pago['recargo_adicional']}}</td>
-                                    <td>$ {{$pago['descuento_adicional'] }}</td>
-                                    <td>$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}</td>
+                                    <td><a href="#">Numero de pago: {{$pago['pago']}}</a></td>
+                                    <td>$ {{$pago['monto_a_pagar'] }}</td>
+                                    <td>$ + {{$pago['recargo_adicional']}}</td>
+                                    <td>$ - {{$pago['descuento_adicional'] }}</td>
+                                    <td>$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
+                                  </td>
                                     
                                   </tr>
                                 
                                   @endforeach
-                                  <?php
-                                    $total = $pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'];
-
-                                  ?>
+                                  
                                   <tr><td>TOTAL</td><td></td><td></td>
+                                  <td></td>
                                   <td>
-                                  $ {{$total}}
+                                  <?php
+                                      $total=0;
+                                      foreach ($model as $pago) {
+                                         
+                                          $total += $pago['monto_a_pagar'] + $pago['recargo_adicional'];
+                                          $total -= $pago['descuento_adicional'];
+                                      }
+                                      echo '$ ' .$total;
+                                  ?>
                                   </td>
                                   </tr>
 
@@ -62,7 +71,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
         
-        <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Guardar</a>
+        <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Confirmar</a>
       </div>
     </div>
   </div>
