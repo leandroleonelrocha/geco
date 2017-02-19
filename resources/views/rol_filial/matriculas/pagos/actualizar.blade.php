@@ -109,7 +109,7 @@
 	$('#ModalEdit').click(function(){
 
 	// elimino la session y recargo
-	
+	/*
 	var url   = '../limpiar_carrito';
 	$.ajax(
 			{
@@ -124,5 +124,6 @@
 
 		);
         });
+    */    
 </script>
 @endsection

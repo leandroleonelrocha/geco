@@ -1,15 +1,6 @@
 @extends('template')
 
 @section('content')
-									<!-- Lista de Matrículas -->
-
-	<div class="row">
-    <div class="col-xs-12">
-      <div class="box-tools pull-right no-print destino">
-       
-      </div>
-    </div> <!-- Fin col -->
-  </div> <!-- Fin row -->
 
 									
 	<div class="row">
@@ -17,51 +8,67 @@
 			<div class="box">
 				<div class="box-body">
 					<div class="row">
-						<div class="col-xs-12">
-							<div class="example-modal text-center">
-								<!-- <div class="modal modal-success"> -->
-								<div class="modal-dialog modal-lg">
-									<div class="modal-content">
-									  <div class="modal-header">
-									    <h3 class="modal-title">@lang('matricula.datosmatricula')</h3>
-									  </div>
-									  <div class="modal-body">
-									    <div class="col-xs-4">
-									    	<span>@lang('matricula.numero')</span>
-						    				<p>{{$matricula->id}}</p>
-									    </div>
-									    <div class="col-xs-4">
-									    	<span>@lang('matricula.fechaalta')</span>
-						    				<p>{{$matricula->created_at}}</p>
-									    </div>
-									    <div class="col-xs-4">
-									    	<span>@lang('matricula.asesoralta')</span>
-						    				<p>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</p>
-									    </div>
-									    <div class="col-xs-4">
-									    	<span>@lang('matricula.filialalta')</span>
-						    				<p>{{$matricula->Filial->nombre}}</p>
-									    </div>
-									    <div class="col-xs-4">
-									    	<span>@lang('matricula.estado')</span>
-						    				<p><?php 
+						<div class="col-lg-12 col-xs-12">
+			              <!-- small box -->
+			              <div class="small-box bg-green">
+			                <div class="inner">
+			                  <div class="row">
+			                    <div class="col-sm-4 border-right">
+			                      <div class="description-block">
+			                        <h5 class="description-header">@lang('matricula.numero')</h5>
+			                        <span class="description-text">{{$matricula->id}}</span>
+			                      </div><!-- /.description-block -->
+			                    </div><!-- /.col -->
+			                    <div class="col-sm-4 border-right">
+			                      <div class="description-block">
+			                        <h5 class="description-header">@lang('matricula.fechaalta')</h5>
+			                        <span class="description-text">{{$matricula->created_at}}</span>
+			                      </div><!-- /.description-block -->
+			                    </div><!-- /.col -->
+			                    <div class="col-sm-4">
+			                      <div class="description-block">
+			                        <h5 class="description-header">@lang('matricula.asesoralta')</h5>
+			                        <span class="description-text">{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</span>
+			                      </div><!-- /.description-block -->
+			                    </div><!-- /.col -->
+			                  </div>
+
+			                   <div class="row">
+			                    <div class="col-sm-4 border-right">
+			                      <div class="description-block">
+			                        <h5 class="description-header">@lang('matricula.filialalta')</h5>
+			                        <span class="description-text">{{$matricula->Filial->nombre}}</span>
+			                      </div><!-- /.description-block -->
+			                    </div><!-- /.col -->
+			                    <div class="col-sm-4 border-right">
+			                      <div class="description-block">
+			                        <h5 class="description-header">@lang('matricula.estado')</h5>
+			                        <span class="description-text"><?php 
 											if ($matricula->terminado == 1) echo 'Terminado';
 											elseif ($matricula->cancelado == 1) echo 'Cancelado';
 											else echo 'Activo';
-											?></p>
-									    </div>
-									    <div class="col-xs-4">
-									    	<span>@lang('matricula.cursa')</span>
-						    				<p><?php 
+											?></span>
+			                      </div><!-- /.description-block -->
+			                    </div><!-- /.col -->
+			                    <div class="col-sm-4">
+			                      <div class="description-block">
+			                        <h5 class="description-header">@lang('matricula.cursa')</h5>
+			                        <span class="description-text">
+			                        	<?php 
 											if ($matricula->carrera_id != null) echo $matricula->Carrera->nombre;
 											else echo $matricula->Curso->nombre;
-											?></p>
-									    </div>
-									  </div>
-									</div>
-								</div>
-								<!-- </div> -->
-							</div>
+											?>
+			                        </span>
+			                      </div><!-- /.description-block -->
+			                    </div><!-- /.col -->
+			                  </div>
+
+
+			                </div>
+			               
+			              </div>
+			            </div>
+							
 						<div class="col-xs-12">
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs">
@@ -94,7 +101,7 @@
 	$('#ModalEdit').click(function(){
 
 	// elimino la session y recargo		
-   location.reload();
+   //location.reload();
         });
 </script>
 @endsection
