@@ -22,7 +22,7 @@
 			                    <div class="col-sm-4 border-right">
 			                      <div class="description-block">
 			                        <h5 class="description-header">@lang('matricula.fechaalta')</h5>
-			                        <span class="description-text">{{$matricula->created_at}}</span>
+			                        <span class="description-text">{{helpersgetFecha($matricula->created_at)}}</span>
 			                      </div><!-- /.description-block -->
 			                    </div><!-- /.col -->
 			                    <div class="col-sm-4">

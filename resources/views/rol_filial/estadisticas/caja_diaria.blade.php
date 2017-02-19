@@ -11,7 +11,7 @@
                {{$filial->Cadena->nombre}}
                - {{$filial->fullname}}
 
-                <small class="pull-right">Fecha: {{$fecha}}</small>
+                <small class="pull-right">Fecha: {{helpersgetFecha($fecha)}}</small>
               </h2>
             </div><!-- /.col -->
           </div>
@@ -84,10 +84,7 @@
                       ?>
                     </td>
                   </tr>
-                  <tr>
-                    <th>Efectivo:</th>
-                    <td>$5.80</td>
-                  </tr>
+                
                   <tr>
                     <th>Total:</th>
                     <td>
