@@ -21,7 +21,6 @@
                                   <th>Original</th>
                                   <th>Recargo</th>
                                   <th>Descuento</th>
-                                  
                                   <th>Monto</th>
                                 </tr>
                               </thead>
@@ -69,7 +68,7 @@
 
       </div>
       <div class="modal-footer">
-       
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
        <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Confirmar</a>
       </div>
     </div>
