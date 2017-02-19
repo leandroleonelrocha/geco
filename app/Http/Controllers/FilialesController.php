@@ -260,4 +260,12 @@ class FilialesController extends Controller
 
         return view('rol_filial.matriculas.partials.carrito');
     }
+
+
+    public function limpiar_carrito(){
+       
+        Session::forget('pagos');
+        
+    }
+
 }

@@ -80,7 +80,7 @@ class ReciboController extends Controller
 		//$sections = $view->renderSections();
 		
 		$model  = Session::get('pagos');
-		Session::forget('pagos');
+		//Session::forget('pagos');
 		
 		$total=0;
 		$miMoneda = null;
@@ -98,5 +98,6 @@ class ReciboController extends Controller
 
 	}
 
+	
 	
 }

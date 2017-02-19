@@ -108,8 +108,21 @@
 <script type="text/javascript">
 	$('#ModalEdit').click(function(){
 
-	// elimino la session y recargo		
-   location.reload();
+	// elimino la session y recargo
+	
+	var url   = '../limpiar_carrito';
+	$.ajax(
+			{
+			url: url,
+			type: 'GET',
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function(result){
+				  location.reload();
+			}}
+
+		);
         });
 </script>
 @endsection
