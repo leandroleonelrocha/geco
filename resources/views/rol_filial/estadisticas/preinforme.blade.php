@@ -136,16 +136,25 @@
                     <td>{{$curso->nombre}}</td>
                     <td>{{$curso->total}}</td>
                     <td>
-                      {{count($curso->Persona->Matricula)}}
+                       @foreach($curso->Persona->Matricula as $matricula)
+                        @if($matricula->getCursoMatricula($matricula->curso_id) == TRUE)
+                            {{ count($curso->Persona->Matricula) }}
+                        @endif
+                       @endforeach
                     </td>
                   </tr>
                   @endforeach
+                  
                   @foreach($carreras as $carrera)
                    <tr>
                     <td>{{$carrera->nombre}}</td>
                     <td>{{$carrera->total}}</td>
                     <td>
-                      {{count($carrera->Persona->Matricula)}}
+                    @foreach($carrera->Persona->Matricula as $matricula)
+                      @if($matricula->getCarreraMatricula($matricula->carrera_id) == TRUE)
+                          {{ count($carrera->Persona->Matricula) }}
+                      @endif
+                    @endforeach
                     </td>
                   </tr>
                   @endforeach

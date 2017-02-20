@@ -61,4 +61,14 @@ class Matricula extends Entity
         return $this->persona_id;
     }
 
+    public function getCursoMatricula($value){
+
+        return $this->curso_id == $value;
+    }
+
+    public function getCarreraMatricula($value){
+
+        return $this->carrera_id == $value;
+    }
+
 }
