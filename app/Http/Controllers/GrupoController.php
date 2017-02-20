@@ -134,13 +134,19 @@ class GrupoController extends Controller
         $data['fecha_fin'] = $ffin;
 		
 		// Creación del grupo
-		if ($data['teorica_practica'] == "practica"){
-			$data['practica'] = true;
-			$data['teorica']  = false;
+		if (isset($data['teorica_practica'])) {
+			if ($data['teorica_practica'] == "practica"){
+				$data['practica'] = true;
+				$data['teorica']  = false;
+			}
+			if ($data['teorica_practica'] == "teorica"){
+				$data['teorica']  = true;
+				$data['practica'] = false;
+			}
 		}
-		if ($data['teorica_practica'] == "teorica"){
+		else{
 			$data['teorica']  = true;
-			$data['practica'] = false;
+			$data['practica'] = true;
 		}
 
 		$this->grupoRepo->create($data);
@@ -536,6 +542,12 @@ class GrupoController extends Controller
 		// $carrera = $this->carreraRepo->find($carrera_id);
 		// $materia = $carrera->Materia;
 		$materias = $this->materiaRepo->findMateriasCarrera($carrera_id, $tp);
+		return response()->json($materias, 200);
+	}
+
+	public function post_materias_cursos(Request $request){	
+		$curso_id = $request->get('curso_id');
+		$materias = $this->materiaRepo->findMateriasCurso($curso_id);
 		return response()->json($materias, 200);
 	}
 

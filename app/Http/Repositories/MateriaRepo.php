@@ -25,6 +25,13 @@ class MateriaRepo extends BaseRepo {
     	}
     }
 
+    public function findMateriasCurso($curso_id){
+        return Materia::where('curso_id', '=', $curso_id)
+                        ->where('practica', '=', 1)
+                        ->where('teorica', '=', 1)
+                        ->get();
+    }
+
 	public function deleteMateria($id){
         return Materia::where('id', '=', $id)->delete();
     }

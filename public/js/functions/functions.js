@@ -80,7 +80,7 @@ $(document).ready(function(){
                 success: function(result){
                    $(".select_grupo").empty();
                    $.each(result, function(clave, valor) {
-                        if (valor.practica == null && valor.teorica == null) {
+                        if (valor.practica == 1 && valor.teorica == 1) {
                             $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+'</option>' );
                         }
                         if (valor.practica == 1){

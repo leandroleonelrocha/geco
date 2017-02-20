@@ -246,53 +246,75 @@
         // }
 
          function showTP(){
-            var carreras_cursos=$('select[id=carreras_cursos]').val(); 
+            var carreras_cursos=$('#carreras_cursos').val(); 
                 var tipo = carreras_cursos.split(';');
-                if(tipo[0] == "carrera"){   
-                    // $(".materia").show();
-                    $(".teorica_practica").show();
-                    $(".horario").hide();
-                }
-                else{
-                    $(".horario").show();
-                    $(".select_materia").empty(); 
-                    $(".materia").hide();
-                    $(".teorica_practica").hide();
-                }
+                if(tipo[0] == "carrera") $(".teorica_practica").show();
+                else $(".teorica_practica").hide();
+                if (tipo == 0) $(".materia").hide();
         }
 
         function obtenerMaterias(){
-            var carreras_cursos = $('select[id=carreras_cursos]').val(),
+            var carreras_cursos = $('#carreras_cursos').val(),
                 tipo            = carreras_cursos.split(';'),
                 tipoM           = $(".tp:checked").val();
                 if(carreras_cursos != 0){
                     $(".materia").show();
-                    $(".teorica_practica").show();
-                    $.ajax(
-                        {
-                        url: "post_materias_carreras",
-                        type: "POST",
-                        data: {carrera_id: tipo[1], tp: tipoM},
-                        headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(result){
-                               if(result.length == 0){
-                                    $(".materia").show();
-                                    $(".materia").empty();
-                                    // $(".teorica_practica").hide();
-                               }
-                               if(result.length > 0){
-                                   $(".materia").show();
-                                   $(".select_materia").empty();
-                                   $(".teorica_practica").show();
-                                   console.log(result);
-                                   $.each(result, function(clave, valor) {
-                                        $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
-                                   });
-                               }
-                        }}
-                    );
+
+                    if (tipo[0] == "curso") {
+                        $(".select_materia").empty();
+                        $.ajax(
+                            {
+                            url: "post_materias_cursos",
+                            type: "POST",
+                            data: {curso_id: tipo[1]},
+                            headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(result){
+                                   if(result.length == 0){
+                                        $(".materia").show();
+                                        $(".select_materia").empty();
+                                        // $(".teorica_practica").hide();
+                                   }
+                                   if(result.length > 0){
+                                       $(".materia").show();
+                                       $(".select_materia").empty();
+                                       console.log(result);
+                                       $.each(result, function(clave, valor) {
+                                            $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
+                                       });
+                                   }
+                            }}
+                        ); // Fin - Ajax
+                    }// Fin Tipo Curso
+                    else if(tipo[0] == "carrera"){
+                        $(".teorica_practica").show();
+                        $.ajax(
+                            {
+                            url: "post_materias_carreras",
+                            type: "POST",
+                            data: {carrera_id: tipo[1], tp: tipoM},
+                            headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(result){
+                                   if(result.length == 0){
+                                        $(".materia").show();
+                                        $(".select_materia").empty();
+                                        // $(".teorica_practica").hide();
+                                   }
+                                   if(result.length > 0){
+                                       $(".materia").show();
+                                       $(".select_materia").empty();
+                                       $(".teorica_practica").show();
+                                       console.log(result);
+                                       $.each(result, function(clave, valor) {
+                                            $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
+                                       });
+                                   }
+                            }}
+                        ); // Fin - Ajax
+                    } // Fin Tipo Carrera
                 }
         }
         
@@ -300,7 +322,12 @@
 
         showTP();
         obtenerMaterias();
-        $("#carreras_cursos").change(function(){ showTP(); });
+        $("#carreras_cursos").change(function(){
+            var carreras_cursos = $('#carreras_cursos').val(),
+                tipo            = carreras_cursos.split(';');
+            if(tipo[0] == "curso") obtenerMaterias();
+            showTP();
+        });
         $(".iCheck-helper").click(function(){ obtenerMaterias(); });
 
         var max_fields      = 10; //maximum input boxes allowed

@@ -21,12 +21,13 @@ class MateriaController extends Controller
 {
 	protected $materiaRepo;
 
-	public function __construct(MateriaRepo $materiaRepo, CarreraRepo $carreraRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
+	public function __construct(MateriaRepo $materiaRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
 	{
-		$this->materiaRepo = $materiaRepo;
-		$this->carreraRepo = $carreraRepo;
-		$this->filialRepo = $filialRepo;
-		$this->paisRepo = $paisRepo;
+		$this->materiaRepo 	= $materiaRepo;
+		$this->carreraRepo 	= $carreraRepo;
+		$this->cursoRepo 	= $cursoRepo;
+		$this->filialRepo 	= $filialRepo;
+		$this->paisRepo 	= $paisRepo;
 	}
 
 	public function lista(){
@@ -38,13 +39,14 @@ class MateriaController extends Controller
 
 	public function nuevo(){
 
-		$filial=$this->filialRepo->obtenerFilialPais();
+		$filial 	= $this->filialRepo->obtenerFilialPais();
 		foreach ($filial as $f) $pais_id=$f->pais_id;
 		
-		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
-		$cadena = $this->filialRepo->filialCadena();
-		$carreras = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
-		return view('rol_filial.materias.nuevo', compact('carreras'));	
+		$pais 		= $this->paisRepo->obtenerLenguaje($pais_id);
+		$cadena 	= $this->filialRepo->filialCadena();
+		$carreras 	= $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+		$cursos 	= $this->cursoRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+		return view('rol_filial.materias.nuevo', compact('carreras', 'cursos'));	
 	}
 
 	public function nuevo_post(CrearNuevaMateriaRequest $request){

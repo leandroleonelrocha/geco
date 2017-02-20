@@ -15,4 +15,8 @@ class Curso extends Entity {
     public function Matricula(){
         return $this->hasMany(Matricula::getClass());
     }
+
+    public function Materia(){
+        return $this->hasMany(Materia::getClass());
+    }
 }

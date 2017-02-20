@@ -92,6 +92,11 @@ Route::group(['prefix' => 'grupos'], function(){
 			'uses' => 'GrupoController@post_materias_carreras'
 		]);
 
+		Route::post('post_materias_cursos',[
+			'as' => 'grupos.post_materias_cursos',
+			'uses' => 'GrupoController@post_materias_cursos'
+		]);
+
 		Route::get('imprimir_asistencias/{id}',[
 			'as'  => 'grupos.imprimir_asistencias',
 			'uses'=> 'GrupoController@imprimir_asistencias'
