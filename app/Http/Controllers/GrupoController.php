@@ -156,7 +156,7 @@ class GrupoController extends Controller
             $data['aula_id'] 		= $request->aula_id[$i];
             $data['grupo_id']		= $grupo->id;
             $grupo->GrupoHorario()->create($data);
-        }die;
+        }
 
 		$grupo_dias = [];
 		$dias_horas = [];
@@ -179,39 +179,39 @@ class GrupoController extends Controller
 			array_push($aula, $a);
 		}
 
-		// $fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
-		// $fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
-		// $contador = 0;
-		// for($i = $fecha1;$i <= $fecha2; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
-		// 	$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
-		// 	$fecha = $dias[date('N', strtotime($i))];
+		$fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
+		$fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
 
-		// 	if (in_array($fecha, $grupo_dias)) {
-		// 	    // Cargo fecha
-		// 	    if ($i >= date('Y-m-d'))
-		// 	    	$data['clase_estado_id'] = 1;
-		// 	    else
-		// 	    	$data['clase_estado_id'] = 2;
-		// 	    $data['grupo_id'] 		 = $ultimo->id;
-		// 	    $data['fecha'] 			 = $i;
-		// 	    $data['docente_id'] 	 = $ultimo->docente_id;
-		// 	    if (!empty($materia[$contador]['materia_id'])){
-		// 	    	$mat  = $this->materiaRepo->find($materia[$contador]['materia_id']);
-		// 	    	$data['descripcion']  = $ultimo->descripcion.' - '.$mat->nombre;
-		// 	    	$data['materia_id']   = $materia[$contador]['materia_id'];
-		// 	    }
-		// 	    else
-		// 	    	$data['descripcion'] = $ultimo->descripcion;
-		// 	    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
-		// 	    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
-		// 	    $data['aula_id'] 		 = $aula[$contador]['aula_id'];
-		// 	    $data['enviado'] 	 	 = 0;
-		// 	    $this->claseRepo->create($data);
-		// 		$contador ++;
-		// 		if( $contador == count($ultimo->GrupoHorario) )
-		// 			$contador = 0;
-		// 	}
-		// }
+		$contador = 0;
+		for($i = $fecha1;$i <= $fecha2; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
+			$fecha = $dias[date('N', strtotime($i))];
+			if (in_array($fecha, $grupo_dias)) {
+			    // Cargo fecha
+			    if ($i >= date('Y-m-d'))
+			    	$data['clase_estado_id'] = 1;
+			    else
+			    	$data['clase_estado_id'] = 2;
+			    $data['grupo_id'] 		 = $ultimo->id;
+			    $data['fecha'] 			 = $i;
+			    $data['docente_id'] 	 = $ultimo->docente_id;
+			    if (!empty($materia[$contador]['materia_id'])){
+			    	$mat  = $this->materiaRepo->find($materia[$contador]['materia_id']);
+			    	$data['descripcion']  = $ultimo->descripcion.' - '.$mat->nombre;
+			    	$data['materia_id']   = $materia[$contador]['materia_id'];
+			    }
+			    else
+			    	$data['descripcion'] = $ultimo->descripcion;
+			    $data['horario_desde'] 	 = $dias_horas[$contador]['horario_desde'];
+			    $data['horario_hasta'] 	 = $dias_horas[$contador]['horario_hasta'];
+			    $data['aula_id'] 		 = $aula[$contador]['aula_id'];
+			    $data['enviado'] 	 	 = 0;
+			    $this->claseRepo->create($data);
+				$contador ++;
+				if( $contador == count($ultimo->GrupoHorario) )
+					$contador = 0;
+			}
+		}
 
 		// $fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
 		// $fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
@@ -246,7 +246,7 @@ class GrupoController extends Controller
 		// 			$contador = 0;
 		// 	}
 		// }
-  //       return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
+        return redirect()->route('grupos.index')->with('msg_ok', 'Grupo creado correctamente');
     }
 
 	public function postEdit($id, CrearNuevoGrupoRequest $request){
