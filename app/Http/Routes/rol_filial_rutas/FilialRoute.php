@@ -66,5 +66,10 @@ Route::group(['prefix' => 'filial'], function(){
 			'as'	=>	'filial.carrito',
 			'uses'	=>	'FilialesController@carrito'
 		]);
+	Route::get('limpiar_carrito',[
+			'as'	=> 'filial.limpiar_carrito',
+			'uses'	=>	'FilialesController@limpiar_carrito'
+		]);
+
 
 });

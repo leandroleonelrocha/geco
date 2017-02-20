@@ -2,34 +2,106 @@
 
 @section('content')
 	
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="box">
-				<div class="box-header">
-					<h3 class="box-title">Caja diaria</h3>
-					<div class="box-tools pull-right no-print">
-						<a href="{{route('filial.asesores_nuevo')}}" class="btn btn-success text-white"> @lang('asesor.agregarnuevo')</a>
-					</div>
-				</div>
-				<div class="box-body">
-					 <table id="example1" class="table table-bordered table-striped">
-						<thead> <tr>
-						<th>@lang('asesor.numerodocumento')</th>
-						<th>@lang('asesor.apellido')</th>
-						<th>@lang('asesor.nombre')</th>
-						<th>@lang('asesor.direccion')</th>
-						<th>@lang('asesor.localidad')</th>
-						<th>@lang('asesor.telefonos')</th>
-						<th>@lang('asesor.mail')</th>
-			
-						<th class="no-print"></th>
-						</tr> </thead>
-	    				<tbody>
-						  
-					   	</tbody>
-				    </table>
-        		</div><!-- Fin box-body -->
-			</div> <!-- Fin box -->
-		</div> <!-- Fin col -->
-	</div> <!-- Fin row -->
+	<section class="invoice">
+          <!-- title row -->
+          <div class="row">
+            <div class="col-xs-12">
+              <h2 class="page-header">
+                <i class="fa fa-bank"></i> 
+               {{$filial->Cadena->nombre}}
+               - {{$filial->fullname}}
+
+                <small class="pull-right">Fecha: {{helpersgetFecha($fecha)}}</small>
+              </h2>
+            </div><!-- /.col -->
+          </div>
+         	<div class="col-xs-12">
+              <p class="lead">PLANILLA DE CAJA DIARIA</p>
+            </div><!-- /.col -->
+
+          <!-- Table row -->
+          <div class="row">
+            <div class="col-xs-12 table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>RECIBO</th>
+                    <th>MATRICULA</th>
+                    <th>GRUPO</th>
+                    <th>APELLIDO Y NOMBRE</th>
+                    <th>IMPORTE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+                	@foreach($pagos as $pago)
+                  <tr>
+                    <td>{{$pago->Recibo}}</td>
+                    <td>{{$pago->Matricula->id}}</td>
+                    <td><?php 
+											if ($pago->Matricula->carrera_id != null) echo $matricula->Carrera->nombre;
+											else echo $pago->Matricula->Curso->nombre;
+											?></td>
+                    <td>{{$pago->Matricula->Persona->fullname}}</td>
+                    <td>$ {{$pago->monto_pago}}</td>
+                  </tr>
+                 	@endforeach
+                </tbody>
+              </table>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+          <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-xs-6">
+             
+            </div><!-- /.col -->
+            <div class="col-xs-6">
+            
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody><tr>
+                    <th style="width:50%">Cuotas:</th>
+                    <td>
+                      <?php
+                        $total=0;
+                        foreach ($pagos as $pago) {
+                        $total += $pago['monto_pago'];
+                        }
+                        echo '$ ' .$total;
+                      ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Recargos</th>
+                    <td>
+                      <?php
+                        $total=0;
+                        foreach ($pagos as $pago) {
+                        $total += $pago['recargo_adicional'];
+                        }
+                        echo '$ ' .$total;
+                      ?>
+                    </td>
+                  </tr>
+                
+                  <tr>
+                    <th>Total:</th>
+                    <td>
+                       <?php
+                        $total=0;
+                        foreach ($pagos as $pago) {
+                        $total += $pago['monto_pago'];
+                        }
+                        echo '$ ' .$total;
+                      ?>
+                    </td>
+                  </tr>
+                </tbody></table>
+              </div>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+         
+        </section>
 @endsection

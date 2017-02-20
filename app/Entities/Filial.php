@@ -44,4 +44,10 @@ class Filial extends Entity {
     public function Cuenta(){
         return $this->hasOne(Cuenta::getClass(), 'entidad_id', 'id')->where('rol_id',4);
     }
+
+    public function getFullNameAttribute()
+    {
+
+        return $this->nombre .' ('.$this->direccion.')';
+    }
 }

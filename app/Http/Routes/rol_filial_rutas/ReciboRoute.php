@@ -25,9 +25,9 @@
 			'uses'	=>	'ReciboController@carrito_imprimir'
 		]);
 
-
 	});
 
+		
 	// Route::get('recibo_imprimir/{id}',function(){
 	// 	$pdf = PDF::loadView('pdf.recibos');
 	// 	return $pdf->download('recibos.pdf');

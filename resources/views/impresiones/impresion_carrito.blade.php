@@ -88,7 +88,9 @@
     <div id="main">
     	<p>Cantidad de pagos: {{count($model)}}</p>
     	@foreach($model as $pago)
-    		<p>$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}</p>
+    		<p>
+    		
+    		$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}</p>
     	@endforeach
     	<p>
     		SON ${{$letra}} pesos

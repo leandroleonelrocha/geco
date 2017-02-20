@@ -84,13 +84,13 @@
 									<label>@lang('recibo.concepto')</label>
 									{!! Form::select('recibo_concepto_pago_id', $conceptos->toArray(), null, array('class'=>'form-control')) !!}
 								</div>
-								<div class="col-md-6 form-group">
+								<div class="col-md-12 form-group">
 									<label>@lang('recibo.descripcion')</label>
 									{!! Form::textarea('descripcion',null,array('class'=>'pago-item form-control','size'=>'30x4')) !!}
 								</div>
 								<div class="box-footer col-xs-12">
-				          	</div>
 							<button type="submite" class="btn btn-success enlaceajax">@lang('matricula.actualizar')</button>
+				          		</div>
 							{!! Form::close() !!}
 						</div>
 					</div>
@@ -108,8 +108,22 @@
 <script type="text/javascript">
 	$('#ModalEdit').click(function(){
 
-	// elimino la session y recargo		
-   location.reload();
+	// elimino la session y recargo
+	/*
+	var url   = '../limpiar_carrito';
+	$.ajax(
+			{
+			url: url,
+			type: 'GET',
+			headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			success: function(result){
+				  location.reload();
+			}}
+
+		);
         });
+    */    
 </script>
 @endsection

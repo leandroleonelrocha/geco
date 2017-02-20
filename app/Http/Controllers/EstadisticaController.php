@@ -25,6 +25,7 @@ class EstadisticaController extends Controller
 		$this->examenRepo      			= $examenRepo;
 		$this->asesorRepo     			= $asesorRepo;
 		$this->filialRepo 				= $filialRepo;
+		$this->filial 					= session('usuario')['entidad_id'];
        // $this->data['totalPersonas']    = $this->total_personas();
        // $this->data['totalAsesores']    = $this->total_asesores();
 	}
@@ -44,15 +45,27 @@ class EstadisticaController extends Controller
 	public function caja_diaria(){
 
     	//return view('rol_filial.estadisticas.index')->with($this->data);
-    	$hoy = getdate();
-		dd(date("Y/m/d"));
-	
-    	return view('rol_filial.estadisticas.caja_diaria');
+    	$pagos  = $this->pagoRepo->cajaDiaria();
+    	$fecha  = date("Y/m/d");
+    	$filial = $this->filialRepo->find($this->filial);
+
+    
+    	return view('rol_filial.estadisticas.caja_diaria',compact('pagos','fecha','filial'));
 	
 	}
 
 	public function preinforme(){
-		return view('rol_filial.estadisticas.preinforme');
+		$preinformes 	 = $this->preinformeRepo->estadisticasMes();
+		$asesores   	 = $this->preinformeRepo->estadisticasAsesor();
+		$medios     	 = $this->preinformeRepo->estadisticasMedio();
+		$cursos     	 = $this->preinformeRepo->estadisticasCurso();
+		$carreras   	 = $this->preinformeRepo->estadisticasCarrera();
+		$filial     	 = $this->filialRepo->find($this->filial);
+		$dia_inicio_mes  = helpersgetFecha(first_day_month());
+        $dia_fin_mes     = helpersgetFecha(last_day_month());
+
+
+		return view('rol_filial.estadisticas.preinforme',compact('preinformes','asesores','medios','cursos','carreras','filial','dia_inicio_mes','dia_fin_mes'));
 	}
 
 	public function count_personas(){

@@ -8,7 +8,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
+        <h5 class="modal-title">Carrito de pagos</h5>
         
       </div>
       <div class="modal-body">
@@ -21,7 +21,6 @@
                                   <th>Original</th>
                                   <th>Recargo</th>
                                   <th>Descuento</th>
-                                  
                                   <th>Monto</th>
                                 </tr>
                               </thead>
@@ -69,9 +68,8 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
-        
-        <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Confirmar</a>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Confirmar</a>
       </div>
     </div>
   </div>

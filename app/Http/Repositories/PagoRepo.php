@@ -94,7 +94,7 @@ class PagoRepo extends BaseRepo {
         return $qry;
     }
 
-        public function totalPorGrupo(){
+    public function totalPorGrupo(){
        // $from        = helpersfuncionFecha($valor[0]);
         //$to          = helpersfuncionFecha($valor[1]);
         $filial_id   = $this->filial; 
@@ -135,5 +135,15 @@ class PagoRepo extends BaseRepo {
     }
 
     
+    public function cajaDiaria(){
+        $hoy         = helpersfuncionFecha(date("Y/m/d"));
+        $filial_id   = $this->filial; 
+
+        $qry         = Pago::where('filial_id',$filial_id)
+                            ->whereDate('updated_at','=',$hoy)
+                            ->get();
+                           
+        return $qry;
+    }
 
 }
