@@ -54,6 +54,12 @@ class MateriaController extends Controller
 		$materia = $request->all();
 		$cadena 	= $this->filialRepo->filialCadena();
 		$materia['cadena_id'] =$cadena->cadena_id;
+		$carrearas_cursos = explode(';',$request->carreras_cursos);
+        
+        if ($carrearas_cursos[0] == 'carrera')
+            $materia['carrera_id']    =   $carrearas_cursos[1];
+        elseif ($carrearas_cursos[0] == 'curso')
+            $materia['curso_id']      =   $carrearas_cursos[1];
 
 		if (isset($materia["teorica_practica"])) {
 			if ($materia["teorica_practica"] == 1){
