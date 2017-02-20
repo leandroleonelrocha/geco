@@ -137,9 +137,11 @@
                     <td>{{$curso->total}}</td>
                     <td>
                        @foreach($curso->Persona->Matricula as $matricula)
-                        @if($matricula->getCursoMatricula($matricula->curso_id) == TRUE)
-                            {{ count($curso->Persona->Matricula) }}
+                     
+                        @if($matricula->curso_id == $curso->curso_id)
+                            {{ count($curso->Persona->Matricula) }}  
                         @endif
+
                        @endforeach
                     </td>
                   </tr>
@@ -151,8 +153,8 @@
                     <td>{{$carrera->total}}</td>
                     <td>
                     @foreach($carrera->Persona->Matricula as $matricula)
-                      @if($matricula->getCarreraMatricula($matricula->carrera_id) == TRUE)
-                          {{ count($carrera->Persona->Matricula) }}
+                      @if($matricula->carrera_id == $carrera->carrera_id)
+                            {{ count($curso->Persona->Matricula) }}  
                       @endif
                     @endforeach
                     </td>

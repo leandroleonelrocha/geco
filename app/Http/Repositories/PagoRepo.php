@@ -142,7 +142,7 @@ class PagoRepo extends BaseRepo {
         $qry         = Pago::where('filial_id',$filial_id)
                             ->whereDate('updated_at','=',$hoy)
                             ->get();
-                         
+                           
         return $qry;
     }
 
