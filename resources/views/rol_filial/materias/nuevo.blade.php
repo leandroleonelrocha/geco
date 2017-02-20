@@ -17,9 +17,25 @@
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <label>@lang('materia.carrera')</label>
-                                {!! Form::select('carrera_id', $carreras->toArray() , null, array('class'=>'form-control select2')) !!}
+                            <div class="form-group col-md-6">
+                                <label>@lang('grupo.carrerasycursos')</label>
+                                <select name="carreras_cursos" id="carreras_cursos" class="form-control">
+                                    <option value="0">@lang('grupo.seleccioncyc')</option>
+                                    <optgroup label=@lang('grupo.carreras')>
+                                        @foreach($carreras as $carrera)
+                                            <option value="carrera;{{$carrera->id}}">
+                                                {{$carrera->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </optgroup>
+                                    <optgroup label=@lang('grupo.cursos')>
+                                        @foreach($cursos as $curso)
+                                            <option value="curso;{{$curso->id}}">
+                                                {{$curso->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
                             </div>
                    
                             <div class="col-md-6 form-group teorica_practica">
@@ -46,4 +62,16 @@
             </div> <!-- Fin box -->
         </div> <!-- Fin col -->
     </div> <!-- Fin row -->
+@endsection
+@section('js')
+<script type="text/javascript">
+   $(document).ready(function(){
+        $("#carreras_cursos").change(function(){
+            var carreras_cursos = $('#carreras_cursos').val(),
+                tipo            = carreras_cursos.split(';');
+            if(tipo[0] == "curso") $('.teorica_practica').hide();
+            else $('.teorica_practica').show();
+        });
+   });
+</script>
 @endsection

@@ -44,8 +44,8 @@ class MateriaController extends Controller
 		
 		$pais 		= $this->paisRepo->obtenerLenguaje($pais_id);
 		$cadena 	= $this->filialRepo->filialCadena();
-		$carreras 	= $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
-		$cursos 	= $this->cursoRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+		$carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
 		return view('rol_filial.materias.nuevo', compact('carreras', 'cursos'));	
 	}
 
@@ -57,14 +57,19 @@ class MateriaController extends Controller
 
 		if (isset($materia["teorica_practica"])) {
 			if ($materia["teorica_practica"] == 1){
-				$materia["practica"] = 1;
-				$materia["teorica"]  = 0;
+				$materia["practica"] = true;
+				$materia["teorica"]  = false;
 			}
 			else{
-				$materia["practica"] = 0;
-				$materia["teorica"]  = 1;
+				$materia["practica"] = false;
+				$materia["teorica"]  = true;
 			}
 		}
+		else{
+			$materia["practica"] = true;
+			$materia["teorica"]  = true;
+		}
+
 		$this->materiaRepo->create($materia);
 		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
 	}
