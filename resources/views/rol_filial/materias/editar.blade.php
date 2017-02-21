@@ -20,10 +20,27 @@
 								{!! Form::text('nombre', $materia->nombre, array('class'=>'form-control')) !!}
 							</div>
 
-							<div class="col-md-6 form-group">
-								<label>@lang('materia.carrera')</label>
-							   	{!! Form::select('carrera_id', $carreras->toArray() , $materia->Carrera->id, array('class'=>'form-control select2')) !!}
-							</div>
+                            <div class="form-group col-md-6">
+                                <label>@lang('grupo.carrerasycursos')</label>
+                                <select name="carreras_cursos" id="carreras_cursos" class="form-control">
+                                    <option value="0">@lang('grupo.seleccioncyc')</option>
+	                                    <optgroup label=@lang('grupo.carreras')>
+	                                        @foreach($carreras as $carrera)
+	                                            <option value="carrera;{{$carrera->id}}">
+	                                                {{$carrera->nombre}}
+	                                            </option>
+	                                        @endforeach
+	                                    </optgroup>
+                                    <optgroup label=@lang('grupo.cursos')>
+                                        @foreach($cursos as $curso)
+                                            <option value="curso;{{$curso->id}}">
+                                                {{$curso->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </optgroup>
+                                </select>
+                            </div>
+                            
 							<div class="col-md-6 form-group teorica_practica">
                                 <label>@lang('materia.tipomateria')</label>
                                 <div>

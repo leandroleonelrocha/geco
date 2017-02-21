@@ -87,13 +87,27 @@ class MateriaController extends Controller
 		
 		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
 		$cadena 	= $this->filialRepo->filialCadena();
-		$carreras = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+		$carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+      	$cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+
 		$materia = $this->materiaRepo->find($id);
-		return view('rol_filial.materias.editar',compact('materia','carreras'));	
+		return view('rol_filial.materias.editar',compact('materia','carreras','cursos'));	
     }
 
     public function editar_post(EditarMateriaRequest $request){
 		$data = $request->all();
+
+		$carrearas_cursos = explode(';',$request->carreras_cursos);
+        
+        if ($carrearas_cursos[0] == 'carrera'){
+            $data['carrera_id']    =   $carrearas_cursos[1];
+        	$data['curso_id']=NULL;
+        }
+        elseif ($carrearas_cursos[0] == 'curso'){
+            $data['curso_id']      =   $carrearas_cursos[1];
+        	$data['carrera_id'] =NULL;
+        }
+
 		if (isset($data["teorica_practica"])) {
 			if ($data["teorica_practica"] == 1){
 				$data["practica"] = 1;
