@@ -85,7 +85,7 @@ class ReciboController extends Controller
 		$total=0;
 		$miMoneda = null;
         foreach ($model as $pago) {
-        $total += $pago['monto_a_pagar'] + $pago['recargo_adicional'];
+        $total += $pago['monto_pago'] + $pago['recargo_adicional'];
         $total -= $pago['descuento_adicional'];
         }
         $clase = new NumberToLetterConverter();

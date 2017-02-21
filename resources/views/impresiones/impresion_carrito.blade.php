@@ -45,7 +45,11 @@
           display: inline-block;
           vertical-align: top !important;
         }
-     
+     	
+     	table{
+
+     		width: 100%;
+     	}
 	</style>
 </head>
 
@@ -65,8 +69,6 @@
 	        <p>{{ $matricula->Persona->fullname }}</p>
 	        <p>{{ $matricula->Persona->domicilio }}</p>
 	        <p>
-    		@lang('impresiones/recibo.grupo'):
-
 	        	<?php 
 				if ($matricula->carrera_id != null) echo $matricula->Carrera->nombre;
 				else echo $matricula->Curso->nombre;
@@ -87,19 +89,74 @@
     </div>
     <div id="main">
     	<p>Cantidad de pagos: {{count($model)}}</p>
-    	@foreach($model as $pago)
-    		<p>
-    		
-    		$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}</p>
-    	@endforeach
-    	<p>
+    	<table class="table no-margin">
+
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Pagó</th>
+                                  <th>Recargo</th>
+                                  <th>Descuento</th>
+                                  <th>Monto</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                 <?php
+                                  $model           = Session::get('pagos');
+                                 
+                                 ?>
+                               
+                                @if(count($model) > 0)
+                                  @foreach($model as $pago)
+
+                                  <tr>
+                                    <td>
+                                    @if($pago['nro_pago'] == 0)
+                                    <a href="#">Matricula</a>
+                                    
+                                    @else
+                                    <a href="#">Numero de pago: {{$pago['nro_pago']}}</a>
+                                    @endif
+
+                                    </td>
+                                    <td align="center">$ {{$pago['monto_pago'] }}</td>
+                                    <td align="center">$ {{$pago['recargo_adicional']}}</td>
+                                    <td align="center">$ {{$pago['descuento_adicional'] }}</td>
+                                    <td align="center">$ {{$pago['monto_pago'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
+                                  </td>
+                                    
+                                  </tr>
+                                
+                                  @endforeach
+                                  
+                                  <tr><td>TOTAL</td><td></td><td></td>
+                                  <td></td>
+                                  <td align="center">
+                                  <?php
+                                      $total=0;
+                                      foreach ($model as $pago) {
+                                         
+                                          $total += $pago['monto_pago'] + $pago['recargo_adicional'];
+                                          $total -= $pago['descuento_adicional'];
+                                      }
+                                      echo '$ ' .$total;
+                                  ?>
+                                  </td>
+                                  </tr>
+
+
+                                @endif
+                                                                
+                              </tbody>
+                            </table><br>
+        <p>
     		SON ${{$letra}} pesos
     		------------------------------------------
     		TOTAL : $
     		{{$total}}.00
     	</p>
-	   	
-        
+    	                    
     </div>
    
 </div>

@@ -18,7 +18,7 @@
                               <thead>
                                 <tr>
                                   <th>#</th>
-                                  <th>Original</th>
+                                  <th>Pagó</th>
                                   <th>Recargo</th>
                                   <th>Descuento</th>
                                   <th>Monto</th>
@@ -28,17 +28,26 @@
 
                                  <?php
                                   $model           = Session::get('pagos');
-                                  
+                                 
                                  ?>
                                
                                 @if(count($model) > 0)
                                   @foreach($model as $pago)
+
                                   <tr>
-                                    <td><a href="#">Numero de pago: {{$pago['pago']}}</a></td>
-                                    <td>$ {{$pago['monto_a_pagar'] }}</td>
+                                    <td>
+                                    @if($pago['nro_pago'] == 0)
+                                    <a href="#">Matricula</a>
+                                    
+                                    @else
+                                    <a href="#">Numero de pago: {{$pago['nro_pago']}}</a>
+                                    @endif
+
+                                    </td>
+                                    <td>$ {{$pago['monto_pago'] }}</td>
                                     <td>$ + {{$pago['recargo_adicional']}}</td>
                                     <td>$ - {{$pago['descuento_adicional'] }}</td>
-                                    <td>$ {{$pago['monto_a_pagar'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
+                                    <td>$ {{$pago['monto_pago'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
                                   </td>
                                     
                                   </tr>
@@ -52,7 +61,7 @@
                                       $total=0;
                                       foreach ($model as $pago) {
                                          
-                                          $total += $pago['monto_a_pagar'] + $pago['recargo_adicional'];
+                                          $total += $pago['monto_pago'] + $pago['recargo_adicional'];
                                           $total -= $pago['descuento_adicional'];
                                       }
                                       echo '$ ' .$total;
