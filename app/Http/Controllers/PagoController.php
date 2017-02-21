@@ -166,6 +166,7 @@ class PagoController extends Controller
                 $recibo['tipo_moneda_id']           =   session('moneda')['id'];
                 
                 if ($this->reciboRepo->create($recibo)) {
+                    
                     $id = $this->reciboRepo->all()->last()->id;
                     //return redirect()->route('filial.recibo_imprimir', $id);
                         $modelP->cuanto_pago = $request->monto_a_pagar;
