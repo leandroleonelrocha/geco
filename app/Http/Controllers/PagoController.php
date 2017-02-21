@@ -136,9 +136,6 @@ class PagoController extends Controller
     public function actualizar_post(Request $request){
 
         //array_push($_SESSION['pagos'], $data);
-        
-        
-
         $url 	= 	session('urlBack');
         $modelP =   $this->pagoRepo->find($request->pago);
         $ma     =   $modelP['monto_actual'] + $request->recargo_adicional;
@@ -174,7 +171,7 @@ class PagoController extends Controller
                         $data = ($request->all());
                         Session::put('matricula', $modelP->Matricula);
                         $request->session()->push('pagos', $data);
-                    return redirect()->back()->with('msg_ok','El pago se agrego al carrito');
+                    return redirect()->to($url)->with('msg_ok','El pago se agrego al carrito');
                 }
                 // return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
             }

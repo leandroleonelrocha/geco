@@ -3,7 +3,7 @@
 return [
     'directores'    => 'Directores',
     'filiales'      => 'Filiales',
-    'persona'       => 'Persona',
+    'persona'       => 'Prospecto',
     'preinforme'    => 'Pre-Informe',
     'matricula'     => 'Matrículas',
     'recibo'        => 'Recibos',

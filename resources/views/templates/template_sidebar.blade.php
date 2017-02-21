@@ -113,7 +113,8 @@
                     </li>
 
                     <li>
-                      <a href="#" class="not-active"> <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
+                      <a href="{{route('estadisticas.caja_diaria')}}" class="not-active"> <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
+                      <!-- <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li> -->
                     </li>
 
                     <li class="treeview">
@@ -212,12 +213,12 @@
                     </li>
 
                     <li>
-                      <a href="#" > <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
-                      <ul class="treeview-menu">
+                      <a href="{{route('estadisticas.preinforme')}}" > <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                      <!-- <ul class="treeview-menu">
                         <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li>
                           <li class="active"><a href="{{route('estadisticas.preinforme')}}"><i class="fa fa-circle-o"></i> Preinforme</a></li>
                        
-                      </ul>
+                      </ul> -->
                     </li>
     
                     <li class="treeview">
