@@ -6,8 +6,8 @@ return [
     'numero' =>'Enrollments number',
     'asesor'=>'Adviser',
     'persona'=>'Person',
-    'terminado'=>'Finished',
-    'cancelado'=>'Canceled',
+    'terminado'=>'Canceled',
+    'cancelado'=>'Terminated',
     'cursa'    =>'Courses',
     'datosmatricula'=>'Enrollments data',
     'datospersonales'=>'Person data',
@@ -63,7 +63,7 @@ return [
     'verpagos' => 'View payments',
 
     'actualizarmatricula' => 'Update enrollments',
-    'cancelar'=> 'Cancel',
+    'cancelar'=> 'Terminate',
     'si'=> 'Yes',
 
 

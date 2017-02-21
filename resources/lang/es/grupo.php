@@ -4,6 +4,7 @@ return [
  
     'listadogrupo' => 'Listado de Grupos',
     'nombre' => 'Nombre',
+    'nombre_grupo' => 'Nombre del Grupo',
     'disponibilidad' => 'Disponibilidad',
     'descripcion'=>'Descripción',
     'matricula'=>'matricula',

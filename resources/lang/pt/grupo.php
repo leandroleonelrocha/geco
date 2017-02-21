@@ -3,6 +3,7 @@
 return [
     'listadogrupo' => 'Lista de Grupos',
     'nombre' => 'Nome',
+    'nombre_grupo' => 'Nome do Grupo',
     'disponibilidad' => 'Disponibilidade',
     'descripcion'=>'Descrição',
     'matricula'=>'Inscrição',

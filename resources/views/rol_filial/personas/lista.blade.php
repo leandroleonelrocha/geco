@@ -33,7 +33,7 @@
 							@foreach($persona as $p)
 								<tr>
 									<td>{{$p->TipoDocumento->tipo_documento}} {{$p->nro_documento}}</td>
-									<td>{{$p->apellidos}} {{$p->apellidos}}</td>
+									<td>{{$p->apellidos}} {{$p->nombres}}</td>
 									<td>
 							     	@foreach($p->PersonaTelefono as $telefono)
 						            		{{$telefono->telefono}}   </br>

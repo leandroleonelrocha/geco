@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label>@lang('grupo.descripcion')</label>
+                                <label>@lang('grupo.nombre_grupo')</label>
                                 {!! Form::text('descripcion', null ,  array('class'=>'form-control')) !!}
                             </div>
                             <div class="form-group">
@@ -274,7 +274,7 @@
                                    if(result.length == 0){
                                         $(".materia").show();
                                         $(".select_materia").empty();
-                                        // $(".teorica_practica").hide();
+                                        $('.select_materia').append( '<tr><td class="text-center"> - </td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
                                    }
                                    if(result.length > 0){
                                        $(".materia").show();

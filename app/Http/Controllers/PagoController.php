@@ -171,7 +171,8 @@ class PagoController extends Controller
                         $data = ($request->all());
                         Session::put('matricula', $modelP->Matricula);
                         $request->session()->push('pagos', $data);
-                    return redirect()->to($url)->with('msg_ok','El pago se agrego al carrito');
+                    // return redirect()->to($url)->with('msg_ok','El pago se agrego al carrito');
+                    return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_ok','El pago ha sido actualizado con éxito');
                 }
                 // return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');
             }
