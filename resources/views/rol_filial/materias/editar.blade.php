@@ -23,21 +23,22 @@
                             <div class="form-group col-md-6">
                                 <label>@lang('grupo.carrerasycursos')</label>
                                 <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-                                    <option value="0">@lang('grupo.seleccioncyc')</option>
-	                                    <optgroup label=@lang('grupo.carreras')>
-	                                        @foreach($carreras as $carrera)
-	                                            <option value="carrera;{{$carrera->id}}">
-	                                                {{$carrera->nombre}}
-	                                            </option>
-	                                        @endforeach
-	                                    </optgroup>
-                                    <optgroup label=@lang('grupo.cursos')>
-                                        @foreach($cursos as $curso)
-                                            <option value="curso;{{$curso->id}}">
-                                                {{$curso->nombre}}
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
+                                	<option value="0">@lang('grupo.seleccioncyc')</option>
+                                		<optgroup label=@lang('grupo.carreras')>
+                                			@foreach($carreras as $carrera)
+                                			<option value="carrera;{{$carrera->id}}" <?php if(isset($materia->Carrera->id)){if($materia->Carrera->id == $carrera->id) echo 'selected';}?>>
+                                    			{{$carrera->nombre}}
+                                			</option>
+                                			@endforeach
+                                		</optgroup>
+
+                                		<optgroup label=@lang('grupo.cursos')>
+                                			@foreach($cursos as $curso)
+                                				<option value="curso;{{$curso->id}}" <?php if(isset($materia->Curso->id)){if($materia->Curso->id == $curso->id) echo 'selected';}?>>
+                                    				{{$curso->nombre}}
+                                				</option>
+                                			@endforeach
+                                		</optgroup>
                                 </select>
                             </div>
                             
