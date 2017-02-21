@@ -44,6 +44,7 @@ class LoginController extends Controller {
               $data['habilitado']  = $cuenta['habilitado'];
 
               session(['usuario' => $data]);
+
               switch ($data['rol_id']) {
                
                 case 2: // Rol de Dueño
@@ -55,7 +56,9 @@ class LoginController extends Controller {
                 case 4: // Rol de Filial
                   $filial =  $this->filialeRepo->find(session('usuario')['id']);
                   $tipo_moneda = $filial->Pais->TipoMoneda;
+                  $leng=$filial->Pais->lenguaje;
                   session(['moneda' => $tipo_moneda]);
+                  session(['lang' => $leng]);
                   return redirect()->route('filial.inicio');
                 break;
               }
