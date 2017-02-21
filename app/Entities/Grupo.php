@@ -35,6 +35,10 @@ class Grupo extends Entity {
     
     public function Clase(){
         return $this->belongsToMany(CLase::getClass());
+    }
+
+    public function Clases(){
+        return $this->hasMany(CLase::getClass());   
     }  
 
     public function GrupoMatricula(){

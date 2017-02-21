@@ -168,9 +168,9 @@ class PagoController extends Controller
                 if ($this->reciboRepo->create($recibo)) {
                     $id = $this->reciboRepo->all()->last()->id;
                     //return redirect()->route('filial.recibo_imprimir', $id);
-                        $data = ($request->all());
+                        $modelP->cuanto_pago = $request->monto_a_pagar;
                         Session::put('matricula', $modelP->Matricula);
-                        $request->session()->push('pagos', $data);
+                        $request->session()->push('pagos', $modelP);
                     return redirect()->to($url)->with('msg_ok','El pago se agrego al carrito');
                 }
                 // return redirect()->route('filial.recibo_nuevo',$modelP['id'])->with('msg_ok','El pago ha sido actualizado con éxito');

@@ -30,4 +30,5 @@ class Clase extends Entity {
         return $this->belongsTo(Aula::getClass());
     }
    
+    
 }
