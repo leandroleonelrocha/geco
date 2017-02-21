@@ -74,11 +74,8 @@
               text-align: center;
               width: 100%;
           }
-          li {  
-            list-style-type: none;
-            font-size: small;
-          }
-
+         
+         
 
       </style>
   </head>
@@ -90,12 +87,15 @@
       <span>Docente de turno: </span>
   </div>
 
-<div class="content">
+
   <table>
     <thead>
       <tr>
         <th>Matricula</th>
         <th>Nombre y Apellido</th>
+        @foreach($grupo->Clases as $clase)
+        <th>{{ helpersgetFecha($clase->fecha) }}</th>
+        @endforeach
         <th>Asistio</th>
      
         
@@ -108,13 +108,16 @@
       <tr>
       <td>{{$m->id}}</td>
       <td>{{$m->Persona->fullname}}</td>
+      @foreach($grupo->Clases as $clase)
+        <td></td>
+      @endforeach
       <td></td>
               
       </tr>
     @endforeach
     </tbody>
   </table>
-</div>
+
 
 </body>
 </html>

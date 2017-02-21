@@ -18,6 +18,7 @@ Route::group(['middleware' => ['web']], function () {
     });
  
     Route::get('lang/{lang}', function ($lang) {
+    
         session(['lang' => $lang]);
         return \Redirect::back();
     })->where([
