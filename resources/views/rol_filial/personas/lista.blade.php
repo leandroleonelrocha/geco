@@ -45,9 +45,9 @@
 					            	<td>
 
 					            	@if (count($p->Matricula) > 0)
-					           			SI 
+					           			@lang('persona.si') 
 					           		@else	
-					           			NO
+					           			@lang('persona.no')
 					           		@endif
 					            		
 					            	</td>
