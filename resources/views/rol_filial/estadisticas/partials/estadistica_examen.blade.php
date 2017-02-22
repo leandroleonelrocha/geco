@@ -9,10 +9,10 @@
                     
                     <tr>
                       <th style="width: 10px">Acta</th>
-                      <th>Grupo</th>
-                      <th>Exámenes</th>
-                      <th>Resultado</th>
-                      <th style="width: 40px">Promedio</th>
+                      <th>@lang('estadistica.grupo')</th>
+                      <th>@lang('estadistica.examenes')</th>
+                      <th>@lang('estadistica.resultado')</th>
+                      <th style="width: 40px">@lang('estadistica.promedio')</th>
                     </tr>
                    	@foreach($examenes as $examen)
                     <tr>

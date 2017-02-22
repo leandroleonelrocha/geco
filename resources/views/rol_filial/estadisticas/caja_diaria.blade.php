@@ -16,7 +16,7 @@
             </div><!-- /.col -->
           </div>
          	<div class="col-xs-12">
-              <p class="lead">PLANILLA DE CAJA DIARIA</p>
+              <p class="lead">@lang('estadistica.planilla')</p>
             </div><!-- /.col -->
 
           <!-- Table row -->
@@ -25,11 +25,11 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>RECIBO</th>
-                    <th>MATRICULA</th>
-                    <th>GRUPO</th>
-                    <th>APELLIDO Y NOMBRE</th>
-                    <th>IMPORTE</th>
+                    <th>@lang('estadistica.recibo')</th>
+                    <th>@lang('estadistica.matricula')</th>
+                    <th>@lang('estadistica.grupo')</th>
+                    <th>@lang('estadistica.ayn')</th>
+                    <th>@lang('estadistica.importe')</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@
               <div class="table-responsive">
                 <table class="table">
                   <tbody><tr>
-                    <th style="width:50%">Cuotas:</th>
+                    <th style="width:50%">@lang('estadistica.cuotas')</th>
                     <td>
                       <?php
                         $total=0;
@@ -73,7 +73,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <th>Recargos</th>
+                    <th>@lang('estadistica.recargos')</th>
                     <td>
                       <?php
                         $total=0;
@@ -86,7 +86,7 @@
                   </tr>
                 
                   <tr>
-                    <th>Total:</th>
+                    <th>@lang('estadistica.total')</th>
                     <td>
                        <?php
                         $total=0;
