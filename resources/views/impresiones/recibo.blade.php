@@ -89,9 +89,9 @@
             <thead>
             <tr>
             <th></th>
-            <th>Recargo</th>
-            <th>Descuento</th>
-            <th>Total</th>
+            <th>@lang('impresiones/recibo.recargo')</th>
+            <th>@lang('impresiones/recibo.descuento')</th>
+            <th>@lang('impresiones/recibo.total')</th>
             </tr>
             </thead>
             <tbody>
@@ -99,9 +99,9 @@
             	<tr>
             	<td>
             		 @if($recibo->Pago->nro_pago == 0)
-						<a href="#">Matricula</a>
+						<a href="#">@lang('impresiones/recibo.matricula')</a>
  					@else
-                    	<a href="#">Numero de pago: {{$recibo->Pago->nro_pago}}</a>
+                    	<a href="#">@lang('impresiones/recibo.numerodepago') {{$recibo->Pago->nro_pago}}</a>
                     @endif
             	</td>
 				<td align="center">$ {{$recibo->Pago->recargo_adicional}}</td>
