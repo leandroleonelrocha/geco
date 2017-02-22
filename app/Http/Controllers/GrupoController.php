@@ -554,6 +554,7 @@ class GrupoController extends Controller
 	public function imprimir_asistencias($id){
 		$grupo      = $this->grupoRepo->find($id);
 		$matriculas = $grupo->Matricula;
+		
 		$pdf    	= PDF::loadView('impresiones.asistencias',compact('grupo','matriculas'));
 		return $pdf->stream();
 

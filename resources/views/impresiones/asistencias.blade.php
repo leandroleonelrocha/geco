@@ -67,8 +67,14 @@
               margin:0 !important;
               padding:0 !important;
           }
+            th,td{
+              width: auto;
+               border: 1px solid ;
+              border-collapse: collapse;
+              text-align: center;
+            }
 
-          table, th, td {
+          table{
               border: 1px solid ;
               border-collapse: collapse;
               text-align: center;
@@ -82,23 +88,21 @@
   <body>
 
   <div class="titulo">
-      <span>Docente titular: {{ $grupo->Docente->fullname }}</span>
+      <span>PLANILLA ASISTENCIA MENSUAL</span>
 
-      <span>Docente de turno: </span>
+      <span>SUCURSAL: {{$grupo->Filial->fullname}} </span>
   </div>
 
-
-  <table>
+  <br><br>
+  <table >
     <thead>
       <tr>
         <th>Matricula</th>
         <th>Nombre y Apellido</th>
         @foreach($grupo->Clases as $clase)
-        <th>{{ helpersgetFecha($clase->fecha) }}</th>
+        <th>{{ helpersgetDiaMes($clase->fecha) }}</th>
         @endforeach
         <th>Asistio</th>
-     
-        
         
       </tr>
     </thead>
@@ -115,6 +119,39 @@
               
       </tr>
     @endforeach
+      <tr>
+        <td colspan="2" >PROFESOR DE TURNO: </td>
+        @foreach($grupo->Clases as $clase)
+        <td></td>
+        @endforeach
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+  <table border=1  >
+  
+    <tbody>
+
+      <tr>
+      <td colspan="1">GRUPO: {{$grupo->fullname}}</td>
+      <td colspan="4">PROFESOR : {{$grupo->Docente->fullname}}</td>
+     
+      </tr>
+
+      @foreach($grupo->GrupoHorario as $horario)
+
+      <tr>
+      <td>DIA:<br> {{$horario->dia}}</td>
+      <td>HORARIO DESDE : {{ $horario->horario_desde }}</td>
+      <td>HORARIO HASTA : {{ $horario->horario_hasta }}</td>
+      <td> MATERIA : {{ $horario->Materia->nombre }}</td>
+      <td>HORARIO AULA : {{ $horario->Aula->nombre }}</td>
+
+      </tr>
+      @endforeach
+
     </tbody>
   </table>
 

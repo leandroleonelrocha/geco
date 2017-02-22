@@ -7,7 +7,7 @@
  */
 
 namespace App\Http\Repositories;
-
+use App\Entities\Filial;
 abstract class BaseRepo {
 
     protected $model;
@@ -26,8 +26,6 @@ abstract class BaseRepo {
 
         return $this->model->orderBy('id','DESC')->where('activo', 1)->get();
     }
-
-
 
     public function listPaginate()
     {
@@ -84,4 +82,6 @@ abstract class BaseRepo {
     
         return $this->model->where('filial_id', $this->filial)->where($campo,$valor)->whereDate('created_at', '>=', $inicio)->whereDate('created_at','<=', $fin)->get()->count();
     }
+
+
 }

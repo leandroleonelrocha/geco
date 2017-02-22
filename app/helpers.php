@@ -18,6 +18,11 @@ function helpersgetFecha($value){
     return date("d/m/Y", strtotime($value));        
 }
 
+function helpersgetDiaMes($value){
+    return date("d/m", strtotime($value));        
+}
+
+
 function herlpersObtenerFechas($value){
  	return explode("-", $value);	
 }

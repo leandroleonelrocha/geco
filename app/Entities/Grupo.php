@@ -45,6 +45,10 @@ class Grupo extends Entity {
         return $this->belongsTo(GrupoMatricula::getClass());
     }
 
+    public function Filial(){
+        return $this->belongsTo(Filial::getClass());
+    }
+
     public function Mailing(){
         return $this->belongsTo(Mailing::getClass());
     }
