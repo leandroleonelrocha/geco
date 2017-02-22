@@ -28,9 +28,9 @@
 									<td>{{$paseR->Matricula->Persona->nombres}} {{$paseR->Matricula->Persona->apellidos}}</td>
 									<td class="accion">
 										<?php if($paseR->confirmar == 0){ ?>
-											<span class="text-danger"> POR CONFIRMAR </span> 
+											<span class="text-danger"> @lang('pase.porconfirmar') </span> 
 										<?php }else{ ?>
-											<span class="text-success"> CONFIRMADO </span>
+											<span class="text-success"> @lang('pase.confirmado') </span>
 										<?php } ?>
 									</td>
 									<td class="text-center">

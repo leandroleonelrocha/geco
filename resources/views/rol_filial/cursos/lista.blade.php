@@ -30,22 +30,15 @@
 						        	<input type="hidden" value="{{$c->id_curso}}">
 							        <td>{{ $c->duracion }}</td>
 						            <td>{{ $c->descripcion }}</td>
-						            <?php 
-							            $len=session('lang');
-							            if ($len=='es') {
-						          			$noasiste='No Asiste';
-						          			$siasiste='Si Asiste';
-							          	}
-				          		      	if ($len=='en') {
-				          					$noasiste='No Attend';
-						          			$siasiste='Yes Attend';
-							          	}
-			          			 		  if ($len=='pt') {
-						          			$noasiste='Se, Atende';
-						          			$siasiste='No Atende';
-							          	}
-						            ?>
-						            <td><?php if($c->taller == 0) echo $noasiste; else echo $siasiste;?></td> 
+
+						            <td>
+										<?php if($c->taller == 0){ ?>
+											<span> @lang('curso.noasiste') </span> 
+										<?php }else{ ?>
+											<span> @lang('curso.siasiste') </span>
+										<?php } ?>
+								 	</td>
+
 						  			<td class="text-center">
 
 					           		<a href="{{route('filial.cursos_editar',$c->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>		
