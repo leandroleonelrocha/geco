@@ -46,15 +46,15 @@
               </li>
               @endif
 
-              <!-- <li class="dropdown messages-menu ">
+              <li class="dropdown messages-menu ">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="fa fa-globe fa-lg"></i>
-                </a> -->
+                </a>
                 <!--EMPIEZA EL BOTON QUE DESPLIEGA IDIOMA-->
-                <!-- <ul class="dropdown-menu">
-                  <li> -->
+                <ul class="dropdown-menu">
+                  <li>
                     <!-- inner menu: contains the actual data -->
-                    <!-- <ul class="menu">
+                    <ul class="menu">
                       <li>
                         <a href="{{ url('lang', ['es']) }}">
                           @lang('header.espanol')
@@ -86,7 +86,7 @@
                 </ul>
 
 
-              </li> -->
+              </li>
 
               <!-- <li>
 

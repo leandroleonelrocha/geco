@@ -39,7 +39,7 @@
                     <td>{{$pago->Recibo}}</td>
                     <td>{{$pago->Matricula->id}}</td>
                     <td><?php 
-											if ($pago->Matricula->carrera_id != null) echo $matricula->Carrera->nombre;
+											if ($pago->Matricula->carrera_id != null) echo $pago->Matricula->Carrera->nombre;
 											else echo $pago->Matricula->Curso->nombre;
 											?></td>
                     <td>{{$pago->Matricula->Persona->fullname}}</td>

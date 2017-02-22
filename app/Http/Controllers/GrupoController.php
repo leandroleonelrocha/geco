@@ -118,7 +118,7 @@ class GrupoController extends Controller
 		// }
 
         $finicio 	= $request->fecha_inicio[0];
-        $longitud 	= count($request->materia_id);
+        $longitud 	= count($request->aula_id);
 		for($i = 0; $i < $longitud; $i++) {
 			// Determina la fecha de incio del Grupo
 			if($finicio > $request->fecha_inicio[$i])

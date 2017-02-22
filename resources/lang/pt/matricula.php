@@ -5,8 +5,8 @@ return [
     'numero' =>'Número de Inscrição',
     'asesor'=>'Assessor',
     'persona'=>'Pessoa',
-    'terminado'=>'Concluido',
-    'cancelado'=>'Cancelado',
+    'terminado'=>'Cancelado',
+    'cancelado'=>'Deregister',
     'cursa'    =>'Percorrendo',
     'datosmatricula'=>'Dados de Registro',
     'datospersonales'=>'Dados Pessoal',
@@ -60,7 +60,7 @@ return [
     'verpagos' => 'Ver Pagamento',
 
     'actualizarmatricula' => 'Atualização Inscriçãos',
-    'cancelar'=> 'Cancelar',
+    'cancelar'=> 'Deregister',
     'si'=> 'Sim',
 
     'agregarnuevapersona' => 'Adicionar Novo Pessoa',

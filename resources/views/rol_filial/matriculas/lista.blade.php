@@ -15,26 +15,34 @@
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
 						<th>@lang('matricula.numero')</th>
-						<th>@lang('matricula.asesor')</th>
 						<th>@lang('matricula.persona')</th>
-						<th>@lang('matricula.terminado')</th>
-						<th>@lang('matricula.cancelado')</th>
+						<th>@lang('matricula.cursa')</th>
+						<th>@lang('preinforme.fecha')</th>
+						<th>@lang('matricula.estado')</th>
+						<th>@lang('matricula.asesor')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
 						@foreach($matriculas as $matricula)
 							<tr>
 								<td>{{$matricula->id}}</td>
-								<td>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</td>
 								<td>{{$matricula->Persona->apellidos}} {{$matricula->Persona->nombres}}</td>
-								<td>
-									<?php if($matricula->terminado == 0) echo 'No'; else echo 'Si';?>
-								</td>
-								<td>
-									<?php if($matricula->cancelado == 0) echo 'No'; else echo 'Si';?>
-								</td>
+								<td><?php
+									if (isset($matricula->Carrera->nombre)) 
+											echo $matricula->Carrera->nombre;
+									if (isset($matricula->Curso->nombre)) 
+											echo $matricula->Curso->nombre;
+								?></td>
+								<td><?php 
+									echo date_format($matricula->created_at, 'd-m-Y'); 
+								?></td>
+								<td><?php 
+									if($matricula->terminado == 1) echo 'Terminada';
+									elseif($matricula->cancelado == 1) echo 'Cancelada';
+									else echo 'Activa';
+								?></td>
+								<td>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</td>
 								<td class="text-center">
-
 								<a href="{{route('filial.matriculas_vista',$matricula->id)}}" title="@lang('lista.vistadetallada')"><i class="btn-xs btn-info glyphicon glyphicon-search"></i></a>
 								<a href="{{route('filial.matriculas_editar',$matricula->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>
 								<!-- <a href="{{route('filial.matriculas_actualizar',$matricula->id)}}" title="@lang('lista.actualizar')"><i class="btn-xs btn-success glyphicon glyphicon-repeat"></i></a> -->
