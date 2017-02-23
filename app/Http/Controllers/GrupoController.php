@@ -85,25 +85,7 @@ class GrupoController extends Controller
 	}
 
 	public function postAdd(Request $request){
-        $grupos 		  = $this->grupoRepo->allEnable();
         $data 			  = $request->all();
-        
-        // if (!empty($grupos)) {
-	       //  foreach ($grupos as $grupo) {
-	       //  	foreach ($grupo->GrupoHorario as $horario) {
-		      //   	for ($i=0; $i < count($data['aula_id']); $i++) {
-		      //   		$hora = date("h:i:s", strtotime($data['horario_desde'][$i]));
-		      //   		$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
-		      //   		$dia = $dias[$data['dia'][$i]];
-
-		      //   		if( ( $data['aula_id'][$i] == $horario->aula_id ) && ( $dia == $horario->dia ) && ( $hora >= $horario->horario_desde && $hora < $horario->horario_hasta ) ){
-		      //   			$aula = $this->aulaRepo->find($data['aula_id'][$i]);
-		      //   			return redirect()->back()->with('msg_error', 'El aula '.$aula->nombre.' ya se está reservada el día '.$dia.' al horario ingresado por el grupo '.$grupo->descripcion.'.');
-		      //   		}
-		      //   	}
-	       //  	}
-	       //  }
-        // }
 
         $array 			  = explode("-", $request->get('fecha'));
 		$carrearas_cursos = explode(';',$request->carreras_cursos);
@@ -155,20 +137,24 @@ class GrupoController extends Controller
 
         for($i=0; $i < $longitud; $i++) {
         	$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
-			$data['dia'] 			= $dias[date('N', strtotime($request->fecha_inicio[$i]))];
-            $data['horario_desde'] 	= $request->horario_desde[$i];
-            $data['horario_hasta'] 	= $request->horario_hasta[$i];
-            $data['materia_id'] 	= $request->materia_id[$i];
-            $data['aula_id'] 		= $request->aula_id[$i];
-            $data['grupo_id']		= $grupo->id;
+			$data['dia'] 			 = $dias[date('N', strtotime($request->fecha_inicio[$i]))];
+            $data['horario_desde'] 	 = $request->horario_desde[$i];
+            $data['horario_hasta'] 	 = $request->horario_hasta[$i];
+            $data['materia_id'] 	 = $request->materia_id[$i];
+            $data['fecha_inicio'] 	 = $request->fecha_inicio[$i];
+            $data['cantidad_clases'] = $request->cantidad_clases[$i];
+            $data['aula_id'] 		 = $request->aula_id[$i];
+            $data['grupo_id']		 = $grupo->id;
             $grupo->GrupoHorario()->create($data);
         }
 
-		$grupo_dias = [];
-		$dias_horas = [];
-		$materia 	= [];
-		$aula 		= [];
-        $ultimo = $this->grupoRepo->all()->last();
+		$grupo_dias 	= [];
+		$dias_horas 	= [];
+		$materia 		= [];
+		$materiaInicio 	= [];
+		$materiaClases 	= [];
+		$aula 			= [];
+        $ultimo 		= $this->grupoRepo->all()->last();
         foreach ($ultimo->GrupoHorario as $value ) {
 			array_push($grupo_dias, $value->dia);
 		}
@@ -179,6 +165,8 @@ class GrupoController extends Controller
 		  	if (isset($value->materia_id)){
 		  		$m['materia_id'] = $value->materia_id;
 		  		array_push($materia, $m);
+		  		array_push($materiaInicio, $value->fecha_inicio);
+				array_push($materiaClases, $value->cantidad_clases);
 		  	}
 		  	$a['aula_id'] = $value->aula_id;
 			array_push($dias_horas, $d);
@@ -187,12 +175,11 @@ class GrupoController extends Controller
 
 		$fecha1 = date("Y-m-d", strtotime($ultimo->fecha_inicio));
 		$fecha2 = date("Y-m-d", strtotime($ultimo->fecha_fin));
-
 		$contador = 0;
 		for($i = $fecha1;$i <= $fecha2; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
 			$dias = array('', 'Lunes','Martes','Miercoles','Jueves','Viernes','Sabado', 'Domingo');
 			$fecha = $dias[date('N', strtotime($i))];
-			if (in_array($fecha, $grupo_dias)) {
+			if (in_array($fecha, $grupo_dias) && $fecha >= $materiaInicio[$contador] && $fecha <= $materiaClases[$contador]) {
 			    // Cargo fecha
 			    if ($i >= date('Y-m-d'))
 			    	$data['clase_estado_id'] = 1;

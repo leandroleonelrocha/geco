@@ -41,19 +41,31 @@ foreign key	(cadena_id) 	references cadena 	(id)
 
 create table if not exists materia(
 id			int not null auto_increment,
-carrera_id	int,
-curso_id	int,
-cadena_id	int not null,
 nombre		varchar(50) not null,
 practica	boolean default false,
 teorica		boolean default false,
+duracion 	time default "00:00",
+cadena_id	int not null,
 descripcion	varchar(300) default 'Sin Descripción.',
 created_at	timestamp not null default '0000-00-00 00:00:00',
 updated_at	timestamp not null default '0000-00-00 00:00:00',
 primary key (id),
+foreign key	(cadena_id) 				references cadena 	(id),
+);
+
+create table if not exists materia_carrera_curso(
+id			int not null auto_increment,
+materia_id 	int not null,
+carrera_id	int,
+curso_id	int,
+ano 		int not null default '1',
+optativo 	boolean default false,
+created_at	timestamp not null default '0000-00-00 00:00:00',
+updated_at	timestamp not null default '0000-00-00 00:00:00',
+primary key (id),
+foreign key	(materia_id) 				references materia 	(id),
 foreign key (carrera_id)				references carrera	(id),
-foreign key (curso_id)					references curso	(id),
-foreign key	(cadena_id) 				references cadena 	(id)
+foreign key (curso_id)					references curso	(id)
 );
 
 create table if not exists tipo_documento(
@@ -441,18 +453,20 @@ foreign key 	(filial_id)						references filial		(id)
 );
 
 create table if not exists grupo_horario(
-grupo_id		int not null,
-dia				ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'),
-horario_desde	time not null,
-horario_hasta	time not null,
-materia_id		int,
-aula_id			int not null,
-created_at  	timestamp not null default '0000-00-00 00:00:00',
-updated_at  	timestamp not null default '0000-00-00 00:00:00',
-primary key		(grupo_id, dia, horario_desde, horario_hasta),
-foreign key		(grupo_id)		references grupo		(id),
-foreign key 	(materia_id) 	references materia	    (id),
-foreign key		(aula_id)		references aula			(id)
+grupo_id				int not null,
+dia						ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'),
+horario_desde			time not null,
+horario_hasta			time not null,
+materia_id				int,
+fecha_inicio			date not null,
+cantidad_clases			int not null,
+aula_id					int not null,
+created_at  			timestamp not null default '0000-00-00 00:00:00',
+updated_at  			timestamp not null default '0000-00-00 00:00:00',
+primary key				(grupo_id, dia, horario_desde, horario_hasta),
+foreign key				(grupo_id)		references grupo		(id),
+foreign key 			(materia_id) 	references materia	    (id),
+foreign key				(aula_id)		references aula			(id)
 );
 
 create table if not exists grupo_matricula(
@@ -1163,97 +1177,283 @@ values 	(1,		4, 'Interesado'		, 1	, 2	, 3, '2017-02-02 00:00:00.000000', '2017-0
 --
 
 insert into curso (`cadena_id`,`nombre`, `duracion`, `descripcion`, `taller`,`lenguaje`, `created_at`, `updated_at`)
-values  (1 	, 'Introducción a la cocina'		, '1 Año'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-		(1	, 'ABC Chef'						, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Panaderia Artesanal'				, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Pasteleria Artesanal' 			, '4 Meses'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Reposteria Artesanal' 			, '1 Año'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Servicio de salón' 				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Cocina Internacional' 			, '20 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Enología y Maridaje' 			, '15 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Barman y Tragos' 				, '50 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 	, 'Conservas y Destilados' 			, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1	, 'Cocin y beffet'					, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-    	(1	, 'Pasteleria'						, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1	, 'Bebidas y Servicios'				, '50 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1	, 'Admin y Marketing Gastronómico'	, '60 Días'	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1	, 'Intensivos'						, '15 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1	, 'Admin de cocina'					, '60 Días'	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+values  (1 	, 'ABC Chef'				, ' - '	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Catering para Eventos'	, ' - '	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Cocineritos Express'		, ' - '	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Mozo - Camarero'			, ' - '	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Maître Profesional'		, ' - '	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Barman Internacional'	, ' - '	, 'Sin Descripción.', 0,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Taller de Sushi'			, ' - '	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Cocina Navideña'			, ' - '	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Taller de Chocolate'		, ' - '	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 	, 'Cocina Light'			, ' - '	, 'Sin Descripción.', 1,'es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --
 -- Carreras
 --
 
 insert into carrera (`cadena_id`, `nombre`, `duracion`, `descripcion`,`lenguaje`, `created_at`, `updated_at`)
-values  (1 , 'Profesional Gastronómico'			, '1 Año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Técnico Superior Gastronómico'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Licenciatura en Gastronomía' 		, '4 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Pastelero Profesional' 			, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Sommelier Profesional' 			, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Profesional Bartender' 			, '5 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Esp en direccion de rest.' 		, '6 Meses'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Crítico gastronómico' 			, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Gerenciamiento gastronómico' 		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1 , 'Tec superior en admin hotelera'	, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Operador de PC' 					, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Técnico en redes' 				, '2 años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Analista de sistema' 				, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2 , 'Técnico en reparación de pc'		, '3 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+values  (1 , 'Chef Profesional' 		, '2 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 , 'Pastelero Profesional'	, '1 año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 , 'Maestro Pastelero'		, '1 año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 , 'Profesional Panadero' 	, '1 año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 , 'Master en Gastronomía' 	, '1 año'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(1 , 'Master en Pastelería'		, '1 Años'	, 'Sin Descripción.','es', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
 --
 -- Materias
 --
 
-insert into materia (`cadena_id`,`carrera_id`, `curso_id`, `nombre`, `practica`, `teorica`, `descripcion`, `created_at`, `updated_at`)
-values  (1, 1	, null, 'Cocina Básica y Servicio'						, 1, 0,	'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Panadería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Pastelería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 2	, null, 'Cocina Argentina y Latinoamericana'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 2	, null, 'Cocina Internacional' 							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 3	, null, 'Enología y Maridaje' 							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 3	, null, 'Repostería' 									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Barman' 										, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 4	, null, 'Repostería Inicial y Repostería Avanzada' 		, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 5	, null, 'Legislación y Admin de personal'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 5	, null, 'Comercialización'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Relaciones públicas y congresos'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 6	, null, 'Arte Culinario'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 7	, null, 'Gestión de la calidad gastronómica'			, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 7	, null, 'Gestión de alimentos y bebidas'				, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 8	, null, 'Cocina Industrial'								, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Restorant I'									, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 9	, null, 'Prácticas en Eventos'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 9	, null, 'Planificación y organización del servicio'		, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Organización de eventos'						, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Materias Primas y Nutrición'					, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 7	, null, 'Elaboración del Menú'							, 1, 0, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 7	, null, 'Diseño y Ambientación de Restaurantes'			, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Cultura y Crítica Gastronómica'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 8	, null, 'Prácticas para la Elaboración de Alimentos'	, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Instalación y Equipamientos Gastronómicos'		, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 9	, null, 'Costos y Compras'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Informática General y Aplicada'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Francés Gastronómico'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Cocina I'										, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 9	, null, 'Cocina fría'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Pastas y Salsas'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Cocina asiatica'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Cocina II'										, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 9	, null, 'Nutrición I'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Contabilidad y costos'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Gestión de personal'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Inglés técnico'								, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 6	, null, 'Nutrición II'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Tecnología alimentaria'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 5	, null, 'Cocina dietoterápica'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Historia de la cultura'						, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, 1	, null, 'Diseño, equipamiento y seguridad'				, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2, 1	, null, 'Topologias'									, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2, 1	, null, 'Redes I'										, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2, 1	, null, 'Introducción a word'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (2, 1	, null, 'Sistemas Operativos'							, 0, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, null, 2	  , 'Cocina, pastas y salsas'						, 1, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, null, 2	  , 'Panes, pizzas y empanadas'						, 1, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
-        (1, null, 2	  , 'Pastelería'									, 1, 1, 'Sin Descripción.', '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+insert into materia (`nombre`, `practica`, `teorica`, `descripcion`, `cadena_id`, `created_at`, `updated_at`)
+values  
+		-- Chef Profesional
+
+		('Panaderia I'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Cocina I'								, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Cocina Latinoamericana'				, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastas y Salsas'						, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería I'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Buffet I'								, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Higiene y Bromatología'				, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Conservación de Alimentos'			, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Nutrición'							, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Química Culinaria'					, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Costos Gastronómicos'					, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Panaderia II'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Cocina Internacional'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Alta Cocina'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Alta Pastelería'						, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Buffet II'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Marketing Gastronómico'				, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Organización de Eventos'				, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Ceremonial y Protocolo'				, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Enología'								, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Managment Gastronómico'				, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Servicio de Mesa'						, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Pastelería Clásica y Europea'			, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería Superior'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Panadería Dulce y Salada'				, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería de Vanguadia'				, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Introducción a la Panadería'			, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Panificados Internacionales'			, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Panificados Dulces'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Masas Especiales y Hojaldres'			, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería Clásica'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Cocina III'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pescados y Mariscos de Alta Cocina'	, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Cocina Exótica'						, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Cocina de Vanguardia'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Práctica Profesional'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Instrucción Docente'					, 0, 1,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Pastelería Moderna'					, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Panadería II'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Chocolaterie'							, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería de Vanguardia'				, 1, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Cursos
+
+		('Cocina, Pastas y Salsas'				, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Panes, Pizzas y Empanadas'			, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería'							, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Recepciones'							, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Entrada y Platos Principales'			, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Postres y Mesas Dulces'				, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Panadería'							, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastas y Salsas'						, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Pastelería Clásica'					, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Introducción a la Cocina'				, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		('Coctelería Básica'					, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Coctelería Clásica'					, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Alta Coctelería Étnica'				, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		('Alta Coctelería'						, 0, 0,	'Sin Descripción.', 1, '2016-11-11 00:00:00', '2016-11-11 00:00:00');
+
+		
+/*
+'ABC Chef'
+'Catering para Eventos'	
+'Cocineritos Express'
+'Mozo - Camarero'
+'Maître Profesional'
+'Barman Internacional'
+'Taller de Sushi'	
+'Cocina Navideña'
+'Taller de Chocolate'
+'Cocina Light'
+
+'Chef Profesional' 
+'Pastelero Profesional'
+'Maestro Pastelero'
+ 'Profesional Panadero'
+'Master en Gastronomía'
+'Master en Pastelería'
+
+'Panaderia I'
+'Cocina I'
+'Cocina Latinoamericana'
+'Pastas y Salsas'
+'Pastelería I'
+'Buffet I'
+'Higiene y Bromatología'
+'Conservación de Alimentos'
+'Nutrición'
+'Química Culinaria'
+'Costos Gastronómicos'
+'Panaderia II'
+'Cocina Internacional'
+'Alta Cocina'
+'Alta Pastelería'
+'Buffet II'	
+'Marketing Gastronómico'
+'Organización de Eventos'
+'Ceremonial y Protocolo'
+'Enología'
+'Managment Gastronómico'
+'Servicio de Mesa'
+
+'Pastelería Clásica y Europea'
+'Pastelería Superior'
+'Panadería Dulce y Salada'
+'Pastelería de Vanguadia'
+
+'Introducción a la Panadería'
+'Panificados Internacionales'
+'Panificados Dulces'
+'Masas Especiales y Hojaldres'
+'Pastelería Clásica'
+
+'Cocina III'
+'Pescados y Mariscos de Alta Cocina'
+'Cocina Exótica'
+'Cocina de Vanguardia'
+'Práctica Profesional'
+'Instrucción Docente'
+
+'Pastelería Moderna'
+'Panadería II'
+'Chocolaterie'
+'Pastelería de Vanguardia'
+
+'Cocina, Pastas y Salsas'
+'Panes, Pizzas y Empanadas'
+'Pastelería'
+
+'Recepciones'
+'Entrada y Platos Principales'
+'Postres y Mesas Dulces'
+'Panadería'
+'Pastas y Salsas'
+'Pastelería Clásica'
+'Introducción a la Cocina'
+
+'Coctelería Básica'
+'Coctelería Clásica'
+'Alta Coctelería Étnica'
+'Alta Coctelería'
+*/
+
+insert into materia_carrera_curso (`materia_id`, `carrera_id`, `curso_id`, 'ano', 'optativo', `created_at`, `updated_at`)
+values  
+		-- Chef Profesional
+
+		(1,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(2,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(3,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(4,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(5,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(6, 	1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(7,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(8,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(9,		1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(10,	1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(11,	1, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(12,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(13,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(14,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(15,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(16,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(17,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(18,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(19,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(20,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(21,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(22,	1, null, 2, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Pastelero Profesional
+
+		(23,	2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(24,	2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(25,	2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(26,	2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(7,		2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(8,		2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(9,		2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(10,	2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(11,	2, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Maestro Pastelero
+
+		(23,	3, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(24,	3, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(25,	3, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(26,	3, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Profesional Panadero
+
+		(27,	4, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(28,	4, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(29,	4, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(30,	4, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(31,	4, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'), 
+
+		-- Master en Gastronomía
+
+		(32,	5, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(33,	5, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(34,	5, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(35,	5, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(36,	5, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(37,	5, null, 1, 1  '2016-11-11 00:00:00', '2016-11-11 00:00:00'), 
+
+		-- Master en Pastelería
+
+		(38,	6, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(39,	6, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(40,	6, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(41,	6, null, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(37,	6, null, 1, 1  '2016-11-11 00:00:00', '2016-11-11 00:00:00'), 
+
+		-- ABC Chef
+
+		(42,	null, 1, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(43,	null, 1, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(44,	null, 1, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Catering para Eventos
+
+		(45,	null, 2, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(46,	null, 2, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(47,	null, 2, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Cocineritos Express
+
+		(48,	null, 3, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(49,	null, 3, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(50,	null, 3, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(51,	null, 3, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+
+		-- Barman Internacional
+
+		(52,	null, 6, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(53,	null, 6, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(54,	null, 6, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00'),
+		(55,	null, 6, 1, 0  '2016-11-11 00:00:00', '2016-11-11 00:00:00');
 
 --	
 -- Matrículas
