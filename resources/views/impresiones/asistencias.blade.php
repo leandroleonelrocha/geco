@@ -88,21 +88,21 @@
   <body>
 
   <div class="titulo">
-      <span>PLANILLA ASISTENCIA MENSUAL</span>
+      <span>@lang('impresiones/asistencias.planillaasistencia')</span>
 
-      <span>SUCURSAL: {{$grupo->Filial->fullname}} </span>
+      <span>@lang('impresiones/asistencias.sucursal') {{$grupo->Filial->fullname}} </span>
   </div>
 
   <br><br>
   <table >
     <thead>
       <tr>
-        <th>Matricula</th>
-        <th>Nombre y Apellido</th>
+        <th>@lang('impresiones/asistencias.matricula')</th>
+        <th>@lang('impresiones/asistencias.nya')</th>
         @foreach($grupo->Clases as $clase)
         <th>{{ helpersgetDiaMes($clase->fecha) }}</th>
         @endforeach
-        <th>Asistio</th>
+        <th>@lang('impresiones/asistencias.asistio')</th>
         
       </tr>
     </thead>
@@ -120,7 +120,7 @@
       </tr>
     @endforeach
       <tr>
-        <td colspan="2" >PROFESOR DE TURNO: </td>
+        <td colspan="2" >@lang('impresiones/asistencias.profesorturno') </td>
         @foreach($grupo->Clases as $clase)
         <td></td>
         @endforeach
@@ -135,19 +135,19 @@
     <tbody>
 
       <tr>
-      <td colspan="1">GRUPO: {{$grupo->fullname}}</td>
-      <td colspan="4">PROFESOR : {{$grupo->Docente->fullname}}</td>
+      <td colspan="1">@lang('impresiones/asistencias.grupo') {{$grupo->fullname}}</td>
+      <td colspan="4">@lang('impresiones/asistencias.profesor') {{$grupo->Docente->fullname}}</td>
      
       </tr>
 
       @foreach($grupo->GrupoHorario as $horario)
 
       <tr>
-      <td>DIA:<br> {{$horario->dia}}</td>
-      <td>HORARIO DESDE : {{ $horario->horario_desde }}</td>
-      <td>HORARIO HASTA : {{ $horario->horario_hasta }}</td>
-      <td> MATERIA : {{ $horario->Materia->nombre }}</td>
-      <td>HORARIO AULA : {{ $horario->Aula->nombre }}</td>
+      <td>@lang('impresiones/asistencias.dia')<br> {{$horario->dia}}</td>
+      <td>@lang('impresiones/asistencias.horariodesde') {{ $horario->horario_desde }}</td>
+      <td>@lang('impresiones/asistencias.horariohasta') {{ $horario->horario_hasta }}</td>
+      <td>@lang('impresiones/asistencias.materia') {{ $horario->Materia->nombre }}</td>
+      <td>@lang('impresiones/asistencias.horarioaula') {{ $horario->Aula->nombre }}</td>
 
       </tr>
       @endforeach
