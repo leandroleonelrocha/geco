@@ -23,11 +23,13 @@ return [
     'nuevo' =>'New',
     'lista' =>'List',
     'pases' =>'Pases',
+    'asignaciones' =>'Assignments',
     'asignaraulas' =>'Assign classrooms',
     'asignardatospreinforme' =>'Assign Data to Pre-Reports',
     'perfil' =>'Profile',
     'cambiarcontraseña' =>'Change password',
-
+    'cambiarmail' =>'Change Mail',
+    'agregartelefonos' =>'Add Telephones',
     'cerrarsesion' =>'Sign off',
 
     'salir' =>'Get out',

@@ -23,11 +23,13 @@ return [
     'nuevo' =>'Nuevo',
     'lista' =>'Lista',
     'pases' =>'Pases',
+    'asignaciones' =>'Asignaciones',
     'asignaraulas' =>'Asignar aulas',
     'asignardatospreinforme' =>'Asignar Datos Preinformes',
     'perfil' =>'Perfil',
     'cambiarcontraseña' =>'Cambiar contraseña',
-
+    'cambiarmail' =>'Cambiar Mail',
+    'agregartelefonos' =>'Agregar Teléfonos',
     'cerrarsesion' =>'Cerrar sesión',
     'salir' =>'Salir',
 ];

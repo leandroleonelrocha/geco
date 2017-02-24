@@ -10,7 +10,7 @@
 namespace App\Http\Requests;
 use App\Http\Requests\Request;
 
-class EditarPerfilFilialRequest extends Request
+class EditarCambioMailRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,22 +29,19 @@ class EditarPerfilFilialRequest extends Request
      */
     public function rules()
     {
+         $rules= [
 
-        $nbr = count($this->input('telefono')) - 1;
-        foreach(range(0, $nbr) as $index) {
-            $rules['telefono.' . $index] = 'required';
-        }
+            'mail' => 'required',
+        ];
 
         return $rules;
     }
 
     public function messages()
     {
+        return [
+            'mail.required' => 'El mail es requerido.',  
+        ];
 
-        $nbr = count($this->input('telefono')) - 1;
-        foreach(range(0, $nbr) as $index) {
-            $messages['telefono.' . $index.'.required'] = 'Escriba al menos un teléfono.';
-        }
-        return $messages;
     }
 }

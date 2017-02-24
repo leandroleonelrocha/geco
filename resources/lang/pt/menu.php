@@ -22,10 +22,13 @@ return [
     'nuevo' =>'Novo',
     'lista' =>'Lista',
     'pases' =>'Passes',
+    'asignaciones' =>'Atribuições',
     'asignaraulas' =>'Atribuir salas de aula',
     'asignardatospreinforme' =>'Atribuir Dados Pré-Informaçãos',
     'perfil' =>'Perfil',
     'cambiarcontraseña' =>'Mudança senha',
+    'cambiarmail' =>'Alterar Mail',
+    'agregartelefonos' =>'Adicionar Telefones',
     'cerrarsesion' =>'Fechar Sessão',
     'salir' =>'Sair',
 ];

@@ -49,9 +49,6 @@
                     <a href="#">
                       <i class="fa fa-wrench"></i> <span>@lang('menu.configuracion')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu">
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
-                    </ul>
                   </li>
                   <?php
                   break;
@@ -65,10 +62,9 @@
                     <a href="">
                       <i class="fa fa-wrench"></i> <span>@lang('menu.configuracion')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu">
+<!--                     <ul class="treeview-menu">
                       <li> <a href="{{route('director.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i> @lang('menu.perfil')</a></li>
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
-                    </ul>
+                    </ul> -->
                   </li>
 
               <?php
@@ -227,11 +223,20 @@
                       </a>
                       <ul class="treeview-menu">
                         <li> <a href="{{route('filial.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i>@lang('menu.perfil')</a></li>
-                        <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignaraulas')</a></li>
-                        <li> <a href="{{route('filial.preinformes_nuevoDatos')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignardatospreinforme')</a></li>
-                        <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
+                       
+                        <li class="treeview">
+                          <a href="">
+                            <i class="fa fa-circle-o"></i> <span>@lang('menu.asignaciones')</span><i class="fa fa-angle-left pull-right"></i>
+                          </a>
+
+                          <ul class="treeview-menu">
+                            <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignaraulas')</a></li>
+                            <li> <a href="{{route('filial.preinformes_nuevoDatos')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignardatospreinforme')</a></li>
+                          </ul>
+                        </li> 
                       </ul>
                     </li> 
+
               <?php
                   break;
                 }

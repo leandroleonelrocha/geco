@@ -9,3 +9,8 @@
 		'as'	=> 'filial.perfil_editarPerfil_post',
 		'uses'	=>	'filialesController@editarPerfil_post'
 	]);
+
+	Route::post('filiales_cambioMail_post',[
+		'as'	=> 'filial.cambioMail_post',
+		'uses'	=>	'filialesController@cambioMail_post'
+	]);
