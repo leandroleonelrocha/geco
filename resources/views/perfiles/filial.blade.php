@@ -77,6 +77,7 @@
 
             	<div class="tab-content">
 	                <div class="tab-pane active" id="tab_1">
+	                <br></br>
 	                    @include('perfiles.partials.perfil_cambioMail')
 	                </div><!-- /.tab-pane -->
 
@@ -85,6 +86,7 @@
 	                </div><!-- /.tab-pane -->
 
 	                <div class="tab-pane" id="tab_3">
+	                 <br></br>
 	                    @include('perfiles.partials.perfil_agregartelefono')
 	                </div><!-- /.tab-pane -->
             	</div><!-- tab-content -->

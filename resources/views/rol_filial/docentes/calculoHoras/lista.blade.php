@@ -46,10 +46,12 @@
 								<tr>
 									<td>{{$c->id}}</td>
 									<td>
-										<?php if($c->fecha > date("Y/m/d")){ ?>	
-												<span class="text-danger"> {{$c->fecha}} </span> 
+										<?php $date=strtotime($c->fecha); 
+										 	$fecha=date("d/m/Y", $date);    
+			  								if($c->fecha > date("Y/m/d")){ ?>	
+												<span class="text-danger"> {{$fecha}} </span> 
 										<?php }else{ ?>
-												<span class="text-success"> {{$c->fecha}} </span>
+												<span class="text-success"> {{$fecha}} </span>
 										<?php } ?>	
 									</td>
 									<td>{{$c->horario_desde}}</td>
