@@ -101,4 +101,13 @@
 			'uses'	=>	'MatriculaController@matriculas_grupos'
 		]);
 
-		
+		Route::get('matriculas_imprimir_plan_de_pago/{id}',[
+			'as'	=> 'filial.matriculas_imprimir_plan_de_pago',
+			'uses'	=>	'MatriculaController@imprimir_plan_de_pago'
+		]);
+
+		Route::get('matricula_prueba',[
+			
+			'as'	=> 'filial.matricula_prueba',
+			'uses'	=>	'MatriculaController@matricula_prueba'
+		]);

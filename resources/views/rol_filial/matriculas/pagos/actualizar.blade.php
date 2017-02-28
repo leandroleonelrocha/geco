@@ -1,13 +1,18 @@
 @extends('template')
 
 @section('content')
-
 	
 	<div class="row">
 		<div class="col-xs-12">
+
+
 			<div class="box">
 				<div class="box-header">
 					<h3 class="box-title">@lang('matricula.actualizarpago')</h3>
+
+              <a href="{{route('filial.matriculas_imprimir_plan_de_pago',$pago->id)}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Plan de pago</a>
+             
+
 				</div>
 				<div class="box-body">
 					<div class="row">
@@ -104,26 +109,3 @@
 @include('rol_filial.matriculas.partials.carrito')
 @endsection
 
-@section('js')
-<script type="text/javascript">
-	$('#ModalEdit').click(function(){
-
-	// elimino la session y recargo
-	/*
-	var url   = '../limpiar_carrito';
-	$.ajax(
-			{
-			url: url,
-			type: 'GET',
-			headers: {
-			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			},
-			success: function(result){
-				  location.reload();
-			}}
-
-		);
-        });
-    */    
-</script>
-@endsection

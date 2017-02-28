@@ -97,34 +97,30 @@
   <table >
     <thead>
       <tr>
-        <th>@lang('impresiones/asistencias.matricula')</th>
         <th>@lang('impresiones/asistencias.nya')</th>
         @foreach($grupo->Clases as $clase)
         <th>{{ helpersgetDiaMes($clase->fecha) }}</th>
         @endforeach
-        <th>@lang('impresiones/asistencias.asistio')</th>
-        
+         
       </tr>
     </thead>
     <tbody>
 
     @foreach($matriculas as $m)
       <tr>
-      <td>{{$m->id}}</td>
       <td>{{$m->Persona->fullname}}</td>
       @foreach($grupo->Clases as $clase)
         <td></td>
       @endforeach
-      <td></td>
-              
+               
       </tr>
     @endforeach
       <tr>
-        <td colspan="2" >@lang('impresiones/asistencias.profesorturno') </td>
+        <td>@lang('impresiones/asistencias.profesorturno') </td>
         @foreach($grupo->Clases as $clase)
         <td></td>
         @endforeach
-        <td></td>
+       
       </tr>
     </tbody>
   </table>

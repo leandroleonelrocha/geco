@@ -34,16 +34,21 @@
                 </thead>
                 <tbody>
                 
-                	@foreach($pagos as $pago)
+                	@foreach($pagos as $recibo)
                   <tr>
-                    <td>{{$pago->Recibo}}</td>
-                    <td>{{$pago->Matricula->id}}</td>
-                    <td><?php 
-											if ($pago->Matricula->carrera_id != null) echo $pago->Matricula->Carrera->nombre;
-											else echo $pago->Matricula->Curso->nombre;
-											?></td>
-                    <td>{{$pago->Matricula->Persona->fullname}}</td>
-                    <td>$ {{$pago->monto_pago}}</td>
+                    <td>{{$recibo->ReciboTipo->recibo_tipo}}</td>
+                    <td>{{$recibo->Pago->Matricula->id}}</td>
+                    <td>
+ 
+                      @if($recibo->Pago->Matricula->carrera_id != null)
+                        {{$recibo->Pago->Matricula->Carrera->nombre}}
+                      @else
+                        {{$recibo->Pago->Matricula->Curso->nombre}}
+                      @endif
+
+                    </td>
+                    <td>{{$recibo->Pago->Matricula->Persona->fullname}}</td>
+                    <td>$ {{$recibo->monto}}</td>
                   </tr>
                  	@endforeach
                 </tbody>
@@ -65,8 +70,9 @@
                     <td>
                       <?php
                         $total=0;
-                        foreach ($pagos as $pago) {
-                        $total += $pago['monto_pago'];
+                        foreach ($pagos as $recibo) {
+
+                        $total += $recibo['monto'];
                         }
                         echo '$ ' .$total;
                       ?>
@@ -77,8 +83,8 @@
                     <td>
                       <?php
                         $total=0;
-                        foreach ($pagos as $pago) {
-                        $total += $pago['recargo_adicional'];
+                        foreach ($pagos as $recibo) {
+                        $total += $recibo->Pago['recargo_adicional'];
                         }
                         echo '$ ' .$total;
                       ?>
@@ -88,10 +94,10 @@
                   <tr>
                     <th>@lang('estadistica.total')</th>
                     <td>
-                       <?php
+                      <?php
                         $total=0;
-                        foreach ($pagos as $pago) {
-                        $total += $pago['monto_pago'];
+                        foreach ($pagos as $recibo) {
+                        $total += $recibo['monto'];
                         }
                         echo '$ ' .$total;
                       ?>

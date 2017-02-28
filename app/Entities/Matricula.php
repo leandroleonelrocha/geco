@@ -23,7 +23,7 @@ class Matricula extends Entity
     }
 
     public function Pago(){
-        return $this->belongsTo(Pago::getClass());
+        return $this->hasMany(Pago::getClass());
     }
 
     public function Grupo(){

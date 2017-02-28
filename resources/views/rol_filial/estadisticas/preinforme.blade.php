@@ -154,13 +154,13 @@
                     <td>
                     @foreach($carrera->Persona->Matricula as $matricula)
                       @if($matricula->carrera_id == $carrera->carrera_id)
-                            {{ count($curso->Persona->Matricula) }}  
+                            {{ count($carrera->Persona->Matricula) }}  
                       @endif
                     @endforeach
                     </td>
                   </tr>
                   @endforeach
-
+                  
                   
                   
                 </tbody>

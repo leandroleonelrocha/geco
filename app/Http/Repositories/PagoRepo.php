@@ -139,7 +139,7 @@ class PagoRepo extends BaseRepo {
         $hoy         = helpersfuncionFecha(date("Y/m/d"));
         $filial_id   = $this->filial; 
 
-        $qry         = Pago::where('filial_id',$filial_id)
+        $qry         = Recibo::where('filial_id',$filial_id)
                             ->whereDate('updated_at','=',$hoy)
                             ->get();
                            
