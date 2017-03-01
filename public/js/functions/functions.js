@@ -40,10 +40,34 @@ $(document).ready(function(){
    	/* ------------------------- Matrículas ------------------------- */
    	// Duplicar los campos de Pagos -- Plan de Pagos ~~ Matrículas
    	$('#mas').click(function(){
-        var cant = $('#cantidadPagos').val();
+        var cant = $('#cantidadPagos').val(),
+            j = 1;
    		// Clonación - Búsqueda de cada campo
         for (var i = 0; i < cant; i++) {
-    	   $('.pagos:last').clone().appendTo('#planDePagos').find(".pago-item");
+            var vencimiento = new Date($('.pagos:last').find("input[name='vencimiento[]']").val()),
+                recargo     = new Date($('.pagos:last').find("input[name='fecha_recargo[]']").val()),
+                fv, fr, d, m;
+
+            // Vencimiento
+            // +2 = +1(meses del 0-11) +1(mes proximo)
+            vencimiento.setMonth(vencimiento.getMonth()+2);
+            vencimiento.setDate(vencimiento.getDate()+1);
+            d  = ("0" + vencimiento.getDate()).slice(-2);
+            m  = ("0" + vencimiento.getMonth()).slice(-2);
+            fv = vencimiento.getFullYear()+'-'+m+'-'+d;
+
+            // Recargo
+            recargo.setMonth(recargo.getMonth()+2);
+            recargo.setDate(recargo.getDate()+1);
+            d  = ("0" + recargo.getDate()).slice(-2);
+            m  = ("0" + recargo.getMonth()).slice(-2);
+            fr = recargo.getFullYear()+'-'+m+'-'+d;
+            j++;
+            
+            $('.pagos:last').clone().appendTo('#planDePagos');
+            $('.pagos:last').find("input[name='nro_pago[]']").val(j);
+            $('.pagos:last').find("input[name='vencimiento[]']").val(fv);
+            $('.pagos:last').find("input[name='fecha_recargo[]']").val(fr);
         }
     });
 
@@ -60,6 +84,8 @@ $(document).ready(function(){
         if( $('.pagos').length > 1)
             $('.pagos:last').remove();
     });
+
+    // Progresión -- Plan de Pagos ~~ Matrículas
 
     // Bloquear Grupos según la carrera/curso elegido -- Datos de la Matrícula ~~ Alta Matrículas
     $("#cursos_carreras").change(function(){
@@ -83,7 +109,7 @@ $(document).ready(function(){
                         if (valor.practica == 1 && valor.teorica == 1) {
                             $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+'</option>' );
                         }
-                        if (valor.practica == 1){
+                        if (valor.practica == 1 && valor.teorica == 0){
                             if (valor.lang == "es")
                                 $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Práctica </option>' );
                             
@@ -93,7 +119,7 @@ $(document).ready(function(){
                             if (valor.lang == "pt")
                                 $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Prática </option>' );
                         }
-                        if (valor.teorica == 1){
+                        if (valor.teorica == 1 && valor.practica == 0){
                             if (valor.lang == "es")
                                 $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Teórica </option>' );
                             

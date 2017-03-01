@@ -63,4 +63,5 @@ return [
     'verrecibos'          => 'Ver recibos',
     'descuentoadicional'  => 'Descuento adicional',
     'recargoadicional'    => 'Recargo adicional',
+    'plan'                => 'Plan',
 ];

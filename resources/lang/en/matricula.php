@@ -84,4 +84,5 @@ return [
     'verrecibos' => 'View receipts',
     'descuentoadicional'  => 'Discount aditional',
     'recargoadicional'    => 'Surcharge aditional',
+    'plan'                => 'Plan',
 ];

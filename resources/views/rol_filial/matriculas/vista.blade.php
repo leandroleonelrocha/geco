@@ -1,8 +1,6 @@
 @extends('template')
 
-@section('content')
-
-									
+@section('content')							
 	<div class="row">
 		<div class="col-xs-12">
 			<div class="box">
@@ -68,7 +66,9 @@
 			               
 			              </div>
 			            </div>
-							
+						<!-- <div class="col-xs-12">
+							<a href="{{route('filial.matriculas_editar',$matricula->id)}}" class="editar" title="@lang('lista.editar')">@lang('matricula.editarmatricula')</a>
+						</div> -->
 						<div class="col-xs-12">
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs">

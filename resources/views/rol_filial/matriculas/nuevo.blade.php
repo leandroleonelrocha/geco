@@ -116,9 +116,8 @@
 				            </div>
 							<div id="planDePagos">
 							<div class="pagos">
-				              	<div class="col-md-6 form-group">
-									<label>@lang('matricula.numerodepago')</label>
-									{!! Form::text('nro_pago[]',null,array('class'=>'pago-item form-control')) !!}
+				              	<div>
+									{!! Form::hidden('nro_pago[]',1,array('class'=>'pago-item form-control')) !!}
 								</div>
 								<div class="col-md-6 form-group">
 									<label>@lang('matricula.fechavencimiento')</label>

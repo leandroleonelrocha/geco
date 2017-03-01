@@ -14,12 +14,12 @@
 				<div class="box-body">
 					 <table id="example1" class="table table-bordered table-striped">
 						<thead> <tr>
-						<th>@lang('matricula.numero')</th>
-						<th>@lang('matricula.persona')</th>
-						<th>@lang('matricula.cursa')</th>
-						<th>@lang('preinforme.fecha')</th>
-						<th>@lang('matricula.estado')</th>
-						<th>@lang('matricula.asesor')</th>
+						<th class="text-center">@lang('matricula.matricula')</th>
+						<th class="text-center">@lang('matricula.persona')</th>
+						<th class="text-center">@lang('matricula.cursa')</th>
+						<th class="text-center">@lang('matricula.plan')</th>
+						<th class="text-center">@lang('matricula.estado')</th>
+						<th class="text-center">@lang('matricula.asesor')</th>
 						<th class="no-print"></th>
 						</tr> </thead>
 						<tbody>
@@ -33,10 +33,19 @@
 									if (isset($matricula->Curso->nombre)) 
 											echo $matricula->Curso->nombre;
 								?></td>
-								<td><?php 
-									echo date_format($matricula->created_at, 'd-m-Y'); 
+								<td class="text-center"><?php
+									$abono = 0;
+									$pagos = 0;
+									 foreach ($matricula->Pago as $pago) {
+									 	if ($pago->nro_pago != 0 && $pago->pago_individual == 0){
+									 		$pagos++;
+									 		if ($pago->terminado == 1)
+									 			$abono ++;
+									 	}
+									 }
+									echo $abono.' / '.$pagos;
 								?></td>
-								<td><?php 
+								<td class="text-center"><?php 
 									if($matricula->terminado == 1) echo 'Terminada';
 									elseif($matricula->cancelado == 1) echo 'Cancelada';
 									else echo 'Activa';
