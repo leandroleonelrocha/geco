@@ -42,16 +42,13 @@
                   </li>
 
                   <li>
-                    <a href="#" class="not-active"> <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
+                    <a href="#" > <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
                   </li>
 
                   <li class="treeview">
                     <a href="#">
                       <i class="fa fa-wrench"></i> <span>@lang('menu.configuracion')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu">
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
-                    </ul>
                   </li>
                   <?php
                   break;
@@ -65,10 +62,9 @@
                     <a href="">
                       <i class="fa fa-wrench"></i> <span>@lang('menu.configuracion')</span><i class="fa fa-angle-left pull-right"></i>
                     </a>
-                    <ul class="treeview-menu">
+<!--                     <ul class="treeview-menu">
                       <li> <a href="{{route('director.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i> @lang('menu.perfil')</a></li>
-                      <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
-                    </ul>
+                    </ul> -->
                   </li>
 
               <?php
@@ -113,7 +109,7 @@
                     </li>
 
                     <li>
-                      <a href="{{route('estadisticas.caja_diaria')}}" class="not-active"> <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
+                      <a href="{{route('estadisticas.caja_diaria')}}" > <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
                       <!-- <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li> -->
                     </li>
 
@@ -214,11 +210,7 @@
 
                     <li>
                       <a href="{{route('estadisticas.preinforme')}}" > <i class="fa fa-bar-chart-o"></i> <span>@lang('menu.estadistica')</span> </a>
-                      <ul class="treeview-menu">
-                        <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li>
-                          <!-- <li class="active"><a href="{{route('estadisticas.preinforme')}}"><i class="fa fa-circle-o"></i> Preinforme</a></li> -->
-                       
-                      </ul>
+                      
                     </li>
     
                     <li class="treeview">
@@ -227,11 +219,20 @@
                       </a>
                       <ul class="treeview-menu">
                         <li> <a href="{{route('filial.perfil_editarPerfil',$u)}}"><i class="fa fa-circle-o"></i>@lang('menu.perfil')</a></li>
-                        <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignaraulas')</a></li>
-                        <li> <a href="{{route('filial.preinformes_nuevoDatos')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignardatospreinforme')</a></li>
-                        <li> <a href="{{ route('contrasena.nueva')}}"><i class="fa fa-circle-o"></i> @lang('menu.cambiarcontraseña')</a></li>
+                       
+                        <li class="treeview">
+                          <a href="">
+                            <i class="fa fa-circle-o"></i> <span>@lang('menu.asignaciones')</span><i class="fa fa-angle-left pull-right"></i>
+                          </a>
+
+                          <ul class="treeview-menu">
+                            <li> <a href="{{route('filial.asignacionAulas_nuevo')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignaraulas')</a></li>
+                            <li> <a href="{{route('filial.preinformes_nuevoDatos')}}"><i class="fa fa-circle-o"></i>@lang('menu.asignardatospreinforme')</a></li>
+                          </ul>
+                        </li> 
                       </ul>
                     </li> 
+
               <?php
                   break;
                 }

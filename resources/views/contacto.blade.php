@@ -39,6 +39,7 @@
 							<table id="example1" class="table table-bordered table-striped">
 								<thead> <tr>
 								<th></th>
+								<th>@lang('filial.cadena')</th>
 								<th>@lang('contacto.telefonos')</th>
 								<th>@lang('contacto.mails')</th>
 								<th>@lang('contacto.director')</th>
@@ -48,7 +49,8 @@
 									    <tr role="row" class="<?php if($s == 3){
 									    	if($f->director_id == $u) echo 'bg-primary';
 									    	} ?> odd">
-									        <td class="sorting_1">{{ $f->nombre }}</td>
+									        <td class="sorting_1"><strong>{{ $f->nombre }}</strong></td>
+									        <td>{{ $f->Cadena->nombre}}</td>
 							                <td>
 					                     	@foreach($f->FilialTelefono as $telefono)
 								            		{{$telefono->telefono}}<br>
@@ -72,7 +74,7 @@
 			    				<tbody>
 							    	@foreach($directores as $d)
 							    		<tr role="row" class="odd">
-									        <td class="sorting_1">{{ $d->nombres }}</td>
+									        <td class="sorting_1"><strong>{{ $d->apellidos }} {{ $d->nombres }}</strong></td>
 							                <td>
 					                     	@foreach($d->DirectorTelefono as $telefono)
 								            		{{$telefono->telefono}}<br>

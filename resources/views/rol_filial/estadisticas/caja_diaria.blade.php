@@ -16,7 +16,7 @@
             </div><!-- /.col -->
           </div>
          	<div class="col-xs-12">
-              <p class="lead">PLANILLA DE CAJA DIARIA</p>
+              <p class="lead">@lang('estadistica.planilla')</p>
             </div><!-- /.col -->
 
           <!-- Table row -->
@@ -25,25 +25,30 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>RECIBO</th>
-                    <th>MATRICULA</th>
-                    <th>GRUPO</th>
-                    <th>APELLIDO Y NOMBRE</th>
-                    <th>IMPORTE</th>
+                    <th>@lang('estadistica.recibo')</th>
+                    <th>@lang('estadistica.matricula')</th>
+                    <th>@lang('estadistica.grupo')</th>
+                    <th>@lang('estadistica.ayn')</th>
+                    <th>@lang('estadistica.importe')</th>
                   </tr>
                 </thead>
                 <tbody>
                 
-                	@foreach($pagos as $pago)
+                	@foreach($pagos as $recibo)
                   <tr>
-                    <td>{{$pago->Recibo}}</td>
-                    <td>{{$pago->Matricula->id}}</td>
-                    <td><?php 
-											if ($pago->Matricula->carrera_id != null) echo $pago->Matricula->Carrera->nombre;
-											else echo $pago->Matricula->Curso->nombre;
-											?></td>
-                    <td>{{$pago->Matricula->Persona->fullname}}</td>
-                    <td>$ {{$pago->monto_pago}}</td>
+                    <td>{{$recibo->ReciboTipo->recibo_tipo}}</td>
+                    <td>{{$recibo->Pago->Matricula->id}}</td>
+                    <td>
+ 
+                      @if($recibo->Pago->Matricula->carrera_id != null)
+                        {{$recibo->Pago->Matricula->Carrera->nombre}}
+                      @else
+                        {{$recibo->Pago->Matricula->Curso->nombre}}
+                      @endif
+
+                    </td>
+                    <td>{{$recibo->Pago->Matricula->Persona->fullname}}</td>
+                    <td>$ {{$recibo->monto}}</td>
                   </tr>
                  	@endforeach
                 </tbody>
@@ -61,24 +66,25 @@
               <div class="table-responsive">
                 <table class="table">
                   <tbody><tr>
-                    <th style="width:50%">Cuotas:</th>
+                    <th style="width:50%">@lang('estadistica.cuotas')</th>
                     <td>
                       <?php
                         $total=0;
-                        foreach ($pagos as $pago) {
-                        $total += $pago['monto_pago'];
+                        foreach ($pagos as $recibo) {
+
+                        $total += $recibo['monto'];
                         }
                         echo '$ ' .$total;
                       ?>
                     </td>
                   </tr>
                   <tr>
-                    <th>Recargos</th>
+                    <th>@lang('estadistica.recargos')</th>
                     <td>
                       <?php
                         $total=0;
-                        foreach ($pagos as $pago) {
-                        $total += $pago['recargo_adicional'];
+                        foreach ($pagos as $recibo) {
+                        $total += $recibo->Pago['recargo_adicional'];
                         }
                         echo '$ ' .$total;
                       ?>
@@ -86,12 +92,12 @@
                   </tr>
                 
                   <tr>
-                    <th>Total:</th>
+                    <th>@lang('estadistica.total')</th>
                     <td>
-                       <?php
+                      <?php
                         $total=0;
-                        foreach ($pagos as $pago) {
-                        $total += $pago['monto_pago'];
+                        foreach ($pagos as $recibo) {
+                        $total += $recibo['monto'];
                         }
                         echo '$ ' .$total;
                       ?>

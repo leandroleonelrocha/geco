@@ -109,7 +109,7 @@
                                
                                 @if(count($model) > 0)
                                   @foreach($model as $pago)
-
+                                 
                                   <tr>
                                     <td>
                                     @if($pago['nro_pago'] == 0)
@@ -120,10 +120,10 @@
                                     @endif
 
                                     </td>
-                                    <td align="center">$ {{$pago['monto_pago'] }}</td>
+                                    <td align="center">$ {{$pago['cuanto_pago'] }}</td>
                                     <td align="center">$ {{$pago['recargo_adicional']}}</td>
                                     <td align="center">$ {{$pago['descuento_adicional'] }}</td>
-                                    <td align="center">$ {{$pago['monto_pago'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
+                                    <td align="center">$ {{$pago['cuanto_pago'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
                                   </td>
                                     
                                   </tr>
@@ -137,7 +137,7 @@
                                       $total=0;
                                       foreach ($model as $pago) {
                                          
-                                          $total += $pago['monto_pago'] + $pago['recargo_adicional'];
+                                          $total += $pago['cuanto_pago'] + $pago['recargo_adicional'];
                                           $total -= $pago['descuento_adicional'];
                                       }
                                       echo '$ ' .$total;

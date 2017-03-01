@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Response;
 use PDF;
 use App;
+use Redirect;
 
 class MatriculaController extends Controller {
 
@@ -94,6 +95,7 @@ class MatriculaController extends Controller {
 
     // Alta de Matrícula y Persona Existente
     public function nuevo_post(Request $request){
+       
         // Datos Matrícula
         $matricula['persona_id']        =   $request->persona;
         //Determinar si se seleccionó un Curso o Carrera
@@ -129,6 +131,7 @@ class MatriculaController extends Controller {
                 $p[] = $this->pagoRepo->all()->last();
             }
                 // return redirect()->route('filial.matriculas');
+            
                 return redirect()->route('filial.pagos_actualizar', $p[0]->id);
         }
         else
@@ -207,6 +210,7 @@ class MatriculaController extends Controller {
                     $p[] = $this->pagoRepo->all()->last();
                 }
                 // return redirect()->route('filial.matriculas');
+              
                 return redirect()->route('filial.pagos_actualizar', $p[0]->id);
             }
             else
@@ -392,5 +396,28 @@ class MatriculaController extends Controller {
 
     }
 
-   
+   public function imprimir_plan_de_pago($id){
+
+        //$pdf->stream('impresiones.impresion_plan_de_pago',array('Attachment'=>0));
+        $pago           = $this->pagoRepo->find($id);
+        
+        $matricula      = $this->matriculaRepo->find($pago->matricula_id);
+        $pdf            = PDF::loadView('impresiones.impresion_plan_de_pago', compact('matricula'));
+       
+        return $pdf->stream();
+
+   } 
+
+   public function matricula_prueba(Request $request)
+   {
+
+        dd($request->all());
+        $matricula      = $this->matriculaRepo->find(1000);
+        $pdf            = PDF::loadView('impresiones.impresion_plan_de_pago', compact('matricula'));
+       
+        return $pdf->stream();
+
+   }
+
+
 }

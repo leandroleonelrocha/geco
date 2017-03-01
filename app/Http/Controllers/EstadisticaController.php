@@ -46,6 +46,7 @@ class EstadisticaController extends Controller
 
     	//return view('rol_filial.estadisticas.index')->with($this->data);
     	$pagos  = $this->pagoRepo->cajaDiaria();
+    	
     	$fecha  = date("Y/m/d");
     	$filial = $this->filialRepo->find($this->filial);
 

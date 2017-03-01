@@ -207,21 +207,13 @@ class LoginController extends Controller {
             if ($user['passwordr'] == $user['contrasena']){
 
               $this->cuentaRepo->edit($cuenta, $user);
-              return redirect()->route('contrasena.nueva')->with('msg_ok', 'Cambio de contraseña correctamente.');
+              return redirect()->back()->with('msg_ok', 'Cambio de contraseña correctamente.');
             }
             else
-            /*
-            $ch = curl_init();  
-            curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarpassword/{$mail}/{$request->password}/{$request->passwordActual}");  
-            curl_setopt($ch, CURLOPT_HEADER, false);  
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-            $data = json_decode(curl_exec($ch),true);
-            curl_close($ch);
-            */
-              return redirect()->route('contrasena.nueva')->with('msg_error', 'Las contraseñas no son iguales, reingrese nuevamente las contraseñas');
+              return redirect()->back()->with('msg_error', 'Las contraseñas no son iguales, reingrese nuevamente las contraseñas');
           }
           else
-            return redirect()->route('contrasena.nueva')->with('msg_error', 'La contraseña anterior es incorrecta.');
+            return redirect()->back()->with('msg_error', 'La contraseña anterior es incorrecta.');
         }
         else
           return redirect()->back();

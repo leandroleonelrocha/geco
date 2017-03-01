@@ -10,7 +10,7 @@
 				<div class="box-body">
 					<div class="row">
 						<div class="col-xs-12">
-							{!! Form::open(['route'=> 'filial.matriculas_nuevo_post', 'method'=>'post']) !!}
+							{!! Form::open(['route'=> 'filial.matriculas_nuevo_post', 'method'=>'post', 'id' => 'formulario']) !!}
 							<!-- ---------- Datos Personales ---------- -->
 				            <div class="col-xs-12">
 				            	<h4 class="box-title text-center">@lang('matricula.datospersonales')</h4>
@@ -187,4 +187,38 @@
 			</div> <!-- Fin box -->
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
+@endsection
+
+@section('js')
+<script>
+$(document).ready(function(){
+	/*
+    $('.btn-success').on('click',function(e){
+    
+    	
+         alert('El formulario se envió con éxito');
+        // $('#formulario').submit();
+        
+      
+        $.ajax({
+                url: "matriculas_imprimir_plan_de_pago",
+                type: "POST",
+                data: $("#formulario").serialize(),
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(result){
+              
+              
+            }
+        });
+     
+
+    });
+ 
+
+}); 
+
+*/
+</script>
 @endsection

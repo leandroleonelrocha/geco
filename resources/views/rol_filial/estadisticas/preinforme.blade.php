@@ -7,10 +7,10 @@
           <div class="row">
             <div class="col-xs-12">
               <h2 class="page-header">
-                <i class="fa fa-bar-chart"></i> ESTADISTICAS INFORMADOS/INSCRIPTOS {{$filial->nombre}}
+                <i class="fa fa-bar-chart"></i> @lang('estadistica.estadisticas') {{$filial->nombre}}
                 <small class="pull-right">
-                  Desde: {{$dia_inicio_mes}}
-                  - Hasta: {{$dia_fin_mes}}
+                  @lang('estadistica.desde') {{$dia_inicio_mes}}
+                  @lang('estadistica.hasta') {{$dia_fin_mes}}
                 </small>
 
               </h2>
@@ -22,9 +22,9 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>FECHA</th>
-                    <th>INFORMADO</th>
-                    <th>INSCRIPTOS</th>
+                    <th>@lang('estadistica.fecha')</th>
+                    <th>@lang('estadistica.informado')</th>
+                    <th>@lang('estadistica.inscriptos')</th>
                     
                   </tr>
                 </thead>
@@ -60,14 +60,14 @@
           </div><!-- /.row -->
 
           <div class="row">
-            <p class="lead">POR CODIGO ASESOR:</p>
+            <p class="lead">@lang('estadistica.codasesor')</p>
            <div class="col-xs-12 table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>ASESOR</th>
-                    <th>INFORMADO</th>
-                    <th>INSCRIPTOS</th>
+                    <th>@lang('estadistica.asesor')</th>
+                    <th>@lang('estadistica.informado')</th>
+                    <th>@lang('estadistica.inscriptos')</th>
                     
                   </tr>
                 </thead>
@@ -88,14 +88,14 @@
           </div>   
 
             <div class="row">
-            <p class="lead">POR CODIGOS DE MEDIO:</p>
+            <p class="lead">@lang('estadistica.codmedio')</p>
            <div class="col-xs-12 table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th>MEDIO</th>
-                    <th>INFORMADO</th>
-                    <th>INSCRIPTOS</th>
+                    <th>@lang('estadistica.medio')</th>
+                    <th>@lang('estadistica.informado')</th>
+                    <th>@lang('estadistica.inscriptos')</th>
                     
                   </tr>
                 </thead>
@@ -119,14 +119,14 @@
           </div>  
 
             <div class="row">
-            <p class="lead">POR CODIGOS DE CURSO:</p>
+            <p class="lead">@lang('estadistica.codcurso')</p>
            <div class="col-xs-12 table-responsive">
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>INFORMADO</th>
-                    <th>INSCRIPTOS</th>
+                    <th>@lang('estadistica.informado')</th>
+                    <th>@lang('estadistica.inscriptos')</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -154,13 +154,13 @@
                     <td>
                     @foreach($carrera->Persona->Matricula as $matricula)
                       @if($matricula->carrera_id == $carrera->carrera_id)
-                            {{ count($curso->Persona->Matricula) }}  
+                            {{ count($carrera->Persona->Matricula) }}  
                       @endif
                     @endforeach
                     </td>
                   </tr>
                   @endforeach
-
+                  
                   
                   
                 </tbody>

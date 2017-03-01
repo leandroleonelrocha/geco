@@ -30,6 +30,8 @@ class CrearNuevoPagoRequest extends Request
 
             'vencimiento' => 'required',
 
+            'fecha_recargo' => 'required',
+
             'monto_original' => 'required',
             'monto_original' => 'required|numeric',
             'monto_original' => 'max:10',
@@ -53,6 +55,8 @@ class CrearNuevoPagoRequest extends Request
             'nro_pago.unique'=> 'El número de pago ya está en uso.', 
 
             'vencimiento.required' => 'El vencimiento es requerido.',
+
+            'fecha_recargo.required' => 'La fecha de recargo es requerida.',
 
             'monto_original.required' => 'El monto original es requerido.',
             'monto_original.numeric'=> 'El monto original es numérico.', 

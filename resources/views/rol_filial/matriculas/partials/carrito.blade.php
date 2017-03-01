@@ -30,6 +30,7 @@
                                   $model           = Session::get('pagos');
                                  
                                  ?>
+                                
                                
                                 @if(count($model) > 0)
                                   @foreach($model as $pago)
@@ -44,10 +45,10 @@
                                     @endif
 
                                     </td>
-                                    <td>$ {{$pago['monto_pago'] }}</td>
+                                    <td>$ {{$pago['cuanto_pago'] }}</td>
                                     <td>$ + {{$pago['recargo_adicional']}}</td>
                                     <td>$ - {{$pago['descuento_adicional'] }}</td>
-                                    <td>$ {{$pago['monto_pago'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
+                                    <td>$ {{$pago['cuanto_pago'] + $pago['recargo_adicional'] - $pago['descuento_adicional'] }}
                                   </td>
                                     
                                   </tr>
@@ -61,7 +62,7 @@
                                       $total=0;
                                       foreach ($model as $pago) {
                                          
-                                          $total += $pago['monto_pago'] + $pago['recargo_adicional'];
+                                          $total += $pago['cuanto_pago'] + $pago['recargo_adicional'];
                                           $total -= $pago['descuento_adicional'];
                                       }
                                       echo '$ ' .$total;

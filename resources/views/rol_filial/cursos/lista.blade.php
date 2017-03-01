@@ -30,7 +30,15 @@
 						        	<input type="hidden" value="{{$c->id_curso}}">
 							        <td>{{ $c->duracion }}</td>
 						            <td>{{ $c->descripcion }}</td>
-						            <td><?php if($c->taller == 0) echo 'No Asiste'; else echo 'Si Asiste';?></td> 
+
+						            <td>
+										<?php if($c->taller == 0){ ?>
+											<span> @lang('curso.noasiste') </span> 
+										<?php }else{ ?>
+											<span> @lang('curso.siasiste') </span>
+										<?php } ?>
+								 	</td>
+
 						  			<td class="text-center">
 
 					           		<a href="{{route('filial.cursos_editar',$c->id)}}" title="@lang('lista.editar')"><i class="btn-xs btn-primary glyphicon glyphicon-pencil"></i></a>		

@@ -13,4 +13,7 @@ return [
 
     'confirmar' => 'Confirmar',
     'rechazar' => 'Recusar',
+
+    'porconfirmar' => 'A CONFIRMAR',
+    'confirmado' => 'CONFIRMADO', 
 ];

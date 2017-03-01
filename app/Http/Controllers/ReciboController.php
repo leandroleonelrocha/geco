@@ -80,7 +80,6 @@ class ReciboController extends Controller
 		//$sections = $view->renderSections();
 		
 		$model  = Session::get('pagos');
-		Session::forget('pagos');
 		
 		$total=0;
 		$miMoneda = null;
@@ -92,6 +91,7 @@ class ReciboController extends Controller
     	$letra = $clase->convertNumber($total,$miMoneda, 'entero');
     	
 		$pdf    = PDF::loadView('impresiones.impresion_carrito',compact('model','total','letra'));
+		Session::forget('pagos');
 		return $pdf->stream();
 
 

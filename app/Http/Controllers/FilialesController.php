@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevaFilialRequest;
 use App\Http\Requests\EditarFilialRequest;
 use App\Http\Requests\EditarPerfilFilialRequest;
+use App\Http\Requests\EditarCambioMailRequest;
 use App\Http\Repositories\FilialRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\FilialTelefonoRepo;
@@ -201,10 +202,30 @@ class FilialesController extends Controller
         $cadenas  = $this->cadenaRepo->all()->lists('nombre','id');
         $paises   = $this->paisRepo->all()->lists('pais','id');
         $telefono =$this->filialTelefonoRepo->findTelefono($id);
-        return view('perfiles.filial',compact('filial','telefono','cadenas','paises'));
+        $mail=session('usuario')['usuario'];
+        return view('perfiles.filial',compact('filial','telefono','cadenas','paises','mail'));
     }
 
     public function editarPerfil_post(EditarPerfilFilialRequest $request){
+
+        $data = $request->all();
+
+        $model = $this->filialesRepo->find($data['id']);
+
+        if($this->filialesRepo->edit($model,$data)){
+           //editar telefono
+            $model->FilialTelefono()->delete();
+            foreach ($data['telefono'] as $key) {
+                $telefono['filial_id'] = $model->id;
+                $telefono['telefono'] = $key;
+                $this->filialTelefonoRepo->create($telefono);
+            }
+            return redirect()->back()->with('msg_ok','El perfil de la filial ha sido modificada con éxito');}
+        else
+            return redirect()->back()->with('msg_error','El perfil la filial no ha podido ser modificado.');
+    }
+
+    public function cambioMail_post(EditarCambioMailRequest $request){
 
         $data = $request->all();
         $cuenta=NULL;
@@ -212,12 +233,7 @@ class FilialesController extends Controller
         $mailn=$data['mail'];
         $entidad=$data['id'];
         if  ($mail!==$mailn) {
-            // $ch = curl_init();  
-            // curl_setopt($ch, CURLOPT_URL, "http://laravelprueba.esy.es/laravel/public/cuenta/actualizarCuenta/{$mail}/{$mailn}/{$entidad}/4");  
-            // curl_setopt($ch, CURLOPT_HEADER, false);  
-            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);  
-            // $pass = json_decode(curl_exec($ch),true);
-            // curl_close($ch);
+
             $cuenta = $this->cuentaRepo->actualizarCuenta($mail,$mailn,$entidad, 4);
             if ($cuenta !==null){
                 // Datos del mail
@@ -237,19 +253,13 @@ class FilialesController extends Controller
 
             $model = $this->filialesRepo->find($data['id']);
             if($this->filialesRepo->edit($model,$data)){
-               //editar telefono
-                $model->FilialTelefono()->delete();
-                foreach ($data['telefono'] as $key) {
-                    $telefono['filial_id'] = $model->id;
-                    $telefono['telefono'] = $key;
-                    $this->filialTelefonoRepo->create($telefono);
-                }
-                return redirect()->back()->with('msg_ok','El perfil de la filial ha sido modificada con éxito, verifique su casilla de mail para la nueva contraseña.');}
+
+                return redirect()->back()->with('msg_ok','El Mail de la filial ha sido modificada con éxito, verifique su casilla de mail para la nueva contraseña.');}
             else
-                return redirect()->back()->with('msg_error','El perfil la filial no ha podido ser modificado.');
+                return redirect()->back()->with('msg_error','El Mail la filial no ha podido ser modificado.');
         }
         else
-            return redirect()->back()->with('msg_error','El perfil de la filial no ha podido ser modificado o existe el E-mail actual.');
+            return redirect()->back()->with('msg_error','El Mail de la filial no ha podido ser modificado o existe el E-mail actual.');
     }
 
 

@@ -136,6 +136,7 @@ class PagoController extends Controller
     public function actualizar_post(Request $request){
 
         //array_push($_SESSION['pagos'], $data);
+        $data   =   $request->all();
         $url 	= 	session('urlBack');
         $modelP =   $this->pagoRepo->find($request->pago);
         $ma     =   $modelP['monto_actual'] + $request->recargo_adicional;
@@ -166,11 +167,12 @@ class PagoController extends Controller
                 $recibo['tipo_moneda_id']           =   session('moneda')['id'];
                 
                 if ($this->reciboRepo->create($recibo)) {
+                    
                     $id = $this->reciboRepo->all()->last()->id;
                     //return redirect()->route('filial.recibo_imprimir', $id);
                         $modelP->cuanto_pago = $request->monto_a_pagar;
                         Session::put('matricula', $modelP->Matricula);
-                        $request->session()->push('pagos', $data);
+                        $request->session()->push('pagos', $modelP);
                     // return redirect()->to($url)->with('msg_ok','El pago se agrego al carrito');
                     return redirect()->route('filial.matriculas_vista',$modelP['matricula_id'])->with('msg_ok','El pago ha sido actualizado con éxito');
                 }

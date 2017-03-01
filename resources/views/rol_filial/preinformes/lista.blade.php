@@ -32,16 +32,16 @@
 								echo $fecha;
 								?>
 								</td>
-								<td>{{$preinforme->Asesor->nombres}} {{$preinforme->Asesor->apellidos}}</td>
-								<td>{{$preinforme->Persona->nombres}} {{$preinforme->Persona->apellidos}}</td>
+								<td>{{$preinforme->Asesor->apellidos}} {{$preinforme->Asesor->nombres}}</td>
+								<td>{{$preinforme->Persona->apellidos}} {{$preinforme->Persona->nombres}}</td>
 								<td>{{$preinforme->PreinformeMedio->medio}}</td>
 								<td>{{$preinforme->PreinformeComoEncontro->como_encontro}}</td>
 				            	<td>
 
 					            	@if (count($preinforme->Persona->Matricula) > 0)
-					           			SI 
+					           			@lang('persona.si') 
 					           		@else	
-					           			NO
+					           			@lang('persona.no')
 					           		@endif
 					            		
 				            	</td>
