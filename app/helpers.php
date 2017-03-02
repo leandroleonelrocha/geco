@@ -40,4 +40,4 @@ function last_day_month() {
       $day = date("d", mktime(0,0,0, $month+1, 0, $year));
  
       return date('Y-m-d', mktime(0,0,0, $month, $day, $year));
-  };
+};

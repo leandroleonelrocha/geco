@@ -141,6 +141,8 @@ class MatriculaController extends Controller {
     // Alta de Matrícula y Persona Nueva
     public function nuevaPersona_post(Request $request){
         // Datos Persona
+
+        $data = $request->all();
         $persona['tipo_documento_id']       =   $request->tipo_documento;
         $persona['nro_documento']           =   $request->nro_documento;
         $persona['nombres']                 =   $request->nombres;
@@ -154,6 +156,7 @@ class MatriculaController extends Controller {
         $persona['estudio_computacion']     =   $request->estudio_computacion;
         $persona['posee_computadora']       =   $request->posee_computadora;
         $persona['disponibilidad_manana']   =   $request->disponibilidad_manana;
+        $persona['pais_id']                 =   $request->pais_id;
         $persona['disponibilidad_tarde']    =   $request->disponibilidad_tarde;
         $persona['disponibilidad_noche']    =   $request->disponibilidad_noche;
         $persona['disponibilidad_sabados']  =   $request->disponibilidad_sabados;
@@ -174,7 +177,7 @@ class MatriculaController extends Controller {
 
                 $mail['persona_id']=$persona->id;
                 $mail['mail']=$key;
-                $this->personaMailRepo->create($mail);
+                $this->personaEmailRepo->create($mail);
             }
             // Datos Matrícula
             $matricula['persona_id']       =   $persona['id'];
@@ -206,6 +209,7 @@ class MatriculaController extends Controller {
                     $pago['descuento']      =   $request->descuento[$i];
                     $pago['recargo']        =   $request->recargo[$i];
                     $pago['filial_id']      =   session('usuario')['entidad_id'];
+                    $pago['tipo_moneda_id'] =   session('moneda')->id;
                     $this->pagoRepo->create($pago);
                     $p[] = $this->pagoRepo->all()->last();
                 }
