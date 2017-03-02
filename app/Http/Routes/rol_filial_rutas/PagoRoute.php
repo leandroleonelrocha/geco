@@ -76,5 +76,15 @@
 			'uses'	=>	'PagoController@imprimir_morosidad'
 		]);
 
+		Route::get('libro_iva',[
+			'as'	=>	'filial.vista_libro_iva',
+			'uses'	=>	'PagoController@vista_libro_iva'
+		]);
+		Route::get('morosidad',[
+			'as'	=>	'filial.vista_morosidad',
+			'uses'	=>	'PagoController@vista_morosidad'
+		]);
+
+
 		
 	});

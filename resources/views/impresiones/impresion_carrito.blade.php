@@ -5,7 +5,7 @@
 	<style type="text/css">
 	
 		#container {
-		    width: 700px;
+		    width: 600px;
 		    margin: 0px auto;
 		    font-family: monospace;
 		}
@@ -19,14 +19,18 @@
 
 
 		#sidebar {
-		    padding-top: 100px;
+        padding-top: 100px;
             margin-top: -40px !important;
             font-size: 18px;
-		
+
 		}
+    #sidebar p{
+      line-height: 0.5;
+       font-size: 1em;
+    }
 		#main {
-			padding-top: 10px;
-            margin-top: -40px !important;
+			  padding-top: -70px;
+        margin-top: -40px !important;
 		    float: left;
 		    font-size: 18px;
 		}
@@ -34,10 +38,11 @@
 		    clear: both;
 		}
 		.right{
-		  line-height:10px;	
+		
           display: inline-block;
           vertical-align: bottom !important;
           width: 50%;
+
         }
 
         .left{
@@ -57,9 +62,11 @@
 
 <div id="container">
     <div id="header">
-        <h2 >@lang('impresiones/recibo.fecha')  <?php echo date('d/m/Y'); ?></h2>
+       
+        <h4 >@lang('impresiones/recibo.fecha')  <?php echo date('d/m/Y'); ?></h2>
 
     </div>
+
     <div id="sidebar">
 
     	<div class="right">
@@ -87,6 +94,8 @@
         </div>
         
     </div>
+
+
     <div id="main">
     	<p>Cantidad de pagos: {{count($model)}}</p>
     	<table class="table no-margin">
