@@ -20,6 +20,10 @@ class Carrera extends Entity {
         return $this->hasMany(Materia::getClass());
     }
 
+    public function MateriaCarreraCurso(){
+        return $this->hasMany(MateriaCarreraCurso::getClass());
+    }
+
     public function getFullNameAttribute()
     {
     	return $this->nombre .', '. $this->descripcion;

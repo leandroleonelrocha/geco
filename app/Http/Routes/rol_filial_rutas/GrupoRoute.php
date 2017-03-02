@@ -87,6 +87,16 @@ Route::group(['prefix' => 'grupos'], function(){
 			'uses' => 'GrupoController@editar_clase_arrastrando'
 		]);	
 
+		Route::post('post_materias_carreras_all',[
+			'as' => 'grupos.post_materias_carreras_all',
+			'uses' => 'GrupoController@post_materias_carreras_all'
+		]);
+
+		Route::post('post_materias_cursos_all',[
+			'as' => 'grupos.post_materias_cursos_all',
+			'uses' => 'GrupoController@post_materias_cursos_all'
+		]);
+
 		Route::post('post_materias_carreras',[
 			'as' => 'grupos.post_materias_carreras',
 			'uses' => 'GrupoController@post_materias_carreras'

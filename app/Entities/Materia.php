@@ -17,6 +17,10 @@ class Materia extends Entity {
         return $this->belongsTo(Curso::getClass());
     }
 
+    public function MateriaCarreraCurso(){
+        return $this->hasMany(MateriaCarreraCurso::getClass());
+    }
+
     public function GrupoHorario(){
     	return $this->hasMany(GrupoHorario::getClass());
     }
