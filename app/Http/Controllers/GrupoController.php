@@ -541,8 +541,9 @@ class GrupoController extends Controller
 	public function imprimir_asistencias($id){
 		$grupo      = $this->grupoRepo->find($id);
 		$matriculas = $grupo->Matricula;
+		$clases     = $this->grupoRepo->clasesMesActual();
 		
-		$pdf    	= PDF::loadView('impresiones.asistencias',compact('grupo','matriculas'));
+		$pdf    	= PDF::loadView('impresiones.asistencias',compact('grupo','matriculas','clases'));
 		return $pdf->stream();
 
 	}
