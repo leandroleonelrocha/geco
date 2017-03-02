@@ -1,10 +1,7 @@
 @extends('template')
 @section('content')
- @if(isset($model))
-        {!! Form::model($model,['route'=>['grupos.postEdit',$model->id]]) !!}
-    @else
+
         {!! Form::open(['route'=>'grupos.postAdd']) !!}
-    @endif
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -20,18 +17,14 @@
                                 <option value="0">@lang('grupo.seleccioncyc')</option>
                                 <optgroup label=@lang('grupo.carreras')>
                                 @foreach($carreras as $carrera)
-                                <option value="carrera;{{$carrera->id}}" <?php if(!empty($model)){
-                                if(isset($model->Carrera->id)){if($model->Carrera->id == $carrera->id) echo 'selected';}
-                                }?>>
+                                <option value="carrera;{{$carrera->id}}">
                                     {{$carrera->nombre}}
                                 </option>
                                 @endforeach
                                 </optgroup>
                                 <optgroup label=@lang('grupo.cursos')>
                                 @foreach($cursos as $curso)
-                                <option value="curso;{{$curso->id}}" <?php if(!empty($model)){
-                                if(isset($model->Curso->id)){if($model->Curso->id == $curso->id) echo 'selected';}
-                                }?>>
+                                <option value="curso;{{$curso->id}}">
                                     {{$curso->nombre}}
                                 </option>
                                 @endforeach
@@ -41,21 +34,17 @@
                             <div class="form-group teorica_practica">
                                 <label>@lang('materia.tipomateria')</label>
                                 <div>
-                                    <input type='radio' class='flat-red tp' name='teorica_practica' value="practica" >@lang('materia.practica')
-                                    <input type='radio' class='flat-red tp' name='teorica_practica' value="teorica">@lang('materia.teorica')
+                                    <input type='radio' class='flat-red tp practica' name='teorica_practica' value="practica" >@lang('materia.practica')
+                                    <input type='radio' class='flat-red tp teorica' name='teorica_practica' value="teorica">@lang('materia.teorica')
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>@lang('grupo.nombre_grupo')</label>
-                                {!! Form::text('descripcion', null ,  array('class'=>'form-control')) !!}
+                                {!! Form::text('descripcion', null , array('class'=>'form-control')) !!}
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">@lang('grupo.docente')</label>
-                                @if(empty($model))
                                 {!! Form::select('docente_id',( $docentes->toArray()), null, ['id' => 'docente_id', 'class' => 'form-control select2']) !!}
-                                @else
-                                {!! Form::select('docente_id',['' => 'Seleccionar docente'] + $docentes->toArray() ,$model->Docente->id, ['id' => 'docente_id', 'class' => 'form-control select2']) !!}
-                                @endif
                             </div>
                             <div class="form-group">
                                 <label>@lang('grupo.disponibilidad')</label>
@@ -73,26 +62,9 @@
                                     </div>
                             </div>
 
-                            <!-- <div class="form-group">
-                                <label>@lang('grupo.rangofecha')</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                    </div>
-                                    @if(empty($model))
-                                    {!! Form::text('fecha', null ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
-                                    @else
-                                    {!! Form::text('fecha', $model->fulldate ,  array('class'=>'form-control', 'id'=>'reservation')) !!}
-                                    @endif
-                                </div>
-                            </div> -->
                             <div class="form-group">
                                 <label for="example-color-input">@lang('grupo.color')</label>
-                                @if(empty($model))
                                 <input class="form-control" name="color" type="color" value="#563d7c" id="example-color-input">
-                                @else
-                                {!! Form::color('color', null ,  array('class'=>'form-control', 'id'=>'example-color-input')) !!}
-                                @endif
                             </div>
 
                             <div class="form-group materia">
@@ -111,84 +83,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- <button class="add_field_button btn btn-primary">@lang('grupo.agregarotrodia')</button><br> -->
-                            @if(empty($model))
-                            <!-- <div class="row input_fields_wrap">
-                                <div class="form-group horario">
-                                    <div class="col-xs-12 materia" style="display: none;">
-                                       <label> @lang('grupo.materia') </label>
-                                       <select name="materia_id[]" class="form-control select_materia">
-                                       </select>
-                                    </div>
-                                    <div class="col-xs-3">
-                                       <label> @lang('grupo.aula') </label>
-                                       {!! Form::select('aula_id[]',$aulas->toArray(),null,array('class' => 'form-control')) !!}
-                                    </div> -->
-                                    <!-- <div class="col-xs-3">
-                                        <label> @lang('grupo.dia') </label>
-                                        <select name="dia[]" class="form-control">
-                                            <option value="1"> @lang('grupo.lunes')</option>
-                                            <option value="2"> @lang('grupo.martes')</option>
-                                            <option value="3"> @lang('grupo.miercoles')</option>
-                                            <option value="4"> @lang('grupo.jueves')</option>
-                                            <option value="5"> @lang('grupo.viernes')</option>
-                                            <option value="6"> @lang('grupo.sabados')</option>
-                                        </select>
-                                    </div> -->
-                                  <!-- <div class="col-xs-3 horario">
-                                   <label> @lang('grupo.horacomienzo') </label>
-                                    <input class="form-control" name="horario_desde[]" type="time" value="08:00:00" >
-                                  </div>
-                                  <div class="col-xs-3 horario">
-                                   <label> @lang('grupo.horafin') </label>
-                                    <input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" >
-                                  </div>
-                                  <div class="form-group col-xs-3">
-                                  <label> @lang('grupo.fechainicio') </label>
-                                  <div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control"></div></div>
-                                </div>
-                            </div> -->
-                            @else
-                            <div class="row input_fields_wrap">
-                                @foreach($model->GrupoHorario as $horario)
-                              
-                                <div class="form-group horario">
-                                    @if(!empty($horario->materia_id))
-                                    @if(isset($materias))
-                                    <!-- <div class="col-xs-12 materia">
-                                       <label> @lang('grupo.materia') </label>
-                                       {!! Form::select('materia_id[]',$materias->toArray(), $horario->materia_id ,array('class' => 'form-control select_materia')) !!}
-                                    </div> -->
-                                    @endif
-                                    @endif
-                                    <div class="col-xs-3">
-                                       <label> @lang('grupo.aula') </label>
-                                       {!! Form::select('aula_id[]',$aulas->toArray(), $horario->aula_id ,array('class' => 'form-control')) !!}
-                                    </div>
-                                    <div class="col-xs-3">
-                                    <label> Dia </label>
-                                    <!-- <select name="dia[]" class="form-control">
-                                       
-                                        <option <?php if ($horario->dia == 'Lunes' )  echo 'selected' ; ?>  value="1" > @lang('grupo.lunes')</option>
-                                        <option <?php if ($horario->dia == 'Martes' ) echo 'selected' ; ?>  value="2"> @lang('grupo.martes')</option>
-                                        <option  <?php if ($horario->dia == 'Miercoles' ) echo 'selected' ; ?>  value="3"> @lang('grupo.miercoles')</option>
-                                        <option  <?php if ($horario->dia == 'Jueves' ) echo 'selected' ; ?>  value="4"> @lang('grupo.jueves')</option>
-                                        <option  <?php if ($horario->dia == 'Viernes' ) echo 'selected' ; ?>  value="5"> @lang('grupo.viernes')</option>
-                                        <option  <?php if ($horario->dia == 'Sabado' ) echo 'selected' ; ?>  value="6"> @lang('grupo.sabados')</option>
-                                     </select> -->
-                                    </div>
-                                  <div class="col-xs-3">
-                                   <label> @lang('grupo.horacomienzo') </label>
-                                    <input class="form-control" name="horario_desde[]" type="time" value="{{$horario->horario_desde}}" >
-                                  </div>
-                                  <div class="col-xs-3">
-                                   <label> @lang('grupo.horafin') </label>
-                                    <input class="form-control" name="horario_hasta[]" type="time" value="{{$horario->horario_hasta}}" >
-                                  </div>
-                                </div>
-                                @endforeach
-                            </div>
-                            @endif
                         </div>
                     </div>
                 </div><!-- Fin box-body -->
@@ -253,10 +147,11 @@
                 if (tipo == 0) $(".materia").hide();
         }
 
-        function obtenerMaterias(){
+        // Obtención de los datos de las materias sin filtro, sirve para mostrar/ocultar datos
+        function obtenerAllMaterias(){
             var carreras_cursos = $('#carreras_cursos').val(),
-                tipo            = carreras_cursos.split(';'),
-                tipoM           = $(".tp:checked").val();
+                tipo            = carreras_cursos.split(';');
+                // tipoM           = $(".tp:checked").val();
                 if(carreras_cursos != 0){
                     $(".materia").show();
 
@@ -277,8 +172,102 @@
                                         $('.select_materia').append( '<tr><td class="text-center"> - </td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
                                    }
                                    if(result.length > 0){
+                                       var practica = [], 
+                                           teorica  = [],
+                                           i = 0;
+
                                        $(".materia").show();
                                        $(".select_materia").empty();
+                                       $(".teorica_practica").show();
+                                       console.log(result);
+                                       $.each(result, function(clave, valor) {
+                                            if (valor.practica == 1)
+                                                practica[i] = true;
+
+                                            if (valor.teorica == 1)
+                                                teorica[i] = true;
+
+                                            i++;
+                                       });
+                                   }
+                            }}
+                        ); // Fin - Ajax
+                    }// Fin Tipo Curso
+                    else if(tipo[0] == "carrera"){
+                        $(".teorica_practica").show();
+                        $.ajax(
+                            {
+                            url: "post_materias_carreras",
+                            type: "POST",
+                            data: {carrera_id: tipo[1]},
+                            headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(result){
+                                   if(result.length == 0){
+                                        $(".materia").show();
+                                        $(".select_materia").empty();
+                                        $('.select_materia').append( '<tr><td class="text-center"> - </td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
+                                   }
+                                   if(result.length > 0){
+                                       var practica = [], 
+                                           teorica  = [],
+                                           i = 0;
+
+                                       $(".materia").show();
+                                       $(".select_materia").empty();
+                                       $(".teorica_practica").show();
+                                       console.log(result);
+                                       $.each(result, function(clave, valor) {
+                                            if (valor.practica == 1)
+                                                practica[i] = true;
+
+                                            if (valor.teorica == 1)
+                                                teorica[i] = true;
+
+                                            i++;
+                                       });
+                                       if (practica.indexOf(true) != -1){
+                                            $('.teorica_practica').show();
+                                            $('.practica').show();
+                                       }
+                                       else $('.practica').hide();
+
+                                       if (teorica.indexOf(true) != -1){
+                                            $('.teorica_practica').show();
+                                            $('.teorica').show();
+                                       }
+                                       else $('.teorica').hide();
+                                   }
+                            }}
+                        ); // Fin - Ajax
+                    } // Fin Tipo Carrera
+                }
+        }
+
+        // Obtención de las Materias, sirve para llenar la tabla
+        function obtenerMaterias(){
+            var carreras_cursos = $('#carreras_cursos').val(),
+                tipo            = carreras_cursos.split(';'),
+                tipoM           = $(".tp:checked").val();
+                if(carreras_cursos != 0){
+                    $(".materia").show();
+
+                    if (tipo[0] == "curso") {
+                        $(".select_materia").empty();
+                        $.ajax(
+                            {
+                            url: "post_materias_cursos",
+                            type: "POST",
+                            data: {curso_id: tipo[1]},
+                            headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(result){
+                                   if(result.length > 0){
+                                       $(".materia").show();
+                                       $(".select_materia").empty();
+                                       $(".teorica_practica").show();
                                        console.log(result);
                                        $.each(result, function(clave, valor) {
                                             $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
@@ -298,11 +287,6 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             success: function(result){
-                                   if(result.length == 0){
-                                        $(".materia").show();
-                                        $(".select_materia").empty();
-                                        // $(".teorica_practica").hide();
-                                   }
                                    if(result.length > 0){
                                        $(".materia").show();
                                        $(".select_materia").empty();
@@ -311,24 +295,27 @@
                                        $.each(result, function(clave, valor) {
                                             $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
                                        });
-                                   }
-                            }}
-                        ); // Fin - Ajax
-                    } // Fin Tipo Carrera
-                }
+                                   } // result.length
+                            }}// success
+                        );
+                } // Fin Tipo Carrera
+            }
         }
         
         // Suceción de fecha de inicio ~~ Carreras y Cursos
 
         showTP();
-        obtenerMaterias();
+        // obtenerMaterias();
         $("#carreras_cursos").change(function(){
             var carreras_cursos = $('#carreras_cursos').val(),
                 tipo            = carreras_cursos.split(';');
-            if(tipo[0] == "curso") obtenerMaterias();
+            if(tipo[0] == "curso") obtenerAllMaterias();
             showTP();
         });
-        $(".iCheck-helper").click(function(){ obtenerMaterias(); });
+        
+        $(".practica").next().on('click', function(){ obtenerMaterias(); });
+        $(".teorica").next().on('click', function(){ obtenerMaterias(); });
+        // $(".ano").on('click', function(){ obtenerMaterias(); });
 
         var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper
@@ -354,30 +341,6 @@
             var row = $(this).data('id');
             e.preventDefault(); $(this).parent('div').remove(); x--;
         });
-        // function add_input(){
-        //     return $('.horario').clone();
-        // }
-        // function add_input(){
-        //  var data = '<div class="form-group">'+
-        //             '<div class="col-xs-6">'+
-        //             '<select name="dia[]" class="form-control">'+
-        //                 '<option value="1"> @lang('grupo.lunes')</option>'+
-        //                 '<option value="2"> @lang('grupo.martes')</option>'+
-        //                 '<option value="3"> @lang('grupo.miercoles')</option>'+
-        //                 '<option value="4"> @lang('grupo.jueves')</option>'+
-        //                 '<option value="5"> @lang('grupo.viernes')</option>'+
-        //                 '<option value="6"> @lang('grupo.sabado')</option> ' +
-        //              '</select>'+
-        //             '</div>'+
-        //                 '<div class="col-xs-3">'+
-        //                 '<input class="form-control" name="horario_desde[]" type="time" value="13:45:00" >'+
-        //               '</div>'+
-        //               '<div class="col-xs-3">'+
-        //                 '<input class="form-control" name="horario_hasta[]" type="time" value="13:45:00" >'+
-        //               '</div>'+
-        //             '</div>';
-        //   return data;      
-        // }
 });
 $(".star_intro" ).click(function() {
     var texto ='¡Bienvenido al Tutorial de Grupos!';  
@@ -390,12 +353,7 @@ $(".star_intro" ).click(function() {
     
     ?>
     startIntro(texto);
-});
-
-// $('.fecha_inicio').on('blur', function(){
-//     var thiss = $(this).val();
-//     console.log(thiss);
-// });   
+});   
 </script>
 @include('partials.inicio_tutorial')
 @endsection

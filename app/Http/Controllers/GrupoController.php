@@ -523,19 +523,31 @@ class GrupoController extends Controller
 		return redirect()->back()->with('msg_ok', 'Asistencia creado correctamente');
 	}
 
-	public function post_materias_carreras(Request $request){	
+	public function post_materias_carreras_all(Request $request){
+		$carrera_id = $request->get('carrera_id');
+		$materias = $this->materiaRepo->findAllMateriasCarrera($carrera_id);
+		return response()->json($materias, 200);
+	}
+
+	public function post_materias_cursos_all(Request $request){	
+		$curso_id = $request->get('curso_id');
+		$materias = $this->materiaRepo->findAllMateriasCurso($curso_id);
+		return response()->json($materias, 200);
+	}
+
+	public function post_materias_carreras(Request $request){
 		$carrera_id = $request->get('carrera_id');
 		$tp 		= $request->get('tp');
-		// $carrera = $this->carreraRepo->find($carrera_id);
-		// $materia = $carrera->Materia;
-		$materias = $this->materiaRepo->findMateriasCarrera($carrera_id, $tp);
+		$materias 	= $this->materiaRepo->findMateriasCarrera($carrera_id, $tp);
 		return response()->json($materias, 200);
 	}
 
 	public function post_materias_cursos(Request $request){	
 		$curso_id = $request->get('curso_id');
-		$materias = $this->materiaRepo->findMateriasCurso($curso_id);
-		return response()->json($materias, 200);
+		$tp 	  = $request->get('tp');
+		return response()->json($tp, 200);
+		// $materias = $this->materiaRepo->findAllMateriasCurso($curso_id, $tp);
+		// return response()->json($materias, 200);
 	}
 
 	public function imprimir_asistencias($id){
