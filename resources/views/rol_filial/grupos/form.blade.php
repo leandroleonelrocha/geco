@@ -159,12 +159,12 @@
                         $(".select_materia").empty();
                         $.ajax(
                             {
-                            url: "post_materias_cursos",
+                            url: "post_materias_cursos_all",
                             type: "POST",
                             data: {curso_id: tipo[1]},
-                            headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
+                            // headers: {
+                            // 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            // },
                             success: function(result){
                                    if(result.length == 0){
                                         $(".materia").show();
@@ -197,7 +197,7 @@
                         $(".teorica_practica").show();
                         $.ajax(
                             {
-                            url: "post_materias_carreras",
+                            url: "post_materias_carreras_all",
                             type: "POST",
                             data: {carrera_id: tipo[1]},
                             headers: {
@@ -307,10 +307,8 @@
         showTP();
         // obtenerMaterias();
         $("#carreras_cursos").change(function(){
-            var carreras_cursos = $('#carreras_cursos').val(),
-                tipo            = carreras_cursos.split(';');
-            if(tipo[0] == "curso") obtenerAllMaterias();
-            showTP();
+            obtenerAllMaterias();
+            // showTP();
         });
         
         $(".practica").next().on('click', function(){ obtenerMaterias(); });
