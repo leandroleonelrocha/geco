@@ -453,6 +453,7 @@ foreign key 	(filial_id)						references filial		(id)
 );
 
 create table if not exists grupo_horario(
+id 						int not null auto_increment,
 grupo_id				int not null,
 dia						ENUM('Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'),
 horario_desde			time not null,
@@ -463,7 +464,7 @@ cantidad_clases			int not null,
 aula_id					int not null,
 created_at  			timestamp not null default '0000-00-00 00:00:00',
 updated_at  			timestamp not null default '0000-00-00 00:00:00',
-primary key				(grupo_id, dia, horario_desde, horario_hasta),
+primary key				(id),
 foreign key				(grupo_id)		references grupo		(id),
 foreign key 			(materia_id) 	references materia	    (id),
 foreign key				(aula_id)		references aula			(id)
