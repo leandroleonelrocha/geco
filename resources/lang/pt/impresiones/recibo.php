@@ -15,4 +15,5 @@ return [
     'son' => 'Este é',
     'pesos' => 'pesos',
     'total' => 'total',
+    'cantidaddepagos' => 'Montante dos pagamentos:',
 ];

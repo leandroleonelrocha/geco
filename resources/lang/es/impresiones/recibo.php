@@ -15,4 +15,5 @@ return [
     'son' => 'Son',
     'pesos' => 'pesos',
     'total' => 'total',
+    'cantidaddepagos' => 'Cantidad de pagos:',
 ];
