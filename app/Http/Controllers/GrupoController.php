@@ -544,10 +544,9 @@ class GrupoController extends Controller
 
 	public function post_materias_cursos(Request $request){	
 		$curso_id = $request->get('curso_id');
-		$tp 	  = $request->get('tp');
-		return response()->json($tp, 200);
-		// $materias = $this->materiaRepo->findAllMateriasCurso($curso_id, $tp);
-		// return response()->json($materias, 200);
+		// $tp 	  = $request->get('tp');
+		$materias = $this->materiaRepo->findMateriasCurso($curso_id);
+		return response()->json($materias, 200);
 	}
 
 	public function imprimir_asistencias($id){
