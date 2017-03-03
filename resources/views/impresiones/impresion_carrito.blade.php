@@ -5,7 +5,7 @@
 	<style type="text/css">
 	
 		#container {
-		    width: 700px;
+		    width: 600px;
 		    margin: 0px auto;
 		    font-family: monospace;
 		}
@@ -19,14 +19,18 @@
 
 
 		#sidebar {
-		    padding-top: 100px;
+        padding-top: 100px;
             margin-top: -40px !important;
             font-size: 18px;
-		
+
 		}
+    #sidebar p{
+      line-height: 0.5;
+       font-size: 1em;
+    }
 		#main {
-			padding-top: 10px;
-            margin-top: -40px !important;
+			  padding-top: -70px;
+        margin-top: -40px !important;
 		    float: left;
 		    font-size: 18px;
 		}
@@ -34,10 +38,11 @@
 		    clear: both;
 		}
 		.right{
-		  line-height:10px;	
+		
           display: inline-block;
           vertical-align: bottom !important;
           width: 50%;
+
         }
 
         .left{
@@ -57,9 +62,11 @@
 
 <div id="container">
     <div id="header">
-        <h2 >@lang('impresiones/recibo.fecha')  <?php echo date('d/m/Y'); ?></h2>
+       
+        <h4 >@lang('impresiones/recibo.fecha')  <?php echo date('d/m/Y'); ?></h2>
 
     </div>
+
     <div id="sidebar">
 
     	<div class="right">
@@ -87,16 +94,18 @@
         </div>
         
     </div>
+
+
     <div id="main">
-    	<p>Cantidad de pagos: {{count($model)}}</p>
+    	<p>@lang('impresiones/recibo.cantidaddepagos') {{count($model)}}</p>
     	<table class="table no-margin">
 
                               <thead>
                                 <tr>
                                   <th></th>
                                   <th>Pagó</th>
-                                  <th>Recargo</th>
-                                  <th>Descuento</th>
+                                  <th>@lang('impresiones/recibo.recargo')</th>
+                                  <th>@lang('impresiones/recibo.descuento')</th>
                                   <th>Monto</th>
                                 </tr>
                               </thead>
@@ -113,10 +122,10 @@
                                   <tr>
                                     <td>
                                     @if($pago['nro_pago'] == 0)
-                                    <a href="#">Matricula</a>
+                                    <a href="#">@lang('impresiones/recibo.matricula')</a>
                                     
                                     @else
-                                    <a href="#">Numero de pago: {{$pago['nro_pago']}}</a>
+                                    <a href="#">@lang('impresiones/recibo.numerodepago') {{$pago['nro_pago']}}</a>
                                     @endif
 
                                     </td>
@@ -130,7 +139,7 @@
                                 
                                   @endforeach
                                   
-                                  <tr><td>TOTAL</td><td></td><td></td>
+                                  <tr><td>@lang('impresiones/recibo.total')</td><td></td><td></td>
                                   <td></td>
                                   <td align="center">
                                   <?php
@@ -151,9 +160,9 @@
                               </tbody>
                             </table><br>
         <p>
-    		SON ${{$letra}} pesos
+    		@lang('impresiones/recibo.son') ${{$letra}} @lang('impresiones/recibo.pesos')
     		------------------------------------------
-    		TOTAL : $
+    		@lang('impresiones/recibo.total') : $
     		{{$total}}.00
     	</p>
     	                    

@@ -325,4 +325,10 @@ class PagoController extends Controller
     public function carrito(){
         return view('rol_filial.matriculas.partials.carrito');
     }
+
+    public function vista_libro_iva(){
+        return view('rol_filial.pagos.vista');
+    }
+
+   
 }

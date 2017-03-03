@@ -83,8 +83,8 @@
     <div id="sidebar">
 
     	<div class="right">
-	        <p>Filial: {{$matricula->Filial->nombre}} </p>
-	        <p>Nro Documento: {{$matricula->Persona->nro_documento}} </p>
+	        <p>@lang('impresiones/matricula.filial') {{$matricula->Filial->nombre}} </p>
+	        <p>@lang('impresiones/matricula.ndocumento') {{$matricula->Persona->nro_documento}} </p>
 	        	Grupo:
 	        	
 	        	@foreach($matricula->Grupo as $grupo)

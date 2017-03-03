@@ -108,9 +108,15 @@
                       </ul>
                     </li>
 
-                    <li>
-                      <a href="{{route('estadisticas.caja_diaria')}}" > <i class="fa fa-dollar"></i> <span>@lang('menu.pago')</span> </a>
-                      <!-- <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li> -->
+                    <li class="treeview">
+                      <a href="{{route('filial.cursos') }}">
+                        <i class="fa fa-circle-o"></i> <span>Pagos</span><i class="fa fa-angle-left pull-right"></i>
+                      </a>
+                      <ul class="treeview-menu">
+                        <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li>
+                        <li class="active"><a href="{{route('filial.vista_libro_iva')}}"><i class="fa fa-circle-o"></i> IVA</a></li>
+
+                      </ul>
                     </li>
 
                     <li class="treeview">
