@@ -328,24 +328,26 @@
 
             <h2>PLAN DE PAGO CONVENIDO</h2>  
             <p class="text-right"> ASESOR: {{$matricula->Asesor->fullname}} </p>
-       
-            <table class="table table-striped table-hover">
-                 @foreach($matricula->Pago as $pago)
-                      @if($pago->nro_pago == 0)
-                      <tr>
-                        <td> MATRICULA</td>
-                        <td> {{$pago->monto_original}}.00</td>
-                      
-                      </tr>
-                      @else
-                      <tr>
-                        <td> CUOTA {{$pago->nro_pago}}</td>
-                        <td> {{$pago->monto_original }}.00</td>
-                      </tr>
-                      @endif
-                    @endforeach
-              
-            </table>
+            
+            <div class="plan_pago" >
+                <table class="table table-striped table-hover">
+                     @foreach($matricula->Pago as $pago)
+                          @if($pago->nro_pago == 0)
+                          <tr>
+                            <td> MATRICULA</td>
+                            <td> {{$pago->monto_original}}.00</td>
+                          
+                          </tr>
+                          @else
+                          <tr>
+                            <td> CUOTA {{$pago->nro_pago}}</td>
+                            <td> {{$pago->monto_original }}.00</td>
+                          </tr>
+                          @endif
+                        @endforeach
+                  
+                </table>
+            </div>
 
 
             <div class="cierre">
