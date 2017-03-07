@@ -53,7 +53,7 @@ class MateriaController extends Controller
 		return view('rol_filial.materias.nuevo', compact('carreras', 'cursos'));	
 	}
 
-	public function nuevo_post(Request $request){
+	public function nuevo_post(CrearNuevaMateriaRequest $request){
 
 		$materia = $request->all();
 		$cadena 	= $this->filialRepo->filialCadena();
@@ -123,7 +123,7 @@ class MateriaController extends Controller
 		return view('rol_filial.materias.editar',compact('materia','carreras','cursos','materiaCarreraCurso'));	
     }
 
-    public function editar_post(Request $request){
+    public function editar_post(EditarMateriaRequest $request){
 		$data = $request->all();
 
 		// $carrearas_cursos = explode(';',$request->carreras_cursos);
