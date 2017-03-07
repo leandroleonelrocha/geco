@@ -1,173 +1,350 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-	<title></title>
-	<style type="text/css">
-	
-		#container {
-		    width: 700px;
-		    margin: 0px auto;
-		    font-family: monospace;
-		}
+      <title>Matricula </title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-		#header{
-			top:20px;
-			text-align: left;
-			
-		}
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            font-size: 11px;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+        }
+
+        html, body {
+            min-height: 100%;
+        }
+
+        body {
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            font-size: 14px;
+            line-height: 1.42857143;
+            color: #333;
+            background-color: #fff;
+            margin: 15px !important;
+            padding: 15px !important;
+        }
+
+        body {
+            margin: 0;
+            margin-top: 20px;
+        }
+
+        html {
+            font-size: 10px;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
 
 
-		#sidebar {
-		    padding-top: 100px;
-            margin-top: -40px !important;
+        .img-responsive{
+            width: 100%;
+        }
+
+        .font21{
             font-size: 18px;
-		
-		}
-		#main {
-			padding-top: 10px;
-            margin-top: -40px !important;
-		    float: left;
-		    font-size: 18px;
-		}
-		#footer {
-		    clear: both;
-		}
-		.right{
-		  
-          display: inline-block;
-          vertical-align: bottom !important;
-          width: 50%;
         }
 
-        .left{
-          width: 50%;
-          display: inline-block;
-          vertical-align: top !important;
+        .col-xs-12{
+            width: 100%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
         }
 
-        .content span{
-              width:100%;
-          }
+        .col-xs-6{
+            width: 50%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
 
-          .border{
-              /*border-bottom: 1px solid black;*/
-              margin-top: -10px !important;
-              padding-top: 0 !important;
-              margin-bottom: -20px !important;
-              padding-bottom: 0 !important;
-          }
+        .col-xs-10{
+            width: 66.66%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
 
-          table, th, td {
-              border: 1px solid ;
-              border-collapse: collapse;
-              text-align: center;
-              width: 100%;
-               height: 50px;
-          }
-          li {  
-            list-style-type: none;
-            font-size: small;
-          }
-     
-	</style>
+        .col-xs-4{
+            width: 25%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .col-xs-3{
+            width: 33.33%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .col-xs-8{
+            width: 75%;
+            float: left;
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+
+        .col-xs-offset-1{
+            margin-left: 8.33%;
+        }
+
+        .col-xs-offset-2{
+            margin-left:  17%;
+        }
+
+        .text-center{
+            text-align: center;
+        }
+
+        .row {
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+
+        /*Tablas*/
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table {
+            background-color: transparent;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            border: 1px solid #ddd;
+        }
+
+        .table>thead:first-child>tr:first-child>th {
+            border-top: 0;
+        }
+
+        .table>thead>tr>th {
+            border-bottom: 2px solid #f4f4f4;
+        }
+
+        .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+            border-top: 1px solid #f4f4f4;
+        }
+
+        .table>thead>tr>th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        td, th {
+            padding: 0;
+        }
+
+        .table-striped>thead>tr:nth-child(2) {
+            background-color: #f9f9f9;
+        }
+
+        .colorWhite{
+            color: white;
+        }
+
+        .bg-blue{
+            background-color: #3498db;
+        }
+
+        .blue{
+            color: #3498db;
+        }
+
+        #logo{
+            /*width:150px;*/
+        }
+
+        .center-vertical{
+            margin-top: 50px;
+            height:50px;
+
+        }
+
+        .center-block{
+            margin: auto;
+        }
+
+        .mb-40n{
+            margin-bottom: -40px;
+        }
+
+        .mb-20{
+            margin-bottom: 20px;
+        }
+
+        .mt-20{
+            margin-top: 20px;
+        }
+
+        .mt-10{
+            margin-top: 10px;
+        }
+
+        .ml-80{
+            margin-left: 80px;
+        }
+
+        .pull-right{
+            float: right;
+        }
+
+        .text-danger{
+            color: #a94442;
+        }
+
+        .border{
+            border: 1px solid #ddd;
+        }
+
+        .footer{
+            width: 110px;
+            margin-top:-21px;
+            padding:5px;
+            float:right;
+        }
+
+
+        .upper{
+            text-transform: uppercase;
+        }
+
+        .text-right{
+            text-align: right;
+        }
+
+        .p10{
+            padding:10px;
+        }
+
+        .little,.little *{
+            font-size: 80%;
+        }
+
+        .cierre>div{
+            width:50%;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+    </style>
+
 </head>
-
 <body>
-<div id="container">
-    <div id="header">
 
-        <h2 >@lang('impresiones/matricula.certificado')</h2>
-
-
-    </div>
-    <div id="sidebar">
-
-    	<div class="right">
-	        <p>@lang('impresiones/matricula.filial') {{$matricula->Filial->nombre}} </p>
-	        <p>@lang('impresiones/matricula.ndocumento') {{$matricula->Persona->nro_documento}} </p>
-	        	Grupo:
-	        	
-	        	@foreach($matricula->Grupo as $grupo)
-	        		@if(isset($grupo->Curso->nombre))
-	        			{{$grupo->Curso->nombre}}
-	        		@endif
-	        		@if(isset($grupo->Carrera->nombre))
-	        			{{$grupo->Carrera->nombre}}
-	        		@endif
-				
-	        	@endforeach
-	        	
-	        </p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 mb-20">
+            <p class="mt-20 ml-80">{{$matricula->Filial->fullname}}</p>
+            <h4 class="font21 text-center" style="margin-top:20px;">@lang('impresiones/matricula.certificado')</h4>
+            <p class="text-right">Buenos Aires, {!! date('d-m-Y',time()) !!} </p>
         </div>
-
-        <div class="left">
-        	<p>@lang('impresiones/matricula.nombre') 	{{$matricula->Persona->fullname}} </p>
-	        <p>@lang('impresiones/matricula.domicilio') {{$matricula->Persona->domicilio}} </p>
-	        
-	        </p>
-	        <p>@lang('impresiones/matricula.nmatricula') {{ $matricula->id }}</p>
-	     
-        </div>
-        
     </div>
-    <div id="main">
-	    <table>
-		  	<thead>
-		    	<tr>
-			    	<th>@lang('impresiones/matricula.modulo')</th>
-			      	<th>@lang('impresiones/matricula.grupo')</th>
-			      	<th>@lang('impresiones/matricula.nota')</th>
-			      	<th>@lang('impresiones/matricula.acta')</th>
-			      	<th>@lang('impresiones/matricula.fecha')</th>
-			      	<th>@lang('impresiones/matricula.docente')</th>
-			      	
-		    	</tr> 
-		  	</thead>
-		  	<tbody>
-		  		@foreach($matricula->Grupo as $grupo)
-		    
-		    	<tr>
-			    	<td>@if(isset($grupo->Curso->nombre))
-	        				{{$grupo->Curso->nombre}}
-	        			@endif
-	        			@if(isset($grupo->Carrera->nombre))
-	        				{{$grupo->Carrera->nombre}}
-	        			@endif
-	        		</td>
-			     	<td>{{$grupo->id}}</td>
-			     	<td>
-			     		@foreach($matricula->Examen as $examen)
-			     			{{$examen->nota}}
-			     		@endforeach
 
-			     	</td>
-			     	<td>{{5432}}</td>
-			     	<td>30/09/2016</td>
-			     	<td> {{$examen->Docente->fullname}} </td>
-			     	
-		    	</tr>
-		  		@endforeach
-		  	</tbody>
-		</table>
-    </div>
-   
-   <div id="sidebar">
-   		<p>@lang('impresiones/matricula.notapromedio') 8</p>
-   		<div class="right">
-   			<p>@lang('impresiones/matricula.cantidadclases')</p>
-   			<p>@lang('impresiones/matricula.cantidadclasesasistidas')</p>
-   			<p>@lang('impresiones/matricula.promedioclases')</p>
-   		
-   		</div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2>DATOS PERSONALES</h2>
+            <br>
+            <div class="border p10">
+                <p>Sres. <b class="upper"> {{$matricula->Persona->fullname}}</b></p>
+                <p>Domicilio : <b> {{$matricula->Persona->domicilio}}</b></p>
+                <p>Teléfono : <b> @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </b></p>
+                <p>Emails: <b>@foreach($matricula->Persona->PersonaMail as $mail) {{$mail->mail}} @endforeach()</b>
+                 </p>
+                  <p>{{$matricula->Persona->TipoDocumento->tipo_documento}} : <b> {{$matricula->Persona->nro_documento}}</b></p>
+            </div>
+            <br>
+
+            
+            <table class="table table-striped table-hover mt-10">
+                <tr>
+                    <th>MODULO</th>
+                    <th>GRUPO</th>
+                    <th>NOTA</th>
+                    <th>ACTA</th>
+                    <th>FECHA</th>
+                    <th>DOCENTE</th>
+                    
+                 
+                </tr>
+                @foreach($matricula->Grupo as $grupos)
+                    @foreach($grupos->Curso->MateriaCarreraCurso  as $materias)
+                    <tr>
+                        <td>{{$materias->Materia->nombre}}</td>
+                        <td>{{$grupos->fullname}}</td>
+                        <td>{{$grupos->fullname}}</td>
+                        <td>{{$grupos->fullname}}</td>
+                        <td>{{$grupos->fecha}}</td>
+                        <td>{{$grupos->Docente->fullname}}</td>
+                        
+                    </tr>
+                    @endforeach
+                @endforeach
+             
+            </table>
+
+           
+
+            <div class="cierre">
+                <div>
+                    <p class="mt-20 text-center">.../.../... </p>
+                </div>
+
+                <div>
+                 <p class="mt-20 text-center">.......................................................... </p>
+                    <p class="mt-20 text-center">Firma y sello</p>
+                
+                </div>
+            </div>
 
 
-        <div class="left">
-        	<p>10</p>
-        	<p>7</p>
-        	<p>74.000</p>
+
+
         </div>
-   		
-   </div>
-
+    </div>
 </div>
+
 </body>
+</html>

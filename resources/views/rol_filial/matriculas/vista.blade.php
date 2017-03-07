@@ -5,6 +5,8 @@
 		<div class="col-xs-12">
 			<div class="box">
 				<div class="box-body">
+
+             
 					<div class="row">
 						<div class="col-lg-12 col-xs-12">
 			              <!-- small box -->
@@ -14,6 +16,7 @@
 			                    <div class="col-sm-4 border-right">
 			                      <div class="description-block">
 			                        <h5 class="description-header">@lang('matricula.numero')</h5>
+			                        
 			                        <span class="description-text">{{$matricula->id}}</span>
 			                      </div><!-- /.description-block -->
 			                    </div><!-- /.col -->
@@ -46,6 +49,7 @@
 											elseif ($matricula->cancelado == 1) echo 'Cancelado';
 											else echo 'Activo';
 											?></span>
+
 			                      </div><!-- /.description-block -->
 			                    </div><!-- /.col -->
 			                    <div class="col-sm-4">
@@ -61,15 +65,17 @@
 			                    </div><!-- /.col -->
 			                  </div>
 
-
 			                </div>
 			               
 			              </div>
 			            </div>
-						<!-- <div class="col-xs-12">
-							<a href="{{route('filial.matriculas_editar',$matricula->id)}}" class="editar" title="@lang('lista.editar')">@lang('matricula.editarmatricula')</a>
-						</div> -->
+
+			            <div class="col-lg-12 col-xs-12">
+			     			  <a href="{{route('filial.matriculas_imprimir_plan_de_pago',$matricula->id)}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i>MATRICULA</a>
+			           </div>
+
 						<div class="col-xs-12">
+
 							<div class="nav-tabs-custom">
 								<ul class="nav nav-tabs">
 									<li class="active"><a href="#tab_1" data-toggle="tab">@lang('matricula.plandepagos')</a></li>

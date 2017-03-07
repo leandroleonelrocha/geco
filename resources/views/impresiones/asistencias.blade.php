@@ -291,7 +291,7 @@
                     <th>@lang('impresiones/asistencias.nya')</th>
                  
                     @foreach($clases as $clase)
-
+                    
                     <th>{{ helpersgetDiaMes($clase->fecha) }}</th>
                     @endforeach
                      

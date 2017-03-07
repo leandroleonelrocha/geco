@@ -10,8 +10,7 @@
 				<div class="box-header">
 					<h3 class="box-title">@lang('matricula.actualizarpago')</h3>
 
-              <a href="{{route('filial.matriculas_imprimir_plan_de_pago',$pago->id)}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> Plan de pago</a>
-             
+            
 
 				</div>
 				<div class="box-body">
