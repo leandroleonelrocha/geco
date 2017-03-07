@@ -63,43 +63,43 @@
     </div>
 
      <div id="sidebar">
-      DATOS PERSONALES:
+      @lang('impresiones/plan_de_pago.datospersonales')
       <hr>
       <table>
         <tr>
-          <td>DOMI: {{$matricula->Persona->domicilio}}</td>
-          <td>LOC: {{$matricula->Persona->localidad}}</td>
+          <td>@lang('impresiones/plan_de_pago.domicilio') {{$matricula->Persona->domicilio}}</td>
+          <td>@lang('impresiones/plan_de_pago.localidad') {{$matricula->Persona->localidad}}</td>
           <td>{{$matricula->Persona->TipoDocumento->tipo_documeto}}: {{$matricula->Persona->nro_documento}}</td>
           
         </tr>
          
         <tr>
-          <td>FECHA NAC: {{$matricula->Persona->fecha_nacimiento}}</td>
-          <td>TELEFONOS: @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </td>
+          <td>@lang('impresiones/plan_de_pago.fecha') {{$matricula->Persona->fecha_nacimiento}}</td>
+          <td>@lang('impresiones/plan_de_pago.telefonos') @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </td>
         </tr>
         </table>
     </div>
 
     <div id="sidebar">
-      DATOS PERSONALES:
+      @lang('impresiones/plan_de_pago.datospersonales')
       <hr>
       <table>
         <tr>
-          <td>DOMI: {{$matricula->Persona->domicilio}}</td>
-          <td>LOC: {{$matricula->Persona->localidad}}</td>
+          <td>@lang('impresiones/plan_de_pago.domicilio') {{$matricula->Persona->domicilio}}</td>
+          <td>@lang('impresiones/plan_de_pago.localidad') {{$matricula->Persona->localidad}}</td>
           <td>{{$matricula->Persona->TipoDocumento->tipo_documeto}}: {{$matricula->Persona->nro_documento}}</td>
           
         </tr>
          
         <tr>
-          <td>FECHA NAC: {{$matricula->Persona->fecha_nacimiento}}</td>
-          <td>TELEFONOS: @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </td>
+          <td>@lang('impresiones/plan_de_pago.fecha') {{$matricula->Persona->fecha_nacimiento}}</td>
+          <td>@lang('impresiones/plan_de_pago.telefonos') @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </td>
         </tr>
         </table>
     </div>
 
     <div id="sidebar">
-      DATOS DE LA CARRERA:
+      @lang('impresiones/plan_de_pago.datoscarrera')
       <hr>
       <table>
         <tr>
@@ -118,19 +118,19 @@
     </div>
 
       <div id="sidebar">
-      PLAN DE PAGO CONVENIDO:
+      @lang('impresiones/plan_de_pago.planconvenido')
       <hr>
       <table>
         @foreach($matricula->Pago as $pago)
           @if($pago->nro_pago == 0)
           <tr>
-            <td> MATRICULA</td>
+            <td> @lang('impresiones/plan_de_pago.matricula')</td>
             <td> {{$pago->monto_original}}.00</td>
-            <td>ASESOR: {{$matricula->Asesor->fullname}}</td>
+            <td>@lang('impresiones/plan_de_pago.asesor') {{$matricula->Asesor->fullname}}</td>
           </tr>
           @else
           <tr>
-            <td> CUOTA {{$pago->nro_pago}}</td>
+            <td> @lang('impresiones/plan_de_pago.cuota') {{$pago->nro_pago}}</td>
             <td> {{$pago->monto_original }}.00</td>
           </tr>
           @endif
@@ -143,20 +143,21 @@
 
         <div class="right">
           <p>.................</p>
-          <p>Firma del alumno</p>
+          <p>@lang('impresiones/plan_de_pago.firma')</p>
         </div>
 
         <div class="left">
           <p>..............................</p>
-          <p>Si es menor, firma del padre o tutor</p>
+          <p>@lang('impresiones/plan_de_pago.siesmenor')</p>
         </div>
         
     </div>
 
      <p>
-      OBSERVACIONES: Descuento de $50 abonando del 1 al 10 de cada mes.
+      @lang('impresiones/plan_de_pago.observaciones')
+      @lang('impresiones/plan_de_pago.ob1')
     </p>
-    <p>Inicio de clases sujeto a modificaciones. DIRECCION <br>
+    <p>@lang('impresiones/plan_de_pago.ob2')<br>
       Preinforme Nro: 
     </p>
     

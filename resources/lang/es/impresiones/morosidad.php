@@ -18,5 +18,6 @@ return [
     'fechapago' => 'Fecha de pago',
     'cuota' => 'Cuota',
     'vencimiento' => 'Vencimiento',
+    'siesmenor' => ' Si es menor, firma del padre o tutor',
 
 ];

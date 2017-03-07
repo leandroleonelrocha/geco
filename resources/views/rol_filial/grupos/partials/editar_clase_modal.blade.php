@@ -19,7 +19,7 @@
 			    </div>
 
 			    <div class="form-group row">
-			      <label for="inputEmail3" class="col-sm-2 col-form-label ">Aula</label>
+			      <label for="inputEmail3" class="col-sm-2 col-form-label ">@lang('grupo.aula')</label>
 			      <div class="col-sm-10">
 					<span class="clase_aula"></span>
 				  </div>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-      <title>Plan de pago</title>
+      <title>@lang('impresiones/plan_de_pago.plandepago')/title>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -278,30 +278,30 @@
     <div class="row">
         <div class="col-xs-12 mb-20">
             <p class="mt-20 ml-80">{{$matricula->Filial->fullname}}</p>
-            <h4 class="font21 text-center" style="margin-top:20px;">PLAN DE PAGO</h4>
+            <h4 class="font21 text-center" style="margin-top:20px;">@lang('impresiones/plan_de_pago.plandepago')</h4>
             <p class="text-right">Buenos Aires, {!! date('d-m-Y',time()) !!} </p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-xs-12">
-            <h2>DATOS PERSONALES</h2>
+            <h2>@lang('impresiones/plan_de_pago.datospersonales')</h2>
             <br>
             <div class="border p10">
-                <p>Sres. <b class="upper"> {{$matricula->Persona->fullname}}</b></p>
-                <p>Domicilio : <b> {{$matricula->Persona->domicilio}}</b></p>
-                <p>Teléfono : <b> @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </b></p>
+                <p>@lang('impresiones/plan_de_pago.sres') <b class="upper"> {{$matricula->Persona->fullname}}</b></p>
+                <p>@lang('impresiones/plan_de_pago.domicilio') <b> {{$matricula->Persona->domicilio}}</b></p>
+                <p>@lang('impresiones/plan_de_pago.telefonos') <b> @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </b></p>
                 <p>Emails: <b>@foreach($matricula->Persona->PersonaMail as $mail) {{$mail->mail}} @endforeach()</b>
                  </p>
                   <p>{{$matricula->Persona->TipoDocumento->tipo_documento}} : <b> {{$matricula->Persona->nro_documento}}</b></p>
             </div>
             <br>
-            <h2>DATOS DE LA CARRERA</h2>
+            <h2>@lang('impresiones/plan_de_pago.datoscarrera')</h2>
             <table class="table table-striped table-hover mt-10">
                 <tr>
-                    <th>GRUPO.:</th>
-                    <th>DIA:</th>
-                    <th>HORARIO:</th>
+                    <th>@lang('impresiones/plan_de_pago.grupo')</th>
+                    <th>@lang('impresiones/plan_de_pago.dia')</th>
+                    <th>@lang('impresiones/plan_de_pago.horario')</th>
                        
                  
                 </tr>
@@ -326,20 +326,20 @@
              
             </table>
 
-            <h2>PLAN DE PAGO CONVENIDO</h2>  
-            <p class="text-right"> ASESOR: {{$matricula->Asesor->fullname}} </p>
+            <h2>@lang('impresiones/plan_de_pago.planconvenido')</h2>  
+            <p class="text-right"> @lang('impresiones/plan_de_pago.asesor') {{$matricula->Asesor->fullname}} </p>
        
             <table class="table table-striped table-hover">
                  @foreach($matricula->Pago as $pago)
                       @if($pago->nro_pago == 0)
                       <tr>
-                        <td> MATRICULA</td>
+                        <td> @lang('impresiones/plan_de_pago.matricula')</td>
                         <td> {{$pago->monto_original}}.00</td>
                       
                       </tr>
                       @else
                       <tr>
-                        <td> CUOTA {{$pago->nro_pago}}</td>
+                        <td> @lang('impresiones/plan_de_pago.cuota') {{$pago->nro_pago}}</td>
                         <td> {{$pago->monto_original }}.00</td>
                       </tr>
                       @endif
@@ -351,26 +351,26 @@
             <div class="cierre">
                 <div>
                     <p class="mt-20 text-center">.......................................................... </p>
-                    <p class="mt-20 text-center">Firma del alumno</p>
+                    <p class="mt-20 text-center">@lang('impresiones/plan_de_pago.firma')</p>
                 </div>
 
                 <div>
                  <p class="mt-20 text-center">.......................................................... </p>
-                    <p class="mt-20 text-center">Si es menor, firma del padre o tutor</p>
+                    <p class="mt-20 text-center">@lang('impresiones/plan_de_pago.siesmenor')</p>
                 
                 </div>
             </div>
 
 
             <p>
-                OBSERVACIONES:
+                @lang('impresiones/plan_de_pago.observaciones')
             </p>
             <p class="little text-center" >
-                Descuento de $50 abonando del 1 al 10 de cada mes.
+                @lang('impresiones/plan_de_pago.ob1')
                
             </p>
             <p class="little text-center">
-                 Inicio de clases sujeto a modificaciones. DIRECCION
+                 @lang('impresiones/plan_de_pago.ob2')
             </p>
 
 

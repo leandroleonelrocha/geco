@@ -16,28 +16,18 @@
                                 <label>@lang('materia.nombre')</label>
                                 {!! Form::text('nombre',null,array('class'=>'form-control')) !!}
                             </div>
+                            <div class="col-md-3 form-group">
+                                
+                                <label>@lang('preinforme.carreras')</label>
 
-                            <div class="form-group col-md-6">
-                                <label>@lang('grupo.carrerasycursos')</label>
-                                <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-                                    <option value="0">@lang('grupo.seleccioncyc')</option>
-                                    <optgroup label=@lang('grupo.carreras')>
-                                        @foreach($carreras as $carrera)
-                                            <option value="carrera;{{$carrera->id}}">
-                                                {{$carrera->nombre}}
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
-                                    <optgroup label=@lang('grupo.cursos')>
-                                        @foreach($cursos as $curso)
-                                            <option value="curso;{{$curso->id}}">
-                                                {{$curso->nombre}}
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
+                                {!! Form::select('carrera[]',$carreras->toArray(),null, array('id'=>'carreras', 'class' => 'form-control', 'multiple')) !!}
                             </div>
-                   
+                            <div class="col-md-3 form-group">
+
+                                <label>@lang('preinforme.cursos')</label>
+                                {!! Form::select('curso[]',$cursos->toArray(),null,array('id'=>'cursos', 'class' => 'form-control', 'multiple')) !!}
+                            </div>
+                                                      
                             <div class="col-md-6 form-group teorica_practica">
                                 <label>@lang('materia.tipomateria')</label>
                                 <div>

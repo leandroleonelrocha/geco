@@ -8,7 +8,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Carrito de pagos</h5>
+        <h5 class="modal-title">@lang('impresiones/recibo.carrito')</h5>
         
       </div>
       <div class="modal-body">
@@ -18,10 +18,10 @@
                               <thead>
                                 <tr>
                                   <th>#</th>
-                                  <th>Pagó</th>
-                                  <th>Recargo</th>
-                                  <th>Descuento</th>
-                                  <th>Monto</th>
+                                  <th>@lang('impresiones/recibos.npago)/th>
+                                  <th>@lang('impresiones/recibo.recargo')</th>
+                                  <th>@lang('impresiones/recibos.descuento')</th>
+                                  <th>@lang('impresiones/recibos.monto')</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -55,7 +55,7 @@
                                 
                                   @endforeach
                                   
-                                  <tr><td>TOTAL</td><td></td><td></td>
+                                  <tr><td>@lang('impresiones/recibo.total')</td><td></td><td></td>
                                   <td></td>
                                   <td>
                                   <?php
@@ -78,8 +78,8 @@
 
       </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-       <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">Confirmar</a>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('impresiones/recibo.cerrar')</button>
+       <a href="{{route('filial.carrito_imprimir')}}" target="_blank" type="button" class="btn btn-primary">@lang('impresiones/recibo.confirmar')</a>
       </div>
     </div>
   </div>
