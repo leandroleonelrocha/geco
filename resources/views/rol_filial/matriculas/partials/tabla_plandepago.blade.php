@@ -19,13 +19,18 @@
 				<tr class="text-center">
 					<td>{{$pago->vencimiento}}</td>
 					<td><?php
-						if($pago->nro_pago == 0) echo 'Matrícula';
-						else echo $pago->nro_pago;
-					?></td>
-					<td><?php
-						if ($pago->terminado == 1) echo 'Terminado';
-						else echo 'Pendiente';
-					?></td>
+						if($pago->nro_pago == 0) {?>
+						<span> @lang('matricula.matricula') </span>
+						<?php }else
+						echo $pago->nro_pago;?>
+					</td>
+					<td>
+						<?php if ($pago->terminado == 1){?>
+							<span> @lang('matricula.terminado') </span>
+						<?php }else{ ?>
+							<span> @lang('matricula.pendiente') </span>
+						<?php } ?>
+					</td>
 					<td><?php echo session('moneda')['simbolo']; ?>{{$pago->monto_actual}}</td>
 					<td><?php echo session('moneda')['simbolo']; ?>{{$pago->monto_original}}</td>
 					<td><?php
@@ -65,9 +70,11 @@
 			@foreach($planPagos as $pago)
 				<tr class="text-center">
 					<td><?php
-					if($pago->nro_pago == 0) echo 'Matrícula';
-						else echo $pago->nro_pago;
-					?></td>
+						if($pago->nro_pago == 0) {?>
+							<span> @lang('matricula.matricula') </span>
+					<?php }else
+							echo $pago->nro_pago;?>
+					</td>
 					<td>{{$pago->vencimiento}}</td>
 					<td>{{$pago->monto_original}}</td>
 					<td>{{$pago->descuento}}</td>

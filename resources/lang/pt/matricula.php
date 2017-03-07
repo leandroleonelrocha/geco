@@ -62,7 +62,7 @@ return [
     'actualizarmatricula' => 'Atualização Inscriçãos',
     'cancelar'=> 'Deregister',
     'si'=> 'Sim',
-
+    'no'                  => 'Não',
     'agregarnuevapersona' => 'Adicionar Novo Pessoa',
     'agregarnueva' => 'Adicionar Novo',
     'nuevamatricula' => 'Novo Inscriçãos',
@@ -80,4 +80,6 @@ return [
     'descuentoadicional'  => 'Desconto aditional',
     'recargoadicional'    => 'Sobrecarregar aditional',
     'plan'                => 'Plan',
+    'terminado'           => 'Concluído',
+    'pendiente'           => 'Pendente',
 ];

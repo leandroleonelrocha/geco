@@ -20,27 +20,34 @@
 								{!! Form::text('nombre', $materia->nombre, array('class'=>'form-control')) !!}
 							</div>
 
-                            <div class="form-group col-md-6">
-                                <label>@lang('grupo.carrerasycursos')</label>
-                                <select name="carreras_cursos" id="carreras_cursos" class="form-control">
-                                	<option value="0">@lang('grupo.seleccioncyc')</option>
-                                		<optgroup label=@lang('grupo.carreras')>
-                                			@foreach($carreras as $carrera)
-                                			<option value="carrera;{{$carrera->id}}" <?php if(isset($materia->Carrera->id)){if($materia->Carrera->id == $carrera->id) echo 'selected';}?>>
-                                    			{{$carrera->nombre}}
-                                			</option>
-                                			@endforeach
-                                		</optgroup>
-
-                                		<optgroup label=@lang('grupo.cursos')>
-                                			@foreach($cursos as $curso)
-                                				<option value="curso;{{$curso->id}}" <?php if(isset($materia->Curso->id)){if($materia->Curso->id == $curso->id) echo 'selected';}?>>
-                                    				{{$curso->nombre}}
-                                				</option>
-                                			@endforeach
-                                		</optgroup>
-                                </select>
-                            </div>
+			              	<div class="col-md-3 form-group">
+								<label>@lang('preinforme.carreras')</label>
+								<select name="carrera[]" id="carreras" class='form-control' multiple>
+									<?php foreach ($carreras as $carrera) { ?>
+										<option value="{{$carrera->id}}"
+										<?php foreach ($materiaCarreraCurso as $m){
+											if( $m->carrera_id == $carrera->id )
+												echo 'selected';
+										}?> >
+											{{$carrera->nombre}}
+										</option>
+									<?php } ?>
+								</select>
+							</div>
+							<div class="col-md-3 form-group">
+								<label>@lang('preinforme.cursos')</label>
+								<select name="curso[]" id="cursos" class='form-control' multiple>
+									<?php foreach ($cursos as $curso) { ?>
+										<option value="{{$curso->id}}"
+										<?php foreach ($materiaCarreraCurso as $m){
+											if( $m->curso_id == $curso->id )
+												echo 'selected';
+										}?>>
+											{{$curso->nombre}}
+										</option>
+									<?php } ?>
+								</select>
+							</div>
                             
 							<div class="col-md-6 form-group teorica_practica">
                                 <label>@lang('materia.tipomateria')</label>

@@ -65,6 +65,7 @@ return [
     'actualizarmatricula' => 'Update enrollments',
     'cancelar'=> 'Terminate',
     'si'=> 'Yes',
+    'no'                  => 'Not',
 
 
     'agregarnuevapersona' => 'Add New Person',
@@ -85,4 +86,6 @@ return [
     'descuentoadicional'  => 'Discount aditional',
     'recargoadicional'    => 'Surcharge aditional',
     'plan'                => 'Plan',
+    'terminado'           => 'Finished',
+    'pendiente'           => 'Pending',
 ];

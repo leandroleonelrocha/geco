@@ -25,8 +25,24 @@
 						    @foreach($materia as $m)
 							    <tr role="row" class="odd">
 							        <td class="sorting_1">{{ $m->nombre }}</td>
-      	            		        <td><?php if(isset($m->Carrera->nombre)) echo $m->Carrera->nombre; else echo "-"; ?></td>
-      	            		        <td><?php if(isset($m->Curso->nombre)) echo $m->Curso->nombre;  else echo "-"; ?></td>
+							         <td>
+							     		@foreach($m->MateriaCarreraCurso as $mcc)
+						            	
+						            			{{ $mcc->carrera_id }}
+						            	
+					            		@endforeach
+
+							        </td>
+
+						        	<td>
+							     		@foreach($m->MateriaCarreraCurso as $mcc)
+						            	
+						            			{{ $mcc->curso_id }}
+						            	
+					            		@endforeach
+
+							        </td>
+
 						            <td>{{ $m->descripcion }}</td>
 						           	<td class="text-center">
 

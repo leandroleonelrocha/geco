@@ -16,4 +16,10 @@ return [
     'pesos' => 'pesos',
     'total' => 'total',
     'cantidaddepagos' => 'Cantidad de pagos:',
+
+    'cantidaddepagos' => 'Cantidad de pagos:',
+
+    'carrito'=> 'Carrito de pagos',
+    'confirmar'=> 'Confirmar',
+    'cerrar'=> 'Cerrar',
 ];
