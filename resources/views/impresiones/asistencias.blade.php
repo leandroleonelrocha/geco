@@ -277,8 +277,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 mb-20">
-            <p class="mt-20 ml-80">FILIAL : FLORES</p>
-            <h4 class="font21 text-center" style="margin-top:20px;">ASISTENCIAS MENSUAL</h4>
+            <p class="mt-20 ml-80">@lang('impresiones/asistencias.filial') FLORES</p>
+            <h4 class="font21 text-center" style="margin-top:20px;">@lang('impresiones/asistencias.planillaasistencia')</h4>
             <p class="text-right">Buenos Aires, {!! date('d-m-Y',time()) !!} </p>
         </div>
     </div>

@@ -21,4 +21,3 @@ return [
     'confirmar'=> 'Confirmar',
     'cerrar'=> 'Perto',
 ];
-];

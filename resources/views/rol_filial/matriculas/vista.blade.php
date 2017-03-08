@@ -98,3 +98,17 @@
 	</div> <!-- Fin row -->
 @endsection
 
+@section('modal')
+@include('rol_filial.matriculas.partials.carrito')
+@endsection
+
+@section('js')
+<script type="text/javascript">
+	$('#ModalEdit').click(function(){
+
+	// elimino la session y recargo		
+   //location.reload();
+        });
+</script>
+@endsection
+

@@ -18,4 +18,5 @@ return [
     'fechapago' => 'Data de pagamento',
     'cuota' => 'Taxa',
     'vencimiento' => 'Maturidade',
+    'siesmenor' => 'Se menor, a assinatura do pai ou tutor',
 ];

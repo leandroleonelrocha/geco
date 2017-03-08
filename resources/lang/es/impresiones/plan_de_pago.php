@@ -14,12 +14,12 @@ return [
  	'dia' => 'DIA',
  	'horario' => 'HORARIO',
  	'planconvenido' => 'PLAN DE PAGO CONVENIDO',
- 	'planconvenido' => 'ASESOR:',
+ 	'asesor' => 'ASESOR:',
  	'matricula' => 'MATRICULA:',
  	'cuota' => 'CUOTA:',
  	'firma' => 'Firma del alumno',
  	'observaciones' => 'OBSERVACIONES:',
  	'ob1' => 'Descuento de $50 abonando del 1 al 10 de cada mes.',
-	'ob2'='Inicio de clases sujeto a modificaciones. DIRECCION',
-
+	'ob2'=>'Inicio de clases sujeto a modificaciones. DIRECCION',
+	'siesmenor'=>' Si es menor, firma del padre o tutor',
 ];

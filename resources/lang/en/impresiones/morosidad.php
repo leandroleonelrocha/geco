@@ -18,4 +18,5 @@ return [
     'fechapago' => 'Payment date',
     'cuota' => 'Fee',
     'vencimiento' => 'Expiration',
+    'siesmenor' => ' If minor, signature of parent or guardian',
 ];
