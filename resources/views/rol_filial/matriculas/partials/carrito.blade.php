@@ -18,7 +18,7 @@
                               <thead>
                                 <tr>
                                   <th>#</th>
-                                  <th>@lang('impresiones/recibos.npago)/th>
+                                  <th>@lang('impresiones/recibos.npago)</th>
                                   <th>@lang('impresiones/recibo.recargo')</th>
                                   <th>@lang('impresiones/recibos.descuento')</th>
                                   <th>@lang('impresiones/recibos.monto')</th>
@@ -38,10 +38,10 @@
                                   <tr>
                                     <td>
                                     @if($pago['nro_pago'] == 0)
-                                    <a href="#">Matricula</a>
+                                    <a href="#">@lang('matricula.matricula)</a>
                                     
                                     @else
-                                    <a href="#">Numero de pago: {{$pago['nro_pago']}}</a>
+                                    <a href="#">@lang('matricula.numerodepago): {{$pago['nro_pago']}}</a>
                                     @endif
 
                                     </td>

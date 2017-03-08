@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-      <title>Matricula </title>
+      <title>@lang('impresiones/matricula.matricula')</title>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -285,12 +285,12 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <h2>DATOS PERSONALES</h2>
+            <h2>@lang('impresiones/matricula.datospersonales')</h2>
             <br>
             <div class="border p10">
-                <p>Sres. <b class="upper"> {{$matricula->Persona->fullname}}</b></p>
-                <p>Domicilio : <b> {{$matricula->Persona->domicilio}}</b></p>
-                <p>Teléfono : <b> @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </b></p>
+                <p>@lang('impresiones/matricula.sres') <b class="upper"> {{$matricula->Persona->fullname}}</b></p>
+                <p>@lang('impresiones/matricula.domicilio') <b> {{$matricula->Persona->domicilio}}</b></p>
+                <p>@lang('impresiones/matricula.telefonos') <b> @foreach($matricula->Persona->PersonaTelefono as $telefono) {{$telefono->telefono}} @endforeach() </b></p>
                 <p>Emails: <b>@foreach($matricula->Persona->PersonaMail as $mail) {{$mail->mail}} @endforeach()</b>
                  </p>
                   <p>{{$matricula->Persona->TipoDocumento->tipo_documento}} : <b> {{$matricula->Persona->nro_documento}}</b></p>
@@ -300,12 +300,12 @@
             
             <table class="table table-striped table-hover mt-10">
                 <tr>
-                    <th>MODULO</th>
-                    <th>GRUPO</th>
-                    <th>NOTA</th>
-                    <th>ACTA</th>
-                    <th>FECHA</th>
-                    <th>DOCENTE</th>
+                    <th>@lang('impresiones/matricula.modulo')</th>
+                    <th>@lang('impresiones/matricula.grupo')</th>
+                    <th>@lang('impresiones/matricula.nota')</th>
+                    <th>@lang('impresiones/matricula.acta')</th>
+                    <th>@lang('impresiones/matricula.fecha')</th>
+                    <th>@lang('impresiones/matricula.docente')</th>
                     
                  
                 </tr>
@@ -334,7 +334,7 @@
 
                 <div>
                  <p class="mt-20 text-center">.......................................................... </p>
-                    <p class="mt-20 text-center">Firma y sello</p>
+                    <p class="mt-20 text-center">@lang('impresiones/matricula.firmaysello')</p>
                 
                 </div>
             </div>

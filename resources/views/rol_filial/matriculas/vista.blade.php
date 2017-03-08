@@ -71,7 +71,7 @@
 			            </div>
 
 			            <div class="col-lg-12 col-xs-12">
-			     			  <a href="{{route('filial.matriculas_imprimir_plan_de_pago',$matricula->id)}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i>MATRICULA</a>
+			     			  <a href="{{route('filial.matriculas_imprimir_plan_de_pago',$matricula->id)}}" target="_blank" class="btn btn-default pull-right"><i class="fa fa-print"></i> @lang('matricula.matricula')</a>
 			           </div>
 
 						<div class="col-xs-12">
@@ -98,16 +98,3 @@
 	</div> <!-- Fin row -->
 @endsection
 
-@section('modal')
-@include('rol_filial.matriculas.partials.carrito')
-@endsection
-
-@section('js')
-<script type="text/javascript">
-	$('#ModalEdit').click(function(){
-
-	// elimino la session y recargo		
-   //location.reload();
-        });
-</script>
-@endsection

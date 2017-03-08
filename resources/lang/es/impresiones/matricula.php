@@ -18,4 +18,12 @@ return [
     'cantidadclases' => 'CANTIDAD DE CLASES',
     'cantidadclasesasistidas' => 'CANTIDAD DE CLASES ASISTIDAS',
     'promedioclases' => 'PROMEDIO DE CLASES',
+    'datospersonales' => 'DATOS PERSONALES:',
+    'sres' => 'Sres.',
+    'domicilio' => 'Domicilio:',
+    'localidad'=> 'Localidad:',
+    'telefonos' =>'Teléfonos:',
+    'firmaysello' =>'Firma y sello',
+ 
+
 ];
