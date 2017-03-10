@@ -278,7 +278,7 @@
     <div class="row">
         <div class="col-xs-12 mb-20">
             <p class="mt-20 ml-80">@lang('impresiones/morosidad.fechadesde') {{$datos['fecha_desde']}} - @lang('impresiones/morosidad.fechahasta') {{$datos['fecha_hasta']}}</p>
-            <h4 class="font21 text-center" style="margin-top:20px;">Listado de morosidad</h4>
+            <h4 class="font21 text-center" style="margin-top:20px;">@lang('impresiones/morosidad.listado')</h4>
             <p class="text-right">Buenos Aires, {!! date('d/m/Y',time()) !!} </p>
         </div>
     </div>
