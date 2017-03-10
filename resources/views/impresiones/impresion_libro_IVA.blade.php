@@ -160,10 +160,10 @@
     <thead>
       <tr>
         <th></th>
-        <th>@lang('impresiones/libro_iva.reciboa')</th>
-        <th>@lang('impresiones/libro_iva.recibob')</th>
-        <th>@lang('impresiones/libro_iva.reciboc')</th>
-        <th>@lang('impresiones/libro_iva.recibox')</th>
+        <th>Recibo A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>X</th>
 
        
       </tr>

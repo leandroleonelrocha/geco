@@ -36,9 +36,10 @@ class PagoRepo extends BaseRepo {
     public function allMorososEntreFechas($valor){
         $from        = helpersfuncionFecha($valor[0]);
         $to          = helpersfuncionFecha($valor[1]);
-        $fecha_hoy   = date("Y-m-d H:i:s");
+        $fecha_hoy   = date("Y-m-d");
         $filial_id   = $this->filial;   
-        return $this->model->where('vencimiento','>',$fecha_hoy)
+        return $this->model->where('vencimiento','<',$fecha_hoy)
+
                            ->where('terminado',0)
                            ->where('filial_id',$filial_id)
                            ->whereDate('created_at','>=',$from)
@@ -70,7 +71,7 @@ class PagoRepo extends BaseRepo {
                          //->join('recibo', 'recibo.pago_id', '=', 'recibo.id')
                          ->select(DB::raw('SUM(recibo.monto) as total, recibo_tipo.recibo_tipo as recibo'))
                          
-                         //->where('terminado',1)
+                         ->where('recibo.filial_id',$filial_id)
                          ->groupBy('recibo.recibo_tipo_id')
                          ->get();
                          
@@ -87,7 +88,7 @@ class PagoRepo extends BaseRepo {
                          //->join('recibo_tipo', 'recibo.recibo_tipo_id', '=', 'recibo_tipo.id')
                          //->join('recibo', 'recibo.pago_id', '=', 'recibo.id')
                          ->select(DB::raw('SUM(recibo.monto) as total'))
-                         //->where('terminado',1)
+                         ->where('recibo.filial_id',$filial_id)
                          //->groupBy('recibo.recibo_tipo_id')
                          ->get();
                          
@@ -122,9 +123,9 @@ class PagoRepo extends BaseRepo {
 
 
         $qry         = Recibo::join('pago', 'pago.id', '=', 'recibo.pago_id')
-       ->select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
+                         ->select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
                          ->join('recibo_tipo', 'recibo.recibo_tipo_id', '=', 'recibo_tipo.id')
-                         //->where('recibo.recibo_tipo_id',1)
+                         ->where('recibo.filial_id', $filial_id)
                          ->join('matricula', 'pago.matricula_id', '=', 'matricula.id')
                          ->join('grupo_matricula', 'matricula.id', '=','grupo_matricula.matricula_id')
                          ->join('grupo','grupo.id','=','grupo_matricula.grupo_id')

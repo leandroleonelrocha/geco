@@ -23,8 +23,8 @@
 				var body = $('#tabla_libro_iva').children('tbody');
 					
 					$.each(result, function(clave, valor){
-						console.log(valor);	
-						body.append(tr_iva(valor.fecha, 'A', valor.nombre, valor.importe));
+						console.log(valor.recibo);	
+						body.append(tr_iva(valor.fecha, valor.recibo, valor.nombre, valor.importe));
 					});
 			}}
 

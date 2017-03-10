@@ -37,7 +37,7 @@
 						<th class="text-center">@lang('impresiones/morosidad.cuota')</th>
 						<th class="text-center">@lang('impresiones/morosidad.fechapago')</th>
 						<th class="text-center">@lang('impresiones/morosidad.vencimiento')</th>
-						<th class="text-center">@lang('impresiones/morosidad.saldo')</th>
+						<th class="text-center">total</th>
 						<th class="text-center">@lang('impresiones/morosidad.telefono')</th>
 						<th class="text-center">Emails</th>
 
