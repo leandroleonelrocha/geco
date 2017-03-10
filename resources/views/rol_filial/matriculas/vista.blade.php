@@ -44,12 +44,16 @@
 			                    <div class="col-sm-4 border-right">
 			                      <div class="description-block">
 			                        <h5 class="description-header">@lang('matricula.estado')</h5>
-			                        <span class="description-text"><?php 
-											if ($matricula->terminado == 1) echo 'Terminado';
-											elseif ($matricula->cancelado == 1) echo 'Cancelado';
-											else echo 'Activo';
-											?></span>
+			                        <span class="description-text">
+										@if($matricula->terminado == 1)
+									 		@lang('matricula.terminado') 
 
+										@elseif($matricula->cancelado == 1) 
+										 		@lang('matricula.cancelado')
+								 
+											@else
+												@lang('matricula.activo')
+											@endif
 			                      </div><!-- /.description-block -->
 			                    </div><!-- /.col -->
 			                    <div class="col-sm-4">

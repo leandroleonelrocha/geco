@@ -45,11 +45,18 @@
 									 }
 									echo $abono.' / '.$pagos;
 								?></td>
-								<td class="text-center"><?php 
-									if($matricula->terminado == 1) echo 'Terminada';
-									elseif($matricula->cancelado == 1) echo 'Cancelada';
-									else echo 'Activa';
-								?></td>
+								<td class="text-center">
+								
+								@if($matricula->terminado == 1)
+									 @lang('matricula.terminado') 
+
+								@elseif($matricula->cancelado == 1) 
+										 	@lang('matricula.cancelado')
+								 
+										@else
+											@lang('matricula.activo')
+										@endif
+								</td>
 								<td>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</td>
 								<td class="text-center">
 								<a href="{{route('filial.matriculas_vista',$matricula->id)}}" title="@lang('lista.vistadetallada')"><i class="btn-xs btn-info glyphicon glyphicon-search"></i></a>
