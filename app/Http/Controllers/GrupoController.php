@@ -497,7 +497,16 @@ class GrupoController extends Controller
 	public function post_materias_carreras(Request $request){
 		$carrera_id = $request->get('carrera_id');
 		$tp 		= $request->get('tp');
+		// $tpA 		= $request->get('tpA');
 		$materias 	= $this->materiaRepo->findMateriasCarrera($carrera_id, $tp);
+		return response()->json($materias, 200);
+	}
+	
+	public function post_materias_carreras_ano(Request $request){
+		$carrera_id = $request->get('carrera_id');
+		$tp 		= $request->get('tp');
+		$año 		= $request->get('a');
+		$materias 	= $this->materiaRepo->findMateriasCarreraAño($carrera_id, $tp, $año);
 		return response()->json($materias, 200);
 	}
 

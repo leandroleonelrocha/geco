@@ -43,6 +43,7 @@ $(document).ready(function(){
         var cant = $('#cantidadPagos').val(),
             j = 1;
    		// Clonación - Búsqueda de cada campo
+        // Progresión -- Plan de Pagos ~~ Matrículas
         for (var i = 0; i < cant; i++) {
             var vencimiento = new Date($('.pagos:last').find("input[name='vencimiento[]']").val()),
                 recargo     = new Date($('.pagos:last').find("input[name='fecha_recargo[]']").val()),
@@ -50,17 +51,21 @@ $(document).ready(function(){
 
             // Vencimiento
             // +2 = +1(meses del 0-11) +1(mes proximo)
-            vencimiento.setMonth(vencimiento.getMonth()+2);
+            vencimiento.setMonth(vencimiento.getMonth()+1);
             vencimiento.setDate(vencimiento.getDate()+1);
             d  = ("0" + vencimiento.getDate()).slice(-2);
             m  = ("0" + vencimiento.getMonth()).slice(-2);
+            m++;
+            m  = ("0" + m).slice(-2);
             fv = vencimiento.getFullYear()+'-'+m+'-'+d;
 
             // Recargo
-            recargo.setMonth(recargo.getMonth()+2);
+            recargo.setMonth(recargo.getMonth()+1);
             recargo.setDate(recargo.getDate()+1);
             d  = ("0" + recargo.getDate()).slice(-2);
             m  = ("0" + recargo.getMonth()).slice(-2);
+            m++;
+            m  = ("0" + m).slice(-2);
             fr = recargo.getFullYear()+'-'+m+'-'+d;
             j++;
             
@@ -84,8 +89,6 @@ $(document).ready(function(){
         if( $('.pagos').length > 1)
             $('.pagos:last').remove();
     });
-
-    // Progresión -- Plan de Pagos ~~ Matrículas
 
     // Bloquear Grupos según la carrera/curso elegido -- Datos de la Matrícula ~~ Alta Matrículas
     $("#cursos_carreras").change(function(){
