@@ -308,7 +308,7 @@
                     <td>{{$m['persona']}}</td>
                     <td>{{$m['nro_pago']}}</td>
                     <td>{{$m['vencimiento']}}</td>
-                  <td>{{$m['saldo']}}</td>
+                  <td>${{$m['saldo']}}.00</td>
                   
                     <td>
                     @foreach($m['persona_email'] as $e)

@@ -117,7 +117,7 @@
                       </a>
                       <ul class="treeview-menu">
                         <li class="active"><a href="{{route('estadisticas.caja_diaria')}}"><i class="fa fa-circle-o"></i> Caja diaria</a></li>
-                        <li class="active"><a href="{{route('filial.vista_libro_iva')}}"><i class="fa fa-circle-o"></i> IVA</a></li>
+                        <li class="active"><a href="{{route('filial.vista_libro_iva')}}"><i class="fa fa-circle-o"></i> Morosidad - IVA</a></li>
 
                       </ul>
                     </li>

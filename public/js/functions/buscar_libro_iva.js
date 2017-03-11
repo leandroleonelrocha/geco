@@ -14,7 +14,9 @@
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
 			success: function(result){
-				console.log(result);	
+				
+				if(result.length > 0)
+				{	
 				$('#tabla_libro_iva').children('tbody').empty();
 				
 				link.find('span').remove();
@@ -26,9 +28,15 @@
 						console.log(valor.recibo);	
 						body.append(tr_iva(valor.fecha, valor.recibo, valor.nombre, valor.importe));
 					});
-			}}
+				}else{
+					link.find('span').remove();
+					link.append('<span class="glyphicon glyphicon-search "></span>');
+					alert('No se han encontrado resultados');
+				}
 
-		);
+			}
+
+		});
 
 	});	
 

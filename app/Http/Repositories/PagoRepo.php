@@ -72,6 +72,8 @@ class PagoRepo extends BaseRepo {
                          ->select(DB::raw('SUM(recibo.monto) as total, recibo_tipo.recibo_tipo as recibo'))
                          
                          ->where('recibo.filial_id',$filial_id)
+                         ->whereDate('recibo.created_at','>=',$from)
+                         ->whereDate('recibo.created_at','<=',$to)
                          ->groupBy('recibo.recibo_tipo_id')
                          ->get();
                          
@@ -89,15 +91,17 @@ class PagoRepo extends BaseRepo {
                          //->join('recibo', 'recibo.pago_id', '=', 'recibo.id')
                          ->select(DB::raw('SUM(recibo.monto) as total'))
                          ->where('recibo.filial_id',$filial_id)
+                         ->whereDate('recibo.created_at','>=',$from)
+                         ->whereDate('recibo.created_at','<=',$to)
                          //->groupBy('recibo.recibo_tipo_id')
                          ->get();
                          
         return $qry;
     }
 
-    public function totalPorGrupo(){
-       // $from        = helpersfuncionFecha($valor[0]);
-        //$to          = helpersfuncionFecha($valor[1]);
+    public function totalPorGrupo($valor){
+        $from        = helpersfuncionFecha($valor[0]);
+        $to          = helpersfuncionFecha($valor[1]);
         $filial_id   = $this->filial; 
         /*
         
@@ -123,12 +127,14 @@ class PagoRepo extends BaseRepo {
 
 
         $qry         = Recibo::join('pago', 'pago.id', '=', 'recibo.pago_id')
-                         ->select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total'))
+                         ->select(DB::raw('recibo_tipo.recibo_tipo,grupo.descripcion as grupo,SUM(recibo.monto) as total,grupo.id'))
                          ->join('recibo_tipo', 'recibo.recibo_tipo_id', '=', 'recibo_tipo.id')
                          ->where('recibo.filial_id', $filial_id)
                          ->join('matricula', 'pago.matricula_id', '=', 'matricula.id')
                          ->join('grupo_matricula', 'matricula.id', '=','grupo_matricula.matricula_id')
                          ->join('grupo','grupo.id','=','grupo_matricula.grupo_id')
+                         ->whereDate('recibo.created_at','>=',$from)
+                         ->whereDate('recibo.created_at','<=',$to)
                          ->groupBy('grupo_matricula.grupo_id','recibo_tipo_id')
                          ->get();
                         
@@ -138,10 +144,11 @@ class PagoRepo extends BaseRepo {
     
     public function cajaDiaria(){
         $hoy         = helpersfuncionFecha(date("Y/m/d"));
+      
         $filial_id   = $this->filial; 
 
         $qry         = Recibo::where('filial_id',$filial_id)
-                            ->whereDate('updated_at','=',$hoy)
+                            ->whereDate('created_at','=',$hoy)
                             ->get();
                            
         return $qry;

@@ -241,7 +241,7 @@ class PagoController extends Controller
         $total_general  =  $this->pagoRepo->totalEntreFechas($fechas);
        
         //FALTA SUMA GRUPO
-        $suma_grupo     = $this->pagoRepo->totalPorGrupo();
+        $suma_grupo     = $this->pagoRepo->totalPorGrupo($fechas);
         //dd($suma_grupo);
 
         $data    =  [];   
@@ -250,7 +250,7 @@ class PagoController extends Controller
         foreach ($iva as $key => $value) {
             
 
-            $d['fecha']        = $value->created_at;
+            $d['fecha']        = helpersgetFecha($value->created_at);
             $d['recibo']       = $value->ReciboTipo->recibo_tipo;
             $d['importe']      = $value->monto;
             $d['nombre']       = $value->Pago->Matricula->Persona->fullname;
@@ -260,8 +260,8 @@ class PagoController extends Controller
 
        
 
-        $datos['fecha_desde'] = $fechas[0];
-        $datos['fecha_hasta'] = $fechas[1];
+        $datos['fecha_desde'] = helpersgetFecha($fechas[0]);
+        $datos['fecha_hasta'] = helpersgetFecha($fechas[1]);
 
         Session::put('libro_iva', $data);
         Session::put('datos', $datos);
