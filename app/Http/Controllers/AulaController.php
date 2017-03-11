@@ -13,15 +13,30 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests\CrearNuevaAulaRequest;
 use App\Http\Requests\EditarAulaRequest;
+use App\Http\Requests\CrearNuevaCarreraRequest;
+use App\Http\Requests\EditarCarreraRequest;
+use App\Http\Repositories\FilialRepo;
+use App\Http\Repositories\CursoRepo;
+use App\Http\Repositories\DirectorRepo;
+use App\Http\Repositories\CarreraRepo;
+use App\Http\Repositories\PaisRepo;
+use App\Http\Repositories\MateriaRepo;
+
+
 
 class AulaController extends Controller
 {
 	protected $aulaRepo;
 
-	public function __construct(AulaRepo $aulaRepo,GrupoRepo $grupoRepo)
+	public function __construct(MateriaRepo $materiaRepo, CursoRepo $cursoRepo, AulaRepo $aulaRepo,GrupoRepo $grupoRepo,CarreraRepo $carreraRepo, PaisRepo $paisRepo, FilialRepo $filialRepo)
 	{
-		$this->aulaRepo = $aulaRepo;
-		$this->grupoRepo = $grupoRepo;
+		$this->aulaRepo 	= $aulaRepo;
+		$this->grupoRepo 	= $grupoRepo;
+		$this->carreraRepo  = $carreraRepo;
+		$this->paisRepo 	= $paisRepo;
+		$this->filialRepo 	= $filialRepo;
+		$this->cursoRepo 	= $cursoRepo;
+		$this->materiaRepo 	= $materiaRepo;
 	}
 
 	public function lista(){
@@ -30,9 +45,20 @@ class AulaController extends Controller
 
 	public function nuevo(){
 
+		$filial=$this->filialRepo->obtenerFilialPais();
+		foreach ($filial as $f) $pais_id=$f->pais_id;
+		$pais=$this->paisRepo->obtenerLenguaje($pais_id);
+		$cadena 	= $this->filialRepo->filialCadena();
+		
+		$carreras=$this->carreraRepo->allCarreras($pais->lenguaje,$cadena->cadena_id);
+
 		$grupos=$this->grupoRepo->allEnable();
 		$aulas= $this->aulaRepo->allAulas();
-		return view('rol_filial.grupos.asignacionAula.nuevo',compact('grupos','aulas'));	  
+		$cursos = $this->cursoRepo->allCursos($pais->lenguaje,$cadena->cadena_id);
+
+		$materia=$this->materiaRepo->allMaterias($cadena->cadena_id);
+
+		return view('rol_filial.grupos.asignacionAula.nuevo',compact('grupos','aulas','carreras','cursos','materia'));	  
 	}
 
 

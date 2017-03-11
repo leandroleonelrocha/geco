@@ -1,4 +1,4 @@
-<div class="col-xs-6 register-box-body">        
+<div class="col-xs-12 register-box-body">        
 
   {!! Form::open(['route'=>'contrasena.postNueva', 'method' => 'post']) !!}
 

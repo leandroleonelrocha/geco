@@ -13,10 +13,12 @@
 {!! Form::close() !!}
 
 <table id="example1" class="table table-bordered table-striped">
-    <thead> <tr>
+    <thead> 
+        <tr>
         <th>@lang('grupo.listaaulasasignadas')</th>
-    <th class="no-print"></th>
-    </tr> </thead>
+        <th class="no-print"></th>
+        </tr> 
+    </thead>
     <tbody>
         @foreach($aulas as $a)
             <tr role="row" class="odd">

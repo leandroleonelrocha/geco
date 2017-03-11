@@ -91,6 +91,7 @@
 	                </div><!-- /.tab-pane -->
             	</div><!-- tab-content -->
         	</div><!-- nav-tabs-custom --> 
+        	
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
 @endsection

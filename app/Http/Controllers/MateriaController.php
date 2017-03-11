@@ -105,7 +105,7 @@ class MateriaController extends Controller
 			}
 		}
     	// $this->materiaCarreraCursoRepo->create($m);
-		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
+		return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok', 'Materia creada correctamente');
 	}
 
  	public function editar($id){
@@ -170,9 +170,9 @@ class MateriaController extends Controller
 					$this->materiaCarreraCursoRepo->create($m);
 				}
 			}
-        	return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');}
+        	return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok','La materia ha sido modificada con éxito');}
 		else
-		    return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');	
+		    return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_error','La materia no ha podido ser modificada.');	
     }
 
     public function borrar($id){
