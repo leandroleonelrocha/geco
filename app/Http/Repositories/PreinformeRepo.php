@@ -2,6 +2,11 @@
 
 namespace App\Http\Repositories;
 use App\Entities\Preinforme;
+use App\Entities\Matricula;
+use App\Entities\Filial;
+use App\Entities\Asesor;
+use App\Entities\Carrera;
+use App\Entities\Curso;
 use App\Http\Repositories\BaseRepo;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -35,7 +40,7 @@ class PreinformeRepo extends BaseRepo {
                         
         return $qry;   
     }
-
+    /*
     public function estadisticasAsesor(){
         $dia_inicio_mes = first_day_month();
         $dia_fin_mes    = last_day_month();
@@ -48,6 +53,29 @@ class PreinformeRepo extends BaseRepo {
                          ->get();
                         
         return $qry;   
+    }
+    */
+
+    public function estadisticasAsesor(){
+        $dia_inicio_mes = first_day_month();
+        $dia_fin_mes    = last_day_month();
+
+        $qry  = Asesor::where('asesor.filial_id',$this->filial)
+                        //->join('asesor','asesor.id','=','matricula.asesor_id')
+                        //->whereDate('matricula.created_at','>=', $dia_inicio_mes)
+                        //->whereDate('matricula.created_at','<=', $dia_fin_mes)  
+                        //->select(DB::raw('COUNT(asesor_id) as total,asesor.nombres as nombre'))
+                        //->groupBy('matricula.asesor_id')
+                        ->get();
+        /*
+        foreach ($qry as $value) {
+             # code...
+            $matricula  = $value->Matricula()->whereDate('created_at', '>=', $dia_inicio_mes)->whereDate('created_at','<=', $dia_fin_mes)->get();
+            $preinforme = $value->Preinforme()->whereDate('created_at', '>=', $dia_inicio_mes)->whereDate('created_at','<=', $dia_fin_mes)->get(); 
+         }
+        */
+
+         return $qry;
     }
 
      public function estadisticasMedio(){
@@ -68,16 +96,19 @@ class PreinformeRepo extends BaseRepo {
         $dia_inicio_mes = first_day_month();
         $dia_fin_mes    = last_day_month();
        
-
-        $qry         = Preinforme::join('persona_interes', 'persona_interes.id', '=', 'preinforme.id')
+        /*
+        $qry         =  Preinforme::where('preinforme.filial_id',$this->filial)
+                        ->join('persona_interes','persona_interes.preinforme_id','=','preinforme.id')
                         ->join('curso', 'persona_interes.curso_id', '=', 'curso.id')
                         ->whereDate('persona_interes.created_at','>=', $dia_inicio_mes)
                         ->whereDate('persona_interes.created_at','<=', $dia_fin_mes)  
                         ->select(DB::raw('COUNT(curso_id) as total,curso.nombre,persona_interes.persona_id,persona_interes.curso_id'))
                         ->where('persona_interes.curso_id','<>','null')
                         ->groupBy('persona_interes.curso_id')
-                        ->where('preinforme.filial_id',$this->filial)
                         ->get();
+        */
+        $filial = Filial::find($this->filial);
+        $qry = Curso::where('cadena_id', $filial->Cadena->id)->where('lenguaje',$this->lenguaje)->get();
                     
         return $qry;   
     }
@@ -85,18 +116,24 @@ class PreinformeRepo extends BaseRepo {
      public function estadisticasCarrera(){
         $dia_inicio_mes = first_day_month();
         $dia_fin_mes    = last_day_month();
-
-        $qry         = Preinforme::join('persona_interes', 'persona_interes.id', '=', 'preinforme.id')
+        /*
+        $qry         = Preinforme::where('preinforme.filial_id', $this->filial)
+                        ->join('persona_interes','persona_interes.preinforme_id','=','preinforme.id')
                         ->join('carrera', 'persona_interes.carrera_id', '=', 'carrera.id')
-                        ->whereDate('persona_interes.created_at','>=', $dia_inicio_mes)
-                        ->whereDate('persona_interes.created_at','<=', $dia_fin_mes)  
                         ->select(DB::raw('COUNT(carrera_id) as total,carrera.nombre,persona_interes.persona_id,persona_interes.carrera_id'))
                         ->where('persona_interes.carrera_id','<>','null')
+                        ->whereDate('persona_interes.created_at','>=', $dia_inicio_mes)
+                        ->whereDate('persona_interes.created_at','<=', $dia_fin_mes)
                         ->groupBy('persona_interes.carrera_id')
-                        ->where('preinforme.filial_id',$this->filial)
                         ->get();
                         
-        return $qry;   
-    }
+        return $qry;
+        */
+        $filial = Filial::find($this->filial);
+        $qry = Carrera::where('cadena_id', $filial->Cadena->id)->where('lenguaje',$this->lenguaje)->get();
+        
+        return $qry;
+
+       }
 
 }

@@ -9,7 +9,7 @@ class Curso extends Entity {
     protected $fillable   = ['cadena_id', 'nombre','duracion', 'descripcion','taller', 'lenguaje'];
 
 	public function PersonaInteres(){
-        return $this->belongsTo(PersonaInteres::getClass());
+        return $this->hasMany(PersonaInteres::getClass());
     }
 
     public function Matricula(){

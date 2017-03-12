@@ -24,6 +24,10 @@ class Asesor extends Entity
         return $this->hasMany(Preinforme::getClass());
     }
 
+    public function Matricula(){
+        return $this->hasMany(Matricula::getClass());
+    }
+
     public function TipoDocumento(){
         return $this->belongsTo(TipoDocumento::getClass());
     }
