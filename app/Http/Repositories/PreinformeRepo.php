@@ -30,15 +30,24 @@ class PreinformeRepo extends BaseRepo {
     public function estadisticasMes(){
         $dia_inicio_mes = first_day_month();
         $dia_fin_mes    = last_day_month();
-
-        $qry         = Preinforme::whereDate('created_at','>=', $dia_inicio_mes)
-                          ->whereDate('created_at','<=', $dia_fin_mes)  
-       ->select(DB::raw('COUNT(id) as total,DATE_FORMAT(created_at,"%d/%m/%Y") as fecha,persona_id'))
-                         ->groupBy('created_at')
+        /*
+        $qry         = Preinforme::leftJoin('persona', 'persona.id', '=', 'preinforme.persona_id')
+                         //->whereDate('created_at','>=', $dia_inicio_mes)
+                         //->whereDate('created_at','<=', $dia_fin_mes)  
+                         //->select(DB::raw('COUNT(id) as total,DATE_FORMAT(created_at,"%d/%m/%Y") as fecha,persona_id'))
+                         ->groupBy('persona.created_at')
                          ->where('filial_id',$this->filial)
                          ->get();
-                        
-        return $qry;   
+                 
+      */
+       $fechas =[];                    
+
+        for($i = $dia_inicio_mes; $i <= $dia_fin_mes; $i = date("Y-m-d", strtotime($i ."+ 1 days"))){
+            
+            array_push($fechas, $i);
+        }
+       return $fechas;
+
     }
     /*
     public function estadisticasAsesor(){

@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Controllers;
 use App\Http\Repositories\PagoRepo;
+use App\Http\Repositories\MatriculaRepo;
 use App\Http\Repositories\PersonaRepo;
 use App\Http\Repositories\PreinformeRepo;
 use App\Http\Repositories\ExamenRepo;
@@ -17,7 +18,8 @@ class EstadisticaController extends Controller
     protected  $totalPersonas;
     protected  $totalAsesores;
     protected  $data;
-	public function __construct(FilialRepo $filialRepo, PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo,AsesorRepo $asesorRepo)
+    protected  $matriculaRepo;
+	public function __construct(MatriculaRepo $matriculaRepo,FilialRepo $filialRepo, PagoRepo $pagoRepo, PersonaRepo $personaRepo, PreinformeRepo $preinformeRepo, ExamenRepo $examenRepo,AsesorRepo $asesorRepo)
 	{
 		$this->pagoRepo        			= $pagoRepo;
 		$this->personaRepo      		= $personaRepo;
@@ -25,6 +27,7 @@ class EstadisticaController extends Controller
 		$this->examenRepo      			= $examenRepo;
 		$this->asesorRepo     			= $asesorRepo;
 		$this->filialRepo 				= $filialRepo;
+		$this->matriculaRepo 			= $matriculaRepo;
 		$this->filial 					= session('usuario')['entidad_id'];
        // $this->data['totalPersonas']    = $this->total_personas();
        // $this->data['totalAsesores']    = $this->total_asesores();
@@ -56,18 +59,19 @@ class EstadisticaController extends Controller
 	}
 
 	public function preinforme(){
-		$preinformes 	 = $this->preinformeRepo->estadisticasMes();
+		$fechas 		 = $this->preinformeRepo->estadisticasMes();
 		$asesores   	 = $this->preinformeRepo->estadisticasAsesor();
 		$medios     	 = $this->preinformeRepo->estadisticasMedio();
 		$cursos     	 = $this->preinformeRepo->estadisticasCurso();
 		$carreras   	 = $this->preinformeRepo->estadisticasCarrera();
-		
+		$matriculas		 = $this->matriculaRepo->allEneable();
+		$preinformes	 = $this->preinformeRepo->allFilial();
 		$filial     	 = $this->filialRepo->find($this->filial);
 		$dia_inicio_mes  = helpersgetFecha(first_day_month());
         $dia_fin_mes     = helpersgetFecha(last_day_month());
 
 
-		return view('rol_filial.estadisticas.preinforme',compact('preinformes','asesores','medios','cursos','carreras','filial','dia_inicio_mes','dia_fin_mes'));
+		return view('rol_filial.estadisticas.preinforme',compact('preinformes','asesores','medios','cursos','carreras','filial','dia_inicio_mes','dia_fin_mes','matriculas','fechas'));
 	}
 
 	public function count_personas(){
