@@ -41,7 +41,7 @@ $(document).ready(function(){
    	// Duplicar los campos de Pagos -- Plan de Pagos ~~ Matrículas
    	$('#mas').click(function(){
         var cant = $('#cantidadPagos').val(),
-            j = 1;
+            j = $('.nro_pago:last').val();
    		// Clonación - Búsqueda de cada campo
         // Progresión -- Plan de Pagos ~~ Matrículas
         for (var i = 0; i < cant; i++) {
@@ -71,6 +71,7 @@ $(document).ready(function(){
             
             $('.pagos:last').clone().appendTo('#planDePagos');
             $('.pagos:last').find("input[name='nro_pago[]']").val(j);
+            $('.pagos:last').find(".nro").html(j);
             $('.pagos:last').find("input[name='vencimiento[]']").val(fv);
             $('.pagos:last').find("input[name='fecha_recargo[]']").val(fr);
         }
