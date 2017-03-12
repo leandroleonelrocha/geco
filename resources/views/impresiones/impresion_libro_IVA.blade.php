@@ -126,7 +126,7 @@
     	<td>{{$m['fecha']}}</td>
     	<td>{{$m['recibo']}}</td>
     	<td>{{$m['nombre']}}</td>
-    	<td>$ {{$m['importe']}}</td>
+    	<td>${{$m['importe']}}.00</td>
     	
     	</tr>
   	@endforeach
@@ -146,24 +146,26 @@
    @foreach($suma_recibo as $recibo)
     		<tr>
     		<td>{{$recibo->recibo}}</td>
-        	<td>{{$recibo->total}}</td>
-        	</tr>
+        <td>${{$recibo->total}}.00</td>
+        </tr>
    	@endforeach
   	</tbody>
 
 </table>
 
-<p>@lang('impresiones/libro_iva.totalgeneral') {{$total_general[0]->total}}</p>
+<p>@lang('impresiones/libro_iva.totalgeneral') $ {{$total_general[0]->total}} .00</p>
 <hr>
 
 <table>
     <thead>
       <tr>
         <th></th>
-        <th>@lang('impresiones/libro_iva.reciboa')</th>
-        <th>@lang('impresiones/libro_iva.recibob')</th>
-        <th>@lang('impresiones/libro_iva.reciboc')</th>
-        <th>@lang('impresiones/libro_iva.recibox')</th>
+        <th>A</th>
+        <th>B</th>
+        <th>C</th>
+        <th>R</th>
+        <th>X</th>
+        <th>E</th>
 
        
       </tr>
@@ -171,13 +173,51 @@
     <tbody>
 
    @foreach($suma_grupo as $grupo)
-        
-        <tr>
-          <td>{{$grupo->grupo}}</td>
-          <td>{{$grupo->total}}</td>
-           <td>{{$grupo->recibo_tipo}}</td>
           
+        
+
+        
+          <tr>
+            <td> {{$grupo->grupo}} </td>
+             @if($grupo->recibo_tipo == 'A')
+             <td>${{$grupo->total}}.00 </td>
+             @endif 
+
+             @if($grupo->recibo_tipo == 'B')
+             <td>  </td>
+             <td>${{$grupo->total}}.00</td>
+             @endif
+
+              @if($grupo->recibo_tipo == 'C')
+             <td>  </td>
+             <td>  </td>
+             <td>${{$grupo->total}}.00</td>
+             @endif
+
+             @if($grupo->recibo_tipo == 'R')
+             <td>  </td>
+             <td>  </td>
+             <td>  </td>
+             <td>${{$grupo->total}}.00</td>
+             @endif
+             
+             @if($grupo->recibo_tipo == 'X')
+             <td>  </td>
+             <td>  </td>
+             <td>  </td>
+             <td>  </td>
+             <td>${{$grupo->total}}.00</td>
+             @endif
+
+             @if($grupo->recibo_tipo == 'E')
+             <td>  </td>
+             <td>  </td>
+             <td>  </td>
+             <td>  </td>
+             <td>${{$grupo->total}}.00</td>
+             @endif
           </tr>
+      
     @endforeach
     </tbody>
 

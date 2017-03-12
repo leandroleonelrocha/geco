@@ -10,10 +10,14 @@ return [
     'matriculacompleta' => 'Inscrição Completo',
     'recargo' => 'Sobretaxa',
     'descuento' => 'Desconto',
-    'numerodepago' => 'Número de pagamento:',
+    'numerodepago' => 'Taxa:',
     'matricula' => 'Inscrição',
     'son' => 'Este é',
     'pesos' => 'pesos',
     'total' => 'total',
     'cantidaddepagos' => 'Montante dos pagamentos:',
+
+    'carrito'=> 'Pagamento carrio',
+    'confirmar'=> 'Confirmar',
+    'cerrar'=> 'Perto',
 ];

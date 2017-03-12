@@ -14,10 +14,19 @@
 								<td>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</td>
 								<td>{{$matricula->Persona->apellidos}} {{$matricula->Persona->nombres}}</td>
 								<td>
-									<?php if($matricula->terminado == 0) echo 'No'; else echo 'Si';?>
+									<?php if($matricula->terminado == 0) { ?>
+										<span> @lang('matricula.no') </span>
+									<?php }else{ ?>
+										<span> @lang('matricula.si') </span>
+									<?php } ?>
 								</td>
+
 								<td>
-									<?php if($matricula->cancelado == 0) echo 'No'; else echo 'Si';?>
+									<?php if($matricula->cancelado == 0) ?>
+										<span> @lang('matricula.no') </span>
+									<?php }else{ ?>
+										<span> @lang('matricula.si') </span>
+									<?php } ?>
 								</td>
 								<td class="text-center">
 

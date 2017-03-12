@@ -14,6 +14,7 @@ use App\Http\Repositories\CursoRepo;
 use App\Http\Repositories\DirectorRepo;
 use App\Http\Repositories\CarreraRepo;
 use App\Http\Repositories\MateriaRepo;
+use App\Http\Repositories\MateriaCarreraCursoRepo;
 use App\Http\Repositories\PaisRepo;
 
 
@@ -21,13 +22,14 @@ class MateriaController extends Controller
 {
 	protected $materiaRepo;
 
-	public function __construct(MateriaRepo $materiaRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, FilialRepo $filialRepo, PaisRepo $paisRepo)
+	public function __construct(MateriaRepo $materiaRepo, CarreraRepo $carreraRepo, CursoRepo $cursoRepo, FilialRepo $filialRepo, PaisRepo $paisRepo, MateriaCarreraCursoRepo $materiaCarreraCursoRepo)
 	{
 		$this->materiaRepo 	= $materiaRepo;
 		$this->carreraRepo 	= $carreraRepo;
 		$this->cursoRepo 	= $cursoRepo;
 		$this->filialRepo 	= $filialRepo;
 		$this->paisRepo 	= $paisRepo;
+		$this->materiaCarreraCursoRepo 	= $materiaCarreraCursoRepo;
 	}
 
 	public function lista(){
@@ -44,8 +46,10 @@ class MateriaController extends Controller
 		
 		$pais 		= $this->paisRepo->obtenerLenguaje($pais_id);
 		$cadena 	= $this->filialRepo->filialCadena();
-		$carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
-        $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+		// $carreras   = $this->carreraRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+  //       $cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
+        $carreras   = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
+        $cursos     = $this->cursoRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
 		return view('rol_filial.materias.nuevo', compact('carreras', 'cursos'));	
 	}
 
@@ -54,13 +58,8 @@ class MateriaController extends Controller
 		$materia = $request->all();
 		$cadena 	= $this->filialRepo->filialCadena();
 		$materia['cadena_id'] =$cadena->cadena_id;
-		$carrearas_cursos = explode(';',$request->carreras_cursos);
-        
-        if ($carrearas_cursos[0] == 'carrera')
-            $materia['carrera_id']    =   $carrearas_cursos[1];
-        elseif ($carrearas_cursos[0] == 'curso')
-            $materia['curso_id']      =   $carrearas_cursos[1];
 
+        
 		if (isset($materia["teorica_practica"])) {
 			if ($materia["teorica_practica"] == 1){
 				$materia["practica"] = true;
@@ -75,9 +74,38 @@ class MateriaController extends Controller
 			$materia["practica"] = true;
 			$materia["teorica"]  = true;
 		}
-
 		$this->materiaRepo->create($materia);
-		return redirect()->route('filial.materias')->with('msg_ok', 'Materia creada correctamente');
+		$data=$this->materiaRepo->all()->last();
+
+		// $carrearas_cursos = explode(';',$request->carreras_cursos);
+		
+		// if ($carrearas_cursos[0] == 'carrera'){
+		// 	$m['materia_id'] 	=	$data['id'];
+  //           $m['carrera_id']    =   $carrearas_cursos[1];
+		// }
+  //       elseif ($carrearas_cursos[0] == 'curso'){
+		// 	$m['materia_id'] 	=	$data['id'];
+  //           $m['curso_id']      =   $carrearas_cursos[1];
+  //       }
+		if (isset($materia['curso'])) {
+
+			for ($i=0; $i < count($materia['curso']); $i++) {
+				$m['materia_id'] = $data['id'];
+				$m['curso_id'] = $materia['curso'][$i];
+				$m['carrera_id'] = null;
+				$this->materiaCarreraCursoRepo->create($m);
+			}
+		}
+		if (isset($materia['carrera'])) {
+			for ($i=0; $i < count($materia['carrera']); $i++) {
+				$m['materia_id'] = $data['id'];
+				$m['carrera_id'] = $materia['carrera'][$i];
+				$m['curso_id'] = null;
+				$this->materiaCarreraCursoRepo->create($m);
+			}
+		}
+    	// $this->materiaCarreraCursoRepo->create($m);
+		return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok', 'Materia creada correctamente');
 	}
 
  	public function editar($id){
@@ -91,22 +119,23 @@ class MateriaController extends Controller
       	$cursos     = $this->cursoRepo->allLenguajeCadenaLista($pais->lenguaje,$cadena->cadena_id);
 
 		$materia = $this->materiaRepo->find($id);
-		return view('rol_filial.materias.editar',compact('materia','carreras','cursos'));	
+		$materiaCarreraCurso=$this->materiaCarreraCursoRepo->findMateriaCarreraCurso($materia->id);
+		return view('rol_filial.materias.editar',compact('materia','carreras','cursos','materiaCarreraCurso'));	
     }
 
     public function editar_post(EditarMateriaRequest $request){
 		$data = $request->all();
 
-		$carrearas_cursos = explode(';',$request->carreras_cursos);
+		// $carrearas_cursos = explode(';',$request->carreras_cursos);
         
-        if ($carrearas_cursos[0] == 'carrera'){
-            $data['carrera_id']    =   $carrearas_cursos[1];
-        	$data['curso_id']=NULL;
-        }
-        elseif ($carrearas_cursos[0] == 'curso'){
-            $data['curso_id']      =   $carrearas_cursos[1];
-        	$data['carrera_id'] =NULL;
-        }
+  //       if ($carrearas_cursos[0] == 'carrera'){
+  //           $m['carrera_id']    =   $carrearas_cursos[1];
+  //       	$m['curso_id']=NULL;
+  //       }
+  //       elseif ($carrearas_cursos[0] == 'curso'){
+  //           $m['curso_id']      =   $carrearas_cursos[1];
+  //       	$m['carrera_id'] =NULL;
+  //       }
 
 		if (isset($data["teorica_practica"])) {
 			if ($data["teorica_practica"] == 1){
@@ -119,12 +148,31 @@ class MateriaController extends Controller
 			}
 		}
 		$model = $this->materiaRepo->find($data['id']);
+		$modelm=$this->materiaCarreraCursoRepo->findMateriaCarreraCurso($data['id']);
+		foreach ($modelm as $mm) { $mm->delete(); }
+		
+		if($this->materiaRepo->edit($model,$data))	{
 
-		if($this->materiaRepo->edit($model,$data))	
+			if (isset($data['curso'])) {
 
-        	return redirect()->route('filial.materias')->with('msg_ok','La materia ha sido modificada con éxito');
+				for ($i=0; $i < count($data['curso']); $i++) {
+					$m['materia_id'] = $data['id'];
+					$m['curso_id'] = $data['curso'][$i];
+					$m['carrera_id'] = null;
+					$this->materiaCarreraCursoRepo->create($m);
+				}
+			}
+			if (isset($data['carrera'])) {
+				for ($i=0; $i < count($data['carrera']); $i++) {
+					$m['materia_id'] = $data['id'];
+					$m['carrera_id'] = $data['carrera'][$i];
+					$m['curso_id'] = null;
+					$this->materiaCarreraCursoRepo->create($m);
+				}
+			}
+        	return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok','La materia ha sido modificada con éxito');}
 		else
-		    return redirect()->route('filial.materias')->with('msg_error','La materia no ha podido ser modificada.');	
+		    return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_error','La materia no ha podido ser modificada.');	
     }
 
     public function borrar($id){

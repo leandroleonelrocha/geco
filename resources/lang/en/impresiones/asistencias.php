@@ -22,4 +22,5 @@ return [
   	'horariohasta' => 'SCHEDULE UP TO:',
     'materia' => 'SUBJECT:',
   	'horarioaula' => 'CLASSROOM SCHEDULE:',
+    'filial' => 'SUBSIDIARY:',
 ];

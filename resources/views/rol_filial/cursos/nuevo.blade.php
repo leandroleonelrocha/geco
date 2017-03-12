@@ -19,13 +19,14 @@
                                 <label>@lang('curso.duracion')</label>
                                 {!! Form::text('duracion',null,array('class'=>'form-control')) !!}
                             </div>
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
                                 <label>@lang('curso.descripcion')</label>
                                 {!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x3')) !!}
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label>@lang('curso.taller') {!! Form::checkbox('taller','1',null, array('class'=>'flat-red'))!!}</label>
+                                <label>@lang('curso.taller')</label>
+                                {!! Form::checkbox('taller','1',null, array('class'=>'flat-red form-control'))!!}
                             </div>
 
                             <div class="box-footer col-xs-12">

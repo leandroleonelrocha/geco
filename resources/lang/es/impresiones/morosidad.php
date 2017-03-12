@@ -10,13 +10,14 @@ return [
     'grupo' => 'Grupo',
     'persona' => 'Persona',
     'npago' => 'Nro Pago',
-    'fecha' => 'Fecha',
-    'saldo' => 'Saldo',
+    'fecha' => 'Vencimiento',
+    'saldo' => 'Total',
     'email' => 'Emails',
     'telefono' => 'Teléfono',
     'nombre' => 'Nombre',
     'fechapago' => 'Fecha de pago',
     'cuota' => 'Cuota',
     'vencimiento' => 'Vencimiento',
+    'siesmenor' => ' Si es menor, firma del padre o tutor',
 
 ];

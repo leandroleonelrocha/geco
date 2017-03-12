@@ -57,7 +57,7 @@ class CarreraController extends Controller
 		$data['lenguaje'] =$pais->lenguaje;
 
 		$this->carreraRepo->create($data);
-		return redirect()->route('filial.carreras')->with('msg_ok', 'Carrera creada correctamente');
+		return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok', 'Carrera creada correctamente');
 	}
 
   	public function editar($id){
@@ -72,9 +72,9 @@ class CarreraController extends Controller
 		$data = $request->all();
 		$model = $this->carreraRepo->find($data['id']);
 		if($this->carreraRepo->edit($model,$data))
-		    return redirect()->route('filial.carreras')->with('msg_ok','La carrera ha sido modificada con éxito');
+		    return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok','La carrera ha sido modificada con éxito');
 		else
-		    return redirect()->route('filial.carreras')->with('msg_error','La carrera no ha podido ser modificada.');
+		    return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_error','La carrera no ha podido ser modificada.');
 		
     }
 

@@ -49,6 +49,7 @@ return [
    	'actualizarmatricula' => 'Actualizar Matrícula',
    	'cancelar'            => 'Dar de Baja',
    	'si'                  => 'Si',
+    'no'                  => 'No',
 	'agregarnuevapersona' => 'Agrregar Nueva Persona',
     'agregarnueva'        => 'Agregar Nueva',
     'nuevamatricula'      => 'Nueva Matrícula',
@@ -64,4 +65,8 @@ return [
     'descuentoadicional'  => 'Descuento adicional',
     'recargoadicional'    => 'Recargo adicional',
     'plan'                => 'Plan',
+    'terminado'           => 'Terminado',
+    'pendiente'           => 'Pendiente',
+    'activo'              => 'Activo',
+    'cancelado'           => 'Cancelado',
 ];

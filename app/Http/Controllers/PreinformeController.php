@@ -298,7 +298,7 @@ class PreinformeController extends Controller {
 
         $medios=$this->preinformeMedioRepo->allLengDatosPreinforme(($pais->lenguaje));
         $comoEncontro=$this->preinformeComoEncontroRepo->allLengDatosPreinforme(($pais->lenguaje));
-        return view('rol_filial.preinformes.AsignacionDatos.nuevo',compact('medios','comoEncontro'));
+        return view('rol_filial.preinformes.asignacionDatos.nuevo',compact('medios','comoEncontro'));
     }
 
     public function nuevoDatosMedio_post(CrearNuevoMedioPreinformeRequest $request){

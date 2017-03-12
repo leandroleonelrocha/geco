@@ -403,9 +403,9 @@ class MatriculaController extends Controller {
    public function imprimir_plan_de_pago($id){
 
         //$pdf->stream('impresiones.impresion_plan_de_pago',array('Attachment'=>0));
-        $pago           = $this->pagoRepo->find($id);
+        //$pago           = $this->pagoRepo->find($id);
         
-        $matricula      = $this->matriculaRepo->find($pago->matricula_id);
+        $matricula      = $this->matriculaRepo->find($id);
         $pdf            = PDF::loadView('impresiones.impresion_plan_de_pago', compact('matricula'));
        
         return $pdf->stream();

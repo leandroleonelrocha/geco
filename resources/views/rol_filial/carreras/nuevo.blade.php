@@ -21,7 +21,7 @@
                                 {!! Form::text('duracion',null,array('class'=>'form-control')) !!}
                             </div>
 
-                            <div class="col-md-6 form-group">
+                            <div class="col-md-12 form-group">
                                 <label>@lang('carrera.descripcion')</label>
                                 {!! Form::textarea('descripcion',null,array('class'=>'form-control','size'=>'30x3')) !!}
                             </div>

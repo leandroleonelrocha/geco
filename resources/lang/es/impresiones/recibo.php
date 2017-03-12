@@ -10,10 +10,16 @@ return [
     'matriculacompleta' => 'Matrícula Completa',
     'recargo' => 'Recargo',
     'descuento' => 'Descuento',
-    'numerodepago' => 'Número de pago:',
+    'numerodepago' => 'Cuota:',
     'matricula' => 'Matrícula',
     'son' => 'Son',
     'pesos' => 'pesos',
     'total' => 'total',
     'cantidaddepagos' => 'Cantidad de pagos:',
+
+    'cantidaddepagos' => 'Cantidad de pagos:',
+
+    'carrito'=> 'Carrito de pagos',
+    'confirmar'=> 'Confirmar',
+    'cerrar'=> 'Cerrar',
 ];

@@ -23,7 +23,7 @@ class CrearNuevaMateriaRequest extends Request
     public function rules()
     {
         return [
-            'carreras_cursos'=>'required',
+            // 'carreras_cursos'=>'required',
             'nombre' => 'required',
             'nombre' => 'required|unique:materia,nombre',
         ];
@@ -32,7 +32,7 @@ class CrearNuevaMateriaRequest extends Request
     public function messages()
     {
         return [
-            'carreras_cursos' => 'Seleccione una carrera/curso.',
+            // 'carreras_cursos' => 'Seleccione una carrera/curso.',
             'nombre.required' => 'El nombre es requerido.',
             'nombre.unique'=> 'El nombre de la materia ya está en uso.', 
         ];

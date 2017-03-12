@@ -16,4 +16,8 @@ return [
     'pesos' => 'pesos',
     'total' => 'total',
     'cantidaddepagos' => 'Amount of payments:',
+
+    'carrito'=> 'Payment cart',
+    'confirmar'=> 'Confirm',
+    'cerrar'=> 'Close',
 ];

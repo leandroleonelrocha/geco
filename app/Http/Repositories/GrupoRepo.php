@@ -42,11 +42,11 @@ class GrupoRepo extends BaseRepo {
             return $data;
     }
 
-    public function clasesMesActual(){
+    public function clasesMesActual($grupo){
         $dia_inicio_mes = first_day_month();
         $dia_fin_mes    = last_day_month();
 
-        $qry =  Clase::where('grupo_id', 1)
+        $qry =  Clase::where('grupo_id', $grupo)
                 ->whereDate('clase.fecha','>=', $dia_inicio_mes)
                 ->whereDate('clase.fecha','<=', $dia_fin_mes)
                 ->get();

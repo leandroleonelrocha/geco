@@ -18,4 +18,10 @@ return [
     'cantidadclases' => 'NUMBER OF CLASSES',
     'cantidadclasesasistidas' => 'NUMBER OF ASSISTED CLASSES',
     'promedioclases' => 'AVERAGE OF CLASSES',
+    'datospersonales' => 'PERSONAL INFORMATION:',
+    'sres' => 'Mr.',
+    'domicilio' => 'Address:',
+    'localidad'=> 'Location:',
+    'telefonos' =>'Telephone:',
+    'firmaysello' =>'Signature and stamp',
 ];
