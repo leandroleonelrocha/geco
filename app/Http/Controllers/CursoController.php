@@ -54,7 +54,7 @@ class CursoController extends Controller
 		$data['cadena_id'] =$cadena->cadena_id;
 		$data['lenguaje'] =$pais->lenguaje;
 		$this->cursoRepo->create($data);
-		return redirect()->route('filial.cursos')->with('msg_ok', 'Curso creado correctamente');
+		return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok', 'Curso creado correctamente');
 	}
 
   	public function editar($id){
@@ -68,9 +68,9 @@ class CursoController extends Controller
 		$data = $request->all();
 		$model = $this->cursoRepo->find($data['id']);
 		if($this->cursoRepo->edit($model,$data))
-			return redirect()->route('filial.cursos')->with('msg_ok','El curso ha sido modificado con éxito');
+			return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_ok','El curso ha sido modificado con éxito');
 		else
-			return redirect()->route('filial.cursos')->with('msg_error','El curso no ha podido ser modificado.');
+			return redirect()->route('filial.asignacionAulas_nuevo')->with('msg_error','El curso no ha podido ser modificado.');
     }
 
     public function borrar($id){

@@ -99,7 +99,7 @@ class PreinformeController extends Controller {
         
         $tipos      = $this->tipoDocumentoRepo->all()->lists('tipo_documento','id');
         $paises     = $this->paisRepo->all()->lists('pais','id');
-        $asesores   = $this->asesorRepo->all()->lists('full_name','id');
+        $asesores   = $this->asesorRepo->allAsesores()->lists('full_name','id');
         $cadena     = $this->filialRepo->filialCadena();
         $carreras   = $this->carreraRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
         $cursos     = $this->cursoRepo->lenguajeCadenaLista('nombre','id',$pais->lenguaje,$cadena->cadena_id);
@@ -298,7 +298,7 @@ class PreinformeController extends Controller {
 
         $medios=$this->preinformeMedioRepo->allLengDatosPreinforme(($pais->lenguaje));
         $comoEncontro=$this->preinformeComoEncontroRepo->allLengDatosPreinforme(($pais->lenguaje));
-        return view('rol_filial.preinformes.AsignacionDatos.nuevo',compact('medios','comoEncontro'));
+        return view('rol_filial.preinformes.asignacionDatos.nuevo',compact('medios','comoEncontro'));
     }
 
     public function nuevoDatosMedio_post(CrearNuevoMedioPreinformeRequest $request){

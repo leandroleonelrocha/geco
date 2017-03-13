@@ -9,13 +9,14 @@ class Carrera extends Entity {
     protected $fillable   = ['cadena_id', 'nombre','duracion', 'descripcion', 'lenguaje'];
 
     public function PersonaInteres(){
-        return $this->belongsTo(PersonaInteres::getClass());
+        return $this->hasMany(PersonaInteres::getClass());
     }
 
     public function Matricula(){
         return $this->hasMany(Matricula::getClass());
     }
 
+    
     public function Materia(){
         return $this->hasMany(Materia::getClass());
     }

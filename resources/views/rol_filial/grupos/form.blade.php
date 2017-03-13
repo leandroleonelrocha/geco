@@ -32,10 +32,19 @@
                                 </select>
                             </div>
                             <div class="form-group teorica_practica">
-                                <label>@lang('materia.tipomateria')</label>
-                                <div>
-                                    <span id="p"><input type='radio' class='flat-red tp practica' name='teorica_practica' value="practica" >@lang('materia.practica')</span>
-                                    <span id="t"><input type='radio' class='flat-red tp teorica' name='teorica_practica' value="teorica">@lang('materia.teorica')</span>
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                        <label>@lang('materia.tipomateria')</label>
+                                        <div>
+                                        <!-- Les saque las clases, si no no funca :D -->
+                                            <span id="p"><input type='radio' class='tp practica' name='teorica_practica' value="practica" >@lang('materia.practica')</span>
+                                            <span id="t"><input type='radio' class='tp teorica' name='teorica_practica' value="teorica">@lang('materia.teorica')</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2" id="filtro_año">
+                                        <label>@lang('materia.años')</label>
+                                        <div id="años"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -101,8 +110,11 @@
         $('.teorica_practica').hide();
 
          function showTP(){
-            var carreras_cursos=$('#carreras_cursos').val(); 
-                var tipo = carreras_cursos.split(';');
+            var carreras_cursos=$('#carreras_cursos').val(),
+                tipo = carreras_cursos.split(';');
+
+                $('#filtro_año').hide();
+
                 if(tipo[0] == "carrera") $(".teorica_practica").show();
                 else $(".teorica_practica").hide();
                 if (tipo == 0) $(".materia").hide();
@@ -162,7 +174,8 @@
                                    if(result.length > 0){
                                        var practica = [], 
                                            teorica  = [],
-                                           i = 0;
+                                           ano      = 0,
+                                           i        = 0;
 
                                        $(".materia").show();
                                        $(".select_materia").empty();
@@ -175,6 +188,8 @@
                                             if (valor.teorica == 1)
                                                 teorica[i] = true;
 
+                                            if(valor.ano > ano)
+                                                ano = valor.ano;
                                             i++;
                                        });
                                        if (practica.indexOf(true) != -1 && practica.length > 0){
@@ -188,6 +203,15 @@
                                             $('#t').show();
                                        }
                                        else $('#t').hide();
+
+                                    $("#años").empty();
+                                    if (ano > 1) {
+                                        $("#filtro_año").show();
+                                        for (var j = 1; j <= ano; j++){
+                                            $('#años').append('<span><input type="radio" class="flat-red ano" name="ano_carrera" value="'+j+'" >'+j+'</span><span>');
+                                        }
+                                    }
+
                                    }
                             }}
                         ); // Fin - Ajax
@@ -253,19 +277,57 @@
             }
         }
         
-        // Suceción de fecha de inicio ~~ Carreras y Cursos
+        // Materias Segun el Año seleccionado
+        function obtenerMateriasAno(){
+            var carreras_cursos = $('#carreras_cursos').val()
+                tipo            = carreras_cursos.split(';'),
+                tipoM           = $(".tp:checked").val(),
+                ano             = $(".ano:checked").val();
+                $.ajax(
+                        {
+                        url: "post_materias_carreras_ano",
+                        type: "POST",
+                        data: {carrera_id: tipo[1], tp: tipoM, a: ano},
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(result){
+                               if(result.length > 0){
+                                   $(".materia").show();
+                                   $(".select_materia").empty();
+                                   $(".teorica_practica").show();
+                                   console.log(result);
+                                   $.each(result, function(clave, valor) {
+                                        $('.select_materia').append( '<tr><td><input type="hidden" name="materia_id[]" value="'+valor.id+'">'+valor.nombre+'</td><td>{!! Form::select('aula_id[]',$aulas->toArray(),null,array("class" => "form-control")) !!}</td><td><div class="form-group"><div class="input-group"><div class="input-group-addon"><i class="fa fa-calendar"></i></div><input type="date" name="fecha_inicio[]" class="form-control fecha_inicio"></div></div></td><td><input class="form-control" name="horario_desde[]" type="time" value="08:00:00" ></td><td><input class="form-control" name="horario_hasta[]" type="time" value="09:00:00" ></td><td class="text-center"><input type="text" name="cantidad_clases[]" class="text-center" /></td></tr>' );
+                                   });
+                               } // result.length
+                        }}// success
+                    );
+        }
 
         showTP();
         // obtenerMaterias();
         $("#carreras_cursos").change(function(){
             showTP();
+             $(".tp").prop("checked", false);
+
             $(".select_materia").empty();
             obtenerAllMaterias();
+            setTimeout(function(){
+                $("input[name=ano_carrera]").prop("checked", false);
+                $("input[name=ano_carrera]").on('click', function(){ obtenerMateriasAno(); });
+            }, 1000);
         });
         
-        $(".practica").next().on('click', function(){ obtenerMaterias(); });
-        $(".teorica").next().on('click', function(){ obtenerMaterias(); });
-        // $(".ano").on('click', function(){ obtenerMaterias(); });
+        $(".practica").on('click', function(){
+            $("input[name=ano_carrera]").prop("checked", false);
+            obtenerMaterias();
+        });
+        $(".teorica").on('click', function(){
+            $("input[name=ano_carrera]").prop("checked", false);
+            obtenerMaterias();
+        });
+        
 
         var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper

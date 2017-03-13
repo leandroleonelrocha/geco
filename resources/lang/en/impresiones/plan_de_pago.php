@@ -14,12 +14,12 @@ return [
  	'dia' => 'DAY',
  	'horario' => 'SCHEDULE',
  	'planconvenido' => 'AGREED PAYMENT PLAN',
- 	'planconvenido' => 'ADVISER:',
+ 	'asesor' => 'ADVISER:',
  	'matricula' => 'ENROLLMENT:',
  	'cuota' => 'FEE:',
  	'firma' => 'Students signature',
  	'observaciones' => 'OBSERVATIONS:',
  	'ob1' => '$ 50 discount per month from 1 to 10.',
-	'ob2'='Start of classes subject to modifications. MANEGEMENT',
-
+	'ob2'=>'Start of classes subject to modifications. MANEGEMENT',
+	'siesmenor' => ' If minor, signature of parent or guardian',
 ];

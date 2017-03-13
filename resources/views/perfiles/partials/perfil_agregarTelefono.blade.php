@@ -1,6 +1,6 @@
 {!! Form::open(['route'=> 'filial.perfil_editarPerfil_post', 'method'=>'post']) !!} 	
 	<input type="hidden" name="id" value="{{$filial->id}}">
-	<div class="col-md-6 form-group">
+	<div class="col-md-12 form-group">
 		<label>@lang('filial.telefonos')</label>
 		<button class="add_input_telefono btn-xs btn-success">+</button> 
 		<div class="input_fields_telefono">    

@@ -82,4 +82,6 @@ return [
     'plan'                => 'Plan',
     'terminado'           => 'Concluído',
     'pendiente'           => 'Pendente',
+    'activo'              => 'Ativo',
+    'cancelado'           => 'Cancelado',
 ];

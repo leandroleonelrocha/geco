@@ -205,21 +205,26 @@ class PagoController extends Controller
             else
                 $d['nro_pago']  = $value->nro_pago;
 
+            if ($value->Matricula->carrera_id != null) 
+                $d['grupo'] = $value->Matricula->Carrera->nombre;
+            else 
+                $d['grupo'] = $value->Matricula->Curso->nombre;
 
-            $d['vencimiento']           = $value->vencimiento;
-            $d['fecha_pago']            = '20/11/2016';
-            $d['saldo']                 = $value->monto_pago;
+
+            $d['vencimiento']           = helpersgetFecha($value->vencimiento);
+          
+            $d['saldo']                 = $value->monto_actual;
             $d['matricula']             = $value->Matricula->id;
             $d['persona']               = $value->Matricula->Persona->fullname;
-            $d['grupo']                 = 'grupo 1';
+            $d['fecha_pago']            = helpersgetFecha($value->created_at);
             $d['persona_email']         = $value->Matricula->Persona->PersonaMail;
             $d['persona_telefono']      = $value->Matricula->Persona->PersonaTelefono;
             
             array_push($data, $d);
         }
 
-        $datos['fecha_desde'] = $fechas[0];
-        $datos['fecha_hasta'] = $fechas[1];
+        $datos['fecha_desde'] = helpersgetFecha($fechas[0]);
+        $datos['fecha_hasta'] = helpersgetFecha($fechas[1]);
 
         Session::put('morosos', $data);
         Session::put('datos', $datos);
@@ -236,7 +241,7 @@ class PagoController extends Controller
         $total_general  =  $this->pagoRepo->totalEntreFechas($fechas);
        
         //FALTA SUMA GRUPO
-        $suma_grupo     = $this->pagoRepo->totalPorGrupo();
+        $suma_grupo     = $this->pagoRepo->totalPorGrupo($fechas);
         //dd($suma_grupo);
 
         $data    =  [];   
@@ -245,7 +250,7 @@ class PagoController extends Controller
         foreach ($iva as $key => $value) {
             
 
-            $d['fecha']        = $value->created_at;
+            $d['fecha']        = helpersgetFecha($value->created_at);
             $d['recibo']       = $value->ReciboTipo->recibo_tipo;
             $d['importe']      = $value->monto;
             $d['nombre']       = $value->Pago->Matricula->Persona->fullname;
@@ -255,8 +260,8 @@ class PagoController extends Controller
 
        
 
-        $datos['fecha_desde'] = $fechas[0];
-        $datos['fecha_hasta'] = $fechas[1];
+        $datos['fecha_desde'] = helpersgetFecha($fechas[0]);
+        $datos['fecha_hasta'] = helpersgetFecha($fechas[1]);
 
         Session::put('libro_iva', $data);
         Session::put('datos', $datos);

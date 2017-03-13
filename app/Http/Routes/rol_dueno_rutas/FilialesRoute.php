@@ -26,6 +26,6 @@
 	
 	Route::post('filiales_editar_post',[
 		'as'	=> 'dueño.filiales_editar_post',
-		'uses'	=>	'filialesController@editar_post'
+		'uses'	=>	'FilialesController@editar_post'
 	]);
 

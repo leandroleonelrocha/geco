@@ -22,4 +22,5 @@ return [
   	'horariohasta' => 'HORARIO HASTA:',
    	'materia' => 'MATERIA:',
   	'horarioaula' => 'HORARIO AULA:',
+    'filial' => 'FILIAL:',
 ];

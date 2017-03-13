@@ -269,6 +269,10 @@
             vertical-align: top;
         }
 
+        .border-right{
+             border-right: 2px solid #f4f4f4;
+        }
+
     </style>
 
 </head>
@@ -277,8 +281,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 mb-20">
-            <p class="mt-20 ml-80">FILIAL : FLORES</p>
-            <h4 class="font21 text-center" style="margin-top:20px;">ASISTENCIAS MENSUAL</h4>
+            <p class="mt-20 ml-80">@lang('impresiones/asistencias.filial') FLORES</p>
+            <h4 class="font21 text-center" style="margin-top:20px;">@lang('impresiones/asistencias.planillaasistencia')</h4>
             <p class="text-right">Buenos Aires, {!! date('d-m-Y',time()) !!} </p>
         </div>
     </div>
@@ -292,7 +296,7 @@
                  
                     @foreach($clases as $clase)
                     
-                    <th>{{ helpersgetDiaMes($clase->fecha) }}</th>
+                    <th class="text-center">{{ helpersgetDiaMes($clase->fecha) }}</th>
                     @endforeach
                      
                   </tr>
@@ -300,24 +304,24 @@
                 <tbody>
 
                 @foreach($matriculas as $m)
-                  <tr>
-                  <td>{{$m->Persona->fullname}}</td>
+                  <tr >
+                  <td class="border-right">{{$m->Persona->fullname}}</td>
                     @foreach($clases as $clase)
-                    <td></td>
+                    <td class="border-right"></td>
                   @endforeach
                            
                   </tr>
                 @endforeach
                   <tr>
-                    <td>@lang('impresiones/asistencias.profesorturno') </td>
+                    <td class="border-right">@lang('impresiones/asistencias.profesorturno') </td>
                     @foreach($clases as $clase)
-                    <td></td>
+                    <td class="border-right"></td>
                     @endforeach
                    
                   </tr>
                 </tbody>
               </table>
-               <table class="table table-striped table-hover mt-10">
+               <table class="table table-striped table-hover mt-10" >
                         <tbody>
 
                           <tr>
@@ -332,7 +336,10 @@
                           <td>@lang('impresiones/asistencias.dia')<br> {{$horario->dia}}</td>
                           <td>@lang('impresiones/asistencias.horariodesde') {{ $horario->horario_desde }}</td>
                           <td>@lang('impresiones/asistencias.horariohasta') {{ $horario->horario_hasta }}</td>
-                          <td>@lang('impresiones/asistencias.materia') {{ $horario->Materia->nombre }}</td>
+                          <td>@lang('impresiones/asistencias.materia') 
+                          @if(isset($horario->Materia->nombre)){{$horario->Materia->nombre}} @endif 
+                          </td>
+               
                           <td>@lang('impresiones/asistencias.horarioaula') {{ $horario->Aula->nombre }}</td>
 
                           </tr>

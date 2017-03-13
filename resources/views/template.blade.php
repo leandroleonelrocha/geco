@@ -26,6 +26,7 @@
       <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
+          @yield('dashboard')
         </section>
 
         <!-- Main content -->

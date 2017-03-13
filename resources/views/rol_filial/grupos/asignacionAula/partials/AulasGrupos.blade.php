@@ -6,7 +6,7 @@
         <th>@lang('grupo.horafin')</th>
         <th>@lang('grupo.docente')</th>
         <th>@lang('grupo.listaaulasasignadas')</th>
-    <th class="no-print"></th>
+   
     </tr> </thead>
     <tbody>
         @foreach($grupos as $g)

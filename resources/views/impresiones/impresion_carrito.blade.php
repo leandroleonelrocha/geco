@@ -106,7 +106,7 @@
                                   <th>Pagó</th>
                                   <th>@lang('impresiones/recibo.recargo')</th>
                                   <th>@lang('impresiones/recibo.descuento')</th>
-                                  <th>Monto</th>
+                                  <th>@lang('impresiones/recibos.monto')</th>
                                 </tr>
                               </thead>
                               <tbody>

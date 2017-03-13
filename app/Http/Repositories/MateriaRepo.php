@@ -37,7 +37,7 @@ class MateriaRepo extends BaseRepo {
         return DB::table('materia')
                    ->join('materia_carrera_curso', 'materia.id', '=', 'materia_carrera_curso.materia_id')
                    ->join('carrera', 'carrera.id', '=', 'materia_carrera_curso.carrera_id')
-                   ->select('materia.*')
+                   ->select('materia.*', 'materia_carrera_curso.ano')
                    ->where('materia_carrera_curso.carrera_id', $carrera_id)
                    ->get();
     }
@@ -69,6 +69,28 @@ class MateriaRepo extends BaseRepo {
                    ->where('materia.teorica', 1)
                    ->get();
      }
+    }
+
+    public function findMateriasCarreraAño($carrera_id, $tp, $año){
+        if ($tp == 'practica') {
+            return DB::table('materia')
+            ->join('materia_carrera_curso', 'materia.id', '=', 'materia_carrera_curso.materia_id')
+            ->join('carrera', 'carrera.id', '=', 'materia_carrera_curso.carrera_id')
+            ->select('materia.*')
+            ->where('materia_carrera_curso.carrera_id', $carrera_id)
+            ->where('materia.practica', 1)
+            ->where('materia_carrera_curso.ano', $año)
+            ->get();
+        }
+        elseif($tp == 'teorica'){
+            return DB::table('materia')
+            ->join('materia_carrera_curso', 'materia.id', '=', 'materia_carrera_curso.materia_id')
+            ->join('carrera', 'carrera.id', '=', 'materia_carrera_curso.carrera_id')
+            ->select('materia.*')
+            ->where('materia.teorica', 1)
+            ->where('materia_carrera_curso.ano', $año)
+            ->get();
+        }
     }
 
     public function findMateriasCurso($curso_id){

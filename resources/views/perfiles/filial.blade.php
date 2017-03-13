@@ -87,10 +87,11 @@
 
 	                <div class="tab-pane" id="tab_3">
 	                 <br></br>
-	                    @include('perfiles.partials.perfil_agregartelefono')
+	                    @include('perfiles.partials.perfil_agregarTelefono')
 	                </div><!-- /.tab-pane -->
             	</div><!-- tab-content -->
         	</div><!-- nav-tabs-custom --> 
+        	
 		</div> <!-- Fin col -->
 	</div> <!-- Fin row -->
 @endsection

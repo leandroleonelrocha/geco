@@ -15,21 +15,36 @@ $( ".buscar_fecha" ).click(function() {
 			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			},
 			success: function(result){
-				
-				$('#tabla_morosidad').children('tbody').empty();
-				
-				link.find('span').remove();
-				link.append('<span class="glyphicon glyphicon-search "></span>');
-				
-				var body = $('#tabla_morosidad').children('tbody');
+			
+				if(result.length > 0)						
+				{
+					$('#tabla_morosidad').children('tbody').empty();
 					
+					link.find('span').remove();
+					link.append('<span class="glyphicon glyphicon-search "></span>');
+					
+					var body = $('#tabla_morosidad').children('tbody');
+				
 					$.each(result, function(clave, valor){
 						var mail 	 = persona_email(valor.persona_email);
 						var telefono = persona_telefono(valor.persona_telefono);
 						body.append(tr_morosos(valor.matricula, valor.grupo, valor.persona, valor.nro_pago, valor.fecha_pago, valor.vencimiento, valor.saldo, telefono, mail));
 						
 					});
-			}}
+				
+				}else{
+					link.find('span').remove();
+					link.append('<span class="glyphicon glyphicon-search "></span>');
+					alert('No se han encontado resultados');
+				}	
+				
+
+
+				}//cierra result
+
+
+			
+			}//end ajax
 
 		);
 
@@ -56,7 +71,7 @@ $( ".buscar_fecha" ).click(function() {
 	function tr_morosos(matricula, grupo, nombre, cuota, fecha_pago, fecha_vencimiento, saldo, telefono, mail) {
 
 		var tr = '<tr>'+
-				 '<td>'+ matricula + '</td>'+
+				 '<td >'+ matricula + '</td>'+
 				 '<td>'+ grupo + '</td>'+
 				 '<td>'+ nombre + '</td>'+
 				 '<td>'+ cuota + '</td>'+

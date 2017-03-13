@@ -13,11 +13,15 @@
 			<td>{{$matricula->created_at}}</td>
 			<td>{{$matricula->Asesor->apellidos}} {{$matricula->Asesor->nombres}}</td>
 			<td>{{$matricula->Filial->nombre}}</td>
-			<td><?php 
-					if ($matricula->terminado == 1) echo 'Terminado';
-					elseif ($matricula->cancelado == 1) echo 'Cancelado';
-					else echo 'Activo';
-			?></td>
+			<td>
+				@if($matricula->terminado == 1)
+					 @lang('matricula.terminado') 
+				@elseif($matricula->cancelado == 1) 
+					 	@lang('matricula.cancelado')
+					@else
+						@lang('matricula.activo')
+					@endif
+			</td>
 			<td><?php 
 					if ($matricula->carrera_id != null) echo $matricula->Carrera->nombre;
 					else echo $matricula->Curso->nombre;
