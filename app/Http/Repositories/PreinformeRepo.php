@@ -145,4 +145,15 @@ class PreinformeRepo extends BaseRepo {
 
        }
 
+
+       public function buscarMatriculasFechas($fecha){
+            $qry = Matricula::where('filial_id', $this->filial)->whereDate('created_at','=', $fecha)->get();
+            return $qry;
+       }
+
+        public function buscarPreinformeFechas($fecha){
+            $qry = Preinforme::where('filial_id', $this->filial)->whereDate('created_at','=', $fecha)->get();
+            return $qry;
+       }
+
 }

@@ -64,8 +64,8 @@ class EstadisticaController extends Controller
 		$medios     	 = $this->preinformeRepo->estadisticasMedio();
 		$cursos     	 = $this->preinformeRepo->estadisticasCurso();
 		$carreras   	 = $this->preinformeRepo->estadisticasCarrera();
-		$matriculas		 = $this->matriculaRepo->allEneable();
-		$preinformes	 = $this->preinformeRepo->allFilial();
+		$matriculas		 = $this->preinformeRepo;
+		$preinformes	 = $this->preinformeRepo;
 		$filial     	 = $this->filialRepo->find($this->filial);
 		$dia_inicio_mes  = helpersgetFecha(first_day_month());
         $dia_fin_mes     = helpersgetFecha(last_day_month());

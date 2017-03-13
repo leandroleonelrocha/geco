@@ -30,24 +30,17 @@
                 </thead>
                 <tbody>
                   @foreach($fechas as $fecha)
+                  @if(count($matriculas->buscarMatriculasFechas($fecha)) > 0 || count($preinformes->buscarPreinformeFechas($fecha)) > 0)
                   <tr>
-
                     <td>{{$fecha}}</td>
                     <td>
-                        <?php
-                         $total=0;
-                         foreach ($preinformes as $preinforme) {
-                         $total += count($preinforme->whereDate('created_at','=', $fecha)->get());
-                         }
-                        ?>
-                        {{$total}}   
-                      
+                    {{count($preinformes->buscarPreinformeFechas($fecha))}}
                     </td>
-                    
                     <td>
+                    {{count($matriculas->buscarMatriculasFechas($fecha))}}
                     </td>
                   </tr>
-
+                  @endif
                   @endforeach
                  
                 </tbody>
