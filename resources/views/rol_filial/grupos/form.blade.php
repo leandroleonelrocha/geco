@@ -322,12 +322,24 @@
         $(".practica").on('click', function(){
             $("input[name=ano_carrera]").prop("checked", false);
             obtenerMaterias();
+            setTimeout(function(){
+                $("input[name=cantidad_clases]").keyup(function(){
+                    var _thiss = $(this).val();
+                    alert(_thiss);
+                });
+            }, 1000);
         });
+
         $(".teorica").on('click', function(){
             $("input[name=ano_carrera]").prop("checked", false);
             obtenerMaterias();
+            setTimeout(function(){
+                $("input[name=cantidad_clases]").keyup(function(){
+                    var _thiss = $(this).val();
+                    alert(_thiss);
+                });
+            }, 1000);
         });
-        
 
         var max_fields      = 10; //maximum input boxes allowed
         var wrapper         = $(".input_fields_wrap"); //Fields wrapper

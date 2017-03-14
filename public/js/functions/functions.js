@@ -110,29 +110,7 @@ $(document).ready(function(){
                 success: function(result){
                    $(".select_grupo").empty();
                    $.each(result, function(clave, valor) {
-                        if (valor.practica == 1 && valor.teorica == 1) {
-                            $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+'</option>' );
-                        }
-                        if (valor.practica == 1 && valor.teorica == 0){
-                            if (valor.lang == "es")
-                                $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Práctica </option>' );
-                            
-                            if (valor.lang == "en")
-                                $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Practical </option>' );
-
-                            if (valor.lang == "pt")
-                                $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Prática </option>' );
-                        }
-                        if (valor.teorica == 1 && valor.practica == 0){
-                            if (valor.lang == "es")
-                                $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Teórica </option>' );
-                            
-                            if (valor.lang == "en")
-                                $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Theoretical </option>' );
-
-                            if (valor.lang == "pt")
-                                $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+' - Teórica </option>' );
-                        }
+                    $('.select_grupo').append( '<option value="'+valor.id+'">'+valor.descripcion+'</option>' );
                    });
                 }
             });
