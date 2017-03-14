@@ -15,8 +15,9 @@ abstract class BaseRepo {
 
     public function __construct()
     {
-        $this->model  = $this->getModel();
-        $this->filial = session('usuario')['entidad_id'];
+        $this->model    = $this->getModel();
+        $this->filial   = session('usuario')['entidad_id'];
+        $this->lenguaje = session('lang');
        
     }
 

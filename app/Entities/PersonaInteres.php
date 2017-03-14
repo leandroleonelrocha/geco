@@ -15,7 +15,7 @@ class PersonaInteres extends Entity
 
     // Relaciones
     public function Preinforme(){
-        return $this->hasMany(Preinforme::getClass());
+        return $this->belongsTo(Preinforme::getClass());
     }
 
     public function Persona(){
@@ -23,10 +23,10 @@ class PersonaInteres extends Entity
     }
 
     public function Carrera(){
-        return $this->hasMany(Carrera::getClass());
+        return $this->belongsTo(Carrera::getClass());
     }
 
     public function Curso(){
-        return $this->hasMany(Curso::getClass());
+        return $this->belongsTo(Curso::getClass());
     }
 }

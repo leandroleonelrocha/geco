@@ -1,6 +1,3 @@
-<div class="box-tools pull-left no-print" style="margin-right: 380px;">
-	<a href="{{route('filial.pagos_nuevo',$matricula->id)}}" class="btn btn-success text-white"> @lang('matricula.agregarnuevopago')</a>
-</div>
 <?php if(isset($pagosIndividualesV)){ ?>
 	<table id="example2" class="table table-bordered table-striped">
 		<thead> <tr>

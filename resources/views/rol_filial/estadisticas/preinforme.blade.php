@@ -29,31 +29,20 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($preinformes as $preinforme)
+                  @foreach($fechas as $fecha)
+                  @if(count($matriculas->buscarMatriculasFechas($fecha)) > 0 || count($preinformes->buscarPreinformeFechas($fecha)) > 0)
                   <tr>
-
-                    <td>{{$preinforme->fecha}}</td>
-                    <td>{{$preinforme->total}}</td>
+                    <td>{{$fecha}}</td>
                     <td>
-                      {{count($preinforme->Persona->Matricula)}}
+                    {{count($preinformes->buscarPreinformeFechas($fecha))}}
+                    </td>
+                    <td>
+                    {{count($matriculas->buscarMatriculasFechas($fecha))}}
                     </td>
                   </tr>
-
+                  @endif
                   @endforeach
-                   <tr>
-                    <td></td>
-                    <td>{{$preinformes->sum('total')}}</td>
-                    <td>
-                        <?php
-                         $total=0;
-                         foreach ($preinformes as $preinforme) {
-                         $total += count($preinforme->Persona->Matricula);
-                         }
-                        ?>
-                        {{$total}}   
-                    </td>
-                  </tr>
-                  
+                 
                 </tbody>
               </table>
             </div><!-- /.col -->
@@ -74,10 +63,17 @@
                 <tbody>
                   @foreach($asesores as $asesor)
                   <tr>
+                 
+                    <td>{{$asesor->nombres}}</td>
+                    
+                   <td>
+                    {{count($asesor->Preinforme()->where('filial_id',$filial->id)->whereDate('created_at', '>=', first_day_month())->whereDate('created_at','<=', last_day_month())->get()->toArray())}}
 
-                    <td>{{$asesor->Asesor->fullname}}</td>
-                    <td>{{$asesor->total}}</td>
-                    <td>{{count($asesor->Persona->Matricula)}}</td>
+                    </td>
+                    
+                    <td>
+                      {{count($asesor->Matricula()->where('filial_id',$filial->id)->whereDate('created_at', '>=', first_day_month())->whereDate('created_at','<=', last_day_month())->get()->toArray())}}
+                    </td>
                    
                   </tr>
                   @endforeach
@@ -130,44 +126,35 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($cursos as $curso)
-                  <tr>
 
-                    <td>{{$curso->nombre}}</td>
-                    <td>{{$curso->total}}</td>
-                    <td>
-                       @foreach($curso->Persona->Matricula as $matricula)
-                     
-                        @if($matricula->curso_id == $curso->curso_id)
-                            {{ count($curso->Persona->Matricula) }}  
-                        @endif
-
-                       @endforeach
-                    </td>
-                  </tr>
-                  @endforeach
-                  
-                  @foreach($carreras as $carrera)
+                  @foreach($carreras as $carrera) 
                    <tr>
                     <td>{{$carrera->nombre}}</td>
-                    <td>{{$carrera->total}}</td>
                     <td>
-                    @foreach($carrera->Persona->Matricula as $matricula)
-                      @if($matricula->carrera_id == $carrera->carrera_id)
-                            {{ count($carrera->Persona->Matricula) }}  
-                      @endif
-                    @endforeach
+                    {{count($carrera->PersonaInteres()->whereDate('created_at', '>=', first_day_month())->whereDate('created_at','<=', last_day_month())->get()->toArray())}} 
+                    </td>
+                    <td>
+                    {{count($carrera->Matricula()->where('filial_id',$filial->id)->whereDate('created_at', '>=', first_day_month())->whereDate('created_at','<=', last_day_month())->get()->toArray())}} 
                     </td>
                   </tr>
                   @endforeach
-                  
-                  
-                  
+
+                  @foreach($cursos as $curso) 
+                   
+                   <tr>
+                    <td>{{$curso->nombre}}</td>
+                    <td>
+                    {{count($curso->PersonaInteres()->whereDate('created_at', '>=', first_day_month())->whereDate('created_at','<=', last_day_month())->get()->toArray())}} 
+                    </td>
+                    <td>
+                    {{count($curso->Matricula()->where('filial_id',$filial->id)->whereDate('created_at', '>=', first_day_month())->whereDate('created_at','<=', last_day_month())->get()->toArray())}} 
+                    </td>
+                  </tr>
+                  @endforeach
+    
                 </tbody>
               </table>
             </div><!-- /.col -->
           </div>  
-
-
         </section>
 @endsection

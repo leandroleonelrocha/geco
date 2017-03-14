@@ -22,4 +22,5 @@ return [
  	'ob1' => 'Descuento de $50 abonando del 1 al 10 de cada mes.',
 	'ob2'=>'Inicio de clases sujeto a modificaciones. DIRECCION',
 	'siesmenor'=>' Si es menor, firma del padre o tutor',
+
 ];
