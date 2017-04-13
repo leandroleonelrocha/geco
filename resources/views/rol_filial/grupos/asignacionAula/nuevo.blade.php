@@ -7,7 +7,10 @@
                             <div class="nav-tabs-custom">
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a href="#tab_1" data-toggle="tab"><em class="fa fa-edit"></em>@lang('grupo.asignaraulas')</a></li>
-                                    <li><a href="#tab_2" data-toggle="tab"><em class="fa fa-table"></em>@lang('grupo.aulasasignadasengrupos')</a></li>
+                                    <!--
+                                    <li><a href="#tab_2" data-toggle="tab"><em class="fa fa-table"></em>
+                                    @lang('grupo.aulasasignadasengrupos')</a></li>
+                                    -->
                                     <li><a href="#tab_3" data-toggle="tab"><em class="fa fa-folder"></em>Carreras</a></li>
                                     <li><a href="#tab_4" data-toggle="tab"><em class="fa fa-tasks"></em>Cursos</a></li>
                                     <li><a href="#tab_5" data-toggle="tab"><em class="fa fa-book"></em>Materias</a></li>

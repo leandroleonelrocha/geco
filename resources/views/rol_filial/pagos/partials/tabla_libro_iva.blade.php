@@ -38,5 +38,9 @@
 		</table>
 
 	</div>
+
+	<div id="app">
+	  @{{ message }}
+	</div>
 		            		
 </div>

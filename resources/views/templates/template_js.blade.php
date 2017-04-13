@@ -41,7 +41,9 @@
 <script src="{{asset('plugins/pace/pace.js')}}"></script>
                         <!-- ******************** STEPS JS ******************** -->
 
-
+<script src="{{asset('js/vue.js')}}"></script>
+                        <!-- ******************** STEPS JS ******************** -->
+<script src="https://unpkg.com/vue"></script>
 <!-- Bootstrap-checkbox -->
 <!-- <script src="{{asset('js/bootstrap-checkbox/dist/js/bootstrap-checkbox.min.js')}}"></script>
 <script src="{{asset('js/functions/checkbox.js')}}"></script> -->

@@ -50,4 +50,11 @@ function tr_iva(fecha, recibo, nombre, importe) {
 				 
 				 '</tr>';
 		return tr;
-	}	
+	}
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})		
