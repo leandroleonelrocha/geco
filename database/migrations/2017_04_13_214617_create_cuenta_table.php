@@ -16,10 +16,10 @@ class CreateCuentaTable extends Migration
             $table->increments('id');
             $table->string('usuario');
             $table->string('contrasena');
-            $table->tinyint('habilitado');
+            $table->tinyInteger('habilitado');
             $table->integer('rol_id');
             $table->integer('entidad_id');
-            $table->tinyint('activo');
+            $table->tinyInteger('activo');
 
             $table->timestamps();
         });

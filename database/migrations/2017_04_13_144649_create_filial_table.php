@@ -19,7 +19,7 @@ class CreateFilialTable extends Migration
             $table->string('localidad');
             $table->integer('codigo_postal');
             $table->string('mail');
-            $table->boolean('activo')
+            $table->boolean('activo');
 
             $table->integer('cadena_id')->unsigned();
             $table->foreign('cadena_id')->references('id')->on('cadena');

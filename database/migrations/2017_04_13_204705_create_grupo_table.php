@@ -24,7 +24,7 @@ class CreateGrupoTable extends Migration
             $table->boolean('sabados');
             $table->string('color');
             $table->date('fecha_inicio');
-            $table->data('fecha_fin');
+            $table->date('fecha_fin');
             $table->boolean('activo');
             $table->boolean('terminado');
             $table->boolean('cancelado');

@@ -21,7 +21,7 @@ class CreateDirectorTable extends Migration
             $table->boolean('activo');
 
             $table->integer('tipo_documento_id')->unsigned();
-            $table->foreign('tipo_documento_id')->references('id')->on('documento');
+            $table->foreign('tipo_documento_id')->references('id')->on('tipo_documento');
 
             $table->timestamps();
         });
