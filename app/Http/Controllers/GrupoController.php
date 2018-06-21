@@ -397,8 +397,11 @@ class GrupoController extends Controller
 	}
 
 	public function nueva_clase(Request $request)
-	{
+	{	
+
 		$data = $request->all();
+		$data['clase_estado_id'] = 1;
+		$data['aula_id'] = 1;	
 		$this->claseRepo->create($data);
 		return redirect()->back()->with('msg_ok', 'Clase creada correctamente');
 		

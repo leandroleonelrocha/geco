@@ -32,7 +32,7 @@
   $(document).ready(function() {
     
     $('#calendar').fullCalendar({
-      defaultView: 'agendaWeek',
+      defaultView: 'month',
       monthNames: ['@lang('grupo.enero')','@lang('grupo.febrero')','@lang('grupo.marzo')','@lang('grupo.abril')','@lang('grupo.mayo')','@lang('grupo.junio')','@lang('grupo.julio')','@lang('grupo.agosto')','@lang('grupo.septiembre')','@lang('grupo.octubre')','@lang('grupo.noviembre')','@lang('grupo.diciembre')'],
           monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
           dayNames: ['@lang('grupo.domingo')','@lang('grupo.lunes')','@lang('grupo.martes')','@lang('grupo.miercoles')','@lang('grupo.jueves')','@lang('grupo.viernes')','@lang('grupo.sabado')'],
@@ -70,7 +70,7 @@
           //document.getElementById("mylink").href = url;
 
           $.ajax({
-            url: 'buscar_clase',
+            url: '{{route('grupos.buscar_clase')}}',
             type: "POST",
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -108,6 +108,7 @@
 
         if($event->Grupo->filial_id == $filial)
         {
+
           $start = explode(" ", $event['fecha']);
           $end = explode(" ", $event['fecha']);
 

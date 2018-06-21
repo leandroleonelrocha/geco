@@ -55,7 +55,7 @@
 				</div>			
                 </div>
 
-             
+             	{{--
 				<div class="form-group row">
 			      <label for="inputEmail3" class="col-sm-2 col-form-label">@lang('grupo.acciones')</label>
 			       <div class="col-sm-10">
@@ -65,6 +65,7 @@
 					 </ul>
 					</div>	
 				 </div> 				
+             	--}}
 			  </div>
 			  <div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">@lang('grupo.cerrar')</button>
